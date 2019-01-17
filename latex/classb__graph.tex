@@ -1,0 +1,313 @@
+\hypertarget{classb__graph}{}\section{b\+\_\+graph Class Reference}
+\label{classb__graph}\index{b\+\_\+graph@{b\+\_\+graph}}
+
+
+simple unmarked bipartite graph  
+
+
+
+
+{\ttfamily \#include $<$bipartite\+\_\+graph.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classb__graph_a6032fbf9681d275260dd9a8587447e61}{b\+\_\+graph} (vector$<$ vector$<$ int $>$ $>$ list, vector$<$ int $>$ right\+\_\+deg)
+\begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\+\_\+adj\+\_\+list} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the adjacency list of a given left vertex \end{DoxyCompactList}\item 
+int \hyperlink{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}{get\+\_\+right\+\_\+degree} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the degree of a right vertex v \end{DoxyCompactList}\item 
+int \hyperlink{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}{get\+\_\+left\+\_\+degree} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the degree of a right vertex v \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\+\_\+right\+\_\+degree\+\_\+sequence} () const
+\begin{DoxyCompactList}\small\item\em return the right degree sequence \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\+\_\+left\+\_\+degree\+\_\+sequence} () const
+\begin{DoxyCompactList}\small\item\em return the left degree sequence \end{DoxyCompactList}\item 
+int \hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\+\_\+vertices} () const
+\begin{DoxyCompactList}\small\item\em returns the number of vertices \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}
+\begin{DoxyCompactList}\small\item\em the number of vertices in each side, so we have 2n vertices in total \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\+\_\+list}
+\begin{DoxyCompactList}\small\item\em adjacency list for left vertices, where for $0 \leq v < n $, adj\+\_\+list\mbox{[}v\mbox{]} is a sorted list of right vertices connected to v. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\+\_\+deg\+\_\+seq}
+\begin{DoxyCompactList}\small\item\em degree sequence for left vertices, where left\+\_\+deg\+\_\+seq\mbox{[}v\mbox{]} is the degree of the left node v \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\+\_\+deg\+\_\+seq}
+\begin{DoxyCompactList}\small\item\em degree sequence for right vertices, where left\+\_\+deg\+\_\+seq\mbox{[}v\mbox{]} is the degree of the right node v \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}{operator$<$$<$} (ostream \&o, const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\begin{DoxyCompactList}\small\item\em printing the graph to the output \end{DoxyCompactList}\item 
+bool \hyperlink{classb__graph_adf87735e8372a81049b347b1fdd23484}{operator==} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G1, const \hyperlink{classb__graph}{b\+\_\+graph} \&G2)
+\begin{DoxyCompactList}\small\item\em comparing two graphs for equality \end{DoxyCompactList}\item 
+bool \hyperlink{classb__graph_ab90cd92a2e8f077e4ae18c568bcddd1a}{operator!=} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G1, const \hyperlink{classb__graph}{b\+\_\+graph} \&G2)
+\begin{DoxyCompactList}\small\item\em comparing for inequality \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+simple unmarked bipartite graph 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classb__graph_a6032fbf9681d275260dd9a8587447e61}\label{classb__graph_a6032fbf9681d275260dd9a8587447e61}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
+\index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}}
+{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list,  }\item[{vector$<$ int $>$}]{right\+\_\+deg }\end{DoxyParamCaption})}
+
+
+
+a constructor 
+
+This constructor takes the list of adjacent vertices and the right degree sequence, and constructs an object. 
+\begin{DoxyParams}{Parameters}
+{\em list} & list\mbox{[}v\mbox{]} for a left node v is the list of right nodes w connected to v. This list does not have to be sorted \\
+\hline
+{\em right\+\_\+deg} & right\+\_\+deg\mbox{[}v\mbox{]} is the degree of the right node v \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+4 \{
+5   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = list.size();
+6   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
+7   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
+8   \textcolor{comment}{// sorting the list}
+9   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}; v++)\{
+10     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+11     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size();
+12   \}
+13   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
+14 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}\label{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+adj\+\_\+list@{get\+\_\+adj\+\_\+list}}
+\index{get\+\_\+adj\+\_\+list@{get\+\_\+adj\+\_\+list}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{get\+\_\+adj\+\_\+list()}{get\_adj\_list()}}
+{\footnotesize\ttfamily vector$<$ int $>$ b\+\_\+graph\+::get\+\_\+adj\+\_\+list (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the adjacency list of a given left vertex 
+
+
+\begin{DoxyCode}
+19 \{
+20   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+21     cerr << \textcolor{stringliteral}{"b\_graph::get\_adj\_list, index v out of range"} << endl;
+22   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v];
+23 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}\label{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree@{get\+\_\+left\+\_\+degree}}
+\index{get\+\_\+left\+\_\+degree@{get\+\_\+left\+\_\+degree}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{get\+\_\+left\+\_\+degree()}{get\_left\_degree()}}
+{\footnotesize\ttfamily int b\+\_\+graph\+::get\+\_\+left\+\_\+degree (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the degree of a right vertex v 
+
+
+\begin{DoxyCode}
+34 \{
+35   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+36     cerr << \textcolor{stringliteral}{"b\_graph::get\_left\_degree, index v out of range"} << endl;
+37   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v];
+38 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_afd65fb655f7e24217393a10533b87d3c}\label{classb__graph_afd65fb655f7e24217393a10533b87d3c}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree\+\_\+sequence@{get\+\_\+left\+\_\+degree\+\_\+sequence}}
+\index{get\+\_\+left\+\_\+degree\+\_\+sequence@{get\+\_\+left\+\_\+degree\+\_\+sequence}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{get\+\_\+left\+\_\+degree\+\_\+sequence()}{get\_left\_degree\_sequence()}}
+{\footnotesize\ttfamily vector$<$ int $>$ b\+\_\+graph\+::get\+\_\+left\+\_\+degree\+\_\+sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+return the left degree sequence 
+
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq};
+48 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}\label{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree@{get\+\_\+right\+\_\+degree}}
+\index{get\+\_\+right\+\_\+degree@{get\+\_\+right\+\_\+degree}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{get\+\_\+right\+\_\+degree()}{get\_right\_degree()}}
+{\footnotesize\ttfamily int b\+\_\+graph\+::get\+\_\+right\+\_\+degree (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the degree of a right vertex v 
+
+
+\begin{DoxyCode}
+27 \{
+28   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+29     cerr << \textcolor{stringliteral}{"b\_graph::get\_right\_degree, index v out of range"} << endl;
+30   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[v];
+31 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_a2711566385b92b02f4c03abdc1f9a582}\label{classb__graph_a2711566385b92b02f4c03abdc1f9a582}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree\+\_\+sequence@{get\+\_\+right\+\_\+degree\+\_\+sequence}}
+\index{get\+\_\+right\+\_\+degree\+\_\+sequence@{get\+\_\+right\+\_\+degree\+\_\+sequence}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{get\+\_\+right\+\_\+degree\+\_\+sequence()}{get\_right\_degree\_sequence()}}
+{\footnotesize\ttfamily vector$<$ int $>$ b\+\_\+graph\+::get\+\_\+right\+\_\+degree\+\_\+sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+return the right degree sequence 
+
+
+\begin{DoxyCode}
+41 \{
+42   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq};
+43 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_a69ff77c254af827afbfe52934b6736a5}\label{classb__graph_a69ff77c254af827afbfe52934b6736a5}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!nu\+\_\+vertices@{nu\+\_\+vertices}}
+\index{nu\+\_\+vertices@{nu\+\_\+vertices}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{nu\+\_\+vertices()}{nu\_vertices()}}
+{\footnotesize\ttfamily int b\+\_\+graph\+::nu\+\_\+vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the number of vertices 
+
+
+\begin{DoxyCode}
+52 \{
+53   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};
+54 \}
+\end{DoxyCode}
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classb__graph_ab90cd92a2e8f077e4ae18c568bcddd1a}\label{classb__graph_ab90cd92a2e8f077e4ae18c568bcddd1a}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+comparing for inequality 
+
+
+\begin{DoxyCode}
+91 \{
+92   \textcolor{keywordflow}{return} !(G1 == G2);
+93 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}\label{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+printing the graph to the output 
+
+
+\begin{DoxyCode}
+58 \{
+59   \textcolor{keywordtype}{int} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = G.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+60   vector<int> list;
+61   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};i++)\{
+62     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+63     o << i << \textcolor{stringliteral}{" -> "};
+64     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+65       o << list[j];
+66       \textcolor{keywordflow}{if} (j < list.size()-1)
+67         o << \textcolor{stringliteral}{", "};
+68     \}
+69     o << endl;
+70   \}
+71   \textcolor{keywordflow}{return} o;
+72 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_adf87735e8372a81049b347b1fdd23484}\label{classb__graph_adf87735e8372a81049b347b1fdd23484}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!operator==@{operator==}}
+\index{operator==@{operator==}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+comparing two graphs for equality 
+
+
+\begin{DoxyCode}
+75 \{
+76   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+77   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+78   \textcolor{keywordflow}{if} (n1!= n2)
+79     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+80   vector<int> list1, list2;
+81   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+82     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+83     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+84     \textcolor{keywordflow}{if} (list1 != list2)
+85       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+86   \}
+87   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+88 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classb__graph_a2a89d2e8f958270952aab2e8769b7342}\label{classb__graph_a2a89d2e8f958270952aab2e8769b7342}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!adj\+\_\+list@{adj\+\_\+list}}
+\index{adj\+\_\+list@{adj\+\_\+list}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{adj\+\_\+list}{adj\_list}}
+{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ b\+\_\+graph\+::adj\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+adjacency list for left vertices, where for $0 \leq v < n $, adj\+\_\+list\mbox{[}v\mbox{]} is a sorted list of right vertices connected to v. 
+
+\mbox{\Hypertarget{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}\label{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!left\+\_\+deg\+\_\+seq@{left\+\_\+deg\+\_\+seq}}
+\index{left\+\_\+deg\+\_\+seq@{left\+\_\+deg\+\_\+seq}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{left\+\_\+deg\+\_\+seq}{left\_deg\_seq}}
+{\footnotesize\ttfamily vector$<$int$>$ b\+\_\+graph\+::left\+\_\+deg\+\_\+seq\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+degree sequence for left vertices, where left\+\_\+deg\+\_\+seq\mbox{[}v\mbox{]} is the degree of the left node v 
+
+\mbox{\Hypertarget{classb__graph_a9e211d40c1799bc9b125de472ff06642}\label{classb__graph_a9e211d40c1799bc9b125de472ff06642}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!n@{n}}
+\index{n@{n}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int b\+\_\+graph\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of vertices in each side, so we have 2n vertices in total 
+
+\mbox{\Hypertarget{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}\label{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!right\+\_\+deg\+\_\+seq@{right\+\_\+deg\+\_\+seq}}
+\index{right\+\_\+deg\+\_\+seq@{right\+\_\+deg\+\_\+seq}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{right\+\_\+deg\+\_\+seq}{right\_deg\_seq}}
+{\footnotesize\ttfamily vector$<$int$>$ b\+\_\+graph\+::right\+\_\+deg\+\_\+seq\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+degree sequence for right vertices, where left\+\_\+deg\+\_\+seq\mbox{[}v\mbox{]} is the degree of the right node v 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{bipartite__graph_8h}{bipartite\+\_\+graph.\+h}\item 
+\hyperlink{bipartite__graph_8cpp}{bipartite\+\_\+graph.\+cpp}\end{DoxyCompactItemize}

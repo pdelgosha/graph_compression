@@ -1,0 +1,74 @@
+\hypertarget{bipartite__graph_8cpp}{}\section{bipartite\+\_\+graph.\+cpp File Reference}
+\label{bipartite__graph_8cpp}\index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}}
+{\ttfamily \#include \char`\"{}bipartite\+\_\+graph.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{bipartite__graph_8cpp_a0635d59bf5b2d1df3d3dd2beef14ac6e}{operator$<$$<$} (ostream \&o, const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\item 
+bool \hyperlink{bipartite__graph_8cpp_adf87735e8372a81049b347b1fdd23484}{operator==} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G1, const \hyperlink{classb__graph}{b\+\_\+graph} \&G2)
+\item 
+bool \hyperlink{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}{operator!=} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G1, const \hyperlink{classb__graph}{b\+\_\+graph} \&G2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}\label{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}} 
+\index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+91 \{
+92   \textcolor{keywordflow}{return} !(G1 == G2);
+93 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bipartite__graph_8cpp_a0635d59bf5b2d1df3d3dd2beef14ac6e}\label{bipartite__graph_8cpp_a0635d59bf5b2d1df3d3dd2beef14ac6e}} 
+\index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+58 \{
+59   \textcolor{keywordtype}{int} n = G.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+60   vector<int> list;
+61   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
+62     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+63     o << i << \textcolor{stringliteral}{" -> "};
+64     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+65       o << list[j];
+66       \textcolor{keywordflow}{if} (j < list.size()-1)
+67         o << \textcolor{stringliteral}{", "};
+68     \}
+69     o << endl;
+70   \}
+71   \textcolor{keywordflow}{return} o;
+72 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bipartite__graph_8cpp_adf87735e8372a81049b347b1fdd23484}\label{bipartite__graph_8cpp_adf87735e8372a81049b347b1fdd23484}} 
+\index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+75 \{
+76   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+77   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}();
+78   \textcolor{keywordflow}{if} (n1!= n2)
+79     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+80   vector<int> list1, list2;
+81   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+82     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+83     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+84     \textcolor{keywordflow}{if} (list1 != list2)
+85       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+86   \}
+87   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+88 \}
+\end{DoxyCode}

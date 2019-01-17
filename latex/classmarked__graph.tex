@@ -1,0 +1,145 @@
+\hypertarget{classmarked__graph}{}\section{marked\+\_\+graph Class Reference}
+\label{classmarked__graph}\index{marked\+\_\+graph@{marked\+\_\+graph}}
+
+
+simple marked graph  
+
+
+
+
+{\ttfamily \#include $<$marked\+\_\+graph.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmarked__graph_acff011a677859b66513c42c4f7e8d531}{marked\+\_\+graph} ()
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+\hyperlink{classmarked__graph_a83ae66845b006cfeeed677bdc2d584db}{marked\+\_\+graph} (int n, vector$<$ pair$<$ pair$<$ int, int $>$, pair$<$ int, int $>$ $>$ $>$ edges, vector$<$ int $>$ vertex\+\_\+marks)
+\begin{DoxyCompactList}\small\item\em constructs a marked graph based on edges lists and vertex marks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\+\_\+vertices}
+\begin{DoxyCompactList}\small\item\em number of vertices in the graph \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, pair$<$ int, int $>$ $>$ $>$ $>$ \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\+\_\+list}
+\begin{DoxyCompactList}\small\item\em adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, mark towards i, mark towards other endpoint) \end{DoxyCompactList}\item 
+vector$<$ map$<$ int, int $>$ $>$ \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\+\_\+location}
+\begin{DoxyCompactList}\small\item\em adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\+\_\+mark}
+\begin{DoxyCompactList}\small\item\em ver\+\_\+mark\mbox{[}i\mbox{]} is the mark of vertex i \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+simple marked graph 
+
+This class stores a simple marked graph where each vertex carries a mark, and each edge carries two marks, one towards each of its endpoints. The mark of each vertex and each edge is a nonnegative integer. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmarked__graph_acff011a677859b66513c42c4f7e8d531}\label{classmarked__graph_acff011a677859b66513c42c4f7e8d531}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!marked\+\_\+graph@{marked\+\_\+graph}}
+\index{marked\+\_\+graph@{marked\+\_\+graph}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{marked\+\_\+graph()}{marked\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily marked\+\_\+graph\+::marked\+\_\+graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+default constructor 
+
+
+\begin{DoxyCode}
+25     \{
+26       \hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} = 0;
+27     \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classmarked__graph_a83ae66845b006cfeeed677bdc2d584db}\label{classmarked__graph_a83ae66845b006cfeeed677bdc2d584db}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!marked\+\_\+graph@{marked\+\_\+graph}}
+\index{marked\+\_\+graph@{marked\+\_\+graph}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{marked\+\_\+graph()}{marked\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily marked\+\_\+graph\+::marked\+\_\+graph (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{vector$<$ pair$<$ pair$<$ int, int $>$, pair$<$ int, int $>$ $>$ $>$}]{edges,  }\item[{vector$<$ int $>$}]{vertex\+\_\+marks }\end{DoxyParamCaption})}
+
+
+
+constructs a marked graph based on edges lists and vertex marks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the number of vertices in the graph \\
+\hline
+{\em edges} & a vector, where each element is of the form $((i,j), (x,y))$ where $i \neq j$ denotes the endpoints of the edge, $x$ is the mark towards $i$ and $y$ is the mark towards $j$ \\
+\hline
+{\em vertex\+\_\+marks} & is a vector of size n, where vertex\+\_\+marks\mbox{[}i\mbox{]} is the mark of vertex i \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+4 \{ 
+5   \hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} = n;
+6   \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}.resize(n);
+7   \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}.resize(n);
+8   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0; k<edges.size(); k++)\{
+9     \textcolor{comment}{// (i,j) are endpoints if the edge}
+10     \textcolor{comment}{// (x,y) are marks, x towards i and y towards j}
+11     \textcolor{keywordtype}{int} i = edges[k].first.first;
+12     \textcolor{keywordtype}{int} j = edges[k].first.second;
+13     \textcolor{keywordtype}{int} x = edges[k].second.first;
+14     \textcolor{keywordtype}{int} y = edges[k].second.second;
+15     \textcolor{keywordflow}{if} (i <0 || i >= n || j < 0 || j >= n || i ==j)
+16       cerr << \textcolor{stringliteral}{" ERROR: graph::graph(n, edges) received an invalid pair of edges with n = "} << n << \textcolor{stringliteral}{" : ("} <
+      < i << \textcolor{stringliteral}{" , "} << j << \textcolor{stringliteral}{" )"} << endl;
+17     \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[i].push\_back(pair<\textcolor{keywordtype}{int}, pair<int, int> > (j, pair<int, int> (x,y)));
+18     \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[i][j] = \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[i].size() - 1;
+19     \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[j].push\_back(pair<\textcolor{keywordtype}{int}, pair<int, int> > (i, pair<int, int> (y,x)));
+20     \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[j][i] = \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[j].size() - 1;
+21   \}
+22   \hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark} = vertex\_marks;
+23 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}\label{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!adj\+\_\+list@{adj\+\_\+list}}
+\index{adj\+\_\+list@{adj\+\_\+list}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{adj\+\_\+list}{adj\_list}}
+{\footnotesize\ttfamily vector$<$vector$<$pair$<$int, pair$<$int, int$>$ $>$ $>$ $>$ marked\+\_\+graph\+::adj\+\_\+list}
+
+
+
+adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, mark towards i, mark towards other endpoint) 
+
+\mbox{\Hypertarget{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}\label{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!adj\+\_\+location@{adj\+\_\+location}}
+\index{adj\+\_\+location@{adj\+\_\+location}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{adj\+\_\+location}{adj\_location}}
+{\footnotesize\ttfamily vector$<$map$<$int,int$>$ $>$ marked\+\_\+graph\+::adj\+\_\+location}
+
+
+
+adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w 
+
+\mbox{\Hypertarget{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}\label{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!nu\+\_\+vertices@{nu\+\_\+vertices}}
+\index{nu\+\_\+vertices@{nu\+\_\+vertices}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{nu\+\_\+vertices}{nu\_vertices}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+::nu\+\_\+vertices}
+
+
+
+number of vertices in the graph 
+
+\mbox{\Hypertarget{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}\label{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}} 
+\index{marked\+\_\+graph@{marked\+\_\+graph}!ver\+\_\+mark@{ver\+\_\+mark}}
+\index{ver\+\_\+mark@{ver\+\_\+mark}!marked\+\_\+graph@{marked\+\_\+graph}}
+\subsubsection{\texorpdfstring{ver\+\_\+mark}{ver\_mark}}
+{\footnotesize\ttfamily vector$<$int$>$ marked\+\_\+graph\+::ver\+\_\+mark}
+
+
+
+ver\+\_\+mark\mbox{[}i\mbox{]} is the mark of vertex i 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{marked__graph_8h}{marked\+\_\+graph.\+h}\item 
+\hyperlink{marked__graph_8cpp}{marked\+\_\+graph.\+cpp}\end{DoxyCompactItemize}

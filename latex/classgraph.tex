@@ -1,0 +1,278 @@
+\hypertarget{classgraph}{}\section{graph Class Reference}
+\label{classgraph}\index{graph@{graph}}
+
+
+simple unmarked graph  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+graph.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}{graph} (vector$<$ vector$<$ int $>$ $>$ list, vector$<$ int $>$ deg)
+\begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\+\_\+forward\+\_\+list} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the forward adjacency list of a given vertex \end{DoxyCompactList}\item 
+int \hyperlink{classgraph_a388b6ce292a4c49e3853e22bdce978de}{get\+\_\+forward\+\_\+degree} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the forward degree of a vertex v \end{DoxyCompactList}\item 
+int \hyperlink{classgraph_a593245054bf5ded344fbf304bcdc7fbe}{get\+\_\+degree} (int v) const
+\begin{DoxyCompactList}\small\item\em returns the overall degree of a vertex \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\+\_\+degree\+\_\+sequence} () const
+\begin{DoxyCompactList}\small\item\em returns the whole degree sequence \end{DoxyCompactList}\item 
+int \hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\+\_\+vertices} () const
+\begin{DoxyCompactList}\small\item\em the number of vertices in the graph \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n}
+\begin{DoxyCompactList}\small\item\em the number of vertices in the graph \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\+\_\+adj\+\_\+list}
+\begin{DoxyCompactList}\small\item\em for a vertex $0 \leq v < n$, forward\+\_\+adj\+\_\+list\mbox{[}v\mbox{]} is a vector containing vertices w such that are adjacent to v and also $w > v$, i.\+e. the adjacent vertices in the forward direction. For such v, forward\+\_\+adj\+\_\+list\mbox{[}v\mbox{]} is sorted increasing. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph_a0b31295672bfe37669c9eb3640977fe6}{degree\+\_\+sequence}
+\begin{DoxyCompactList}\small\item\em the degree sequence of the graph, where the degree of a vertex is the number of all edges connected to it (not just the ones with greater index). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classgraph_abe8832440fa24b6a6c152dbc3736c908}{operator$<$$<$} (ostream \&o, const \hyperlink{classgraph}{graph} \&G)
+\begin{DoxyCompactList}\small\item\em printing the graph to the output \end{DoxyCompactList}\item 
+bool \hyperlink{classgraph_a156c8acaca113a7e5cc8d918dd1fc3f3}{operator==} (const \hyperlink{classgraph}{graph} \&G1, const \hyperlink{classgraph}{graph} \&G2)
+\begin{DoxyCompactList}\small\item\em comparing two graphs for equality \end{DoxyCompactList}\item 
+bool \hyperlink{classgraph_a004e2b491d4bafaf2d8129e6bc8abc2e}{operator!=} (const \hyperlink{classgraph}{graph} \&G1, const \hyperlink{classgraph}{graph} \&G2)
+\begin{DoxyCompactList}\small\item\em comparing for inequality \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+simple unmarked graph 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}\label{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}} 
+\index{graph@{graph}!graph@{graph}}
+\index{graph@{graph}!graph@{graph}}
+\subsubsection{\texorpdfstring{graph()}{graph()}}
+{\footnotesize\ttfamily graph\+::graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list,  }\item[{vector$<$ int $>$}]{deg }\end{DoxyParamCaption})}
+
+
+
+a constructor 
+
+This constructor takes the list of adjacent vertices and the degree sequence, and constructs an object. 
+\begin{DoxyParams}{Parameters}
+{\em list} & list\mbox{[}v\mbox{]} is the list of vertices w adjacent to v such that $w > v$. However, this list does not have to be sorted. \\
+\hline
+{\em deg} & deg\mbox{[}v\mbox{]} is the overall degree of the vertex (not only the ones with greater index). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+9                                                       \{
+10   \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n} = list.size();
+11   \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list} = list;
+12   \textcolor{comment}{// sorting the list}
+13   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n}; v++)
+14     sort(\hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list}[v].begin(), \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list}[v].end());
+15   \hyperlink{classgraph_a0b31295672bfe37669c9eb3640977fe6}{degree\_sequence} = deg;
+16 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgraph_a593245054bf5ded344fbf304bcdc7fbe}\label{classgraph_a593245054bf5ded344fbf304bcdc7fbe}} 
+\index{graph@{graph}!get\+\_\+degree@{get\+\_\+degree}}
+\index{get\+\_\+degree@{get\+\_\+degree}!graph@{graph}}
+\subsubsection{\texorpdfstring{get\+\_\+degree()}{get\_degree()}}
+{\footnotesize\ttfamily int graph\+::get\+\_\+degree (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the overall degree of a vertex 
+
+
+\begin{DoxyCode}
+30                                 \{
+31   \textcolor{keywordflow}{return} \hyperlink{classgraph_a0b31295672bfe37669c9eb3640977fe6}{degree\_sequence}[v];
+32 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_afdca627df7fb93a7d1d8a547f616e948}\label{classgraph_afdca627df7fb93a7d1d8a547f616e948}} 
+\index{graph@{graph}!get\+\_\+degree\+\_\+sequence@{get\+\_\+degree\+\_\+sequence}}
+\index{get\+\_\+degree\+\_\+sequence@{get\+\_\+degree\+\_\+sequence}!graph@{graph}}
+\subsubsection{\texorpdfstring{get\+\_\+degree\+\_\+sequence()}{get\_degree\_sequence()}}
+{\footnotesize\ttfamily vector$<$ int $>$ graph\+::get\+\_\+degree\+\_\+sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the whole degree sequence 
+
+
+\begin{DoxyCode}
+34                                             \{
+35   \textcolor{keywordflow}{return} \hyperlink{classgraph_a0b31295672bfe37669c9eb3640977fe6}{degree\_sequence};
+36 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_a388b6ce292a4c49e3853e22bdce978de}\label{classgraph_a388b6ce292a4c49e3853e22bdce978de}} 
+\index{graph@{graph}!get\+\_\+forward\+\_\+degree@{get\+\_\+forward\+\_\+degree}}
+\index{get\+\_\+forward\+\_\+degree@{get\+\_\+forward\+\_\+degree}!graph@{graph}}
+\subsubsection{\texorpdfstring{get\+\_\+forward\+\_\+degree()}{get\_forward\_degree()}}
+{\footnotesize\ttfamily int graph\+::get\+\_\+forward\+\_\+degree (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the forward degree of a vertex v 
+
+
+\begin{DoxyCode}
+24                                         \{
+25   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n})
+26     cerr << \textcolor{stringliteral}{"graph::get\_forward\_degree, index v out of range"} << endl;
+27   \textcolor{keywordflow}{return} \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list}[v].size();
+28 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}\label{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}} 
+\index{graph@{graph}!get\+\_\+forward\+\_\+list@{get\+\_\+forward\+\_\+list}}
+\index{get\+\_\+forward\+\_\+list@{get\+\_\+forward\+\_\+list}!graph@{graph}}
+\subsubsection{\texorpdfstring{get\+\_\+forward\+\_\+list()}{get\_forward\_list()}}
+{\footnotesize\ttfamily vector$<$ int $>$ graph\+::get\+\_\+forward\+\_\+list (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns the forward adjacency list of a given vertex 
+
+
+\begin{DoxyCode}
+18                                               \{
+19   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n})
+20     cerr << \textcolor{stringliteral}{"graph::get\_forward\_list, index v out of range"} << endl;
+21   \textcolor{keywordflow}{return} \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list}[v];
+22 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}\label{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}} 
+\index{graph@{graph}!nu\+\_\+vertices@{nu\+\_\+vertices}}
+\index{nu\+\_\+vertices@{nu\+\_\+vertices}!graph@{graph}}
+\subsubsection{\texorpdfstring{nu\+\_\+vertices()}{nu\_vertices()}}
+{\footnotesize\ttfamily int graph\+::nu\+\_\+vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+the number of vertices in the graph 
+
+
+\begin{DoxyCode}
+39                             \{
+40   \textcolor{keywordflow}{return} \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n};
+41 \}
+\end{DoxyCode}
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classgraph_a004e2b491d4bafaf2d8129e6bc8abc2e}\label{classgraph_a004e2b491d4bafaf2d8129e6bc8abc2e}} 
+\index{graph@{graph}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!graph@{graph}}
+\subsubsection{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G1,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+comparing for inequality 
+
+
+\begin{DoxyCode}
+77 \{
+78   \textcolor{keywordflow}{return} !(G1 == G2);
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_abe8832440fa24b6a6c152dbc3736c908}\label{classgraph_abe8832440fa24b6a6c152dbc3736c908}} 
+\index{graph@{graph}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!graph@{graph}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+printing the graph to the output 
+
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keywordtype}{int} \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n} = G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+46   vector<int> list;
+47   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n};i++)\{
+48     list = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i);
+49     o << i << \textcolor{stringliteral}{" -> "};
+50     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+51       o << list[j];
+52       \textcolor{keywordflow}{if} (j < list.size()-1)
+53         o << \textcolor{stringliteral}{", "};
+54     \}
+55     o << endl;
+56   \}
+57   \textcolor{keywordflow}{return} o;
+58 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph_a156c8acaca113a7e5cc8d918dd1fc3f3}\label{classgraph_a156c8acaca113a7e5cc8d918dd1fc3f3}} 
+\index{graph@{graph}!operator==@{operator==}}
+\index{operator==@{operator==}!graph@{graph}}
+\subsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G1,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+comparing two graphs for equality 
+
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+63   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+64   \textcolor{keywordflow}{if} (n1!= n2)
+65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66   vector<int> list1, list2;
+67   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+68     list1 = G1.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+69     list2 = G2.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+70     \textcolor{keywordflow}{if} (list1 != list2)
+71       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+72   \}
+73   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+74 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classgraph_a0b31295672bfe37669c9eb3640977fe6}\label{classgraph_a0b31295672bfe37669c9eb3640977fe6}} 
+\index{graph@{graph}!degree\+\_\+sequence@{degree\+\_\+sequence}}
+\index{degree\+\_\+sequence@{degree\+\_\+sequence}!graph@{graph}}
+\subsubsection{\texorpdfstring{degree\+\_\+sequence}{degree\_sequence}}
+{\footnotesize\ttfamily vector$<$int$>$ graph\+::degree\+\_\+sequence\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the degree sequence of the graph, where the degree of a vertex is the number of all edges connected to it (not just the ones with greater index). 
+
+\mbox{\Hypertarget{classgraph_a7d6441850d586d6a99fb73df57b70362}\label{classgraph_a7d6441850d586d6a99fb73df57b70362}} 
+\index{graph@{graph}!forward\+\_\+adj\+\_\+list@{forward\+\_\+adj\+\_\+list}}
+\index{forward\+\_\+adj\+\_\+list@{forward\+\_\+adj\+\_\+list}!graph@{graph}}
+\subsubsection{\texorpdfstring{forward\+\_\+adj\+\_\+list}{forward\_adj\_list}}
+{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ graph\+::forward\+\_\+adj\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+for a vertex $0 \leq v < n$, forward\+\_\+adj\+\_\+list\mbox{[}v\mbox{]} is a vector containing vertices w such that are adjacent to v and also $w > v$, i.\+e. the adjacent vertices in the forward direction. For such v, forward\+\_\+adj\+\_\+list\mbox{[}v\mbox{]} is sorted increasing. 
+
+\mbox{\Hypertarget{classgraph_ac8b3474ce95c04087c312508ec1443b6}\label{classgraph_ac8b3474ce95c04087c312508ec1443b6}} 
+\index{graph@{graph}!n@{n}}
+\index{n@{n}!graph@{graph}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int graph\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of vertices in the graph 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{simple__graph_8h}{simple\+\_\+graph.\+h}\item 
+\hyperlink{simple__graph_8cpp}{simple\+\_\+graph.\+cpp}\end{DoxyCompactItemize}

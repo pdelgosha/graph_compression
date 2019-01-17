@@ -1,0 +1,74 @@
+\hypertarget{simple__graph_8cpp}{}\section{simple\+\_\+graph.\+cpp File Reference}
+\label{simple__graph_8cpp}\index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}}
+{\ttfamily \#include \char`\"{}simple\+\_\+graph.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{simple__graph_8cpp_abe8832440fa24b6a6c152dbc3736c908}{operator$<$$<$} (ostream \&o, const \hyperlink{classgraph}{graph} \&G)
+\item 
+bool \hyperlink{simple__graph_8cpp_a156c8acaca113a7e5cc8d918dd1fc3f3}{operator==} (const \hyperlink{classgraph}{graph} \&G1, const \hyperlink{classgraph}{graph} \&G2)
+\item 
+bool \hyperlink{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}{operator!=} (const \hyperlink{classgraph}{graph} \&G1, const \hyperlink{classgraph}{graph} \&G2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}\label{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}} 
+\index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G1,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+77 \{
+78   \textcolor{keywordflow}{return} !(G1 == G2);
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{simple__graph_8cpp_abe8832440fa24b6a6c152dbc3736c908}\label{simple__graph_8cpp_abe8832440fa24b6a6c152dbc3736c908}} 
+\index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keywordtype}{int} n = G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+46   vector<int> list;
+47   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
+48     list = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i);
+49     o << i << \textcolor{stringliteral}{" -> "};
+50     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+51       o << list[j];
+52       \textcolor{keywordflow}{if} (j < list.size()-1)
+53         o << \textcolor{stringliteral}{", "};
+54     \}
+55     o << endl;
+56   \}
+57   \textcolor{keywordflow}{return} o;
+58 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{simple__graph_8cpp_a156c8acaca113a7e5cc8d918dd1fc3f3}\label{simple__graph_8cpp_a156c8acaca113a7e5cc8d918dd1fc3f3}} 
+\index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G1,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+63   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+64   \textcolor{keywordflow}{if} (n1!= n2)
+65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66   vector<int> list1, list2;
+67   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+68     list1 = G1.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+69     list2 = G2.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+70     \textcolor{keywordflow}{if} (list1 != list2)
+71       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+72   \}
+73   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+74 \}
+\end{DoxyCode}

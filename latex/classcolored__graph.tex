@@ -1,0 +1,294 @@
+\hypertarget{classcolored__graph}{}\section{colored\+\_\+graph Class Reference}
+\label{classcolored__graph}\index{colored\+\_\+graph@{colored\+\_\+graph}}
+
+
+this class defines a colored graph, which is obtained from a simple marked graph and the color of edges come from the type of edges  
+
+
+
+
+{\ttfamily \#include $<$graph\+\_\+message.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}{colored\+\_\+graph} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&\hyperlink{classgraph}{graph}, int depth, int max\+\_\+degree)
+\begin{DoxyCompactList}\small\item\em constructor from a graph, depth and maximum degree parameters \end{DoxyCompactList}\item 
+void \hyperlink{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}{init} ()
+\begin{DoxyCompactList}\small\item\em initializes other variables \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{classmarked__graph}{marked\+\_\+graph} \& \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}
+\begin{DoxyCompactList}\small\item\em the marked graph from which this is created \end{DoxyCompactList}\item 
+int \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}
+\begin{DoxyCompactList}\small\item\em the depth up to which look at edge types \end{DoxyCompactList}\item 
+int \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}
+\begin{DoxyCompactList}\small\item\em the maximum degree threshold \end{DoxyCompactList}\item 
+\hyperlink{classgraph__message}{graph\+\_\+message} \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}
+\begin{DoxyCompactList}\small\item\em we use the message passing algorithm of class \hyperlink{classgraph__message}{graph\+\_\+message} to find out edge types \end{DoxyCompactList}\item 
+int \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\+\_\+vertices}
+\begin{DoxyCompactList}\small\item\em the number of vertices in the graph. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, pair$<$ int, int $>$ $>$ $>$ $>$ \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\+\_\+list}
+\begin{DoxyCompactList}\small\item\em adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, color component towards i, color component towards other endpoint). Therefore, the color of an edge between v and its ith neighbor is of the form (adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+first, adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+second) \end{DoxyCompactList}\item 
+vector$<$ map$<$ int, int $>$ $>$ \hyperlink{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}{adj\+\_\+location}
+\begin{DoxyCompactList}\small\item\em adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\+\_\+type}
+\begin{DoxyCompactList}\small\item\em vertex mark and the colored degree matrix of each vertex. For a vertex v, D\mbox{[}v\mbox{]} is a vector of size $1 + L \times L$, where the first entry is the vertex mark, and the rest is the colored degree matrix row by row. Here, $L$ denotes the number of colors. \end{DoxyCompactList}\item 
+map$<$ vector$<$ int $>$, int $>$ \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\+\_\+type\+\_\+dict}
+\begin{DoxyCompactList}\small\item\em the dictionary mapping vertex types to integers, obtained from the ver\+\_\+type array defined above \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\+\_\+type\+\_\+list}
+\begin{DoxyCompactList}\small\item\em the list of all distinct vertex types, obtained from the ver\+\_\+type array. This is constructed in such a way that ver\+\_\+type\+\_\+list\mbox{[}ver\+\_\+type\+\_\+dict\mbox{[}x\mbox{]}\mbox{]} = x \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\+\_\+type\+\_\+int}
+\begin{DoxyCompactList}\small\item\em vertex type converted to integers, using the ver\+\_\+type\+\_\+dict map, i.\+e. ver\+\_\+type\+\_\+int\mbox{[}v\mbox{]} = ver\+\_\+type\+\_\+dict\mbox{[}ver\+\_\+type\mbox{[}v\mbox{]}\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+this class defines a colored graph, which is obtained from a simple marked graph and the color of edges come from the type of edges 
+
+quick member overview\+:
+
+
+\begin{DoxyItemize}
+\item There is a reference to a \hyperlink{classmarked__graph}{marked\+\_\+graph} object G,
+\item h and Delta are parameters that determine depth and maximum degree to form edge types,
+\item M is a member with type \hyperlink{classgraph__message}{graph\+\_\+message} that is used to form edge types,
+\item nu\+\_\+vertices\+: number of vertices in the graph
+\item adj\+\_\+list\+: the adjacency list of vertices, which also includes edge colors
+\item adj\+\_\+location\+: map for finding where neighbors of vertices are in the adjacency list
+\item ver\+\_\+type\+: a vector for each vertex, containing mark + vectorized degree matrix
+\item ver\+\_\+type\+\_\+dict\+: dictionary mapping vertex mark + degree matrix to integer
+\item ver\+\_\+type\+\_\+list\+: list of \char`\"{}distinct\char`\"{} vertex types
+\item ver\+\_\+type\+\_\+int\+: vertex types converted to integers
+\end{DoxyItemize}
+
+{\itshape Sample Usage} \begin{DoxyVerb}marked_graph G;
+... //define G
+int h = 10;
+int Delta = 5;
+colored_graph C(G, h, Delta);\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}\label{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
+\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}}
+{\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor from a graph, depth and maximum degree parameters 
+
+
+\begin{DoxyCode}
+104                                                                     : \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}(graph), 
+      \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}(graph, depth, max\_degree), \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}(depth), \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}(max\_degree)
+105   \{
+106     \hyperlink{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}{init}(); \textcolor{comment}{// initialize other variables }
+107   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}\label{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!init@{init}}
+\index{init@{init}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void colored\+\_\+graph\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initializes other variables 
+
+
+\begin{DoxyItemize}
+\item updates messages for M
+\item updates adj\+\_\+list
+\item updates ver\+\_\+type, ver\+\_\+type\+\_\+dict, ver\+\_\+type\+\_\+list, ver\+\_\+type\+\_\+int
+\item to make sure, checks whether the sum of degree matrices is symmetric 
+\end{DoxyItemize}
+\begin{DoxyCode}
+169 \{
+170   \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices} = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
+171   \hyperlink{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}{adj\_location} = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}; \textcolor{comment}{// neighborhood structure is the same as the
+       given graph}
+172   \textcolor{comment}{// assigning edge colors based on the messages given by M}
+173   \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a611832eb2767873fbff7b07c5790570d}{update\_messages}();
+174   \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}.resize(\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices});
+175 
+176   \textcolor{comment}{// updating adj\_list}
+177   \textcolor{keywordtype}{int} w, my\_location, color\_v, color\_w;
+178   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
+179     \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].resize(\hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()); \textcolor{comment}{// the same number of neighbors here}
+180     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+181       w = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the ith neighbor, the same as in G}
+182       my\_location = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// where v stands among the neighbors of w}
+183       color\_v = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a7890d2dff06b9de6f98734c69d8fbcfd}{message\_dict}[\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a06a1d1ab91b4891c65ea80205566f800}{messages}[v][i][\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}-1]]; \textcolor{comment}{// the color towards v
+       corresponds to the message v sends to w}
+184       color\_w = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a7890d2dff06b9de6f98734c69d8fbcfd}{message\_dict}[\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a06a1d1ab91b4891c65ea80205566f800}{messages}[w][my\_location][
+      \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}-1]]; \textcolor{comment}{// the color towards w is the message w sends towards v}
+185       \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i] = pair<int, pair<int, int> >(w, pair<int, int>(color\_v, color\_w)); \textcolor{comment}{// add w as
+       a neighbor, in the same order as in G, and add the colors towards v and w }
+186     \}
+187   \}
+188 
+189   \textcolor{comment}{// updating the vertex type sequence, dictionary and list, i.e. variables ver\_type, ver\_type\_dict and
+       ver\_type\_list}
+190   \textcolor{comment}{// we also update ver\_type\_int}
+191 
+192   \textcolor{keywordtype}{int} L = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_aa497f561e976cf58cc554a77e0601d8f}{message\_list}.size(); \textcolor{comment}{// the number of messages}
+193   \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}.resize(nu\_vertices);
+194   \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}.resize(nu\_vertices);
+195   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
+196     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v].resize(1 + L * L);
+197     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v][0] = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
+198     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
+199       \textcolor{comment}{//if (adj\_list[v][i].second.first < M.message\_list.size())\{ // equivalently, the edge is not * typed,
+       since all * typed messages are after L by sorting}
+200       \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v][1 +  \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first * L + 
+      \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second] ++;
+201       \textcolor{comment}{//\}}
+202     \}
+203     \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.find(\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v]) == \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.end())\{
+204       \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}.push\_back(\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v]);
+205       \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v]] = \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}.size() -1;
+206     \}
+207     \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}[v] = \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[ver\_type[v]];
+208   \}
+209 
+210   \textcolor{comment}{// checking whether the sum of degrees is symmetric}
+211   vector<int> sum;
+212   sum.resize(1 + L * L);
+213   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)
+214     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<1 + L * L;i++)
+215       sum[i] += \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v][i];
+216   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<L;i++)\{
+217     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<L;j++)\{
+218       cout << sum[1+i*L + j] << \textcolor{stringliteral}{" "};
+219       \textcolor{keywordflow}{if} (sum[1+i*L + j] != sum[1+j*L+i])
+220         cout << \textcolor{stringliteral}{" DANGER! the sum matrix is not symmetric"} << endl;
+221     \}
+222     cout << endl;
+223   \}
+224 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}\label{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!adj\+\_\+list@{adj\+\_\+list}}
+\index{adj\+\_\+list@{adj\+\_\+list}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{adj\+\_\+list}{adj\_list}}
+{\footnotesize\ttfamily vector$<$vector$<$pair$<$int, pair$<$int, int$>$ $>$ $>$ $>$ colored\+\_\+graph\+::adj\+\_\+list}
+
+
+
+adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, color component towards i, color component towards other endpoint). Therefore, the color of an edge between v and its ith neighbor is of the form (adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+first, adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+second) 
+
+\mbox{\Hypertarget{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}\label{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!adj\+\_\+location@{adj\+\_\+location}}
+\index{adj\+\_\+location@{adj\+\_\+location}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{adj\+\_\+location}{adj\_location}}
+{\footnotesize\ttfamily vector$<$map$<$int,int$>$ $>$ colored\+\_\+graph\+::adj\+\_\+location}
+
+
+
+adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w 
+
+\mbox{\Hypertarget{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}\label{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!Delta@{Delta}}
+\index{Delta@{Delta}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{Delta}{Delta}}
+{\footnotesize\ttfamily int colored\+\_\+graph\+::\+Delta}
+
+
+
+the maximum degree threshold 
+
+\mbox{\Hypertarget{classcolored__graph_a39186b56cad58c368d6947656976e18d}\label{classcolored__graph_a39186b56cad58c368d6947656976e18d}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!G@{G}}
+\index{G@{G}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily const \hyperlink{classmarked__graph}{marked\+\_\+graph}\& colored\+\_\+graph\+::G}
+
+
+
+the marked graph from which this is created 
+
+\mbox{\Hypertarget{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}\label{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!h@{h}}
+\index{h@{h}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int colored\+\_\+graph\+::h}
+
+
+
+the depth up to which look at edge types 
+
+\mbox{\Hypertarget{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}\label{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!M@{M}}
+\index{M@{M}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily \hyperlink{classgraph__message}{graph\+\_\+message} colored\+\_\+graph\+::M}
+
+
+
+we use the message passing algorithm of class \hyperlink{classgraph__message}{graph\+\_\+message} to find out edge types 
+
+\mbox{\Hypertarget{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}\label{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!nu\+\_\+vertices@{nu\+\_\+vertices}}
+\index{nu\+\_\+vertices@{nu\+\_\+vertices}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{nu\+\_\+vertices}{nu\_vertices}}
+{\footnotesize\ttfamily int colored\+\_\+graph\+::nu\+\_\+vertices}
+
+
+
+the number of vertices in the graph. 
+
+\mbox{\Hypertarget{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}\label{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type@{ver\+\_\+type}}
+\index{ver\+\_\+type@{ver\+\_\+type}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{ver\+\_\+type}{ver\_type}}
+{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ colored\+\_\+graph\+::ver\+\_\+type}
+
+
+
+vertex mark and the colored degree matrix of each vertex. For a vertex v, D\mbox{[}v\mbox{]} is a vector of size $1 + L \times L$, where the first entry is the vertex mark, and the rest is the colored degree matrix row by row. Here, $L$ denotes the number of colors. 
+
+\mbox{\Hypertarget{classcolored__graph_aeb780762429ddac375799f4a45405712}\label{classcolored__graph_aeb780762429ddac375799f4a45405712}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+dict@{ver\+\_\+type\+\_\+dict}}
+\index{ver\+\_\+type\+\_\+dict@{ver\+\_\+type\+\_\+dict}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+dict}{ver\_type\_dict}}
+{\footnotesize\ttfamily map$<$vector$<$int$>$, int $>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+dict}
+
+
+
+the dictionary mapping vertex types to integers, obtained from the ver\+\_\+type array defined above 
+
+\mbox{\Hypertarget{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}\label{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+int@{ver\+\_\+type\+\_\+int}}
+\index{ver\+\_\+type\+\_\+int@{ver\+\_\+type\+\_\+int}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+int}{ver\_type\_int}}
+{\footnotesize\ttfamily vector$<$int$>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+int}
+
+
+
+vertex type converted to integers, using the ver\+\_\+type\+\_\+dict map, i.\+e. ver\+\_\+type\+\_\+int\mbox{[}v\mbox{]} = ver\+\_\+type\+\_\+dict\mbox{[}ver\+\_\+type\mbox{[}v\mbox{]}\mbox{]} 
+
+\mbox{\Hypertarget{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}\label{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+list@{ver\+\_\+type\+\_\+list}}
+\index{ver\+\_\+type\+\_\+list@{ver\+\_\+type\+\_\+list}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+list}{ver\_type\_list}}
+{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+list}
+
+
+
+the list of all distinct vertex types, obtained from the ver\+\_\+type array. This is constructed in such a way that ver\+\_\+type\+\_\+list\mbox{[}ver\+\_\+type\+\_\+dict\mbox{[}x\mbox{]}\mbox{]} = x 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}\item 
+\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}\end{DoxyCompactItemize}

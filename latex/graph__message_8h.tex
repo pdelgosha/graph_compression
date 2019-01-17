@@ -1,0 +1,36 @@
+\hypertarget{graph__message_8h}{}\section{graph\+\_\+message.\+h File Reference}
+\label{graph__message_8h}\index{graph\+\_\+message.\+h@{graph\+\_\+message.\+h}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include \char`\"{}marked\+\_\+graph.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classgraph__message}{graph\+\_\+message}
+\begin{DoxyCompactList}\small\item\em this class takes care of message passing on marked graphs. \end{DoxyCompactList}\item 
+class \hyperlink{classcolored__graph}{colored\+\_\+graph}
+\begin{DoxyCompactList}\small\item\em this class defines a colored graph, which is obtained from a simple marked graph and the color of edges come from the type of edges \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{graph__message_8h_ad920672ef38738d9c54c17e8008b7028}{pair\+\_\+compare} (const pair$<$ vector$<$ int $>$, int $>$ \&, const pair$<$ vector$<$ int $>$, int $>$ \&)
+\begin{DoxyCompactList}\small\item\em used for sorting messages \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{graph__message_8h_ad920672ef38738d9c54c17e8008b7028}\label{graph__message_8h_ad920672ef38738d9c54c17e8008b7028}} 
+\index{graph\+\_\+message.\+h@{graph\+\_\+message.\+h}!pair\+\_\+compare@{pair\+\_\+compare}}
+\index{pair\+\_\+compare@{pair\+\_\+compare}!graph\+\_\+message.\+h@{graph\+\_\+message.\+h}}
+\subsubsection{\texorpdfstring{pair\+\_\+compare()}{pair\_compare()}}
+{\footnotesize\ttfamily bool pair\+\_\+compare (\begin{DoxyParamCaption}\item[{const pair$<$ vector$<$ int $>$, int $>$ \&}]{,  }\item[{const pair$<$ vector$<$ int $>$, int $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+used for sorting messages 
+
+
+\begin{DoxyCode}
+153                                                                                     \{
+154   \textcolor{keywordflow}{return} a.first < b.first;
+155 \}
+\end{DoxyCode}

@@ -1,0 +1,36 @@
+\hypertarget{test_8cpp}{}\section{test.\+cpp File Reference}
+\label{test_8cpp}\index{test.\+cpp@{test.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}marked\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graph\+\_\+message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fenwick.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}simple\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}simple\+\_\+graph\+\_\+compression.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bipartite\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bipartite\+\_\+graph\+\_\+compression.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test.\+cpp@{test.\+cpp}!main@{main}}
+\index{main@{main}!test.\+cpp@{test.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+15           \{
+16   \hyperlink{classmarked__graph}{marked\_graph} G;
+17   ifstream inp(\textcolor{stringliteral}{"star\_graph.txt"});
+18   inp >> G;
+19   \hyperlink{classgraph__message}{graph\_message} M(G, 10, 2);
+20   M.update\_messages();
+21 \}
+\end{DoxyCode}

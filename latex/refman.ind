@@ -1,0 +1,130 @@
+\begin{theindex}
+
+  \item {adj\+\_\+list}
+    \subitem {colored\+\_\+graph}, \hyperpage{8}
+    \subitem {marked\+\_\+graph}, \hyperpage{17}
+  \item {adj\+\_\+location}
+    \subitem {colored\+\_\+graph}, \hyperpage{8}
+    \subitem {marked\+\_\+graph}, \hyperpage{17}
+
+  \indexspace
+
+  \item {colored\+\_\+graph}, \hyperpage{5}
+    \subitem {adj\+\_\+list}, \hyperpage{8}
+    \subitem {adj\+\_\+location}, \hyperpage{8}
+    \subitem {colored\+\_\+graph}, \hyperpage{6}
+    \subitem {Delta}, \hyperpage{8}
+    \subitem {G}, \hyperpage{8}
+    \subitem {h}, \hyperpage{8}
+    \subitem {init}, \hyperpage{7}
+    \subitem {M}, \hyperpage{9}
+    \subitem {nu\+\_\+vertices}, \hyperpage{9}
+    \subitem {ver\+\_\+type}, \hyperpage{9}
+    \subitem {ver\+\_\+type\+\_\+dict}, \hyperpage{9}
+    \subitem {ver\+\_\+type\+\_\+int}, \hyperpage{9}
+    \subitem {ver\+\_\+type\+\_\+list}, \hyperpage{9}
+
+  \indexspace
+
+  \item {Delta}
+    \subitem {colored\+\_\+graph}, \hyperpage{8}
+    \subitem {graph\+\_\+message}, \hyperpage{14}
+
+  \indexspace
+
+  \item {G}
+    \subitem {colored\+\_\+graph}, \hyperpage{8}
+    \subitem {graph\+\_\+message}, \hyperpage{14}
+  \item {graph\+\_\+message}, \hyperpage{10}
+    \subitem {Delta}, \hyperpage{14}
+    \subitem {G}, \hyperpage{14}
+    \subitem {graph\+\_\+message}, \hyperpage{11}
+    \subitem {h}, \hyperpage{14}
+    \subitem {message\+\_\+dict}, \hyperpage{14}
+    \subitem {message\+\_\+list}, \hyperpage{14}
+    \subitem {messages}, \hyperpage{15}
+    \subitem {update\+\_\+message\+\_\+dictionary}, \hyperpage{11}
+    \subitem {update\+\_\+messages}, \hyperpage{12}
+  \item {graph\+\_\+message.\+cpp}, \hyperpage{19}
+    \subitem {pair\+\_\+compare}, \hyperpage{19}
+  \item {graph\+\_\+message.\+h}, \hyperpage{19}
+    \subitem {pair\+\_\+compare}, \hyperpage{20}
+
+  \indexspace
+
+  \item {h}
+    \subitem {colored\+\_\+graph}, \hyperpage{8}
+    \subitem {graph\+\_\+message}, \hyperpage{14}
+
+  \indexspace
+
+  \item {init}
+    \subitem {colored\+\_\+graph}, \hyperpage{7}
+
+  \indexspace
+
+  \item {M}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+  \item {main}
+    \subitem {test.\+cpp}, \hyperpage{22}
+  \item {marked\+\_\+graph}, \hyperpage{15}
+    \subitem {adj\+\_\+list}, \hyperpage{17}
+    \subitem {adj\+\_\+location}, \hyperpage{17}
+    \subitem {marked\+\_\+graph}, \hyperpage{16}
+    \subitem {nu\+\_\+vertices}, \hyperpage{17}
+    \subitem {ver\+\_\+mark}, \hyperpage{17}
+  \item {marked\+\_\+graph.\+cpp}, \hyperpage{20}
+    \subitem {operator$>$$>$}, \hyperpage{20}
+  \item {marked\+\_\+graph.\+h}, \hyperpage{21}
+    \subitem {operator$>$$>$}, \hyperpage{21}
+  \item {message\+\_\+dict}
+    \subitem {graph\+\_\+message}, \hyperpage{14}
+  \item {message\+\_\+list}
+    \subitem {graph\+\_\+message}, \hyperpage{14}
+  \item {messages}
+    \subitem {graph\+\_\+message}, \hyperpage{15}
+
+  \indexspace
+
+  \item {nu\+\_\+vertices}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+    \subitem {marked\+\_\+graph}, \hyperpage{17}
+
+  \indexspace
+
+  \item {operator$>$$>$}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{20}
+    \subitem {marked\+\_\+graph.\+h}, \hyperpage{21}
+
+  \indexspace
+
+  \item {pair\+\_\+compare}
+    \subitem {graph\+\_\+message.\+cpp}, \hyperpage{19}
+    \subitem {graph\+\_\+message.\+h}, \hyperpage{20}
+
+  \indexspace
+
+  \item {test.\+cpp}, \hyperpage{22}
+    \subitem {main}, \hyperpage{22}
+
+  \indexspace
+
+  \item {update\+\_\+message\+\_\+dictionary}
+    \subitem {graph\+\_\+message}, \hyperpage{11}
+  \item {update\+\_\+messages}
+    \subitem {graph\+\_\+message}, \hyperpage{12}
+
+  \indexspace
+
+  \item {ver\+\_\+mark}
+    \subitem {marked\+\_\+graph}, \hyperpage{17}
+  \item {ver\+\_\+type}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+  \item {ver\+\_\+type\+\_\+dict}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+  \item {ver\+\_\+type\+\_\+int}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+  \item {ver\+\_\+type\+\_\+list}
+    \subitem {colored\+\_\+graph}, \hyperpage{9}
+
+\end{theindex}

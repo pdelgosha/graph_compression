@@ -1,0 +1,159 @@
+\hypertarget{classfenwick__tree}{}\section{fenwick\+\_\+tree Class Reference}
+\label{classfenwick__tree}\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+
+
+Fenwick tree class.  
+
+
+
+
+{\ttfamily \#include $<$fenwick.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfenwick__tree_a6a23235d1eb40c9858057525d7ed6d70}{fenwick\+\_\+tree} ()
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+\hyperlink{classfenwick__tree_a35288559f8182d96aef8ddba5cb46adb}{fenwick\+\_\+tree} (vector$<$ int $>$)
+\begin{DoxyCompactList}\small\item\em constructor, which takes a vector of values and initializes \end{DoxyCompactList}\item 
+int \hyperlink{classfenwick__tree_abedd21a2ddbbb830195c8eba1330112f}{size} ()
+\begin{DoxyCompactList}\small\item\em the size of the array, which is sums.\+size()-\/1, since sums is one based \end{DoxyCompactList}\item 
+void \hyperlink{classfenwick__tree_ab2f999bba718bcd57d066db754d85ad4}{add} (int k, int val)
+\item 
+int \hyperlink{classfenwick__tree_adad26fa851d811b4d1e0328a5c6eae03}{sum} (int k)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ int $>$ \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}
+\begin{DoxyCompactList}\small\item\em a one based vector containing sum of values \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fenwick tree class. 
+
+this class computes the partial sums of an array. More precisely, we feed it a vector of integers, and it can compute the sum of values up to a certain index efficiently. Moreover, we can change the value of an index. Both these operations are done in $O(\log n)$ where $n$ is the size of the array. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfenwick__tree_a6a23235d1eb40c9858057525d7ed6d70}\label{classfenwick__tree_a6a23235d1eb40c9858057525d7ed6d70}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{fenwick\+\_\+tree()}{fenwick\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily fenwick\+\_\+tree\+::fenwick\+\_\+tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+default constructor 
+
+
+\begin{DoxyCode}
+23     \{
+24       \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}.resize(0);
+25     \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfenwick__tree_a35288559f8182d96aef8ddba5cb46adb}\label{classfenwick__tree_a35288559f8182d96aef8ddba5cb46adb}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{fenwick\+\_\+tree()}{fenwick\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily fenwick\+\_\+tree\+::fenwick\+\_\+tree (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{vals }\end{DoxyParamCaption})}
+
+
+
+constructor, which takes a vector of values and initializes 
+
+
+\begin{DoxyCode}
+9 \{
+10   \textcolor{keywordtype}{int} n = vals.size();
+11   \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}.resize(n+1);
+12   \textcolor{comment}{// initializes at zero}
+13   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<=n;i++)
+14     \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}[i] = 0;
+15   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)
+16     \hyperlink{classfenwick__tree_ab2f999bba718bcd57d066db754d85ad4}{add}(i,vals[i]); \textcolor{comment}{// add values one by one}
+17 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfenwick__tree_ab2f999bba718bcd57d066db754d85ad4}\label{classfenwick__tree_ab2f999bba718bcd57d066db754d85ad4}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!add@{add}}
+\index{add@{add}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void fenwick\+\_\+tree\+::add (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{int}]{val }\end{DoxyParamCaption})}
+
+gets a (zero based) index k, and add to that value 
+\begin{DoxyParams}{Parameters}
+{\em k} & the index to be modified, this is zero based \\
+\hline
+{\em val} & the value to be added to the above index \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+20 \{
+21   k = k +1; \textcolor{comment}{// the sums vector is one based while the index k was zero based}
+22   \textcolor{keywordflow}{while} (k < \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}.size())\{
+23     \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}[k] += val;
+24     k += (k & -k);
+25   \}
+26 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfenwick__tree_abedd21a2ddbbb830195c8eba1330112f}\label{classfenwick__tree_abedd21a2ddbbb830195c8eba1330112f}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!size@{size}}
+\index{size@{size}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int fenwick\+\_\+tree\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the size of the array, which is sums.\+size()-\/1, since sums is one based 
+
+
+\begin{DoxyCode}
+32   \{
+33     \textcolor{keywordflow}{return} \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}.size() - 1;
+34   \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfenwick__tree_adad26fa851d811b4d1e0328a5c6eae03}\label{classfenwick__tree_adad26fa851d811b4d1e0328a5c6eae03}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!sum@{sum}}
+\index{sum@{sum}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{sum()}{sum()}}
+{\footnotesize\ttfamily int fenwick\+\_\+tree\+::sum (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})}
+
+returns the sum of values from 0 to k 
+\begin{DoxyParams}{Parameters}
+{\em k} & the index up to which (including) the sum is computed \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+30 \{
+31   k = k +1; \textcolor{comment}{// the sums vector is one based while the index k was zero based}
+32   \textcolor{keywordtype}{int} sum\_computed = 0;
+33   \textcolor{keywordflow}{while} (k > 0)\{
+34     sum\_computed += \hyperlink{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}{sums}[k];
+35     k -= (k & -k); \textcolor{comment}{// reduce the lsb bit}
+36   \}
+37   \textcolor{keywordflow}{return} sum\_computed;
+38 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}\label{classfenwick__tree_ac05c8fc17f358a38a2bab242f9164138}} 
+\index{fenwick\+\_\+tree@{fenwick\+\_\+tree}!sums@{sums}}
+\index{sums@{sums}!fenwick\+\_\+tree@{fenwick\+\_\+tree}}
+\subsubsection{\texorpdfstring{sums}{sums}}
+{\footnotesize\ttfamily vector$<$int$>$ fenwick\+\_\+tree\+::sums\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a one based vector containing sum of values 
+
+sums\mbox{[}k\mbox{]} contains the sum of values in the interval (k-\/lsb(k), k\mbox{]}. Here lsb(k) denotes the rightmost one in k. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fenwick_8h}{fenwick.\+h}\item 
+\hyperlink{fenwick_8cpp}{fenwick.\+cpp}\end{DoxyCompactItemize}

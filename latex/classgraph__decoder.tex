@@ -1,0 +1,329 @@
+\hypertarget{classgraph__decoder}{}\section{graph\+\_\+decoder Class Reference}
+\label{classgraph__decoder}\index{graph\+\_\+decoder@{graph\+\_\+decoder}}
+
+
+Decodes a simple unmarked graph.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+graph\+\_\+compression.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgraph__decoder_a41aa2f322a170376a7904b008e9cdfe0}{graph\+\_\+decoder} (vector$<$ int $>$ a\+\_\+)
+\begin{DoxyCompactList}\small\item\em constructor given the degree sequence \end{DoxyCompactList}\item 
+\hyperlink{classgraph}{graph} \hyperlink{classgraph__decoder_a3d2ef81ec6ac66e50c1809f361143922}{decode} (mpz\+\_\+class f, vector$<$ int $>$ t\+S\+\_\+)
+\begin{DoxyCompactList}\small\item\em given $\tilde{N}$ and a vector $\tilde{S}$, decodes the graph and returns an object of type graph \end{DoxyCompactList}\item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}{decode\+\_\+node} (int i, mpz\+\_\+class tN)
+\begin{DoxyCompactList}\small\item\em decode the node i \end{DoxyCompactList}\item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\+\_\+interval} (int i, int j, int I, mpz\+\_\+class tN, int Sj)
+\begin{DoxyCompactList}\small\item\em decodes the interval $[i,j]$ with interval index $I$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ int $>$ \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}
+\begin{DoxyCompactList}\small\item\em the degree sequence of the graph. \end{DoxyCompactList}\item 
+int \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}
+\begin{DoxyCompactList}\small\item\em the number of vertices, which is a.\+size() \end{DoxyCompactList}\item 
+int \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2}
+\begin{DoxyCompactList}\small\item\em the integer part of $\log^2 n$ \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}
+\begin{DoxyCompactList}\small\item\em the forward adjacency list of the decoded graph \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}
+\begin{DoxyCompactList}\small\item\em the sequence $\vec{\beta}$, where after decoding vertex $i$, for $i \leq v\leq n$ we have $\beta_v = d_v(i)$. \end{DoxyCompactList}\item 
+\hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree} \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}
+\begin{DoxyCompactList}\small\item\em a Fenwick tree initialized with the degree sequence a, and after decoding vertex $i$, for $i \leq v$, we have $U_v = \sum_{k=v}^{n-1} d_k(i)$. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS}
+\begin{DoxyCompactList}\small\item\em the $\tilde{S}$ vector, which stores the partial sums for the midpoints of intervals with length more than $\log^2 n$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Decodes a simple unmarked graph. 
+
+This class received a number $\tilde{N}$ and finds a simple unmarked graph. We assume that the degree sequence of the graph is known as well. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgraph__decoder_a41aa2f322a170376a7904b008e9cdfe0}\label{classgraph__decoder_a41aa2f322a170376a7904b008e9cdfe0}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{graph\+\_\+decoder()}{graph\_decoder()}}
+{\footnotesize\ttfamily graph\+\_\+decoder\+::graph\+\_\+decoder (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{a\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+constructor given the degree sequence 
+
+
+\begin{DoxyCode}
+113 \{
+114   \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a} = a\_;
+115   \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size();
+116   \textcolor{keywordtype}{double} logn = log(\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n});
+117   \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2} = int(logn * logn);
+118   \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}.resize(\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n});
+119   \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a};
+120   \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
+121 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgraph__decoder_a3d2ef81ec6ac66e50c1809f361143922}\label{classgraph__decoder_a3d2ef81ec6ac66e50c1809f361143922}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!decode@{decode}}
+\index{decode@{decode}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily \hyperlink{classgraph}{graph} graph\+\_\+decoder\+::decode (\begin{DoxyParamCaption}\item[{mpz\+\_\+class}]{f,  }\item[{vector$<$ int $>$}]{t\+S\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+given $\tilde{N}$ and a vector $\tilde{S}$, decodes the graph and returns an object of type graph 
+
+
+\begin{DoxyCode}
+125 \{
+126   \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS} = tS\_;
+127   \textcolor{comment}{//mpz\_class prod\_a\_factorial = 1; // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+128   \textcolor{comment}{//for (int i=0; i<a.size();i++)}
+129   \textcolor{comment}{//  prod\_a\_factorial *= compute\_product(a[i], a[i], 1);}
+130 
+131   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}, 0,\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} a\_i!}
+132   mpz\_class tN = f * prod\_a\_factorial;
+133   \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(0,\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1,1,tN,0);
+134   \textcolor{keywordflow}{return} \hyperlink{classgraph}{graph}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}, \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
+135 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}\label{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!decode\+\_\+interval@{decode\+\_\+interval}}
+\index{decode\+\_\+interval@{decode\+\_\+interval}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{decode\+\_\+interval()}{decode\_interval()}}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ graph\+\_\+decoder\+::decode\+\_\+interval (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{I,  }\item[{mpz\+\_\+class}]{tN,  }\item[{int}]{Sj }\end{DoxyParamCaption})}
+
+
+
+decodes the interval $[i,j]$ with interval index $I$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i,j} & intervals endpoints \\
+\hline
+{\em I} & the index of the interval \\
+\hline
+{\em tN} & $\tilde{N}_{i,j}$ \\
+\hline
+{\em Sj} & $S_{j+1}$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pair $N_{i,j}, l_{i,j}$ where $N_{i,j} = N_{i,j}(G)$ and $l_{i,j} = l_{i,j}(G)$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+190 \{
+191   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " tN " << tN << endl;}
+192   \textcolor{keywordflow}{if} (i == j)
+193     \textcolor{keywordflow}{return} \hyperlink{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}{decode\_node}(i, tN);
+194 
+195   \textcolor{comment}{// sweeping for zero nodes}
+196 
+197   \textcolor{keywordtype}{int} t; \textcolor{comment}{// place to break}
+198   \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
+199   \textcolor{keywordflow}{if} ((j-i) > \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2})\{
+200     \textcolor{comment}{//cerr << " long interval I = " << I << endl;}
+201     t = (i+j) / 2; \textcolor{comment}{// break at middle, since we have \(\backslash\)tilde\{S\}}
+202     St = \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS}[I]; \textcolor{comment}{// looking at the \(\backslash\)f$\(\backslash\)tilde\{S\}\(\backslash\)f$ vector}
+203   \}\textcolor{keywordflow}{else}\{
+204     \textcolor{comment}{//cerr << " short interval " << endl;}
+205     t = i;
+206     St = \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(i) - 2 * \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];
+207   \}
+208 
+209   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " t " << t << " St " << St << " Sj " << Sj << endl;}
+210   mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$t\_\{t+1, j\}\(\backslash\)f$}
+211   mpz\_class tNit; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{i,t\}\(\backslash\)f$ for the left decoder}
+212   mpz\_class tNtj; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{t+1, j\}\(\backslash\)f$ for the right decoder }
+213   mpz\_class Nit; \textcolor{comment}{// the true N\_\{i,t\} returned by the left decoder}
+214   mpz\_class lit; \textcolor{comment}{// the true l\_\{i,t\} returned by the left decoder}
+215   mpz\_class Ntj; \textcolor{comment}{// the true N\_\{t+1, j\} returned by the right decoder}
+216   mpz\_class ltj; \textcolor{comment}{// the true l\_\{t+1,j\} returned by the right decoder}
+217   mpz\_class Nij; \textcolor{comment}{// the true N\_\{i,j\} to return}
+218   mpz\_class lij; \textcolor{comment}{// the true l\_\{i,j\} to return}
+219 
+220   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// returned by subintervals }
+221 
+222 
+223   rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St - 1, (St - Sj)/2, 2);
+224   \textcolor{comment}{//cerr << " interval " << i << " " << j << " t " << t << " St " << St << " rtj " << rtj << endl;}
+225   tNit = tN / rtj;
+226 
+227   \textcolor{comment}{// calling the left decoder }
+228   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(i,t,2*I,tNit, St); 
+229   Nit = ans.first;
+230   lit = ans.second;
+231 
+232   \textcolor{comment}{// reducing the contribution of the left decoder to prepare for the right decoder}
+233   tNtj = (tN - Nit * rtj) / lit;
+234 
+235   \textcolor{comment}{// calling the right decoder}
+236   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(t+1, j, 2*I + 1, tNtj, Sj);
+237   Ntj = ans.first;
+238   ltj = ans.second;
+239 
+240   \textcolor{comment}{// preparing Nij and lij to return}
+241   Nij = Nit * rtj + lit * Ntj;
+242   lij = lit * ltj;
+243   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+244 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}\label{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!decode\+\_\+node@{decode\+\_\+node}}
+\index{decode\+\_\+node@{decode\+\_\+node}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{decode\+\_\+node()}{decode\_node()}}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ graph\+\_\+decoder\+::decode\+\_\+node (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{mpz\+\_\+class}]{tN }\end{DoxyParamCaption})}
+
+
+
+decode the node i 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & the vertex index \\
+\hline
+{\em tN} & $\tilde{N}_{i,i}$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pair $(N_{i,i}, l_i)$ where $l_i = l_i(G)$ and $N_{i,i} = N_{i,i}(G)$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+138 \{
+139   \textcolor{comment}{//cerr << " decode node " << i << " tN " << tN << endl;}
+140   \textcolor{comment}{//cerr << " beta[i] " << beta[i] << endl;}
+141   \textcolor{comment}{//cerr << " beta " << endl;}
+142   \textcolor{comment}{//for (int k = i; k< n;k++)}
+143   \textcolor{comment}{//  cerr << k << " " << beta[k] << endl;}
+144   \textcolor{comment}{//cerr << " U " << endl;}
+145   \textcolor{comment}{//for (int k=i;k<n;k++)}
+146   \textcolor{comment}{//  cerr << k << " " << U.sum(k) << endl;}
+147 
+148   \textcolor{keywordflow}{if} (\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i] == 0)
+149     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (0,1);
+150 
+151   mpz\_class li = 1; \textcolor{comment}{// l\_i(G)}
+152   mpz\_class Ni = 0; \textcolor{comment}{// N\_\{i,i\}(G)}
+153   \textcolor{keywordtype}{int} f, g; \textcolor{comment}{// endpoints for the binary search}
+154   \textcolor{keywordtype}{int} t; \textcolor{comment}{// midpoint for the binary search}
+155   mpz\_class zik, lik; 
+156   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];k++)\{
+157     \textcolor{keywordflow}{if} (k==0)
+158       f = i+1;
+159     \textcolor{keywordflow}{else}
+160       f = \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k-1]+1;
+161     g = \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1;
+162     \textcolor{keywordflow}{while}(g > f)\{
+163       \textcolor{comment}{//cerr << " f , g " << f << " " << g << endl;}
+164       t = (f+g)/2;
+165       \textcolor{comment}{// binary search:}
+166       \textcolor{keywordflow}{if}(\hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1), beta[i] - k, 1) <= tN)
+167         g = t;
+168       \textcolor{keywordflow}{else}
+169         f = t+1;
+170     \}
+171     \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i].push\_back(f);
+172     zik = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]+1), beta[i] - k, 1);
+173     Ni += li * zik;
+174     lik = (beta[i] - k) * beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]];
+175     li *= lik;
+176     tN -= zik;
+177     tN /= lik;
+178     \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k],-1);
+179     beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]] --;
+180   \}
+181   \textcolor{comment}{//cerr << " decoded for " << i << " x: " << endl;}
+182   \textcolor{comment}{//for (int j=0;j<x[i].size(); j++)}
+183   \textcolor{comment}{//  cerr << x[i][j] << " " ;}
+184   \textcolor{comment}{//cerr << endl;}
+185   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Ni, li);
+186 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}\label{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!a@{a}}
+\index{a@{a}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{a}{a}}
+{\footnotesize\ttfamily vector$<$int$>$ graph\+\_\+decoder\+::a\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the degree sequence of the graph. 
+
+\mbox{\Hypertarget{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}\label{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!beta@{beta}}
+\index{beta@{beta}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{beta}{beta}}
+{\footnotesize\ttfamily vector$<$int$>$ graph\+\_\+decoder\+::beta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the sequence $\vec{\beta}$, where after decoding vertex $i$, for $i \leq v\leq n$ we have $\beta_v = d_v(i)$. 
+
+\mbox{\Hypertarget{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}\label{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!logn2@{logn2}}
+\index{logn2@{logn2}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{logn2}{logn2}}
+{\footnotesize\ttfamily int graph\+\_\+decoder\+::logn2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the integer part of $\log^2 n$ 
+
+\mbox{\Hypertarget{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}\label{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!n@{n}}
+\index{n@{n}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int graph\+\_\+decoder\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of vertices, which is a.\+size() 
+
+\mbox{\Hypertarget{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}\label{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!tS@{tS}}
+\index{tS@{tS}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{tS}{tS}}
+{\footnotesize\ttfamily vector$<$int$>$ graph\+\_\+decoder\+::tS\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the $\tilde{S}$ vector, which stores the partial sums for the midpoints of intervals with length more than $\log^2 n$. 
+
+\mbox{\Hypertarget{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}\label{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!U@{U}}
+\index{U@{U}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{U}{U}}
+{\footnotesize\ttfamily \hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree} graph\+\_\+decoder\+::U\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a Fenwick tree initialized with the degree sequence a, and after decoding vertex $i$, for $i \leq v$, we have $U_v = \sum_{k=v}^{n-1} d_k(i)$. 
+
+\mbox{\Hypertarget{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}\label{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}} 
+\index{graph\+\_\+decoder@{graph\+\_\+decoder}!x@{x}}
+\index{x@{x}!graph\+\_\+decoder@{graph\+\_\+decoder}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ graph\+\_\+decoder\+::x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the forward adjacency list of the decoded graph 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{simple__graph__compression_8h}{simple\+\_\+graph\+\_\+compression.\+h}\item 
+\hyperlink{simple__graph__compression_8cpp}{simple\+\_\+graph\+\_\+compression.\+cpp}\end{DoxyCompactItemize}
