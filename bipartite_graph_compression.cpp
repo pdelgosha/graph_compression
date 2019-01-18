@@ -5,7 +5,7 @@
 // b_graph_encoder
 //==============================
 
-void b_graph_encoder::init()
+void b_graph_encoder::init(const b_graph& G)
 {
   // initializing beta
   beta = G.get_right_degree_sequence();
@@ -13,17 +13,14 @@ void b_graph_encoder::init()
   // initializing the Fenwick tree
   U = reverse_fenwick_tree(beta);
 
-  //initializing a as the left degree vector
-  a = G.get_left_degree_sequence();
+  if (a != G.get_left_degree_sequence() or b != G.get_right_degree_sequence())
+    cerr << " WARNING b_graph_encoder::init : vectors a and/or b do not match with the degree sequences of the given bipartite graph  " << endl;
 
-  //initializing b as the right degree vector
-  b = G.get_right_degree_sequence();
-    
 }
 
 
 
-  pair<mpz_class, mpz_class> b_graph_encoder::compute_N(int i, int j)
+pair<mpz_class, mpz_class> b_graph_encoder::compute_N(int i, int j, const b_graph& G)
   {
     mpz_class Nij = 0;
     mpz_class lij = 1;
@@ -47,21 +44,21 @@ void b_graph_encoder::init()
       pair<mpz_class, mpz_class> ans; // for collecting the results from subintervals
 
       // left subinterval
-      ans = compute_N(i,t);
+      ans = compute_N(i,t, G);
       Nit = ans.first;
       lit = ans.second;
       St = U.sum(0);
 
       // right subinterval
-      ans = compute_N(t+1, j);
+      ans = compute_N(t+1, j, G);
       Ntj = ans.first;
       ltj = ans.second;
       Sj = U.sum(0);
 
       mpz_class rtj; // r_{t+1, j}
-      mpz_class prod_afac = 1; // the product of a_k! for t + 1 <= k <= j
-      for (int k = t+1; k <= j; k++)
-        prod_afac *= compute_product(a[k], a[k], 1);
+      mpz_class prod_afac = prod_factorial(a, t+1, j);; // the product of a_k! for t + 1 <= k <= j
+
+
       rtj = compute_product(St, St - Sj, 1) / prod_afac; 
 
       Nij = Nit * rtj + lit * Ntj;
@@ -72,9 +69,13 @@ void b_graph_encoder::init()
 
 
 
-mpz_class b_graph_encoder::encode()
+mpz_class b_graph_encoder::encode(const b_graph& G)
 {
-  pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_vertices()-1);
+  if (a != G.get_left_degree_sequence() or b != G.get_right_degree_sequence())
+    cerr << " WARNING b_graph_encoder::encoder : vectors a and/or b do not match with the degree sequences of the given bipartite graph  " << endl;
+
+  init(G); // initialize U and beta for G
+  pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_left_vertices()-1, G);
 
   mpz_class prod_b_factorial = prod_factorial(b, 0, b.size()-1); // \prod_{i=0}^{n-1} b_i
 
@@ -97,12 +98,19 @@ b_graph_decoder::b_graph_decoder(vector<int> a_, vector<int> b_)
   a = a_;
   b = b_;
   n = a.size();
+  np = b.size();
+  init();
+}
+
+void b_graph_decoder::init()
+{
+  x.clear();
   x.resize(n);
   beta = b;
   U = reverse_fenwick_tree(b);
   W = reverse_fenwick_tree(a);
+  
 }
-
 
 pair<mpz_class, mpz_class> b_graph_decoder::decode_node(int i, mpz_class tN)
 {
@@ -110,14 +118,15 @@ pair<mpz_class, mpz_class> b_graph_decoder::decode_node(int i, mpz_class tN)
   mpz_class Ni = 0;
   int f, g; // endpoints of the interval for binary search
   int v;
-  mpz_class y; // helper 
+  mpz_class y; // helper
+  x[i].clear(); // make sure nothing is in the list to be decoded
   for (int k=0;k<a[i];k++){
     // finding x[i][k]
     if (k==0)
       f = 0;
     else
       f = 1 + x[i][k-1];
-    g = n-1;
+    g = np-1;
     while (g > f){
       v = (f+g)/2;
       if (binomial(U.sum(1+v) , a[i] - k) <= tN)
@@ -168,7 +177,7 @@ pair<mpz_class, mpz_class> b_graph_decoder::decode_interval(int i, int j, mpz_cl
 
 b_graph b_graph_decoder::decode(mpz_class f)
 {
-  mpz_class prod_b_factorial = prod_factorial(b, 0, n-1);
+  mpz_class prod_b_factorial = prod_factorial(b, 0, np-1);
   mpz_class tN = f * prod_b_factorial;
   decode_interval(0,n-1,tN);
   return b_graph(x, b);

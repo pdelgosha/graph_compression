@@ -2,24 +2,27 @@
 \label{classb__graph__encoder}\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 
 
+Encodes a simple unmarked bipartite graph.  
+
+
+
+
 {\ttfamily \#include $<$bipartite\+\_\+graph\+\_\+compression.\+h$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classb__graph__encoder_a03c88fac38f7b125212a524af8dc84ed}{b\+\_\+graph\+\_\+encoder} (const \hyperlink{classb__graph}{b\+\_\+graph} \&Gin)
+\hyperlink{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}{b\+\_\+graph\+\_\+encoder} (vector$<$ int $>$ a\+\_\+, vector$<$ int $>$ b\+\_\+)
 \begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
-void \hyperlink{classb__graph__encoder_a844cff8771a706d4de2abeec1312ff04}{init} ()
-\begin{DoxyCompactList}\small\item\em initializes beta and U, and a as the left degree vector of G, and b as the right degree vector of G \end{DoxyCompactList}\item 
-pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}{compute\+\_\+N} (int i, int j)
+void \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\begin{DoxyCompactList}\small\item\em initializes beta and U \end{DoxyCompactList}\item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\+\_\+N} (int i, int j, const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
 \begin{DoxyCompactList}\small\item\em computes $N_{i,j}(G)$ \end{DoxyCompactList}\item 
-mpz\+\_\+class \hyperlink{classb__graph__encoder_ab238f7cf40295274caf554eef6347e74}{encode} ()
-\begin{DoxyCompactList}\small\item\em encodes the given bipartite graph and returns an integer in the specified range \end{DoxyCompactList}\end{DoxyCompactItemize}
+mpz\+\_\+class \hyperlink{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}{encode} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\begin{DoxyCompactList}\small\item\em encodes the given bipartite graph $G$ and returns an integer in the specified range \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const \hyperlink{classb__graph}{b\+\_\+graph} \& \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}
-\begin{DoxyCompactList}\small\item\em the simple unmarked bipartite graph to be encoded \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}
 \begin{DoxyCompactList}\small\item\em when compute\+\_\+N is called for $i \leq j$, for $ i \leq v \leq n$, we have beta\mbox{[}v\mbox{]} = $b_v(i)$ \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}
@@ -30,12 +33,31 @@ vector$<$ int $>$ \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096
 \begin{DoxyCompactList}\small\item\em a Fenwick tree which encodes the degree of right nodes. When compute\+\_\+N is called for $i \leq j$, for $i \leq v \leq n$, we have U.\+sum\mbox{[}v\mbox{]} $= \sum_{k = v}^n b_k(i)$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Encodes a simple unmarked bipartite graph. 
+
+Encodes a simple bipartite graph in the set of bipartite graphs with given left degree sequence a and right degree sequence b. Therefore, to construct an encoder object, we need to specify these two degree sequences as vectors of int. For instance (in c++11) \begin{DoxyVerb}vector<int> a = {1,1,2};
+vector<int> b = {2,2};
+b_graph_encoder E(a,b);
+\end{DoxyVerb}
+
+
+constructs an encode object E which is capable of encoding bipartite graphs having 3 left nodes with degrees 1, 1, 2 (in order) and 2 right nodes with degrees 2,2 (in order). Hence, assume that we have defined such a bipartite graph by giving adjacency list\+: \begin{DoxyVerb}b_graph G({{0},{1},{0,1}});
+\end{DoxyVerb}
+
+
+Note that G has left and right degree sequences which are equal to a and b, respectively. Then, we can use E to encode G as follows\+: \begin{DoxyVerb}mpz_class f = E.encode(G);
+\end{DoxyVerb}
+
+
+In this way, the encode converts G to an integer stored in f. Later on, we can use f to decode G. 
+
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classb__graph__encoder_a03c88fac38f7b125212a524af8dc84ed}\label{classb__graph__encoder_a03c88fac38f7b125212a524af8dc84ed}} 
+\mbox{\Hypertarget{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}\label{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{b\+\_\+graph\+\_\+encoder()}{b\_graph\_encoder()}}
-{\footnotesize\ttfamily b\+\_\+graph\+\_\+encoder\+::b\+\_\+graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{Gin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily b\+\_\+graph\+\_\+encoder\+::b\+\_\+graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{a\+\_\+,  }\item[{vector$<$ int $>$}]{b\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -43,19 +65,16 @@ constructor
 
 
 \begin{DoxyCode}
-22                                      : \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}(Gin)
-23   \{
-24     \hyperlink{classb__graph__encoder_a844cff8771a706d4de2abeec1312ff04}{init}();
-25   \}
+40 : \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}(a\_), \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}(b\_) \{\}
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}\label{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}} 
+\mbox{\Hypertarget{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}\label{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!compute\+\_\+N@{compute\+\_\+N}}
 \index{compute\+\_\+N@{compute\+\_\+N}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{compute\+\_\+\+N()}{compute\_N()}}
-{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
@@ -65,110 +84,118 @@ computes $N_{i,j}(G)$
 \begin{DoxyParams}{Parameters}
 {\em i,j} & the interval for which we compute $N_{i,j}(G)$ \\
 \hline
+{\em G} & reference to the bipartite graph for which we compute N \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A pair, where the first component is $N_{i,j}(G)$, and the second component is $l_{i,j}(G)$ 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-27   \{
-28     mpz\_class Nij = 0;
-29     mpz\_class lij = 1;
-30     \textcolor{keywordflow}{if} (i == j)\{
-31       vector<int> x = \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i); \textcolor{comment}{// the adjacency list of the vertex}
-32       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
-33         Nij += lij * \hyperlink{compression__helper_8cpp_a4bc36d358aecc67feee9f87efc041d32}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
-34         lij *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]];
-35         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]] --;
-36         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k],-1);
-37       \}
-38       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-39     \}\textcolor{keywordflow}{else}\{
-40       \textcolor{keywordtype}{int} t = (i+j)/ 2;
-41       mpz\_class Nit, lit; \textcolor{comment}{// for the left subinterval i, j}
-42       mpz\_class Ntj, ltj; \textcolor{comment}{// for the right subinterval t+1, j}
-43       mpz\_class Nij, lij; \textcolor{comment}{// to return}
-44       \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
-45       \textcolor{keywordtype}{int} Sj; \textcolor{comment}{// S\_\{j+1\}}
-46 
-47       pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// for collecting the results from subintervals}
-48 
-49       \textcolor{comment}{// left subinterval}
-50       ans = \hyperlink{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}{compute\_N}(i,t);
-51       Nit = ans.first;
-52       lit = ans.second;
-53       St = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
-54 
-55       \textcolor{comment}{// right subinterval}
-56       ans = \hyperlink{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}{compute\_N}(t+1, j);
-57       Ntj = ans.first;
-58       ltj = ans.second;
-59       Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+24   \{
+25     mpz\_class Nij = 0;
+26     mpz\_class lij = 1;
+27     \textcolor{keywordflow}{if} (i == j)\{
+28       vector<int> x = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i); \textcolor{comment}{// the adjacency list of the vertex}
+29       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
+30         Nij += lij * \hyperlink{compression__helper_8cpp_a4bc36d358aecc67feee9f87efc041d32}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
+31         lij *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]];
+32         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]] --;
+33         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k],-1);
+34       \}
+35       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+36     \}\textcolor{keywordflow}{else}\{
+37       \textcolor{keywordtype}{int} t = (i+j)/ 2;
+38       mpz\_class Nit, lit; \textcolor{comment}{// for the left subinterval i, j}
+39       mpz\_class Ntj, ltj; \textcolor{comment}{// for the right subinterval t+1, j}
+40       mpz\_class Nij, lij; \textcolor{comment}{// to return}
+41       \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
+42       \textcolor{keywordtype}{int} Sj; \textcolor{comment}{// S\_\{j+1\}}
+43 
+44       pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// for collecting the results from subintervals}
+45 
+46       \textcolor{comment}{// left subinterval}
+47       ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(i,t, G);
+48       Nit = ans.first;
+49       lit = ans.second;
+50       St = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+51 
+52       \textcolor{comment}{// right subinterval}
+53       ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(t+1, j, G);
+54       Ntj = ans.first;
+55       ltj = ans.second;
+56       Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+57 
+58       mpz\_class rtj; \textcolor{comment}{// r\_\{t+1, j\}}
+59       mpz\_class prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j);; \textcolor{comment}{// the product of a\_k! for t + 1 <= k
+       <= j}
 60 
-61       mpz\_class rtj; \textcolor{comment}{// r\_\{t+1, j\}}
-62       mpz\_class prod\_afac = 1; \textcolor{comment}{// the product of a\_k! for t + 1 <= k <= j}
-63       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = t+1; k <= j; k++)
-64         prod\_afac *= \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(a[k], a[k], 1);
-65       rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
-66 
-67       Nij = Nit * rtj + lit * Ntj;
-68       lij = lit * ltj;
-69       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Nij, lij);
-70     \}
-71   \}
+61 
+62       rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
+63 
+64       Nij = Nit * rtj + lit * Ntj;
+65       lij = lit * ltj;
+66       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Nij, lij);
+67     \}
+68   \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph__encoder_ab238f7cf40295274caf554eef6347e74}\label{classb__graph__encoder_ab238f7cf40295274caf554eef6347e74}} 
+\mbox{\Hypertarget{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}\label{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!encode@{encode}}
 \index{encode@{encode}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{encode()}{encode()}}
-{\footnotesize\ttfamily mpz\+\_\+class b\+\_\+graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily mpz\+\_\+class b\+\_\+graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
-encodes the given bipartite graph and returns an integer in the specified range 
+encodes the given bipartite graph $G$ and returns an integer in the specified range 
 
 
 \begin{DoxyCode}
-76 \{
-77   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_a58e4aae68aab6cd8e4d34fc6b658c380}{compute\_N}(0,\hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}.\hyperlink{classb__graph_a69ff77c254af827afbfe52934b6736a5}{nu\_vertices}()-1);
-78 
-79   mpz\_class prod\_b\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}, 0, \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
-80 
-81   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
-82   \textcolor{keywordflow}{if} (ans.first % prod\_b\_factorial != 0)
-83     ceil = \textcolor{keyword}{true};
-84   ans.first /= prod\_b\_factorial;
-85   \textcolor{keywordflow}{if} (ceil)
-86     ans.first ++;
-87   \textcolor{keywordflow}{return} ans.first;
-88 \}
+73 \{
+74   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
+      \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
+75     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
+       of the given bipartite graph  "} << endl;
+76 
+77   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G); \textcolor{comment}{// initialize U and beta for G}
+78   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(0,G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}()-1, G);
+79 
+80   mpz\_class prod\_b\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}, 0, \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
+81 
+82   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
+83   \textcolor{keywordflow}{if} (ans.first % prod\_b\_factorial != 0)
+84     ceil = \textcolor{keyword}{true};
+85   ans.first /= prod\_b\_factorial;
+86   \textcolor{keywordflow}{if} (ceil)
+87     ans.first ++;
+88   \textcolor{keywordflow}{return} ans.first;
+89 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph__encoder_a844cff8771a706d4de2abeec1312ff04}\label{classb__graph__encoder_a844cff8771a706d4de2abeec1312ff04}} 
+\mbox{\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!init@{init}}
 \index{init@{init}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily void b\+\_\+graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void b\+\_\+graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
-initializes beta and U, and a as the left degree vector of G, and b as the right degree vector of G 
+initializes beta and U 
 
 
 \begin{DoxyCode}
 9 \{
 10   \textcolor{comment}{// initializing beta}
-11   \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta} = \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}.\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}();
+11   \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta} = G.\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}();
 12 
 13   \textcolor{comment}{// initializing the Fenwick tree}
 14   \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta});
 15 
-16   \textcolor{comment}{//initializing a as the left degree vector}
-17   \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} = \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}();
+16   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
+      \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
+17     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::init : vectors a and/or b do not match with the degree sequences of
+       the given bipartite graph  "} << endl;
 18 
-19   \textcolor{comment}{//initializing b as the right degree vector}
-20   \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} = \hyperlink{classb__graph__encoder_af969e24f445db0e54513086604e2c165}{G}.\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}();
-21     
-22 \}
+19 \}
 \end{DoxyCode}
 
 
@@ -202,16 +229,6 @@ the degree sequence for the right nodes
 
 
 when compute\+\_\+N is called for $i \leq j$, for $ i \leq v \leq n$, we have beta\mbox{[}v\mbox{]} = $b_v(i)$ 
-
-\mbox{\Hypertarget{classb__graph__encoder_af969e24f445db0e54513086604e2c165}\label{classb__graph__encoder_af969e24f445db0e54513086604e2c165}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!G@{G}}
-\index{G@{G}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{G}{G}}
-{\footnotesize\ttfamily const \hyperlink{classb__graph}{b\+\_\+graph}\& b\+\_\+graph\+\_\+encoder\+::G\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-the simple unmarked bipartite graph to be encoded 
 
 \mbox{\Hypertarget{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}\label{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!U@{U}}

@@ -13,6 +13,8 @@
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+ostream \& \hyperlink{test_8cpp_af5223445b486d224879e0a71e1836ff0}{operator$<$$<$} (ostream \&o, const vector$<$ int $>$ \&v)
+\item 
 int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 \end{DoxyCompactItemize}
 
@@ -26,11 +28,68 @@ int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-15           \{
-16   \hyperlink{classmarked__graph}{marked\_graph} G;
-17   ifstream inp(\textcolor{stringliteral}{"star\_graph.txt"});
-18   inp >> G;
-19   \hyperlink{classgraph__message}{graph\_message} M(G, 10, 2);
-20   M.update\_messages();
-21 \}
+24           \{
+25   \textcolor{comment}{//marked\_graph G;}
+26   \textcolor{comment}{//ifstream inp("star\_graph.txt");}
+27   \textcolor{comment}{//inp >> G;}
+28   \textcolor{comment}{//graph\_message M(G, 10, 2);}
+29   \textcolor{comment}{//M.update\_messages();}
+30   vector<int> a = \{1,1,2\}; \textcolor{comment}{// left degree sequence }
+31   vector<int> b = \{2,2\}; \textcolor{comment}{// right degree sequence}
+32 
+33   \hyperlink{classb__graph}{b\_graph} G(\{\{0\},\{1\},\{0,1\}\}); \textcolor{comment}{// defining the graph}
+34 
+35   \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(a,b); \textcolor{comment}{// constructing the encoder object}
+36   mpz\_class f = E.encode(G);
+37 
+38   \hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(a, b);
+39   \hyperlink{classb__graph}{b\_graph} Ghat = D.decode(f);
+40 
+41   \textcolor{keywordflow}{if} (Ghat == G)
+42     cout << \textcolor{stringliteral}{" successfully decoded the graph! "} << endl;
+43 
+44 
+45   \textcolor{keywordflow}{return} 0;
+46   \textcolor{comment}{// vector<vector<int> > list = \{\{\}, \{\}, \{\}\};}
+47 
+48   \textcolor{comment}{// b\_graph G(\{\{0\},\{1\},\{0,1\}\});}
+49   \textcolor{comment}{// // cout << G << endl;}
+50   \textcolor{comment}{// // cout << G.nu\_left\_vertices() << endl;}
+51   \textcolor{comment}{// // cout << G.nu\_right\_vertices() << endl;}
+52   \textcolor{comment}{// // cout << G.get\_left\_degree\_sequence() << endl;}
+53   \textcolor{comment}{// // cout << G.get\_right\_degree\_sequence() << endl;}
+54   \textcolor{comment}{// vector<int> a = G.get\_left\_degree\_sequence();}
+55   \textcolor{comment}{// vector<int> b = G.get\_right\_degree\_sequence();}
+56   
+57 
+58   \textcolor{comment}{// b\_graph\_encoder  E(a,b);}
+59   \textcolor{comment}{// mpz\_class m = E.encode(G);}
+60   \textcolor{comment}{// cout << "encoded: " << m << endl;}
+61 
+62   \textcolor{comment}{// b\_graph\_decoder D(a, b);}
+63   \textcolor{comment}{// b\_graph Ghat = D.decode(m);}
+64   \textcolor{comment}{// cout << "decoded graph: " << endl << Ghat << endl;}
+65 
+66   \textcolor{comment}{// if (Ghat == G)}
+67   \textcolor{comment}{//   cout << " equal " << endl;}
+68   \textcolor{comment}{// return 0;}
+69 
+70 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test_8cpp_af5223445b486d224879e0a71e1836ff0}\label{test_8cpp_af5223445b486d224879e0a71e1836ff0}} 
+\index{test.\+cpp@{test.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!test.\+cpp@{test.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const vector$<$ int $>$ \&}]{v }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+15                                                        \{
+16   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<v.size();i++)\{
+17     o << v[i];
+18     \textcolor{keywordflow}{if} (i < v.size()-1)
+19       o << \textcolor{stringliteral}{", "};
+20   \}
+21   \textcolor{keywordflow}{return} o;
+22 \}
 \end{DoxyCode}

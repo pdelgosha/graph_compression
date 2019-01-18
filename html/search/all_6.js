@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['g',['G',['../classb__graph__encoder.html#af969e24f445db0e54513086604e2c165',1,'b_graph_encoder::G()'],['../classgraph__message.html#abffce6d6a7868da0e747425569759f0f',1,'graph_message::G()'],['../classcolored__graph.html#a39186b56cad58c368d6947656976e18d',1,'colored_graph::G()'],['../classgraph__encoder.html#a56d8ab1a423e192c6f80514ff5e5cfec',1,'graph_encoder::G()']]],
+  ['g',['G',['../classgraph__message.html#abffce6d6a7868da0e747425569759f0f',1,'graph_message::G()'],['../classcolored__graph.html#a39186b56cad58c368d6947656976e18d',1,'colored_graph::G()'],['../classgraph__encoder.html#a56d8ab1a423e192c6f80514ff5e5cfec',1,'graph_encoder::G()']]],
   ['get_5fadj_5flist',['get_adj_list',['../classb__graph.html#aa81c7179b9c6cb4986c4b41e84a85799',1,'b_graph']]],
   ['get_5fdegree',['get_degree',['../classgraph.html#a593245054bf5ded344fbf304bcdc7fbe',1,'graph']]],
   ['get_5fdegree_5fsequence',['get_degree_sequence',['../classgraph.html#afdca627df7fb93a7d1d8a547f616e948',1,'graph']]],

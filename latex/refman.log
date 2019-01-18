@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  14 JAN 2019 14:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  17 JAN 2019 20:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1087,24 +1087,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 6.29996pt on input line 6.
- [1
-
-]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 41.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 41.
+(Font)              scaled to size 7.19995pt on input line 9.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 9.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-))
+) [1
+
+]
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 67.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 6.29996pt on input line 67.
+ [2] [3]
+[4] [5] [6] [7])
 \tf@toc=\write5
 \openout5 = `refman.toc'.
 
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 136.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 136.
- [2]
+ [8]
 Package hyperref Info: Option `pageanchor' set `true' on input line 138.
 
 Chapter 1.
@@ -1134,7 +1135,7 @@ Chapter 2.
 
 ]
 Chapter 3.
-(./classcolored__graph.tex
+(./classb__graph.tex
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 6.29996pt on input line 1.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
@@ -1157,28 +1158,76 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 16.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 29.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 41.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 29.
+(Font)              scaled to size 6.29996pt on input line 41.
  [5]
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 65.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 65.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 76.
+(Font)              scaled to size 8.99994pt on input line 78.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 7.19995pt on input line 78.
+
+
+LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
+(Font)              using `T1/pcr/m/n' instead on input line 78.
+
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 77.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 79.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 77.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 79.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [6]
-[7] [8]) (./classgraph__message.tex [9] [10]
+[7] [8] [9] [10]) (./classb__graph__decoder.tex [11] [12] [13]
+Underfull \hbox (badness 10000) detected at line 113
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 142
+[][][]
+ []
+
+[14]
+Underfull \hbox (badness 10000) detected at line 192
+[][][]
+ []
+
+[15] [16]) (./classb__graph__encoder.tex [17] [18]
+Underfull \hbox (badness 10000) detected at line 90
+[][][]
+ []
+
+[19] [20]) (./classcolored__graph.tex [21] [22] [23] [24] [25])
+(./classfenwick__tree.tex [26] [27] [28]) (./classgraph.tex [29] [30] [31]
+[32] [33]) (./classgraph__decoder.tex [34] [35]
+Underfull \hbox (badness 10000) detected at line 118
+[][][]
+ []
+
+[36]
+Underfull \hbox (badness 10000) detected at line 196
+[][][]
+ []
+
+[37]) (./classgraph__encoder.tex [38] [39]
+Underfull \hbox (badness 10000) detected at line 81
+[][][]
+ []
+
+[40]
+Underfull \hbox (badness 10000) detected at line 152
+[][][]
+ []
+
+[41] [42]) (./classgraph__message.tex [43]
 Overfull \hbox (36.15553pt too wide) in paragraph at lines 93--93
 []       \T1/pcr/m/n/7 last element in message_list which is going to be added 
 in the next line, this assures that if message_dict[m][] 
  []
 
-[11]
+[44]
 Overfull \hbox (19.15001pt too wide) in paragraph at lines 148--148
 []       \T1/pcr/m/n/7 is $\OMS/cmsy/m/n/7 n$\T1/pcr/m/n/7 xi(v,w) and a subtre
 e component which is a single root with mark $\OMS/cmsy/m/n/7 n$\T1/pcr/m/n/7 t
@@ -1192,7 +1241,7 @@ cr/m/n/7 tau(v), 0,$\OMS/cmsy/m/n/7 n$\T1/pcr/m/n/7 xi(v,w)) where the last 0 i
 ndicates that there is no offspring.[][] 
  []
 
-[12]
+[45]
 Overfull \hbox (23.55554pt too wide) in paragraph at lines 175--175
 []       \T1/pcr/m/n/7 between w and v towards v is added to it, and then all t
 hese objects are stacked in neighbor_messages to be[] 
@@ -1208,91 +1257,167 @@ i(v,w)[][]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13]
-[14]) (./classmarked__graph.tex [15]
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 7.19995pt on input line 41.
-
-
-LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
-(Font)              using `T1/pcr/m/n' instead on input line 41.
-
-[16]) [17] [18
+ [46]
+[47]) (./classmarked__graph.tex [48] [49]) (./classreverse__fenwick__tree.tex
+[50] [51] [52]) [53] [54
 
 ]
 Chapter 4.
-(./graph__message_8cpp.tex
+(./bipartite__graph_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
-) (./graph__message_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--6
+[55]) (./bipartite__graph_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
-[19]) (./marked__graph_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-[20]) (./marked__graph_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
-
- []
-
-[21]) (./test_8cpp.tex
+) (./bipartite__graph__compression_8cpp.tex)
+(./bipartite__graph__compression_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
  []
 
-) [22] (./refman.ind [23
+[56]) (./compression__helper_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[57]
+Underfull \hbox (badness 10000) detected at line 33
+[][][]
+ []
 
 
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+[58]
+Underfull \hbox (badness 10000) detected at line 109
+[][][]
+ []
+
+) (./compression__helper_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[59]
+Underfull \hbox (badness 10000) detected at line 35
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 65
+[][][]
+ []
+
+[60]
+Underfull \hbox (badness 10000) detected at line 111
+[][][]
+ []
+
+) (./fenwick_8cpp.tex) (./fenwick_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+) (./graph__message_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[61]) (./graph__message_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+) (./marked__graph_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[62]) (./marked__graph_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+[63]) (./simple__graph_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[64] [65]) (./simple__graph_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+) (./simple__graph__compression_8cpp.tex) (./simple__graph__compression_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+
+ []
+
+) (./test_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--13
+
+ []
+
+[66] [67]) [68] (./refman.ind [69
+
+
+
+] [70] [71] [72
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 185.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 185.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 185.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 185.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: B7FD3D01B7BD0C8C6D3AEF6146982348;12057.
+(rerunfilecheck)             Checksum: 3A8B7963CA5DB464AF8457FB4CA75E34;42799.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 185.
  ) 
 Here is how much of TeX's memory you used:
- 14945 strings out of 493117
- 215476 string characters out of 6135433
- 314907 words of memory out of 5000000
- 17992 multiletter control sequences out of 15000+600000
+ 15641 strings out of 493117
+ 234478 string characters out of 6135433
+ 324151 words of memory out of 5000000
+ 18282 multiletter control sequences out of 15000+600000
  69414 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 53i,16n,92p,871b,563s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,16n,92p,1067b,631s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
 ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texliv
 e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/
 2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/texmf-di
-st/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts
-/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
-urw/helvetic/uhvb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/hel
-vetic/uhvb8ac.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/
-uhvr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvro8a
-.pfb>
-Output written on refman.pdf (27 pages, 207246 bytes).
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+urw/courier/ucrro8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/hel
+vetic/uhvb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/u
+hvb8ac.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.
+pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (82 pages, 404663 bytes).
 PDF statistics:
- 913 PDF objects out of 1000 (max. 8388607)
- 859 compressed objects within 9 object streams
- 144 named destinations out of 1000 (max. 500000)
- 513 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2926 PDF objects out of 2984 (max. 8388607)
+ 2792 compressed objects within 28 object streams
+ 510 named destinations out of 1000 (max. 500000)
+ 1737 words of extra memory for PDF output out of 10000 (max. 10000000)
 

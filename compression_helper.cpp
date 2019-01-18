@@ -10,7 +10,7 @@ mpz_class compute_product(mpz_class N, mpz_class k, int s){
     return 1;
 
   if (k < 0){
-    cerr << " ERROR: compute product called for k < 0, returning 1  " << endl;
+    cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
     return 1;
   }
   if (N - (k-1) * s <= 0) // the terms go negative 

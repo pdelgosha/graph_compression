@@ -76,7 +76,8 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 10     \textcolor{keywordflow}{return} 1;
 11 
 12   \textcolor{keywordflow}{if} (k < 0)\{
-13     cerr << \textcolor{stringliteral}{" ERROR: compute product called for k < 0, returning 1  "} << endl;
+13     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
+       << endl;
 14     \textcolor{keywordflow}{return} 1;
 15   \}
 16   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0) \textcolor{comment}{// the terms go negative }
