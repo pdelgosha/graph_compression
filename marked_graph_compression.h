@@ -5,6 +5,10 @@
 #include <vector>
 #include "marked_graph.h"
 #include "graph_message.h"
+#include "simple_graph.h"
+#include "bipartite_graph.h"
+#include "simple_graph_compression.h"
+#include "bipartite_graph_compression.h"
 #include "time_series_compression.h"
 
 using namespace std;
@@ -17,7 +21,7 @@ class marked_graph_compressed
   pair<vector<int>, mpz_class> star_vertices; //!< the compressed form of the star_vertices list
   map<pair<int, int> , vector<vector<int> > > star_edges; //!< for each pair of edge marks x,x', and integer \f$k\f$, star_edges[pair<int,int>(x,x')][k] is a list of neighbors \f$w\f$ of the \f$k\f$th star vertex (say \f$v\f$) so that \f$v\f$ shares a star edge with \f$w\f$ so that the mark towards \f$v\f$ is x and the mark towards \f$w\f$ is xp. 
   vector<vector<int> > message_list; //!< a list of messages which appear in graph (not star type), so its size is L
-  vector<int> ver_type_list; //!< the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size \f$1+L \times L\f$ with the first index being the vertex mark, and the rest being the color degree matrix stored row by row. This can be considered as a dictionary to convert actual vertex types to integers (if ver_type_list[i] = a, then the integer i represents vertex type a) and subsequently compress it as a time series and store in the ver_types member. 
+  vector<vector<int> > ver_type_list; //!< the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size \f$1+L \times L\f$ with the first index being the vertex mark, and the rest being the color degree matrix stored row by row. This can be considered as a dictionary to convert actual vertex types to integers (if ver_type_list[i] = a, then the integer i represents vertex type a) and subsequently compress it as a time series and store in the ver_types member. 
 
   pair<vector<int>, mpz_class> ver_types; //!< the compressed form of vertex types, where the type of a vertex is the index with respect to ver_type_list of the list of size \f$1 + L \times L\f$ encapsulating the vertex mark and the
 
@@ -44,6 +48,12 @@ class marked_graph_encoder
   marked_graph_compressed compressed; //!< the compressed version of the given graph in encode function
 
   void encode_star_vertices();
+  void extract_edge_types(const marked_graph&);
+  void encode_star_edges();
+  void encode_vertex_types();
+  void extract_partition_graphs();
+  void encode_partition_bgraphs();
+  void encode_partition_graphs();
  public:
 
  marked_graph_encoder(int h_, int delta_): h(h_), delta(delta_) {}

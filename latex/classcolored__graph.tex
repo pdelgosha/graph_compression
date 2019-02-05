@@ -14,13 +14,13 @@ this class defines a colored graph, which is obtained from a simple marked graph
 \item 
 \hyperlink{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}{colored\+\_\+graph} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&\hyperlink{classgraph}{graph}, int depth, int max\+\_\+degree)
 \begin{DoxyCompactList}\small\item\em constructor from a graph, depth and maximum degree parameters \end{DoxyCompactList}\item 
-void \hyperlink{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}{init} ()
-\begin{DoxyCompactList}\small\item\em initializes other variables \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}{colored\+\_\+graph} ()
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+void \hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
+\begin{DoxyCompactList}\small\item\em initializes other variables. Here, G is the reference to the marked graph based on which this object is being created \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const \hyperlink{classmarked__graph}{marked\+\_\+graph} \& \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}
-\begin{DoxyCompactList}\small\item\em the marked graph from which this is created \end{DoxyCompactList}\item 
 int \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}
 \begin{DoxyCompactList}\small\item\em the depth up to which look at edge types \end{DoxyCompactList}\item 
 int \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}
@@ -56,7 +56,6 @@ quick member overview\+:
 
 
 \begin{DoxyItemize}
-\item There is a reference to a \hyperlink{classmarked__graph}{marked\+\_\+graph} object G,
 \item h and Delta are parameters that determine depth and maximum degree to form edge types,
 \item M is a member with type \hyperlink{classgraph__message}{graph\+\_\+message} that is used to form edge types,
 \item nu\+\_\+vertices\+: number of vertices in the graph
@@ -72,7 +71,7 @@ quick member overview\+:
 
 
 \begin{DoxyCode}
-\hyperlink{classmarked__graph}{marked\_graph} \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G};
+\hyperlink{classmarked__graph}{marked\_graph} G;
 ... \textcolor{comment}{//define G}
 \textcolor{keywordtype}{int} h = 10;
 \textcolor{keywordtype}{int} Delta = 5;
@@ -84,7 +83,7 @@ quick member overview\+:
 \mbox{\Hypertarget{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}\label{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}} 
 \index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
 \index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}}
+\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -93,24 +92,38 @@ constructor from a graph, depth and maximum degree parameters
 
 
 \begin{DoxyCode}
-114                                                                     : \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}(graph), 
-      \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}(graph, depth, max\_degree), \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}(depth), \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}(max\_degree)
-115   \{
-116     \hyperlink{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}{init}(); \textcolor{comment}{// initialize other variables }
-117   \}
+116                                                                     : \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}(graph, depth, max\_degree), 
+      \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}(depth), \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}(max\_degree)
+117   \{
+118     \hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init}(graph); \textcolor{comment}{// initialize other variables }
+119   \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}\label{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}} 
+\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
+\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
+\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+default constructor 
+
+
+\begin{DoxyCode}
+122 \{\}
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}\label{classcolored__graph_a463f9f010d6124df8d03b4f7649a130d}} 
+\mbox{\Hypertarget{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}\label{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}} 
 \index{colored\+\_\+graph@{colored\+\_\+graph}!init@{init}}
 \index{init@{init}!colored\+\_\+graph@{colored\+\_\+graph}}
 \subsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily void colored\+\_\+graph\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void colored\+\_\+graph\+::init (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
-initializes other variables 
+initializes other variables. Here, G is the reference to the marked graph based on which this object is being created 
 
 
 \begin{DoxyItemize}
@@ -121,20 +134,20 @@ initializes other variables
 \end{DoxyItemize}
 \begin{DoxyCode}
 169 \{
-170   \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices} = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
-171   \hyperlink{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}{adj\_location} = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}; \textcolor{comment}{// neighborhood structure is the same as the
-       given graph}
+170   \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices} = G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
+171   \hyperlink{classcolored__graph_ad657e7e86bee874d19dbc1765e1edaa7}{adj\_location} = G.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}; \textcolor{comment}{// neighborhood structure is the same as the given
+       graph}
 172   \textcolor{comment}{// assigning edge colors based on the messages given by M}
-173   \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a611832eb2767873fbff7b07c5790570d}{update\_messages}();
+173   \textcolor{comment}{//M.update\_messages();}
 174   \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}.resize(\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices});
 175 
 176   \textcolor{comment}{// updating adj\_list}
 177   \textcolor{keywordtype}{int} w, my\_location, color\_v, color\_w;
 178   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
-179     \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].resize(\hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()); \textcolor{comment}{// the same number of neighbors here}
-180     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-181       w = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the ith neighbor, the same as in G}
-182       my\_location = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// where v stands among the neighbors of w}
+179     \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].resize(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()); \textcolor{comment}{// the same number of neighbors here}
+180     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+181       w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the ith neighbor, the same as in G}
+182       my\_location = G.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// where v stands among the neighbors of w}
 183       color\_v = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a7890d2dff06b9de6f98734c69d8fbcfd}{message\_dict}[\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a06a1d1ab91b4891c65ea80205566f800}{messages}[v][i][\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}-1]]; \textcolor{comment}{// the color towards v
        corresponds to the message v sends to w}
 184       color\_w = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a7890d2dff06b9de6f98734c69d8fbcfd}{message\_dict}[\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a06a1d1ab91b4891c65ea80205566f800}{messages}[w][my\_location][
@@ -160,7 +173,7 @@ initializes other variables
 201   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
 202     \hyperlink{classcolored__graph_a00d0c64fcf8de58553aa4cade64193df}{is\_star\_vertex}[v] = 0; \textcolor{comment}{// unless we find below a star edge connected to it}
 203     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v].resize(1 + \hyperlink{classcolored__graph_ae159d1b15106b70a2eabef8884501e97}{L} * \hyperlink{classcolored__graph_ae159d1b15106b70a2eabef8884501e97}{L});
-204     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v][0] = \hyperlink{classcolored__graph_a39186b56cad58c368d6947656976e18d}{G}.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
+204     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v][0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
 205     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
 206       \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first < L and \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second < L)\{ \textcolor{comment}{// this
        means that this edge is not star type}
@@ -227,16 +240,6 @@ adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+
 
 
 the maximum degree threshold 
-
-\mbox{\Hypertarget{classcolored__graph_a39186b56cad58c368d6947656976e18d}\label{classcolored__graph_a39186b56cad58c368d6947656976e18d}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!G@{G}}
-\index{G@{G}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{G}{G}}
-{\footnotesize\ttfamily const \hyperlink{classmarked__graph}{marked\+\_\+graph}\& colored\+\_\+graph\+::G}
-
-
-
-the marked graph from which this is created 
 
 \mbox{\Hypertarget{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}\label{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}} 
 \index{colored\+\_\+graph@{colored\+\_\+graph}!h@{h}}

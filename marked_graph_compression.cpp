@@ -19,7 +19,7 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   n = G.nu_vertices;
   compressed.n = n;
 
-  extract_edge_types();
+  extract_edge_types(G);
   compressed.L = L;
   compressed.ver_type_list = C.ver_type_list; // 
   compressed.message_list = vector<vector<int> >(C.M.message_list.begin(), C.M.message_list.begin() + L); // taking the first L elements corresponding to non star type edges in the message list of M 
@@ -34,6 +34,8 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 
   encode_partition_bgraphs(); 
   encode_partition_graphs();
+
+  return compressed;
 }
 
 void marked_graph_encoder::encode_vertex_types()
@@ -42,7 +44,7 @@ void marked_graph_encoder::encode_vertex_types()
   compressed.ver_types = vtype_encoder.encode(C.ver_type_int);
 }
 
-void marked_graph_encoder::extract_edge_types()
+void marked_graph_encoder::extract_edge_types(const marked_graph& G)
 {
   // extracting edges types (aka colors)
   C = colored_graph(G, h, delta);
@@ -120,13 +122,13 @@ void marked_graph_encoder::extract_partition_graphs()
   // going over part_adj_list and construct partition graphs and bipartite graphs
   pair<int, int> c; // the color
   vector<vector<int> > list; // the adjacency list / forward adjacency list
-  for (map<pair<int, int>, vector<vector<int> > > :: it = part_adj_list.begin(); it!=part_adj_list.end(); it++){
+  for (map<pair<int, int>, vector<vector<int> > >::iterator it = part_adj_list.begin(); it!=part_adj_list.end(); it++){
     c = it->first;
     list = it->second;
     if (c.first < c.second) // this is a color in \f$C_<\f$
       part_bgraph[c] = b_graph(list);
     if (c.first == c.second) // this is a color in \f$C_=\f$
-      part_graph[c] = graph(list);
+      part_graph[c.first] = graph(list);
   }
 }
 
@@ -139,7 +141,7 @@ void marked_graph_encoder::encode_partition_bgraphs()
   int t, tp;
 
   // compressing bipartite graphs 
-  for (map<pair<int, int> , bgraph>::iterator it = part_bgraph.begin(); it!=par_bgraph.end(); it++){
+  for (map<pair<int, int> , b_graph>::iterator it = part_bgraph.begin(); it!=part_bgraph.end(); it++){
     // the color components are t, tp
     t = it->first.first; // type towards me (left vertices)
     tp = it->first.second; // type towards other endpoints (right vertices)
@@ -156,6 +158,14 @@ void marked_graph_encoder::encode_partition_bgraphs()
     compressed.part_bgraph[pair<int, int>(t,tp)] = E.encode(it->second);
   }
 
+}
+
+void marked_graph_encoder::encode_partition_graphs()
+{
+  vector<int> a; // degree sequence to initialize graph encoders 
+  a.resize(n);
+  int t;
+
   // compressing graphs
   for (map<int, graph>::iterator it=part_graph.begin(); it!=part_graph.end(); it++){
     t = it->first; // the color is t,t
@@ -164,5 +174,5 @@ void marked_graph_encoder::encode_partition_bgraphs()
     graph_encoder E(a);
 
     compressed.part_graph[t] = E.encode(it->second);
-  }
+  }  
 }

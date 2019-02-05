@@ -15,7 +15,7 @@
     (\tau_G(v), \deg_G(v) -1, s, \xi_G(w,v))\f$.
    */
 
-void graph_message::update_messages()
+void graph_message::update_messages(const marked_graph& G)
 {
   int nu_vertices = G.nu_vertices;
 
@@ -109,14 +109,14 @@ void graph_message::update_messages()
       }
     }
   }
-  update_message_dictionary(); // update the variables message_dict and message_list
+  update_message_dictionary(G); // update the variables message_dict and message_list
 }
 
 /*!
   The message_list is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list.
 */
 
-void graph_message::update_message_dictionary()
+void graph_message::update_message_dictionary(const marked_graph& G)
 {
   vector<int> message;
   for (int v=0;v<G.nu_vertices;v++){
@@ -165,12 +165,12 @@ bool pair_compare(const pair<vector<int> , int>& a, const pair<vector<int>, int>
   - to make sure, checks whether the sum of degree matrices is symmetric
 
  */
-void colored_graph::init()
+void colored_graph::init(const marked_graph& G)
 {
   nu_vertices = G.nu_vertices;
   adj_location = G.adj_location; // neighborhood structure is the same as the given graph
   // assigning edge colors based on the messages given by M
-  M.update_messages();
+  //M.update_messages();
   adj_list.resize(nu_vertices);
 
   // updating adj_list

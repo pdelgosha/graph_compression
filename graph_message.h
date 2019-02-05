@@ -19,31 +19,34 @@ using namespace std;
   int h = 10;
   int Delta = 5; 
   graph_message M(G, h, Delta);
-  M.update_messages();
   ~~~~~~~~~
 
  */
 class graph_message{
-public:
-  const marked_graph & G; //!< reference to the marked graph for which we do message passing
   int h; //!< the depth up to which we do message passing (the type of edges go through depth h-1)
   int Delta; //!< the maximum degree threshold
+
+  //! performs the message passing algorithm and updates the messages array accordingly
+  void update_messages(const marked_graph&);
+
+  //! update message_dict and message_list
+  void update_message_dictionary(const marked_graph&); 
+public:
+  //const marked_graph & G; //!< reference to the marked graph for which we do message passing
   vector<vector<vector<vector<int> > > > messages; //!< messages[v][i][t] is the message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
 
   map<vector<int>, int> message_dict; //!< the message dictionary (at depth t=h-1), which maps each message to its corresponding index in the dictionary
   vector<vector<int> > message_list; //!< the list of messages present in the graph, stored in an order consistent with message_dict, i.e. for a message m, if messsage_dict[m] = i, then message_list[i] = m. This is constructed in such a way that message_list[message_dict[x]] = x. This is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -1, and the second being the edge mark component (towards the 'me' vertex). 
 
   //! constructor, given reference to a graph
-  graph_message(const marked_graph& graph, int depth, int max_degree): G(graph){
+  graph_message(const marked_graph& graph, int depth, int max_degree){
     h = depth;
     Delta = max_degree;
+    update_messages(graph); // do message passing
   }
 
-  //! performs the message passing algorithm and updates the messages array accordingly
-  void update_messages();
-
-  //! update message_dict and message_list
-  void update_message_dictionary(); 
+  //! default constructor
+  graph_message() {}
 };
 
 
@@ -63,7 +66,6 @@ bool pair_compare(const pair<vector<int> , int>& , const pair<vector<int>, int>&
 /*!
   quick member overview:
 
-  - There is a reference to a marked_graph object G,
   - h and Delta are parameters that determine depth and maximum degree to form edge types,
   - M is a member with type graph_message that is used to form edge types,
   - nu_vertices: number of vertices in the graph
@@ -87,7 +89,7 @@ bool pair_compare(const pair<vector<int> , int>& , const pair<vector<int>, int>&
  */
 class colored_graph{
 public:
-  const marked_graph & G; //!< the marked graph from which this is created
+  //const marked_graph & G; //!< the marked graph from which this is created
   int h; //!< the depth up to which look at edge types
   int Delta; //!< the maximum degree threshold
   graph_message M; //!< we use the message passing algorithm of class graph_message to find out edge types
@@ -111,13 +113,16 @@ public:
   vector<int> star_vertices; //!< the (sorted) list of star_vertices, where a star vertex is the one which has at least one star type vertex connected to it.
 
   //! constructor from a graph, depth and maximum degree parameters
- colored_graph(const marked_graph& graph, int depth, int max_degree): G(graph), M(graph, depth, max_degree), h(depth), Delta(max_degree)
+ colored_graph(const marked_graph& graph, int depth, int max_degree): M(graph, depth, max_degree), h(depth), Delta(max_degree)
   {
-    init(); // initialize other variables 
+    init(graph); // initialize other variables 
   }
 
-  //! initializes other variables
-  void init();
+  //! default constructor
+  colored_graph() {}
+
+  //! initializes other variables. Here, G is the reference to the marked graph based on which this object is being created 
+  void init(const marked_graph& G);
 };
 
 

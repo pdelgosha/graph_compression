@@ -11,6 +11,10 @@ class graph{
   vector<vector<int> > forward_adj_list; //!< for a vertex \f$0 \leq v < n\f$, forward_adj_list[v] is a vector containing vertices w such that are adjacent to v and also \f$w > v\f$, i.e. the adjacent vertices in the forward direction. For such v, forward_adj_list[v] is sorted increasing.
   vector<int> degree_sequence; //!< the degree sequence of the graph, where the degree of a vertex is the number of all edges connected to it (not just the ones with greater index).
 public:
+
+  //! default constructor
+ graph(): n(0) {}
+
   //! a constructor
   graph(vector<vector<int> > list, vector<int> deg);
 
