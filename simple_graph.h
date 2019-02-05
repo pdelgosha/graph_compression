@@ -14,6 +14,9 @@ public:
   //! a constructor
   graph(vector<vector<int> > list, vector<int> deg);
 
+  //! constructor, given only the forward adjacency list 
+  graph(vector<vector<int> > list);
+
   //! returns the forward adjacency list of a given vertex 
   vector<int> get_forward_list(int v) const;
 

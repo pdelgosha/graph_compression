@@ -189,22 +189,33 @@ void colored_graph::init()
   // updating the vertex type sequence, dictionary and list, i.e. variables ver_type, ver_type_dict and ver_type_list
   // we also update ver_type_int
 
-  int L = M.message_list.size(); // the number of messages
+  
+  L = 0; // the number of non-star type messages
+  for (int i=0;i<M.message_list.size();i++)
+    if (M.message_list[i][0]!= -1) // this is not a star type edge
+      L++; 
   ver_type.resize(nu_vertices);
   ver_type_int.resize(nu_vertices);
+  is_star_vertex.resize(nu_vertices);
+
   for (int v=0;v<nu_vertices;v++){
+    is_star_vertex[v] = 0; // unless we find below a star edge connected to it
     ver_type[v].resize(1 + L * L);
     ver_type[v][0] = G.ver_mark[v];
     for (int i=0;i<adj_list[v].size();i++){
-      //if (adj_list[v][i].second.first < M.message_list.size()){ // equivalently, the edge is not * typed, since all * typed messages are after L by sorting
-      ver_type[v][1 +  adj_list[v][i].second.first * L + adj_list[v][i].second.second] ++;
-      //}
+      if (adj_list[v][i].second.first < L and adj_list[v][i].second.second < L){ // this means that this edge is not star type
+        ver_type[v][1 +  adj_list[v][i].second.first * L + adj_list[v][i].second.second] ++;
+      }else{
+        is_star_vertex[v] = 1; // we found a star edge connected to v
+      }
     }
     if (ver_type_dict.find(ver_type[v]) == ver_type_dict.end()){
       ver_type_list.push_back(ver_type[v]);
       ver_type_dict[ver_type[v]] = ver_type_list.size() -1;
     }
     ver_type_int[v] = ver_type_dict[ver_type[v]];
+    if (is_star_vertex[v] == 1)
+      star_vertices.push_back(v); // add this vertex to the list of star vertices 
   }
 
   // checking whether the sum of degrees is symmetric

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n',['n',['../classb__graph.html#a9e211d40c1799bc9b125de472ff06642',1,'b_graph::n()'],['../classb__graph__decoder.html#a2caddd63df6808c95e2ee738f7c77870',1,'b_graph_decoder::n()'],['../classgraph.html#ac8b3474ce95c04087c312508ec1443b6',1,'graph::n()'],['../classgraph__decoder.html#a6bc1e72b2f7a913d14b789a6c2d92c1e',1,'graph_decoder::n()']]],
-  ['np',['np',['../classb__graph.html#acffdd5f20329515eb6ec17ad24f1ca64',1,'b_graph::np()'],['../classb__graph__decoder.html#a7eca48cf8793e722d1b29dbdc9fd2dca',1,'b_graph_decoder::np()']]],
-  ['nu_5fvertices',['nu_vertices',['../classcolored__graph.html#a90ece8eb1fec52f3f41549ab527c1d5b',1,'colored_graph::nu_vertices()'],['../classmarked__graph.html#acf79c6aeb8f32614cb14a5baaa6c9f9b',1,'marked_graph::nu_vertices()']]]
+  ['l',['L',['../classcolored__graph.html#ae159d1b15106b70a2eabef8884501e97',1,'colored_graph::L()'],['../classmarked__graph__compressed.html#abd70435e7a1f6eeb4c585bfca428d175',1,'marked_graph_compressed::L()'],['../classmarked__graph__encoder.html#a0f2e2dd184fe262f6fc93f375215227e',1,'marked_graph_encoder::L()']]],
+  ['left_5fdeg_5fseq',['left_deg_seq',['../classb__graph.html#a311d16462dbb10c47b3a6c80a42139d9',1,'b_graph']]],
+  ['logn2',['logn2',['../classgraph__encoder.html#a27fde3a95a280304877b1e37fc4d8553',1,'graph_encoder::logn2()'],['../classgraph__decoder.html#a59663482843ffa5059128bd6ed866f11',1,'graph_decoder::logn2()']]]
 ];

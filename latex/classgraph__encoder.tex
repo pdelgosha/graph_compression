@@ -12,19 +12,21 @@ Encodes a simple unmarked graph.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classgraph__encoder_ac2d2390b126ba3ab21406d0df8757ab6}{graph\+\_\+encoder} (const \hyperlink{classgraph}{graph} \&Gin)
+\hyperlink{classgraph__encoder_a571aefbf0b6ad203346fc4e0ef1a33dc}{graph\+\_\+encoder} (const vector$<$ int $>$ \&a\+\_\+)
 \begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
-void \hyperlink{classgraph__encoder_a197200e714da86ec133ab07bb45e5313}{init} ()
-\begin{DoxyCompactList}\small\item\em initializes beta and U, logn2, and resizes Stilde. \end{DoxyCompactList}\item 
-pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classgraph__encoder_ad2f997218e6527b869166e778c79672c}{compute\+\_\+N} (int i, int j, int I)
+void \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init} (const \hyperlink{classgraph}{graph} \&G)
+\begin{DoxyCompactList}\small\item\em initializes beta and U, clears Stilde for a fresh use \end{DoxyCompactList}\item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\+\_\+N} (int i, int j, int I, const \hyperlink{classgraph}{graph} \&G)
 \begin{DoxyCompactList}\small\item\em computes $N_{i,j}(G)$ \end{DoxyCompactList}\item 
-pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ \hyperlink{classgraph__encoder_a674380f767d1b635f30444f3b499c544}{encode} ()
+pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ \hyperlink{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}{encode} (const \hyperlink{classgraph}{graph} \&G)
 \begin{DoxyCompactList}\small\item\em Encodes the graph and returns N together with Stilde. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const \hyperlink{classgraph}{graph} \& \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}
-\begin{DoxyCompactList}\small\item\em the simple unmarked graph which is going to be encoded \end{DoxyCompactList}\item 
+int \hyperlink{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}{n}
+\begin{DoxyCompactList}\small\item\em the number of vertices \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}
+\begin{DoxyCompactList}\small\item\em the degree sequence \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}
 \begin{DoxyCompactList}\small\item\em When compute\+\_\+N is called for $i \leq j$, for $i \leq v \leq n$, we have $\beta_v = d_v(i)$. \end{DoxyCompactList}\item 
 \hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree} \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}
@@ -32,40 +34,79 @@ vector$<$ int $>$ \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6b
 vector$<$ int $>$ \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}
 \begin{DoxyCompactList}\small\item\em Summation of forward degrees at $n / \log^2 n$ many points. \end{DoxyCompactList}\item 
 int \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2}
-\begin{DoxyCompactList}\small\item\em the integer part of $\log^2 n$ where $n$ is the number of vertices in $G$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em $\lfloor \log_2 n \rfloor^2$ where $n$ is the number of vertices \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Encodes a simple unmarked graph. 
 
-This class has a reference to a simple unmarked graph, and encodes it using the counting algorithm which counts the number of configurations resulting in a graph lexicographically smaller than the reference graph. It is assumed that both the encode and the decode know the number of vertices and also the degree profile of the graph. 
+Encodes a simple graph in the set of graphs with a given degree sequence a. Therefore, to construct an encoder object, we need to specify this degree sequence as a vector of int. For instance (in c++11)
+
+
+\begin{DoxyCode}
+vector<int> a = \{3,2,2,3\};
+\hyperlink{classgraph__encoder}{graph\_encoder} E(a);
+\end{DoxyCode}
+
+
+constructs an encode object E which is capable of encoding graphs having 4 nodes with degrees 3, 2, 2, 3 (in order). Hence, assume that we have defined such a graph by giving forward adjacency list\+:
+
+
+\begin{DoxyCode}
+\hyperlink{classgraph}{graph} G(\{1,2,3\},\{3\},\{3\},\{\});
+\end{DoxyCode}
+
+
+Note that G has a degree sequences which is equal to a. Then, we can use E to encode G as follows\+:
+
+
+\begin{DoxyCode}
+pair<mpz\_class, vector<int> > f = E.encode(G);
+\end{DoxyCode}
+
+
+In this way, the encode converts G to a pair stored in f, where its first part is an integer, and the second part is the array of integers $\tilde{S}$. Later on, we can use f to decode G. 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classgraph__encoder_ac2d2390b126ba3ab21406d0df8757ab6}\label{classgraph__encoder_ac2d2390b126ba3ab21406d0df8757ab6}} 
+\mbox{\Hypertarget{classgraph__encoder_a571aefbf0b6ad203346fc4e0ef1a33dc}\label{classgraph__encoder_a571aefbf0b6ad203346fc4e0ef1a33dc}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!graph\+\_\+encoder@{graph\+\_\+encoder}}
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!graph\+\_\+encoder@{graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{graph\+\_\+encoder()}{graph\_encoder()}}
-{\footnotesize\ttfamily graph\+\_\+encoder\+::graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{Gin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily graph\+\_\+encoder\+::graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{a\+\_\+ }\end{DoxyParamCaption})}
 
 
 
 constructor 
 
-
+initializes the degree sequence to a\+\_\+, sets n and logn2, and resizes the Stilde vector 
 \begin{DoxyCode}
-22                                 : \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}(Gin)
-23   \{
-24     \hyperlink{classgraph__encoder_a197200e714da86ec133ab07bb45e5313}{init}();
-25   \}
+11                                                  \{
+12   \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a} = a\_;
+13   \hyperlink{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}{n} = \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}.size();
+14   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// log of n in base 2}
+15   \textcolor{keywordtype}{int} nn = \hyperlink{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}{n}; \textcolor{comment}{// a copy of n}
+16   \textcolor{keywordflow}{while} (nn>0)\{
+17     log2n ++;
+18     nn = nn >> 1; \textcolor{comment}{// divide by 2}
+19   \} \textcolor{comment}{// eventually, we count the number of bits in n}
+20   log2n --; \textcolor{comment}{// we count extra, e.g. when n = 1, we end up having 1, rather than 0}
+21   \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2} = log2n * log2n;
+22 
+23   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.clear();
+24   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.resize(4 * \hyperlink{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}{n} / \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2}); \textcolor{comment}{// look at the explanation of the algorithm, before deriving
+       the bound 16 n, that 4n / \(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor^2 is also an upper bound. After this point, we have used
+       \(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor \(\backslash\)geq \(\backslash\)log n / 2 to derive the 16 n bound.}
+25   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[0] = 0;
+26 \}
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classgraph__encoder_ad2f997218e6527b869166e778c79672c}\label{classgraph__encoder_ad2f997218e6527b869166e778c79672c}} 
+\mbox{\Hypertarget{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}\label{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!compute\+\_\+N@{compute\+\_\+N}}
 \index{compute\+\_\+N@{compute\+\_\+N}!graph\+\_\+encoder@{graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{compute\+\_\+\+N()}{compute\_N()}}
-{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{I }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{I,  }\item[{const \hyperlink{classgraph}{graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
@@ -77,137 +118,153 @@ computes $N_{i,j}(G)$
 \hline
 {\em I} & The integer index corresponding to the current interval (follows a heap convention). \\
 \hline
+{\em G} & the reference to the simple graph G \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A pair, where the first component is $N_{i,j}(G)$ and the second component is $l_{i,j}(G)$. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-33 \{
-34   \textcolor{comment}{//cerr << " i, j " << i << " , " << j << endl;}
-35   \textcolor{keywordflow}{if} (i==j)\{
-36     mpz\_class zi, li, zik, lik;
-37     zi = 0;
-38     li = 1;
-39     vector<int> x = \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i); \textcolor{comment}{// the forward adjacency list of vertex i}
-40     \textcolor{keywordflow}{if} (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] != x.size())
-41       cerr << \textcolor{stringliteral}{" DANGER! beta[i] is not the same as x.size()!!"} << endl;
-42     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<x.size();k++)\{
-43       zik = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
+49 \{
+50   \textcolor{comment}{//cerr << " i, j " << i << " , " << j << endl;}
+51   \textcolor{keywordflow}{if} (i==j)\{
+52     mpz\_class zi, li, zik, lik;
+53     zi = 0;
+54     li = 1;
+55     vector<int> x = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i); \textcolor{comment}{// the forward adjacency list of vertex i}
+56     \textcolor{keywordflow}{if} (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] != x.size())
+57       cerr << \textcolor{stringliteral}{" DANGER! beta[i] is not the same as x.size()!!"} << endl;
+58     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<x.size();k++)\{
+59       zik = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
        here, so instead of -k + 1, we have -k}
-44       zi += li * zik;
-45       lik = (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k) * \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]]; \textcolor{comment}{// we are zero based here, so instead of -k + 1, we have -k}
-46       li *= lik;
-47       \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]] --;
-48       \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k], -1);
-49     \}
-50     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << zi << " l " << li << endl;}
-51     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(zi, li);
-52   \}\textcolor{keywordflow}{else}\{
-53     \textcolor{keywordtype}{int} t = (i+j) / 2;
-54     mpz\_class Nit, lit; \textcolor{comment}{// \(\backslash\)f$N\_\{i,t\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:t]\}\(\backslash\)f$}
-55     mpz\_class Ntj, ltj; \textcolor{comment}{// \(\backslash\)f$N\_\{t+1,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[t+1:j]\}\(\backslash\)f$}
-56     mpz\_class Nij, lij; \textcolor{comment}{// \(\backslash\)f$N\_\{i,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:j]\}\(\backslash\)f$}
-57     \textcolor{keywordtype}{int} St, Sj; \textcolor{comment}{// \(\backslash\)f$S\_\{t+1\}\(\backslash\)f$ and \(\backslash\)f$S\_\{j+1\}\(\backslash\)f$}
-58     mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$r\_\{[t+1:j]\}\(\backslash\)f$}
-59 
-60     pair<mpz\_class, mpz\_class> return\_left = \hyperlink{classgraph__encoder_ad2f997218e6527b869166e778c79672c}{compute\_N}(i,t, 2*I); \textcolor{comment}{// calling for the interval i,t}
-61     Nit = return\_left.first;
-62     lit = return\_left.second;
-63     St = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
-64 
-65     \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})\{\textcolor{comment}{// we should save the midpoint sum St}
-66       \textcolor{comment}{//cerr << " i " << i << " j " << j << " I " << I << " storing St " << St << endl;}
-67       \textcolor{keywordflow}{if} (I >= \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() )\{
-68         cerr << \textcolor{stringliteral}{" BAD: I out of range I "} << I << \textcolor{stringliteral}{" Stilde.size() "}<< \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() << endl;
-69         cerr << \textcolor{stringliteral}{" i "} << i << \textcolor{stringliteral}{" j "} << j << \textcolor{stringliteral}{" logn2 "} << \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2} << endl;
-70       \}
-71       \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St;
-72     \}
-73 
-74     pair<mpz\_class, mpz\_class> return\_right = \hyperlink{classgraph__encoder_ad2f997218e6527b869166e778c79672c}{compute\_N}(t+1, j, 2*I + 1); \textcolor{comment}{// calling for the
+60       zi += li * zik;
+61       lik = (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k) * \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]]; \textcolor{comment}{// we are zero based here, so instead of -k + 1, we have -k}
+62       li *= lik;
+63       \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]] --;
+64       \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k], -1);
+65     \}
+66     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << zi << " l " << li << endl;}
+67     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(zi, li);
+68   \}\textcolor{keywordflow}{else}\{
+69     \textcolor{keywordtype}{int} t = (i+j) / 2;
+70     mpz\_class Nit, lit; \textcolor{comment}{// \(\backslash\)f$N\_\{i,t\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:t]\}\(\backslash\)f$}
+71     mpz\_class Ntj, ltj; \textcolor{comment}{// \(\backslash\)f$N\_\{t+1,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[t+1:j]\}\(\backslash\)f$}
+72     mpz\_class Nij, lij; \textcolor{comment}{// \(\backslash\)f$N\_\{i,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:j]\}\(\backslash\)f$}
+73     \textcolor{keywordtype}{int} St, Sj; \textcolor{comment}{// \(\backslash\)f$S\_\{t+1\}\(\backslash\)f$ and \(\backslash\)f$S\_\{j+1\}\(\backslash\)f$}
+74     mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$r\_\{[t+1:j]\}\(\backslash\)f$}
+75 
+76     pair<mpz\_class, mpz\_class> return\_left = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(i,t, 2*I, G); \textcolor{comment}{// calling for the interval
+       i,t}
+77     Nit = return\_left.first;
+78     lit = return\_left.second;
+79     St = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
+80 
+81     \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})\{\textcolor{comment}{// we should save the midpoint sum St}
+82       \textcolor{comment}{//cerr << " i " << i << " j " << j << " I " << I << " storing St " << St << endl;}
+83       \textcolor{keywordflow}{if} (I >= \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() )\{
+84         cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::compute\_N index I is out of range.  I= "} << I << \textcolor{stringliteral}{" Stilde.size()= 
+      "}<< \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() <<  \textcolor{stringliteral}{" i= "} << i << \textcolor{stringliteral}{" j= "} << j << \textcolor{stringliteral}{" logn2= "} << \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2} << endl;
+85       \}
+86       \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St;
+87     \}
+88 
+89     pair<mpz\_class, mpz\_class> return\_right = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(t+1, j, 2*I + 1, G); \textcolor{comment}{// calling for the
        interval t+1, j}
-75     Ntj = return\_right.first;
-76     ltj = return\_right.second;
-77     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-78     rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St-1, (St - Sj)/2, 2);
-79     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
-80     Nij = Nit * rtj + lit * Ntj ;
-81     lij = lit * ltj;
-82     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
-83     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-84   \}
-85 \}
+90     Ntj = return\_right.first;
+91     ltj = return\_right.second;
+92     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
+93     rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St-1, (St - Sj)/2, 2);
+94     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
+95     Nij = Nit * rtj + lit * Ntj ;
+96     lij = lit * ltj;
+97     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
+98     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+99   \}
+100 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph__encoder_a674380f767d1b635f30444f3b499c544}\label{classgraph__encoder_a674380f767d1b635f30444f3b499c544}} 
+\mbox{\Hypertarget{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}\label{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!encode@{encode}}
 \index{encode@{encode}!graph\+\_\+encoder@{graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{encode()}{encode()}}
-{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
 Encodes the graph and returns N together with Stilde. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em G} & reference to the graph to encode \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A pair, where the first component is $\lceil N(G) / \prod_{i=1}^n a_i! \rceil$ where $N(G) = N_{0,n-1}(G)$ and $a$ is the degree sequence of the graph, and the second component is the vector Stilde which stores partial mid sum of intervals and has length roughly $n / \log^2 n$ 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-87                                                    \{
-88   pair<mpz\_class, mpz\_class> ans  = \hyperlink{classgraph__encoder_ad2f997218e6527b869166e778c79672c}{compute\_N}(0,\hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1);
-89   vector<int> a = \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}();  \textcolor{comment}{// the graph degree sequence}
-90   \textcolor{comment}{//mpz\_class prod\_a\_factorial = 1; // \(\backslash\)prod\_\{i=1\}^n a\_i!}
-91   \textcolor{comment}{//for (int i=0; i<a.size();i++)}
-92   \textcolor{comment}{//  prod\_a\_factorial *= compute\_product(a[i], a[i], 1);}
-93   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, 0,a.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=1\}^n a\_i!}
-94   \textcolor{comment}{// we need the ceiling of the ratio of ans.first and prod\_a\_factorial}
-95   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
-96   \textcolor{keywordflow}{if} (ans.first % prod\_a\_factorial != 0)
-97     ceil = \textcolor{keyword}{true};
-98   ans.first /= prod\_a\_factorial;
-99   \textcolor{keywordflow}{if} (ceil)
-100     ans.first ++;
-101   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
-102 \}
+102                                                                  \{
+103   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
+104     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
+       graph "};
+105   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
+106   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
+107 
+108   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}, 0,\hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=1\}^n a\_i!}
+109   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
+110   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
+111   \textcolor{keywordflow}{if} (N\_ans.first % prod\_a\_factorial != 0)
+112     ceil = \textcolor{keyword}{true};
+113   N\_ans.first /= prod\_a\_factorial;
+114   \textcolor{keywordflow}{if} (ceil)
+115     N\_ans.first ++;
+116   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
+117 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph__encoder_a197200e714da86ec133ab07bb45e5313}\label{classgraph__encoder_a197200e714da86ec133ab07bb45e5313}} 
+\mbox{\Hypertarget{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}\label{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!init@{init}}
 \index{init@{init}!graph\+\_\+encoder@{graph\+\_\+encoder}}
 \subsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily void graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}\item[{const \hyperlink{classgraph}{graph} \&}]{G }\end{DoxyParamCaption})}
 
 
 
-initializes beta and U, logn2, and resizes Stilde. 
+initializes beta and U, clears Stilde for a fresh use 
 
 
 \begin{DoxyCode}
-10 \{
-11   \textcolor{comment}{// initializing the beta sequence}
-12   \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta} = \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}();
-13 
-14   \textcolor{comment}{//beta.resize(G.nu\_vertices());}
-15   \textcolor{comment}{//for (int v=0;v<G.nu\_vertices();v++)}
-16   \textcolor{comment}{//  beta[v] = G.get\_degree(v);  }
-17 
-18   \textcolor{comment}{// initializing the Fenwick Tree}
-19   \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta});
-20 
-21   \textcolor{comment}{// initializing logn2}
-22   \textcolor{keywordtype}{int} n = \hyperlink{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}{G}.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
-23   \textcolor{keywordtype}{double} logn = log(n);
-24   \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2} = int(logn * logn);
-25 
-26   \textcolor{comment}{//initializing the partial sum vector Stilde}
-27   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.resize(4 * n / \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2}); \textcolor{comment}{// TO CHECK,
+29 \{
+30   \textcolor{comment}{// initializing the beta sequence}
+31   \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta} = \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}; 
+32 
+33   \textcolor{comment}{//beta.resize(G.nu\_vertices());}
+34   \textcolor{comment}{//for (int v=0;v<G.nu\_vertices();v++)}
+35   \textcolor{comment}{//  beta[v] = G.get\_degree(v);  }
+36 
+37   \textcolor{comment}{// initializing the Fenwick Tree}
+38   \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta});
+39 
+40 
+41   \textcolor{comment}{//initializing the partial sum vector Stilde}
+42   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.clear();
+43   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.resize(4 * \hyperlink{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}{n} / \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2}); \textcolor{comment}{// TO CHECK,
        2018-10-18\_self-compression\_Stilde-size-required-2nlogn2.pdf}
-28   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[0] = 0;
-29 \}
+44   \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[0] = 0;
+45 \}
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}\label{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}} 
+\index{graph\+\_\+encoder@{graph\+\_\+encoder}!a@{a}}
+\index{a@{a}!graph\+\_\+encoder@{graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{a}{a}}
+{\footnotesize\ttfamily vector$<$int$>$ graph\+\_\+encoder\+::a\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the degree sequence 
+
 \mbox{\Hypertarget{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}\label{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!beta@{beta}}
 \index{beta@{beta}!graph\+\_\+encoder@{graph\+\_\+encoder}}
@@ -218,16 +275,6 @@ initializes beta and U, logn2, and resizes Stilde.
 
 When compute\+\_\+N is called for $i \leq j$, for $i \leq v \leq n$, we have $\beta_v = d_v(i)$. 
 
-\mbox{\Hypertarget{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}\label{classgraph__encoder_a56d8ab1a423e192c6f80514ff5e5cfec}} 
-\index{graph\+\_\+encoder@{graph\+\_\+encoder}!G@{G}}
-\index{G@{G}!graph\+\_\+encoder@{graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{G}{G}}
-{\footnotesize\ttfamily const \hyperlink{classgraph}{graph}\& graph\+\_\+encoder\+::G\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-the simple unmarked graph which is going to be encoded 
-
 \mbox{\Hypertarget{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}\label{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!logn2@{logn2}}
 \index{logn2@{logn2}!graph\+\_\+encoder@{graph\+\_\+encoder}}
@@ -236,7 +283,17 @@ the simple unmarked graph which is going to be encoded
 
 
 
-the integer part of $\log^2 n$ where $n$ is the number of vertices in $G$. 
+$\lfloor \log_2 n \rfloor^2$ where $n$ is the number of vertices 
+
+\mbox{\Hypertarget{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}\label{classgraph__encoder_a7fedc9ace19e34abb32f1851c8597591}} 
+\index{graph\+\_\+encoder@{graph\+\_\+encoder}!n@{n}}
+\index{n@{n}!graph\+\_\+encoder@{graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int graph\+\_\+encoder\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of vertices 
 
 \mbox{\Hypertarget{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}\label{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!Stilde@{Stilde}}

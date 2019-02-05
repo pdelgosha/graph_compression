@@ -28,6 +28,10 @@ class b_graph{
   vector<int> left_deg_seq; //!< degree sequence for left vertices, where left_deg_seq[v] is the degree of the left node v
   vector<int> right_deg_seq; //!< degree sequence for right vertices, where left_deg_seq[v] is the degree of the right node v
 public:
+
+  //! default constructor
+ b_graph(): n(0), np(0) {}
+  
   //! a constructor
   /*!
     This constructor takes the list of adjacent vertices and the right degree sequence, and constructs an object.

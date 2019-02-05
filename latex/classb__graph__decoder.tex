@@ -46,29 +46,42 @@ vector$<$ int $>$ \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f652
 \subsection{Detailed Description}
 Decodes a simple unmarked bipartite graph. 
 
-Decodes a simple bipartite graph given its encoded integer. We assume that the decoder knows the left and right degree sequences of the encoded graph, hence these sequences must be given when a decoder object is being constructed. For instance, borrowing the degree sequences of the example we used to explain the \hyperlink{classb__graph__encoder}{b\+\_\+graph\+\_\+encoder} class\+: \begin{DoxyVerb}vector<int> a = {1,1,2};
-vector<int> b = {2,2};
-b_graph_decoder D(a,b);
-\end{DoxyVerb}
+Decodes a simple bipartite graph given its encoded integer. We assume that the decoder knows the left and right degree sequences of the encoded graph, hence these sequences must be given when a decoder object is being constructed. For instance, borrowing the degree sequences of the example we used to explain the \hyperlink{classb__graph__encoder}{b\+\_\+graph\+\_\+encoder} class\+:
 
 
-Then, if variable f of type mpz\+\_\+class is obtained from a \hyperlink{classb__graph__encoder}{b\+\_\+graph\+\_\+encoder} class, we can reconstruct the graph using f\+: \begin{DoxyVerb}b_graph Ghat = D.decode(f);
-\end{DoxyVerb}
+\begin{DoxyCode}
+vector<int> a = \{1,1,2\};
+vector<int> b = \{2,2\};
+\hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(a,b);
+\end{DoxyCode}
 
 
-Then, the graph Ghat will be equal to the graph G. Here is a full example showing the procedure of compression and decompression together\+: \begin{DoxyVerb}vector<int> a = {1,1,2}; // left degree sequence 
-vector<int> b = {2,2}; // right degree sequence
+Then, if variable f of type mpz\+\_\+class is obtained from a \hyperlink{classb__graph__encoder}{b\+\_\+graph\+\_\+encoder} class, we can reconstruct the graph using f\+:
 
-b_graph G({{0},{1},{0,1}}); // defining the graph
 
-b_graph_encoder E(a,b); // constructing the encoder object
-mpz_class f = E.encode(G);
+\begin{DoxyCode}
+\hyperlink{classb__graph}{b\_graph} Ghat = D.decode(f);
+\end{DoxyCode}
 
-b_graph_decoder D(a, b);
-b_graph Ghat = D.decode(f);
 
-if (Ghat == G)
-  cout << " we successfully reconstructed the graph! " << endl;\end{DoxyVerb}
+Then, the graph Ghat will be equal to the graph G. Here is a full example showing the procedure of compression and decompression together\+:
+
+
+\begin{DoxyCode}
+vector<int> a = \{1,1,2\}; \textcolor{comment}{// left degree sequence }
+vector<int> b = \{2,2\}; \textcolor{comment}{// right degree sequence}
+
+\hyperlink{classb__graph}{b\_graph} G(\{\{0\},\{1\},\{0,1\}\}); \textcolor{comment}{// defining the graph}
+
+\hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(a,b); \textcolor{comment}{// constructing the encoder object}
+mpz\_class f = E.encode(G);
+
+\hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(a, b);
+\hyperlink{classb__graph}{b\_graph} Ghat = D.decode(f);
+
+\textcolor{keywordflow}{if} (Ghat == G)
+   cout << \textcolor{stringliteral}{" we successfully reconstructed the graph! "} << endl;
+\end{DoxyCode}
  
 
 \subsection{Constructor \& Destructor Documentation}

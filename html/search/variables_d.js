@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['ver_5fmark',['ver_mark',['../classmarked__graph.html#ac83e9377dd4d8bb95be1ac949b127296',1,'marked_graph']]],
-  ['ver_5ftype',['ver_type',['../classcolored__graph.html#a2cc32e7146fa3319f83cfa940f5e1be4',1,'colored_graph']]],
-  ['ver_5ftype_5fdict',['ver_type_dict',['../classcolored__graph.html#aeb780762429ddac375799f4a45405712',1,'colored_graph']]],
-  ['ver_5ftype_5fint',['ver_type_int',['../classcolored__graph.html#a491ed2ea1a65118af02ec606c8d44c0a',1,'colored_graph']]],
-  ['ver_5ftype_5flist',['ver_type_list',['../classcolored__graph.html#a3a1ae8abac458d20a2afb4aa48bbc956',1,'colored_graph']]]
+  ['star_5fedges',['star_edges',['../classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532',1,'marked_graph_compressed']]],
+  ['star_5fvertices',['star_vertices',['../classcolored__graph.html#ab7ee8d717abde7ad7467ef695038f574',1,'colored_graph::star_vertices()'],['../classmarked__graph__compressed.html#a7a4ced4586e2e353f9076bd447df5208',1,'marked_graph_compressed::star_vertices()'],['../classmarked__graph__encoder.html#a08fdf6fcd7dcd8c5d1667f2d7ff06c2c',1,'marked_graph_encoder::star_vertices()']]],
+  ['stilde',['Stilde',['../classgraph__encoder.html#a342688a3fdee511b7fae3f155cfb10cf',1,'graph_encoder']]],
+  ['sums',['sums',['../classfenwick__tree.html#ac05c8fc17f358a38a2bab242f9164138',1,'fenwick_tree']]]
 ];

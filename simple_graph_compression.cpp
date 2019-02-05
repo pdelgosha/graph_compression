@@ -5,11 +5,30 @@
 // graph_encoder
 //==============================
 
+/*!
+  initializes the degree sequence to a_, sets n and logn2, and resizes the Stilde vector
+ */
+graph_encoder::graph_encoder(const vector<int>& a_){
+  a = a_;
+  n = a.size();
+  int log2n = 0; // log of n in base 2
+  int nn = n; // a copy of n
+  while (nn>0){
+    log2n ++;
+    nn = nn >> 1; // divide by 2
+  } // eventually, we count the number of bits in n
+  log2n --; // we count extra, e.g. when n = 1, we end up having 1, rather than 0
+  logn2 = log2n * log2n;
 
-void graph_encoder::init()
+  Stilde.clear();
+  Stilde.resize(4 * n / logn2); // look at the explanation of the algorithm, before deriving the bound 16 n, that 4n / \lfloor \log_2 n \rfloor^2 is also an upper bound. After this point, we have used \lfloor \log_2 n \rfloor \geq \log n / 2 to derive the 16 n bound.
+  Stilde[0] = 0;
+}
+
+void graph_encoder::init(const graph& G)
 {
   // initializing the beta sequence
-  beta = G.get_degree_sequence();
+  beta = a; 
 
   //beta.resize(G.nu_vertices());
   //for (int v=0;v<G.nu_vertices();v++)
@@ -18,18 +37,15 @@ void graph_encoder::init()
   // initializing the Fenwick Tree
   U = reverse_fenwick_tree(beta);
 
-  // initializing logn2
-  int n = G.nu_vertices();
-  double logn = log(n);
-  logn2 = int(logn * logn);
 
   //initializing the partial sum vector Stilde
+  Stilde.clear();
   Stilde.resize(4 * n / logn2); // TO CHECK, 2018-10-18_self-compression_Stilde-size-required-2nlogn2.pdf
   Stilde[0] = 0;
 }
 
 
-pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I)
+pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I, const graph& G)
 {
   //cerr << " i, j " << i << " , " << j << endl;
   if (i==j){
@@ -57,7 +73,7 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I)
     int St, Sj; // \f$S_{t+1}\f$ and \f$S_{j+1}\f$
     mpz_class rtj; // \f$r_{[t+1:j]}\f$
 
-    pair<mpz_class, mpz_class> return_left = compute_N(i,t, 2*I); // calling for the interval i,t
+    pair<mpz_class, mpz_class> return_left = compute_N(i,t, 2*I, G); // calling for the interval i,t
     Nit = return_left.first;
     lit = return_left.second;
     St = U.sum(t+1);
@@ -65,13 +81,12 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I)
     if (j - i > logn2){// we should save the midpoint sum St
       //cerr << " i " << i << " j " << j << " I " << I << " storing St " << St << endl;
       if (I >= Stilde.size() ){
-        cerr << " BAD: I out of range I " << I << " Stilde.size() "<< Stilde.size() << endl;
-        cerr << " i " << i << " j " << j << " logn2 " << logn2 << endl;
+        cerr << " WARNING graph_encoder::compute_N index I is out of range.  I= " << I << " Stilde.size()= "<< Stilde.size() <<  " i= " << i << " j= " << j << " logn2= " << logn2 << endl;
       }
       Stilde[I] = St;
     }
 
-    pair<mpz_class, mpz_class> return_right = compute_N(t+1, j, 2*I + 1); // calling for the interval t+1, j
+    pair<mpz_class, mpz_class> return_right = compute_N(t+1, j, 2*I + 1, G); // calling for the interval t+1, j
     Ntj = return_right.first;
     ltj = return_right.second;
     Sj = U.sum(j+1);
@@ -84,21 +99,21 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I)
   }
 }
 
-pair<mpz_class, vector<int> > graph_encoder::encode(){
-  pair<mpz_class, mpz_class> ans  = compute_N(0,G.nu_vertices()-1,1);
-  vector<int> a = G.get_degree_sequence();  // the graph degree sequence
-  //mpz_class prod_a_factorial = 1; // \prod_{i=1}^n a_i!
-  //for (int i=0; i<a.size();i++)
-  //  prod_a_factorial *= compute_product(a[i], a[i], 1);
+pair<mpz_class, vector<int> > graph_encoder::encode(const graph& G){
+  if (G.get_degree_sequence()!= a)
+    cerr << " WARNING graph_encoder::encode : vector a does not match with the degree sequence of the given graph ";
+  init(G); // initialize U and beta 
+  pair<mpz_class, mpz_class> N_ans  = compute_N(0,G.nu_vertices()-1,1, G);
+
   mpz_class prod_a_factorial = prod_factorial(a, 0,a.size()-1); // \prod_{i=1}^n a_i!
-  // we need the ceiling of the ratio of ans.first and prod_a_factorial
+  // we need the ceiling of the ratio of N_ans.first and prod_a_factorial
   bool ceil = false; // if true, we will add one to the integer division
-  if (ans.first % prod_a_factorial != 0)
+  if (N_ans.first % prod_a_factorial != 0)
     ceil = true;
-  ans.first /= prod_a_factorial;
+  N_ans.first /= prod_a_factorial;
   if (ceil)
-    ans.first ++;
-  return pair<mpz_class, vector<int> > (ans.first, Stilde);
+    N_ans.first ++;
+  return pair<mpz_class, vector<int> > (N_ans.first, Stilde);
 }
 
 
@@ -113,16 +128,30 @@ graph_decoder::graph_decoder(vector<int> a_)
 {
   a = a_;
   n = a.size();
-  double logn = log(n);
-  logn2 = int(logn * logn);
+
+  int log2n = 0; // log of n in base 2
+  int nn = n; // a copy of n
+  while (nn>0){
+    log2n ++;
+    nn = nn >> 1; // divide by 2
+  } // eventually, we count the number of bits in n
+  log2n --; // we count extra, e.g. when n = 1, we end up having 1, rather than 0
+  logn2 = log2n * log2n;
+
+  init(); // init x, beta and U
+}
+
+void graph_decoder::init()
+{
+  x.clear();
   x.resize(n);
   beta = a;
   U = reverse_fenwick_tree(a);
 }
 
-
 graph graph_decoder::decode(mpz_class f, vector<int> tS_)
 {
+  init(); // make x, U and beta ready for decoding 
   tS = tS_;
   //mpz_class prod_a_factorial = 1; // \prod_{i=1}^n a_i!
   //for (int i=0; i<a.size();i++)

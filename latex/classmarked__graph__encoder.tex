@@ -1,0 +1,208 @@
+\hypertarget{classmarked__graph__encoder}{}\section{marked\+\_\+graph\+\_\+encoder Class Reference}
+\label{classmarked__graph__encoder}\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+
+
+{\ttfamily \#include $<$marked\+\_\+graph\+\_\+compression.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmarked__graph__encoder_a128d2a38b23ce620c77d00a5eff487ea}{marked\+\_\+graph\+\_\+encoder} (int h\+\_\+, int delta\+\_\+)
+\item 
+\hyperlink{classmarked__graph__compressed}{marked\+\_\+graph\+\_\+compressed} \hyperlink{classmarked__graph__encoder_aa7fa19a225dd9b31d6fef9583fab8cf1}{encode} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}{encode\+\_\+star\+\_\+vertices} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classmarked__graph__encoder_ae7f8872c57d2d64e4ca6cc47387b9b58}{h}
+\item 
+int \hyperlink{classmarked__graph__encoder_a29dcf42526b12cf7964a556bb1025c9b}{delta}
+\item 
+int \hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n}
+\begin{DoxyCompactList}\small\item\em number of vertices, this is set when a graph G is given to be encoded \end{DoxyCompactList}\item 
+\hyperlink{classcolored__graph}{colored\+\_\+graph} \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}
+\begin{DoxyCompactList}\small\item\em the auxiliary object to extract edge types \end{DoxyCompactList}\item 
+int \hyperlink{classmarked__graph__encoder_a0f2e2dd184fe262f6fc93f375215227e}{L}
+\begin{DoxyCompactList}\small\item\em the number of edge colors, excluding star types \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classmarked__graph__encoder_a4ce8d85a7b63aed1272ec9824710ce45}{is\+\_\+star\+\_\+vertex}
+\begin{DoxyCompactList}\small\item\em for $0 \leq v < n$, is\+\_\+star\+\_\+vertex\mbox{[}v\mbox{]} is 1 if there is at least one star type edge connected to v and 0 otherwise. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\+\_\+vertices}
+\begin{DoxyCompactList}\small\item\em the list of star vertices \end{DoxyCompactList}\item 
+map$<$ pair$<$ int, int $>$, bgraph $>$ \hyperlink{classmarked__graph__encoder_aa43552947f687fccf5192eef468a430a}{part\+\_\+bgraph}
+\begin{DoxyCompactList}\small\item\em for $0 \leq t < t' < L$, part\+\_\+bgraph\mbox{[}pair$<$int, int$>$ (t,t\textquotesingle{})\mbox{]} is a bipartite graph with n left vertex and n right vertex. In this bipartite graph, a left vertex i is connected to a right vertex j iff there is an edge in the graph between vertices i and j with a half edge type towards i equal to t and a half edge type towards j equal to t\textquotesingle{}. \end{DoxyCompactList}\item 
+map$<$ int, \hyperlink{classgraph}{graph} $>$ \hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\+\_\+graph}
+\begin{DoxyCompactList}\small\item\em for $0 \leq t < L$, part\+\_\+graph\mbox{[}i\mbox{]} is a simple unmarked graph with n vertices. In this graph, vertices i and j are connected in the original graph with an edge with half edge types t in both directions i and j. \end{DoxyCompactList}\item 
+\hyperlink{classmarked__graph__compressed}{marked\+\_\+graph\+\_\+compressed} \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}
+\begin{DoxyCompactList}\small\item\em the compressed version of the given graph in encode function \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmarked__graph__encoder_a128d2a38b23ce620c77d00a5eff487ea}\label{classmarked__graph__encoder_a128d2a38b23ce620c77d00a5eff487ea}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{marked\+\_\+graph\+\_\+encoder()}{marked\_graph\_encoder()}}
+{\footnotesize\ttfamily marked\+\_\+graph\+\_\+encoder\+::marked\+\_\+graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{int}]{h\+\_\+,  }\item[{int}]{delta\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}
+49 : \hyperlink{classmarked__graph__encoder_ae7f8872c57d2d64e4ca6cc47387b9b58}{h}(h\_), \hyperlink{classmarked__graph__encoder_a29dcf42526b12cf7964a556bb1025c9b}{delta}(delta\_) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmarked__graph__encoder_aa7fa19a225dd9b31d6fef9583fab8cf1}\label{classmarked__graph__encoder_aa7fa19a225dd9b31d6fef9583fab8cf1}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode@{encode}}
+\index{encode@{encode}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily \hyperlink{classmarked__graph__compressed}{marked\+\_\+graph\+\_\+compressed} marked\+\_\+graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+16 \{
+17   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}{clear}(); \textcolor{comment}{// reset the compressed variable before starting}
+18 
+19   \hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n} = G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
+20   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n} = \hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n};
+21 
+22   extract\_edge\_types();
+23   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}{L} = \hyperlink{classmarked__graph__encoder_a0f2e2dd184fe262f6fc93f375215227e}{L};
+24   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a1942b05e1cb30950b89e45e23d1f38fa}{ver\_type\_list} = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}; \textcolor{comment}{// }
+25   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a240a69c3859f89c1478cb4be35d20d95}{message\_list} = vector<vector<int> >(\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.
+      \hyperlink{classgraph__message_aa497f561e976cf58cc554a77e0601d8f}{message\_list}.begin(), \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_aa497f561e976cf58cc554a77e0601d8f}{message\_list}.begin() + \hyperlink{classmarked__graph__encoder_a0f2e2dd184fe262f6fc93f375215227e}{L}); \textcolor{comment}{// taking the first L
+       elements corresponding to non star type edges in the message list of M }
+26 
+27   \hyperlink{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}{encode\_star\_vertices}(); \textcolor{comment}{// encode the list of vertices with at least one star edge
+       connected to them}
+28 
+29   encode\_star\_edges(); \textcolor{comment}{// encode edges with star types, i.e. those with half edge type L or larger}
+30 
+31   encode\_vertex\_types(); \textcolor{comment}{// encode the sequences \(\backslash\)f$\(\backslash\)vec\{\(\backslash\)beta\}, \(\backslash\)vec\{D\}\(\backslash\)f$, which is encoded in C.ver\_type}
+32 
+33   extract\_partition\_graphs(); \textcolor{comment}{// for equality types, we form simple unmarked graphs, and for inequality
+       types, we form a bipartite graph}
+34 
+35   encode\_partition\_bgraphs(); 
+36   encode\_partition\_graphs();
+37 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}\label{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode\+\_\+star\+\_\+vertices@{encode\+\_\+star\+\_\+vertices}}
+\index{encode\+\_\+star\+\_\+vertices@{encode\+\_\+star\+\_\+vertices}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{encode\+\_\+star\+\_\+vertices()}{encode\_star\_vertices()}}
+{\footnotesize\ttfamily void marked\+\_\+graph\+\_\+encoder\+::encode\+\_\+star\+\_\+vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}
+55 \{
+56   \textcolor{comment}{// compress the is\_star\_vertex list}
+57   \hyperlink{classtime__series__encoder}{time\_series\_encoder} star\_encoder(\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n});
+58   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices} = star\_encoder.encode(
+      \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices});
+59 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}\label{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!C@{C}}
+\index{C@{C}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily \hyperlink{classcolored__graph}{colored\+\_\+graph} marked\+\_\+graph\+\_\+encoder\+::C\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the auxiliary object to extract edge types 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}\label{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!compressed@{compressed}}
+\index{compressed@{compressed}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{compressed}{compressed}}
+{\footnotesize\ttfamily \hyperlink{classmarked__graph__compressed}{marked\+\_\+graph\+\_\+compressed} marked\+\_\+graph\+\_\+encoder\+::compressed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the compressed version of the given graph in encode function 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_a29dcf42526b12cf7964a556bb1025c9b}\label{classmarked__graph__encoder_a29dcf42526b12cf7964a556bb1025c9b}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!delta@{delta}}
+\index{delta@{delta}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+encoder\+::delta\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmarked__graph__encoder_ae7f8872c57d2d64e4ca6cc47387b9b58}\label{classmarked__graph__encoder_ae7f8872c57d2d64e4ca6cc47387b9b58}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!h@{h}}
+\index{h@{h}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+encoder\+::h\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmarked__graph__encoder_a4ce8d85a7b63aed1272ec9824710ce45}\label{classmarked__graph__encoder_a4ce8d85a7b63aed1272ec9824710ce45}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!is\+\_\+star\+\_\+vertex@{is\+\_\+star\+\_\+vertex}}
+\index{is\+\_\+star\+\_\+vertex@{is\+\_\+star\+\_\+vertex}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{is\+\_\+star\+\_\+vertex}{is\_star\_vertex}}
+{\footnotesize\ttfamily vector$<$int$>$ marked\+\_\+graph\+\_\+encoder\+::is\+\_\+star\+\_\+vertex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+for $0 \leq v < n$, is\+\_\+star\+\_\+vertex\mbox{[}v\mbox{]} is 1 if there is at least one star type edge connected to v and 0 otherwise. 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_a0f2e2dd184fe262f6fc93f375215227e}\label{classmarked__graph__encoder_a0f2e2dd184fe262f6fc93f375215227e}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!L@{L}}
+\index{L@{L}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+encoder\+::L\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of edge colors, excluding star types 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}\label{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!n@{n}}
+\index{n@{n}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+encoder\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+number of vertices, this is set when a graph G is given to be encoded 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_aa43552947f687fccf5192eef468a430a}\label{classmarked__graph__encoder_aa43552947f687fccf5192eef468a430a}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!part\+\_\+bgraph@{part\+\_\+bgraph}}
+\index{part\+\_\+bgraph@{part\+\_\+bgraph}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{part\+\_\+bgraph}{part\_bgraph}}
+{\footnotesize\ttfamily map$<$pair$<$int, int$>$, bgraph$>$ marked\+\_\+graph\+\_\+encoder\+::part\+\_\+bgraph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+for $0 \leq t < t' < L$, part\+\_\+bgraph\mbox{[}pair$<$int, int$>$ (t,t\textquotesingle{})\mbox{]} is a bipartite graph with n left vertex and n right vertex. In this bipartite graph, a left vertex i is connected to a right vertex j iff there is an edge in the graph between vertices i and j with a half edge type towards i equal to t and a half edge type towards j equal to t\textquotesingle{}. 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}\label{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!part\+\_\+graph@{part\+\_\+graph}}
+\index{part\+\_\+graph@{part\+\_\+graph}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{part\+\_\+graph}{part\_graph}}
+{\footnotesize\ttfamily map$<$int, \hyperlink{classgraph}{graph}$>$ marked\+\_\+graph\+\_\+encoder\+::part\+\_\+graph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+for $0 \leq t < L$, part\+\_\+graph\mbox{[}i\mbox{]} is a simple unmarked graph with n vertices. In this graph, vertices i and j are connected in the original graph with an edge with half edge types t in both directions i and j. 
+
+\mbox{\Hypertarget{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}\label{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}} 
+\index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!star\+\_\+vertices@{star\+\_\+vertices}}
+\index{star\+\_\+vertices@{star\+\_\+vertices}!marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{star\+\_\+vertices}{star\_vertices}}
+{\footnotesize\ttfamily vector$<$int$>$ marked\+\_\+graph\+\_\+encoder\+::star\+\_\+vertices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the list of star vertices 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{marked__graph__compression_8h}{marked\+\_\+graph\+\_\+compression.\+h}\item 
+\hyperlink{marked__graph__compression_8cpp}{marked\+\_\+graph\+\_\+compression.\+cpp}\end{DoxyCompactItemize}

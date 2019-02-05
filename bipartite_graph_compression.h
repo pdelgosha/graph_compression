@@ -13,17 +13,23 @@ using namespace std;
 /*!
   Encodes a simple bipartite graph in the set of bipartite graphs with given left degree sequence a and right degree sequence b. Therefore, to construct an encoder object, we need to specify these two degree sequences as vectors of int. For instance (in c++11)
 
-      vector<int> a = {1,1,2};
-      vector<int> b = {2,2};
-      b_graph_encoder E(a,b);
+  ~~~~~~~~~{.cpp}
+  vector<int> a = {1,1,2};
+  vector<int> b = {2,2};
+  b_graph_encoder E(a,b);
+  ~~~~~~~~~
 
  constructs an encode object E which is capable of encoding bipartite graphs having 3 left nodes with degrees 1, 1, 2 (in order) and 2 right nodes with degrees 2,2 (in order). Hence, assume that we have defined such a bipartite graph by giving adjacency list:
 
-     b_graph G({{0},{1},{0,1}});
+ ~~~~~~~~~{.cpp}
+ b_graph G({{0},{1},{0,1}});
+ ~~~~~~~~~
 
  Note that G has left and right degree sequences which are equal to a and b, respectively. Then, we can use E to encode G as follows:
 
-     mpz_class f = E.encode(G);
+ ~~~~~~~~~{.cpp}
+ mpz_class f = E.encode(G);
+ ~~~~~~~~~
 
  In this way, the encode converts G to an integer stored in f. Later on, we can use f to decode G.
  */
@@ -61,30 +67,36 @@ public:
 /*!
   Decodes a simple bipartite graph given its encoded integer. We assume that the decoder knows the left and right degree sequences of the encoded graph, hence these sequences must be given when a decoder object is being constructed. For instance, borrowing the degree sequences of the example we used to explain the b_graph_encoder class:
 
-      vector<int> a = {1,1,2};
-      vector<int> b = {2,2};
-      b_graph_decoder D(a,b);
+  ~~~~~~~~~{.cpp}
+  vector<int> a = {1,1,2};
+  vector<int> b = {2,2};
+  b_graph_decoder D(a,b);
+  ~~~~~~~~~
 
  Then, if variable f of type mpz_class is obtained from a b_graph_encoder class, we can reconstruct the graph using f:
 
-     b_graph Ghat = D.decode(f);
+ ~~~~~~~~~{.cpp}
+ b_graph Ghat = D.decode(f);
+ ~~~~~~~~~
 
  Then, the graph Ghat will be equal to the graph G. Here is a full example showing the procedure of compression and decompression together:
 
-     vector<int> a = {1,1,2}; // left degree sequence 
-     vector<int> b = {2,2}; // right degree sequence
-
-     b_graph G({{0},{1},{0,1}}); // defining the graph
-
-     b_graph_encoder E(a,b); // constructing the encoder object
-     mpz_class f = E.encode(G);
-
-     b_graph_decoder D(a, b);
-     b_graph Ghat = D.decode(f);
-
-     if (Ghat == G)
-       cout << " we successfully reconstructed the graph! " << endl;
-
+ ~~~~~~~~~{.cpp}
+ vector<int> a = {1,1,2}; // left degree sequence 
+ vector<int> b = {2,2}; // right degree sequence
+ 
+ b_graph G({{0},{1},{0,1}}); // defining the graph
+ 
+ b_graph_encoder E(a,b); // constructing the encoder object
+ mpz_class f = E.encode(G);
+ 
+ b_graph_decoder D(a, b);
+ b_graph Ghat = D.decode(f);
+ 
+ if (Ghat == G)
+    cout << " we successfully reconstructed the graph! " << endl;
+ ~~~~~~~~~
+ 
  */
 class b_graph_decoder
 {

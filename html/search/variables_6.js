@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['left_5fdeg_5fseq',['left_deg_seq',['../classb__graph.html#a311d16462dbb10c47b3a6c80a42139d9',1,'b_graph']]],
-  ['logn2',['logn2',['../classgraph__encoder.html#a27fde3a95a280304877b1e37fc4d8553',1,'graph_encoder::logn2()'],['../classgraph__decoder.html#a59663482843ffa5059128bd6ed866f11',1,'graph_decoder::logn2()']]]
+  ['h',['h',['../classgraph__message.html#a934d63ed7275c211e13c6fb68824ed46',1,'graph_message::h()'],['../classcolored__graph.html#ae27062a4ee59df2670d3a0c81e85a3fa',1,'colored_graph::h()'],['../classmarked__graph__encoder.html#ae7f8872c57d2d64e4ca6cc47387b9b58',1,'marked_graph_encoder::h()']]]
 ];

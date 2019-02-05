@@ -15,6 +15,31 @@ graph::graph(vector<vector<int> > list, vector<int> deg){
   degree_sequence = deg;
 }
 
+/*!
+  This constructor only takes the forward adjacency list and computes the degree sequence itself
+ */
+graph::graph(vector<vector<int> > list)
+{
+  n = list.size();
+  forward_adj_list = list;
+
+
+  // sorting the list
+  for (int v=0; v<n; v++)
+    sort(forward_adj_list[v].begin(), forward_adj_list[v].end());
+
+  // finding the degree sequence
+  // first, removing and resize it
+  degree_sequence.clear();
+  degree_sequence.resize(n);
+
+  for (int v=0; v<n; v++){
+    degree_sequence[v] += forward_adj_list[v].size(); // degree to the right 
+    for (int i=0;i<forward_adj_list[v].size();i++) // modifying degree of vertices to the right of v
+      degree_sequence[forward_adj_list[v][i]]++;
+  }
+}
+
 vector<int> graph::get_forward_list(int v) const{
   if (v < 0 or v >= n)
     cerr << "graph::get_forward_list, index v out of range" << endl;

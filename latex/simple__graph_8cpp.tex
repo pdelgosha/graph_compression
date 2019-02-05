@@ -21,9 +21,9 @@ bool \hyperlink{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}{operator!=
 
 
 \begin{DoxyCode}
-77 \{
-78   \textcolor{keywordflow}{return} !(G1 == G2);
-79 \}
+102 \{
+103   \textcolor{keywordflow}{return} !(G1 == G2);
+104 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{simple__graph_8cpp_abe8832440fa24b6a6c152dbc3736c908}\label{simple__graph_8cpp_abe8832440fa24b6a6c152dbc3736c908}} 
 \index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}!operator$<$$<$@{operator$<$$<$}}
@@ -33,21 +33,21 @@ bool \hyperlink{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}{operator!=
 
 
 \begin{DoxyCode}
-44 \{
-45   \textcolor{keywordtype}{int} n = G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
-46   vector<int> list;
-47   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
-48     list = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i);
-49     o << i << \textcolor{stringliteral}{" -> "};
-50     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
-51       o << list[j];
-52       \textcolor{keywordflow}{if} (j < list.size()-1)
-53         o << \textcolor{stringliteral}{", "};
-54     \}
-55     o << endl;
-56   \}
-57   \textcolor{keywordflow}{return} o;
-58 \}
+69 \{
+70   \textcolor{keywordtype}{int} n = G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+71   vector<int> list;
+72   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
+73     list = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i);
+74     o << i << \textcolor{stringliteral}{" -> "};
+75     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+76       o << list[j];
+77       \textcolor{keywordflow}{if} (j < list.size()-1)
+78         o << \textcolor{stringliteral}{", "};
+79     \}
+80     o << endl;
+81   \}
+82   \textcolor{keywordflow}{return} o;
+83 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{simple__graph_8cpp_a156c8acaca113a7e5cc8d918dd1fc3f3}\label{simple__graph_8cpp_a156c8acaca113a7e5cc8d918dd1fc3f3}} 
 \index{simple\+\_\+graph.\+cpp@{simple\+\_\+graph.\+cpp}!operator==@{operator==}}
@@ -57,18 +57,18 @@ bool \hyperlink{simple__graph_8cpp_a004e2b491d4bafaf2d8129e6bc8abc2e}{operator!=
 
 
 \begin{DoxyCode}
-61 \{
-62   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
-63   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
-64   \textcolor{keywordflow}{if} (n1!= n2)
-65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-66   vector<int> list1, list2;
-67   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
-68     list1 = G1.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
-69     list2 = G2.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
-70     \textcolor{keywordflow}{if} (list1 != list2)
-71       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-72   \}
-73   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-74 \}
+86 \{
+87   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+88   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}();
+89   \textcolor{keywordflow}{if} (n1!= n2)
+90     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+91   vector<int> list1, list2;
+92   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+93     list1 = G1.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+94     list2 = G2.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+95     \textcolor{keywordflow}{if} (list1 != list2)
+96       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+97   \}
+98   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+99 \}
 \end{DoxyCode}
