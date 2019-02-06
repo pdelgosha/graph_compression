@@ -23,13 +23,14 @@ b_graph::b_graph(vector<vector<int> > list)
   adj_list = list;
   left_deg_seq.resize(n);
   for (int v=0;v<adj_list.size();v++){
+    cerr << " v " << v << endl;
     sort(adj_list[v].begin(), adj_list[v].end());
-    if (adj_list[v][adj_list[v].size()-1] > np)
-      np = list[v][adj_list[v].size()-1];
+    if (adj_list[v].size() > 0 and adj_list[v][adj_list[v].size()-1] > np)
+      np = adj_list[v][adj_list[v].size()-1];
     left_deg_seq[v] = adj_list[v].size();
   }
   np++; // node indexing is zero based
-
+  
   right_deg_seq.resize(np);
   fill(right_deg_seq.begin(), right_deg_seq.end(), 0); // make all elements 0
   for (int v=0;v<list.size();v++)

@@ -198,15 +198,17 @@ initializes other variables. Here, G is the reference to the marked graph based 
 224   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)
 225     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<1 + L * \hyperlink{classcolored__graph_ae159d1b15106b70a2eabef8884501e97}{L};i++)
 226       sum[i] += ver\_type[v][i];
-227   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_ae159d1b15106b70a2eabef8884501e97}{L};i++)\{
-228     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<\hyperlink{classcolored__graph_ae159d1b15106b70a2eabef8884501e97}{L};j++)\{
-229       cout << sum[1+i*L + j] << \textcolor{stringliteral}{" "};
-230       \textcolor{keywordflow}{if} (sum[1+i*L + j] != sum[1+j*L+i])
-231         cout << \textcolor{stringliteral}{" DANGER! the sum matrix is not symmetric"} << endl;
-232     \}
-233     cout << endl;
-234   \}
-235 \}
+227   \textcolor{comment}{/*}
+228 \textcolor{comment}{  for (int i=0;i<L;i++)\{}
+229 \textcolor{comment}{    for (int j=0;j<L;j++)\{}
+230 \textcolor{comment}{      cout << sum[1+i*L + j] << " ";}
+231 \textcolor{comment}{      if (sum[1+i*L + j] != sum[1+j*L+i])}
+232 \textcolor{comment}{        cout << " DANGER! the sum matrix is not symmetric" << endl;}
+233 \textcolor{comment}{    \}}
+234 \textcolor{comment}{    cout << endl;}
+235 \textcolor{comment}{  \}}
+236 \textcolor{comment}{  */}
+237 \}
 \end{DoxyCode}
 
 

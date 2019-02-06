@@ -145,19 +145,21 @@ This constructor takes the list of adjacent vertices
 23   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
 24   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
 25   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}.size();v++)\{
-26     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
-27     \textcolor{keywordflow}{if} (\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1] > \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np})
-28       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = list[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1];
-29     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = adj\_list[v].size();
-30   \}
-31   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}++; \textcolor{comment}{// node indexing is zero based}
-32 
-33   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.resize(\hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np});
-34   fill(\hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.begin(), \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.end(), 0); \textcolor{comment}{// make all elements 0}
-35   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<list.size();v++)
-36     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list[v].size();i++)
-37       \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[list[v][i]]++;
-38 \}
+26     cerr << \textcolor{stringliteral}{" v "} << v << endl;
+27     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+28     \textcolor{keywordflow}{if} (\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size() > 0 and \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1] > 
+      \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np})
+29       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1];
+30     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = adj\_list[v].size();
+31   \}
+32   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}++; \textcolor{comment}{// node indexing is zero based}
+33   
+34   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.resize(\hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np});
+35   fill(\hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.begin(), \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.end(), 0); \textcolor{comment}{// make all elements 0}
+36   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<list.size();v++)
+37     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list[v].size();i++)
+38       \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[list[v][i]]++;
+39 \}
 \end{DoxyCode}
 
 
@@ -174,11 +176,11 @@ returns the adjacency list of a given left vertex
 
 
 \begin{DoxyCode}
-41 \{
-42   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-43     cerr << \textcolor{stringliteral}{"b\_graph::get\_adj\_list, index v out of range"} << endl;
-44   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v];
-45 \}
+42 \{
+43   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+44     cerr << \textcolor{stringliteral}{"b\_graph::get\_adj\_list, index v out of range"} << endl;
+45   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v];
+46 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}\label{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree@{get\+\_\+left\+\_\+degree}}
@@ -192,11 +194,11 @@ returns the degree of a right vertex v
 
 
 \begin{DoxyCode}
-56 \{
-57   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-58     cerr << \textcolor{stringliteral}{"b\_graph::get\_left\_degree, index v out of range"} << endl;
-59   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v];
-60 \}
+57 \{
+58   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+59     cerr << \textcolor{stringliteral}{"b\_graph::get\_left\_degree, index v out of range"} << endl;
+60   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v];
+61 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_afd65fb655f7e24217393a10533b87d3c}\label{classb__graph_afd65fb655f7e24217393a10533b87d3c}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree\+\_\+sequence@{get\+\_\+left\+\_\+degree\+\_\+sequence}}
@@ -210,9 +212,9 @@ return the left degree sequence
 
 
 \begin{DoxyCode}
-68 \{
-69   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq};
-70 \}
+69 \{
+70   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq};
+71 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}\label{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree@{get\+\_\+right\+\_\+degree}}
@@ -226,11 +228,11 @@ returns the degree of a right vertex v
 
 
 \begin{DoxyCode}
-49 \{
-50   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-51     cerr << \textcolor{stringliteral}{"b\_graph::get\_right\_degree, index v out of range"} << endl;
-52   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[v];
-53 \}
+50 \{
+51   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+52     cerr << \textcolor{stringliteral}{"b\_graph::get\_right\_degree, index v out of range"} << endl;
+53   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[v];
+54 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a2711566385b92b02f4c03abdc1f9a582}\label{classb__graph_a2711566385b92b02f4c03abdc1f9a582}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree\+\_\+sequence@{get\+\_\+right\+\_\+degree\+\_\+sequence}}
@@ -244,9 +246,9 @@ return the right degree sequence
 
 
 \begin{DoxyCode}
-63 \{
-64   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq};
-65 \}
+64 \{
+65   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq};
+66 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}\label{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!nu\+\_\+left\+\_\+vertices@{nu\+\_\+left\+\_\+vertices}}
@@ -260,9 +262,9 @@ returns the number of left vertices
 
 
 \begin{DoxyCode}
-74 \{
-75   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};
-76 \}
+75 \{
+76   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};
+77 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}\label{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!nu\+\_\+right\+\_\+vertices@{nu\+\_\+right\+\_\+vertices}}
@@ -276,9 +278,9 @@ returns the number of right vertices
 
 
 \begin{DoxyCode}
-79 \{
-80   \textcolor{keywordflow}{return} \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np};
-81 \}
+80 \{
+81   \textcolor{keywordflow}{return} \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np};
+82 \}
 \end{DoxyCode}
 
 
@@ -295,9 +297,9 @@ comparing for inequality
 
 
 \begin{DoxyCode}
-121 \{
-122   \textcolor{keywordflow}{return} !(G1 == G2);
-123 \}
+122 \{
+123   \textcolor{keywordflow}{return} !(G1 == G2);
+124 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}\label{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!operator$<$$<$@{operator$<$$<$}}
@@ -311,21 +313,21 @@ printing the graph to the output
 
 
 \begin{DoxyCode}
-85 \{
-86   \textcolor{keywordtype}{int} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-87   vector<int> list;
-88   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};i++)\{
-89     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
-90     o << i << \textcolor{stringliteral}{" -> "};
-91     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
-92       o << list[j];
-93       \textcolor{keywordflow}{if} (j < list.size()-1)
-94         o << \textcolor{stringliteral}{", "};
-95     \}
-96     o << endl;
-97   \}
-98   \textcolor{keywordflow}{return} o;
-99 \}
+86 \{
+87   \textcolor{keywordtype}{int} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+88   vector<int> list;
+89   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};i++)\{
+90     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+91     o << i << \textcolor{stringliteral}{" -> "};
+92     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+93       o << list[j];
+94       \textcolor{keywordflow}{if} (j < list.size()-1)
+95         o << \textcolor{stringliteral}{", "};
+96     \}
+97     o << endl;
+98   \}
+99   \textcolor{keywordflow}{return} o;
+100 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_adf87735e8372a81049b347b1fdd23484}\label{classb__graph_adf87735e8372a81049b347b1fdd23484}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!operator==@{operator==}}
@@ -339,23 +341,23 @@ comparing two graphs for equality
 
 
 \begin{DoxyCode}
-102 \{
-103   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-104   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-105   
-106   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-107   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-108   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
-109     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-110   vector<int> list1, list2;
-111   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
-112     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-113     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-114     \textcolor{keywordflow}{if} (list1 != list2)
-115       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-116   \}
-117   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-118 \}
+103 \{
+104   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+105   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+106   
+107   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+108   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+109   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
+110     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+111   vector<int> list1, list2;
+112   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+113     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+114     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+115     \textcolor{keywordflow}{if} (list1 != list2)
+116       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+117   \}
+118   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+119 \}
 \end{DoxyCode}
 
 

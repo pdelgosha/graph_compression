@@ -24,16 +24,42 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   compressed.ver_type_list = C.ver_type_list; // 
   compressed.message_list = vector<vector<int> >(C.M.message_list.begin(), C.M.message_list.begin() + L); // taking the first L elements corresponding to non star type edges in the message list of M 
 
+  cout << " message list " << endl;
+  for (int i=0;i<C.M.message_list.size();i++){
+    cout << i << " : ";
+    for (int j=0;j<C.M.message_list[i].size();j++)
+      cout << C.M.message_list[i][j] << " ";
+    cout << endl;
+  }
+
   encode_star_vertices(); // encode the list of vertices with at least one star edge connected to them
+
 
   encode_star_edges(); // encode edges with star types, i.e. those with half edge type L or larger
 
+
   encode_vertex_types(); // encode the sequences \f$\vec{\beta}, \vec{D}\f$, which is encoded in C.ver_type
+
 
   extract_partition_graphs(); // for equality types, we form simple unmarked graphs, and for inequality types, we form a bipartite graph
 
-  encode_partition_bgraphs(); 
+  cout << " partition bipartite graphs " << endl;
+  for (map<pair<int, int>, b_graph>::iterator it = part_bgraph.begin(); it!=part_bgraph.end(); it++){
+    cout << " c = " << it->first.first << " , " << it->first.second << endl;
+    cout << it->second << endl;
+  }
+
+  cout << " partition simple graphs " << endl;
+  for (map<int, graph>::iterator it = part_graph.begin();it!=part_graph.end();it++){
+    cout << " t = " << it->first << endl;
+    cout << it->second << endl;
+  }
+
+  encode_partition_bgraphs();
+
+
   encode_partition_graphs();
+
 
   return compressed;
 }
@@ -41,6 +67,10 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 void marked_graph_encoder::encode_vertex_types()
 {
   time_series_encoder vtype_encoder(n);
+  //cerr << " C.ver_type_int " << endl;
+  //for (int i=0;i<C.ver_type_int.size();i++)
+  //  cerr << C.ver_type_int[i] << " ";
+  //cerr << endl;
   compressed.ver_types = vtype_encoder.encode(C.ver_type_int);
 }
 
@@ -57,7 +87,7 @@ void marked_graph_encoder::encode_star_vertices()
 {
   // compress the is_star_vertex list
   time_series_encoder star_encoder(n);
-  compressed.star_vertices = star_encoder.encode(star_vertices);
+  compressed.star_vertices = star_encoder.encode(is_star_vertex);
 }
 
 void marked_graph_encoder::encode_star_edges()
@@ -119,16 +149,22 @@ void marked_graph_encoder::extract_partition_graphs()
     }
   }
 
+  //cerr << " extracted adjacency lists " << endl;
+
   // going over part_adj_list and construct partition graphs and bipartite graphs
   pair<int, int> c; // the color
   vector<vector<int> > list; // the adjacency list / forward adjacency list
+  b_graph test;
+  //cerr << " part_adj_list.size() " << part_adj_list.size() << endl;
   for (map<pair<int, int>, vector<vector<int> > >::iterator it = part_adj_list.begin(); it!=part_adj_list.end(); it++){
     c = it->first;
     list = it->second;
     if (c.first < c.second) // this is a color in \f$C_<\f$
       part_bgraph[c] = b_graph(list);
+
     if (c.first == c.second) // this is a color in \f$C_=\f$
       part_graph[c.first] = graph(list);
+
   }
 }
 

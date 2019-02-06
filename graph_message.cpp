@@ -224,6 +224,7 @@ void colored_graph::init(const marked_graph& G)
   for (int v=0;v<nu_vertices;v++)
     for (int i=0;i<1 + L * L;i++)
       sum[i] += ver_type[v][i];
+  /*
   for (int i=0;i<L;i++){
     for (int j=0;j<L;j++){
       cout << sum[1+i*L + j] << " ";
@@ -232,4 +233,5 @@ void colored_graph::init(const marked_graph& G)
     }
     cout << endl;
   }
+  */
 }

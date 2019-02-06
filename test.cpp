@@ -69,6 +69,14 @@ void time_series_compression_test()
     cout << " successfully decoded the original time series! " << endl;
 }
 
+void marked_graph_encoder_test()
+{
+  marked_graph G;
+  ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
+  inp >> G;
+  marked_graph_encoder E(2,4);// h = 2, delta = 4
+  marked_graph_compressed C = E.encode(G);
+}
 int main(){
   //marked_graph G;
   //ifstream inp("star_graph.txt");
@@ -76,8 +84,8 @@ int main(){
   //graph_message M(G, 10, 2);
   //M.update_messages();
   //graph_test();
-  time_series_compression_test();
-
+  //time_series_compression_test();
+  marked_graph_encoder_test();
 
   return 0;
   // vector<vector<int> > list = {{}, {}, {}};
