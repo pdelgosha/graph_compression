@@ -18,6 +18,8 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 
   n = G.nu_vertices;
   compressed.n = n;
+  compressed.h = h;
+  compressed.delta = delta;
 
   extract_edge_types(G);
   compressed.L = L;
@@ -98,7 +100,7 @@ void marked_graph_encoder::encode_star_edges()
   for (int k=0; k<star_vertices.size(); k++){ // iterating over star vertices
     v = star_vertices[k];
     for (int i=0;i<C.adj_list[v].size();i++){
-      if (C.adj_list[v][i].second.first > L or C.adj_list[v][i].second.second > L){ // this is a star edge
+      if (C.adj_list[v][i].second.first >= L or C.adj_list[v][i].second.second >= L){ // this is a star edge
         x = C.M.message_list[C.adj_list[v][i].second.first][1]; // mark towards v
         xp = C.M.message_list[C.adj_list[v][i].second.second][1]; // mark towards other endpoint
         w = C.adj_list[v][i].first; // the other endpoint of the edge
@@ -211,4 +213,172 @@ void marked_graph_encoder::encode_partition_graphs()
 
     compressed.part_graph[t] = E.encode(it->second);
   }  
+}
+
+
+
+
+
+
+
+
+
+// ==================================================
+// marked graph decoder
+// ==================================================
+
+
+
+
+marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compressed)
+{
+  n = compressed.n;
+  h = compressed.h;
+  delta = compressed.delta;
+  L = compressed.L;
+
+  edges.clear(); // clear the edge list of the marked graph to be decoded
+  vertex_marks.clear(); // clear the list of vertex marks of the marked graph to be decoded
+
+  decode_star_vertices(compressed);
+  cerr << " decoded star vertices " << endl;
+
+  decode_star_edges(compressed);
+  cerr << " decoded star edges " << endl;
+
+  decode_vertex_types(compressed);
+  cerr << " decoded vertex types " << endl;
+
+  decode_partition_graphs(compressed);
+  cerr << " decoded partition graphs " << endl;
+
+  decode_partition_bgraphs(compressed);
+  cerr << " decoded partition b graphs " << endl;
+
+  // now, reconstruct the original marked graphs by assembling the vertex marks and edge list
+  marked_graph G(n, edges, vertex_marks);
+  return G;
+}
+
+void marked_graph_decoder::decode_star_vertices(const marked_graph_compressed& compressed)
+{
+  time_series_decoder D(n);
+  is_star_vertex = D.decode(compressed.star_vertices);
+
+  star_vertices.clear();
+  for (int i=0;i<n;i++)
+    if (is_star_vertex[i] == 1)
+      star_vertices.push_back(i);
+}
+
+void marked_graph_decoder::decode_star_edges(const marked_graph_compressed& compressed)
+{
+  pair<int, int> mark_pair; // the pair of marks
+  vector<vector<int> > list; // list of edges with this pair of marks
+  int v; // one endpoint of the star edge
+  // iterating through the star_edges map
+  for (map<pair<int, int>, vector<vector<int> > >::const_iterator it = compressed.star_edges.begin(); it!=compressed.star_edges.end(); it++){
+    mark_pair = it->first;
+    cerr << " mark_pair " << mark_pair.first << " " << mark_pair.second << endl;
+    list = it->second;
+    for (int i=0;i<list.size();i++){
+      v = star_vertices[i];
+      for (int j=0;j<list[i].size();j++){
+        cerr << " list[i][j] " << list[i][j] << endl;
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,list[i][j]), mark_pair));
+      }
+    }
+  }
+}
+
+void marked_graph_decoder::decode_vertex_types(const marked_graph_compressed& compressed)
+{
+  time_series_decoder D(n);
+  vector<int> ver_type_int = D.decode(compressed.ver_types);
+
+  // converting the integer value vertex types to actual vectors using the `ver_type_list` attribute of compressed
+
+  vertex_marks.resize(n); // preparing for decoding vertex marks
+  ver_type.resize(n);
+
+  for (int v=0;v<n;v++){
+    if (ver_type_int[v] >= compressed.ver_type_list.size())
+      cerr << " Warning: marked_graph_decoder::decode_vertex_types ver_type_int[" << v << "] is out of range" << endl;
+    ver_type[v] = compressed.ver_type_list[ver_type_int[v]];
+    vertex_marks[v] = ver_type[v][0]; // the mark of vertex v is the first element in the type list of this vertex 
+  }
+}
+
+
+void marked_graph_decoder::decode_partition_graphs(const marked_graph_compressed& compressed)
+{
+  int t; // the type corresponding to the partition graph
+  vector<int> t_message; // the actual message corresponding to t
+  int x; // the mark component associated to t
+  pair< mpz_class, vector< int > > G_compressed; // the compressed form of the partition graph
+  graph G; // the decoded partition graph
+  vector<int> a; // the degree sequence of the partition graph to be decoded
+  a.resize(n);
+  vector<int> flist; // the forward adjacency list of a vertex in a partition graph
+
+  for(map< int, pair< mpz_class, vector< int > > >::const_iterator it=compressed.part_graph.begin(); it!=compressed.part_graph.end(); it++){
+    t = it->first;
+    t_message = compressed.message_list[t];
+    if (t_message.size() == 0)
+      cerr << " Warning: marked_graph_decoder::decode_partition_graphs t_message corresponding to t = " << t << " has size 0" << endl;
+    x = t_message[t_message.size()-1]; // the mark component of a message is always the last entry in the list 
+    G_compressed = it->second;
+    // trying to reconstruct the partition graph, but before that, we need to figure out its degree sequence based on the `ver_type` sequence and reading the corresponding entry of the degree matrix of each vertex
+    for (int v=0;v<n;v++){
+      a[v] = ver_type[v][1+ L*t + t]; // the degree is the (t,t) coordinate of the degree matrix. Since the first element of `ver_type[v]` is the vertex mark and we list the degree matrix row by row, this is precisely the index 1 + L*t + t in the list.
+    }
+    graph_decoder D(a);
+    G = D.decode(G_compressed.first, G_compressed.second);
+    // for each edge in G, we should add an edge with mark pair (x,x) to the edge list of the marked graph
+    for (int v=0;v<n;v++){
+      flist = G.get_forward_list(v);
+      for (int i=0;i<flist.size();i++)
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,flist[i]), pair<int, int> (x,x)));
+    }
+  }
+}
+
+
+void marked_graph_decoder::decode_partition_bgraphs(const marked_graph_compressed& compressed)
+{
+  pair<int, int> c; // the pair of types
+  int t, tp; // types
+  vector<int> t_message, tp_message; // associated messages to types
+  int x, xp; // mark components of t and tp
+
+  b_graph G;
+  vector<int> a, b; // the left and right degree sequences
+  a.resize(n);
+  b.resize(n);
+  vector<int> adj_list; // adj list of a vertex in a partition bipartite graph
+
+  for (map<pair<int, int>, mpz_class>::const_iterator it = compressed.part_bgraph.begin(); it!=compressed.part_bgraph.end(); it++){
+    c = it->first;
+    t = c.first;
+    tp = c.second;
+    t_message = compressed.message_list[t];
+    tp_message = compressed.message_list[tp];
+    if (t_message.size() == 0)
+      cerr << " Warning: marked_graph_decoder::decode_partition_bgraphs t_message corresponding to t = " << t << " has size 0" << endl;
+    if (tp_message.size() == 0)
+      cerr << " Warning: marked_graph_decoder::decode_partition_bgraphs tp_message corresponding to tp = " << tp << " has size 0" << endl;
+    x = t_message[t_message.size()-1];
+    xp = tp_message[tp_message.size()-1];
+    for (int v=0;v<n;v++){
+      a[v] = ver_type[v][1+t*L + tp]; // row t column tp of degree matrix, +1 since the first entry is the vertex mark 
+      b[v] = ver_type[v][1+tp*L + t]; // rot tp column t
+    }
+    b_graph_decoder D(a,b);
+    G = D.decode(it->second);
+    for (int v=0;v<n;v++){
+      adj_list = G.get_adj_list(v);
+      for (int i=0;i<adj_list.size();i++)
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,adj_list[i]), pair<int, int>(x,xp)));
+    }
+  }
 }

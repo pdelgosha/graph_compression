@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['h',['h',['../classgraph__message.html#a934d63ed7275c211e13c6fb68824ed46',1,'graph_message::h()'],['../classcolored__graph.html#ae27062a4ee59df2670d3a0c81e85a3fa',1,'colored_graph::h()'],['../classmarked__graph__encoder.html#ae7f8872c57d2d64e4ca6cc47387b9b58',1,'marked_graph_encoder::h()']]]
+  ['g',['G',['../classtime__series__encoder.html#aa40f761a56f696e78e8888e50e8f45b9',1,'time_series_encoder::G()'],['../classtime__series__decoder.html#a66abe50babd1ebe2eb5a130d4b8091f1',1,'time_series_decoder::G()']]]
 ];

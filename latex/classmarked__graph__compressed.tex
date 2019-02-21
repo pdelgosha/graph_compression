@@ -16,6 +16,10 @@ int \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}
 \begin{DoxyCompactList}\small\item\em the number of vertices \end{DoxyCompactList}\item 
 int \hyperlink{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}{L}
 \begin{DoxyCompactList}\small\item\em the number of half edge colors (non star type) \end{DoxyCompactList}\item 
+int \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}
+\begin{DoxyCompactList}\small\item\em the depth up to which the compression was performed \end{DoxyCompactList}\item 
+int \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}
+\begin{DoxyCompactList}\small\item\em the degree threshold used when compression was performed \end{DoxyCompactList}\item 
 pair$<$ vector$<$ int $>$, mpz\+\_\+class $>$ \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\+\_\+vertices}
 \begin{DoxyCompactList}\small\item\em the compressed form of the star\+\_\+vertices list \end{DoxyCompactList}\item 
 map$<$ pair$<$ int, int $>$, vector$<$ vector$<$ int $>$ $>$ $>$ \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\+\_\+edges}
@@ -52,6 +56,26 @@ map$<$ int, pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ $>$ \hyperlink{classma
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}\label{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}} 
+\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!delta@{delta}}
+\index{delta@{delta}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
+\subsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+compressed\+::delta}
+
+
+
+the degree threshold used when compression was performed 
+
+\mbox{\Hypertarget{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}\label{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}} 
+\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!h@{h}}
+\index{h@{h}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
+\subsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+compressed\+::h}
+
+
+
+the depth up to which the compression was performed 
+
 \mbox{\Hypertarget{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}\label{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!L@{L}}
 \index{L@{L}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}

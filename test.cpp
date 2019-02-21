@@ -72,10 +72,23 @@ void time_series_compression_test()
 void marked_graph_encoder_test()
 {
   marked_graph G;
-  ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
+  ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
   inp >> G;
-  marked_graph_encoder E(2,4);// h = 2, delta = 4
+  marked_graph_encoder E(3,1);// h = 2, delta = 3
   marked_graph_compressed C = E.encode(G);
+
+  marked_graph_decoder D; // h = 2, delta = 3
+  marked_graph Ghat = D.decode(C);
+
+  if (Ghat == G)
+    cout << " successfully decoded the marked graph :D " << endl;
+  else
+    cout << " they do not match :(" << endl;
+
+  cout << " G " << endl;
+  cout << G << endl;
+  cout << " Ghat " << endl;
+  cout << Ghat << endl;
 }
 int main(){
   //marked_graph G;

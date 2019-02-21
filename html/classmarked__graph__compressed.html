@@ -88,6 +88,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:abd70435e7a1f6eeb4c585bfca428d175"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarked__graph__compressed.html#abd70435e7a1f6eeb4c585bfca428d175">L</a></td></tr>
 <tr class="memdesc:abd70435e7a1f6eeb4c585bfca428d175"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of half edge colors (non star type)  <a href="#abd70435e7a1f6eeb4c585bfca428d175">More...</a><br /></td></tr>
 <tr class="separator:abd70435e7a1f6eeb4c585bfca428d175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6ff623407b673d08d0cab77b39c2193"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarked__graph__compressed.html#af6ff623407b673d08d0cab77b39c2193">h</a></td></tr>
+<tr class="memdesc:af6ff623407b673d08d0cab77b39c2193"><td class="mdescLeft">&#160;</td><td class="mdescRight">the depth up to which the compression was performed  <a href="#af6ff623407b673d08d0cab77b39c2193">More...</a><br /></td></tr>
+<tr class="separator:af6ff623407b673d08d0cab77b39c2193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b2aaac68e9332ddc78d88eb60b323a7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarked__graph__compressed.html#a8b2aaac68e9332ddc78d88eb60b323a7">delta</a></td></tr>
+<tr class="memdesc:a8b2aaac68e9332ddc78d88eb60b323a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">the degree threshold used when compression was performed  <a href="#a8b2aaac68e9332ddc78d88eb60b323a7">More...</a><br /></td></tr>
+<tr class="separator:a8b2aaac68e9332ddc78d88eb60b323a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a4ced4586e2e353f9076bd447df5208"><td class="memItemLeft" align="right" valign="top">pair&lt; vector&lt; int &gt;, mpz_class &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarked__graph__compressed.html#a7a4ced4586e2e353f9076bd447df5208">star_vertices</a></td></tr>
 <tr class="memdesc:a7a4ced4586e2e353f9076bd447df5208"><td class="mdescLeft">&#160;</td><td class="mdescRight">the compressed form of the star_vertices list  <a href="#a7a4ced4586e2e353f9076bd447df5208">More...</a><br /></td></tr>
 <tr class="separator:a7a4ced4586e2e353f9076bd447df5208"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,15 +131,47 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532">star_edges</a>.clear();</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a240a69c3859f89c1478cb4be35d20d95">message_list</a>.clear();</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#af2e3e55223d436628a02758dfae88493">ver_type_list</a>.clear();</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a7b3267063fba30b45eb21b3ba4e07536">part_bgraph</a>.clear();</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#ae179a4737e6eab905c18a94d44ef64b7">part_graph</a>.clear();</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div><div class="ttc" id="classmarked__graph__compressed_html_a7df5779d313486644132bd816937f532"><div class="ttname"><a href="classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532">marked_graph_compressed::star_edges</a></div><div class="ttdeci">map&lt; pair&lt; int, int &gt;, vector&lt; vector&lt; int &gt; &gt; &gt; star_edges</div><div class="ttdoc">for each pair of edge marks x,x&amp;#39;, and integer , star_edges[pair&lt;int,int&gt;(x,x&amp;#39;)][k] is a list of neigh...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:22</div></div>
-<div class="ttc" id="classmarked__graph__compressed_html_a7b3267063fba30b45eb21b3ba4e07536"><div class="ttname"><a href="classmarked__graph__compressed.html#a7b3267063fba30b45eb21b3ba4e07536">marked_graph_compressed::part_bgraph</a></div><div class="ttdeci">map&lt; pair&lt; int, int &gt;, mpz_class &gt; part_bgraph</div><div class="ttdoc">compressed form of partition bipartite graphs corresponding to colors in . For a pair  of half edge t...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:28</div></div>
-<div class="ttc" id="classmarked__graph__compressed_html_a240a69c3859f89c1478cb4be35d20d95"><div class="ttname"><a href="classmarked__graph__compressed.html#a240a69c3859f89c1478cb4be35d20d95">marked_graph_compressed::message_list</a></div><div class="ttdeci">vector&lt; vector&lt; int &gt; &gt; message_list</div><div class="ttdoc">a list of messages which appear in graph (not star type), so its size is L </div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:23</div></div>
-<div class="ttc" id="classmarked__graph__compressed_html_af2e3e55223d436628a02758dfae88493"><div class="ttname"><a href="classmarked__graph__compressed.html#af2e3e55223d436628a02758dfae88493">marked_graph_compressed::ver_type_list</a></div><div class="ttdeci">vector&lt; vector&lt; int &gt; &gt; ver_type_list</div><div class="ttdoc">the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:24</div></div>
-<div class="ttc" id="classmarked__graph__compressed_html_ae179a4737e6eab905c18a94d44ef64b7"><div class="ttname"><a href="classmarked__graph__compressed.html#ae179a4737e6eab905c18a94d44ef64b7">marked_graph_compressed::part_graph</a></div><div class="ttdeci">map&lt; int, pair&lt; mpz_class, vector&lt; int &gt; &gt; &gt; part_graph</div><div class="ttdoc">compressed form of partition graphs corresponding to colors in . For a half edge type t...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:30</div></div>
+<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532">star_edges</a>.clear();</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a240a69c3859f89c1478cb4be35d20d95">message_list</a>.clear();</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#af2e3e55223d436628a02758dfae88493">ver_type_list</a>.clear();</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#a7b3267063fba30b45eb21b3ba4e07536">part_bgraph</a>.clear();</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <a class="code" href="classmarked__graph__compressed.html#ae179a4737e6eab905c18a94d44ef64b7">part_graph</a>.clear();</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div><div class="ttc" id="classmarked__graph__compressed_html_a7df5779d313486644132bd816937f532"><div class="ttname"><a href="classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532">marked_graph_compressed::star_edges</a></div><div class="ttdeci">map&lt; pair&lt; int, int &gt;, vector&lt; vector&lt; int &gt; &gt; &gt; star_edges</div><div class="ttdoc">for each pair of edge marks x,x&amp;#39;, and integer , star_edges[pair&lt;int,int&gt;(x,x&amp;#39;)][k] is a list of neigh...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:24</div></div>
+<div class="ttc" id="classmarked__graph__compressed_html_a7b3267063fba30b45eb21b3ba4e07536"><div class="ttname"><a href="classmarked__graph__compressed.html#a7b3267063fba30b45eb21b3ba4e07536">marked_graph_compressed::part_bgraph</a></div><div class="ttdeci">map&lt; pair&lt; int, int &gt;, mpz_class &gt; part_bgraph</div><div class="ttdoc">compressed form of partition bipartite graphs corresponding to colors in . For a pair  of half edge t...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:30</div></div>
+<div class="ttc" id="classmarked__graph__compressed_html_a240a69c3859f89c1478cb4be35d20d95"><div class="ttname"><a href="classmarked__graph__compressed.html#a240a69c3859f89c1478cb4be35d20d95">marked_graph_compressed::message_list</a></div><div class="ttdeci">vector&lt; vector&lt; int &gt; &gt; message_list</div><div class="ttdoc">a list of messages which appear in graph (not star type), so its size is L </div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:25</div></div>
+<div class="ttc" id="classmarked__graph__compressed_html_af2e3e55223d436628a02758dfae88493"><div class="ttname"><a href="classmarked__graph__compressed.html#af2e3e55223d436628a02758dfae88493">marked_graph_compressed::ver_type_list</a></div><div class="ttdeci">vector&lt; vector&lt; int &gt; &gt; ver_type_list</div><div class="ttdoc">the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:26</div></div>
+<div class="ttc" id="classmarked__graph__compressed_html_ae179a4737e6eab905c18a94d44ef64b7"><div class="ttname"><a href="classmarked__graph__compressed.html#ae179a4737e6eab905c18a94d44ef64b7">marked_graph_compressed::part_graph</a></div><div class="ttdeci">map&lt; int, pair&lt; mpz_class, vector&lt; int &gt; &gt; &gt; part_graph</div><div class="ttdoc">compressed form of partition graphs corresponding to colors in . For a half edge type t...</div><div class="ttdef"><b>Definition:</b> marked_graph_compression.h:32</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8b2aaac68e9332ddc78d88eb60b323a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b2aaac68e9332ddc78d88eb60b323a7">&#9670;&nbsp;</a></span>delta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int marked_graph_compressed::delta</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the degree threshold used when compression was performed </p>
+
+</div>
+</div>
+<a id="af6ff623407b673d08d0cab77b39c2193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6ff623407b673d08d0cab77b39c2193">&#9670;&nbsp;</a></span>h</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int marked_graph_compressed::h</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the depth up to which the compression was performed </p>
+
+</div>
+</div>
 <a id="abd70435e7a1f6eeb4c585bfca428d175"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd70435e7a1f6eeb4c585bfca428d175">&#9670;&nbsp;</a></span>L</h2>
 

@@ -18,6 +18,8 @@ class marked_graph_compressed
  public:
   int n; //!< the number of vertices
   int L; //!< the number of half edge colors (non star type)
+  int h; //!< the depth up to which the compression was performed
+  int delta; //!< the degree threshold used when compression was performed
   pair<vector<int>, mpz_class> star_vertices; //!< the compressed form of the star_vertices list
   map<pair<int, int> , vector<vector<int> > > star_edges; //!< for each pair of edge marks x,x', and integer \f$k\f$, star_edges[pair<int,int>(x,x')][k] is a list of neighbors \f$w\f$ of the \f$k\f$th star vertex (say \f$v\f$) so that \f$v\f$ shares a star edge with \f$w\f$ so that the mark towards \f$v\f$ is x and the mark towards \f$w\f$ is xp. 
   vector<vector<int> > message_list; //!< a list of messages which appear in graph (not star type), so its size is L
@@ -47,19 +49,67 @@ class marked_graph_encoder
 
   marked_graph_compressed compressed; //!< the compressed version of the given graph in encode function
 
+  //! encodes the star vertices (those vertices with at least one star edge connected to them)
+  /*!
+    uses time_series_encode to encode the 0-1 sequence of star vertices stored in is_star_vertex to the star_vertices attribute of compressed
+   */
   void encode_star_vertices();
+
+  //! Given a marked graph, extracts edge types by updating the colored_graph member C
   void extract_edge_types(const marked_graph&);
+
+  //! Encodes star edges to the star_edges attribute of compressed
   void encode_star_edges();
+
+  //! encodes the type of vertices, where the type of a vertex denotes its mark as well as its degree matrix 
   void encode_vertex_types();
+
+  //! by looking at the colored graph C, extract partition graphs (simple and bipartite)
   void extract_partition_graphs();
+
+  //! encode partition bipartite graphs
   void encode_partition_bgraphs();
+
+  //! encodes partition simple graphs 
   void encode_partition_graphs();
  public:
 
  marked_graph_encoder(int h_, int delta_): h(h_), delta(delta_) {}
   marked_graph_compressed encode(const marked_graph& G);
-  
+
 };
 
+
+class marked_graph_decoder
+{
+  int h;
+  int delta;
+  int n; //!< number of vertices, this is set when a graph G is given to be encoded
+  int L; //!< the number of edge colors, excluding star types 
+  vector<int> is_star_vertex; //!< for \f$0 \leq v < n\f$, is_star_vertex[v] is 1 if there is at least one star type edge connected to v and 0 otherwise.
+  vector<int> star_vertices; //!< the list of star vertices
+
+  vector<vector<int> > ver_type; //!< the list of vertex types, where the type of a vertex is an array of size \f$1+L\times L\f$, using the same convention as in the `colored_graph` class.
+
+  map<pair<int, int>, b_graph> part_bgraph; //!< for \f$0 \leq t < t' < L\f$, part_bgraph[pair<int, int> (t,t')] is a bipartite graph with n left vertex and n right vertex. In this bipartite graph, a left vertex i is connected to a right vertex j iff there is an edge in the graph between vertices i and j with a half edge type towards i equal to t and a half edge type towards j equal to t'.
+  map<int, graph> part_graph; //!< for \f$0 \leq t < L\f$, part_graph[i] is a simple unmarked graph with n vertices. In this graph, vertices i and j are connected in the original graph with an edge with half edge types t in both directions i and j.
+
+  vector<pair<pair<int, int>, pair<int, int> > > edges; //!< the list of edges in the decoded graph, each index of the form \f$((i,j), (x,y))\f$, where \f$i\f$ and \f$j\f$ are the endpoints and \f$x\f$ and \f$y\f$ are the marks (towards \f$i\f$ and \f$j\f$, respectively).
+
+  vector<int> vertex_marks; //!< the list of vertex marks of the marked graph to be decoded 
+  void decode_star_vertices(const marked_graph_compressed&);
+  void decode_star_edges(const marked_graph_compressed&);
+  void decode_vertex_types(const marked_graph_compressed&);
+  void decode_partition_graphs(const marked_graph_compressed&);
+  void decode_partition_bgraphs(const marked_graph_compressed&);
+
+ public:
+
+  //! constructor
+  marked_graph_decoder() {}
+
+
+  marked_graph decode(const marked_graph_compressed&);
+};
 
 #endif

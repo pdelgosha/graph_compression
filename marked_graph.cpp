@@ -43,3 +43,53 @@ istream& operator>>(istream& inp, marked_graph& G)
 
   return inp;
 }
+
+bool operator== (const marked_graph& G1, const marked_graph& G2)
+{
+  if (G1.nu_vertices != G2.nu_vertices)
+    return false;
+  int n = G1.nu_vertices; // number of vertices of the two graphs
+  vector< pair< int, pair< int, int > > > l1, l2; // the adjacency list of a vertex in two graphs for comparison. 
+  for (int v=0;v<n;v++){
+    if (G1.ver_mark[v] != G2.ver_mark[v]) // mark of each vertex should be the same
+      return false;
+    if (G1.adj_list[v].size() != G2.adj_list[v].size()) // each vertex must have the same degree in two graphs
+      return false;
+    l1 = G1.adj_list[v];
+    l2 = G2.adj_list[v];
+    sort(l1.begin(), l1.end(), edge_compare); // sort with respect to the other endpoint
+    sort(l2.begin(), l2.end(), edge_compare);
+    if (l1 != l2) // after sorting, the lists must match
+      return false;
+  }
+  return true;
+}
+
+bool operator!= (const marked_graph& G1, const marked_graph& G2)
+{
+  return !(G1 == G2);
+}
+
+bool edge_compare(const pair<int, pair<int, int> >& a, pair<int, pair<int, int> >& b)
+{
+  return a.first < b.first;
+}
+
+
+ostream& operator<< (ostream& o, const marked_graph& G)
+{
+  o << " number of vertices " << G.nu_vertices << endl;
+  vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex
+  for (int v=0; v<G.nu_vertices; v++){
+    o << " vertex " << v << " mark " << G.ver_mark[v] << endl;
+    o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;
+    l = G.adj_list[v];
+    sort(l.begin(), l.end(), edge_compare);
+    for (int i=0;i<l.size();i++){
+      if (l[i].first > v)
+        o << " (" << l[i].first << ", (" << l[i].second.first << ", " << l[i].second.second << ")) ";
+    }
+    o << endl;
+  }
+  return o;
+}

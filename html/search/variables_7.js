@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#a00d0c64fcf8de58553aa4cade64193df',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#a4ce8d85a7b63aed1272ec9824710ce45',1,'marked_graph_encoder::is_star_vertex()']]]
+  ['h',['h',['../classgraph__message.html#a934d63ed7275c211e13c6fb68824ed46',1,'graph_message::h()'],['../classcolored__graph.html#ae27062a4ee59df2670d3a0c81e85a3fa',1,'colored_graph::h()'],['../classmarked__graph__compressed.html#af6ff623407b673d08d0cab77b39c2193',1,'marked_graph_compressed::h()'],['../classmarked__graph__encoder.html#ae7f8872c57d2d64e4ca6cc47387b9b58',1,'marked_graph_encoder::h()'],['../classmarked__graph__decoder.html#a15bb3109398ce7c1f0ffbfae512e34c9',1,'marked_graph_decoder::h()']]]
 ];

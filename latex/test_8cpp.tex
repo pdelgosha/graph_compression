@@ -87,42 +87,42 @@ int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-80           \{
-81   \textcolor{comment}{//marked\_graph G;}
-82   \textcolor{comment}{//ifstream inp("star\_graph.txt");}
-83   \textcolor{comment}{//inp >> G;}
-84   \textcolor{comment}{//graph\_message M(G, 10, 2);}
-85   \textcolor{comment}{//M.update\_messages();}
-86   \textcolor{comment}{//graph\_test();}
-87   \textcolor{comment}{//time\_series\_compression\_test();}
-88   \hyperlink{test_8cpp_af087647683f99aca0cfa687af0d88813}{marked\_graph\_encoder\_test}();
-89 
-90   \textcolor{keywordflow}{return} 0;
-91   \textcolor{comment}{// vector<vector<int> > list = \{\{\}, \{\}, \{\}\};}
-92 
-93   \textcolor{comment}{// b\_graph G(\{\{0\},\{1\},\{0,1\}\});}
-94   \textcolor{comment}{// // cout << G << endl;}
-95   \textcolor{comment}{// // cout << G.nu\_left\_vertices() << endl;}
-96   \textcolor{comment}{// // cout << G.nu\_right\_vertices() << endl;}
-97   \textcolor{comment}{// // cout << G.get\_left\_degree\_sequence() << endl;}
-98   \textcolor{comment}{// // cout << G.get\_right\_degree\_sequence() << endl;}
-99   \textcolor{comment}{// vector<int> a = G.get\_left\_degree\_sequence();}
-100   \textcolor{comment}{// vector<int> b = G.get\_right\_degree\_sequence();}
-101   
+93           \{
+94   \textcolor{comment}{//marked\_graph G;}
+95   \textcolor{comment}{//ifstream inp("star\_graph.txt");}
+96   \textcolor{comment}{//inp >> G;}
+97   \textcolor{comment}{//graph\_message M(G, 10, 2);}
+98   \textcolor{comment}{//M.update\_messages();}
+99   \textcolor{comment}{//graph\_test();}
+100   \textcolor{comment}{//time\_series\_compression\_test();}
+101   \hyperlink{test_8cpp_af087647683f99aca0cfa687af0d88813}{marked\_graph\_encoder\_test}();
 102 
-103   \textcolor{comment}{// b\_graph\_encoder  E(a,b);}
-104   \textcolor{comment}{// mpz\_class m = E.encode(G);}
-105   \textcolor{comment}{// cout << "encoded: " << m << endl;}
-106 
-107   \textcolor{comment}{// b\_graph\_decoder D(a, b);}
-108   \textcolor{comment}{// b\_graph Ghat = D.decode(m);}
-109   \textcolor{comment}{// cout << "decoded graph: " << endl << Ghat << endl;}
-110 
-111   \textcolor{comment}{// if (Ghat == G)}
-112   \textcolor{comment}{//   cout << " equal " << endl;}
-113   \textcolor{comment}{// return 0;}
-114 
-115 \}
+103   \textcolor{keywordflow}{return} 0;
+104   \textcolor{comment}{// vector<vector<int> > list = \{\{\}, \{\}, \{\}\};}
+105 
+106   \textcolor{comment}{// b\_graph G(\{\{0\},\{1\},\{0,1\}\});}
+107   \textcolor{comment}{// // cout << G << endl;}
+108   \textcolor{comment}{// // cout << G.nu\_left\_vertices() << endl;}
+109   \textcolor{comment}{// // cout << G.nu\_right\_vertices() << endl;}
+110   \textcolor{comment}{// // cout << G.get\_left\_degree\_sequence() << endl;}
+111   \textcolor{comment}{// // cout << G.get\_right\_degree\_sequence() << endl;}
+112   \textcolor{comment}{// vector<int> a = G.get\_left\_degree\_sequence();}
+113   \textcolor{comment}{// vector<int> b = G.get\_right\_degree\_sequence();}
+114   
+115 
+116   \textcolor{comment}{// b\_graph\_encoder  E(a,b);}
+117   \textcolor{comment}{// mpz\_class m = E.encode(G);}
+118   \textcolor{comment}{// cout << "encoded: " << m << endl;}
+119 
+120   \textcolor{comment}{// b\_graph\_decoder D(a, b);}
+121   \textcolor{comment}{// b\_graph Ghat = D.decode(m);}
+122   \textcolor{comment}{// cout << "decoded graph: " << endl << Ghat << endl;}
+123 
+124   \textcolor{comment}{// if (Ghat == G)}
+125   \textcolor{comment}{//   cout << " equal " << endl;}
+126   \textcolor{comment}{// return 0;}
+127 
+128 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{test_8cpp_af087647683f99aca0cfa687af0d88813}\label{test_8cpp_af087647683f99aca0cfa687af0d88813}} 
 \index{test.\+cpp@{test.\+cpp}!marked\+\_\+graph\+\_\+encoder\+\_\+test@{marked\+\_\+graph\+\_\+encoder\+\_\+test}}
@@ -134,11 +134,24 @@ int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 \begin{DoxyCode}
 73 \{
 74   \hyperlink{classmarked__graph}{marked\_graph} G;
-75   ifstream inp(\textcolor{stringliteral}{"test\_graphs/hexagon\_diagonal\_marked.txt"});
+75   ifstream inp(\textcolor{stringliteral}{"test\_graphs/ten\_node.txt"}); \textcolor{comment}{//("test\_graphs/hexagon\_diagonal\_marked.txt");}
 76   inp >> G;
-77   \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(2,4);\textcolor{comment}{// h = 2, delta = 4}
+77   \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(3,1);\textcolor{comment}{// h = 2, delta = 3}
 78   \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
-79 \}
+79 
+80   \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D; \textcolor{comment}{// h = 2, delta = 3}
+81   \hyperlink{classmarked__graph}{marked\_graph} Ghat = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
+82 
+83   \textcolor{keywordflow}{if} (Ghat == G)
+84     cout << \textcolor{stringliteral}{" successfully decoded the marked graph :D "} << endl;
+85   \textcolor{keywordflow}{else}
+86     cout << \textcolor{stringliteral}{" they do not match :("} << endl;
+87 
+88   cout << \textcolor{stringliteral}{" G "} << endl;
+89   cout << G << endl;
+90   cout << \textcolor{stringliteral}{" Ghat "} << endl;
+91   cout << Ghat << endl;
+92 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{test_8cpp_af5223445b486d224879e0a71e1836ff0}\label{test_8cpp_af5223445b486d224879e0a71e1836ff0}} 
 \index{test.\+cpp@{test.\+cpp}!operator$<$$<$@{operator$<$$<$}}

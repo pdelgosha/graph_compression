@@ -13,10 +13,28 @@ class \hyperlink{classmarked__graph}{marked\+\_\+graph}
 \begin{DoxyCompactItemize}
 \item 
 istream \& \hyperlink{marked__graph_8h_af0e562f34d9f6deb1ff7b9508ad8d84a}{operator$>$$>$} (istream \&inp, \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
-\begin{DoxyCompactList}\small\item\em inputs a \hyperlink{classmarked__graph}{marked\+\_\+graph} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em inputs a \hyperlink{classmarked__graph}{marked\+\_\+graph} \end{DoxyCompactList}\item 
+bool \hyperlink{marked__graph_8h_a09dd24caed50b1d106e10538e688b6ac}{edge\+\_\+compare} (const pair$<$ int, pair$<$ int, int $>$ $>$ \&a, pair$<$ int, pair$<$ int, int $>$ $>$ \&b)
+\begin{DoxyCompactList}\small\item\em this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{marked__graph_8h_a09dd24caed50b1d106e10538e688b6ac}\label{marked__graph_8h_a09dd24caed50b1d106e10538e688b6ac}} 
+\index{marked\+\_\+graph.\+h@{marked\+\_\+graph.\+h}!edge\+\_\+compare@{edge\+\_\+compare}}
+\index{edge\+\_\+compare@{edge\+\_\+compare}!marked\+\_\+graph.\+h@{marked\+\_\+graph.\+h}}
+\subsubsection{\texorpdfstring{edge\+\_\+compare()}{edge\_compare()}}
+{\footnotesize\ttfamily bool edge\+\_\+compare (\begin{DoxyParamCaption}\item[{const pair$<$ int, pair$<$ int, int $>$ $>$ \&}]{a,  }\item[{pair$<$ int, pair$<$ int, int $>$ $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j. 
+
+
+\begin{DoxyCode}
+74 \{
+75   \textcolor{keywordflow}{return} a.first < b.first;
+76 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{marked__graph_8h_af0e562f34d9f6deb1ff7b9508ad8d84a}\label{marked__graph_8h_af0e562f34d9f6deb1ff7b9508ad8d84a}} 
 \index{marked\+\_\+graph.\+h@{marked\+\_\+graph.\+h}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!marked\+\_\+graph.\+h@{marked\+\_\+graph.\+h}}

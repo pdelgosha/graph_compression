@@ -89,8 +89,41 @@ Functions</h2></td></tr>
 <tr class="memitem:af0e562f34d9f6deb1ff7b9508ad8d84a"><td class="memItemLeft" align="right" valign="top">istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="marked__graph_8h.html#af0e562f34d9f6deb1ff7b9508ad8d84a">operator&gt;&gt;</a> (istream &amp;inp, <a class="el" href="classmarked__graph.html">marked_graph</a> &amp;G)</td></tr>
 <tr class="memdesc:af0e562f34d9f6deb1ff7b9508ad8d84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">inputs a <a class="el" href="classmarked__graph.html" title="simple marked graph ">marked_graph</a>  <a href="#af0e562f34d9f6deb1ff7b9508ad8d84a">More...</a><br /></td></tr>
 <tr class="separator:af0e562f34d9f6deb1ff7b9508ad8d84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09dd24caed50b1d106e10538e688b6ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="marked__graph_8h.html#a09dd24caed50b1d106e10538e688b6ac">edge_compare</a> (const pair&lt; int, pair&lt; int, int &gt; &gt; &amp;a, pair&lt; int, pair&lt; int, int &gt; &gt; &amp;b)</td></tr>
+<tr class="memdesc:a09dd24caed50b1d106e10538e688b6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j.  <a href="#a09dd24caed50b1d106e10538e688b6ac">More...</a><br /></td></tr>
+<tr class="separator:a09dd24caed50b1d106e10538e688b6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a09dd24caed50b1d106e10538e688b6ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09dd24caed50b1d106e10538e688b6ac">&#9670;&nbsp;</a></span>edge_compare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool edge_compare </td>
+          <td>(</td>
+          <td class="paramtype">const pair&lt; int, pair&lt; int, int &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pair&lt; int, pair&lt; int, int &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j. </p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">return</span> a.first &lt; b.first;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div></div><!-- fragment -->
+</div>
+</div>
 <a id="af0e562f34d9f6deb1ff7b9508ad8d84a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0e562f34d9f6deb1ff7b9508ad8d84a">&#9670;&nbsp;</a></span>operator>>()</h2>
 

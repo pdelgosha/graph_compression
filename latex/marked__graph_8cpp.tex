@@ -5,10 +5,101 @@
 \begin{DoxyCompactItemize}
 \item 
 istream \& \hyperlink{marked__graph_8cpp_af0e562f34d9f6deb1ff7b9508ad8d84a}{operator$>$$>$} (istream \&inp, \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
-\begin{DoxyCompactList}\small\item\em inputs a \hyperlink{classmarked__graph}{marked\+\_\+graph} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em inputs a \hyperlink{classmarked__graph}{marked\+\_\+graph} \end{DoxyCompactList}\item 
+bool \hyperlink{marked__graph_8cpp_a1718b82e881f8c37552018df1f83f82c}{operator==} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G1, const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G2)
+\item 
+bool \hyperlink{marked__graph_8cpp_a52ab641f19231908b18f8661bad17493}{operator!=} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G1, const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G2)
+\item 
+bool \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\+\_\+compare} (const pair$<$ int, pair$<$ int, int $>$ $>$ \&a, pair$<$ int, pair$<$ int, int $>$ $>$ \&b)
+\begin{DoxyCompactList}\small\item\em this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j. \end{DoxyCompactList}\item 
+ostream \& \hyperlink{marked__graph_8cpp_a4f98d2df29f50f6da1365a14fd80d764}{operator$<$$<$} (ostream \&o, const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
+\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}\label{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}} 
+\index{marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}!edge\+\_\+compare@{edge\+\_\+compare}}
+\index{edge\+\_\+compare@{edge\+\_\+compare}!marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{edge\+\_\+compare()}{edge\_compare()}}
+{\footnotesize\ttfamily bool edge\+\_\+compare (\begin{DoxyParamCaption}\item[{const pair$<$ int, pair$<$ int, int $>$ $>$ \&}]{a,  }\item[{pair$<$ int, pair$<$ int, int $>$ $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+this is to help comparing two marked graphs. The inputs would resemble two edge information, of the form (j, (x, y)), where j is the other endpoint, and x and y are marks. We want to sort them with respect to the neighbor index j. 
+
+
+\begin{DoxyCode}
+74 \{
+75   \textcolor{keywordflow}{return} a.first < b.first;
+76 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{marked__graph_8cpp_a52ab641f19231908b18f8661bad17493}\label{marked__graph_8cpp_a52ab641f19231908b18f8661bad17493}} 
+\index{marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+69 \{
+70   \textcolor{keywordflow}{return} !(G1 == G2);
+71 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{marked__graph_8cpp_a4f98d2df29f50f6da1365a14fd80d764}\label{marked__graph_8cpp_a4f98d2df29f50f6da1365a14fd80d764}} 
+\index{marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+80 \{
+81   o << \textcolor{stringliteral}{" number of vertices "} << G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} << endl;
+82   vector<pair<int, pair<int, int> > > l; \textcolor{comment}{// the adjacency list of a vertex}
+83   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; v++)\{
+84     o << \textcolor{stringliteral}{" vertex "} << v << \textcolor{stringliteral}{" mark "} << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] << endl;
+85     o << \textcolor{stringliteral}{" adj list (connections to vertices with greater index): format (j, (x,y))"} << endl;
+86     l = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+87     sort(l.begin(), l.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
+88     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<l.size();i++)\{
+89       \textcolor{keywordflow}{if} (l[i].first > v)
+90         o << \textcolor{stringliteral}{" ("} << l[i].first << \textcolor{stringliteral}{", ("} << l[i].second.first << \textcolor{stringliteral}{", "} << l[i].second.second << \textcolor{stringliteral}{")) "};
+91     \}
+92     o << endl;
+93   \}
+94   \textcolor{keywordflow}{return} o;
+95 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{marked__graph_8cpp_a1718b82e881f8c37552018df1f83f82c}\label{marked__graph_8cpp_a1718b82e881f8c37552018df1f83f82c}} 
+\index{marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G1,  }\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G2 }\end{DoxyParamCaption})}
+
+two marked graphs are said to be the same if\+: 1) they have the same number of vertices, 2) vertex marks match and 3) each vertex has the same set of neighbors with matching marks. 
+\begin{DoxyCode}
+48 \{
+49   \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} != G2.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices})
+50     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+51   \textcolor{keywordtype}{int} n = G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; \textcolor{comment}{// number of vertices of the two graphs}
+52   vector< pair< int, pair< int, int > > > l1, l2; \textcolor{comment}{// the adjacency list of a vertex in two graphs for
+       comparison. }
+53   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n;v++)\{
+54     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] != G2.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]) \textcolor{comment}{// mark of each vertex should be the same}
+55       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+56     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() != G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()) \textcolor{comment}{// each vertex must have the same
+       degree in two graphs}
+57       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+58     l1 = G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+59     l2 = G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+60     sort(l1.begin(), l1.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare}); \textcolor{comment}{// sort with respect to the other endpoint}
+61     sort(l2.begin(), l2.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
+62     \textcolor{keywordflow}{if} (l1 != l2) \textcolor{comment}{// after sorting, the lists must match}
+63       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+64   \}
+65   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+66 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{marked__graph_8cpp_af0e562f34d9f6deb1ff7b9508ad8d84a}\label{marked__graph_8cpp_af0e562f34d9f6deb1ff7b9508ad8d84a}} 
 \index{marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!marked\+\_\+graph.\+cpp@{marked\+\_\+graph.\+cpp}}
