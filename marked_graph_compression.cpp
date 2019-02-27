@@ -22,10 +22,13 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   compressed.delta = delta;
 
   extract_edge_types(G);
+  cout << " edge types extracted " << endl;
+
   compressed.L = L;
   compressed.ver_type_list = C.ver_type_list; // 
   compressed.message_list = vector<vector<int> >(C.M.message_list.begin(), C.M.message_list.begin() + L); // taking the first L elements corresponding to non star type edges in the message list of M 
 
+  /*
   cout << " message list " << endl;
   for (int i=0;i<C.M.message_list.size();i++){
     cout << i << " : ";
@@ -33,19 +36,21 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
       cout << C.M.message_list[i][j] << " ";
     cout << endl;
   }
+  */
 
   encode_star_vertices(); // encode the list of vertices with at least one star edge connected to them
-
+  cout << " encoded star vertices " << endl;
 
   encode_star_edges(); // encode edges with star types, i.e. those with half edge type L or larger
-
+  cout << " encoded star edges " << endl;
 
   encode_vertex_types(); // encode the sequences \f$\vec{\beta}, \vec{D}\f$, which is encoded in C.ver_type
-
+  cout << " encoded vertex types " << endl;
 
   extract_partition_graphs(); // for equality types, we form simple unmarked graphs, and for inequality types, we form a bipartite graph
-
-  cout << " partition bipartite graphs " << endl;
+  cout << " extracted partition graphs " << endl;
+  /*
+    cout << " partition bipartite graphs " << endl;
   for (map<pair<int, int>, b_graph>::iterator it = part_bgraph.begin(); it!=part_bgraph.end(); it++){
     cout << " c = " << it->first.first << " , " << it->first.second << endl;
     cout << it->second << endl;
@@ -56,12 +61,13 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
     cout << " t = " << it->first << endl;
     cout << it->second << endl;
   }
+  */
 
   encode_partition_bgraphs();
-
+  cout << " encoded partition bgraphs " << endl;
 
   encode_partition_graphs();
-
+  cout << " encoded partition graphs " << endl;
 
   return compressed;
 }
@@ -279,12 +285,12 @@ void marked_graph_decoder::decode_star_edges(const marked_graph_compressed& comp
   // iterating through the star_edges map
   for (map<pair<int, int>, vector<vector<int> > >::const_iterator it = compressed.star_edges.begin(); it!=compressed.star_edges.end(); it++){
     mark_pair = it->first;
-    cerr << " mark_pair " << mark_pair.first << " " << mark_pair.second << endl;
+    //cerr << " mark_pair " << mark_pair.first << " " << mark_pair.second << endl;
     list = it->second;
     for (int i=0;i<list.size();i++){
       v = star_vertices[i];
       for (int j=0;j<list[i].size();j++){
-        cerr << " list[i][j] " << list[i][j] << endl;
+        //cerr << " list[i][j] " << list[i][j] << endl;
         edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,list[i][j]), mark_pair));
       }
     }

@@ -139,17 +139,18 @@ prints a marked graph to the output
 82   vector<pair<int, pair<int, int> > > l; \textcolor{comment}{// the adjacency list of a vertex}
 83   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; v++)\{
 84     o << \textcolor{stringliteral}{" vertex "} << v << \textcolor{stringliteral}{" mark "} << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] << endl;
-85     o << \textcolor{stringliteral}{" adj list (connections to vertices with greater index): format (j, (x,y))"} << endl;
-86     l = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
-87     sort(l.begin(), l.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
-88     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<l.size();i++)\{
-89       \textcolor{keywordflow}{if} (l[i].first > v)
-90         o << \textcolor{stringliteral}{" ("} << l[i].first << \textcolor{stringliteral}{", ("} << l[i].second.first << \textcolor{stringliteral}{", "} << l[i].second.second << \textcolor{stringliteral}{")) "};
-91     \}
-92     o << endl;
-93   \}
-94   \textcolor{keywordflow}{return} o;
-95 \}
+85     \textcolor{comment}{//o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;}
+86     o << \textcolor{stringliteral}{" adj list "} << endl;
+87     l = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+88     sort(l.begin(), l.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
+89     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<l.size();i++)\{
+90       \textcolor{keywordflow}{if} (l[i].first > v)
+91         o << \textcolor{stringliteral}{" ("} << l[i].first << \textcolor{stringliteral}{", ("} << l[i].second.first << \textcolor{stringliteral}{", "} << l[i].second.second << \textcolor{stringliteral}{")) "};
+92     \}
+93     o << endl << endl;
+94   \}
+95   \textcolor{keywordflow}{return} o;
+96 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}\label{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}} 
 \index{marked\+\_\+graph@{marked\+\_\+graph}!operator==@{operator==}}

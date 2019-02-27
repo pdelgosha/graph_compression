@@ -1,0 +1,64 @@
+\hypertarget{random__graph_8cpp}{}\section{random\+\_\+graph.\+cpp File Reference}
+\label{random__graph_8cpp}\index{random\+\_\+graph.\+cpp@{random\+\_\+graph.\+cpp}}
+{\ttfamily \#include \char`\"{}random\+\_\+graph.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\+\_\+\+ER} (int n, double p, int ver\+\_\+mark, int edge\+\_\+mark)
+\begin{DoxyCompactList}\small\item\em generates a marked Erdos Renyi graph \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}\label{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}} 
+\index{random\+\_\+graph.\+cpp@{random\+\_\+graph.\+cpp}!marked\+\_\+\+ER@{marked\+\_\+\+ER}}
+\index{marked\+\_\+\+ER@{marked\+\_\+\+ER}!random\+\_\+graph.\+cpp@{random\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{marked\+\_\+\+E\+R()}{marked\_ER()}}
+{\footnotesize\ttfamily \hyperlink{classmarked__graph}{marked\+\_\+graph} marked\+\_\+\+ER (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{double}]{p,  }\item[{int}]{ver\+\_\+mark,  }\item[{int}]{edge\+\_\+mark }\end{DoxyParamCaption})}
+
+
+
+generates a marked Erdos Renyi graph 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the number of vertices \\
+\hline
+{\em p} & probability of an edge being present \\
+\hline
+{\em ver\+\_\+mark} & the number of possible vertex marks \\
+\hline
+{\em edge\+\_\+mark} & the number of possible edge marks \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a random marked graph, where each edge is independently present with probability p, each vertex has a random integer mark in the range \mbox{[}0,ver\+\_\+mark), and each edge has two random integers marks in the range \mbox{[}0,edge\+\_\+mark) 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+4 \{
+5   \textcolor{keywordtype}{unsigned} seed = chrono::system\_clock::now().time\_since\_epoch().count();
+6   default\_random\_engine generator(seed);
+7   uniform\_int\_distribution<int> ver\_mark\_dist(0,ver\_mark-1); \textcolor{comment}{// distribution a vertex mark}
+8   uniform\_int\_distribution<int> edge\_mark\_dist(0,edge\_mark-1); \textcolor{comment}{// distribution an edge mark}
+9   uniform\_real\_distribution<double> unif\_dist(0.0,1.0);
+10   \textcolor{keywordtype}{double} unif;
+11   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// generated marks}
+12 
+13   vector<int> ver\_marks(n); \textcolor{comment}{// vector of size n}
+14   vector<pair< pair<int, int>, pair<int, int> > > edges; \textcolor{comment}{// the edge list of the graph }
+15 
+16   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n; v++)\{
+17     ver\_marks[v] = ver\_mark\_dist(generator);
+18     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} w=v+1; w<n;w++)\{
+19       unif = unif\_dist(generator);
+20       \textcolor{keywordflow}{if} (unif < p)\{ \textcolor{comment}{// we put an edge between v and w}
+21         x = edge\_mark\_dist(generator);
+22         xp = edge\_mark\_dist(generator);
+23         edges.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,w), pair<int, int>(x,xp)));
+24       \}
+25     \}
+26   \}
+27   cout << \textcolor{stringliteral}{" marked\_ER number of edges "} << edges.size() << endl;
+28   \textcolor{keywordflow}{return} \hyperlink{classmarked__graph}{marked\_graph}(n, edges, ver\_marks);
+29 \}
+\end{DoxyCode}

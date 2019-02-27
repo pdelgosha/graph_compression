@@ -82,14 +82,15 @@ ostream& operator<< (ostream& o, const marked_graph& G)
   vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex
   for (int v=0; v<G.nu_vertices; v++){
     o << " vertex " << v << " mark " << G.ver_mark[v] << endl;
-    o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;
+    //o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;
+    o << " adj list " << endl;
     l = G.adj_list[v];
     sort(l.begin(), l.end(), edge_compare);
     for (int i=0;i<l.size();i++){
       if (l[i].first > v)
         o << " (" << l[i].first << ", (" << l[i].second.first << ", " << l[i].second.second << ")) ";
     }
-    o << endl;
+    o << endl << endl;
   }
   return o;
 }

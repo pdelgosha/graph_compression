@@ -11,6 +11,7 @@
 #include "bipartite_graph_compression.h"
 #include "time_series_compression.h"
 #include "marked_graph_compression.h"
+#include "random_graph.h"
 
 using namespace std;
 
@@ -72,12 +73,19 @@ void time_series_compression_test()
 void marked_graph_encoder_test()
 {
   marked_graph G;
-  ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
-  inp >> G;
-  marked_graph_encoder E(3,1);// h = 2, delta = 3
+  //ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
+  //inp >> G;
+  int h, delta;
+  cout << " h " << endl;
+  cin >> h;
+  cout << " delta " << endl;
+  cin >> delta; 
+  G = marked_ER(300,0.01,2 ,2);
+  cout << " graph constructed " << endl;
+  marked_graph_encoder E(h,delta);
   marked_graph_compressed C = E.encode(G);
 
-  marked_graph_decoder D; // h = 2, delta = 3
+  marked_graph_decoder D; 
   marked_graph Ghat = D.decode(C);
 
   if (Ghat == G)
@@ -85,10 +93,16 @@ void marked_graph_encoder_test()
   else
     cout << " they do not match :(" << endl;
 
-  cout << " G " << endl;
-  cout << G << endl;
-  cout << " Ghat " << endl;
-  cout << Ghat << endl;
+  //cout << " G " << endl;
+  //cout << G << endl;
+  //cout << " Ghat " << endl;
+  //cout << Ghat << endl;
+}
+
+void random_graph_test()
+{
+  marked_graph G = marked_ER(100,1,3,4);
+  //cout << G << endl;
 }
 int main(){
   //marked_graph G;
@@ -99,6 +113,7 @@ int main(){
   //graph_test();
   //time_series_compression_test();
   marked_graph_encoder_test();
+  //random_graph_test();
 
   return 0;
   // vector<vector<int> > list = {{}, {}, {}};

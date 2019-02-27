@@ -4,5 +4,6 @@ var searchData=
   ['init_5falph_5fsize',['init_alph_size',['../classtime__series__encoder.html#a8607e6953e5115a3c8a198266d2db8ce',1,'time_series_encoder']]],
   ['init_5ffreq',['init_freq',['../classtime__series__encoder.html#af4b8988acb10fe076be59302e47084be',1,'time_series_encoder']]],
   ['init_5fg',['init_G',['../classtime__series__encoder.html#a90eb54134d6af2ab2cca36ee13956470',1,'time_series_encoder']]],
-  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#a00d0c64fcf8de58553aa4cade64193df',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#a4ce8d85a7b63aed1272ec9824710ce45',1,'marked_graph_encoder::is_star_vertex()'],['../classmarked__graph__decoder.html#a5c5391206cf2965b8513248e505ba48f',1,'marked_graph_decoder::is_star_vertex()']]]
+  ['is_5fstar_5fmessage',['is_star_message',['../classgraph__message.html#a55ff5531a0043106369e84a7bc45e22d',1,'graph_message']]],
+  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#ad41163e970530c7e45878d299f0dc961',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#a4ce8d85a7b63aed1272ec9824710ce45',1,'marked_graph_encoder::is_star_vertex()'],['../classmarked__graph__decoder.html#a5c5391206cf2965b8513248e505ba48f',1,'marked_graph_decoder::is_star_vertex()']]]
 ];
