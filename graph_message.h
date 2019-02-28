@@ -38,6 +38,7 @@ public:
   vector<map<vector<int>, int> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
   vector<vector<vector<int> > > message_list; //!< message_list[t] is the list of messages present in the graph at depth t, stored in an order consistent with message_dict[t], i.e. for a message m, if messsage_dict[t][m] = i, then message_list[t][i] = m. This is constructed in such a way that message_list[t][message_dict[t][x]] = x. message_list[h-1] is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -1, and the second being the edge mark component (towards the 'me' vertex). 
 
+
   vector<int> message_mark; //!< for an integer message such as m at depth h-1, message_mark[m] denotes the mark component of the message that corresponds to m. The message corresponds to m is basically message_list[h-1][m] which is of type vector<int> and the last component in this array is the mark component. 
 
   vector<bool> is_star_message; //!< for a message m (integer type) at depth h-1, is_star_message[m] is true if the corresponding message starts with -1, ans is false otherwise.

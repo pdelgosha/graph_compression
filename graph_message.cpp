@@ -17,13 +17,12 @@
 
 void graph_message::update_messages(const marked_graph& G)
 {
-  cerr << " update message called " << endl;
 
   int nu_vertices = G.nu_vertices;
 
   messages.resize(nu_vertices);
-  message_dict_all_depth.resize(h);
-  message_list_all_depth.resize(h);
+  message_dict.resize(h);
+  message_list.resize(h);
 
   // initialize the messages
   for (int v=0;v<nu_vertices;v++){
@@ -31,9 +30,6 @@ void graph_message::update_messages(const marked_graph& G)
     for (int i=0;i<G.adj_list[v].size();i++){
       // the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which is \xi(v,w) and a subtree component which is a single root with mark \tau(v). This is encoded as a message vector with size 3 of the form (\tau(v), 0,\xi(v,w)) where the last 0 indicates that there is no offspring.
       messages[v][i].resize(h);
-      // initialize messages to be empty
-      for (int t=0;t<h;t++)
-        messages[v][i][t].resize(0);
 
       vector<int> m;
       m.push_back(G.ver_mark[v]);
@@ -41,18 +37,17 @@ void graph_message::update_messages(const marked_graph& G)
       m.push_back(G.adj_list[v][i].second.first);
 
       // adding this message to the message dictionary
-      if (message_dictnd(m) == message_dict[0].end()){
+      if (message_dict[0].find(m) == message_dict[0].end()){
         message_dict[0][m] = message_list[0].size();
         message_list[0].push_back(m);
       }
 
-      messages[v][i][0] = message_dict[m]; // the message at time 0
+      messages[v][i][0] = message_dict[0][m]; // the message at time 0
     }
   }
 
   // updating messages
   for (int t=1;t<h;t++){
-    cerr << " depth " << t << endl;
     for (int v=0;v<nu_vertices;v++){
       //cerr << " vertex " << v << endl;
       if (G.adj_list[v].size() <= Delta){
@@ -68,22 +63,21 @@ void graph_message::update_messages(const marked_graph& G)
           int my_location = G.adj_location[w].at(v); // where is the place of node v among the list of neighbors of the ith neighbor of v
           int previous_message = messages[w][my_location][t-1]; // the message sent from this neighbor towards v at time t-1
           int mark_to_v = G.adj_list[v][i].second.first;
-          previous_message.push_back(); // adding the mark towards v to the list
           neighbor_messages.push_back(pair<pair<int, int> , int> (pair<int,int>(previous_message, mark_to_v), w));
         }
 
-        sort(neighbor_messages.begin(), neighbor_messages.end());
+        sort(neighbor_messages.begin(), neighbor_messages.end()); // sorts lexicographically 
         for (int i=0;i<G.adj_list[v].size();i++){
           // let w be the current ith neighbor of v
           int w = G.adj_list[v][i].first;
           // first, start with the mark of v and the number of offsprings in the subgraph component of the message
-          vector<int> m; // the current message
+          vector<int> m; // the message that v is going to send to w 
           m.push_back(G.ver_mark[v]); // mark of v
           m.push_back(G.adj_list[v].size()-1); // the number of offsprings in the subgraph component of the message
           // stacking messages from all neighbors of v expect for w towards v at time t-1
           for (int j=0;j<G.adj_list[v].size();j++){
             if (neighbor_messages[j].second != w){
-              if (message_list[t-1][neighbor_messages[j].first][0] == -1){
+              if (message_list[t-1][neighbor_messages[j].first.first][0] == -1){
                 // this means that one of the messages that should be aggregated is * typed, therefore the outgoing messages should also be * typed
                 // i.e. the message has only two entries: (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
                 // since after this loop, the mark \xi(w,v) is added to the message (after the comment starting with 'finally'), we only add the initial -1 part
@@ -92,8 +86,8 @@ void graph_message::update_messages(const marked_graph& G)
                 break; // the message is decided, we do not need to go over any of the other neighbor messages, hence break
               }
               // this message should be added to the list of messages
-              m.push_back(neighbor_message[j].first.first); // message part
-              m.push_back(neighbor_message[j].first.second); // mark part towards v
+              m.push_back(neighbor_messages[j].first.first); // message part
+              m.push_back(neighbor_messages[j].first.second); // mark part towards v
             }
           }
           // if we break, we reach at this point and message is (-1), otherwise the message is of the form (\tau(v), \deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. 
@@ -148,13 +142,14 @@ void graph_message::update_messages(const marked_graph& G)
     }
   }
 
-  // setting message_mark
+  // setting message_mark and is_star_message
   message_mark.resize(message_list[h-1].size());
   is_star_message.resize(message_list[h-1].size());
   for (int i=0;i<message_list[h-1].size();i++){
     message_mark[i] = message_list[h-1][i].back(); // the last element is the mark component
     is_star_message[i] = (message_list[h-1][i][0] == -1); // message is star type when the first element is -1
   }
+
 }
 
 
@@ -202,22 +197,21 @@ void colored_graph::init(const marked_graph& G)
   // updating the vertex type sequence, dictionary and list, i.e. variables ver_type, ver_type_dict and ver_type_list
   // we also update ver_type_int
 
-  // EDITED UP TO THIS POINT
-  // ==================================================
   // implement and update deg and type_vertex_list
   
   int m, mp; // pair of types
 
   deg.resize(nu_vertices);
   is_star_vertex.resize(nu_vertices);
+  ver_type.resize(nu_vertices);
   ver_type_int.resize(nu_vertices);
 
   for (int v=0;v<nu_vertices;v++){
-    is_star_vertex[v] = False; // it is false unless we figure out otherwise, see below
+    is_star_vertex[v] = false; // it is false unless we figure out otherwise, see below
     for (int i=0;i<adj_list[v].size(); i++){
       m = adj_list[v][i].second.first;
       mp = adj_list[v][i].second.second;
-      if (M.is_star_message[m] == False and M.is_star_message[mp] == False){
+      if (M.is_star_message[m] == false and M.is_star_message[mp] == false){
         // this edge is not star type
         if (deg[v].find(pair<int, int>(m, mp)) == deg[v].end()){
           // this does not exist, so create it, since this is the first edge, its value must be 1
@@ -229,12 +223,12 @@ void colored_graph::init(const marked_graph& G)
         }
       }else{
         // this is a star type vertex
-        is_star_vertex[v] = True;
+        is_star_vertex[v] = true;
       }
     }
 
     // check if it was star vertex
-    if (is_star_vertex[v] == True)
+    if (is_star_vertex[v] == true)
       star_vertices.push_back(v);
 
     // now, we form the type of this vertex
