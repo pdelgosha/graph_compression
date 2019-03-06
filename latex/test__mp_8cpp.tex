@@ -1,0 +1,104 @@
+\hypertarget{test__mp_8cpp}{}\section{test\+\_\+mp.\+cpp File Reference}
+\label{test__mp_8cpp}\index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}marked\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graph\+\_\+message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}random\+\_\+graph.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{test__mp_8cpp_af5223445b486d224879e0a71e1836ff0}{operator$<$$<$} (ostream \&o, const vector$<$ int $>$ \&v)
+\item 
+void \hyperlink{test__mp_8cpp_ade4fa14856f731f14986b8b0ae8e187d}{random\+\_\+graph\+\_\+test} ()
+\item 
+void \hyperlink{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}{mp\+\_\+test} ()
+\item 
+int \hyperlink{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!main@{main}}
+\index{main@{main}!test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+56           \{
+57   \hyperlink{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}{mp\_test}();
+58   \textcolor{comment}{//random\_graph\_test ();}
+59   \textcolor{keywordflow}{return} 0;
+60 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}\label{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}} 
+\index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!mp\+\_\+test@{mp\+\_\+test}}
+\index{mp\+\_\+test@{mp\+\_\+test}!test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}}
+\subsubsection{\texorpdfstring{mp\+\_\+test()}{mp\_test()}}
+{\footnotesize\ttfamily void mp\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+26               \{
+27   \hyperlink{classmarked__graph}{marked\_graph} G;
+28   \textcolor{comment}{//ifstream inp("test\_graphs/hexagon\_diagonal\_marked.txt");}
+29   \textcolor{comment}{//inp >> G;}
+30   \textcolor{comment}{//G = marked\_ER(10000,0.0003,2 ,2);}
+31   G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(100000,16, 2, 2);
+32   cerr << \textcolor{stringliteral}{" graph generated "} << endl;
+33   \textcolor{comment}{//cerr << " graph generated " << endl;}
+34   \textcolor{comment}{//cout << " G " << endl << G << endl;}
+35   \hyperlink{classcolored__graph}{colored\_graph} C(G, 2, 2);
+36 
+37   \textcolor{comment}{/*}
+38 \textcolor{comment}{  int n = C.nu\_vertices;}
+39 \textcolor{comment}{  for (int v=0; v<n; v++)\{}
+40 \textcolor{comment}{    cout << v << " : ";}
+41 \textcolor{comment}{    for (int i=0;i<C.adj\_list[v].size();i++)\{}
+42 \textcolor{comment}{      cout << C.adj\_list[v][i].first << " ( " << C.adj\_list[v][i].second.first << " , " <<
+       C.adj\_list[v][i].second.second << " ) ";}
+43 \textcolor{comment}{    \}}
+44 \textcolor{comment}{    cout << endl;}
+45 \textcolor{comment}{  \}}
+46 \textcolor{comment}{}
+47 \textcolor{comment}{  cout << " message marks " << endl;}
+48 \textcolor{comment}{  for (int m=0; m<C.M.message\_mark.size(); m++)\{}
+49 \textcolor{comment}{    cout << m << " mark = " << C.M.message\_mark[m] << " star " << C.M.is\_star\_message[m] << endl;}
+50 \textcolor{comment}{  \}}
+51 \textcolor{comment}{  */}
+52   
+53 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test__mp_8cpp_af5223445b486d224879e0a71e1836ff0}\label{test__mp_8cpp_af5223445b486d224879e0a71e1836ff0}} 
+\index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const vector$<$ int $>$ \&}]{v }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+11                                                        \{
+12   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<v.size();i++)\{
+13     o << v[i];
+14     \textcolor{keywordflow}{if} (i < v.size()-1)
+15       o << \textcolor{stringliteral}{", "};
+16   \}
+17   \textcolor{keywordflow}{return} o;
+18 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test__mp_8cpp_ade4fa14856f731f14986b8b0ae8e187d}\label{test__mp_8cpp_ade4fa14856f731f14986b8b0ae8e187d}} 
+\index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!random\+\_\+graph\+\_\+test@{random\+\_\+graph\+\_\+test}}
+\index{random\+\_\+graph\+\_\+test@{random\+\_\+graph\+\_\+test}!test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}}
+\subsubsection{\texorpdfstring{random\+\_\+graph\+\_\+test()}{random\_graph\_test()}}
+{\footnotesize\ttfamily void random\+\_\+graph\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+21                         \{
+22   \hyperlink{classmarked__graph}{marked\_graph} G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(10, 2, 2, 2);
+23   cout << G;
+24 \}
+\end{DoxyCode}

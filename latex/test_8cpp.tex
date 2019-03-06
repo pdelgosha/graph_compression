@@ -140,16 +140,16 @@ int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 75   \hyperlink{classmarked__graph}{marked\_graph} G;
 76   \textcolor{comment}{//ifstream inp("test\_graphs/ten\_node.txt"); //("test\_graphs/hexagon\_diagonal\_marked.txt");}
 77   \textcolor{comment}{//inp >> G;}
-78   \textcolor{keywordtype}{int} h, delta;
-79   cout << \textcolor{stringliteral}{" h "} << endl;
-80   cin >> h;
-81   cout << \textcolor{stringliteral}{" delta "} << endl;
-82   cin >> delta; 
-83   G = \hyperlink{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\_ER}(300,0.01,2 ,2);
+78   \textcolor{comment}{//int h, delta;}
+79   \textcolor{comment}{//cout << " h " << endl;}
+80   \textcolor{comment}{//cin >> h;}
+81   \textcolor{comment}{//cout << " delta " << endl;}
+82   \textcolor{comment}{//cin >> delta; }
+83   G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(100000,10, 10, 10);\textcolor{comment}{//marked\_ER(300,0.01,2 ,2);}
 84   cout << \textcolor{stringliteral}{" graph constructed "} << endl;
-85   \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h,delta);
+85   \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(5,20);
 86   \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
-87 
+87   cerr << \textcolor{stringliteral}{" graph encoded "} << endl;
 88   \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D; 
 89   \hyperlink{classmarked__graph}{marked\_graph} Ghat = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
 90 

@@ -31,7 +31,16 @@ public:
 
   //! default constructor
  b_graph(): n(0), np(0) {}
-  
+
+  //! a fast constructor getting adjacency list and both left and right degree sequences
+  /*!
+    This constructor takes the adjacency list of left vertices assuming it is sorted, together with left and right degree sequences.
+    \param list list[v] is an increasingly sorted list of right nodes adjacent to the left node v
+    \param left_deg left_deg[v] is the degree of the left node v
+    \param right_deg right_deg[w] is the degree of the right node w
+   */
+  b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> right_deg);
+
   //! a constructor
   /*!
     This constructor takes the list of adjacent vertices and the right degree sequence, and constructs an object.

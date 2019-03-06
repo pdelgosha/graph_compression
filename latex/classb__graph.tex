@@ -14,6 +14,8 @@ simple unmarked bipartite graph
 \item 
 \hyperlink{classb__graph_a83ebab7ff22a3cf19c0cf62de3f8b306}{b\+\_\+graph} ()
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+\hyperlink{classb__graph_a147326d0a78853a1f33ca4bed03393cc}{b\+\_\+graph} (const vector$<$ vector$<$ int $>$ $>$ \&list, const vector$<$ int $>$ \&left\+\_\+deg, const vector$<$ int $>$ right\+\_\+deg)
+\begin{DoxyCompactList}\small\item\em a fast constructor getting adjacency list and both left and right degree sequences \end{DoxyCompactList}\item 
 \hyperlink{classb__graph_a6032fbf9681d275260dd9a8587447e61}{b\+\_\+graph} (vector$<$ vector$<$ int $>$ $>$ list, vector$<$ int $>$ right\+\_\+deg)
 \begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
 \hyperlink{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}{b\+\_\+graph} (vector$<$ vector$<$ int $>$ $>$ list)
@@ -77,7 +79,7 @@ b_graph G(list, right_deg);\end{DoxyVerb}
 \mbox{\Hypertarget{classb__graph_a83ebab7ff22a3cf19c0cf62de3f8b306}\label{classb__graph_a83ebab7ff22a3cf19c0cf62de3f8b306}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
-\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -88,10 +90,39 @@ default constructor
 \begin{DoxyCode}
 33 : \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}(0), \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}(0) \{\}
 \end{DoxyCode}
+\mbox{\Hypertarget{classb__graph_a147326d0a78853a1f33ca4bed03393cc}\label{classb__graph_a147326d0a78853a1f33ca4bed03393cc}} 
+\index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
+\index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
+\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list,  }\item[{const vector$<$ int $>$ \&}]{left\+\_\+deg,  }\item[{const vector$<$ int $>$}]{right\+\_\+deg }\end{DoxyParamCaption})}
+
+
+
+a fast constructor getting adjacency list and both left and right degree sequences 
+
+This constructor takes the adjacency list of left vertices assuming it is sorted, together with left and right degree sequences. 
+\begin{DoxyParams}{Parameters}
+{\em list} & list\mbox{[}v\mbox{]} is an increasingly sorted list of right nodes adjacent to the left node v \\
+\hline
+{\em left\+\_\+deg} & left\+\_\+deg\mbox{[}v\mbox{]} is the degree of the left node v \\
+\hline
+{\em right\+\_\+deg} & right\+\_\+deg\mbox{[}w\mbox{]} is the degree of the right node w \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+4 \{
+5   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = left\_deg.size();
+6   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = right\_deg.size();
+7   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
+8   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq} = left\_deg;
+9   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
+10 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a6032fbf9681d275260dd9a8587447e61}\label{classb__graph_a6032fbf9681d275260dd9a8587447e61}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
-\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list,  }\item[{vector$<$ int $>$}]{right\+\_\+deg }\end{DoxyParamCaption})}
 
 
@@ -107,23 +138,23 @@ This constructor takes the list of adjacent vertices and the right degree sequen
 \end{DoxyParams}
 
 \begin{DoxyCode}
-4 \{
-5   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = list.size();
-6   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = right\_deg.size(); \textcolor{comment}{// the number of right nodes}
-7   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
-8   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
-9   \textcolor{comment}{// sorting the list}
-10   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}; v++)\{
-11     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
-12     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size();
-13   \}
-14   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
-15 \}
+13 \{
+14   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = list.size();
+15   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = right\_deg.size(); \textcolor{comment}{// the number of right nodes}
+16   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
+17   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
+18   \textcolor{comment}{// sorting the list}
+19   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}; v++)\{
+20     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+21     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size();
+22   \}
+23   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
+24 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}\label{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
-\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list }\end{DoxyParamCaption})}
 
 
@@ -137,29 +168,29 @@ This constructor takes the list of adjacent vertices
 \end{DoxyParams}
 
 \begin{DoxyCode}
-18 \{
-19   \textcolor{comment}{// goal: finding right degrees and calling the above constructor}
-20   \textcolor{comment}{// first, we find the number of right nodes}
-21   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = 0; \textcolor{comment}{// the number of right nodes}
-22   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = list.size();
-23   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
-24   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
-25   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}.size();v++)\{
-26     \textcolor{comment}{//cerr << " v " << v << endl;}
-27     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
-28     \textcolor{keywordflow}{if} (\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size() > 0 and \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1] > 
+27 \{
+28   \textcolor{comment}{// goal: finding right degrees and calling the above constructor}
+29   \textcolor{comment}{// first, we find the number of right nodes}
+30   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = 0; \textcolor{comment}{// the number of right nodes}
+31   \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = list.size();
+32   \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list} = list;
+33   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
+34   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}.size();v++)\{
+35     \textcolor{comment}{//cerr << " v " << v << endl;}
+36     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+37     \textcolor{keywordflow}{if} (\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size() > 0 and \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1] > 
       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np})
-29       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1];
-30     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = adj\_list[v].size();
-31   \}
-32   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}++; \textcolor{comment}{// node indexing is zero based}
-33   
-34   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.resize(\hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np});
-35   fill(\hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.begin(), \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.end(), 0); \textcolor{comment}{// make all elements 0}
-36   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<list.size();v++)
-37     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list[v].size();i++)
-38       \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[list[v][i]]++;
-39 \}
+38       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1];
+39     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = adj\_list[v].size();
+40   \}
+41   \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}++; \textcolor{comment}{// node indexing is zero based}
+42   
+43   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.resize(\hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np});
+44   fill(\hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.begin(), \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}.end(), 0); \textcolor{comment}{// make all elements 0}
+45   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<list.size();v++)
+46     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list[v].size();i++)
+47       \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[list[v][i]]++;
+48 \}
 \end{DoxyCode}
 
 
@@ -176,11 +207,11 @@ returns the adjacency list of a given left vertex
 
 
 \begin{DoxyCode}
-42 \{
-43   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-44     cerr << \textcolor{stringliteral}{"b\_graph::get\_adj\_list, index v out of range"} << endl;
-45   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v];
-46 \}
+51 \{
+52   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+53     cerr << \textcolor{stringliteral}{"b\_graph::get\_adj\_list, index v out of range"} << endl;
+54   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v];
+55 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}\label{classb__graph_ac64ac5cb1197d8008e07babc333eb3ea}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree@{get\+\_\+left\+\_\+degree}}
@@ -194,11 +225,11 @@ returns the degree of a right vertex v
 
 
 \begin{DoxyCode}
-57 \{
-58   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-59     cerr << \textcolor{stringliteral}{"b\_graph::get\_left\_degree, index v out of range"} << endl;
-60   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v];
-61 \}
+66 \{
+67   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+68     cerr << \textcolor{stringliteral}{"b\_graph::get\_left\_degree, index v out of range"} << endl;
+69   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v];
+70 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_afd65fb655f7e24217393a10533b87d3c}\label{classb__graph_afd65fb655f7e24217393a10533b87d3c}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+left\+\_\+degree\+\_\+sequence@{get\+\_\+left\+\_\+degree\+\_\+sequence}}
@@ -212,9 +243,9 @@ return the left degree sequence
 
 
 \begin{DoxyCode}
-69 \{
-70   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq};
-71 \}
+78 \{
+79   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq};
+80 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}\label{classb__graph_a1caf2e1ca8ee19e7407f489be6b171b8}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree@{get\+\_\+right\+\_\+degree}}
@@ -228,11 +259,11 @@ returns the degree of a right vertex v
 
 
 \begin{DoxyCode}
-50 \{
-51   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
-52     cerr << \textcolor{stringliteral}{"b\_graph::get\_right\_degree, index v out of range"} << endl;
-53   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[v];
-54 \}
+59 \{
+60   \textcolor{keywordflow}{if} (v < 0 or v >= \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n})
+61     cerr << \textcolor{stringliteral}{"b\_graph::get\_right\_degree, index v out of range"} << endl;
+62   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq}[v];
+63 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a2711566385b92b02f4c03abdc1f9a582}\label{classb__graph_a2711566385b92b02f4c03abdc1f9a582}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!get\+\_\+right\+\_\+degree\+\_\+sequence@{get\+\_\+right\+\_\+degree\+\_\+sequence}}
@@ -246,9 +277,9 @@ return the right degree sequence
 
 
 \begin{DoxyCode}
-64 \{
-65   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq};
-66 \}
+73 \{
+74   \textcolor{keywordflow}{return} \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq};
+75 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}\label{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!nu\+\_\+left\+\_\+vertices@{nu\+\_\+left\+\_\+vertices}}
@@ -262,9 +293,9 @@ returns the number of left vertices
 
 
 \begin{DoxyCode}
-75 \{
-76   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};
-77 \}
+84 \{
+85   \textcolor{keywordflow}{return} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};
+86 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}\label{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!nu\+\_\+right\+\_\+vertices@{nu\+\_\+right\+\_\+vertices}}
@@ -278,9 +309,9 @@ returns the number of right vertices
 
 
 \begin{DoxyCode}
-80 \{
-81   \textcolor{keywordflow}{return} \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np};
-82 \}
+89 \{
+90   \textcolor{keywordflow}{return} \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np};
+91 \}
 \end{DoxyCode}
 
 
@@ -297,9 +328,9 @@ comparing for inequality
 
 
 \begin{DoxyCode}
-122 \{
-123   \textcolor{keywordflow}{return} !(G1 == G2);
-124 \}
+131 \{
+132   \textcolor{keywordflow}{return} !(G1 == G2);
+133 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}\label{classb__graph_a0635d59bf5b2d1df3d3dd2beef14ac6e}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!operator$<$$<$@{operator$<$$<$}}
@@ -313,21 +344,21 @@ printing the graph to the output
 
 
 \begin{DoxyCode}
-86 \{
-87   \textcolor{keywordtype}{int} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-88   vector<int> list;
-89   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};i++)\{
-90     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
-91     o << i << \textcolor{stringliteral}{" -> "};
-92     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
-93       o << list[j];
-94       \textcolor{keywordflow}{if} (j < list.size()-1)
-95         o << \textcolor{stringliteral}{", "};
-96     \}
-97     o << endl;
-98   \}
-99   \textcolor{keywordflow}{return} o;
-100 \}
+95 \{
+96   \textcolor{keywordtype}{int} \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n} = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+97   vector<int> list;
+98   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n};i++)\{
+99     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+100     o << i << \textcolor{stringliteral}{" -> "};
+101     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+102       o << list[j];
+103       \textcolor{keywordflow}{if} (j < list.size()-1)
+104         o << \textcolor{stringliteral}{", "};
+105     \}
+106     o << endl;
+107   \}
+108   \textcolor{keywordflow}{return} o;
+109 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph_adf87735e8372a81049b347b1fdd23484}\label{classb__graph_adf87735e8372a81049b347b1fdd23484}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!operator==@{operator==}}
@@ -341,23 +372,23 @@ comparing two graphs for equality
 
 
 \begin{DoxyCode}
-103 \{
-104   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-105   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-106   
-107   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-108   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-109   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
-110     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-111   vector<int> list1, list2;
-112   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
-113     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-114     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-115     \textcolor{keywordflow}{if} (list1 != list2)
-116       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-117   \}
-118   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-119 \}
+112 \{
+113   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+114   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+115   
+116   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+117   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+118   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
+119     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+120   vector<int> list1, list2;
+121   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+122     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+123     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+124     \textcolor{keywordflow}{if} (list1 != list2)
+125       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+126   \}
+127   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+128 \}
 \end{DoxyCode}
 
 

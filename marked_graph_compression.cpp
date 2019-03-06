@@ -3,7 +3,7 @@
 void marked_graph_compressed::clear()
 {
   star_edges.clear();
-  message_list.clear();
+  type_mark.clear();
   ver_type_list.clear();
   part_bgraph.clear();
   part_graph.clear();
@@ -24,9 +24,9 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   extract_edge_types(G);
   cout << " edge types extracted " << endl;
 
-  compressed.L = L;
+
   compressed.ver_type_list = C.ver_type_list; // 
-  compressed.message_list = vector<vector<int> >(C.M.message_list.begin(), C.M.message_list.begin() + L); // taking the first L elements corresponding to non star type edges in the message list of M 
+  compressed.type_mark = C.M.message_mark;
 
   /*
   cout << " message list " << endl;
@@ -88,14 +88,20 @@ void marked_graph_encoder::extract_edge_types(const marked_graph& G)
   C = colored_graph(G, h, delta);
   is_star_vertex = C.is_star_vertex;
   star_vertices = C.star_vertices;
-  L = C.L; // the number of colors, excluding star edges 
 }
 
 void marked_graph_encoder::encode_star_vertices()
 {
   // compress the is_star_vertex list
   time_series_encoder star_encoder(n);
-  compressed.star_vertices = star_encoder.encode(is_star_vertex);
+  vector<int> is_star_vertex_int(is_star_vertex.size());
+  for (int i=0;i<is_star_vertex.size();i++){
+    if(is_star_vertex[i] == true)
+      is_star_vertex_int[i] = 1;
+    else
+      is_star_vertex_int[i] = 0;
+  }
+  compressed.star_vertices = star_encoder.encode(is_star_vertex_int);
 }
 
 void marked_graph_encoder::encode_star_edges()
@@ -106,20 +112,42 @@ void marked_graph_encoder::encode_star_edges()
   for (int k=0; k<star_vertices.size(); k++){ // iterating over star vertices
     v = star_vertices[k];
     for (int i=0;i<C.adj_list[v].size();i++){
-      if (C.adj_list[v][i].second.first >= L or C.adj_list[v][i].second.second >= L){ // this is a star edge
-        x = C.M.message_list[C.adj_list[v][i].second.first][1]; // mark towards v
-        xp = C.M.message_list[C.adj_list[v][i].second.second][1]; // mark towards other endpoint
+      if (C.M.is_star_message[C.adj_list[v][i].second.first] or C.M.is_star_message[C.adj_list[v][i].second.second]){ // this is a star edge
+        x = C.M.message_mark[C.adj_list[v][i].second.first]; // mark towards v
+        xp = C.M.message_mark[C.adj_list[v][i].second.second]; // mark towards other endpoint
         w = C.adj_list[v][i].first; // the other endpoint of the edge
         if (x < xp){ // if x > xp, we only store this edge when visiting the other endpoint (w), since we do not want to express an edge twice
           if (compressed.star_edges.find(pair<int, int>(x,xp)) == compressed.star_edges.end()) // this pair does not exist
             compressed.star_edges[pair<int, int>(x,xp)].resize(star_vertices.size()); // open space for all star vertices 
-          compressed.star_edges[pair<int, int>(x,xp)][k].push_back(w); // add w to the position of v (which is k)
+          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(w); // add w to the position of v (which is k)
         }
         if (x == xp and w > v){ // if w < v, we store this edge when visiting the other endpoint (w) to avoid storing and edge twice
           if (compressed.star_edges.find(pair<int, int>(x,xp)) == compressed.star_edges.end()) // not yet exist
             compressed.star_edges[pair<int, int>(x,xp)].resize(star_vertices.size()); // open space
-          compressed.star_edges[pair<int, int>(x,xp)][k].push_back(w);
+          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(w);
         }
+      }
+    }
+  }
+}
+
+void marked_graph_encoder::find_part_index_deg()
+{
+  // extracting part_index and part_deg
+  part_index.resize(n);
+  for (int v =0; v<n; v++){
+    for (map< pair< int, int >, int >::iterator it = C.deg[v].begin(); it != C.deg[v].end(); it++){
+      if (part_deg.find(it->first) == part_deg.end()){
+        // this pair has not been observed yet in the graph
+        // so v is the first index node
+        part_index[v][it->first] = 0;
+        // the degree of v in the partition graph is indeed it->second
+        part_deg[it->first] = vector<int>({it->second}); 
+      }else{
+        // there are currently part_deg[it->first].size() many elements there, and v is the last arrival one, so its index is equal to the number of existing nodes 
+        part_index[v][it->first] = part_deg.at(it->first).size();
+        // append degree of v, which is it->second
+        part_deg.at(it->first).push_back(it->second); 
       }
     }
   }
@@ -127,78 +155,62 @@ void marked_graph_encoder::encode_star_edges()
 
 void marked_graph_encoder::extract_partition_graphs()
 {
-  map< pair<int, int> , vector<vector<int> > > part_adj_list; // for \f$0 \leq t \leq t' < L\f$, part_adj_list[pair<int, int>(t,t')] is an adjacency list. If \f$t < t'\f$, this is the adjacency list of the partition bipartite graph corresponding to the edges with color \f$(t,t')\f$. If \f$t = t'\f$, this corresponds to the partition simple graph corresponding to edges with color \f$(t,t')\f$.
+  find_part_index_deg();
 
-  int t, tp;
-  int w;
-  for (int v=0; v<n; v++){
+  // for t \leq t', part_adj_list[(t,t')] is the adjacency list of the partition graph t,t'. If t < t', this is the adjacency list of the left nodes, if t = t', this is the forward adjacency list of the partition graph.
+
+  map<pair<int, int>, vector<vector<int> > > part_adj_list;
+  int t, tp; // types 
+  for (map<pair<int, int>, vector<int> >::iterator it = part_deg.begin(); it!= part_deg.end(); it++){
+    // search over all type pairs in part_deg
+    t = it->first.first;
+    tp = it->first.second;
+    // t < t': bipartite, t = t': simple. In both cases, 
+    if (t <= tp)
+      part_adj_list[it->first] = vector<vector<int> >(it->second.size());
+  }
+
+  // going over the edges in the graph and forming partition_adj_list
+  int w, p, q; // auxiliary variables 
+  for (int v =0; v<n; v++){
     for (int i=0;i<C.adj_list[v].size();i++){
-      w = C.adj_list[v][i].first; // other endpoint
-      t = C.adj_list[v][i].second.first; // half edge type towards v
-      tp = C.adj_list[v][i].second.second; // half edge type towards the other endpoint
-      if (t < L and tp < L){ // this is a normal edge, i.e. not a star edge
-        if (t < tp){ // this edge has a color in \f$C_<\f$
-          if (part_adj_list.find(pair<int, int>(t,tp)) == part_adj_list.end()){
-            // the observed color does not yet exist, we need to first create it
-            part_adj_list[pair<int, int>(t,tp)].resize(n);
-          }
-          part_adj_list[pair<int, int>(t,tp)][v].push_back(w); // add w as a neighbor
-        }
-        if (t == tp){ // this edge has a color in \f$C_=\f$
-          if (v < w){ // if v > w, v is already recorded as a neighbor of w, since we need to keep track of the forwards adjacency list
-            if (part_adj_list.find(pair<int, int>(t,tp)) == part_adj_list.end()){
-              // first, create the forward adjacency list
-              part_adj_list[pair<int, int>(t,tp)].resize(n);
-            }
-            part_adj_list[pair<int, int>(t, tp)][v].push_back(w);
-          }
-        }
+      w = C.adj_list[v][i].first; // the other endpoint
+      t = C.adj_list[v][i].second.first; // color towards v
+      tp = C.adj_list[v][i].second.second; // color towards w
+      if (C.M.is_star_message[t] == false and C.M.is_star_message[tp] == false){
+        p = part_index[v].at(pair<int, int>(t,tp)); // the index of v in the t part of the t,tp partition graph
+        //cerr << " p " << p << endl;
+        q = part_index[w].at(pair<int, int>(tp, t)); // the index of w in the tp part of the t,tp partition graph
+        //cerr << " q " << q << endl;
+        if (t < tp)
+          part_adj_list.at(pair<int, int>(t,tp))[p].push_back(q);
+        if ((t == tp) and (q > p))
+          part_adj_list.at(pair<int, int>(t,t))[p].push_back(q);
       }
     }
   }
 
-  //cerr << " extracted adjacency lists " << endl;
-
-  // going over part_adj_list and construct partition graphs and bipartite graphs
-  pair<int, int> c; // the color
-  vector<vector<int> > list; // the adjacency list / forward adjacency list
-  b_graph test;
-  //cerr << " part_adj_list.size() " << part_adj_list.size() << endl;
-  for (map<pair<int, int>, vector<vector<int> > >::iterator it = part_adj_list.begin(); it!=part_adj_list.end(); it++){
-    c = it->first;
-    list = it->second;
-    if (c.first < c.second) // this is a color in \f$C_<\f$
-      part_bgraph[c] = b_graph(list);
-
-    if (c.first == c.second) // this is a color in \f$C_=\f$
-      part_graph[c.first] = graph(list);
-
+  // using partition_adj_list in order to construct partition graphs
+  for (map<pair<int, int>, vector<vector<int> > >::iterator it=part_adj_list.begin(); it!=part_adj_list.end();it++){
+    t = it->first.first;
+    tp = it->first.second;
+    if (t<tp)
+      part_bgraph[it->first] = b_graph(it->second, part_deg.at(pair<int, int>(t,tp)), part_deg.at(pair<int, int>(tp, t))); // left and right degree sequences are read from the part_deg map
+    if (t == tp)
+      part_graph[t] = graph(it->second, part_deg.at(pair<int, int>(t,t)));
   }
 }
 
-
 void marked_graph_encoder::encode_partition_bgraphs()
 {
-  vector<int> a, b; // degree sequences to initialize graph encoders 
-  a.resize(n);
-  b.resize(n);
   int t, tp;
 
   // compressing bipartite graphs 
   for (map<pair<int, int> , b_graph>::iterator it = part_bgraph.begin(); it!=part_bgraph.end(); it++){
     // the color components are t, tp
-    t = it->first.first; // type towards me (left vertices)
-    tp = it->first.second; // type towards other endpoints (right vertices)
-    // finding a and b
-    //for (int v=0;v<n;v++){
-    //  a[v] = C.ver_type[v][1+ t*L + tp]; // C.ver_type[v] was a vector of size 1 + L x L, where the fist entry is the vertex mark, and the rest is the degree matrix, so we can read degree sequences of the bipartite graph from this array
-    //  b[v] = C.ver_type[v][1+ tp*L + t];
-    // }
-    a = it->second.get_left_degree_sequence();
-    b = it->second.get_right_degree_sequence();
-
-    b_graph_encoder E(a,b);
-
+    t = it->first.first; 
+    tp = it->first.second; 
+    b_graph_encoder E(part_deg.at(pair<int, int>(t,tp)),part_deg.at(pair<int, int>(tp, t)));
     compressed.part_bgraph[pair<int, int>(t,tp)] = E.encode(it->second);
   }
 
@@ -206,19 +218,14 @@ void marked_graph_encoder::encode_partition_bgraphs()
 
 void marked_graph_encoder::encode_partition_graphs()
 {
-  vector<int> a; // degree sequence to initialize graph encoders 
-  a.resize(n);
   int t;
 
   // compressing graphs
   for (map<int, graph>::iterator it=part_graph.begin(); it!=part_graph.end(); it++){
     t = it->first; // the color is t,t
-    a = it->second.get_degree_sequence();
-
-    graph_encoder E(a);
-
+    graph_encoder E(part_deg.at(pair<int, int>(t,t)));
     compressed.part_graph[t] = E.encode(it->second);
-  }  
+  }
 }
 
 
@@ -241,7 +248,8 @@ marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compres
   n = compressed.n;
   h = compressed.h;
   delta = compressed.delta;
-  L = compressed.L;
+  // TO TAKE CARE OF: 
+  //L = compressed.L;
 
   edges.clear(); // clear the edge list of the marked graph to be decoded
   vertex_marks.clear(); // clear the list of vertex marks of the marked graph to be decoded
@@ -305,16 +313,47 @@ void marked_graph_decoder::decode_vertex_types(const marked_graph_compressed& co
   // converting the integer value vertex types to actual vectors using the `ver_type_list` attribute of compressed
 
   vertex_marks.resize(n); // preparing for decoding vertex marks
-  ver_type.resize(n);
+  Deg.clear(); // refresh
+  Deg.resize(n);
+
+  vector<int> x; // auxiliary vector
 
   for (int v=0;v<n;v++){
     if (ver_type_int[v] >= compressed.ver_type_list.size())
       cerr << " Warning: marked_graph_decoder::decode_vertex_types ver_type_int[" << v << "] is out of range" << endl;
-    ver_type[v] = compressed.ver_type_list[ver_type_int[v]];
-    vertex_marks[v] = ver_type[v][0]; // the mark of vertex v is the first element in the type list of this vertex 
+    x = compressed.ver_type_list[ver_type_int[v]];
+    vertex_marks[v] =x[0]; // the mark of vertex v is the first element in the type list of this vertex
+    // now, we extract Deg[v] by looking at batches of size 3 in x
+    for (int i=1;i<x.size();i+=3){
+      if (i+2 >= x.size())
+        cerr << " Error: marked_graph_decoder::decode_vertex_types, the type of vertex " << v << " does not obey length constrains, i.e. it does not have length 1 + 3k " << endl;
+          Deg[v][pair<int, int>(x[i],x[i+1])] = x[i+2]; // x[i] and x[i+1] are types, and x[i+2] is the count
+    }
   }
 }
 
+void marked_graph_decoder::find_part_deg_orig_index()
+{
+  part_deg.clear();
+  origin_index.clear();
+  int t, tp; // types
+
+  for (int v=0;v<n;v++){
+    for (map<pair<int, int>, int>::iterator it=Deg[v].begin(); it!=Deg[v].end(); it++){
+      t = it->first.first;
+      tp = it->first.second;
+      if (part_deg.find(it->first) == part_deg.end()){
+        // this is our first encounter with this type pair
+        origin_index[it->first] = vector<int>({v}); // v is the first node in the t side of the (t,t') partition graph
+        part_deg[it->first] = vector<int>({it->second}); // the degree in the partition graph is read from it->second
+      }else{
+        origin_index.at(it->first).push_back(v); // v is the next vertex observed with type t,t', so the vertex in the partition graph with index origin_index[it->first] has original index v 
+        // append degree of v, which is it->second
+        part_deg.at(it->first).push_back(it->second);
+      }
+    }
+  }
+}
 
 void marked_graph_decoder::decode_partition_graphs(const marked_graph_compressed& compressed)
 {
@@ -323,68 +362,68 @@ void marked_graph_decoder::decode_partition_graphs(const marked_graph_compressed
   int x; // the mark component associated to t
   pair< mpz_class, vector< int > > G_compressed; // the compressed form of the partition graph
   graph G; // the decoded partition graph
-  vector<int> a; // the degree sequence of the partition graph to be decoded
-  a.resize(n);
   vector<int> flist; // the forward adjacency list of a vertex in a partition graph
+  int w; // vertex in partition graph
+  int v_orig, w_orig; // the original index of vertices v and w
+  int n_G; // the number of vertices of the partitioned graph 
 
   for(map< int, pair< mpz_class, vector< int > > >::const_iterator it=compressed.part_graph.begin(); it!=compressed.part_graph.end(); it++){
     t = it->first;
-    t_message = compressed.message_list[t];
-    if (t_message.size() == 0)
-      cerr << " Warning: marked_graph_decoder::decode_partition_graphs t_message corresponding to t = " << t << " has size 0" << endl;
-    x = t_message[t_message.size()-1]; // the mark component of a message is always the last entry in the list 
+    x = compressed.type_mark[t]; // the mark component of t 
+
     G_compressed = it->second;
-    // trying to reconstruct the partition graph, but before that, we need to figure out its degree sequence based on the `ver_type` sequence and reading the corresponding entry of the degree matrix of each vertex
-    for (int v=0;v<n;v++){
-      a[v] = ver_type[v][1+ L*t + t]; // the degree is the (t,t) coordinate of the degree matrix. Since the first element of `ver_type[v]` is the vertex mark and we list the degree matrix row by row, this is precisely the index 1 + L*t + t in the list.
-    }
-    graph_decoder D(a);
+    // the degree sequence of the graph can be obtained from part_deg.at(pair<int,int>(t,t))
+    graph_decoder D(part_deg.at(pair<int, int>(t,t)));
+    n_G = part_deg.at(pair<int, int>(t,t)).size(); // the number of vertices in the partition graph is read from the size of its degree sequence
     G = D.decode(G_compressed.first, G_compressed.second);
     // for each edge in G, we should add an edge with mark pair (x,x) to the edge list of the marked graph
-    for (int v=0;v<n;v++){
+    for (int v=0;v<n_G;v++){
       flist = G.get_forward_list(v);
-      for (int i=0;i<flist.size();i++)
-        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,flist[i]), pair<int, int> (x,x)));
+      v_orig = origin_index.at(pair<int, int>(t,t))[v]; // the index of v in the original graph 
+      for (int i=0;i<flist.size();i++){
+        w = flist[i]; // the other endpoint in the partition graph
+        w_orig = origin_index.at(pair<int, int>(t,t))[w]; // the index of w in the original graph
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v_orig,w_orig), pair<int, int> (x,x)));
+      }
     }
   }
 }
+
 
 
 void marked_graph_decoder::decode_partition_bgraphs(const marked_graph_compressed& compressed)
 {
   pair<int, int> c; // the pair of types
   int t, tp; // types
-  vector<int> t_message, tp_message; // associated messages to types
   int x, xp; // mark components of t and tp
 
-  b_graph G;
-  vector<int> a, b; // the left and right degree sequences
-  a.resize(n);
-  b.resize(n);
+  b_graph G; // the decoded partition bipartite graph
+  int nl_G; // the number of left nodes in the partition graph G 
   vector<int> adj_list; // adj list of a vertex in a partition bipartite graph
-
+  int w; // a right node
+  int v_orig, w_orig; // the original index of vertices v and w in partition graphs 
   for (map<pair<int, int>, mpz_class>::const_iterator it = compressed.part_bgraph.begin(); it!=compressed.part_bgraph.end(); it++){
     c = it->first;
     t = c.first;
     tp = c.second;
-    t_message = compressed.message_list[t];
-    tp_message = compressed.message_list[tp];
-    if (t_message.size() == 0)
-      cerr << " Warning: marked_graph_decoder::decode_partition_bgraphs t_message corresponding to t = " << t << " has size 0" << endl;
-    if (tp_message.size() == 0)
-      cerr << " Warning: marked_graph_decoder::decode_partition_bgraphs tp_message corresponding to tp = " << tp << " has size 0" << endl;
-    x = t_message[t_message.size()-1];
-    xp = tp_message[tp_message.size()-1];
-    for (int v=0;v<n;v++){
-      a[v] = ver_type[v][1+t*L + tp]; // row t column tp of degree matrix, +1 since the first entry is the vertex mark 
-      b[v] = ver_type[v][1+tp*L + t]; // rot tp column t
-    }
-    b_graph_decoder D(a,b);
+    x = compressed.type_mark[t]; // the mark component of t
+    xp = compressed.type_mark[tp]; // the mark component of tp 
+
+
+    b_graph_decoder D(part_deg.at(pair<int, int>(t,tp)), part_deg.at(pair<int, int>(tp,t))); // the degree sequence of left nodes is precisely part_deg.at(pair<int, int>(t,tp)), while that of the right nodes is precisely part_deg.at(pair<int, int>(tp,t))
     G = D.decode(it->second);
-    for (int v=0;v<n;v++){
+    nl_G = part_deg.at(pair<int, int>(t,tp)).size(); // the number of left nodes in G is obtained from the size of the degree sequence of left nodes
+    
+    for (int v=0;v<nl_G;v++){
+      v_orig = origin_index.at(pair<int, int>(t,tp))[v];
       adj_list = G.get_adj_list(v);
-      for (int i=0;i<adj_list.size();i++)
-        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,adj_list[i]), pair<int, int>(x,xp)));
+      for (int i=0;i<adj_list.size();i++){
+        w = adj_list[i];
+        w_orig = origin_index.at(pair<int, int>(tp,t))[w]; // since w is a right node, we should read its original index through origin_index[(tp,t)]
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v_orig,w_orig), pair<int, int>(x,xp)));
+      }
     }
   }
 }
+
+

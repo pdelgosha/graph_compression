@@ -8,7 +8,7 @@ var searchData=
   ['decode_5fstar_5fedges',['decode_star_edges',['../classmarked__graph__decoder.html#a79fcfb8d5616c691114ebc0a7adb18b2',1,'marked_graph_decoder']]],
   ['decode_5fstar_5fvertices',['decode_star_vertices',['../classmarked__graph__decoder.html#a57fba34d119743414a38c7339b910d99',1,'marked_graph_decoder']]],
   ['decode_5fvertex_5ftypes',['decode_vertex_types',['../classmarked__graph__decoder.html#afc0aea714483a4dda31dd85fd20bfe5f',1,'marked_graph_decoder']]],
-  ['deg',['deg',['../classcolored__graph.html#ae3269d35c1b022bc70d195bebd4e1b8a',1,'colored_graph']]],
+  ['deg',['Deg',['../classmarked__graph__decoder.html#a5040ad86467693eab415f615408bfb9e',1,'marked_graph_decoder::Deg()'],['../classcolored__graph.html#ae3269d35c1b022bc70d195bebd4e1b8a',1,'colored_graph::deg()']]],
   ['degree_5fsequence',['degree_sequence',['../classgraph.html#a0b31295672bfe37669c9eb3640977fe6',1,'graph']]],
   ['delta',['delta',['../classmarked__graph__compressed.html#a8b2aaac68e9332ddc78d88eb60b323a7',1,'marked_graph_compressed::delta()'],['../classmarked__graph__encoder.html#a29dcf42526b12cf7964a556bb1025c9b',1,'marked_graph_encoder::delta()'],['../classmarked__graph__decoder.html#a779d91c4c405b82baf0a3374401be0a2',1,'marked_graph_decoder::delta()'],['../classgraph__message.html#a45dfd061b7bc73572e5132fbf66efd55',1,'graph_message::Delta()'],['../classcolored__graph.html#a5b0e93eb40a20dc815c809dee11edc12',1,'colored_graph::Delta()']]]
 ];

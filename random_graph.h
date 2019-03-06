@@ -5,6 +5,7 @@
 #include <random>
 #include <chrono>
 #include <vector>
+#include <set>
 using namespace std;
 
 //! generates a marked Erdos Renyi graph
@@ -17,5 +18,17 @@ using namespace std;
  */
 
 marked_graph marked_ER(int n, double p, int ver_mark, int edge_mark);
+
+//! generates a random graph where roughly speaking, the degree of a vertex is Poisson
+/*!
+  \param n: the number of vertices
+  \param deg_mean: mean of Poisson
+  \param ver_mark: the number of possible vertex marks
+  \param edge_mark: the number of possible edge marks
+  \return A random graph, where each vertex chooses its degree according to Poisson(deg_mean), then picks neighbors uniformly at random, and connects to them (if the neighbors have not already connected to them, if some of the neighbors I pick are already connected to me, I just don't do anything). Vertex and edge marks are picked independently and uniformly.
+ */
+
+marked_graph poisson_graph(int n, double deg_mean, int ver_mark, int edge_mark);
+
 
 #endif

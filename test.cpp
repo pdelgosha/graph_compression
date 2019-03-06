@@ -75,16 +75,16 @@ void marked_graph_encoder_test()
   marked_graph G;
   //ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
   //inp >> G;
-  int h, delta;
-  cout << " h " << endl;
-  cin >> h;
-  cout << " delta " << endl;
-  cin >> delta; 
-  G = marked_ER(300,0.01,2 ,2);
+  //int h, delta;
+  //cout << " h " << endl;
+  //cin >> h;
+  //cout << " delta " << endl;
+  //cin >> delta; 
+  G = poisson_graph(100000,10, 10, 10);//marked_ER(300,0.01,2 ,2);
   cout << " graph constructed " << endl;
-  marked_graph_encoder E(h,delta);
+  marked_graph_encoder E(5,20);
   marked_graph_compressed C = E.encode(G);
-
+  cerr << " graph encoded " << endl;
   marked_graph_decoder D; 
   marked_graph Ghat = D.decode(C);
 

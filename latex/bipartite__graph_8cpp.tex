@@ -21,9 +21,9 @@ bool \hyperlink{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}{operato
 
 
 \begin{DoxyCode}
-122 \{
-123   \textcolor{keywordflow}{return} !(G1 == G2);
-124 \}
+131 \{
+132   \textcolor{keywordflow}{return} !(G1 == G2);
+133 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bipartite__graph_8cpp_a0635d59bf5b2d1df3d3dd2beef14ac6e}\label{bipartite__graph_8cpp_a0635d59bf5b2d1df3d3dd2beef14ac6e}} 
 \index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}!operator$<$$<$@{operator$<$$<$}}
@@ -33,21 +33,21 @@ bool \hyperlink{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}{operato
 
 
 \begin{DoxyCode}
-86 \{
-87   \textcolor{keywordtype}{int} n = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-88   vector<int> list;
-89   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
-90     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
-91     o << i << \textcolor{stringliteral}{" -> "};
-92     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
-93       o << list[j];
-94       \textcolor{keywordflow}{if} (j < list.size()-1)
-95         o << \textcolor{stringliteral}{", "};
-96     \}
-97     o << endl;
-98   \}
-99   \textcolor{keywordflow}{return} o;
-100 \}
+95 \{
+96   \textcolor{keywordtype}{int} n = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+97   vector<int> list;
+98   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
+99     list = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+100     o << i << \textcolor{stringliteral}{" -> "};
+101     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list.size();j++)\{
+102       o << list[j];
+103       \textcolor{keywordflow}{if} (j < list.size()-1)
+104         o << \textcolor{stringliteral}{", "};
+105     \}
+106     o << endl;
+107   \}
+108   \textcolor{keywordflow}{return} o;
+109 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bipartite__graph_8cpp_adf87735e8372a81049b347b1fdd23484}\label{bipartite__graph_8cpp_adf87735e8372a81049b347b1fdd23484}} 
 \index{bipartite\+\_\+graph.\+cpp@{bipartite\+\_\+graph.\+cpp}!operator==@{operator==}}
@@ -57,21 +57,21 @@ bool \hyperlink{bipartite__graph_8cpp_ab90cd92a2e8f077e4ae18c568bcddd1a}{operato
 
 
 \begin{DoxyCode}
-103 \{
-104   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-105   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
-106   
-107   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-108   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
-109   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
-110     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-111   vector<int> list1, list2;
-112   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
-113     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-114     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
-115     \textcolor{keywordflow}{if} (list1 != list2)
-116       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-117   \}
-118   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-119 \}
+112 \{
+113   \textcolor{keywordtype}{int} n1 = G1.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+114   \textcolor{keywordtype}{int} n2 = G2.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}();
+115   
+116   \textcolor{keywordtype}{int} np1 = G1.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+117   \textcolor{keywordtype}{int} np2 = G2.\hyperlink{classb__graph_abecfd7d6fbd0d9a554fe0d9aa3241a04}{nu\_right\_vertices}();
+118   \textcolor{keywordflow}{if} (n1!= n2 or np1 != np2)
+119     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+120   vector<int> list1, list2;
+121   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<n1; v++)\{
+122     list1 = G1.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+123     list2 = G2.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(v);
+124     \textcolor{keywordflow}{if} (list1 != list2)
+125       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+126   \}
+127   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+128 \}
 \end{DoxyCode}

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['u',['U',['../classb__graph__encoder.html#ac810138443002a2b2cf579ced2dc34ce',1,'b_graph_encoder::U()'],['../classb__graph__decoder.html#ae15e74088bb60a096562a9bdaf380f2c',1,'b_graph_decoder::U()'],['../classgraph__encoder.html#a3314c40920f2ee132958a6b0ce7e7995',1,'graph_encoder::U()'],['../classgraph__decoder.html#a2fa9fec2cef06aaa410e57fb59d5c1ad',1,'graph_decoder::U()']]]
+  ['ts',['tS',['../classgraph__decoder.html#ac466636b9b21122f4fa0246aa624978c',1,'graph_decoder']]],
+  ['type_5fmark',['type_mark',['../classmarked__graph__compressed.html#a86b00223525703e973415cbc9c94da68',1,'marked_graph_compressed']]]
 ];

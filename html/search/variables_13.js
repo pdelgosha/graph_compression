@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x',['x',['../classb__graph__decoder.html#a6bba2e67984f9733fc60c40dd4956587',1,'b_graph_decoder::x()'],['../classgraph__decoder.html#aa3f2776afe387668cf7f68109428e14e',1,'graph_decoder::x()']]]
+  ['w',['W',['../classb__graph__decoder.html#a2c3f91db1f54ddfd411f74d18b01b606',1,'b_graph_decoder']]]
 ];

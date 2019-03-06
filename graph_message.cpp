@@ -216,7 +216,7 @@ void colored_graph::init(const marked_graph& G)
         if (deg[v].find(pair<int, int>(m, mp)) == deg[v].end()){
           // this does not exist, so create it, since this is the first edge, its value must be 1
           deg[v][pair<int, int>(m, mp)] = 1;
-          type_vertex_list[pair<int, int>(m, mp)].push_back(v); // this must be done when we see the type (m, mp) for the first time here, so as to avoid multiple placing of v in the list 
+          //type_vertex_list[pair<int, int>(m, mp)].push_back(v); // this must be done when we see the type (m, mp) for the first time here, so as to avoid multiple placing of v in the list 
         }else{
           // the edge exists, we only need to increase it by one
           deg[v][pair<int, int>(m, mp)] ++;

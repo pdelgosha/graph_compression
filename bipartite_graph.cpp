@@ -1,5 +1,14 @@
 #include "bipartite_graph.h"
 
+b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> right_deg)
+{
+  n = left_deg.size();
+  np = right_deg.size();
+  adj_list = list;
+  left_deg_seq = left_deg;
+  right_deg_seq = right_deg;
+}
+
 b_graph::b_graph(vector<vector<int> > list, vector<int> right_deg)
 {
   n = list.size();

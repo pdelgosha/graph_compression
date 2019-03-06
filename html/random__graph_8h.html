@@ -74,6 +74,7 @@ $(function() {
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
 </div>
 <p><a href="random__graph_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -82,6 +83,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a643ca20d84dd6981854da9b1a8c7a6c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmarked__graph.html">marked_graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="random__graph_8h.html#a643ca20d84dd6981854da9b1a8c7a6c5">marked_ER</a> (int n, double p, int ver_mark, int edge_mark)</td></tr>
 <tr class="memdesc:a643ca20d84dd6981854da9b1a8c7a6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">generates a marked Erdos Renyi graph  <a href="#a643ca20d84dd6981854da9b1a8c7a6c5">More...</a><br /></td></tr>
 <tr class="separator:a643ca20d84dd6981854da9b1a8c7a6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c6d20574de900afa2186b61977b83d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmarked__graph.html">marked_graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="random__graph_8h.html#a12c6d20574de900afa2186b61977b83d">poisson_graph</a> (int n, double deg_mean, int ver_mark, int edge_mark)</td></tr>
+<tr class="memdesc:a12c6d20574de900afa2186b61977b83d"><td class="mdescLeft">&#160;</td><td class="mdescRight">generates a random graph where roughly speaking, the degree of a vertex is Poisson  <a href="#a12c6d20574de900afa2186b61977b83d">More...</a><br /></td></tr>
+<tr class="separator:a12c6d20574de900afa2186b61977b83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a643ca20d84dd6981854da9b1a8c7a6c5"></a>
@@ -134,6 +138,59 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a random marked graph, where each edge is independently present with probability p, each vertex has a random integer mark in the range [0,ver_mark), and each edge has two random integers marks in the range [0,edge_mark) </dd></dl>
 <div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">unsigned</span> seed = chrono::system_clock::now().time_since_epoch().count();</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  default_random_engine generator(seed);</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  uniform_int_distribution&lt;int&gt; ver_mark_dist(0,ver_mark-1); <span class="comment">// distribution a vertex mark</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  uniform_int_distribution&lt;int&gt; edge_mark_dist(0,edge_mark-1); <span class="comment">// distribution an edge mark</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  uniform_real_distribution&lt;double&gt; unif_dist(0.0,1.0);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">double</span> unif;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">int</span> x, xp; <span class="comment">// generated marks</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  vector&lt;int&gt; ver_marks(n); <span class="comment">// vector of size n</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  vector&lt;pair&lt; pair&lt;int, int&gt;, pair&lt;int, int&gt; &gt; &gt; edges; <span class="comment">// the edge list of the graph </span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> v=0; v&lt;n; v++){</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    ver_marks[v] = ver_mark_dist(generator);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> w=v+1; w&lt;n;w++){</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      unif = unif_dist(generator);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keywordflow">if</span> (unif &lt; p){ <span class="comment">// we put an edge between v and w</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        x = edge_mark_dist(generator);</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        xp = edge_mark_dist(generator);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        edges.push_back(pair&lt;pair&lt;int, int&gt;, pair&lt;int, int&gt; &gt;(pair&lt;int, int&gt;(v,w), pair&lt;int, int&gt;(x,xp)));</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      }</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  }</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  cout &lt;&lt; <span class="stringliteral">&quot; marked_ER number of edges &quot;</span> &lt;&lt; edges.size() &lt;&lt; endl;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="classmarked__graph.html">marked_graph</a>(n, edges, ver_marks);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div><div class="ttc" id="classmarked__graph_html"><div class="ttname"><a href="classmarked__graph.html">marked_graph</a></div><div class="ttdoc">simple marked graph </div><div class="ttdef"><b>Definition:</b> marked_graph.h:15</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a12c6d20574de900afa2186b61977b83d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12c6d20574de900afa2186b61977b83d">&#9670;&nbsp;</a></span>poisson_graph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmarked__graph.html">marked_graph</a> poisson_graph </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>deg_mean</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ver_mark</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>edge_mark</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>generates a random graph where roughly speaking, the degree of a vertex is Poisson </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>the number of vertices </td></tr>
+    <tr><td class="paramname">deg_mean</td><td>mean of Poisson </td></tr>
+    <tr><td class="paramname">ver_mark</td><td>the number of possible vertex marks </td></tr>
+    <tr><td class="paramname">edge_mark</td><td>the number of possible edge marks </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A random graph, where each vertex chooses its degree according to Poisson(deg_mean), then picks neighbors uniformly at random, and connects to them (if the neighbors have not already connected to them, if some of the neighbors I pick are already connected to me, I just don't do anything). Vertex and edge marks are picked independently and uniformly. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                                                                               {</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">unsigned</span> seed = chrono::system_clock::now().time_since_epoch().count();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  default_random_engine generator(seed);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  poisson_distribution&lt;int&gt; deg_dist(deg_mean);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  uniform_int_distribution&lt;int&gt; neighbor_dist(0,n-1); <span class="comment">// distribution for the other endpoint</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  vector&lt; pair&lt; pair&lt; int, int &gt;, pair&lt; int, int &gt; &gt; &gt; edges;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  vector&lt;int&gt; ver_marks(n);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  uniform_int_distribution&lt;int&gt; ver_mark_dist(0,ver_mark-1); <span class="comment">// distribution a vertex mark</span></div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  uniform_int_distribution&lt;int&gt; edge_mark_dist(0,edge_mark-1); <span class="comment">// distribution an edge mark</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">int</span> x, xp; <span class="comment">// edge mark values</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  pair&lt; pair&lt; int, int &gt;, pair&lt; int, int &gt; &gt; edge; <span class="comment">// the current edge to be added </span></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  vector&lt;set&lt;int&gt; &gt; neighbors(n); <span class="comment">// the list of neighbors of vertices </span></div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">int</span> deg; <span class="comment">// the degree of a vertex</span></div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">int</span> w; <span class="comment">// the neighbor</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> v=0;v&lt;n;v++){</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ver_marks[v] = ver_mark_dist(generator);</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    deg = deg_dist(generator);</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;deg; i++){</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keywordflow">do</span>{</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        w = neighbor_dist(generator);</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      }<span class="keywordflow">while</span>(w == v or neighbors[v].find(w) != neighbors[v].end()); <span class="comment">// not myself and not already connected</span></div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="comment">// now, w is a possible neighbor</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="comment">// see if w has picked v as a neighbor</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">if</span> (neighbors[w].find(v) == neighbors[w].end()){</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// add w as a neighbors to v</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        neighbors[v].insert(w);</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">// marks for the edge</span></div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        x = edge_mark_dist(generator); </div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        xp = edge_mark_dist(generator);</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        edge.first.first = v;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        edge.first.second = w;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        edge.second.first = x;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        edge.second.second = xp;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        edges.push_back(edge);</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      }</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  cerr &lt;&lt; <span class="stringliteral">&quot; edges size &quot;</span> &lt;&lt; edges.size() &lt;&lt; endl;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="classmarked__graph.html">marked_graph</a>(n, edges, ver_marks);</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div><div class="ttc" id="classmarked__graph_html"><div class="ttname"><a href="classmarked__graph.html">marked_graph</a></div><div class="ttdoc">simple marked graph </div><div class="ttdef"><b>Definition:</b> marked_graph.h:15</div></div>
 </div><!-- fragment -->
 </div>
 </div>

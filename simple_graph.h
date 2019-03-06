@@ -15,6 +15,7 @@ public:
   //! default constructor
  graph(): n(0) {}
 
+
   //! a constructor
   graph(vector<vector<int> > list, vector<int> deg);
 

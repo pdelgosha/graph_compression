@@ -103,11 +103,11 @@ public:
 
   vector<map<int,int> > adj_location;  //!< adj_location[v] for \f$0 \leq v < n\f$, is a map, where adj_location[v][w] denotes the index in adj_list[v] where the information regarding the edge between v and w is stored. Hence, adj_location[v][w] does not exist if w is not adjacent to v, and adj_list[v][adj_location[v][w]] is the edge between v and w
 
-  vector<map<pair<int, int> , int> > deg; //!< deg[v] for a vertex v is a map, where deg[v][(m, m')] for a pair of messages m, m' is the number of edges connected to v with type m towards v and type m' towards the other endpoint
+  vector<map<pair<int, int> , int> > deg; //!< deg[v] for a vertex v is a map, where deg[v][(m, m')] for a pair of non star types  m, m' is the number of edges connected to v with type m towards v and type m' towards the other endpoint. Note that only non star types appear in this map. 
 
-  map<pair<int, int> , vector<int> > type_vertex_list; //!< type_vertex_list[(m,m')] for a pair of types m and m' is the list of vertices v in the graph with at least one edge adjacent to v with type m towards v and m' towards the other endpoint. type_vertex_list[(m, m')] is guaranteed to be an increasing list.
+  //map<pair<int, int> , vector<int> > type_vertex_list; //!< type_vertex_list[(m,m')] for a pair of types m and m' is the list of vertices v in the graph with at least one edge adjacent to v with type m towards v and m' towards the other endpoint. type_vertex_list[(m, m')] is guaranteed to be an increasing list.
 
-  vector<vector<int> >  ver_type; //!< vertex mark and the colored degree matrix of each vertex. For a vertex v,  ver_type[v] is a vector of size \f$1 + L \times L\f$, where the first entry is the vertex mark, and the rest is the colored degree matrix row by row. Here, \f$L\f$ denotes the number of non star type colors.  Note that all star type colors are in the range [L, M.message_list.size()).
+  vector<vector<int> >  ver_type; //!< for a vertex v, ver_type[v] is a vector<int> and encodes the mark of v and its colored degree in the following way: ver_type[v][0] is the ver_mark of v, ver_type[v][3k+1], ver_type[v][3k+2] and ver_type[3k+3] are \f$m, m'\f$ and \f$n_{m, m'}\f$, where \f$m\f$ and \f$m'\f$ are edge types, and \f$n_{m, m'}\f$ denotes the number of edges connected to v with type \f$(m, m')\f$. The list of \f$m, m'\f$ is sorted (lexicographically) to ensure unique representation. Since we only represent types with nonzero \f$n_{m, m'}\f$, we are effectively giving the nonzero entries of the colored degree matrix, resulting in an improvement over storing the whole degree matrix. 
 
   map<vector<int>, int > ver_type_dict; //!< the dictionary mapping vertex types to integers, obtained from the ver_type array defined above
 
@@ -128,7 +128,7 @@ public:
 
   //! default constructor
   colored_graph() {}
-
+  
   //! initializes other variables. Here, G is the reference to the marked graph based on which this object is being created 
   void init(const marked_graph& G);
 };

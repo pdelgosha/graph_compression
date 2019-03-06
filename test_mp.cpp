@@ -18,16 +18,23 @@ ostream& operator << (ostream& o, const vector<int>& v){
 }
 
 
+void random_graph_test(){
+  marked_graph G = poisson_graph(10, 2, 2, 2);
+  cout << G;
+}
+
 void mp_test(){
   marked_graph G;
-  ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
-  inp >> G;
+  //ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
+  //inp >> G;
   //G = marked_ER(10000,0.0003,2 ,2);
+  G = poisson_graph(100000,16, 2, 2);
+  cerr << " graph generated " << endl;
   //cerr << " graph generated " << endl;
-  cout << " G " << endl << G << endl;
+  //cout << " G " << endl << G << endl;
   colored_graph C(G, 2, 2);
 
-  
+  /*
   int n = C.nu_vertices;
   for (int v=0; v<n; v++){
     cout << v << " : ";
@@ -41,11 +48,13 @@ void mp_test(){
   for (int m=0; m<C.M.message_mark.size(); m++){
     cout << m << " mark = " << C.M.message_mark[m] << " star " << C.M.is_star_message[m] << endl;
   }
+  */
   
 }
 
 
 int main(){
   mp_test();
+  //random_graph_test ();
   return 0;
 }

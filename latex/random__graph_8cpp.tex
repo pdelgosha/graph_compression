@@ -5,7 +5,9 @@
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\+\_\+\+ER} (int n, double p, int ver\+\_\+mark, int edge\+\_\+mark)
-\begin{DoxyCompactList}\small\item\em generates a marked Erdos Renyi graph \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em generates a marked Erdos Renyi graph \end{DoxyCompactList}\item 
+\hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\+\_\+graph} (int n, double deg\+\_\+mean, int ver\+\_\+mark, int edge\+\_\+mark)
+\begin{DoxyCompactList}\small\item\em generates a random graph where roughly speaking, the degree of a vertex is Poisson \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -61,4 +63,74 @@ a random marked graph, where each edge is independently present with probability
 27   cout << \textcolor{stringliteral}{" marked\_ER number of edges "} << edges.size() << endl;
 28   \textcolor{keywordflow}{return} \hyperlink{classmarked__graph}{marked\_graph}(n, edges, ver\_marks);
 29 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}\label{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}} 
+\index{random\+\_\+graph.\+cpp@{random\+\_\+graph.\+cpp}!poisson\+\_\+graph@{poisson\+\_\+graph}}
+\index{poisson\+\_\+graph@{poisson\+\_\+graph}!random\+\_\+graph.\+cpp@{random\+\_\+graph.\+cpp}}
+\subsubsection{\texorpdfstring{poisson\+\_\+graph()}{poisson\_graph()}}
+{\footnotesize\ttfamily \hyperlink{classmarked__graph}{marked\+\_\+graph} poisson\+\_\+graph (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{double}]{deg\+\_\+mean,  }\item[{int}]{ver\+\_\+mark,  }\item[{int}]{edge\+\_\+mark }\end{DoxyParamCaption})}
+
+
+
+generates a random graph where roughly speaking, the degree of a vertex is Poisson 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the number of vertices \\
+\hline
+{\em deg\+\_\+mean} & mean of Poisson \\
+\hline
+{\em ver\+\_\+mark} & the number of possible vertex marks \\
+\hline
+{\em edge\+\_\+mark} & the number of possible edge marks \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random graph, where each vertex chooses its degree according to Poisson(deg\+\_\+mean), then picks neighbors uniformly at random, and connects to them (if the neighbors have not already connected to them, if some of the neighbors I pick are already connected to me, I just don\textquotesingle{}t do anything). Vertex and edge marks are picked independently and uniformly. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+32                                                                                \{
+33   \textcolor{keywordtype}{unsigned} seed = chrono::system\_clock::now().time\_since\_epoch().count();
+34   default\_random\_engine generator(seed);
+35   poisson\_distribution<int> deg\_dist(deg\_mean);
+36   uniform\_int\_distribution<int> neighbor\_dist(0,n-1); \textcolor{comment}{// distribution for the other endpoint}
+37 
+38   vector< pair< pair< int, int >, pair< int, int > > > edges;
+39   vector<int> ver\_marks(n);
+40 
+41   uniform\_int\_distribution<int> ver\_mark\_dist(0,ver\_mark-1); \textcolor{comment}{// distribution a vertex mark}
+42   uniform\_int\_distribution<int> edge\_mark\_dist(0,edge\_mark-1); \textcolor{comment}{// distribution an edge mark}
+43   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// edge mark values}
+44 
+45   pair< pair< int, int >, pair< int, int > > edge; \textcolor{comment}{// the current edge to be added }
+46   vector<set<int> > neighbors(n); \textcolor{comment}{// the list of neighbors of vertices }
+47   \textcolor{keywordtype}{int} deg; \textcolor{comment}{// the degree of a vertex}
+48   \textcolor{keywordtype}{int} w; \textcolor{comment}{// the neighbor}
+49   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n;v++)\{
+50     ver\_marks[v] = ver\_mark\_dist(generator);
+51     deg = deg\_dist(generator);
+52     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<deg; i++)\{
+53       \textcolor{keywordflow}{do}\{
+54         w = neighbor\_dist(generator);
+55       \}\textcolor{keywordflow}{while}(w == v or neighbors[v].find(w) != neighbors[v].end()); \textcolor{comment}{// not myself and not already connected}
+56       \textcolor{comment}{// now, w is a possible neighbor}
+57       \textcolor{comment}{// see if w has picked v as a neighbor}
+58       \textcolor{keywordflow}{if} (neighbors[w].find(v) == neighbors[w].end())\{
+59         \textcolor{comment}{// add w as a neighbors to v}
+60         neighbors[v].insert(w);
+61         \textcolor{comment}{// marks for the edge}
+62         x = edge\_mark\_dist(generator); 
+63         xp = edge\_mark\_dist(generator);
+64         edge.first.first = v;
+65         edge.first.second = w;
+66         edge.second.first = x;
+67         edge.second.second = xp;
+68         edges.push\_back(edge);
+69       \}
+70     \}
+71   \}
+72   cerr << \textcolor{stringliteral}{" edges size "} << edges.size() << endl;
+73   \textcolor{keywordflow}{return} \hyperlink{classmarked__graph}{marked\_graph}(n, edges, ver\_marks);
+74 \}
 \end{DoxyCode}

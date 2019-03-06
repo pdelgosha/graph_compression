@@ -14,8 +14,6 @@ void \hyperlink{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9
 \item 
 int \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}
 \begin{DoxyCompactList}\small\item\em the number of vertices \end{DoxyCompactList}\item 
-int \hyperlink{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}{L}
-\begin{DoxyCompactList}\small\item\em the number of half edge colors (non star type) \end{DoxyCompactList}\item 
 int \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}
 \begin{DoxyCompactList}\small\item\em the depth up to which the compression was performed \end{DoxyCompactList}\item 
 int \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}
@@ -24,8 +22,8 @@ pair$<$ vector$<$ int $>$, mpz\+\_\+class $>$ \hyperlink{classmarked__graph__com
 \begin{DoxyCompactList}\small\item\em the compressed form of the star\+\_\+vertices list \end{DoxyCompactList}\item 
 map$<$ pair$<$ int, int $>$, vector$<$ vector$<$ int $>$ $>$ $>$ \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\+\_\+edges}
 \begin{DoxyCompactList}\small\item\em for each pair of edge marks x,x\textquotesingle{}, and integer $k$, star\+\_\+edges\mbox{[}pair$<$int,int$>$(x,x\textquotesingle{})\mbox{]}\mbox{[}k\mbox{]} is a list of neighbors $w$ of the $k$th star vertex (say $v$) so that $v$ shares a star edge with $w$ so that the mark towards $v$ is x and the mark towards $w$ is xp. \end{DoxyCompactList}\item 
-vector$<$ vector$<$ int $>$ $>$ \hyperlink{classmarked__graph__compressed_a240a69c3859f89c1478cb4be35d20d95}{message\+\_\+list}
-\begin{DoxyCompactList}\small\item\em a list of messages which appear in graph (not star type), so its size is L \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\+\_\+mark}
+\begin{DoxyCompactList}\small\item\em for an edge type t, type\+\_\+mark\mbox{[}t\mbox{]} denotes the mark component of t \end{DoxyCompactList}\item 
 vector$<$ vector$<$ int $>$ $>$ \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\+\_\+type\+\_\+list}
 \begin{DoxyCompactList}\small\item\em the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size $1+L \times L$ with the first index being the vertex mark, and the rest being the color degree matrix stored row by row. This can be considered as a dictionary to convert actual vertex types to integers (if ver\+\_\+type\+\_\+list\mbox{[}i\mbox{]} = a, then the integer i represents vertex type a) and subsequently compress it as a time series and store in the ver\+\_\+types member. \end{DoxyCompactList}\item 
 pair$<$ vector$<$ int $>$, mpz\+\_\+class $>$ \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\+\_\+types}
@@ -47,7 +45,7 @@ map$<$ int, pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ $>$ \hyperlink{classma
 \begin{DoxyCode}
 4 \{
 5   \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.clear();
-6   \hyperlink{classmarked__graph__compressed_a240a69c3859f89c1478cb4be35d20d95}{message\_list}.clear();
+6   \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.clear();
 7   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.clear();
 8   \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.clear();
 9   \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.clear();
@@ -75,26 +73,6 @@ the degree threshold used when compression was performed
 
 
 the depth up to which the compression was performed 
-
-\mbox{\Hypertarget{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}\label{classmarked__graph__compressed_abd70435e7a1f6eeb4c585bfca428d175}} 
-\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!L@{L}}
-\index{L@{L}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
-\subsubsection{\texorpdfstring{L}{L}}
-{\footnotesize\ttfamily int marked\+\_\+graph\+\_\+compressed\+::L}
-
-
-
-the number of half edge colors (non star type) 
-
-\mbox{\Hypertarget{classmarked__graph__compressed_a240a69c3859f89c1478cb4be35d20d95}\label{classmarked__graph__compressed_a240a69c3859f89c1478cb4be35d20d95}} 
-\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!message\+\_\+list@{message\+\_\+list}}
-\index{message\+\_\+list@{message\+\_\+list}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
-\subsubsection{\texorpdfstring{message\+\_\+list}{message\_list}}
-{\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ marked\+\_\+graph\+\_\+compressed\+::message\+\_\+list}
-
-
-
-a list of messages which appear in graph (not star type), so its size is L 
 
 \mbox{\Hypertarget{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}\label{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!n@{n}}
@@ -145,6 +123,16 @@ for each pair of edge marks x,x\textquotesingle{}, and integer $k$, star\+\_\+ed
 
 
 the compressed form of the star\+\_\+vertices list 
+
+\mbox{\Hypertarget{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}\label{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}} 
+\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!type\+\_\+mark@{type\+\_\+mark}}
+\index{type\+\_\+mark@{type\+\_\+mark}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
+\subsubsection{\texorpdfstring{type\+\_\+mark}{type\_mark}}
+{\footnotesize\ttfamily vector$<$int$>$ marked\+\_\+graph\+\_\+compressed\+::type\+\_\+mark}
+
+
+
+for an edge type t, type\+\_\+mark\mbox{[}t\mbox{]} denotes the mark component of t 
 
 \mbox{\Hypertarget{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}\label{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!ver\+\_\+type\+\_\+list@{ver\+\_\+type\+\_\+list}}
