@@ -248,8 +248,7 @@ marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compres
   n = compressed.n;
   h = compressed.h;
   delta = compressed.delta;
-  // TO TAKE CARE OF: 
-  //L = compressed.L;
+
 
   edges.clear(); // clear the edge list of the marked graph to be decoded
   vertex_marks.clear(); // clear the list of vertex marks of the marked graph to be decoded
@@ -262,6 +261,7 @@ marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compres
 
   decode_vertex_types(compressed);
   cerr << " decoded vertex types " << endl;
+
 
   decode_partition_graphs(compressed);
   cerr << " decoded partition graphs " << endl;
@@ -330,6 +330,8 @@ void marked_graph_decoder::decode_vertex_types(const marked_graph_compressed& co
           Deg[v][pair<int, int>(x[i],x[i+1])] = x[i+2]; // x[i] and x[i+1] are types, and x[i+2] is the count
     }
   }
+
+  find_part_deg_orig_index(); // find part_deg and orig_index maps
 }
 
 void marked_graph_decoder::find_part_deg_orig_index()
@@ -338,10 +340,13 @@ void marked_graph_decoder::find_part_deg_orig_index()
   origin_index.clear();
   int t, tp; // types
 
+  //cerr << " decoded deg : " << endl;
   for (int v=0;v<n;v++){
+    //cerr << " v " << v << endl;
     for (map<pair<int, int>, int>::iterator it=Deg[v].begin(); it!=Deg[v].end(); it++){
       t = it->first.first;
       tp = it->first.second;
+      //cerr << " t " << t << " tp " << tp << " : " << it->second << endl;
       if (part_deg.find(it->first) == part_deg.end()){
         // this is our first encounter with this type pair
         origin_index[it->first] = vector<int>({v}); // v is the first node in the t side of the (t,t') partition graph
@@ -374,6 +379,7 @@ void marked_graph_decoder::decode_partition_graphs(const marked_graph_compressed
     G_compressed = it->second;
     // the degree sequence of the graph can be obtained from part_deg.at(pair<int,int>(t,t))
     graph_decoder D(part_deg.at(pair<int, int>(t,t)));
+    //cerr << " part_graph t = " << t << " with " << part_deg.at(pair<int, int>(t,t)).size() << " vertices " << endl;
     n_G = part_deg.at(pair<int, int>(t,t)).size(); // the number of vertices in the partition graph is read from the size of its degree sequence
     G = D.decode(G_compressed.first, G_compressed.second);
     // for each edge in G, we should add an edge with mark pair (x,x) to the edge list of the marked graph
@@ -409,17 +415,24 @@ void marked_graph_decoder::decode_partition_bgraphs(const marked_graph_compresse
     x = compressed.type_mark[t]; // the mark component of t
     xp = compressed.type_mark[tp]; // the mark component of tp 
 
+    //cerr << " t " << t << " tp " << tp << endl;
 
     b_graph_decoder D(part_deg.at(pair<int, int>(t,tp)), part_deg.at(pair<int, int>(tp,t))); // the degree sequence of left nodes is precisely part_deg.at(pair<int, int>(t,tp)), while that of the right nodes is precisely part_deg.at(pair<int, int>(tp,t))
+    //cerr << " decoder constructed " << endl;
+    //cerr << " part graph t = "  << t << " t' = " << tp << " nl " << part_deg.at(pair<int, int>(t,tp)).size() << " nr = " << part_deg.at(pair<int, int>(tp,t)).size() << endl;
     G = D.decode(it->second);
+
+    //cerr << " G decoded " << endl;
     nl_G = part_deg.at(pair<int, int>(t,tp)).size(); // the number of left nodes in G is obtained from the size of the degree sequence of left nodes
     
     for (int v=0;v<nl_G;v++){
       v_orig = origin_index.at(pair<int, int>(t,tp))[v];
+      //cerr << " v " << v << " v_orig " << v_orig << endl;
       adj_list = G.get_adj_list(v);
       for (int i=0;i<adj_list.size();i++){
         w = adj_list[i];
         w_orig = origin_index.at(pair<int, int>(tp,t))[w]; // since w is a right node, we should read its original index through origin_index[(tp,t)]
+        //cerr << " w " << w << " w_orig " << w_orig << endl;
         edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v_orig,w_orig), pair<int, int>(x,xp)));
       }
     }

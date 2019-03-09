@@ -5,6 +5,16 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
   nu_vertices = n;
   adj_list.resize(n);
   adj_location.resize(n);
+  // modify the edges if necessary so that in each element of the form ((i,j), (x, x')), we have i < j. This is important when forming adjacency lists so that the list of each vertex is sorted
+  for (int i=0;i<edges.size();i++){
+    if (edges[i].first.first > edges[i].first.second){
+      // swap the edge endpoints and represent it in the other direction
+      swap(edges[i].first.first, edges[i].first.second);
+      // also, we should swap the mark components
+      swap(edges[i].second.first, edges[i].second.second);
+    }
+  }
+  sort(edges.begin(), edges.end()); // so that the adjacency list is sorted
   for (int k=0; k<edges.size(); k++){
     // (i,j) are endpoints if the edge
     // (x,y) are marks, x towards i and y towards j
