@@ -1,14 +1,9 @@
 var searchData=
 [
-  ['b',['b',['../classb__graph__encoder.html#a767826e268702e45ab71565e096a52b8',1,'b_graph_encoder::b()'],['../classb__graph__decoder.html#a12d1a4a91f342111d2116196cb826317',1,'b_graph_decoder::b()']]],
-  ['b_5fgraph',['b_graph',['../classb__graph.html',1,'b_graph'],['../classb__graph.html#a83ebab7ff22a3cf19c0cf62de3f8b306',1,'b_graph::b_graph()'],['../classb__graph.html#a147326d0a78853a1f33ca4bed03393cc',1,'b_graph::b_graph(const vector&lt; vector&lt; int &gt; &gt; &amp;list, const vector&lt; int &gt; &amp;left_deg, const vector&lt; int &gt; right_deg)'],['../classb__graph.html#a6032fbf9681d275260dd9a8587447e61',1,'b_graph::b_graph(vector&lt; vector&lt; int &gt; &gt; list, vector&lt; int &gt; right_deg)'],['../classb__graph.html#af94e3bc6694a312f13c9305ec5ffe4ee',1,'b_graph::b_graph(vector&lt; vector&lt; int &gt; &gt; list)']]],
-  ['b_5fgraph_5fdecoder',['b_graph_decoder',['../classb__graph__decoder.html',1,'b_graph_decoder'],['../classb__graph__decoder.html#a2284e65bb4fcdd9356fc6a3109c2a4a7',1,'b_graph_decoder::b_graph_decoder()']]],
-  ['b_5fgraph_5fencoder',['b_graph_encoder',['../classb__graph__encoder.html',1,'b_graph_encoder'],['../classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283',1,'b_graph_encoder::b_graph_encoder()']]],
-  ['b_5fgraph_5ftest',['b_graph_test',['../test_8cpp.html#aa276850b1d7d04eb917a6fc7415b9566',1,'test.cpp']]],
-  ['beta',['beta',['../classb__graph__encoder.html#ae54d76cc4cee399d98951f870897a144',1,'b_graph_encoder::beta()'],['../classb__graph__decoder.html#a3e5babfb07af486c1d9e991f65251266',1,'b_graph_decoder::beta()'],['../classgraph__encoder.html#a40880adecfd63fb86e94b4b0fc3f6bc2',1,'graph_encoder::beta()'],['../classgraph__decoder.html#aa57c11e4c09c52101682ff83286162f7',1,'graph_decoder::beta()']]],
-  ['binomial',['binomial',['../compression__helper_8cpp.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp']]],
-  ['bipartite_5fgraph_2ecpp',['bipartite_graph.cpp',['../bipartite__graph_8cpp.html',1,'']]],
-  ['bipartite_5fgraph_2eh',['bipartite_graph.h',['../bipartite__graph_8h.html',1,'']]],
-  ['bipartite_5fgraph_5fcompression_2ecpp',['bipartite_graph_compression.cpp',['../bipartite__graph__compression_8cpp.html',1,'']]],
-  ['bipartite_5fgraph_5fcompression_2eh',['bipartite_graph_compression.h',['../bipartite__graph__compression_8h.html',1,'']]]
+  ['a',['a',['../classb__graph__encoder.html#afd22d167f495cd85b41397f337c377c2',1,'b_graph_encoder::a()'],['../classb__graph__decoder.html#afcf783e4199fb8f9d6828db08bb12333',1,'b_graph_decoder::a()'],['../classgraph__encoder.html#a56eb5cf480ae5c2fca9f3a45f2ffd4f1',1,'graph_encoder::a()'],['../classgraph__decoder.html#a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc',1,'graph_decoder::a()']]],
+  ['add',['add',['../classfenwick__tree.html#ab2f999bba718bcd57d066db754d85ad4',1,'fenwick_tree::add()'],['../classreverse__fenwick__tree.html#a942d7f49b37e53ebfec3076d177691d7',1,'reverse_fenwick_tree::add()']]],
+  ['add_5fentry',['add_entry',['../classlogger.html#a710163deb17bc81f70d53d285b8ac9ac',1,'logger']]],
+  ['adj_5flist',['adj_list',['../classb__graph.html#a2a89d2e8f958270952aab2e8769b7342',1,'b_graph::adj_list()'],['../classcolored__graph.html#a45dce16965079286cf3f41a54a1b2ea4',1,'colored_graph::adj_list()'],['../classmarked__graph.html#a1a0bf7ca413a278763f7c878b3b6fd6f',1,'marked_graph::adj_list()']]],
+  ['adj_5flocation',['adj_location',['../classcolored__graph.html#ad657e7e86bee874d19dbc1765e1edaa7',1,'colored_graph::adj_location()'],['../classmarked__graph.html#a3ae722ea9583ad23af34d789a88ac01a',1,'marked_graph::adj_location()']]],
+  ['alph_5fsize',['alph_size',['../classtime__series__encoder.html#a7e73867e25ea5ae643bf05eaf33ea9ac',1,'time_series_encoder::alph_size()'],['../classtime__series__decoder.html#a9e712b2d41cc124485c4d6f497504c29',1,'time_series_decoder::alph_size()']]]
 ];

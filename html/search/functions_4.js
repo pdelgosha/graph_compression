@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['edge_5fcompare',['edge_compare',['../marked__graph_8cpp.html#a09dd24caed50b1d106e10538e688b6ac',1,'edge_compare(const pair&lt; int, pair&lt; int, int &gt; &gt; &amp;a, pair&lt; int, pair&lt; int, int &gt; &gt; &amp;b):&#160;marked_graph.cpp'],['../marked__graph_8h.html#a09dd24caed50b1d106e10538e688b6ac',1,'edge_compare(const pair&lt; int, pair&lt; int, int &gt; &gt; &amp;a, pair&lt; int, pair&lt; int, int &gt; &gt; &amp;b):&#160;marked_graph.cpp']]],
-  ['encode',['encode',['../classb__graph__encoder.html#a9dbf40f42a2eb12822b14ca10d580763',1,'b_graph_encoder::encode()'],['../classmarked__graph__encoder.html#aa7fa19a225dd9b31d6fef9583fab8cf1',1,'marked_graph_encoder::encode()'],['../classgraph__encoder.html#a23350e4c0986763b24d14c5ef1beb37e',1,'graph_encoder::encode()'],['../classtime__series__encoder.html#a6d3fbf4d839978c6c82efc2160cdc465',1,'time_series_encoder::encode()']]],
-  ['encode_5fpartition_5fbgraphs',['encode_partition_bgraphs',['../classmarked__graph__encoder.html#aa113c4870e3221faa332b2151b63d9e6',1,'marked_graph_encoder']]],
-  ['encode_5fpartition_5fgraphs',['encode_partition_graphs',['../classmarked__graph__encoder.html#a654463d4b256b84225f5944b5e361ebf',1,'marked_graph_encoder']]],
-  ['encode_5fstar_5fedges',['encode_star_edges',['../classmarked__graph__encoder.html#ad6883669a47d24e3d9898978f3252727',1,'marked_graph_encoder']]],
-  ['encode_5fstar_5fvertices',['encode_star_vertices',['../classmarked__graph__encoder.html#af8daeed1452dbfd41fa2f875813e3496',1,'marked_graph_encoder']]],
-  ['encode_5fvertex_5ftypes',['encode_vertex_types',['../classmarked__graph__encoder.html#a239769085214166e09cb56de750a8d71',1,'marked_graph_encoder']]],
-  ['extract_5fedge_5ftypes',['extract_edge_types',['../classmarked__graph__encoder.html#ac3060e8f7e6abbe371c5968eb47cb8a1',1,'marked_graph_encoder']]],
-  ['extract_5fpartition_5fgraphs',['extract_partition_graphs',['../classmarked__graph__encoder.html#a60b0038c57bd8fa2f5cb3f0b6999c4f3',1,'marked_graph_encoder']]]
+  ['decode',['decode',['../classb__graph__decoder.html#a81cffad95fa5a051fa4421b164f236a9',1,'b_graph_decoder::decode()'],['../classmarked__graph__decoder.html#a31bbd76091acf5b058fd0a7b7948f74c',1,'marked_graph_decoder::decode()'],['../classgraph__decoder.html#a3d2ef81ec6ac66e50c1809f361143922',1,'graph_decoder::decode()'],['../classtime__series__decoder.html#a4b28eb8883c68f5502c43a802424e0c3',1,'time_series_decoder::decode()']]],
+  ['decode_5finterval',['decode_interval',['../classb__graph__decoder.html#ae8b20698e015819cbdb8da7997888fd8',1,'b_graph_decoder::decode_interval()'],['../classgraph__decoder.html#a2cb0bd279889a833d4c825e99eb72410',1,'graph_decoder::decode_interval()']]],
+  ['decode_5fnode',['decode_node',['../classb__graph__decoder.html#a3d6d38da4436a92ebd01693cd3eb7c16',1,'b_graph_decoder::decode_node()'],['../classgraph__decoder.html#af3ff99a4de6035ad257ebd7c6519cdd8',1,'graph_decoder::decode_node()']]],
+  ['decode_5fpartition_5fbgraphs',['decode_partition_bgraphs',['../classmarked__graph__decoder.html#aea53529191c7d56a897620b3d842ffaa',1,'marked_graph_decoder']]],
+  ['decode_5fpartition_5fgraphs',['decode_partition_graphs',['../classmarked__graph__decoder.html#a80eb5f68b45ba160b9a00334476b6be7',1,'marked_graph_decoder']]],
+  ['decode_5fstar_5fedges',['decode_star_edges',['../classmarked__graph__decoder.html#a79fcfb8d5616c691114ebc0a7adb18b2',1,'marked_graph_decoder']]],
+  ['decode_5fstar_5fvertices',['decode_star_vertices',['../classmarked__graph__decoder.html#a57fba34d119743414a38c7339b910d99',1,'marked_graph_decoder']]],
+  ['decode_5fvertex_5ftypes',['decode_vertex_types',['../classmarked__graph__decoder.html#afc0aea714483a4dda31dd85fd20bfe5f',1,'marked_graph_decoder']]]
 ];

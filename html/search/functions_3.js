@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['decode',['decode',['../classb__graph__decoder.html#a81cffad95fa5a051fa4421b164f236a9',1,'b_graph_decoder::decode()'],['../classmarked__graph__decoder.html#a31bbd76091acf5b058fd0a7b7948f74c',1,'marked_graph_decoder::decode()'],['../classgraph__decoder.html#a3d2ef81ec6ac66e50c1809f361143922',1,'graph_decoder::decode()'],['../classtime__series__decoder.html#a4b28eb8883c68f5502c43a802424e0c3',1,'time_series_decoder::decode()']]],
-  ['decode_5finterval',['decode_interval',['../classb__graph__decoder.html#ae8b20698e015819cbdb8da7997888fd8',1,'b_graph_decoder::decode_interval()'],['../classgraph__decoder.html#a2cb0bd279889a833d4c825e99eb72410',1,'graph_decoder::decode_interval()']]],
-  ['decode_5fnode',['decode_node',['../classb__graph__decoder.html#a3d6d38da4436a92ebd01693cd3eb7c16',1,'b_graph_decoder::decode_node()'],['../classgraph__decoder.html#af3ff99a4de6035ad257ebd7c6519cdd8',1,'graph_decoder::decode_node()']]],
-  ['decode_5fpartition_5fbgraphs',['decode_partition_bgraphs',['../classmarked__graph__decoder.html#aea53529191c7d56a897620b3d842ffaa',1,'marked_graph_decoder']]],
-  ['decode_5fpartition_5fgraphs',['decode_partition_graphs',['../classmarked__graph__decoder.html#a80eb5f68b45ba160b9a00334476b6be7',1,'marked_graph_decoder']]],
-  ['decode_5fstar_5fedges',['decode_star_edges',['../classmarked__graph__decoder.html#a79fcfb8d5616c691114ebc0a7adb18b2',1,'marked_graph_decoder']]],
-  ['decode_5fstar_5fvertices',['decode_star_vertices',['../classmarked__graph__decoder.html#a57fba34d119743414a38c7339b910d99',1,'marked_graph_decoder']]],
-  ['decode_5fvertex_5ftypes',['decode_vertex_types',['../classmarked__graph__decoder.html#afc0aea714483a4dda31dd85fd20bfe5f',1,'marked_graph_decoder']]]
+  ['clear',['clear',['../classmarked__graph__compressed.html#af58307bfadcaa4c3ca6dd594c2f9b3a9',1,'marked_graph_compressed']]],
+  ['colored_5fgraph',['colored_graph',['../classcolored__graph.html#a0374481a0474ac8e9b77689f74b5ed9b',1,'colored_graph::colored_graph(const marked_graph &amp;graph, int depth, int max_degree)'],['../classcolored__graph.html#a104bcd930e68c04e4786678923bfdca1',1,'colored_graph::colored_graph()']]],
+  ['compute_5fn',['compute_N',['../classb__graph__encoder.html#a3ffcfb945e8563d01e683fc5e5127d6d',1,'b_graph_encoder::compute_N()'],['../classgraph__encoder.html#ae7273c47d6dab8367daa5ee6a9cdbc72',1,'graph_encoder::compute_N()']]],
+  ['compute_5fproduct',['compute_product',['../compression__helper_8cpp.html#ac683dff9ff89796df0ab62cd65c30990',1,'compute_product(mpz_class N, mpz_class k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#ac683dff9ff89796df0ab62cd65c30990',1,'compute_product(mpz_class N, mpz_class k, int s):&#160;compression_helper.cpp']]]
 ];

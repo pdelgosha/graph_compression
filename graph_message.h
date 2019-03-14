@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include "marked_graph.h"
+#include "logger.h"
+
 using namespace std;
 
 

@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['left_5fdeg_5fseq',['left_deg_seq',['../classb__graph.html#a311d16462dbb10c47b3a6c80a42139d9',1,'b_graph']]],
-  ['logn2',['logn2',['../classgraph__encoder.html#a27fde3a95a280304877b1e37fc4d8553',1,'graph_encoder::logn2()'],['../classgraph__decoder.html#a59663482843ffa5059128bd6ed866f11',1,'graph_decoder::logn2()']]]
+  ['init',['init',['../classb__graph__encoder.html#a9b62ac0580191ac42b98d764046af7cb',1,'b_graph_encoder::init()'],['../classb__graph__decoder.html#a9498e8aa7391480cc663bffef3718c6b',1,'b_graph_decoder::init()'],['../classcolored__graph.html#a0e867afa9f5491dfc05bed10680f0709',1,'colored_graph::init()'],['../classgraph__encoder.html#a6cfb6fca4bc50d4e5d267060a91f43c3',1,'graph_encoder::init()'],['../classgraph__decoder.html#a97a9dcd5af21ece86fa91adcb41ca9cc',1,'graph_decoder::init()']]],
+  ['init_5falph_5fsize',['init_alph_size',['../classtime__series__encoder.html#a8607e6953e5115a3c8a198266d2db8ce',1,'time_series_encoder']]],
+  ['init_5ffreq',['init_freq',['../classtime__series__encoder.html#af4b8988acb10fe076be59302e47084be',1,'time_series_encoder']]],
+  ['init_5fg',['init_G',['../classtime__series__encoder.html#a90eb54134d6af2ab2cca36ee13956470',1,'time_series_encoder']]],
+  ['is_5fstar_5fmessage',['is_star_message',['../classgraph__message.html#a55ff5531a0043106369e84a7bc45e22d',1,'graph_message']]],
+  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#ad41163e970530c7e45878d299f0dc961',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#ac36f6c2430af6fa4d20584569859bb59',1,'marked_graph_encoder::is_star_vertex()'],['../classmarked__graph__decoder.html#a5c5391206cf2965b8513248e505ba48f',1,'marked_graph_decoder::is_star_vertex()']]]
 ];

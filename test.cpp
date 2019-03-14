@@ -12,6 +12,7 @@
 #include "time_series_compression.h"
 #include "marked_graph_compression.h"
 #include "random_graph.h"
+#include "logger.h"
 
 using namespace std;
 
@@ -72,6 +73,9 @@ void time_series_compression_test()
 
 void marked_graph_encoder_test()
 {
+  logger::current_depth++;
+
+  logger::add_entry("Construct G", "");
   marked_graph G;
   //ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
   //ifstream inp("test_graphs/problem_4.txt");
@@ -85,20 +89,27 @@ void marked_graph_encoder_test()
   //G = marked_ER(100,0.05,1 ,1);
   cout << " graph constructed " << endl;
   //cout << G << endl;
+
+  logger::add_entry("Encode","");
+
   marked_graph_encoder E(3,20);
   marked_graph_compressed C = E.encode(G);
-  cerr << " graph encoded " << endl;
+  //cerr << " graph encoded " << endl;
+
+  logger::add_entry("Decode", "");
   marked_graph_decoder D; 
   marked_graph Ghat = D.decode(C);
 
   //cout << " Ghat " << endl;
   //cout << Ghat << endl;
 
+  logger::add_entry("compare", "");
   if (Ghat == G)
     cout << " successfully decoded the marked graph :D " << endl;
   else
     cout << " they do not match :(" << endl;
 
+  logger::current_depth--;
   //cout << " G " << endl;
   //cout << G << endl;
   //cout << " Ghat " << endl;
@@ -111,6 +122,7 @@ void random_graph_test()
   //cout << G << endl;
 }
 int main(){
+  logger::start();
   //marked_graph G;
   //ifstream inp("star_graph.txt");
   //inp >> G;
@@ -120,7 +132,7 @@ int main(){
   //time_series_compression_test();
   marked_graph_encoder_test();
   //random_graph_test();
-
+  logger::stop();
   return 0;
   // vector<vector<int> > list = {{}, {}, {}};
 

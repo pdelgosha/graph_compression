@@ -10,6 +10,7 @@
 #include "simple_graph_compression.h"
 #include "bipartite_graph_compression.h"
 #include "time_series_compression.h"
+#include "logger.h"
 
 using namespace std;
 

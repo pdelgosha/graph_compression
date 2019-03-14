@@ -14,6 +14,9 @@ void marked_graph_compressed::clear()
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 {
+  logger::current_depth++;
+  logger::add_entry("Init compressed", "");
+
   compressed.clear(); // reset the compressed variable before starting
 
   n = G.nu_vertices;
@@ -21,8 +24,9 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   compressed.h = h;
   compressed.delta = delta;
 
+  logger::add_entry("Extact edge types", "");
   extract_edge_types(G);
-  cout << " edge types extracted " << endl;
+  //cout << " edge types extracted " << endl;
 
 
   compressed.ver_type_list = C.ver_type_list; // 
@@ -38,17 +42,21 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   }
   */
 
+  logger::add_entry("Encode * vertices", "");
   encode_star_vertices(); // encode the list of vertices with at least one star edge connected to them
-  cout << " encoded star vertices " << endl;
+  //cout << " encoded star vertices " << endl;
 
+  logger::add_entry("Encode * edges", "");
   encode_star_edges(); // encode edges with star types, i.e. those with half edge type L or larger
-  cout << " encoded star edges " << endl;
+  //cout << " encoded star edges " << endl;
 
+  logger::add_entry("Encode vertex types", "");
   encode_vertex_types(); // encode the sequences \f$\vec{\beta}, \vec{D}\f$, which is encoded in C.ver_type
-  cout << " encoded vertex types " << endl;
+  //cout << " encoded vertex types " << endl;
 
+  logger::add_entry("Extract partition graphs", "");
   extract_partition_graphs(); // for equality types, we form simple unmarked graphs, and for inequality types, we form a bipartite graph
-  cout << " extracted partition graphs " << endl;
+  //cout << " extracted partition graphs " << endl;
   /*
     cout << " partition bipartite graphs " << endl;
   for (map<pair<int, int>, b_graph>::iterator it = part_bgraph.begin(); it!=part_bgraph.end(); it++){
@@ -63,12 +71,15 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   }
   */
 
+  logger::add_entry("Encode partition b graphs", "");
   encode_partition_bgraphs();
-  cout << " encoded partition bgraphs " << endl;
+  //cout << " encoded partition bgraphs " << endl;
 
+  logger::add_entry("Encode partition graphs", "");
   encode_partition_graphs();
-  cout << " encoded partition graphs " << endl;
-
+  //cout << " encoded partition graphs " << endl;
+  
+  logger::current_depth--;
   return compressed;
 }
 
@@ -85,9 +96,12 @@ void marked_graph_encoder::encode_vertex_types()
 void marked_graph_encoder::extract_edge_types(const marked_graph& G)
 {
   // extracting edges types (aka colors)
+  logger::current_depth++;
+  logger::add_entry("Extract messages", "");
   C = colored_graph(G, h, delta);
   is_star_vertex = C.is_star_vertex;
   star_vertices = C.star_vertices;
+  logger::current_depth--;
 }
 
 void marked_graph_encoder::encode_star_vertices()
@@ -245,6 +259,8 @@ void marked_graph_encoder::encode_partition_graphs()
 
 marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compressed)
 {
+  logger::current_depth++;
+  logger::add_entry("Init", "");
   n = compressed.n;
   h = compressed.h;
   delta = compressed.delta;
@@ -253,24 +269,31 @@ marked_graph marked_graph_decoder::decode(const marked_graph_compressed& compres
   edges.clear(); // clear the edge list of the marked graph to be decoded
   vertex_marks.clear(); // clear the list of vertex marks of the marked graph to be decoded
 
+  logger::add_entry("Decode * vertices", "");
   decode_star_vertices(compressed);
-  cerr << " decoded star vertices " << endl;
+  //cerr << " decoded star vertices " << endl;
 
+  logger::add_entry("Decode * edges", "");
   decode_star_edges(compressed);
-  cerr << " decoded star edges " << endl;
+  //cerr << " decoded star edges " << endl;
 
+  logger::add_entry("Decode vertex types", "");
   decode_vertex_types(compressed);
-  cerr << " decoded vertex types " << endl;
+  //cerr << " decoded vertex types " << endl;
 
-
+  logger::add_entry("Decode partition graphs", "");
   decode_partition_graphs(compressed);
-  cerr << " decoded partition graphs " << endl;
+  //cerr << " decoded partition graphs " << endl;
 
+  logger::add_entry("Decode partition b graphs", "");
   decode_partition_bgraphs(compressed);
-  cerr << " decoded partition b graphs " << endl;
+  //cerr << " decoded partition b graphs " << endl;
 
   // now, reconstruct the original marked graphs by assembling the vertex marks and edge list
+  logger::add_entry("Construct decoded graph", "");
   marked_graph G(n, edges, vertex_marks);
+
+  logger::current_depth--;
   return G;
 }
 

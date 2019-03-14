@@ -17,7 +17,8 @@
 
 void graph_message::update_messages(const marked_graph& G)
 {
-
+  logger::current_depth++;
+  logger::add_entry("graph_message::update_message init", "");
   int nu_vertices = G.nu_vertices;
 
   messages.resize(nu_vertices);
@@ -25,13 +26,16 @@ void graph_message::update_messages(const marked_graph& G)
   message_list.resize(h);
 
   // initialize the messages
+  logger::add_entry("initializing messages","");
+  vector<int> m;
   for (int v=0;v<nu_vertices;v++){
     messages[v].resize(G.adj_list[v].size());
     for (int i=0;i<G.adj_list[v].size();i++){
       // the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which is \xi(v,w) and a subtree component which is a single root with mark \tau(v). This is encoded as a message vector with size 3 of the form (\tau(v), 0,\xi(v,w)) where the last 0 indicates that there is no offspring.
       messages[v][i].resize(h);
 
-      vector<int> m;
+      //vector<int> m;
+      m.clear();
       m.push_back(G.ver_mark[v]);
       m.push_back(0);
       m.push_back(G.adj_list[v][i].second.first);
@@ -47,6 +51,7 @@ void graph_message::update_messages(const marked_graph& G)
   }
 
   // updating messages
+  logger::add_entry("updating messages", "");
   for (int t=1;t<h;t++){
     for (int v=0;v<nu_vertices;v++){
       //cerr << " vertex " << v << endl;
@@ -71,7 +76,8 @@ void graph_message::update_messages(const marked_graph& G)
           // let w be the current ith neighbor of v
           int w = G.adj_list[v][i].first;
           // first, start with the mark of v and the number of offsprings in the subgraph component of the message
-          vector<int> m; // the message that v is going to send to w 
+          //vector<int> m; // the message that v is going to send to w
+          m.clear();
           m.push_back(G.ver_mark[v]); // mark of v
           m.push_back(G.adj_list[v].size()-1); // the number of offsprings in the subgraph component of the message
           // stacking messages from all neighbors of v expect for w towards v at time t-1
@@ -105,8 +111,8 @@ void graph_message::update_messages(const marked_graph& G)
         // if the degree of v is bigger than Delta, the message towards all neighbors is of the form *
         // i.e. message of v towards a neighbor w is of the form (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
         for (int i=0;i<G.adj_list[v].size();i++){
-          vector<int> m; // the current message from v to ith neighbor
-          
+          //vector<int> m; // the current message from v to ith neighbor
+          m.clear();
           m.resize(2);
           m[0] = -1;
           m[1] = G.adj_list[v][i].second.first;
@@ -123,13 +129,15 @@ void graph_message::update_messages(const marked_graph& G)
   }
 
   // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \xi(v,w)
+  logger::add_entry("* symmetrizing", "");
   for (int v=0;v<nu_vertices;v++){
     for (int i=0;i<G.adj_list[v].size();i++){
       if (message_list[h-1][messages[v][i][h-1]][0] == -1){
         // it is of the form *
         int w = G.adj_list[v][i].first; // the other endpoint of the edge
         int my_location = G.adj_location[w].at(v); // so that adj_list[w][my_location].first = v
-        vector<int> m;
+        //vector<int> m;
+        m.clear();
         m.resize(2);
         m[0] = -1;
         m[1] = G.adj_list[v][i].second.second; // the mark towards w
@@ -143,13 +151,14 @@ void graph_message::update_messages(const marked_graph& G)
   }
 
   // setting message_mark and is_star_message
+  logger::add_entry("setting message_mark and is_star_message", "");
   message_mark.resize(message_list[h-1].size());
   is_star_message.resize(message_list[h-1].size());
   for (int i=0;i<message_list[h-1].size();i++){
     message_mark[i] = message_list[h-1][i].back(); // the last element is the mark component
     is_star_message[i] = (message_list[h-1][i][0] == -1); // message is star type when the first element is -1
   }
-
+  logger::current_depth--;
 }
 
 
@@ -175,6 +184,7 @@ bool pair_compare(const pair<vector<int> , int>& a, const pair<vector<int>, int>
  */
 void colored_graph::init(const marked_graph& G)
 {
+  logger::add_entry("colored_graph::init init", "");
   nu_vertices = G.nu_vertices;
   adj_location = G.adj_location; // neighborhood structure is the same as the given graph
   // assigning edge colors based on the messages given by M
@@ -182,6 +192,7 @@ void colored_graph::init(const marked_graph& G)
   adj_list.resize(nu_vertices);
 
   // updating adj_list
+  logger::add_entry("updating adj_list", "");
   int w, my_location, color_v, color_w;
   for (int v=0;v<nu_vertices;v++){
     adj_list[v].resize(G.adj_list[v].size()); // the same number of neighbors here
@@ -201,6 +212,7 @@ void colored_graph::init(const marked_graph& G)
   
   int m, mp; // pair of types
 
+  logger::add_entry("Find deg and ver_types", "");
   deg.resize(nu_vertices);
   is_star_vertex.resize(nu_vertices);
   ver_type.resize(nu_vertices);
@@ -230,6 +242,7 @@ void colored_graph::init(const marked_graph& G)
     // check if it was star vertex
     if (is_star_vertex[v] == true)
       star_vertices.push_back(v);
+
 
     // now, we form the type of this vertex
     // the type of a vertex is a vector x as follows:

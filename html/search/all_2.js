@@ -1,11 +1,14 @@
 var searchData=
 [
-  ['c',['C',['../classmarked__graph__encoder.html#af82bc0653414091291cb75553a407bdb',1,'marked_graph_encoder']]],
-  ['clear',['clear',['../classmarked__graph__compressed.html#af58307bfadcaa4c3ca6dd594c2f9b3a9',1,'marked_graph_compressed']]],
-  ['colored_5fgraph',['colored_graph',['../classcolored__graph.html',1,'colored_graph'],['../classcolored__graph.html#a0374481a0474ac8e9b77689f74b5ed9b',1,'colored_graph::colored_graph(const marked_graph &amp;graph, int depth, int max_degree)'],['../classcolored__graph.html#a104bcd930e68c04e4786678923bfdca1',1,'colored_graph::colored_graph()']]],
-  ['compressed',['compressed',['../classmarked__graph__encoder.html#ac2ded200860fdd2321f86dd76b28bcb3',1,'marked_graph_encoder']]],
-  ['compression_5fhelper_2ecpp',['compression_helper.cpp',['../compression__helper_8cpp.html',1,'']]],
-  ['compression_5fhelper_2eh',['compression_helper.h',['../compression__helper_8h.html',1,'']]],
-  ['compute_5fn',['compute_N',['../classb__graph__encoder.html#a3ffcfb945e8563d01e683fc5e5127d6d',1,'b_graph_encoder::compute_N()'],['../classgraph__encoder.html#ae7273c47d6dab8367daa5ee6a9cdbc72',1,'graph_encoder::compute_N()']]],
-  ['compute_5fproduct',['compute_product',['../compression__helper_8cpp.html#ac683dff9ff89796df0ab62cd65c30990',1,'compute_product(mpz_class N, mpz_class k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#ac683dff9ff89796df0ab62cd65c30990',1,'compute_product(mpz_class N, mpz_class k, int s):&#160;compression_helper.cpp']]]
+  ['b',['b',['../classb__graph__encoder.html#a767826e268702e45ab71565e096a52b8',1,'b_graph_encoder::b()'],['../classb__graph__decoder.html#a12d1a4a91f342111d2116196cb826317',1,'b_graph_decoder::b()']]],
+  ['b_5fgraph',['b_graph',['../classb__graph.html',1,'b_graph'],['../classb__graph.html#a83ebab7ff22a3cf19c0cf62de3f8b306',1,'b_graph::b_graph()'],['../classb__graph.html#a147326d0a78853a1f33ca4bed03393cc',1,'b_graph::b_graph(const vector&lt; vector&lt; int &gt; &gt; &amp;list, const vector&lt; int &gt; &amp;left_deg, const vector&lt; int &gt; right_deg)'],['../classb__graph.html#a6032fbf9681d275260dd9a8587447e61',1,'b_graph::b_graph(vector&lt; vector&lt; int &gt; &gt; list, vector&lt; int &gt; right_deg)'],['../classb__graph.html#af94e3bc6694a312f13c9305ec5ffe4ee',1,'b_graph::b_graph(vector&lt; vector&lt; int &gt; &gt; list)']]],
+  ['b_5fgraph_5fdecoder',['b_graph_decoder',['../classb__graph__decoder.html',1,'b_graph_decoder'],['../classb__graph__decoder.html#a2284e65bb4fcdd9356fc6a3109c2a4a7',1,'b_graph_decoder::b_graph_decoder()']]],
+  ['b_5fgraph_5fencoder',['b_graph_encoder',['../classb__graph__encoder.html',1,'b_graph_encoder'],['../classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283',1,'b_graph_encoder::b_graph_encoder()']]],
+  ['b_5fgraph_5ftest',['b_graph_test',['../test_8cpp.html#aa276850b1d7d04eb917a6fc7415b9566',1,'test.cpp']]],
+  ['beta',['beta',['../classb__graph__encoder.html#ae54d76cc4cee399d98951f870897a144',1,'b_graph_encoder::beta()'],['../classb__graph__decoder.html#a3e5babfb07af486c1d9e991f65251266',1,'b_graph_decoder::beta()'],['../classgraph__encoder.html#a40880adecfd63fb86e94b4b0fc3f6bc2',1,'graph_encoder::beta()'],['../classgraph__decoder.html#aa57c11e4c09c52101682ff83286162f7',1,'graph_decoder::beta()']]],
+  ['binomial',['binomial',['../compression__helper_8cpp.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp']]],
+  ['bipartite_5fgraph_2ecpp',['bipartite_graph.cpp',['../bipartite__graph_8cpp.html',1,'']]],
+  ['bipartite_5fgraph_2eh',['bipartite_graph.h',['../bipartite__graph_8h.html',1,'']]],
+  ['bipartite_5fgraph_5fcompression_2ecpp',['bipartite_graph_compression.cpp',['../bipartite__graph__compression_8cpp.html',1,'']]],
+  ['bipartite_5fgraph_5fcompression_2eh',['bipartite_graph_compression.h',['../bipartite__graph__compression_8h.html',1,'']]]
 ];

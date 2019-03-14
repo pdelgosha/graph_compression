@@ -1,0 +1,82 @@
+\hypertarget{classlog__entry}{}\section{log\+\_\+entry Class Reference}
+\label{classlog__entry}\index{log\+\_\+entry@{log\+\_\+entry}}
+
+
+{\ttfamily \#include $<$logger.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlog__entry_ac5c6d1454c9285c418e3359b82cdd573}{log\+\_\+entry} (string \hyperlink{classlog__entry_ac65943b778a5978a579d984a6b682def}{name}, string \hyperlink{classlog__entry_a35acb4013a550dd9926c6cccd93300dd}{description}, int \hyperlink{classlog__entry_abfcc98c447997da2eb424a73f5f06da4}{depth})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classlog__entry_ac65943b778a5978a579d984a6b682def}{name}
+\item 
+string \hyperlink{classlog__entry_a35acb4013a550dd9926c6cccd93300dd}{description}
+\item 
+int \hyperlink{classlog__entry_abfcc98c447997da2eb424a73f5f06da4}{depth}
+\item 
+high\+\_\+resolution\+\_\+clock\+::time\+\_\+point \hyperlink{classlog__entry_a9477b6872dfa3609db1e4e6a97ed5dba}{t}
+\item 
+system\+\_\+clock\+::time\+\_\+point \hyperlink{classlog__entry_a2877798c71ba0f0762b821633c8bc517}{sys\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classlog__entry_ac5c6d1454c9285c418e3359b82cdd573}\label{classlog__entry_ac5c6d1454c9285c418e3359b82cdd573}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!log\+\_\+entry@{log\+\_\+entry}}
+\index{log\+\_\+entry@{log\+\_\+entry}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{log\+\_\+entry()}{log\_entry()}}
+{\footnotesize\ttfamily log\+\_\+entry\+::log\+\_\+entry (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{string}]{description,  }\item[{int}]{depth }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+10                                                                  \{
+11   \hyperlink{classlog__entry_ac65943b778a5978a579d984a6b682def}{name} = name\_;
+12   \hyperlink{classlog__entry_a35acb4013a550dd9926c6cccd93300dd}{description} = description\_;
+13   \hyperlink{classlog__entry_abfcc98c447997da2eb424a73f5f06da4}{depth} = depth\_;
+14   \hyperlink{classlog__entry_a9477b6872dfa3609db1e4e6a97ed5dba}{t} = high\_resolution\_clock::now();
+15   \hyperlink{classlog__entry_a2877798c71ba0f0762b821633c8bc517}{sys\_t} = system\_clock::now();
+16 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classlog__entry_abfcc98c447997da2eb424a73f5f06da4}\label{classlog__entry_abfcc98c447997da2eb424a73f5f06da4}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!depth@{depth}}
+\index{depth@{depth}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{depth}{depth}}
+{\footnotesize\ttfamily int log\+\_\+entry\+::depth}
+
+\mbox{\Hypertarget{classlog__entry_a35acb4013a550dd9926c6cccd93300dd}\label{classlog__entry_a35acb4013a550dd9926c6cccd93300dd}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!description@{description}}
+\index{description@{description}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily string log\+\_\+entry\+::description}
+
+\mbox{\Hypertarget{classlog__entry_ac65943b778a5978a579d984a6b682def}\label{classlog__entry_ac65943b778a5978a579d984a6b682def}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!name@{name}}
+\index{name@{name}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string log\+\_\+entry\+::name}
+
+\mbox{\Hypertarget{classlog__entry_a2877798c71ba0f0762b821633c8bc517}\label{classlog__entry_a2877798c71ba0f0762b821633c8bc517}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!sys\+\_\+t@{sys\+\_\+t}}
+\index{sys\+\_\+t@{sys\+\_\+t}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{sys\+\_\+t}{sys\_t}}
+{\footnotesize\ttfamily system\+\_\+clock\+::time\+\_\+point log\+\_\+entry\+::sys\+\_\+t}
+
+\mbox{\Hypertarget{classlog__entry_a9477b6872dfa3609db1e4e6a97ed5dba}\label{classlog__entry_a9477b6872dfa3609db1e4e6a97ed5dba}} 
+\index{log\+\_\+entry@{log\+\_\+entry}!t@{t}}
+\index{t@{t}!log\+\_\+entry@{log\+\_\+entry}}
+\subsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily high\+\_\+resolution\+\_\+clock\+::time\+\_\+point log\+\_\+entry\+::t}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{logger_8h}{logger.\+h}\item 
+\hyperlink{logger_8cpp}{logger.\+cpp}\end{DoxyCompactItemize}

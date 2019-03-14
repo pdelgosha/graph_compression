@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['main',['main',['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test.cpp'],['../test__mp_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_mp.cpp']]],
-  ['marked_5fer',['marked_ER',['../random__graph_8cpp.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp'],['../random__graph_8h.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp']]],
-  ['marked_5fgraph',['marked_graph',['../classmarked__graph.html#acff011a677859b66513c42c4f7e8d531',1,'marked_graph::marked_graph()'],['../classmarked__graph.html#a83ae66845b006cfeeed677bdc2d584db',1,'marked_graph::marked_graph(int n, vector&lt; pair&lt; pair&lt; int, int &gt;, pair&lt; int, int &gt; &gt; &gt; edges, vector&lt; int &gt; vertex_marks)']]],
-  ['marked_5fgraph_5fdecoder',['marked_graph_decoder',['../classmarked__graph__decoder.html#ad13aa15246efd3754b3ba7d2c28300d9',1,'marked_graph_decoder']]],
-  ['marked_5fgraph_5fencoder',['marked_graph_encoder',['../classmarked__graph__encoder.html#a128d2a38b23ce620c77d00a5eff487ea',1,'marked_graph_encoder']]],
-  ['marked_5fgraph_5fencoder_5ftest',['marked_graph_encoder_test',['../test_8cpp.html#af087647683f99aca0cfa687af0d88813',1,'test.cpp']]],
-  ['mp_5ftest',['mp_test',['../test__mp_8cpp.html#a2f49a1fae1f238b0451e12ece3ed2f12',1,'test_mp.cpp']]]
+  ['init',['init',['../classb__graph__encoder.html#a9b62ac0580191ac42b98d764046af7cb',1,'b_graph_encoder::init()'],['../classb__graph__decoder.html#a9498e8aa7391480cc663bffef3718c6b',1,'b_graph_decoder::init()'],['../classcolored__graph.html#a0e867afa9f5491dfc05bed10680f0709',1,'colored_graph::init()'],['../classgraph__encoder.html#a6cfb6fca4bc50d4e5d267060a91f43c3',1,'graph_encoder::init()'],['../classgraph__decoder.html#a97a9dcd5af21ece86fa91adcb41ca9cc',1,'graph_decoder::init()']]],
+  ['init_5falph_5fsize',['init_alph_size',['../classtime__series__encoder.html#a8607e6953e5115a3c8a198266d2db8ce',1,'time_series_encoder']]],
+  ['init_5ffreq',['init_freq',['../classtime__series__encoder.html#af4b8988acb10fe076be59302e47084be',1,'time_series_encoder']]],
+  ['init_5fg',['init_G',['../classtime__series__encoder.html#a90eb54134d6af2ab2cca36ee13956470',1,'time_series_encoder']]]
 ];

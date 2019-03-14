@@ -1,8 +1,20 @@
 var searchData=
 [
-  ['n',['n',['../classb__graph.html#a9e211d40c1799bc9b125de472ff06642',1,'b_graph::n()'],['../classb__graph__decoder.html#a2caddd63df6808c95e2ee738f7c77870',1,'b_graph_decoder::n()'],['../classmarked__graph__compressed.html#a8d841016ddb11cfd33748c8deb6277ba',1,'marked_graph_compressed::n()'],['../classmarked__graph__encoder.html#a4c66d9fdbc14c97523715aac7e4511cb',1,'marked_graph_encoder::n()'],['../classmarked__graph__decoder.html#aefc93611bc4a3e9a5d3956d97649a0e9',1,'marked_graph_decoder::n()'],['../classgraph.html#ac8b3474ce95c04087c312508ec1443b6',1,'graph::n()'],['../classgraph__encoder.html#a7fedc9ace19e34abb32f1851c8597591',1,'graph_encoder::n()'],['../classgraph__decoder.html#a6bc1e72b2f7a913d14b789a6c2d92c1e',1,'graph_decoder::n()'],['../classtime__series__encoder.html#ab84b7528d50c495fc140f1eb50d9b539',1,'time_series_encoder::n()'],['../classtime__series__decoder.html#a05f75c42ac2acd63766714e6e09f1a65',1,'time_series_decoder::n()']]],
-  ['np',['np',['../classb__graph.html#acffdd5f20329515eb6ec17ad24f1ca64',1,'b_graph::np()'],['../classb__graph__decoder.html#a7eca48cf8793e722d1b29dbdc9fd2dca',1,'b_graph_decoder::np()']]],
-  ['nu_5fleft_5fvertices',['nu_left_vertices',['../classb__graph.html#a5e71d5c97f2501b0b93c17146cf7e68e',1,'b_graph']]],
-  ['nu_5fright_5fvertices',['nu_right_vertices',['../classb__graph.html#abecfd7d6fbd0d9a554fe0d9aa3241a04',1,'b_graph']]],
-  ['nu_5fvertices',['nu_vertices',['../classcolored__graph.html#a90ece8eb1fec52f3f41549ab527c1d5b',1,'colored_graph::nu_vertices()'],['../classmarked__graph.html#acf79c6aeb8f32614cb14a5baaa6c9f9b',1,'marked_graph::nu_vertices()'],['../classgraph.html#a70a6e0e4e0a874ab122405abd38f83cd',1,'graph::nu_vertices()']]]
+  ['m',['M',['../classcolored__graph.html#ab72c568fe12f7c849ca6bffb145aec47',1,'colored_graph']]],
+  ['main',['main',['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test.cpp'],['../test__mp_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_mp.cpp']]],
+  ['marked_5fer',['marked_ER',['../random__graph_8cpp.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp'],['../random__graph_8h.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp']]],
+  ['marked_5fgraph',['marked_graph',['../classmarked__graph.html',1,'marked_graph'],['../classmarked__graph.html#acff011a677859b66513c42c4f7e8d531',1,'marked_graph::marked_graph()'],['../classmarked__graph.html#a83ae66845b006cfeeed677bdc2d584db',1,'marked_graph::marked_graph(int n, vector&lt; pair&lt; pair&lt; int, int &gt;, pair&lt; int, int &gt; &gt; &gt; edges, vector&lt; int &gt; vertex_marks)']]],
+  ['marked_5fgraph_2ecpp',['marked_graph.cpp',['../marked__graph_8cpp.html',1,'']]],
+  ['marked_5fgraph_2eh',['marked_graph.h',['../marked__graph_8h.html',1,'']]],
+  ['marked_5fgraph_5fcompressed',['marked_graph_compressed',['../classmarked__graph__compressed.html',1,'']]],
+  ['marked_5fgraph_5fcompression_2ecpp',['marked_graph_compression.cpp',['../marked__graph__compression_8cpp.html',1,'']]],
+  ['marked_5fgraph_5fcompression_2eh',['marked_graph_compression.h',['../marked__graph__compression_8h.html',1,'']]],
+  ['marked_5fgraph_5fdecoder',['marked_graph_decoder',['../classmarked__graph__decoder.html',1,'marked_graph_decoder'],['../classmarked__graph__decoder.html#ad13aa15246efd3754b3ba7d2c28300d9',1,'marked_graph_decoder::marked_graph_decoder()']]],
+  ['marked_5fgraph_5fencoder',['marked_graph_encoder',['../classmarked__graph__encoder.html',1,'marked_graph_encoder'],['../classmarked__graph__encoder.html#a128d2a38b23ce620c77d00a5eff487ea',1,'marked_graph_encoder::marked_graph_encoder()']]],
+  ['marked_5fgraph_5fencoder_5ftest',['marked_graph_encoder_test',['../test_8cpp.html#af087647683f99aca0cfa687af0d88813',1,'test.cpp']]],
+  ['message_5fdict',['message_dict',['../classgraph__message.html#ad0a6d35ac8550fb7ff03ce90fce7d5a5',1,'graph_message']]],
+  ['message_5flist',['message_list',['../classgraph__message.html#aa17fdb629b423343edfafa97252763ef',1,'graph_message']]],
+  ['message_5fmark',['message_mark',['../classgraph__message.html#a49d9af5150daf0599c29fe18cb032fa5',1,'graph_message']]],
+  ['messages',['messages',['../classgraph__message.html#aac77e098f0acf9650116a8e51fe3b4b7',1,'graph_message']]],
+  ['mp_5ftest',['mp_test',['../test__mp_8cpp.html#a2f49a1fae1f238b0451e12ece3ed2f12',1,'test_mp.cpp']]]
 ];
