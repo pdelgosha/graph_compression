@@ -80,6 +80,7 @@ void marked_graph_encoder_test()
   //ifstream inp("test_graphs/ten_node.txt"); //("test_graphs/hexagon_diagonal_marked.txt");
   //ifstream inp("test_graphs/problem_4.txt");
   //inp >> G;
+  //G = marked_graph(5, {{{0,1}, {0,0}}, {{1,2}, {0,0}}, {{0,3},{0,0}}}, {0,0,0,0,0});
   //int h, delta;
   //cout << " h " << endl;
   //cin >> h;
@@ -93,6 +94,7 @@ void marked_graph_encoder_test()
   logger::add_entry("Encode","");
 
   marked_graph_encoder E(3,20);
+  //marked_graph_encoder E(1,20);
   marked_graph_compressed C = E.encode(G);
   //cerr << " graph encoded " << endl;
 

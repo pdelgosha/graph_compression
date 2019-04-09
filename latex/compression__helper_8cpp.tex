@@ -35,11 +35,11 @@ the binomial coefficient n! / m! (n-\/m)!. If n $<$= 0, or m $>$ n, or m $<$= 0,
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-29 \{
-30   \textcolor{keywordflow}{if} (n <= 0 or m > n or m <= 0)
-31     \textcolor{keywordflow}{return} 0;
-32   \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(n, m, 1) / \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(m, m, 1);
-33 \}
+31 \{
+32   \textcolor{keywordflow}{if} (n <= 0 or m > n or m <= 0)
+33     \textcolor{keywordflow}{return} 0;
+34   \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(n, m, 1) / \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(m, m, 1);
+35 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}\label{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}} 
 \index{compression\+\_\+helper.\+cpp@{compression\+\_\+helper.\+cpp}!compute\+\_\+product@{compute\+\_\+product}}
@@ -78,16 +78,18 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
        << endl;
 14     \textcolor{keywordflow}{return} 1;
 15   \}
-16   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0) \textcolor{comment}{// the terms go negative }
-17     \textcolor{keywordflow}{return} 0;
-18   
-19   \textcolor{comment}{// we do this by dividing the terms into two parts}
-20   mpz\_class m = k / 2; \textcolor{comment}{// the middle point}
-21   mpz\_class left, right; \textcolor{comment}{// each of the half products }
-22   left = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(N, m, s);
-23   right = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(N-m * s, k-m, s);
-24   \textcolor{keywordflow}{return} left * right;
-25 \}
+16   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
+17     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
+18     \textcolor{keywordflow}{return} 0;
+19   \}
+20   
+21   \textcolor{comment}{// we do this by dividing the terms into two parts}
+22   mpz\_class m = k / 2; \textcolor{comment}{// the middle point}
+23   mpz\_class left, right; \textcolor{comment}{// each of the half products }
+24   left = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(N, m, s);
+25   right = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(N-m * s, k-m, s);
+26   \textcolor{keywordflow}{return} left * right;
+27 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}\label{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}} 
 \index{compression\+\_\+helper.\+cpp@{compression\+\_\+helper.\+cpp}!prod\+\_\+factorial@{prod\+\_\+factorial}}
@@ -111,14 +113,14 @@ $\prod_{v = i}^j a_v ! $
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-37 \{
-38   \textcolor{keywordflow}{if} (i == j)\{
-39     \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(a[i], a[i], 1);
-40   \}\textcolor{keywordflow}{else}\{
-41     \textcolor{keywordtype}{int} k = (i+j)/2;
-42     mpz\_class x = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, i, k);
-43     mpz\_class y = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, k+1, j);
-44     \textcolor{keywordflow}{return} x * y;
-45   \}
-46 \}
+39 \{
+40   \textcolor{keywordflow}{if} (i == j)\{
+41     \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(a[i], a[i], 1);
+42   \}\textcolor{keywordflow}{else}\{
+43     \textcolor{keywordtype}{int} k = (i+j)/2;
+44     mpz\_class x = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, i, k);
+45     mpz\_class y = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, k+1, j);
+46     \textcolor{keywordflow}{return} x * y;
+47   \}
+48 \}
 \end{DoxyCode}

@@ -1,5 +1,10 @@
 #include "graph_message.h"
 
+size_t vint_hash::operator()(vector<int> const& v) const{
+  return boost::hash_range(v.begin(),v.end());
+}
+
+
   /*!
     The structure of messages is as follows. To simplify the notation, we use \f$M_k(v,w)\f$ to denote the message sent from \f$v\f$ towards \f$w\f$ at time step \f$k\f$, this is in fact messages[v][i][t] where i is the index of \f$w\f$ among neighbors of \f$v\f$.
 
@@ -26,32 +31,61 @@ void graph_message::update_messages(const marked_graph& G)
   message_list.resize(h);
 
   // initialize the messages
-  logger::add_entry("initializing messages","");
-  vector<int> m;
+
+  logger::add_entry("resizing messages", "");
   for (int v=0;v<nu_vertices;v++){
     messages[v].resize(G.adj_list[v].size());
     for (int i=0;i<G.adj_list[v].size();i++){
-      // the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which is \xi(v,w) and a subtree component which is a single root with mark \tau(v). This is encoded as a message vector with size 3 of the form (\tau(v), 0,\xi(v,w)) where the last 0 indicates that there is no offspring.
       messages[v][i].resize(h);
+    }
+  }
+
+  logger::add_entry("initializing messages","");
+  vector<int> m(3);
+  unordered_map<vector<int>, int, vint_hash>::iterator it;
+  //map<vector<int>, int>::iterator it;
+
+  for (int v=0;v<nu_vertices;v++){
+
+    for (int i=0;i<G.adj_list[v].size();i++){
+      // the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which is \xi(v,w) and a subtree component which is a single root with mark \tau(v). This is encoded as a message vector with size 3 of the form (\tau(v), 0,\xi(v,w)) where the last 0 indicates that there is no offspring.
+
 
       //vector<int> m;
-      m.clear();
-      m.push_back(G.ver_mark[v]);
-      m.push_back(0);
-      m.push_back(G.adj_list[v][i].second.first);
+      //m.clear();
+      //m.push_back(G.ver_mark[v]);
+      //m.push_back(0);
+      //m.push_back(G.adj_list[v][i].second.first);
+
+      m[0] = G.ver_mark[v];
+      m[1] = 0;
+      m[2] = G.adj_list[v][i].second.first;
 
       // adding this message to the message dictionary
-      if (message_dict[0].find(m) == message_dict[0].end()){
+      it = message_dict[0].find(m); 
+      if (it == message_dict[0].end()){
         message_dict[0][m] = message_list[0].size();
+        messages[v][i][0] = message_list[0].size();
         message_list[0].push_back(m);
+      }else{
+        messages[v][i][0] = it->second;
       }
 
-      messages[v][i][0] = message_dict[0][m]; // the message at time 0
+      //messages[v][i][0] = message_dict[0][m]; // the message at time 0
     }
   }
 
   // updating messages
   logger::add_entry("updating messages", "");
+  m.reserve(5+ 2 * Delta);
+
+  duration<float> diff;
+  high_resolution_clock::time_point t1, t2; 
+  float agg_search = 0;
+  float agg_insert = 0;
+  float agg_m = 0;
+  float agg_sort = 0;
+
   for (int t=1;t<h;t++){
     for (int v=0;v<nu_vertices;v++){
       //cerr << " vertex " << v << endl;
@@ -71,15 +105,25 @@ void graph_message::update_messages(const marked_graph& G)
           neighbor_messages.push_back(pair<pair<int, int> , int> (pair<int,int>(previous_message, mark_to_v), w));
         }
 
-        sort(neighbor_messages.begin(), neighbor_messages.end()); // sorts lexicographically 
+        t1 = high_resolution_clock::now();
+        sort(neighbor_messages.begin(), neighbor_messages.end()); // sorts lexicographically
+        t2 = high_resolution_clock::now();
+        diff = t2 - t1;
+        agg_sort += diff.count();
+
         for (int i=0;i<G.adj_list[v].size();i++){
           // let w be the current ith neighbor of v
           int w = G.adj_list[v][i].first;
           // first, start with the mark of v and the number of offsprings in the subgraph component of the message
           //vector<int> m; // the message that v is going to send to w
+          t1 = high_resolution_clock::now();
           m.clear();
           m.push_back(G.ver_mark[v]); // mark of v
           m.push_back(G.adj_list[v].size()-1); // the number of offsprings in the subgraph component of the message
+          t2 = high_resolution_clock::now();
+          diff = t2 - t1;
+          agg_m += diff.count();
+
           // stacking messages from all neighbors of v expect for w towards v at time t-1
           for (int j=0;j<G.adj_list[v].size();j++){
             if (neighbor_messages[j].second != w){
@@ -87,46 +131,94 @@ void graph_message::update_messages(const marked_graph& G)
                 // this means that one of the messages that should be aggregated is * typed, therefore the outgoing messages should also be * typed
                 // i.e. the message has only two entries: (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
                 // since after this loop, the mark \xi(w,v) is added to the message (after the comment starting with 'finally'), we only add the initial -1 part
+                t1 = high_resolution_clock::now();
                 m.resize(0);
                 m.push_back(-1);
+                t2 = high_resolution_clock::now();
+                diff = t2 - t1;
+                agg_m += diff.count();
                 break; // the message is decided, we do not need to go over any of the other neighbor messages, hence break
               }
               // this message should be added to the list of messages
+              t1 = high_resolution_clock::now();
               m.push_back(neighbor_messages[j].first.first); // message part
               m.push_back(neighbor_messages[j].first.second); // mark part towards v
+              t2 = high_resolution_clock::now();
+              diff = t2 - t1;
+              agg_m += diff.count();
+
             }
           }
           // if we break, we reach at this point and message is (-1), otherwise the message is of the form (\tau(v), \deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. 
           // finally, the mark of the edge between v and w towards v, \xi(w,v), should be added to this list
+          t1 = high_resolution_clock::now();
           m.push_back(G.adj_list[v][i].second.first);
+          t2 = high_resolution_clock::now();
+          diff = t2 - t1;
+          agg_m += diff.count();
 
           // set the current message
-          if (message_dict[t].find(m) == message_dict[t].end()){
-            message_dict[t][m] = message_list[t].size();
+          t1 = high_resolution_clock::now();
+          it = message_dict[t].find(m);
+          t2 = high_resolution_clock::now();
+          diff = t2 - t1;
+          agg_search += diff.count();
+
+          if (it == message_dict[t].end()){
+            t1 = high_resolution_clock::now();
+            //message_dict[t][m] = message_list[t].size();
+            message_dict[t].insert(pair<vector<int>, int> (m, message_list[t].size()));
+            t2 = high_resolution_clock::now();
+            diff = t2 - t1;
+            agg_insert += diff.count();
+
+            messages[v][i][t] = message_list[t].size();
             message_list[t].push_back(m);
+          }else{
+            messages[v][i][t] = it->second;
           }
-          messages[v][i][t] = message_dict[t][m];
         }
       }else{
         // if the degree of v is bigger than Delta, the message towards all neighbors is of the form *
         // i.e. message of v towards a neighbor w is of the form (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
         for (int i=0;i<G.adj_list[v].size();i++){
           //vector<int> m; // the current message from v to ith neighbor
+          t1 = high_resolution_clock::now();
           m.clear();
           m.resize(2);
           m[0] = -1;
           m[1] = G.adj_list[v][i].second.first;
+          t2 = high_resolution_clock::now();
+          diff = t2 - t1;
+          agg_m += diff.count();
 
           // set the current message
-          if (message_dict[t].find(m) == message_dict[t].end()){
-            message_dict[t][m] = message_list[t].size();
+          t1 = high_resolution_clock::now();
+          it = message_dict[t].find(m);
+          t2 = high_resolution_clock::now();
+          diff = t2 - t1;
+          agg_search += diff.count();
+
+          if (it == message_dict[t].end()){
+            t1 = high_resolution_clock::now();
+            //message_dict[t][m] = message_list[t].size();
+            message_dict[t].insert(pair<vector<int>, int> (m, message_list[t].size()));
+            t2 = high_resolution_clock::now();
+            diff = t2 - t1;
+            agg_insert += diff.count();
+            messages[v][i][t] = message_list[t].size();
             message_list[t].push_back(m);
+          }else{
+            messages[v][i][t] = it->second;
           }
-          messages[v][i][t] = message_dict[t][m];
         }
       }
     }
   }
+  cerr << " total time to search in hash table: " << agg_search << endl;
+  cerr << " total time to insert in hash table: " << agg_insert << endl;
+  cerr << " total time to modify vector m  " << agg_m << endl;
+  cerr << " total time to sort  " << agg_sort << endl;
 
   // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \xi(v,w)
   logger::add_entry("* symmetrizing", "");

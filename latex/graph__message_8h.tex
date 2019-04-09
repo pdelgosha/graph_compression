@@ -2,10 +2,14 @@
 \label{graph__message_8h}\index{graph\+\_\+message.\+h@{graph\+\_\+message.\+h}}
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$boost/functional/hash/hash.\+hpp$>$}\newline
 {\ttfamily \#include \char`\"{}marked\+\_\+graph.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structvint__hash}{vint\+\_\+hash}
 \item 
 class \hyperlink{classgraph__message}{graph\+\_\+message}
 \begin{DoxyCompactList}\small\item\em this class takes care of message passing on marked graphs. \end{DoxyCompactList}\item 
@@ -31,7 +35,7 @@ used for sorting messages
 
 
 \begin{DoxyCode}
-170                                                                                     \{
-171   \textcolor{keywordflow}{return} a.first < b.first;
-172 \}
+262                                                                                     \{
+263   \textcolor{keywordflow}{return} a.first < b.first;
+264 \}
 \end{DoxyCode}

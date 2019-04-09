@@ -13,8 +13,10 @@ mpz_class compute_product(mpz_class N, mpz_class k, int s){
     cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
     return 1;
   }
-  if (N - (k-1) * s <= 0) // the terms go negative 
+  if (N - (k-1) * s <= 0){ // the terms go negative
+    //cerr << " WARNING: compute_product called for N - (k-1) * s <= 0 " << endl;
     return 0;
+  }
   
   // we do this by dividing the terms into two parts
   mpz_class m = k / 2; // the middle point

@@ -3,11 +3,16 @@
 
 #include <vector>
 #include <map>
+#include <unordered_map>
+#include <boost/functional/hash/hash.hpp>
 #include "marked_graph.h"
 #include "logger.h"
 
 using namespace std;
 
+struct vint_hash{
+  size_t operator()(vector<int> const& v) const;
+};
 
 //! this class takes care of message passing on marked graphs.
 /*!
@@ -37,7 +42,10 @@ public:
   //const marked_graph & G; //!< reference to the marked graph for which we do message passing
   vector<vector<vector<int > > > messages; //!< messages[v][i][t] is the integer version of the  message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
 
-  vector<map<vector<int>, int> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
+  vector<unordered_map<vector<int>, int, vint_hash> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
+
+  //vector<map<vector<int>, int> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
+
   vector<vector<vector<int> > > message_list; //!< message_list[t] is the list of messages present in the graph at depth t, stored in an order consistent with message_dict[t], i.e. for a message m, if messsage_dict[t][m] = i, then message_list[t][i] = m. This is constructed in such a way that message_list[t][message_dict[t][x]] = x. message_list[h-1] is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -1, and the second being the edge mark component (towards the 'me' vertex). 
 
 

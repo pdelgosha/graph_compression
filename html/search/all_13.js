@@ -8,5 +8,6 @@ var searchData=
   ['ver_5ftypes',['ver_types',['../classmarked__graph__compressed.html#af446cc5e23c241a92b76642fd5ebc403',1,'marked_graph_compressed']]],
   ['verbose',['verbose',['../classlogger.html#aab3c778c044ddf4b1b5fad8f4c230ff9',1,'logger']]],
   ['verbose_5fstream',['verbose_stream',['../classlogger.html#aec58cd6310ffb9939f8509daf1fcfbf8',1,'logger']]],
-  ['vertex_5fmarks',['vertex_marks',['../classmarked__graph__decoder.html#a98be932a5abff7efbc8dd4290268b69a',1,'marked_graph_decoder']]]
+  ['vertex_5fmarks',['vertex_marks',['../classmarked__graph__decoder.html#a98be932a5abff7efbc8dd4290268b69a',1,'marked_graph_decoder']]],
+  ['vint_5fhash',['vint_hash',['../structvint__hash.html',1,'']]]
 ];
