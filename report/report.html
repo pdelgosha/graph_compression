@@ -13,6 +13,7 @@
 <ul>
 <li><a href="#discussions">Discussions</a><ul>
 <li><a href="#section">2019-04-08</a></li>
+<li><a href="#pm">2019-04-09 8:53 PM</a></li>
 </ul></li>
 </ul>
 </div>
@@ -94,5 +95,147 @@
        35.38 real        33.98 user         0.73 sys</code></pre>
 <p></details></p>
 <p>Here, extracting edge types takes 45% of the compression time, and updating messages takes 93% of extracting edge types. Updating messages takes 5.9s, among which 0.76s is for search in hash table, 1.5s is for insertion in hash table, and 0.8s for modifying vector m (the message vector). This totals to 3s, yet 2.9s remains which is not clear what happens. Maybe I should do a more search on this. I also thought of updating messages parallel since updating for different nodes are independent. So I spent some time last week to learn multi thread programming in C++.</p>
+<h2 id="pm">2019-04-09 8:53 PM</h2>
+<p>Realized that in updating messages, the variable <code>neighbor_messages</code> is defined in each iteration of the loop. I defined it outside the loop, reserved some space for it, and cleared it inside the loop. This made some improvement (around 0.1 - 0.2 s):</p>
+<p><details> <summary> before </summary></p>
+<pre><code>---Construct G () 2019-04-09 05:03:30 PM
+ edges size 299475
+ graph constructed
+|---Encode () 2019-04-09 05:03:31 PM
+|---|---Init compressed () 2019-04-09 05:03:31 PM
+|---|---Extact edge types () 2019-04-09 05:03:31 PM
+|---|---|---Extract messages () 2019-04-09 05:03:31 PM
+|---|---|---|---graph_message::update_message init () 2019-04-09 05:03:31 PM
+|---|---|---|---resizing messages () 2019-04-09 05:03:31 PM
+|---|---|---|---initializing messages () 2019-04-09 05:03:31 PM
+|---|---|---|---updating messages () 2019-04-09 05:03:31 PM
+ total time to search in hash table: 0.76763
+ total time to insert in hash table: 1.55482
+ total time to modify vector m  0.801063
+ total time to sort  0.0744823
+ total time to collect neighbor messages 1.05781
+|---|---|---|---* symmetrizing () 2019-04-09 05:03:37 PM
+|---|---|---|---setting message_mark and is_star_message () 2019-04-09 05:03:37 PM
+|---|---|---colored_graph::init init () 2019-04-09 05:03:37 PM
+|---|---|---updating adj_list () 2019-04-09 05:03:37 PM
+|---|---|---Find deg and ver_types () 2019-04-09 05:03:38 PM
+|---|---Encode * vertices () 2019-04-09 05:03:39 PM
+|---|---Encode * edges () 2019-04-09 05:03:41 PM
+|---|---Encode vertex types () 2019-04-09 05:03:41 PM
+|---|---Extract partition graphs () 2019-04-09 05:03:44 PM
+|---|---Encode partition b graphs () 2019-04-09 05:03:46 PM
+|---|---Encode partition graphs () 2019-04-09 05:03:48 PM
+|---Decode () 2019-04-09 05:03:49 PM
+|---|---Init () 2019-04-09 05:03:49 PM
+|---|---Decode * vertices () 2019-04-09 05:03:49 PM
+|---|---Decode * edges () 2019-04-09 05:03:51 PM
+|---|---Decode vertex types () 2019-04-09 05:03:51 PM
+|---|---Decode partition graphs () 2019-04-09 05:03:57 PM
+|---|---Decode partition b graphs () 2019-04-09 05:03:57 PM
+|---|---Construct decoded graph () 2019-04-09 05:04:01 PM
+|---compare () 2019-04-09 05:04:01 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.945466s [2.729596%]
+|---Encode (): 17.966131s [51.868896%]
+|---|---Init compressed (): 0.000691s [0.003846%]
+|---|---Extact edge types (): 8.346380s [46.456192%]
+|---|---|---Extract messages (): 6.465446s [77.464073%]
+|---|---|---|---graph_message::update_message init (): 0.001417s [0.021923%]
+|---|---|---|---resizing messages (): 0.199745s [3.089419%]
+|---|---|---|---initializing messages (): 0.187164s [2.894831%]
+|---|---|---|---updating messages (): 6.012073s [92.987755%]
+|---|---|---|---* symmetrizing (): 0.030768s [0.475881%]
+|---|---|---|---setting message_mark and is_star_message (): 0.034264s [0.529948%]
+|---|---|---colored_graph::init init (): 0.225783s [2.705163%]
+|---|---|---updating adj_list (): 0.389235s [4.663514%]
+|---|---|---Find deg and ver_types (): 1.265874s [15.166743%]
+|---|---Encode * vertices (): 2.294833s [12.773107%]
+|---|---Encode * edges (): 0.000052s [0.000290%]
+|---|---Encode vertex types (): 2.315811s [12.889873%]
+|---|---Extract partition graphs (): 2.749254s [15.302428%]
+|---|---Encode partition b graphs (): 2.082472s [11.591098%]
+|---|---Encode partition graphs (): 0.174702s [0.972397%]
+|---Decode (): 12.768882s [36.864243%]
+|---|---Init (): 0.000014s [0.000111%]
+|---|---Decode * vertices (): 2.372627s [18.581320%]
+|---|---Decode * edges (): 0.000034s [0.000268%]
+|---|---Decode vertex types (): 6.345600s [49.695812%]
+|---|---Decode partition graphs (): 0.000051s [0.000399%]
+|---|---Decode partition b graphs (): 3.525432s [27.609560%]
+|---|---Construct decoded graph (): 0.525092s [4.112280%]
+|---compare (): 2.957078s [8.537197%]
+       34.64 real        33.47 user         0.72 sys</code></pre>
+<p></details></p>
+<p><details> <summary> after </summary></p>
+<pre><code>|---Construct G () 2019-04-09 05:05:10 PM
+ edges size 300470
+ graph constructed
+|---Encode () 2019-04-09 05:05:11 PM
+|---|---Init compressed () 2019-04-09 05:05:11 PM
+|---|---Extact edge types () 2019-04-09 05:05:11 PM
+|---|---|---Extract messages () 2019-04-09 05:05:11 PM
+|---|---|---|---graph_message::update_message init () 2019-04-09 05:05:11 PM
+|---|---|---|---resizing messages () 2019-04-09 05:05:11 PM
+|---|---|---|---initializing messages () 2019-04-09 05:05:11 PM
+|---|---|---|---updating messages () 2019-04-09 05:05:11 PM
+ total time to search in hash table: 0.755252
+ total time to insert in hash table: 1.52036
+ total time to modify vector m  0.79718
+ total time to sort  0.07528
+ total time to collect neighbor messages 0.752213
+|---|---|---|---* symmetrizing () 2019-04-09 05:05:17 PM
+|---|---|---|---setting message_mark and is_star_message () 2019-04-09 05:05:17 PM
+|---|---|---colored_graph::init init () 2019-04-09 05:05:17 PM
+|---|---|---updating adj_list () 2019-04-09 05:05:17 PM
+|---|---|---Find deg and ver_types () 2019-04-09 05:05:18 PM
+|---|---Encode * vertices () 2019-04-09 05:05:19 PM
+|---|---Encode * edges () 2019-04-09 05:05:21 PM
+|---|---Encode vertex types () 2019-04-09 05:05:21 PM
+|---|---Extract partition graphs () 2019-04-09 05:05:24 PM
+|---|---Encode partition b graphs () 2019-04-09 05:05:26 PM
+|---|---Encode partition graphs () 2019-04-09 05:05:28 PM
+|---Decode () 2019-04-09 05:05:29 PM
+|---|---Init () 2019-04-09 05:05:29 PM
+|---|---Decode * vertices () 2019-04-09 05:05:29 PM
+|---|---Decode * edges () 2019-04-09 05:05:31 PM
+|---|---Decode vertex types () 2019-04-09 05:05:31 PM
+|---|---Decode partition graphs () 2019-04-09 05:05:38 PM
+|---|---Decode partition b graphs () 2019-04-09 05:05:38 PM
+|---|---Construct decoded graph () 2019-04-09 05:05:41 PM
+|---compare () 2019-04-09 05:05:42 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.956205s [2.775045%]
+|---Encode (): 17.612391s [51.113735%]
+|---|---Init compressed (): 0.000653s [0.003709%]
+|---|---Extact edge types (): 7.961563s [45.204330%]
+|---|---|---Extract messages (): 6.084527s [76.423775%]
+|---|---|---|---graph_message::update_message init (): 0.001444s [0.023740%]
+|---|---|---|---resizing messages (): 0.192311s [3.160649%]
+|---|---|---|---initializing messages (): 0.187849s [3.087325%]
+|---|---|---|---updating messages (): 5.632613s [92.572739%]
+|---|---|---|---* symmetrizing (): 0.032790s [0.538907%]
+|---|---|---|---setting message_mark and is_star_message (): 0.037503s [0.616363%]
+|---|---|---colored_graph::init init (): 0.214541s [2.694708%]
+|---|---|---updating adj_list (): 0.395865s [4.972202%]
+|---|---|---Find deg and ver_types (): 1.266586s [15.908758%]
+|---|---Encode * vertices (): 2.331242s [13.236377%]
+|---|---Encode * edges (): 0.000055s [0.000311%]
+|---|---Encode vertex types (): 2.293806s [13.023817%]
+|---|---Extract partition graphs (): 2.750105s [15.614605%]
+|---|---Encode partition b graphs (): 2.096790s [11.905195%]
+|---|---Encode partition graphs (): 0.176885s [1.004324%]
+|---Decode (): 12.922110s [37.501854%]
+|---|---Init (): 0.000021s [0.000161%]
+|---|---Decode * vertices (): 2.465586s [19.080364%]
+|---|---Decode * edges (): 0.000037s [0.000283%]
+|---|---Decode vertex types (): 6.388016s [49.434776%]
+|---|---Decode partition graphs (): 0.000078s [0.000603%]
+|---|---Decode partition b graphs (): 3.535769s [27.362165%]
+|---|---Construct decoded graph (): 0.532570s [4.121383%]
+|---compare (): 2.966536s [8.609321%]
+       34.46 real        33.37 user         0.72 sys</code></pre>
+<p></details></p>
 </body>
 </html>

@@ -85,6 +85,11 @@ void graph_message::update_messages(const marked_graph& G)
   float agg_insert = 0;
   float agg_m = 0;
   float agg_sort = 0;
+  float agg_neigh_message = 0;
+
+  vector<pair<pair<int, int>, int> > neighbor_messages; // the first component is the message and the second is the name of the neighbor
+  // the second component is stored so that after sorting, we know the owner of the message
+  neighbor_messages.reserve(5+2*Delta);
 
   for (int t=1;t<h;t++){
     for (int v=0;v<nu_vertices;v++){
@@ -93,10 +98,10 @@ void graph_message::update_messages(const marked_graph& G)
         // the degree of v is no more than Delta
         // do the standard message passing by aggregating messages from neighbors
         // stacking all the messages from neighbors of v towards v
-        vector<pair<pair<int, int>, int> > neighbor_messages; // the first component is the message and the second is the name of the neighbor
-        // the second component is stored so that after sorting, we know the owner of the message
+        neighbor_messages.clear();
 
-        // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge between w and v towards v is added to it, and then all these objects are stacked in neighbor_messages to be sorted and used afterwards 
+        // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge between w and v towards v is added to it, and then all these objects are stacked in neighbor_messages to be sorted and used afterwards
+        t1 = high_resolution_clock::now();
         for (int i=0;i<G.adj_list[v].size();i++){
           int w = G.adj_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the ith neighbor of vertex v 
           int my_location = G.adj_location[w].at(v); // where is the place of node v among the list of neighbors of the ith neighbor of v
@@ -104,6 +109,9 @@ void graph_message::update_messages(const marked_graph& G)
           int mark_to_v = G.adj_list[v][i].second.first;
           neighbor_messages.push_back(pair<pair<int, int> , int> (pair<int,int>(previous_message, mark_to_v), w));
         }
+        t2 = high_resolution_clock::now();
+        diff = t2 - t1;
+        agg_neigh_message += diff.count();
 
         t1 = high_resolution_clock::now();
         sort(neighbor_messages.begin(), neighbor_messages.end()); // sorts lexicographically
@@ -219,7 +227,7 @@ void graph_message::update_messages(const marked_graph& G)
   cerr << " total time to insert in hash table: " << agg_insert << endl;
   cerr << " total time to modify vector m  " << agg_m << endl;
   cerr << " total time to sort  " << agg_sort << endl;
-
+  cerr << " total time to collect neighbor messages " <<  agg_neigh_message << endl;
   // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \xi(v,w)
   logger::add_entry("* symmetrizing", "");
   for (int v=0;v<nu_vertices;v++){
