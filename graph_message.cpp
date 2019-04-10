@@ -242,8 +242,10 @@ void graph_message::update_messages(const marked_graph& G)
     for (int i=0;i<G.adj_list[v].size();i++){
       if (message_list[h-1][messages[v][i][h-1]][0] == -1){
         // it is of the form *
-        int w = G.adj_list[v][i].first; // the other endpoint of the edge
-        int my_location = G.adj_location[w].at(v); // so that adj_list[w][my_location].first = v
+        w = G.adj_list[v][i].first; // the other endpoint of the edge
+        //my_location = G.adj_location[w].at(v); // so that adj_list[w][my_location].first = v
+        my_location = G.index_in_neighbor[v][i];
+
         //vector<int> m;
         m.clear();
         m.resize(2);
@@ -294,7 +296,9 @@ void colored_graph::init(const marked_graph& G)
 {
   logger::add_entry("colored_graph::init init", "");
   nu_vertices = G.nu_vertices;
-  adj_location = G.adj_location; // neighborhood structure is the same as the given graph
+  //adj_location = G.adj_location; // neighborhood structure is the same as the given graph
+  index_in_neighbor = G.index_in_neighbor;
+
   // assigning edge colors based on the messages given by M
   //M.update_messages();
   adj_list.resize(nu_vertices);
@@ -306,7 +310,8 @@ void colored_graph::init(const marked_graph& G)
     adj_list[v].resize(G.adj_list[v].size()); // the same number of neighbors here
     for (int i=0;i<G.adj_list[v].size();i++){
       w = G.adj_list[v][i].first; // the ith neighbor, the same as in G
-      my_location = G.adj_location[w].at(v); // where v stands among the neighbors of w
+      //my_location = G.adj_location[w].at(v); // where v stands among the neighbors of w
+      my_location = index_in_neighbor[v][i]; 
       color_v = M.messages[v][i][h-1]; // the color towards v corresponds to the message v sends to w
       color_w = M.messages[w][my_location][h-1]; // the color towards w is the message w sends towards v
       adj_list[v][i] = pair<int, pair<int, int> >(w, pair<int, int>(color_v, color_w)); // add w as a neighbor, in the same order as in G, and add the colors towards v and w 

@@ -42,7 +42,7 @@ public:
   //const marked_graph & G; //!< reference to the marked graph for which we do message passing
   vector<vector<vector<int > > > messages; //!< messages[v][i][t] is the integer version of the  message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
 
-  vector<vector<vector<int > > > inward_messages; //!< inward_messages[v][i][t] is the integer version of the  message at time t from the ith neighbor of v towards v (in the order given by adj_list in graph G). 
+  //vector<vector<vector<int > > > inward_messages; //!< inward_messages[v][i][t] is the integer version of the  message at time t from the ith neighbor of v towards v (in the order given by adj_list in graph G). 
 
   vector<unordered_map<vector<int>, int, vint_hash> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
 
@@ -113,7 +113,9 @@ public:
   int nu_vertices; //!< the number of vertices in the graph.
   vector<vector<pair<int, pair<int, int> > > > adj_list; //!< adj_list[i] is the list of edges connected to vertex i, each of the format (other endpoint, color component towards i, color component towards other endpoint). Therefore, the color of an edge between v and its ith neighbor is of the form (adj_list[v][i].second.first, adj_list[v][i].second.second)
 
-  vector<map<int,int> > adj_location;  //!< adj_location[v] for \f$0 \leq v < n\f$, is a map, where adj_location[v][w] denotes the index in adj_list[v] where the information regarding the edge between v and w is stored. Hence, adj_location[v][w] does not exist if w is not adjacent to v, and adj_list[v][adj_location[v][w]] is the edge between v and w
+  vector<vector<int> > index_in_neighbor; //!< index_in_neighbor[v][i] is the index of vertex v in the adjacency list of the ith neighbor of v
+
+  //vector<map<int,int> > adj_location;  //!< adj_location[v] for \f$0 \leq v < n\f$, is a map, where adj_location[v][w] denotes the index in adj_list[v] where the information regarding the edge between v and w is stored. Hence, adj_location[v][w] does not exist if w is not adjacent to v, and adj_list[v][adj_location[v][w]] is the edge between v and w
 
   vector<map<pair<int, int> , int> > deg; //!< deg[v] for a vertex v is a map, where deg[v][(m, m')] for a pair of non star types  m, m' is the number of edges connected to v with type m towards v and type m' towards the other endpoint. Note that only non star types appear in this map. 
 

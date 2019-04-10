@@ -23,8 +23,6 @@ int \hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\+\_\+ver
 \begin{DoxyCompactList}\small\item\em number of vertices in the graph \end{DoxyCompactList}\item 
 vector$<$ vector$<$ pair$<$ int, pair$<$ int, int $>$ $>$ $>$ $>$ \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\+\_\+list}
 \begin{DoxyCompactList}\small\item\em adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, mark towards i, mark towards other endpoint) \end{DoxyCompactList}\item 
-vector$<$ map$<$ int, int $>$ $>$ \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\+\_\+location}
-\begin{DoxyCompactList}\small\item\em adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w \end{DoxyCompactList}\item 
 vector$<$ vector$<$ int $>$ $>$ \hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\+\_\+in\+\_\+neighbor}
 \begin{DoxyCompactList}\small\item\em index\+\_\+in\+\_\+neighbor\mbox{[}v\mbox{]}\mbox{[}i\mbox{]} is the index of vertex v in the adjacency list of the ith neighbor of v \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\+\_\+mark}
@@ -86,7 +84,7 @@ constructs a marked graph based on edges lists and vertex marks.
 4 \{ 
 5   \hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} = n;
 6   \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}.resize(n);
-7   \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}.resize(n);
+7   \textcolor{comment}{//adj\_location.resize(n);}
 8   \hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}.resize(n);
 9   \textcolor{comment}{// modify the edges if necessary so that in each element of the form ((i,j), (x, x')), we have i < j.
        This is important when forming adjacency lists so that the list of each vertex is sorted}
@@ -110,9 +108,9 @@ constructs a marked graph based on edges lists and vertex marks.
 27       cerr << \textcolor{stringliteral}{" ERROR: graph::graph(n, edges) received an invalid pair of edges with n = "} << n << \textcolor{stringliteral}{" : ("} <
       < i << \textcolor{stringliteral}{" , "} << j << \textcolor{stringliteral}{" )"} << endl;
 28     \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[i].push\_back(pair<\textcolor{keywordtype}{int}, pair<int, int> > (j, pair<int, int> (x,y)));
-29     \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[i][j] = \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[i].size() - 1;
+29     \textcolor{comment}{//adj\_location[i][j] = adj\_list[i].size() - 1;}
 30     \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[j].push\_back(pair<\textcolor{keywordtype}{int}, pair<int, int> > (i, pair<int, int> (y,x)));
-31     \hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[j][i] = \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[j].size() - 1;
+31     \textcolor{comment}{//adj\_location[j][i] = adj\_list[j].size() - 1;}
 32     \hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}[i].push\_back(\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[j].size()-1);
 33     \hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}[j].push\_back(\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[i].size()-1);
 34   \}
@@ -216,16 +214,6 @@ two marked graphs are said to be the same if\+: 1) they have the same number of 
 
 
 adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, mark towards i, mark towards other endpoint) 
-
-\mbox{\Hypertarget{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}\label{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}} 
-\index{marked\+\_\+graph@{marked\+\_\+graph}!adj\+\_\+location@{adj\+\_\+location}}
-\index{adj\+\_\+location@{adj\+\_\+location}!marked\+\_\+graph@{marked\+\_\+graph}}
-\subsubsection{\texorpdfstring{adj\+\_\+location}{adj\_location}}
-{\footnotesize\ttfamily vector$<$map$<$int,int$>$ $>$ marked\+\_\+graph\+::adj\+\_\+location}
-
-
-
-adj\+\_\+location\mbox{[}v\mbox{]} for $0 \leq v < n$, is a map, where adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} denotes the index in adj\+\_\+list\mbox{[}v\mbox{]} where the information regarding the edge between v and w is stored. Hence, adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]} does not exist if w is not adjacent to v, and adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}adj\+\_\+location\mbox{[}v\mbox{]}\mbox{[}w\mbox{]}\mbox{]} is the edge between v and w 
 
 \mbox{\Hypertarget{classmarked__graph_aee10b537408de42476609c1e45c075d0}\label{classmarked__graph_aee10b537408de42476609c1e45c075d0}} 
 \index{marked\+\_\+graph@{marked\+\_\+graph}!index\+\_\+in\+\_\+neighbor@{index\+\_\+in\+\_\+neighbor}}

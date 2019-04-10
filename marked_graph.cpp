@@ -4,7 +4,7 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
 { 
   nu_vertices = n;
   adj_list.resize(n);
-  adj_location.resize(n);
+  //adj_location.resize(n);
   index_in_neighbor.resize(n);
   // modify the edges if necessary so that in each element of the form ((i,j), (x, x')), we have i < j. This is important when forming adjacency lists so that the list of each vertex is sorted
   for (int i=0;i<edges.size();i++){
@@ -26,9 +26,9 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
     if (i <0 || i >= n || j < 0 || j >= n || i ==j)
       cerr << " ERROR: graph::graph(n, edges) received an invalid pair of edges with n = " << n << " : (" << i << " , " << j << " )" << endl;
     adj_list[i].push_back(pair<int, pair<int, int> > (j, pair<int, int> (x,y)));
-    adj_location[i][j] = adj_list[i].size() - 1;
+    //adj_location[i][j] = adj_list[i].size() - 1;
     adj_list[j].push_back(pair<int, pair<int, int> > (i, pair<int, int> (y,x)));
-    adj_location[j][i] = adj_list[j].size() - 1;
+    //adj_location[j][i] = adj_list[j].size() - 1;
     index_in_neighbor[i].push_back(adj_list[j].size()-1);
     index_in_neighbor[j].push_back(adj_list[i].size()-1);
   }
