@@ -5,6 +5,7 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
   nu_vertices = n;
   adj_list.resize(n);
   adj_location.resize(n);
+  index_in_neighbor.resize(n);
   // modify the edges if necessary so that in each element of the form ((i,j), (x, x')), we have i < j. This is important when forming adjacency lists so that the list of each vertex is sorted
   for (int i=0;i<edges.size();i++){
     if (edges[i].first.first > edges[i].first.second){
@@ -28,7 +29,11 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
     adj_location[i][j] = adj_list[i].size() - 1;
     adj_list[j].push_back(pair<int, pair<int, int> > (i, pair<int, int> (y,x)));
     adj_location[j][i] = adj_list[j].size() - 1;
+    index_in_neighbor[i].push_back(adj_list[j].size()-1);
+    index_in_neighbor[j].push_back(adj_list[i].size()-1);
   }
+
+
   ver_mark = vertex_marks;
 }
 

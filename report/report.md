@@ -244,3 +244,8 @@ Realized that in updating messages, the variable `neighbor_messages` is defined 
 ```
 
 </details>
+
+
+## 2019-04-09 9:17 PM
+
+Realized that it is not really necessary to work with `adj_location` which is a complex map structure in marked graphs. Instead, defined `index_in_neighbor`: for a vertex v, `index_in_neighbor[v][i]` is the index of v in the adjacency list of the ith neighbor of v.

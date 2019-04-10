@@ -25,8 +25,10 @@ void graph_message::update_messages(const marked_graph& G)
   logger::current_depth++;
   logger::add_entry("graph_message::update_message init", "");
   int nu_vertices = G.nu_vertices;
-
+  int w;
+  int my_location;
   messages.resize(nu_vertices);
+  //inward_message.resize(nu_vertices);
   message_dict.resize(h);
   message_list.resize(h);
 
@@ -35,8 +37,10 @@ void graph_message::update_messages(const marked_graph& G)
   logger::add_entry("resizing messages", "");
   for (int v=0;v<nu_vertices;v++){
     messages[v].resize(G.adj_list[v].size());
+    //inward_messages[v].resize(G.adj_list[v].size());
     for (int i=0;i<G.adj_list[v].size();i++){
       messages[v][i].resize(h);
+      //inward_messages[v][i].resize(h);
     }
   }
 
@@ -62,11 +66,13 @@ void graph_message::update_messages(const marked_graph& G)
       m[2] = G.adj_list[v][i].second.first;
 
       // adding this message to the message dictionary
-      it = message_dict[0].find(m); 
+      it = message_dict[0].find(m);
+      w = G.adj_list[v][i].first;
       if (it == message_dict[0].end()){
         message_dict[0][m] = message_list[0].size();
         messages[v][i][0] = message_list[0].size();
         message_list[0].push_back(m);
+
       }else{
         messages[v][i][0] = it->second;
       }
@@ -103,8 +109,10 @@ void graph_message::update_messages(const marked_graph& G)
         // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge between w and v towards v is added to it, and then all these objects are stacked in neighbor_messages to be sorted and used afterwards
         t1 = high_resolution_clock::now();
         for (int i=0;i<G.adj_list[v].size();i++){
-          int w = G.adj_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the ith neighbor of vertex v 
-          int my_location = G.adj_location[w].at(v); // where is the place of node v among the list of neighbors of the ith neighbor of v
+          w = G.adj_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the ith neighbor of vertex v 
+          //my_location = G.adj_location[w].at(v); <--- the inefficient way
+          my_location = G.index_in_neighbor[v][i];
+          // where is the place of node v among the list of neighbors of the ith neighbor of v
           int previous_message = messages[w][my_location][t-1]; // the message sent from this neighbor towards v at time t-1
           int mark_to_v = G.adj_list[v][i].second.first;
           neighbor_messages.push_back(pair<pair<int, int> , int> (pair<int,int>(previous_message, mark_to_v), w));

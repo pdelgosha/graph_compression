@@ -42,6 +42,8 @@ public:
   //const marked_graph & G; //!< reference to the marked graph for which we do message passing
   vector<vector<vector<int > > > messages; //!< messages[v][i][t] is the integer version of the  message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
 
+  vector<vector<vector<int > > > inward_messages; //!< inward_messages[v][i][t] is the integer version of the  message at time t from the ith neighbor of v towards v (in the order given by adj_list in graph G). 
+
   vector<unordered_map<vector<int>, int, vint_hash> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
 
   //vector<map<vector<int>, int> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary

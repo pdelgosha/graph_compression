@@ -21,6 +21,8 @@ this class takes care of message passing on marked graphs.
 \item 
 vector$<$ vector$<$ vector$<$ int $>$ $>$ $>$ \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}
 \begin{DoxyCompactList}\small\item\em messages\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} is the integer version of the message at time t from vertex v towards its ith neighbor (in the order given by adj\+\_\+list of vertex i in graph G). Messages will be useful to find edge types \end{DoxyCompactList}\item 
+vector$<$ vector$<$ vector$<$ int $>$ $>$ $>$ \hyperlink{classgraph__message_ab34dae49ed64132f2b1bbf626c509cd1}{inward\+\_\+messages}
+\begin{DoxyCompactList}\small\item\em inward\+\_\+messages\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} is the integer version of the message at time t from the ith neighbor of v towards v (in the order given by adj\+\_\+list in graph G). \end{DoxyCompactList}\item 
 vector$<$ unordered\+\_\+map$<$ vector$<$ int $>$, int, \hyperlink{structvint__hash}{vint\+\_\+hash} $>$ $>$ \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\+\_\+dict}
 \begin{DoxyCompactList}\small\item\em message\+\_\+dict\mbox{[}t\mbox{]} for $0 \leq t \leq h-1$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary \end{DoxyCompactList}\item 
 vector$<$ vector$<$ vector$<$ int $>$ $>$ $>$ \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\+\_\+list}
@@ -75,11 +77,11 @@ constructor, given reference to a graph
 
 
 \begin{DoxyCode}
-57                                                                      \{
-58     \hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h} = depth;
-59     \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} = max\_degree;
-60     \hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\_messages}(graph); \textcolor{comment}{// do message passing}
-61   \}
+59                                                                      \{
+60     \hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h} = depth;
+61     \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} = max\_degree;
+62     \hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\_messages}(graph); \textcolor{comment}{// do message passing}
+63   \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}\label{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}} 
 \index{graph\+\_\+message@{graph\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
@@ -93,7 +95,7 @@ default constructor
 
 
 \begin{DoxyCode}
-64 \{\}
+66 \{\}
 \end{DoxyCode}
 
 
@@ -133,265 +135,272 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 25   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
 26   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"graph\_message::update\_message init"}, \textcolor{stringliteral}{""});
 27   \textcolor{keywordtype}{int} nu\_vertices = G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
-28 
-29   \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}.resize(nu\_vertices);
-30   \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}.resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
-31   \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}.resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
-32 
-33   \textcolor{comment}{// initialize the messages}
+28   \textcolor{keywordtype}{int} w;
+29   \textcolor{keywordtype}{int} my\_location;
+30   \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}.resize(nu\_vertices);
+31   \textcolor{comment}{//inward\_message.resize(nu\_vertices);}
+32   \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}.resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
+33   \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}.resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
 34 
-35   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"resizing messages"}, \textcolor{stringliteral}{""});
-36   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-37     \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v].resize(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size());
-38     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-39       \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i].resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
-40     \}
-41   \}
-42 
-43   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"initializing messages"},\textcolor{stringliteral}{""});
-44   vector<int> m(3);
-45   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
-46   \textcolor{comment}{//map<vector<int>, int>::iterator it;}
-47 
-48   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-49 
-50     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-51       \textcolor{comment}{// the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which
+35   \textcolor{comment}{// initialize the messages}
+36 
+37   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"resizing messages"}, \textcolor{stringliteral}{""});
+38   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
+39     \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v].resize(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size());
+40     \textcolor{comment}{//inward\_messages[v].resize(G.adj\_list[v].size());}
+41     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+42       \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i].resize(\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h});
+43       \textcolor{comment}{//inward\_messages[v][i].resize(h);}
+44     \}
+45   \}
+46 
+47   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"initializing messages"},\textcolor{stringliteral}{""});
+48   vector<int> m(3);
+49   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
+50   \textcolor{comment}{//map<vector<int>, int>::iterator it;}
+51 
+52   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
+53 
+54     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+55       \textcolor{comment}{// the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which
        is \(\backslash\)xi(v,w) and a subtree component which is a single root with mark \(\backslash\)tau(v). This is encoded as a message
        vector with size 3 of the form (\(\backslash\)tau(v), 0,\(\backslash\)xi(v,w)) where the last 0 indicates that there is no offspring.}
-52 
-53 
-54       \textcolor{comment}{//vector<int> m;}
-55       \textcolor{comment}{//m.clear();}
-56       \textcolor{comment}{//m.push\_back(G.ver\_mark[v]);}
-57       \textcolor{comment}{//m.push\_back(0);}
-58       \textcolor{comment}{//m.push\_back(G.adj\_list[v][i].second.first);}
-59 
-60       m[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
-61       m[1] = 0;
-62       m[2] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+56 
+57 
+58       \textcolor{comment}{//vector<int> m;}
+59       \textcolor{comment}{//m.clear();}
+60       \textcolor{comment}{//m.push\_back(G.ver\_mark[v]);}
+61       \textcolor{comment}{//m.push\_back(0);}
+62       \textcolor{comment}{//m.push\_back(G.adj\_list[v][i].second.first);}
 63 
-64       \textcolor{comment}{// adding this message to the message dictionary}
-65       it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0].find(m); 
-66       \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0].end())\{
-67         \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0][m] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].size();
-68         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][0] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].size();
-69         \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].push\_back(m);
-70       \}\textcolor{keywordflow}{else}\{
-71         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][0] = it->second;
-72       \}
-73 
-74       \textcolor{comment}{//messages[v][i][0] = message\_dict[0][m]; // the message at time 0}
-75     \}
-76   \}
-77 
-78   \textcolor{comment}{// updating messages}
-79   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"updating messages"}, \textcolor{stringliteral}{""});
-80   m.reserve(5+ 2 * \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
-81 
-82   duration<float> diff;
-83   high\_resolution\_clock::time\_point t1, t2; 
-84   \textcolor{keywordtype}{float} agg\_search = 0;
-85   \textcolor{keywordtype}{float} agg\_insert = 0;
-86   \textcolor{keywordtype}{float} agg\_m = 0;
-87   \textcolor{keywordtype}{float} agg\_sort = 0;
-88   \textcolor{keywordtype}{float} agg\_neigh\_message = 0;
-89 
-90   vector<pair<pair<int, int>, \textcolor{keywordtype}{int}> > neighbor\_messages; \textcolor{comment}{// the first component is the message and the
+64       m[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
+65       m[1] = 0;
+66       m[2] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+67 
+68       \textcolor{comment}{// adding this message to the message dictionary}
+69       it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0].find(m);
+70       w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
+71       \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0].end())\{
+72         \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[0][m] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].size();
+73         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][0] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].size();
+74         \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[0].push\_back(m);
+75 
+76       \}\textcolor{keywordflow}{else}\{
+77         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][0] = it->second;
+78       \}
+79 
+80       \textcolor{comment}{//messages[v][i][0] = message\_dict[0][m]; // the message at time 0}
+81     \}
+82   \}
+83 
+84   \textcolor{comment}{// updating messages}
+85   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"updating messages"}, \textcolor{stringliteral}{""});
+86   m.reserve(5+ 2 * \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
+87 
+88   duration<float> diff;
+89   high\_resolution\_clock::time\_point t1, t2; 
+90   \textcolor{keywordtype}{float} agg\_search = 0;
+91   \textcolor{keywordtype}{float} agg\_insert = 0;
+92   \textcolor{keywordtype}{float} agg\_m = 0;
+93   \textcolor{keywordtype}{float} agg\_sort = 0;
+94   \textcolor{keywordtype}{float} agg\_neigh\_message = 0;
+95 
+96   vector<pair<pair<int, int>, \textcolor{keywordtype}{int}> > neighbor\_messages; \textcolor{comment}{// the first component is the message and the
        second is the name of the neighbor}
-91   \textcolor{comment}{// the second component is stored so that after sorting, we know the owner of the message}
-92   neighbor\_messages.reserve(5+2*\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
-93 
-94   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=1;t<\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h};t++)\{
-95     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-96       \textcolor{comment}{//cerr << " vertex " << v << endl;}
-97       \textcolor{keywordflow}{if} (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() <= \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta})\{
-98         \textcolor{comment}{// the degree of v is no more than Delta}
-99         \textcolor{comment}{// do the standard message passing by aggregating messages from neighbors}
-100         \textcolor{comment}{// stacking all the messages from neighbors of v towards v}
-101         neighbor\_messages.clear();
-102 
-103         \textcolor{comment}{// the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
+97   \textcolor{comment}{// the second component is stored so that after sorting, we know the owner of the message}
+98   neighbor\_messages.reserve(5+2*\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
+99 
+100   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=1;t<\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h};t++)\{
+101     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
+102       \textcolor{comment}{//cerr << " vertex " << v << endl;}
+103       \textcolor{keywordflow}{if} (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() <= \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta})\{
+104         \textcolor{comment}{// the degree of v is no more than Delta}
+105         \textcolor{comment}{// do the standard message passing by aggregating messages from neighbors}
+106         \textcolor{comment}{// stacking all the messages from neighbors of v towards v}
+107         neighbor\_messages.clear();
+108 
+109         \textcolor{comment}{// the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
        between w and v towards v is added to it, and then all these objects are stacked in neighbor\_messages to be
        sorted and used afterwards}
-104         t1 = high\_resolution\_clock::now();
-105         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-106           \textcolor{keywordtype}{int} w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// what is the name of the neighbor I am looking at now,
+110         t1 = high\_resolution\_clock::now();
+111         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+112           w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// what is the name of the neighbor I am looking at now,
        which is the ith neighbor of vertex v }
-107           \textcolor{keywordtype}{int} my\_location = G.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// where is the place of node v among the
-       list of neighbors of the ith neighbor of v}
-108           \textcolor{keywordtype}{int} previous\_message = \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[w][my\_location][t-1]; \textcolor{comment}{// the message sent from this
+113           \textcolor{comment}{//my\_location = G.adj\_location[w].at(v); <--- the inefficient way}
+114           my\_location = G.\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}[v][i];
+115           \textcolor{comment}{// where is the place of node v among the list of neighbors of the ith neighbor of v}
+116           \textcolor{keywordtype}{int} previous\_message = \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[w][my\_location][t-1]; \textcolor{comment}{// the message sent from this
        neighbor towards v at time t-1}
-109           \textcolor{keywordtype}{int} mark\_to\_v = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-110           neighbor\_messages.push\_back(pair<pair<int, int> , \textcolor{keywordtype}{int}> (pair<int,int>(previous\_message, mark\_to\_v
+117           \textcolor{keywordtype}{int} mark\_to\_v = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+118           neighbor\_messages.push\_back(pair<pair<int, int> , \textcolor{keywordtype}{int}> (pair<int,int>(previous\_message, mark\_to\_v
       ), w));
-111         \}
-112         t2 = high\_resolution\_clock::now();
-113         diff = t2 - t1;
-114         agg\_neigh\_message += diff.count();
-115 
-116         t1 = high\_resolution\_clock::now();
-117         sort(neighbor\_messages.begin(), neighbor\_messages.end()); \textcolor{comment}{// sorts lexicographically}
-118         t2 = high\_resolution\_clock::now();
-119         diff = t2 - t1;
-120         agg\_sort += diff.count();
-121 
-122         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-123           \textcolor{comment}{// let w be the current ith neighbor of v}
-124           \textcolor{keywordtype}{int} w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
-125           \textcolor{comment}{// first, start with the mark of v and the number of offsprings in the subgraph component of the
+119         \}
+120         t2 = high\_resolution\_clock::now();
+121         diff = t2 - t1;
+122         agg\_neigh\_message += diff.count();
+123 
+124         t1 = high\_resolution\_clock::now();
+125         sort(neighbor\_messages.begin(), neighbor\_messages.end()); \textcolor{comment}{// sorts lexicographically}
+126         t2 = high\_resolution\_clock::now();
+127         diff = t2 - t1;
+128         agg\_sort += diff.count();
+129 
+130         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+131           \textcolor{comment}{// let w be the current ith neighbor of v}
+132           \textcolor{keywordtype}{int} w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
+133           \textcolor{comment}{// first, start with the mark of v and the number of offsprings in the subgraph component of the
        message}
-126           \textcolor{comment}{//vector<int> m; // the message that v is going to send to w}
-127           t1 = high\_resolution\_clock::now();
-128           m.clear();
-129           m.push\_back(G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]); \textcolor{comment}{// mark of v}
-130           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1); \textcolor{comment}{// the number of offsprings in the subgraph
+134           \textcolor{comment}{//vector<int> m; // the message that v is going to send to w}
+135           t1 = high\_resolution\_clock::now();
+136           m.clear();
+137           m.push\_back(G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]); \textcolor{comment}{// mark of v}
+138           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1); \textcolor{comment}{// the number of offsprings in the subgraph
        component of the message}
-131           t2 = high\_resolution\_clock::now();
-132           diff = t2 - t1;
-133           agg\_m += diff.count();
-134 
-135           \textcolor{comment}{// stacking messages from all neighbors of v expect for w towards v at time t-1}
-136           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();j++)\{
-137             \textcolor{keywordflow}{if} (neighbor\_messages[j].second != w)\{
-138               \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t-1][neighbor\_messages[j].first.first][0] == -1)\{
-139                 \textcolor{comment}{// this means that one of the messages that should be aggregated is * typed, therefore the
+139           t2 = high\_resolution\_clock::now();
+140           diff = t2 - t1;
+141           agg\_m += diff.count();
+142 
+143           \textcolor{comment}{// stacking messages from all neighbors of v expect for w towards v at time t-1}
+144           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();j++)\{
+145             \textcolor{keywordflow}{if} (neighbor\_messages[j].second != w)\{
+146               \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t-1][neighbor\_messages[j].first.first][0] == -1)\{
+147                 \textcolor{comment}{// this means that one of the messages that should be aggregated is * typed, therefore the
        outgoing messages should also be * typed}
-140                 \textcolor{comment}{// i.e. the message has only two entries: (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark of the
+148                 \textcolor{comment}{// i.e. the message has only two entries: (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark of the
        edge between v and w towards v}
-141                 \textcolor{comment}{// since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
+149                 \textcolor{comment}{// since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
        starting with 'finally'), we only add the initial -1 part}
-142                 t1 = high\_resolution\_clock::now();
-143                 m.resize(0);
-144                 m.push\_back(-1);
-145                 t2 = high\_resolution\_clock::now();
-146                 diff = t2 - t1;
-147                 agg\_m += diff.count();
-148                 \textcolor{keywordflow}{break}; \textcolor{comment}{// the message is decided, we do not need to go over any of the other neighbor
+150                 t1 = high\_resolution\_clock::now();
+151                 m.resize(0);
+152                 m.push\_back(-1);
+153                 t2 = high\_resolution\_clock::now();
+154                 diff = t2 - t1;
+155                 agg\_m += diff.count();
+156                 \textcolor{keywordflow}{break}; \textcolor{comment}{// the message is decided, we do not need to go over any of the other neighbor
        messages, hence break}
-149               \}
-150               \textcolor{comment}{// this message should be added to the list of messages}
-151               t1 = high\_resolution\_clock::now();
-152               m.push\_back(neighbor\_messages[j].first.first); \textcolor{comment}{// message part}
-153               m.push\_back(neighbor\_messages[j].first.second); \textcolor{comment}{// mark part towards v}
-154               t2 = high\_resolution\_clock::now();
-155               diff = t2 - t1;
-156               agg\_m += diff.count();
-157 
-158             \}
-159           \}
-160           \textcolor{comment}{// if we break, we reach at this point and message is (-1), otherwise the message is of the form
+157               \}
+158               \textcolor{comment}{// this message should be added to the list of messages}
+159               t1 = high\_resolution\_clock::now();
+160               m.push\_back(neighbor\_messages[j].first.first); \textcolor{comment}{// message part}
+161               m.push\_back(neighbor\_messages[j].first.second); \textcolor{comment}{// mark part towards v}
+162               t2 = high\_resolution\_clock::now();
+163               diff = t2 - t1;
+164               agg\_m += diff.count();
+165 
+166             \}
+167           \}
+168           \textcolor{comment}{// if we break, we reach at this point and message is (-1), otherwise the message is of the form
        (\(\backslash\)tau(v), \(\backslash\)deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. }
-161           \textcolor{comment}{// finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
+169           \textcolor{comment}{// finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
        list}
-162           t1 = high\_resolution\_clock::now();
-163           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first);
-164           t2 = high\_resolution\_clock::now();
-165           diff = t2 - t1;
-166           agg\_m += diff.count();
-167 
-168           \textcolor{comment}{// set the current message}
-169           t1 = high\_resolution\_clock::now();
-170           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
-171           t2 = high\_resolution\_clock::now();
-172           diff = t2 - t1;
-173           agg\_search += diff.count();
-174 
-175           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
-176             t1 = high\_resolution\_clock::now();
-177             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
-178             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
-      \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size()));
-179             t2 = high\_resolution\_clock::now();
-180             diff = t2 - t1;
-181             agg\_insert += diff.count();
+170           t1 = high\_resolution\_clock::now();
+171           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first);
+172           t2 = high\_resolution\_clock::now();
+173           diff = t2 - t1;
+174           agg\_m += diff.count();
+175 
+176           \textcolor{comment}{// set the current message}
+177           t1 = high\_resolution\_clock::now();
+178           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
+179           t2 = high\_resolution\_clock::now();
+180           diff = t2 - t1;
+181           agg\_search += diff.count();
 182 
-183             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
-184             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
-185           \}\textcolor{keywordflow}{else}\{
-186             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = it->second;
-187           \}
-188         \}
-189       \}\textcolor{keywordflow}{else}\{
-190         \textcolor{comment}{// if the degree of v is bigger than Delta, the message towards all neighbors is of the form *}
-191         \textcolor{comment}{// i.e. message of v towards a neighbor w is of the form (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark
-       of the edge between v and w towards v}
-192         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-193           \textcolor{comment}{//vector<int> m; // the current message from v to ith neighbor}
-194           t1 = high\_resolution\_clock::now();
-195           m.clear();
-196           m.resize(2);
-197           m[0] = -1;
-198           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-199           t2 = high\_resolution\_clock::now();
-200           diff = t2 - t1;
-201           agg\_m += diff.count();
-202 
-203           \textcolor{comment}{// set the current message}
-204           t1 = high\_resolution\_clock::now();
-205           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
-206           t2 = high\_resolution\_clock::now();
-207           diff = t2 - t1;
-208           agg\_search += diff.count();
-209 
-210           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
-211             t1 = high\_resolution\_clock::now();
-212             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
-213             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
+183           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
+184             t1 = high\_resolution\_clock::now();
+185             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
+186             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
       \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size()));
-214             t2 = high\_resolution\_clock::now();
-215             diff = t2 - t1;
-216             agg\_insert += diff.count();
-217             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
-218             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
-219           \}\textcolor{keywordflow}{else}\{
-220             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = it->second;
-221           \}
-222         \}
-223       \}
-224     \}
-225   \}
-226   cerr << \textcolor{stringliteral}{" total time to search in hash table: "} << agg\_search << endl;
-227   cerr << \textcolor{stringliteral}{" total time to insert in hash table: "} << agg\_insert << endl;
-228   cerr << \textcolor{stringliteral}{" total time to modify vector m  "} << agg\_m << endl;
-229   cerr << \textcolor{stringliteral}{" total time to sort  "} << agg\_sort << endl;
-230   cerr << \textcolor{stringliteral}{" total time to collect neighbor messages "} <<  agg\_neigh\_message << endl;
-231   \textcolor{comment}{// now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the
+187             t2 = high\_resolution\_clock::now();
+188             diff = t2 - t1;
+189             agg\_insert += diff.count();
+190 
+191             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
+192             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
+193           \}\textcolor{keywordflow}{else}\{
+194             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = it->second;
+195           \}
+196         \}
+197       \}\textcolor{keywordflow}{else}\{
+198         \textcolor{comment}{// if the degree of v is bigger than Delta, the message towards all neighbors is of the form *}
+199         \textcolor{comment}{// i.e. message of v towards a neighbor w is of the form (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark
+       of the edge between v and w towards v}
+200         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+201           \textcolor{comment}{//vector<int> m; // the current message from v to ith neighbor}
+202           t1 = high\_resolution\_clock::now();
+203           m.clear();
+204           m.resize(2);
+205           m[0] = -1;
+206           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+207           t2 = high\_resolution\_clock::now();
+208           diff = t2 - t1;
+209           agg\_m += diff.count();
+210 
+211           \textcolor{comment}{// set the current message}
+212           t1 = high\_resolution\_clock::now();
+213           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
+214           t2 = high\_resolution\_clock::now();
+215           diff = t2 - t1;
+216           agg\_search += diff.count();
+217 
+218           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
+219             t1 = high\_resolution\_clock::now();
+220             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
+221             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
+      \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size()));
+222             t2 = high\_resolution\_clock::now();
+223             diff = t2 - t1;
+224             agg\_insert += diff.count();
+225             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
+226             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
+227           \}\textcolor{keywordflow}{else}\{
+228             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = it->second;
+229           \}
+230         \}
+231       \}
+232     \}
+233   \}
+234   cerr << \textcolor{stringliteral}{" total time to search in hash table: "} << agg\_search << endl;
+235   cerr << \textcolor{stringliteral}{" total time to insert in hash table: "} << agg\_insert << endl;
+236   cerr << \textcolor{stringliteral}{" total time to modify vector m  "} << agg\_m << endl;
+237   cerr << \textcolor{stringliteral}{" total time to sort  "} << agg\_sort << endl;
+238   cerr << \textcolor{stringliteral}{" total time to collect neighbor messages "} <<  agg\_neigh\_message << endl;
+239   \textcolor{comment}{// now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the
        form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \(\backslash\)xi(v,w)}
-232   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"* symmetrizing"}, \textcolor{stringliteral}{""});
-233   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-234     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-235       \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][\hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][h-1]][0] == -1)\{
-236         \textcolor{comment}{// it is of the form *}
-237         \textcolor{keywordtype}{int} w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint of the edge}
-238         \textcolor{keywordtype}{int} my\_location = G.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// so that adj\_list[w][my\_location].first =
+240   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"* symmetrizing"}, \textcolor{stringliteral}{""});
+241   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
+242     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+243       \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][\hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][h-1]][0] == -1)\{
+244         \textcolor{comment}{// it is of the form *}
+245         \textcolor{keywordtype}{int} w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint of the edge}
+246         \textcolor{keywordtype}{int} my\_location = G.\hyperlink{classmarked__graph_a3ae722ea9583ad23af34d789a88ac01a}{adj\_location}[w].at(v); \textcolor{comment}{// so that adj\_list[w][my\_location].first =
        v}
-239         \textcolor{comment}{//vector<int> m;}
-240         m.clear();
-241         m.resize(2);
-242         m[0] = -1;
-243         m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second; \textcolor{comment}{// the mark towards w}
-244         \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1].find(m) == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1].end())\{
-245           \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1][m] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size();
-246           \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].push\_back(m);
-247         \}
-248         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[w][my\_location][h-1] = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1][m];
-249       \}
-250     \}
-251   \}
-252 
-253   \textcolor{comment}{// setting message\_mark and is\_star\_message}
-254   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"setting message\_mark and is\_star\_message"}, \textcolor{stringliteral}{""});
-255   \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.resize(\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size());
-256   \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.resize(\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size());
-257   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size();i++)\{
-258     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[i] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][i].back(); \textcolor{comment}{// the last element is the mark
+247         \textcolor{comment}{//vector<int> m;}
+248         m.clear();
+249         m.resize(2);
+250         m[0] = -1;
+251         m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second; \textcolor{comment}{// the mark towards w}
+252         \textcolor{keywordflow}{if} (\hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1].find(m) == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1].end())\{
+253           \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1][m] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size();
+254           \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].push\_back(m);
+255         \}
+256         \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[w][my\_location][h-1] = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[h-1][m];
+257       \}
+258     \}
+259   \}
+260 
+261   \textcolor{comment}{// setting message\_mark and is\_star\_message}
+262   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"setting message\_mark and is\_star\_message"}, \textcolor{stringliteral}{""});
+263   \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.resize(\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size());
+264   \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.resize(\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size());
+265   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1].size();i++)\{
+266     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[i] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][i].back(); \textcolor{comment}{// the last element is the mark
        component}
-259     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[i] = (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][i][0] == -1); \textcolor{comment}{// message is star
+267     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[i] = (\hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[h-1][i][0] == -1); \textcolor{comment}{// message is star
        type when the first element is -1}
-260   \}
-261   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-262 \}
+268   \}
+269   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+270 \}
 \end{DoxyCode}
 
 
@@ -415,6 +424,16 @@ the maximum degree threshold
 
 
 the depth up to which we do message passing (the type of edges go through depth h-\/1) 
+
+\mbox{\Hypertarget{classgraph__message_ab34dae49ed64132f2b1bbf626c509cd1}\label{classgraph__message_ab34dae49ed64132f2b1bbf626c509cd1}} 
+\index{graph\+\_\+message@{graph\+\_\+message}!inward\+\_\+messages@{inward\+\_\+messages}}
+\index{inward\+\_\+messages@{inward\+\_\+messages}!graph\+\_\+message@{graph\+\_\+message}}
+\subsubsection{\texorpdfstring{inward\+\_\+messages}{inward\_messages}}
+{\footnotesize\ttfamily vector$<$vector$<$vector$<$int $>$ $>$ $>$ graph\+\_\+message\+::inward\+\_\+messages}
+
+
+
+inward\+\_\+messages\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} is the integer version of the message at time t from the ith neighbor of v towards v (in the order given by adj\+\_\+list in graph G). 
 
 \mbox{\Hypertarget{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}\label{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}} 
 \index{graph\+\_\+message@{graph\+\_\+message}!is\+\_\+star\+\_\+message@{is\+\_\+star\+\_\+message}}

@@ -31,9 +31,9 @@ this is to help comparing two marked graphs. The inputs would resemble two edge 
 
 
 \begin{DoxyCode}
-84 \{
-85   \textcolor{keywordflow}{return} a.first < b.first;
-86 \}
+89 \{
+90   \textcolor{keywordflow}{return} a.first < b.first;
+91 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{marked__graph_8h_af0e562f34d9f6deb1ff7b9508ad8d84a}\label{marked__graph_8h_af0e562f34d9f6deb1ff7b9508ad8d84a}} 
 \index{marked\+\_\+graph.\+h@{marked\+\_\+graph.\+h}!operator$>$$>$@{operator$>$$>$}}
@@ -47,25 +47,25 @@ inputs a \hyperlink{classmarked__graph}{marked\+\_\+graph}
 
 The input format is as follows\+: 1) number of vertices 2) a list of vertex marks as nonnegative integers 3) number of edges 4) for each edge\+: write $i j x y$, where $i$ and $j$ are the endpoints (here, $0 \leq i, j \leq n-1 $ with $n$ being the number of vertices), $x$ is the mark towards $i$ and $y$ is the mark towards $j$ (both nonnegative integers) Example\+: 2 1 2 1 0 1 1 2 which is a graph with 2 vertices, the mark of vertex 0 is 1 and the mark of vertex 1 is 2, there is one edge between these two vertices with mark 1 towards 0 and mark 2 toward s 1 
 \begin{DoxyCode}
-36 \{
-37   \textcolor{keywordtype}{int} nu\_vertices;
-38   inp >> nu\_vertices;
-39 
-40   vector<int> ver\_marks;
-41   ver\_marks.resize(nu\_vertices);
-42   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_vertices;i++)
-43     inp >> ver\_marks[i];
+41 \{
+42   \textcolor{keywordtype}{int} nu\_vertices;
+43   inp >> nu\_vertices;
 44 
-45   \textcolor{keywordtype}{int} nu\_edges;
-46   inp >> nu\_edges;
-47   vector<pair< pair<int, int> , pair<int, int> > > edges;
-48   edges.resize(nu\_edges);
-49   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_edges;i++)
-50     inp >> edges[i].first.first >> edges[i].first.second >> edges[i].second.first >> edges[i].second.second
+45   vector<int> ver\_marks;
+46   ver\_marks.resize(nu\_vertices);
+47   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_vertices;i++)
+48     inp >> ver\_marks[i];
+49 
+50   \textcolor{keywordtype}{int} nu\_edges;
+51   inp >> nu\_edges;
+52   vector<pair< pair<int, int> , pair<int, int> > > edges;
+53   edges.resize(nu\_edges);
+54   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_edges;i++)
+55     inp >> edges[i].first.first >> edges[i].first.second >> edges[i].second.first >> edges[i].second.second
       ;
-51 
-52   G = \hyperlink{classmarked__graph}{marked\_graph}(nu\_vertices, edges, ver\_marks);
-53 
-54   \textcolor{keywordflow}{return} inp;
-55 \}
+56 
+57   G = \hyperlink{classmarked__graph}{marked\_graph}(nu\_vertices, edges, ver\_marks);
+58 
+59   \textcolor{keywordflow}{return} inp;
+60 \}
 \end{DoxyCode}
