@@ -1,7 +1,7 @@
 #include "compression_helper.h"
 
 
-mpz_class compute_product(mpz_class N, mpz_class k, int s){
+mpz_class compute_product(int N, int k, int s){
   //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
 
   if (k==1)
@@ -19,7 +19,7 @@ mpz_class compute_product(mpz_class N, mpz_class k, int s){
   }
   
   // we do this by dividing the terms into two parts
-  mpz_class m = k / 2; // the middle point
+  int m = k / 2; // the middle point
   mpz_class left, right; // each of the half products 
   left = compute_product(N, m, s);
   right = compute_product(N-m * s, k-m, s);
@@ -27,7 +27,7 @@ mpz_class compute_product(mpz_class N, mpz_class k, int s){
 }
 
 
-mpz_class binomial(const mpz_class n, const mpz_class m)
+mpz_class binomial(const int n, const int m)
 {
   if (n <= 0 or m > n or m <= 0)
     return 0;

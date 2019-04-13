@@ -163,7 +163,7 @@ decodes the connectivity list of vertices in the range and updated member x. Fur
 153   \textcolor{keywordtype}{int} k = (i+j)/ 2; \textcolor{comment}{// midpoint to break}
 154   \textcolor{keywordtype}{int} Wk = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(k+1);
 155   \textcolor{keywordtype}{int} Wj = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-156   mpz\_class rkj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(Wk, Wk - Wj, 1) / 
+156   mpz\_class rkj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(Wk, Wk - Wj, 1) / 
       \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}, k+1, j); \textcolor{comment}{// r\_\{t+1, j\}}
 157   mpz\_class tNik = tN / rkj; \textcolor{comment}{// \(\backslash\)tilde\{N\}\_\{i,k\}}
 158   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// to keep the return for each subinterval}
@@ -223,13 +223,13 @@ decodes the connectivity list and updates the x member, and returns a pair, wher
 129     g = \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np}-1;
 130     \textcolor{keywordflow}{while} (g > f)\{
 131       v = (f+g)/2;
-132       \textcolor{keywordflow}{if} (\hyperlink{compression__helper_8cpp_a4bc36d358aecc67feee9f87efc041d32}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+v) , a[i] - k) <= tN)
+132       \textcolor{keywordflow}{if} (\hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+v) , a[i] - k) <= tN)
 133         g = v;
 134       \textcolor{keywordflow}{else}
 135         f = v + 1;
 136     \}
 137     \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i].push\_back(f); \textcolor{comment}{// decoded the kth connection of vertex i}
-138     y = \hyperlink{compression__helper_8cpp_a4bc36d358aecc67feee9f87efc041d32}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]), a[i] - k);
+138     y = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]), a[i] - k);
 139     tN = (tN - y) / \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];
 140     Ni += li * y;
 141     li *= \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];

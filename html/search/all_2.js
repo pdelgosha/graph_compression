@@ -6,7 +6,7 @@ var searchData=
   ['b_5fgraph_5fencoder',['b_graph_encoder',['../classb__graph__encoder.html',1,'b_graph_encoder'],['../classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283',1,'b_graph_encoder::b_graph_encoder()']]],
   ['b_5fgraph_5ftest',['b_graph_test',['../test_8cpp.html#aa276850b1d7d04eb917a6fc7415b9566',1,'test.cpp']]],
   ['beta',['beta',['../classb__graph__encoder.html#ae54d76cc4cee399d98951f870897a144',1,'b_graph_encoder::beta()'],['../classb__graph__decoder.html#a3e5babfb07af486c1d9e991f65251266',1,'b_graph_decoder::beta()'],['../classgraph__encoder.html#a40880adecfd63fb86e94b4b0fc3f6bc2',1,'graph_encoder::beta()'],['../classgraph__decoder.html#aa57c11e4c09c52101682ff83286162f7',1,'graph_decoder::beta()']]],
-  ['binomial',['binomial',['../compression__helper_8cpp.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a4bc36d358aecc67feee9f87efc041d32',1,'binomial(const mpz_class n, const mpz_class m):&#160;compression_helper.cpp']]],
+  ['binomial',['binomial',['../compression__helper_8cpp.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp']]],
   ['bipartite_5fgraph_2ecpp',['bipartite_graph.cpp',['../bipartite__graph_8cpp.html',1,'']]],
   ['bipartite_5fgraph_2eh',['bipartite_graph.h',['../bipartite__graph_8h.html',1,'']]],
   ['bipartite_5fgraph_5fcompression_2ecpp',['bipartite_graph_compression.cpp',['../bipartite__graph__compression_8cpp.html',1,'']]],

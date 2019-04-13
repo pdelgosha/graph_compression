@@ -14,7 +14,8 @@ using namespace std;
   \param s the iteration
   \return the product N \f$ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) \f$
 */
-mpz_class compute_product(mpz_class N, mpz_class k, int s);
+//mpz_class compute_product(mpz_class N, mpz_class k, int s);
+mpz_class compute_product(int N, int k, int s);
 
 
 //! computes the binomial coefficient n choose m = n! / m! (n-m)!
@@ -23,7 +24,7 @@ mpz_class compute_product(mpz_class N, mpz_class k, int s);
   \param m integer
   \return the binomial coefficient n! / m! (n-m)!. If n <= 0, or  m > n, or m <= 0, returns 0
 */
-mpz_class binomial(const mpz_class n, const mpz_class m);
+mpz_class binomial(const int n, const int m);
 
 
 //! computes the product of factorials in a vector given a range

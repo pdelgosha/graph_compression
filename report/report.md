@@ -248,4 +248,94 @@ Realized that in updating messages, the variable `neighbor_messages` is defined 
 
 ## 2019-04-09 9:17 PM
 
-Realized that it is not really necessary to work with `adj_location` which is a complex map structure in marked graphs. Instead, defined `index_in_neighbor`: for a vertex v, `index_in_neighbor[v][i]` is the index of v in the adjacency list of the ith neighbor of v.
+Realized that it is not really necessary to work with `adj_location` which is a complex map structure in marked graphs. Instead, defined `index_in_neighbor`: for a vertex v, `index_in_neighbor[v][i]` is the index of v in the adjacency list of the ith neighbor of v. With this, only modifying update message, I had a ~0.5 s improvement: 
+
+## 2019-04-10 11:50 AM
+
+Removed the attribute `adj_location` from both marked graph and colored graph, and used `index_in_neighbor` in all places. This results in ~2 s improvement: 
+
+<details>
+
+<summary> details </summary>
+
+```
+|---Construct G () 2019-04-10 11:43:03 AM
+ edges size 300440
+ graph constructed
+|---Encode () 2019-04-10 11:43:04 AM
+|---|---Init compressed () 2019-04-10 11:43:04 AM
+|---|---Extact edge types () 2019-04-10 11:43:04 AM
+|---|---|---Extract messages () 2019-04-10 11:43:04 AM
+|---|---|---|---graph_message::update_message init () 2019-04-10 11:43:04 AM
+|---|---|---|---resizing messages () 2019-04-10 11:43:04 AM
+|---|---|---|---initializing messages () 2019-04-10 11:43:04 AM
+|---|---|---|---updating messages () 2019-04-10 11:43:04 AM
+ total time to search in hash table: 0.760559
+ total time to insert in hash table: 1.55026
+ total time to modify vector m  0.784155
+ total time to sort  0.0688325
+ total time to collect neighbor messages 0.41188
+|---|---|---|---* symmetrizing () 2019-04-10 11:43:10 AM
+|---|---|---|---setting message_mark and is_star_message () 2019-04-10 11:43:10 AM
+|---|---|---colored_graph::init init () 2019-04-10 11:43:10 AM
+|---|---|---updating adj_list () 2019-04-10 11:43:10 AM
+|---|---|---Find deg and ver_types () 2019-04-10 11:43:10 AM
+|---|---Encode * vertices () 2019-04-10 11:43:11 AM
+|---|---Encode * edges () 2019-04-10 11:43:13 AM
+|---|---Encode vertex types () 2019-04-10 11:43:13 AM
+|---|---Extract partition graphs () 2019-04-10 11:43:16 AM
+|---|---Encode partition b graphs () 2019-04-10 11:43:18 AM
+|---|---Encode partition graphs () 2019-04-10 11:43:20 AM
+|---Decode () 2019-04-10 11:43:21 AM
+|---|---Init () 2019-04-10 11:43:21 AM
+|---|---Decode * vertices () 2019-04-10 11:43:21 AM
+|---|---Decode * edges () 2019-04-10 11:43:23 AM
+|---|---Decode vertex types () 2019-04-10 11:43:23 AM
+|---|---Decode partition graphs () 2019-04-10 11:43:29 AM
+|---|---Decode partition b graphs () 2019-04-10 11:43:29 AM
+|---|---Construct decoded graph () 2019-04-10 11:43:32 AM
+|---compare () 2019-04-10 11:43:33 AM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.829669s [2.594985%]
+|---Encode (): 16.433228s [51.398804%]
+|---|---Init compressed (): 0.000718s [0.004366%]
+|---|---Extact edge types (): 7.172252s [43.644817%]
+|---|---|---Extract messages (): 5.716563s [79.703888%]
+|---|---|---|---graph_message::update_message init (): 0.001409s [0.024649%]
+|---|---|---|---resizing messages (): 0.191876s [3.356501%]
+|---|---|---|---initializing messages (): 0.179843s [3.145999%]
+|---|---|---|---updating messages (): 5.273019s [92.241066%]
+|---|---|---|---* symmetrizing (): 0.032299s [0.565013%]
+|---|---|---|---setting message_mark and is_star_message (): 0.037780s [0.660887%]
+|---|---|---colored_graph::init init (): 0.024582s [0.342731%]
+|---|---|---updating adj_list (): 0.220640s [3.076303%]
+|---|---|---Find deg and ver_types (): 1.210425s [16.876507%]
+|---|---Encode * vertices (): 2.164104s [13.169074%]
+|---|---Encode * edges (): 0.000043s [0.000263%]
+|---|---Encode vertex types (): 2.158486s [13.134887%]
+|---|---Extract partition graphs (): 2.701006s [16.436249%]
+|---|---Encode partition b graphs (): 2.064137s [12.560755%]
+|---|---Encode partition graphs (): 0.171202s [1.041805%]
+|---Decode (): 12.170957s [38.067539%]
+|---|---Init (): 0.000023s [0.000190%]
+|---|---Decode * vertices (): 2.286243s [18.784418%]
+|---|---Decode * edges (): 0.000034s [0.000280%]
+|---|---Decode vertex types (): 6.092728s [50.059563%]
+|---|---Decode partition graphs (): 0.000061s [0.000503%]
+|---|---Decode partition b graphs (): 3.370534s [27.693254%]
+|---|---Construct decoded graph (): 0.421302s [3.461539%]
+|---compare (): 2.538139s [7.938629%]
+       31.98 real        31.27 user         0.58 sys
+```
+
+
+</details>
+
+This is a javascript test:
+
+<p id="demo"></p>
+
+<button onclick="document.getElementById('demo').innerHTML='Salam' "> Change Text </button>
+
+

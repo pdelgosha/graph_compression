@@ -196,7 +196,7 @@ a pair $N_{i,j}, l_{i,j}$ where $N_{i,j} = N_{i,j}(G)$ and $l_{i,j} = l_{i,j}(G)
 249   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// returned by subintervals }
 250 
 251 
-252   rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St - 1, (St - Sj)/2, 2);
+252   rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St - 1, (St - Sj)/2, 2);
 253   \textcolor{comment}{//cerr << " interval " << i << " " << j << " t " << t << " St " << St << " rtj " << rtj << endl;}
 254   tNit = tN / rtj;
 255 
@@ -269,13 +269,13 @@ a pair $(N_{i,i}, l_i)$ where $l_i = l_i(G)$ and $N_{i,i} = N_{i,i}(G)$
 192       \textcolor{comment}{//cerr << " f , g " << f << " " << g << endl;}
 193       t = (f+g)/2;
 194       \textcolor{comment}{// binary search:}
-195       \textcolor{keywordflow}{if}(\hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1), beta[i] - k, 1) <= tN)
+195       \textcolor{keywordflow}{if}(\hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1), beta[i] - k, 1) <= tN)
 196         g = t;
 197       \textcolor{keywordflow}{else}
 198         f = t+1;
 199     \}
 200     \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i].push\_back(f);
-201     zik = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]+1), beta[i] - k, 1);
+201     zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]+1), beta[i] - k, 1);
 202     Ni += li * zik;
 203     lik = (beta[i] - k) * beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]];
 204     li *= lik;

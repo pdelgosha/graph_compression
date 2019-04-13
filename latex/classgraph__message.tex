@@ -220,7 +220,7 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 109         \textcolor{comment}{// the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
        between w and v towards v is added to it, and then all these objects are stacked in neighbor\_messages to be
        sorted and used afterwards}
-110         t1 = high\_resolution\_clock::now();
+110         \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 111         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
 112           w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// what is the name of the neighbor I am looking at now,
        which is the ith neighbor of vertex v }
@@ -233,15 +233,15 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 118           neighbor\_messages.push\_back(pair<pair<int, int> , \textcolor{keywordtype}{int}> (pair<int,int>(previous\_message, mark\_to\_v
       ), w));
 119         \}
-120         t2 = high\_resolution\_clock::now();
-121         diff = t2 - t1;
-122         agg\_neigh\_message += diff.count();
+120         \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+121         \textcolor{comment}{//diff = t2 - t1;}
+122         \textcolor{comment}{//agg\_neigh\_message += diff.count();}
 123 
-124         t1 = high\_resolution\_clock::now();
+124         \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 125         sort(neighbor\_messages.begin(), neighbor\_messages.end()); \textcolor{comment}{// sorts lexicographically}
-126         t2 = high\_resolution\_clock::now();
-127         diff = t2 - t1;
-128         agg\_sort += diff.count();
+126         \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+127         \textcolor{comment}{//diff = t2 - t1;}
+128         \textcolor{comment}{//agg\_sort += diff.count();}
 129 
 130         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
 131           \textcolor{comment}{// let w be the current ith neighbor of v}
@@ -249,14 +249,14 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 133           \textcolor{comment}{// first, start with the mark of v and the number of offsprings in the subgraph component of the
        message}
 134           \textcolor{comment}{//vector<int> m; // the message that v is going to send to w}
-135           t1 = high\_resolution\_clock::now();
+135           \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 136           m.clear();
 137           m.push\_back(G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]); \textcolor{comment}{// mark of v}
 138           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1); \textcolor{comment}{// the number of offsprings in the subgraph
        component of the message}
-139           t2 = high\_resolution\_clock::now();
-140           diff = t2 - t1;
-141           agg\_m += diff.count();
+139           \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+140           \textcolor{comment}{//diff = t2 - t1;}
+141           \textcolor{comment}{//agg\_m += diff.count();}
 142 
 143           \textcolor{comment}{// stacking messages from all neighbors of v expect for w towards v at time t-1}
 144           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();j++)\{
@@ -268,22 +268,22 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
        edge between v and w towards v}
 149                 \textcolor{comment}{// since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
        starting with 'finally'), we only add the initial -1 part}
-150                 t1 = high\_resolution\_clock::now();
+150                 \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 151                 m.resize(0);
 152                 m.push\_back(-1);
-153                 t2 = high\_resolution\_clock::now();
-154                 diff = t2 - t1;
-155                 agg\_m += diff.count();
+153                 \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+154                 \textcolor{comment}{//diff = t2 - t1;}
+155                 \textcolor{comment}{//agg\_m += diff.count();}
 156                 \textcolor{keywordflow}{break}; \textcolor{comment}{// the message is decided, we do not need to go over any of the other neighbor
        messages, hence break}
 157               \}
 158               \textcolor{comment}{// this message should be added to the list of messages}
-159               t1 = high\_resolution\_clock::now();
+159               \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 160               m.push\_back(neighbor\_messages[j].first.first); \textcolor{comment}{// message part}
 161               m.push\_back(neighbor\_messages[j].first.second); \textcolor{comment}{// mark part towards v}
-162               t2 = high\_resolution\_clock::now();
-163               diff = t2 - t1;
-164               agg\_m += diff.count();
+162               \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+163               \textcolor{comment}{//diff = t2 - t1;}
+164               \textcolor{comment}{//agg\_m += diff.count();}
 165 
 166             \}
 167           \}
@@ -291,27 +291,27 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
        (\(\backslash\)tau(v), \(\backslash\)deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. }
 169           \textcolor{comment}{// finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
        list}
-170           t1 = high\_resolution\_clock::now();
+170           \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 171           m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first);
-172           t2 = high\_resolution\_clock::now();
-173           diff = t2 - t1;
-174           agg\_m += diff.count();
+172           \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+173           \textcolor{comment}{//diff = t2 - t1;}
+174           \textcolor{comment}{//agg\_m += diff.count();}
 175 
 176           \textcolor{comment}{// set the current message}
-177           t1 = high\_resolution\_clock::now();
+177           \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 178           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
-179           t2 = high\_resolution\_clock::now();
-180           diff = t2 - t1;
-181           agg\_search += diff.count();
+179           \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+180           \textcolor{comment}{//diff = t2 - t1;}
+181           \textcolor{comment}{//agg\_search += diff.count();}
 182 
 183           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
-184             t1 = high\_resolution\_clock::now();
+184             \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 185             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
 186             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
       \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size()));
-187             t2 = high\_resolution\_clock::now();
-188             diff = t2 - t1;
-189             agg\_insert += diff.count();
+187             \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+188             \textcolor{comment}{//diff = t2 - t1;}
+189             \textcolor{comment}{//agg\_insert += diff.count();}
 190 
 191             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
 192             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
@@ -325,30 +325,30 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
        of the edge between v and w towards v}
 200         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
 201           \textcolor{comment}{//vector<int> m; // the current message from v to ith neighbor}
-202           t1 = high\_resolution\_clock::now();
+202           \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 203           m.clear();
 204           m.resize(2);
 205           m[0] = -1;
 206           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-207           t2 = high\_resolution\_clock::now();
-208           diff = t2 - t1;
-209           agg\_m += diff.count();
+207           \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+208           \textcolor{comment}{//diff = t2 - t1;}
+209           \textcolor{comment}{//agg\_m += diff.count();}
 210 
 211           \textcolor{comment}{// set the current message}
-212           t1 = high\_resolution\_clock::now();
+212           \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 213           it = \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].find(m);
-214           t2 = high\_resolution\_clock::now();
-215           diff = t2 - t1;
-216           agg\_search += diff.count();
+214           \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+215           \textcolor{comment}{//diff = t2 - t1;}
+216           \textcolor{comment}{//agg\_search += diff.count();}
 217 
 218           \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].end())\{
-219             t1 = high\_resolution\_clock::now();
+219             \textcolor{comment}{//t1 = high\_resolution\_clock::now();}
 220             \textcolor{comment}{//message\_dict[t][m] = message\_list[t].size();}
 221             \hyperlink{classgraph__message_ab54d89b122c2b1322da0d5db2043fb84}{message\_dict}[t].insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, 
       \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size()));
-222             t2 = high\_resolution\_clock::now();
-223             diff = t2 - t1;
-224             agg\_insert += diff.count();
+222             \textcolor{comment}{//t2 = high\_resolution\_clock::now();}
+223             \textcolor{comment}{//diff = t2 - t1;}
+224             \textcolor{comment}{//agg\_insert += diff.count();}
 225             \hyperlink{classgraph__message_aac77e098f0acf9650116a8e51fe3b4b7}{messages}[v][i][t] = \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].size();
 226             \hyperlink{classgraph__message_aa17fdb629b423343edfafa97252763ef}{message\_list}[t].push\_back(m);
 227           \}\textcolor{keywordflow}{else}\{

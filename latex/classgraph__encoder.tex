@@ -136,7 +136,7 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 56     \textcolor{keywordflow}{if} (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] != x.size())
 57       cerr << \textcolor{stringliteral}{" DANGER! beta[i] is not the same as x.size()!!"} << endl;
 58     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<x.size();k++)\{
-59       zik = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
+59       zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
        here, so instead of -k + 1, we have -k}
 60       zi += li * zik;
 61       lik = (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k) * \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]]; \textcolor{comment}{// we are zero based here, so instead of -k + 1, we have -k}
@@ -174,7 +174,7 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 90     Ntj = return\_right.first;
 91     ltj = return\_right.second;
 92     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-93     rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St-1, (St - Sj)/2, 2);
+93     rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St-1, (St - Sj)/2, 2);
 94     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
 95     Nij = Nit * rtj + lit * Ntj ;
 96     lij = lit * ltj;

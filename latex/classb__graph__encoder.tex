@@ -110,7 +110,7 @@ A pair, where the first component is $N_{i,j}(G)$, and the second component is $
 27     \textcolor{keywordflow}{if} (i == j)\{
 28       vector<int> x = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i); \textcolor{comment}{// the adjacency list of the vertex}
 29       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
-30         Nij += lij * \hyperlink{compression__helper_8cpp_a4bc36d358aecc67feee9f87efc041d32}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
+30         Nij += lij * \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
 31         lij *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]];
 32         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]] --;
 33         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k],-1);
@@ -143,7 +143,7 @@ A pair, where the first component is $N_{i,j}(G)$, and the second component is $
        <= j}
 60 
 61 
-62       rtj = \hyperlink{compression__helper_8cpp_ac683dff9ff89796df0ab62cd65c30990}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
+62       rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
 63 
 64       Nij = Nit * rtj + lit * Ntj;
 65       lij = lit * ltj;

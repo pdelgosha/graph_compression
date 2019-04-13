@@ -107,7 +107,7 @@ void graph_message::update_messages(const marked_graph& G)
         neighbor_messages.clear();
 
         // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge between w and v towards v is added to it, and then all these objects are stacked in neighbor_messages to be sorted and used afterwards
-        t1 = high_resolution_clock::now();
+        //t1 = high_resolution_clock::now();
         for (int i=0;i<G.adj_list[v].size();i++){
           w = G.adj_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the ith neighbor of vertex v 
           //my_location = G.adj_location[w].at(v); <--- the inefficient way
@@ -117,28 +117,28 @@ void graph_message::update_messages(const marked_graph& G)
           int mark_to_v = G.adj_list[v][i].second.first;
           neighbor_messages.push_back(pair<pair<int, int> , int> (pair<int,int>(previous_message, mark_to_v), w));
         }
-        t2 = high_resolution_clock::now();
-        diff = t2 - t1;
-        agg_neigh_message += diff.count();
+        //t2 = high_resolution_clock::now();
+        //diff = t2 - t1;
+        //agg_neigh_message += diff.count();
 
-        t1 = high_resolution_clock::now();
+        //t1 = high_resolution_clock::now();
         sort(neighbor_messages.begin(), neighbor_messages.end()); // sorts lexicographically
-        t2 = high_resolution_clock::now();
-        diff = t2 - t1;
-        agg_sort += diff.count();
+        //t2 = high_resolution_clock::now();
+        //diff = t2 - t1;
+        //agg_sort += diff.count();
 
         for (int i=0;i<G.adj_list[v].size();i++){
           // let w be the current ith neighbor of v
           int w = G.adj_list[v][i].first;
           // first, start with the mark of v and the number of offsprings in the subgraph component of the message
           //vector<int> m; // the message that v is going to send to w
-          t1 = high_resolution_clock::now();
+          //t1 = high_resolution_clock::now();
           m.clear();
           m.push_back(G.ver_mark[v]); // mark of v
           m.push_back(G.adj_list[v].size()-1); // the number of offsprings in the subgraph component of the message
-          t2 = high_resolution_clock::now();
-          diff = t2 - t1;
-          agg_m += diff.count();
+          //t2 = high_resolution_clock::now();
+          //diff = t2 - t1;
+          //agg_m += diff.count();
 
           // stacking messages from all neighbors of v expect for w towards v at time t-1
           for (int j=0;j<G.adj_list[v].size();j++){
@@ -147,46 +147,46 @@ void graph_message::update_messages(const marked_graph& G)
                 // this means that one of the messages that should be aggregated is * typed, therefore the outgoing messages should also be * typed
                 // i.e. the message has only two entries: (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
                 // since after this loop, the mark \xi(w,v) is added to the message (after the comment starting with 'finally'), we only add the initial -1 part
-                t1 = high_resolution_clock::now();
+                //t1 = high_resolution_clock::now();
                 m.resize(0);
                 m.push_back(-1);
-                t2 = high_resolution_clock::now();
-                diff = t2 - t1;
-                agg_m += diff.count();
+                //t2 = high_resolution_clock::now();
+                //diff = t2 - t1;
+                //agg_m += diff.count();
                 break; // the message is decided, we do not need to go over any of the other neighbor messages, hence break
               }
               // this message should be added to the list of messages
-              t1 = high_resolution_clock::now();
+              //t1 = high_resolution_clock::now();
               m.push_back(neighbor_messages[j].first.first); // message part
               m.push_back(neighbor_messages[j].first.second); // mark part towards v
-              t2 = high_resolution_clock::now();
-              diff = t2 - t1;
-              agg_m += diff.count();
+              //t2 = high_resolution_clock::now();
+              //diff = t2 - t1;
+              //agg_m += diff.count();
 
             }
           }
           // if we break, we reach at this point and message is (-1), otherwise the message is of the form (\tau(v), \deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. 
           // finally, the mark of the edge between v and w towards v, \xi(w,v), should be added to this list
-          t1 = high_resolution_clock::now();
+          //t1 = high_resolution_clock::now();
           m.push_back(G.adj_list[v][i].second.first);
-          t2 = high_resolution_clock::now();
-          diff = t2 - t1;
-          agg_m += diff.count();
+          //t2 = high_resolution_clock::now();
+          //diff = t2 - t1;
+          //agg_m += diff.count();
 
           // set the current message
-          t1 = high_resolution_clock::now();
+          //t1 = high_resolution_clock::now();
           it = message_dict[t].find(m);
-          t2 = high_resolution_clock::now();
-          diff = t2 - t1;
-          agg_search += diff.count();
+          //t2 = high_resolution_clock::now();
+          //diff = t2 - t1;
+          //agg_search += diff.count();
 
           if (it == message_dict[t].end()){
-            t1 = high_resolution_clock::now();
+            //t1 = high_resolution_clock::now();
             //message_dict[t][m] = message_list[t].size();
             message_dict[t].insert(pair<vector<int>, int> (m, message_list[t].size()));
-            t2 = high_resolution_clock::now();
-            diff = t2 - t1;
-            agg_insert += diff.count();
+            //t2 = high_resolution_clock::now();
+            //diff = t2 - t1;
+            //agg_insert += diff.count();
 
             messages[v][i][t] = message_list[t].size();
             message_list[t].push_back(m);
@@ -199,29 +199,29 @@ void graph_message::update_messages(const marked_graph& G)
         // i.e. message of v towards a neighbor w is of the form (-1, \xi(w,v)) where \xi(w,v) is the mark of the edge between v and w towards v
         for (int i=0;i<G.adj_list[v].size();i++){
           //vector<int> m; // the current message from v to ith neighbor
-          t1 = high_resolution_clock::now();
+          //t1 = high_resolution_clock::now();
           m.clear();
           m.resize(2);
           m[0] = -1;
           m[1] = G.adj_list[v][i].second.first;
-          t2 = high_resolution_clock::now();
-          diff = t2 - t1;
-          agg_m += diff.count();
+          //t2 = high_resolution_clock::now();
+          //diff = t2 - t1;
+          //agg_m += diff.count();
 
           // set the current message
-          t1 = high_resolution_clock::now();
+          //t1 = high_resolution_clock::now();
           it = message_dict[t].find(m);
-          t2 = high_resolution_clock::now();
-          diff = t2 - t1;
-          agg_search += diff.count();
+          //t2 = high_resolution_clock::now();
+          //diff = t2 - t1;
+          //agg_search += diff.count();
 
           if (it == message_dict[t].end()){
-            t1 = high_resolution_clock::now();
+            //t1 = high_resolution_clock::now();
             //message_dict[t][m] = message_list[t].size();
             message_dict[t].insert(pair<vector<int>, int> (m, message_list[t].size()));
-            t2 = high_resolution_clock::now();
-            diff = t2 - t1;
-            agg_insert += diff.count();
+            //t2 = high_resolution_clock::now();
+            //diff = t2 - t1;
+            //agg_insert += diff.count();
             messages[v][i][t] = message_list[t].size();
             message_list[t].push_back(m);
           }else{
