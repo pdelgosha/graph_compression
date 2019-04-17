@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['send_5fmessage',['send_message',['../classgraph__message.html#aa76d1d5420a12477fa1dddd878d78c8f',1,'graph_message']]],
   ['simple_5fgraph_2ecpp',['simple_graph.cpp',['../simple__graph_8cpp.html',1,'']]],
   ['simple_5fgraph_2eh',['simple_graph.h',['../simple__graph_8h.html',1,'']]],
   ['simple_5fgraph_5fcompression_2ecpp',['simple_graph_compression.cpp',['../simple__graph__compression_8cpp.html',1,'']]],

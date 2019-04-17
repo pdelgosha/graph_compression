@@ -5,6 +5,7 @@
 #include "marked_graph.h"
 #include "graph_message.h"
 #include "random_graph.h"
+#include "logger.h"
 
 using namespace std;
 
@@ -28,11 +29,11 @@ void mp_test(){
   //ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
   //inp >> G;
   //G = marked_ER(10000,0.0003,2 ,2);
-  G = poisson_graph(100000,16, 2, 2);
-  cerr << " graph generated " << endl;
+  G = poisson_graph(100000,3, 10, 10);
+  //cerr << " graph generated " << endl;
   //cerr << " graph generated " << endl;
   //cout << " G " << endl << G << endl;
-  colored_graph C(G, 2, 2);
+  colored_graph C(G, 3, 20);
 
   /*
   int n = C.nu_vertices;
@@ -54,7 +55,9 @@ void mp_test(){
 
 
 int main(){
+  logger::start();
   mp_test();
+  logger::stop();
   //random_graph_test ();
   return 0;
 }

@@ -63,6 +63,7 @@ bool operator== (const marked_graph& G1, const marked_graph& G2)
 {
   if (G1.nu_vertices != G2.nu_vertices)
     return false;
+  return G1.adj_list == G2.adj_list;
   int n = G1.nu_vertices; // number of vertices of the two graphs
   vector< pair< int, pair< int, int > > > l1, l2; // the adjacency list of a vertex in two graphs for comparison. 
   for (int v=0;v<n;v++){

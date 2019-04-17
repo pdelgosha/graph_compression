@@ -37,23 +37,33 @@ class graph_message{
   void update_messages(const marked_graph&);
 
   //! update message_dict and message_list
-  void update_message_dictionary(const marked_graph&); 
+  //void update_message_dictionary(const marked_graph&);
+
+  //! send the message m from vertex v towards its ith neighbor. Updates message_dict, message_mark and is_message_star
+  inline void send_message(const vector<int>& m, int v, int i);
+
 public:
   //const marked_graph & G; //!< reference to the marked graph for which we do message passing
-  vector<vector<vector<int > > > messages; //!< messages[v][i][t] is the integer version of the  message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
+  //vector<vector<vector<int > > > messages; //!< messages[v][i][t] is the integer version of the  message at time t from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). Messages will be useful to find edge types
+  vector<vector<int > > messages; //!< messages[v][i] is the integer version of the  message from vertex v towards its ith neighbor (in the order given by adj_list of vertex i in graph G). The message is at any given step that update_messages is running, so after finishing update_message, the messages are at step (depth) h-1.
 
   //vector<vector<vector<int > > > inward_messages; //!< inward_messages[v][i][t] is the integer version of the  message at time t from the ith neighbor of v towards v (in the order given by adj_list in graph G). 
 
-  vector<unordered_map<vector<int>, int, vint_hash> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
+  //vector<unordered_map<vector<int>, int, vint_hash> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
+
+  unordered_map<vector<int>, int, vint_hash> message_dict; //!< message_dict is the message dictionary at any step that update_messages is running, which maps each message to its corresponding index in the dictionary. When update_messages is over, this corresponds to step (depth) h-1
 
   //vector<map<vector<int>, int> > message_dict; //!< message_dict[t] for \f$0 \leq t \leq h-1\f$ is the message dictionary at depth t, which maps each message to its corresponding index in the dictionary
 
-  vector<vector<vector<int> > > message_list; //!< message_list[t] is the list of messages present in the graph at depth t, stored in an order consistent with message_dict[t], i.e. for a message m, if messsage_dict[t][m] = i, then message_list[t][i] = m. This is constructed in such a way that message_list[t][message_dict[t][x]] = x. message_list[h-1] is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -1, and the second being the edge mark component (towards the 'me' vertex). 
+  //vector<vector<vector<int> > > message_list; //!< message_list[t] is the list of messages present in the graph at depth t, stored in an order consistent with message_dict[t], i.e. for a message m, if messsage_dict[t][m] = i, then message_list[t][i] = m. This is constructed in such a way that message_list[t][message_dict[t][x]] = x. message_list[h-1] is sorted in reverse order so that all * messages (those messages starting with -1) go to the end of the list. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -1, and the second being the edge mark component (towards the 'me' vertex). 
 
+  vector<int> message_mark; //!< for an integer message \f$m\f$, message_mark[m] is the mark component associated to the message m at any step that update_messages is working. This is basically the last index in the vector message associate to m. When update_messages is over, this corresponds to step (depth) h-1.
 
-  vector<int> message_mark; //!< for an integer message such as m at depth h-1, message_mark[m] denotes the mark component of the message that corresponds to m. The message corresponds to m is basically message_list[h-1][m] which is of type vector<int> and the last component in this array is the mark component. 
+  vector<bool> is_star_message; //!< for an integer message \f$m\f$, is_star_message[m] is true if m is a star message and false otherwise. Note that m is star type iff the first index in the vector message corresponding to m is -1. This is updated at step of update_messages, so when it is over, it corresponds to step (depth) h-1.
 
-  vector<bool> is_star_message; //!< for a message m (integer type) at depth h-1, is_star_message[m] is true if the corresponding message starts with -1, ans is false otherwise.
+  //vector<int> message_mark; //!< for an integer message such as m at depth h-1, message_mark[m] denotes the mark component of the message that corresponds to m. The message corresponds to m is basically message_list[h-1][m] which is of type vector<int> and the last component in this array is the mark component. 
+
+  //vector<bool> is_star_message; //!< for a message m (integer type) at depth h-1, is_star_message[m] is true if the corresponding message starts with -1, ans is false otherwise.
 
   //! constructor, given reference to a graph
   graph_message(const marked_graph& graph, int depth, int max_degree){

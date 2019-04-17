@@ -99,6 +99,7 @@ void marked_graph_encoder::extract_edge_types(const marked_graph& G)
   logger::current_depth++;
   logger::add_entry("Extract messages", "");
   C = colored_graph(G, h, delta);
+  cerr << " number of types " << C.M.message_mark.size() << endl;
   is_star_vertex = C.is_star_vertex;
   star_vertices = C.star_vertices;
   logger::current_depth--;

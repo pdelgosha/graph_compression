@@ -6,6 +6,7 @@
 {\ttfamily \#include \char`\"{}marked\+\_\+graph.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}graph\+\_\+message.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}random\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,11 +29,13 @@ int \hyperlink{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-56           \{
-57   \hyperlink{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}{mp\_test}();
-58   \textcolor{comment}{//random\_graph\_test ();}
-59   \textcolor{keywordflow}{return} 0;
-60 \}
+57           \{
+58   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
+59   \hyperlink{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}{mp\_test}();
+60   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
+61   \textcolor{comment}{//random\_graph\_test ();}
+62   \textcolor{keywordflow}{return} 0;
+63 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}\label{test__mp_8cpp_a2f49a1fae1f238b0451e12ece3ed2f12}} 
 \index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!mp\+\_\+test@{mp\+\_\+test}}
@@ -42,35 +45,35 @@ int \hyperlink{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-26               \{
-27   \hyperlink{classmarked__graph}{marked\_graph} G;
-28   \textcolor{comment}{//ifstream inp("test\_graphs/hexagon\_diagonal\_marked.txt");}
-29   \textcolor{comment}{//inp >> G;}
-30   \textcolor{comment}{//G = marked\_ER(10000,0.0003,2 ,2);}
-31   G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(100000,16, 2, 2);
-32   cerr << \textcolor{stringliteral}{" graph generated "} << endl;
+27               \{
+28   \hyperlink{classmarked__graph}{marked\_graph} G;
+29   \textcolor{comment}{//ifstream inp("test\_graphs/hexagon\_diagonal\_marked.txt");}
+30   \textcolor{comment}{//inp >> G;}
+31   \textcolor{comment}{//G = marked\_ER(10000,0.0003,2 ,2);}
+32   G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(100000,3, 10, 10);
 33   \textcolor{comment}{//cerr << " graph generated " << endl;}
-34   \textcolor{comment}{//cout << " G " << endl << G << endl;}
-35   \hyperlink{classcolored__graph}{colored\_graph} C(G, 2, 2);
-36 
-37   \textcolor{comment}{/*}
-38 \textcolor{comment}{  int n = C.nu\_vertices;}
-39 \textcolor{comment}{  for (int v=0; v<n; v++)\{}
-40 \textcolor{comment}{    cout << v << " : ";}
-41 \textcolor{comment}{    for (int i=0;i<C.adj\_list[v].size();i++)\{}
-42 \textcolor{comment}{      cout << C.adj\_list[v][i].first << " ( " << C.adj\_list[v][i].second.first << " , " <<
+34   \textcolor{comment}{//cerr << " graph generated " << endl;}
+35   \textcolor{comment}{//cout << " G " << endl << G << endl;}
+36   \hyperlink{classcolored__graph}{colored\_graph} C(G, 3, 20);
+37 
+38   \textcolor{comment}{/*}
+39 \textcolor{comment}{  int n = C.nu\_vertices;}
+40 \textcolor{comment}{  for (int v=0; v<n; v++)\{}
+41 \textcolor{comment}{    cout << v << " : ";}
+42 \textcolor{comment}{    for (int i=0;i<C.adj\_list[v].size();i++)\{}
+43 \textcolor{comment}{      cout << C.adj\_list[v][i].first << " ( " << C.adj\_list[v][i].second.first << " , " <<
        C.adj\_list[v][i].second.second << " ) ";}
-43 \textcolor{comment}{    \}}
-44 \textcolor{comment}{    cout << endl;}
-45 \textcolor{comment}{  \}}
-46 \textcolor{comment}{}
-47 \textcolor{comment}{  cout << " message marks " << endl;}
-48 \textcolor{comment}{  for (int m=0; m<C.M.message\_mark.size(); m++)\{}
-49 \textcolor{comment}{    cout << m << " mark = " << C.M.message\_mark[m] << " star " << C.M.is\_star\_message[m] << endl;}
-50 \textcolor{comment}{  \}}
-51 \textcolor{comment}{  */}
-52   
-53 \}
+44 \textcolor{comment}{    \}}
+45 \textcolor{comment}{    cout << endl;}
+46 \textcolor{comment}{  \}}
+47 \textcolor{comment}{}
+48 \textcolor{comment}{  cout << " message marks " << endl;}
+49 \textcolor{comment}{  for (int m=0; m<C.M.message\_mark.size(); m++)\{}
+50 \textcolor{comment}{    cout << m << " mark = " << C.M.message\_mark[m] << " star " << C.M.is\_star\_message[m] << endl;}
+51 \textcolor{comment}{  \}}
+52 \textcolor{comment}{  */}
+53   
+54 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{test__mp_8cpp_af5223445b486d224879e0a71e1836ff0}\label{test__mp_8cpp_af5223445b486d224879e0a71e1836ff0}} 
 \index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!operator$<$$<$@{operator$<$$<$}}
@@ -80,14 +83,14 @@ int \hyperlink{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-11                                                        \{
-12   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<v.size();i++)\{
-13     o << v[i];
-14     \textcolor{keywordflow}{if} (i < v.size()-1)
-15       o << \textcolor{stringliteral}{", "};
-16   \}
-17   \textcolor{keywordflow}{return} o;
-18 \}
+12                                                        \{
+13   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<v.size();i++)\{
+14     o << v[i];
+15     \textcolor{keywordflow}{if} (i < v.size()-1)
+16       o << \textcolor{stringliteral}{", "};
+17   \}
+18   \textcolor{keywordflow}{return} o;
+19 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{test__mp_8cpp_ade4fa14856f731f14986b8b0ae8e187d}\label{test__mp_8cpp_ade4fa14856f731f14986b8b0ae8e187d}} 
 \index{test\+\_\+mp.\+cpp@{test\+\_\+mp.\+cpp}!random\+\_\+graph\+\_\+test@{random\+\_\+graph\+\_\+test}}
@@ -97,8 +100,8 @@ int \hyperlink{test__mp_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 
 
 \begin{DoxyCode}
-21                         \{
-22   \hyperlink{classmarked__graph}{marked\_graph} G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(10, 2, 2, 2);
-23   cout << G;
-24 \}
+22                         \{
+23   \hyperlink{classmarked__graph}{marked\_graph} G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(10, 2, 2, 2);
+24   cout << G;
+25 \}
 \end{DoxyCode}

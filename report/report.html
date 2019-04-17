@@ -7,6 +7,7 @@
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="/Users/pdelgosha/css/jemdoc_edited.css" type="text/css" />
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body>
 <div id="TOC">
@@ -16,6 +17,9 @@
 <li><a href="#pm">2019-04-09 8:53 PM</a></li>
 <li><a href="#pm-1">2019-04-09 9:17 PM</a></li>
 <li><a href="#am">2019-04-10 11:50 AM</a></li>
+<li><a href="#pm-2">2019-04-12 7:04 PM</a></li>
+<li><a href="#pm-3">2019-04-12 7:12 PM</a></li>
+<li><a href="#pm-4">2019-04-16 5:40 PM</a></li>
 </ul></li>
 </ul>
 </div>
@@ -314,11 +318,225 @@
 |---compare (): 2.538139s [7.938629%]
        31.98 real        31.27 user         0.58 sys</code></pre>
 <p></details></p>
-<p>This is a javascript test:</p>
-<p id="demo"></p>
+<h2 id="pm-2">2019-04-12 7:04 PM</h2>
+<p>I realized that the inputs to the <code>compute_product</code> function do not need to be of type <code>mpz_class</code>, only <code>int</code> is enough. This surprisingly results in about 6s improvement!</p>
+<p><details></p>
+<p><summary> details </summary></p>
+<p>Note that I commented the parts to compute total time to search in hash table etc.</p>
+<pre><code>|---Construct G () 2019-04-12 07:00:18 PM
+ edges size 300457
+ graph constructed
+|---Encode () 2019-04-12 07:00:19 PM
+|---|---Init compressed () 2019-04-12 07:00:19 PM
+|---|---Extact edge types () 2019-04-12 07:00:19 PM
+|---|---|---Extract messages () 2019-04-12 07:00:19 PM
+|---|---|---|---graph_message::update_message init () 2019-04-12 07:00:19 PM
+|---|---|---|---resizing messages () 2019-04-12 07:00:19 PM
+|---|---|---|---initializing messages () 2019-04-12 07:00:19 PM
+|---|---|---|---updating messages () 2019-04-12 07:00:19 PM
+ total time to search in hash table: 0
+ total time to insert in hash table: 0
+ total time to modify vector m  0
+ total time to sort  0
+ total time to collect neighbor messages 0
+|---|---|---|---* symmetrizing () 2019-04-12 07:00:23 PM
+|---|---|---|---setting message_mark and is_star_message () 2019-04-12 07:00:23 PM
+|---|---|---colored_graph::init init () 2019-04-12 07:00:23 PM
+|---|---|---updating adj_list () 2019-04-12 07:00:23 PM
+|---|---|---Find deg and ver_types () 2019-04-12 07:00:23 PM
+|---|---Encode * vertices () 2019-04-12 07:00:25 PM
+|---|---Encode * edges () 2019-04-12 07:00:26 PM
+|---|---Encode vertex types () 2019-04-12 07:00:26 PM
+|---|---Extract partition graphs () 2019-04-12 07:00:27 PM
+|---|---Encode partition b graphs () 2019-04-12 07:00:30 PM
+|---|---Encode partition graphs () 2019-04-12 07:00:32 PM
+|---Decode () 2019-04-12 07:00:32 PM
+|---|---Init () 2019-04-12 07:00:32 PM
+|---|---Decode * vertices () 2019-04-12 07:00:32 PM
+|---|---Decode * edges () 2019-04-12 07:00:33 PM
+|---|---Decode vertex types () 2019-04-12 07:00:33 PM
+|---|---Decode partition graphs () 2019-04-12 07:00:37 PM
+|---|---Decode partition b graphs () 2019-04-12 07:00:37 PM
+|---|---Construct decoded graph () 2019-04-12 07:00:40 PM
+|---compare () 2019-04-12 07:00:41 PM
+ successfully decoded the marked graph :D
 
-<button onclick="document.getElementById('demo').innerHTML='Salam' "> 
-Change Text
-</button>
+|---Construct G (): 0.838441s [3.293217%]
+|---Encode (): 13.342818s [52.407761%]
+|---|---Init compressed (): 0.000688s [0.005153%]
+|---|---Extact edge types (): 6.134593s [45.976738%]
+|---|---|---Extract messages (): 4.592058s [74.855133%]
+|---|---|---|---graph_message::update_message init (): 0.001506s [0.032806%]
+|---|---|---|---resizing messages (): 0.194764s [4.241329%]
+|---|---|---|---initializing messages (): 0.193184s [4.206914%]
+|---|---|---|---updating messages (): 4.128408s [89.903221%]
+|---|---|---|---* symmetrizing (): 0.034695s [0.755551%]
+|---|---|---|---setting message_mark and is_star_message (): 0.039188s [0.853394%]
+|---|---|---colored_graph::init init (): 0.027730s [0.452019%]
+|---|---|---updating adj_list (): 0.236458s [3.854509%]
+|---|---|---Find deg and ver_types (): 1.278302s [20.837597%]
+|---|---Encode * vertices (): 1.130349s [8.471589%]
+|---|---Encode * edges (): 0.000045s [0.000334%]
+|---|---Encode vertex types (): 1.154480s [8.652441%]
+|---|---Extract partition graphs (): 2.733744s [20.488504%]
+|---|---Encode partition b graphs (): 2.016023s [15.109422%]
+|---|---Encode partition graphs (): 0.171038s [1.281871%]
+|---Decode (): 8.703982s [34.187397%]
+|---|---Init (): 0.000019s [0.000223%]
+|---|---Decode * vertices (): 1.197001s [13.752331%]
+|---|---Decode * edges (): 0.000042s [0.000481%]
+|---|---Decode vertex types (): 3.619471s [41.584076%]
+|---|---Decode partition graphs (): 0.000045s [0.000514%]
+|---|---Decode partition b graphs (): 3.433578s [39.448360%]
+|---|---Construct decoded graph (): 0.453796s [5.213660%]
+|---compare (): 2.574372s [10.111587%]
+       25.47 real        24.60 user         0.60 sys</code></pre>
+<p></details></p>
+<h2 id="pm-3">2019-04-12 7:12 PM</h2>
+<p>I also tried to see if another way of splitting the terms for <code>compute_product</code> can result in an improvement. The other form (see handwritten note for details) is as follows:</p>
+<p><span class="math">\[ \prod_{i=0}^{k-1} (r - is) = \prod_{i=0}^{\lceil k / 2 \rceil - 1} (r - i(2s)) \times \prod_{i=0}^{\lfloor k / 2 \rfloor - 1} ((r-s) - i(2s))\]</span></p>
+<p>Which means that <span class="math">\(\text{compute_product}(r, k, s) = \text{compute_product}(r, m, 2s) \times \text{compute_product}(r-s, k-m, 2s)\)</span> where <span class="math">\(m = (k+1) \div 2\)</span>. I tested this, but did not see an improvement. I expected one, because this is a more balanced split.</p>
+<p><details></p>
+<p><summary> details </summary></p>
+<pre><code>|---Construct G () 2019-04-12 07:11:21 PM
+ edges size 299838
+ graph constructed
+|---Encode () 2019-04-12 07:11:21 PM
+|---|---Init compressed () 2019-04-12 07:11:21 PM
+|---|---Extact edge types () 2019-04-12 07:11:21 PM
+|---|---|---Extract messages () 2019-04-12 07:11:21 PM
+|---|---|---|---graph_message::update_message init () 2019-04-12 07:11:21 PM
+|---|---|---|---resizing messages () 2019-04-12 07:11:21 PM
+|---|---|---|---initializing messages () 2019-04-12 07:11:22 PM
+|---|---|---|---updating messages () 2019-04-12 07:11:22 PM
+ total time to search in hash table: 0
+ total time to insert in hash table: 0
+ total time to modify vector m  0
+ total time to sort  0
+ total time to collect neighbor messages 0
+|---|---|---|---* symmetrizing () 2019-04-12 07:11:26 PM
+|---|---|---|---setting message_mark and is_star_message () 2019-04-12 07:11:26 PM
+|---|---|---colored_graph::init init () 2019-04-12 07:11:26 PM
+|---|---|---updating adj_list () 2019-04-12 07:11:26 PM
+|---|---|---Find deg and ver_types () 2019-04-12 07:11:26 PM
+|---|---Encode * vertices () 2019-04-12 07:11:28 PM
+|---|---Encode * edges () 2019-04-12 07:11:29 PM
+|---|---Encode vertex types () 2019-04-12 07:11:29 PM
+|---|---Extract partition graphs () 2019-04-12 07:11:30 PM
+|---|---Encode partition b graphs () 2019-04-12 07:11:33 PM
+|---|---Encode partition graphs () 2019-04-12 07:11:35 PM
+|---Decode () 2019-04-12 07:11:35 PM
+|---|---Init () 2019-04-12 07:11:35 PM
+|---|---Decode * vertices () 2019-04-12 07:11:35 PM
+|---|---Decode * edges () 2019-04-12 07:11:36 PM
+|---|---Decode vertex types () 2019-04-12 07:11:36 PM
+|---|---Decode partition graphs () 2019-04-12 07:11:40 PM
+|---|---Decode partition b graphs () 2019-04-12 07:11:40 PM
+|---|---Construct decoded graph () 2019-04-12 07:11:43 PM
+|---compare () 2019-04-12 07:11:43 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.846560s [3.329669%]
+|---Encode (): 13.309370s [52.348114%]
+|---|---Init compressed (): 0.000787s [0.005912%]
+|---|---Extact edge types (): 6.099671s [45.829899%]
+|---|---|---Extract messages (): 4.611472s [75.601974%]
+|---|---|---|---graph_message::update_message init (): 0.001362s [0.029537%]
+|---|---|---|---resizing messages (): 0.192514s [4.174665%]
+|---|---|---|---initializing messages (): 0.190769s [4.136829%]
+|---|---|---|---updating messages (): 4.160253s [90.215286%]
+|---|---|---|---* symmetrizing (): 0.029564s [0.641104%]
+|---|---|---|---setting message_mark and is_star_message (): 0.036786s [0.797699%]
+|---|---|---colored_graph::init init (): 0.025158s [0.412448%]
+|---|---|---updating adj_list (): 0.228830s [3.751512%]
+|---|---|---Find deg and ver_types (): 1.234159s [20.233212%]
+|---|---Encode * vertices (): 1.139122s [8.558794%]
+|---|---Encode * edges (): 0.000050s [0.000373%]
+|---|---Encode vertex types (): 1.177471s [8.846930%]
+|---|---Extract partition graphs (): 2.741612s [20.599110%]
+|---|---Encode partition b graphs (): 1.975690s [14.844354%]
+|---|---Encode partition graphs (): 0.173620s [1.304497%]
+|---Decode (): 8.671961s [34.108360%]
+|---|---Init (): 0.000020s [0.000227%]
+|---|---Decode * vertices (): 1.194511s [13.774403%]
+|---|---Decode * edges (): 0.000037s [0.000429%]
+|---|---Decode vertex types (): 3.631156s [41.872372%]
+|---|---Decode partition graphs (): 0.000049s [0.000569%]
+|---|---Decode partition b graphs (): 3.408437s [39.304111%]
+|---|---Construct decoded graph (): 0.437722s [5.047554%]
+|---compare (): 2.596835s [10.213815%]
+       25.43 real        24.67 user         0.57 sys</code></pre>
+<p></details></p>
+<h2 id="pm-4">2019-04-16 5:40 PM</h2>
+<p>Realized that there is a more efficient way of updating messages: when we gather previous messages and sort them, we do not need to construct a vector for each neighbor separately, we can swap the last element one by one to find the message. This is done by working with capacity and size, so that we keep the element of the message that we do not need at the end of the vector outside its size so that we can use it later by swapping.</p>
+<p>Also, I realized that we do not need to keep a list of all messages, the only information we need is whether a message is star type and its mark component.</p>
+<p>Also, we do not need to keep a copy of message_dict and messages for all depths, as at depth s we only need depth s-1, so at each depth, we can get a backup of current variables and clear them and update them using this backup (which refers to the previous depth).</p>
+<p>With all these, I seem to have an improvement of around 1s, but I expected at least 3s! Now, for 100,000 nodes, 300,000 edges, h = 3, delta = 20. Here is details:</p>
+<p><details></p>
+<p><summary> details </summary></p>
+<pre><code>|---Construct G () 2019-04-16 05:28:48 PM
+ edges size 299124
+ graph constructed
+|---Encode () 2019-04-16 05:28:49 PM
+|---|---Init compressed () 2019-04-16 05:28:49 PM
+|---|---Extact edge types () 2019-04-16 05:28:49 PM
+|---|---|---Extract messages () 2019-04-16 05:28:49 PM
+|---|---|---|---graph_message::update_message init () 2019-04-16 05:28:49 PM
+|---|---|---|---resizing messages () 2019-04-16 05:28:49 PM
+|---|---|---|---initializing messages () 2019-04-16 05:28:49 PM
+|---|---|---|---updating messages () 2019-04-16 05:28:49 PM
+|---|---|---|---* symmetrizing () 2019-04-16 05:28:53 PM
+|---|---|---colored_graph::init init () 2019-04-16 05:28:53 PM
+|---|---|---updating adj_list () 2019-04-16 05:28:53 PM
+|---|---|---Find deg and ver_types () 2019-04-16 05:28:53 PM
+|---|---Encode * vertices () 2019-04-16 05:28:54 PM
+|---|---Encode * edges () 2019-04-16 05:28:56 PM
+|---|---Encode vertex types () 2019-04-16 05:28:56 PM
+|---|---Extract partition graphs () 2019-04-16 05:28:57 PM
+|---|---Encode partition b graphs () 2019-04-16 05:29:00 PM
+|---|---Encode partition graphs () 2019-04-16 05:29:01 PM
+|---Decode () 2019-04-16 05:29:02 PM
+|---|---Init () 2019-04-16 05:29:02 PM
+|---|---Decode * vertices () 2019-04-16 05:29:02 PM
+|---|---Decode * edges () 2019-04-16 05:29:03 PM
+|---|---Decode vertex types () 2019-04-16 05:29:03 PM
+|---|---Decode partition graphs () 2019-04-16 05:29:06 PM
+|---|---Decode partition b graphs () 2019-04-16 05:29:06 PM
+|---|---Construct decoded graph () 2019-04-16 05:29:10 PM
+|---compare () 2019-04-16 05:29:10 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.853117s [3.544942%]
+|---Encode (): 12.856951s [53.424271%]
+|---|---Init compressed (): 0.000504s [0.003918%]
+|---|---Extact edge types (): 5.701544s [44.346008%]
+|---|---|---Extract messages (): 4.292262s [75.282448%]
+|---|---|---|---graph_message::update_message init (): 0.001364s [0.031769%]
+|---|---|---|---resizing messages (): 0.025791s [0.600883%]
+|---|---|---|---initializing messages (): 0.179556s [4.183252%]
+|---|---|---|---updating messages (): 3.769229s [87.814514%]
+|---|---|---|---* symmetrizing (): 0.316306s [7.369211%]
+|---|---|---colored_graph::init init (): 0.022788s [0.399686%]
+|---|---|---updating adj_list (): 0.163689s [2.870965%]
+|---|---|---Find deg and ver_types (): 1.222781s [21.446480%]
+|---|---Encode * vertices (): 1.128720s [8.779068%]
+|---|---Encode * edges (): 0.000044s [0.000342%]
+|---|---Encode vertex types (): 1.150674s [8.949819%]
+|---|---Extract partition graphs (): 2.728767s [21.224064%]
+|---|---Encode partition b graphs (): 1.966031s [15.291584%]
+|---|---Encode partition graphs (): 0.179268s [1.394325%]
+|---Decode (): 8.595399s [35.716316%]
+|---|---Init (): 0.000018s [0.000204%]
+|---|---Decode * vertices (): 1.209178s [14.067740%]
+|---|---Decode * edges (): 0.000051s [0.000593%]
+|---|---Decode vertex types (): 3.569625s [41.529484%]
+|---|---Decode partition graphs (): 0.000054s [0.000633%]
+|---|---Decode partition b graphs (): 3.373827s [39.251541%]
+|---|---Construct decoded graph (): 0.442614s [5.149432%]
+|---compare (): 1.760271s [7.314426%]
+       24.07 real        23.38 user         0.50 sys</code></pre>
+<p></details></p>
+<p>I am starting to think that perhaps I am expecting too much. This is somehow the maximum entropy ensemble and perhaps that's why it takes this much time. For other types of data, e.g. more symmetric ones, perhaps we can be faster. The reason for this: among the ~300,000 edges and 600,000 half edges, almost all of them have a unique type, more specifically, in an example, the graph has 299,768 edges and 598,135 type, so nearly the maximum, and this is because there is no symmetry in the graph. Maybe I should run it and test it in different examples. Yet the idea of multithreading exists, but that might be a little difficult.</p>
+<p>Don't forget to commit.</p>
 </body>
 </html>

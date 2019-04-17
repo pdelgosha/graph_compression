@@ -4,6 +4,6 @@ all:
 	time ./test.o
 
 testmp:
-	g++ -std=c++11 -o2 test_mp.cpp marked_graph.cpp graph_message.cpp  random_graph.cpp -lgmpxx -lgmp  -o test_mp.o
+	g++ -std=c++11 -I /opt/local/include -o2 test_mp.cpp marked_graph.cpp graph_message.cpp  random_graph.cpp logger.cpp -lgmpxx -lgmp  -o test_mp.o
 	time ./test_mp.o
 

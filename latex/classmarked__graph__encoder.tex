@@ -165,21 +165,21 @@ encode partition bipartite graphs
 
 
 \begin{DoxyCode}
-219 \{
-220   \textcolor{keywordtype}{int} t, tp;
-221 
-222   \textcolor{comment}{// compressing bipartite graphs }
-223   \textcolor{keywordflow}{for} (map<pair<int, int> , \hyperlink{classb__graph}{b\_graph}>::iterator it = \hyperlink{classmarked__graph__encoder_a5faebef707fb681c0b6c2ccf64abc04c}{part\_bgraph}.begin(); it!=
+220 \{
+221   \textcolor{keywordtype}{int} t, tp;
+222 
+223   \textcolor{comment}{// compressing bipartite graphs }
+224   \textcolor{keywordflow}{for} (map<pair<int, int> , \hyperlink{classb__graph}{b\_graph}>::iterator it = \hyperlink{classmarked__graph__encoder_a5faebef707fb681c0b6c2ccf64abc04c}{part\_bgraph}.begin(); it!=
       \hyperlink{classmarked__graph__encoder_a5faebef707fb681c0b6c2ccf64abc04c}{part\_bgraph}.end(); it++)\{
-224     \textcolor{comment}{// the color components are t, tp}
-225     t = it->first.first; 
-226     tp = it->first.second; 
-227     \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,tp)),
+225     \textcolor{comment}{// the color components are t, tp}
+226     t = it->first.first; 
+227     tp = it->first.second; 
+228     \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,tp)),
       \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(tp, t)));
-228     \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}[pair<int, int>(t,tp)] = E.encode(it->second);
-229   \}
-230 
-231 \}
+229     \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}[pair<int, int>(t,tp)] = E.encode(it->second);
+230   \}
+231 
+232 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_a654463d4b256b84225f5944b5e361ebf}\label{classmarked__graph__encoder_a654463d4b256b84225f5944b5e361ebf}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode\+\_\+partition\+\_\+graphs@{encode\+\_\+partition\+\_\+graphs}}
@@ -193,16 +193,16 @@ encodes partition simple graphs
 
 
 \begin{DoxyCode}
-234 \{
-235   \textcolor{keywordtype}{int} t;
-236 
-237   \textcolor{comment}{// compressing graphs}
-238   \textcolor{keywordflow}{for} (map<int, graph>::iterator it=\hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}.begin(); it!=\hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}.end(); it++)\{
-239     t = it->first; \textcolor{comment}{// the color is t,t}
-240     \hyperlink{classgraph__encoder}{graph\_encoder} E(\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,t)));
-241     \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}[t] = E.encode(it->second);
-242   \}
-243 \}
+235 \{
+236   \textcolor{keywordtype}{int} t;
+237 
+238   \textcolor{comment}{// compressing graphs}
+239   \textcolor{keywordflow}{for} (map<int, graph>::iterator it=\hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}.begin(); it!=\hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}.end(); it++)\{
+240     t = it->first; \textcolor{comment}{// the color is t,t}
+241     \hyperlink{classgraph__encoder}{graph\_encoder} E(\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,t)));
+242     \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}[t] = E.encode(it->second);
+243   \}
+244 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_ad6883669a47d24e3d9898978f3252727}\label{classmarked__graph__encoder_ad6883669a47d24e3d9898978f3252727}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode\+\_\+star\+\_\+edges@{encode\+\_\+star\+\_\+edges}}
@@ -216,40 +216,40 @@ Encodes star edges to the star\+\_\+edges attribute of compressed.
 
 
 \begin{DoxyCode}
-122 \{
-123   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// auxiliary mark variables}
-124   \textcolor{keywordtype}{int} w; \textcolor{comment}{// auxiliary vertex variable}
-125   \textcolor{keywordtype}{int} v; \textcolor{comment}{// auxiliary vertex variable }
-126   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0; k<\hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}.size(); k++)\{ \textcolor{comment}{// iterating over star vertices}
-127     v = \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}[k];
-128     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
-129       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first] or 
+123 \{
+124   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// auxiliary mark variables}
+125   \textcolor{keywordtype}{int} w; \textcolor{comment}{// auxiliary vertex variable}
+126   \textcolor{keywordtype}{int} v; \textcolor{comment}{// auxiliary vertex variable }
+127   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0; k<\hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}.size(); k++)\{ \textcolor{comment}{// iterating over star vertices}
+128     v = \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}[k];
+129     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
+130       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first] or 
       \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second])\{ \textcolor{comment}{// this is a star edge}
-130         x = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first]; \textcolor{comment}{// mark towards v}
-131         xp = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second]; \textcolor{comment}{// mark towards other
+131         x = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first]; \textcolor{comment}{// mark towards v}
+132         xp = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}[\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second]; \textcolor{comment}{// mark towards other
        endpoint}
-132         w = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint of the edge}
-133         \textcolor{keywordflow}{if} (x < xp)\{ \textcolor{comment}{// if x > xp, we only store this edge when visiting the other endpoint (w), since we
+133         w = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint of the edge}
+134         \textcolor{keywordflow}{if} (x < xp)\{ \textcolor{comment}{// if x > xp, we only store this edge when visiting the other endpoint (w), since we
        do not want to express an edge twice}
-134           \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.find(pair<int, int>(x,xp)) == 
+135           \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.find(pair<int, int>(x,xp)) == 
       \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end()) \textcolor{comment}{// this pair does not exist}
-135             \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}[pair<int, int>(x,xp)].resize(
+136             \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}[pair<int, int>(x,xp)].resize(
       \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}.size()); \textcolor{comment}{// open space for all star vertices }
-136           \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.at(pair<int, int>(x,xp))[k].push\_back(w); \textcolor{comment}{// add w to
+137           \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.at(pair<int, int>(x,xp))[k].push\_back(w); \textcolor{comment}{// add w to
        the position of v (which is k)}
-137         \}
-138         \textcolor{keywordflow}{if} (x == xp and w > v)\{ \textcolor{comment}{// if w < v, we store this edge when visiting the other endpoint (w) to
+138         \}
+139         \textcolor{keywordflow}{if} (x == xp and w > v)\{ \textcolor{comment}{// if w < v, we store this edge when visiting the other endpoint (w) to
        avoid storing and edge twice}
-139           \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.find(pair<int, int>(x,xp)) == 
+140           \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.find(pair<int, int>(x,xp)) == 
       \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end()) \textcolor{comment}{// not yet exist}
-140             \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}[pair<int, int>(x,xp)].resize(
+141             \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}[pair<int, int>(x,xp)].resize(
       \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices}.size()); \textcolor{comment}{// open space}
-141           \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.at(pair<int, int>(x,xp))[k].push\_back(w);
-142         \}
-143       \}
-144     \}
-145   \}
-146 \}
+142           \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.at(pair<int, int>(x,xp))[k].push\_back(w);
+143         \}
+144       \}
+145     \}
+146   \}
+147 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}\label{classmarked__graph__encoder_af8daeed1452dbfd41fa2f875813e3496}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode\+\_\+star\+\_\+vertices@{encode\+\_\+star\+\_\+vertices}}
@@ -263,18 +263,18 @@ encodes the star vertices (those vertices with at least one star edge connected 
 
 uses time\+\_\+series\+\_\+encode to encode the 0-\/1 sequence of star vertices stored in is\+\_\+star\+\_\+vertex to the star\+\_\+vertices attribute of compressed 
 \begin{DoxyCode}
-108 \{
-109   \textcolor{comment}{// compress the is\_star\_vertex list}
-110   \hyperlink{classtime__series__encoder}{time\_series\_encoder} star\_encoder(\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n});
-111   vector<int> is\_star\_vertex\_int(\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}.size());
-112   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}.size();i++)\{
-113     \textcolor{keywordflow}{if}(\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}[i] == \textcolor{keyword}{true})
-114       is\_star\_vertex\_int[i] = 1;
-115     \textcolor{keywordflow}{else}
-116       is\_star\_vertex\_int[i] = 0;
-117   \}
-118   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices} = star\_encoder.encode(is\_star\_vertex\_int);
-119 \}
+109 \{
+110   \textcolor{comment}{// compress the is\_star\_vertex list}
+111   \hyperlink{classtime__series__encoder}{time\_series\_encoder} star\_encoder(\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n});
+112   vector<int> is\_star\_vertex\_int(\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}.size());
+113   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}.size();i++)\{
+114     \textcolor{keywordflow}{if}(\hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex}[i] == \textcolor{keyword}{true})
+115       is\_star\_vertex\_int[i] = 1;
+116     \textcolor{keywordflow}{else}
+117       is\_star\_vertex\_int[i] = 0;
+118   \}
+119   \hyperlink{classmarked__graph__encoder_ac2ded200860fdd2321f86dd76b28bcb3}{compressed}.\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices} = star\_encoder.encode(is\_star\_vertex\_int);
+120 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_a239769085214166e09cb56de750a8d71}\label{classmarked__graph__encoder_a239769085214166e09cb56de750a8d71}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!encode\+\_\+vertex\+\_\+types@{encode\+\_\+vertex\+\_\+types}}
@@ -314,10 +314,11 @@ Given a marked graph, extracts edge types by updating the \hyperlink{classcolore
 99   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
 100   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Extract messages"}, \textcolor{stringliteral}{""});
 101   \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C} = \hyperlink{classcolored__graph}{colored\_graph}(G, \hyperlink{classmarked__graph__encoder_ae7f8872c57d2d64e4ca6cc47387b9b58}{h}, \hyperlink{classmarked__graph__encoder_a29dcf42526b12cf7964a556bb1025c9b}{delta});
-102   \hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex} = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex};
-103   \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices} = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\_vertices};
-104   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-105 \}
+102   cerr << \textcolor{stringliteral}{" number of types "} << \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size() << endl;
+103   \hyperlink{classmarked__graph__encoder_ac36f6c2430af6fa4d20584569859bb59}{is\_star\_vertex} = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex};
+104   \hyperlink{classmarked__graph__encoder_a08fdf6fcd7dcd8c5d1667f2d7ff06c2c}{star\_vertices} = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\_vertices};
+105   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+106 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_a60b0038c57bd8fa2f5cb3f0b6999c4f3}\label{classmarked__graph__encoder_a60b0038c57bd8fa2f5cb3f0b6999c4f3}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!extract\+\_\+partition\+\_\+graphs@{extract\+\_\+partition\+\_\+graphs}}
@@ -331,61 +332,61 @@ by looking at the colored graph C, extract partition graphs (simple and bipartit
 
 
 \begin{DoxyCode}
-171 \{
-172   \hyperlink{classmarked__graph__encoder_a1cb2cd754108302a0437a924dc70bc0e}{find\_part\_index\_deg}();
-173 
-174   \textcolor{comment}{// for t \(\backslash\)leq t', part\_adj\_list[(t,t')] is the adjacency list of the partition graph t,t'. If t < t',
+172 \{
+173   \hyperlink{classmarked__graph__encoder_a1cb2cd754108302a0437a924dc70bc0e}{find\_part\_index\_deg}();
+174 
+175   \textcolor{comment}{// for t \(\backslash\)leq t', part\_adj\_list[(t,t')] is the adjacency list of the partition graph t,t'. If t < t',
        this is the adjacency list of the left nodes, if t = t', this is the forward adjacency list of the partition
        graph.}
-175 
-176   map<pair<int, int>, vector<vector<int> > > part\_adj\_list;
-177   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types }
-178   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<int> >::iterator it = \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.begin(); it!= 
+176 
+177   map<pair<int, int>, vector<vector<int> > > part\_adj\_list;
+178   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types }
+179   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<int> >::iterator it = \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.begin(); it!= 
       \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.end(); it++)\{
-179     \textcolor{comment}{// search over all type pairs in part\_deg}
-180     t = it->first.first;
-181     tp = it->first.second;
-182     \textcolor{comment}{// t < t': bipartite, t = t': simple. In both cases, }
-183     \textcolor{keywordflow}{if} (t <= tp)
-184       part\_adj\_list[it->first] = vector<vector<int> >(it->second.size());
-185   \}
-186 
-187   \textcolor{comment}{// going over the edges in the graph and forming partition\_adj\_list}
-188   \textcolor{keywordtype}{int} w, p, q; \textcolor{comment}{// auxiliary variables }
-189   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v =0; v<\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n}; v++)\{
-190     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
-191       w = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint}
-192       t = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first; \textcolor{comment}{// color towards v}
-193       tp = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second; \textcolor{comment}{// color towards w}
-194       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[t] == \textcolor{keyword}{false} and \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.
+180     \textcolor{comment}{// search over all type pairs in part\_deg}
+181     t = it->first.first;
+182     tp = it->first.second;
+183     \textcolor{comment}{// t < t': bipartite, t = t': simple. In both cases, }
+184     \textcolor{keywordflow}{if} (t <= tp)
+185       part\_adj\_list[it->first] = vector<vector<int> >(it->second.size());
+186   \}
+187 
+188   \textcolor{comment}{// going over the edges in the graph and forming partition\_adj\_list}
+189   \textcolor{keywordtype}{int} w, p, q; \textcolor{comment}{// auxiliary variables }
+190   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v =0; v<\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n}; v++)\{
+191     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size();i++)\{
+192       w = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].first; \textcolor{comment}{// the other endpoint}
+193       t = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first; \textcolor{comment}{// color towards v}
+194       tp = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second; \textcolor{comment}{// color towards w}
+195       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[t] == \textcolor{keyword}{false} and \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.
       \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[tp] == \textcolor{keyword}{false})\{
-195         p = \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v].at(pair<int, int>(t,tp)); \textcolor{comment}{// the index of v in the t part of the t,tp
+196         p = \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v].at(pair<int, int>(t,tp)); \textcolor{comment}{// the index of v in the t part of the t,tp
        partition graph}
-196         \textcolor{comment}{//cerr << " p " << p << endl;}
-197         q = \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[w].at(pair<int, int>(tp, t)); \textcolor{comment}{// the index of w in the tp part of the t,tp
+197         \textcolor{comment}{//cerr << " p " << p << endl;}
+198         q = \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[w].at(pair<int, int>(tp, t)); \textcolor{comment}{// the index of w in the tp part of the t,tp
        partition graph}
-198         \textcolor{comment}{//cerr << " q " << q << endl;}
-199         \textcolor{keywordflow}{if} (t < tp)
-200           part\_adj\_list.at(pair<int, int>(t,tp))[p].push\_back(q);
-201         \textcolor{keywordflow}{if} ((t == tp) and (q > p))
-202           part\_adj\_list.at(pair<int, int>(t,t))[p].push\_back(q);
-203       \}
-204     \}
-205   \}
-206 
-207   \textcolor{comment}{// using partition\_adj\_list in order to construct partition graphs}
-208   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<vector<int> > >::iterator it=part\_adj\_list.begin(); it!=part\_adj\_list.end
+199         \textcolor{comment}{//cerr << " q " << q << endl;}
+200         \textcolor{keywordflow}{if} (t < tp)
+201           part\_adj\_list.at(pair<int, int>(t,tp))[p].push\_back(q);
+202         \textcolor{keywordflow}{if} ((t == tp) and (q > p))
+203           part\_adj\_list.at(pair<int, int>(t,t))[p].push\_back(q);
+204       \}
+205     \}
+206   \}
+207 
+208   \textcolor{comment}{// using partition\_adj\_list in order to construct partition graphs}
+209   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<vector<int> > >::iterator it=part\_adj\_list.begin(); it!=part\_adj\_list.end
       ();it++)\{
-209     t = it->first.first;
-210     tp = it->first.second;
-211     \textcolor{keywordflow}{if} (t<tp)
-212       \hyperlink{classmarked__graph__encoder_a5faebef707fb681c0b6c2ccf64abc04c}{part\_bgraph}[it->first] = \hyperlink{classb__graph}{b\_graph}(it->second, \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,
+210     t = it->first.first;
+211     tp = it->first.second;
+212     \textcolor{keywordflow}{if} (t<tp)
+213       \hyperlink{classmarked__graph__encoder_a5faebef707fb681c0b6c2ccf64abc04c}{part\_bgraph}[it->first] = \hyperlink{classb__graph}{b\_graph}(it->second, \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,
       tp)), \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(tp, t))); \textcolor{comment}{// left and right degree sequences are read from the
        part\_deg map}
-213     \textcolor{keywordflow}{if} (t == tp)
-214       \hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}[t] = \hyperlink{classgraph}{graph}(it->second, \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,t)));
-215   \}
-216 \}
+214     \textcolor{keywordflow}{if} (t == tp)
+215       \hyperlink{classmarked__graph__encoder_adbafd0769ae301acc1b2c19b5e1d4844}{part\_graph}[t] = \hyperlink{classgraph}{graph}(it->second, \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(pair<int, int>(t,t)));
+216   \}
+217 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__encoder_a1cb2cd754108302a0437a924dc70bc0e}\label{classmarked__graph__encoder_a1cb2cd754108302a0437a924dc70bc0e}} 
 \index{marked\+\_\+graph\+\_\+encoder@{marked\+\_\+graph\+\_\+encoder}!find\+\_\+part\+\_\+index\+\_\+deg@{find\+\_\+part\+\_\+index\+\_\+deg}}
@@ -399,28 +400,28 @@ update part\+\_\+index and part\+\_\+deg members
 
 
 \begin{DoxyCode}
-149 \{
-150   \textcolor{comment}{// extracting part\_index and part\_deg}
-151   \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}.resize(\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n});
-152   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v =0; v<\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n}; v++)\{
-153     \textcolor{keywordflow}{for} (map< pair< int, int >, \textcolor{keywordtype}{int} >::iterator it = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].begin(); it != 
+150 \{
+151   \textcolor{comment}{// extracting part\_index and part\_deg}
+152   \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}.resize(\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n});
+153   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v =0; v<\hyperlink{classmarked__graph__encoder_a4c66d9fdbc14c97523715aac7e4511cb}{n}; v++)\{
+154     \textcolor{keywordflow}{for} (map< pair< int, int >, \textcolor{keywordtype}{int} >::iterator it = \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].begin(); it != 
       \hyperlink{classmarked__graph__encoder_af82bc0653414091291cb75553a407bdb}{C}.\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].end(); it++)\{
-154       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.find(it->first) == \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.end())\{
-155         \textcolor{comment}{// this pair has not been observed yet in the graph}
-156         \textcolor{comment}{// so v is the first index node}
-157         \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v][it->first] = 0;
-158         \textcolor{comment}{// the degree of v in the partition graph is indeed it->second}
-159         \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}[it->first] = vector<int>(\{it->second\}); 
-160       \}\textcolor{keywordflow}{else}\{
-161         \textcolor{comment}{// there are currently part\_deg[it->first].size() many elements there, and v is the last arrival
+155       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.find(it->first) == \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.end())\{
+156         \textcolor{comment}{// this pair has not been observed yet in the graph}
+157         \textcolor{comment}{// so v is the first index node}
+158         \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v][it->first] = 0;
+159         \textcolor{comment}{// the degree of v in the partition graph is indeed it->second}
+160         \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}[it->first] = vector<int>(\{it->second\}); 
+161       \}\textcolor{keywordflow}{else}\{
+162         \textcolor{comment}{// there are currently part\_deg[it->first].size() many elements there, and v is the last arrival
        one, so its index is equal to the number of existing nodes }
-162         \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v][it->first] = \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(it->first).size();
-163         \textcolor{comment}{// append degree of v, which is it->second}
-164         \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(it->first).push\_back(it->second); 
-165       \}
-166     \}
-167   \}
-168 \}
+163         \hyperlink{classmarked__graph__encoder_a1d3e2b90f5d46244fd4cb33c69ac81f1}{part\_index}[v][it->first] = \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(it->first).size();
+164         \textcolor{comment}{// append degree of v, which is it->second}
+165         \hyperlink{classmarked__graph__encoder_a55ea2edb2609dfc287432f61900d6ad1}{part\_deg}.at(it->first).push\_back(it->second); 
+166       \}
+167     \}
+168   \}
+169 \}
 \end{DoxyCode}
 
 

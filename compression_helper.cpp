@@ -27,6 +27,34 @@ mpz_class compute_product(int N, int k, int s){
 }
 
 
+// this is another way of implementing compute_product, which splits the terms even / odd. But I did not see much improvement with this!
+/*
+mpz_class compute_product(int N, int k, int s){
+  //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
+
+  if (k==1)
+    return N;
+  if (k == 0) // TO CHECK because there are no terms to compute product
+    return 1;
+
+  if (k < 0){
+    cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
+    return 1;
+  }
+  if (N - (k-1) * s <= 0){ // the terms go negative
+    //cerr << " WARNING: compute_product called for N - (k-1) * s <= 0 " << endl;
+    return 0;
+  }
+  
+  // we do this by dividing the terms into two parts
+  int m = (k+1) / 2; // the middle point
+  mpz_class left, right; // each of the half products 
+  left = compute_product(N, m, 2*s);
+  right = compute_product(N-s, k-m, 2*s);
+  return left * right;
+}
+*/
+
 mpz_class binomial(const int n, const int m)
 {
   if (n <= 0 or m > n or m <= 0)
