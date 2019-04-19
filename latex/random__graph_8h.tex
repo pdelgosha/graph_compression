@@ -11,7 +11,9 @@
 \hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8h_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\+\_\+\+ER} (int n, double p, int ver\+\_\+mark, int edge\+\_\+mark)
 \begin{DoxyCompactList}\small\item\em generates a marked Erdos Renyi graph \end{DoxyCompactList}\item 
 \hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8h_a12c6d20574de900afa2186b61977b83d}{poisson\+\_\+graph} (int n, double deg\+\_\+mean, int ver\+\_\+mark, int edge\+\_\+mark)
-\begin{DoxyCompactList}\small\item\em generates a random graph where roughly speaking, the degree of a vertex is Poisson \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em generates a random graph where roughly speaking, the degree of a vertex is Poisson \end{DoxyCompactList}\item 
+\hyperlink{classmarked__graph}{marked\+\_\+graph} \hyperlink{random__graph_8h_adccc8660f7f0d6afc43f4691de7d7518}{near\+\_\+regular\+\_\+graph} (int n, int half\+\_\+deg, int ver\+\_\+mark, int edge\+\_\+mark)
+\begin{DoxyCompactList}\small\item\em generates a random graph which is nearly regular, and the degree of each vertex is close to 2 $\ast$ half\+\_\+deg. Each vertex is uniformly connected to half\+\_\+deg many other vertices, and multiple edges are dropped. Furthermore, each vertex and edge is randomly assigned marks, where the vertex mark set is $\{0,1,\dots, \verb+ver_mark+ - 1\}$ and $\{0,1,\dots,\verb+edge_mark+ - 1\}$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -67,6 +69,71 @@ a random marked graph, where each edge is independently present with probability
 27   cout << \textcolor{stringliteral}{" marked\_ER number of edges "} << edges.size() << endl;
 28   \textcolor{keywordflow}{return} \hyperlink{classmarked__graph}{marked\_graph}(n, edges, ver\_marks);
 29 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{random__graph_8h_adccc8660f7f0d6afc43f4691de7d7518}\label{random__graph_8h_adccc8660f7f0d6afc43f4691de7d7518}} 
+\index{random\+\_\+graph.\+h@{random\+\_\+graph.\+h}!near\+\_\+regular\+\_\+graph@{near\+\_\+regular\+\_\+graph}}
+\index{near\+\_\+regular\+\_\+graph@{near\+\_\+regular\+\_\+graph}!random\+\_\+graph.\+h@{random\+\_\+graph.\+h}}
+\subsubsection{\texorpdfstring{near\+\_\+regular\+\_\+graph()}{near\_regular\_graph()}}
+{\footnotesize\ttfamily \hyperlink{classmarked__graph}{marked\+\_\+graph} near\+\_\+regular\+\_\+graph (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{int}]{half\+\_\+deg,  }\item[{int}]{ver\+\_\+mark,  }\item[{int}]{edge\+\_\+mark }\end{DoxyParamCaption})}
+
+
+
+generates a random graph which is nearly regular, and the degree of each vertex is close to 2 $\ast$ half\+\_\+deg. Each vertex is uniformly connected to half\+\_\+deg many other vertices, and multiple edges are dropped. Furthermore, each vertex and edge is randomly assigned marks, where the vertex mark set is $\{0,1,\dots, \verb+ver_mark+ - 1\}$ and $\{0,1,\dots,\verb+edge_mark+ - 1\}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the number of vertices \\
+\hline
+{\em half\+\_\+deg} & the number of edges each vertex tries to connect to, so the final average degree is 2$\ast$half\+\_\+deg \\
+\hline
+{\em ver\+\_\+mark} & the number of possible vertex marks \\
+\hline
+{\em edge\+\_\+mark} & the number of possible edge\+\_\+marks \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a random marked graph as described above. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+76                                                                                  \{
+77   \textcolor{keywordtype}{unsigned} seed = chrono::system\_clock::now().time\_since\_epoch().count();
+78   default\_random\_engine generator(seed);
+79 
+80   uniform\_int\_distribution<int> neighbor\_dist(0,n-1);
+81   uniform\_int\_distribution<int> ver\_mark\_dist(0,ver\_mark-1); \textcolor{comment}{// distribution a vertex mark}
+82   uniform\_int\_distribution<int> edge\_mark\_dist(0,edge\_mark-1); \textcolor{comment}{// distribution an edge mark}
+83 
+84   \textcolor{keywordtype}{int} w; 
+85   pair<int, int> edge;
+86 
+87   set<pair<int, int> > umarked\_edges;
+88   vector< pair< pair< int, int >, pair< int, int > > > edges;
+89 
+90   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// edge marks}
+91   vector<int> ver\_marks(n);
+92 
+93   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<n;i++)\{
+94     ver\_marks[i] = ver\_mark\_dist(generator);
+95     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<half\_deg;j++)\{
+96       w = neighbor\_dist(generator);
+97       \textcolor{keywordflow}{if} (w!= i)\{
+98         edge = pair<int,int>(i,w);
+99         \textcolor{keywordflow}{if} (edge.first > edge.second)
+100           swap (edge.first, edge.second); \textcolor{comment}{// to make sure pairs are ordered}
+101         umarked\_edges.insert(edge);
+102       \}
+103     \}
+104   \}
+105   \textcolor{keywordflow}{for} (\textcolor{keyword}{set}<pair<int, int>>::iterator it = umarked\_edges.begin(); it!=umarked\_edges.end(); it++)\{
+106     x = edge\_mark\_dist(generator); 
+107     xp = edge\_mark\_dist(generator);
+108     edges.push\_back(pair<pair<int, int>, pair<int, int> >(*it, pair<int, int>(x, xp)));
+109   \}
+110 
+111 
+112   \textcolor{keywordflow}{return} \hyperlink{classmarked__graph}{marked\_graph}(n, edges, ver\_marks);
+113 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{random__graph_8h_a12c6d20574de900afa2186b61977b83d}\label{random__graph_8h_a12c6d20574de900afa2186b61977b83d}} 
 \index{random\+\_\+graph.\+h@{random\+\_\+graph.\+h}!poisson\+\_\+graph@{poisson\+\_\+graph}}

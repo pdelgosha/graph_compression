@@ -72,3 +72,42 @@ marked_graph poisson_graph(int n, double deg_mean, int ver_mark, int edge_mark){
   cerr << " edges size " << edges.size() << endl;
   return marked_graph(n, edges, ver_marks);
 }
+
+marked_graph near_regular_graph(int n, int half_deg, int ver_mark, int edge_mark){
+  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+  default_random_engine generator(seed);
+
+  uniform_int_distribution<int> neighbor_dist(0,n-1);
+  uniform_int_distribution<int> ver_mark_dist(0,ver_mark-1); // distribution a vertex mark
+  uniform_int_distribution<int> edge_mark_dist(0,edge_mark-1); // distribution an edge mark
+
+  int w; 
+  pair<int, int> edge;
+
+  set<pair<int, int> > umarked_edges;
+  vector< pair< pair< int, int >, pair< int, int > > > edges;
+
+  int x, xp; // edge marks
+  vector<int> ver_marks(n);
+
+  for (int i=0;i<n;i++){
+    ver_marks[i] = ver_mark_dist(generator);
+    for (int j=0;j<half_deg;j++){
+      w = neighbor_dist(generator);
+      if (w!= i){
+        edge = pair<int,int>(i,w);
+        if (edge.first > edge.second)
+          swap (edge.first, edge.second); // to make sure pairs are ordered
+        umarked_edges.insert(edge);
+      }
+    }
+  }
+  for (set<pair<int, int>>::iterator it = umarked_edges.begin(); it!=umarked_edges.end(); it++){
+    x = edge_mark_dist(generator); 
+    xp = edge_mark_dist(generator);
+    edges.push_back(pair<pair<int, int>, pair<int, int> >(*it, pair<int, int>(x, xp)));
+  }
+
+
+  return marked_graph(n, edges, ver_marks);
+}

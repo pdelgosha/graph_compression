@@ -31,4 +31,16 @@ marked_graph marked_ER(int n, double p, int ver_mark, int edge_mark);
 marked_graph poisson_graph(int n, double deg_mean, int ver_mark, int edge_mark);
 
 
+//! generates a random graph which is nearly regular, and the degree of each vertex is close to 2 * half_deg. Each vertex is uniformly connected to half_deg many other vertices, and multiple edges are dropped. Furthermore, each vertex and edge is randomly assigned marks, where the vertex mark set is \f$\{0,1,\dots, \verb+ver_mark+ - 1\}\f$ and \f$\{0,1,\dots,\verb+edge_mark+ - 1\}\f$.
+/*!
+  \param n: the number of vertices
+  \param half_deg: the number of edges each vertex tries to connect to, so the final average degree is 2*half_deg
+  \param ver_mark: the number of possible vertex marks
+  \param edge_mark: the number of possible edge_marks
+  \return a random marked graph as described above.
+ */
+
+marked_graph near_regular_graph(int n, int half_deg, int ver_mark, int edge_mark);
+
+
 #endif

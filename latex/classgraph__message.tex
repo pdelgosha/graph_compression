@@ -118,38 +118,38 @@ sends a message by setting messages, and puts it in the message hash table messa
 \hline
 {\em i} & the message is sent to the ith neighbor of v \\
 \hline
-{\em s} & the step, or depth ( $0 \lee s < h$) \\
-\hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-480                                                                          \{
-481   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
-482   \textcolor{comment}{//cerr << " send message (";}
-483   \textcolor{comment}{//for (int k=0;k<m.size();k++)\{}
-484   \textcolor{comment}{//  cerr << m[k];}
-485   \textcolor{comment}{//  if (k<m.size()-1)}
-486   \textcolor{comment}{//    cerr << ", ";}
-487   \textcolor{comment}{// \}}
-488   \textcolor{comment}{//cerr << "): " << v << " -> " << i;}
-489 
-490   it = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.find(m);
-491   \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.end())\{
-492     \textcolor{comment}{// this is a new message}
-493     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size())); \textcolor{comment}{// insert
+479                                                                          \{
+480   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
+481   \textcolor{comment}{/*}
+482 \textcolor{comment}{  cerr << " send message (";}
+483 \textcolor{comment}{  for (int k=0;k<m.size();k++)\{}
+484 \textcolor{comment}{    cerr << m[k];}
+485 \textcolor{comment}{    if (k<m.size()-1)}
+486 \textcolor{comment}{      cerr << ", ";}
+487 \textcolor{comment}{   \}}
+488 \textcolor{comment}{  cerr << "): " << v << " -> " << i;}
+489 \textcolor{comment}{  */}
+490 
+491   it = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.find(m);
+492   \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.end())\{
+493     \textcolor{comment}{// this is a new message}
+494     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size())); \textcolor{comment}{// insert
        the message into the hash table, message\_mark[s].size() is in fact the number of registered marks at step s}
-494     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size(); \textcolor{comment}{// set the message}
-495     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.push\_back(m.back()); \textcolor{comment}{// register m by adding its mark component (which is
+495     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size(); \textcolor{comment}{// set the message}
+496     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.push\_back(m.back()); \textcolor{comment}{// register m by adding its mark component (which is
        m.back() the last element in m) to the list of marks at step s}
-496     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.push\_back(m[0]==-1); \textcolor{comment}{// check if m is star type, and add this
+497     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.push\_back(m[0]==-1); \textcolor{comment}{// check if m is star type, and add this
        information to the list}
-497   \}\textcolor{keywordflow}{else}\{
-498     \textcolor{comment}{// the message already exists, just use the registered integer value corresponding to m and send the
+498   \}\textcolor{keywordflow}{else}\{
+499     \textcolor{comment}{// the message already exists, just use the registered integer value corresponding to m and send the
        message}
-499     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = it->second;
-500   \}
-501   \textcolor{comment}{//cout << " message = " << messages[v][i] << endl;}
-502 \}
+500     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = it->second;
+501   \}
+502   \textcolor{comment}{//cerr << " message = " << messages[v][i] << endl;}
+503 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}\label{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}} 
 \index{graph\+\_\+message@{graph\+\_\+message}!update\+\_\+messages@{update\+\_\+messages}}
@@ -243,8 +243,8 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 90   \textcolor{comment}{// these are copies of message\_dict, message\_mark and is\_star\_message at the previous step, which are
        used to update messages at the current step.}
 91 
-92   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}> message\_dict\_old;
-93   vector<int> message\_mark\_old;
+92   \textcolor{comment}{//unordered\_map<vector<int>, int, vint\_hash> message\_dict\_old;}
+93   \textcolor{comment}{//vector<int> message\_mark\_old;}
 94   vector<bool> is\_star\_message\_old;
 95   vector<vector<int> > messages\_old;
 96 
@@ -287,9 +287,9 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 126     \textcolor{comment}{//cerr << endl << endl<< " depth " << s << endl;}
 127     \textcolor{comment}{// store variables corresponding to the previous step in their old version, and clearing the variables
        for this step:}
-128     message\_dict\_old = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict};
+128     \textcolor{comment}{//message\_dict\_old = message\_dict;}
 129     messages\_old = \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages};
-130     message\_mark\_old = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark};
+130     \textcolor{comment}{//message\_mark\_old = message\_mark;}
 131     is\_star\_message\_old = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message};
 132     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.clear();
 133     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.clear();
@@ -437,14 +437,14 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 266         star1 = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i]];
 267         star2 = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[messages[w][my\_location]];
 268         \textcolor{keywordflow}{if} (star1 and !star2)\{
-269           \textcolor{comment}{// messages[v][i] should also become star}
-270           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-271           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
+269           \textcolor{comment}{// message[w][my\_location] should be star}
+270           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second;
+271           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,w,my\_location);
 272         \}
 273         \textcolor{keywordflow}{if} (!star1 and star2)\{
-274           \textcolor{comment}{// message[w][my\_location] should be star}
-275           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second;
-276           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,w,my\_location);
+274           \textcolor{comment}{// messages[v][i] should also become star}
+275           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+276           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
 277         \}
 278       \}
 279     \}

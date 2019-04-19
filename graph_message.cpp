@@ -89,8 +89,8 @@ void graph_message::update_messages(const marked_graph& G)
 
   // these are copies of message_dict, message_mark and is_star_message at the previous step, which are used to update messages at the current step.
 
-  unordered_map<vector<int>, int, vint_hash> message_dict_old;
-  vector<int> message_mark_old;
+  //unordered_map<vector<int>, int, vint_hash> message_dict_old;
+  //vector<int> message_mark_old;
   vector<bool> is_star_message_old;
   vector<vector<int> > messages_old;
 
@@ -125,9 +125,9 @@ void graph_message::update_messages(const marked_graph& G)
   for (int s=1; s<h;s++){ // s stands for step
     //cerr << endl << endl<< " depth " << s << endl;
     // store variables corresponding to the previous step in their old version, and clearing the variables for this step:
-    message_dict_old = message_dict;
+    //message_dict_old = message_dict;
     messages_old = messages;
-    message_mark_old = message_mark;
+    //message_mark_old = message_mark;
     is_star_message_old = is_star_message;
     message_dict.clear();
     message_mark.clear();
@@ -266,14 +266,14 @@ void graph_message::update_messages(const marked_graph& G)
         star1 = is_star_message[messages[v][i]];
         star2 = is_star_message[messages[w][my_location]];
         if (star1 and !star2){
-          // messages[v][i] should also become star
-          m[1] = G.adj_list[v][i].second.first;
-          send_message(m,v,i);
-        }
-        if (!star1 and star2){
           // message[w][my_location] should be star
           m[1] = G.adj_list[v][i].second.second;
           send_message(m,w,my_location);
+        }
+        if (!star1 and star2){
+          // messages[v][i] should also become star
+          m[1] = G.adj_list[v][i].second.first;
+          send_message(m,v,i);
         }
       }
     }
@@ -475,17 +475,18 @@ void graph_message::update_messages(const marked_graph& G)
   \param m: the message to be sent
   \param v: the vertex from which the message is originated
   \param i: the message is sent to the ith neighbor of v
-  \param s: the step, or depth (\f$0 \lee s < h\f$)
  */
 inline void graph_message::send_message(const vector<int>& m, int v, int i){
   unordered_map<vector<int>, int, vint_hash>::iterator it;
-  //cerr << " send message (";
-  //for (int k=0;k<m.size();k++){
-  //  cerr << m[k];
-  //  if (k<m.size()-1)
-  //    cerr << ", ";
-  // }
-  //cerr << "): " << v << " -> " << i;
+  /*
+  cerr << " send message (";
+  for (int k=0;k<m.size();k++){
+    cerr << m[k];
+    if (k<m.size()-1)
+      cerr << ", ";
+   }
+  cerr << "): " << v << " -> " << i;
+  */
 
   it = message_dict.find(m);
   if (it == message_dict.end()){
@@ -498,7 +499,7 @@ inline void graph_message::send_message(const vector<int>& m, int v, int i){
     // the message already exists, just use the registered integer value corresponding to m and send the message
     messages[v][i] = it->second;
   }
-  //cout << " message = " << messages[v][i] << endl;
+  //cerr << " message = " << messages[v][i] << endl;
 }
 
 

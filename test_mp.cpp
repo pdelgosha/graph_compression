@@ -20,20 +20,21 @@ ostream& operator << (ostream& o, const vector<int>& v){
 
 
 void random_graph_test(){
-  marked_graph G = poisson_graph(10, 2, 2, 2);
+  //marked_graph G = poisson_graph(10, 2, 2, 2);
+  marked_graph G = near_regular_graph(10,2,1,1);
   cout << G;
 }
 
 void mp_test(){
   marked_graph G;
-  //ifstream inp("test_graphs/hexagon_diagonal_marked.txt");
-  //inp >> G;
+  ifstream inp("test_graphs/hexagon_diagonal_marked2.txt");
+  inp >> G;
   //G = marked_ER(10000,0.0003,2 ,2);
-  G = poisson_graph(100000,3, 10, 10);
+  //G = poisson_graph(100000,3, 10, 10);
   //cerr << " graph generated " << endl;
   //cerr << " graph generated " << endl;
   //cout << " G " << endl << G << endl;
-  colored_graph C(G, 3, 20);
+  colored_graph C(G, 3, 2);
 
   /*
   int n = C.nu_vertices;
@@ -56,7 +57,8 @@ void mp_test(){
 
 int main(){
   logger::start();
-  mp_test();
+  //mp_test();
+  random_graph_test();
   logger::stop();
   //random_graph_test ();
   return 0;

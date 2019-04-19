@@ -87,6 +87,7 @@ void marked_graph_encoder_test()
   //cout << " delta " << endl;
   //cin >> delta; 
   G = poisson_graph(100000,3, 10, 10);//
+  //G = near_regular_graph(100000,3,1,1);
   //G = marked_ER(100,0.05,1 ,1);
   cout << " graph constructed " << endl;
   //cout << G << endl;

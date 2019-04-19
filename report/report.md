@@ -587,4 +587,94 @@ With all these, I seem to have an improvement of around 1s, but I expected at le
 
 I am starting to think that perhaps I am expecting too much. This is somehow the maximum entropy ensemble and perhaps that's why it takes this much time. For other types of data, e.g. more symmetric ones, perhaps we can be faster. The reason for this: among the ~300,000 edges and 600,000 half edges, almost all of them have a unique type, more specifically, in an example, the graph has 299,768 edges and 598,135 type, so nearly the maximum, and this is because there is no symmetry in the graph. Maybe I should run it and test it in different examples. Yet the idea of multithreading exists, but that might be a little difficult. 
 
-Don't forget to commit.
+Commit 811aa34.
+
+## 2019-04-18 11:40 AM
+
+I want to test the code on a non ER example, e.g. a regular graph, to see how long it takes to encode. 
+
+I also looked into WebGraph to see if I can find any implementation, and see if I con compare with it. Here are some perhaps useful links:
+
+- [WebGraph homepage](http://webgraph.di.unimi.it/)
+- [A C++ implementation](http://cnets.indiana.edu/groups/nan/webgraph/)
+- [The GitHub page for the C++ implementation](https://github.com/jacobratkiewicz/webgraph)
+
+
+## 2019-04-18 12:29 PM
+
+I implemented a version of regular graph which generates a graph which is nearly regular (`random_graph/near_regular_graph(...)`). I tested compression with this, and it is still ~20s. In this regime, I do not have marks, so that message passing is fast, but compressing partition graphs is more difficult, as there are ~25,000 types and more partition graphs. The graph has 100,000 nodes, half degree is 3, so the average degree is ~ 6, and the number of edges is ~300,000, h = 3, delta = 20, overall time ~22 s.
+
+<details>
+
+<summary> details </summary>
+
+```
+|---Construct G () 2019-04-18 12:31:48 PM
+ graph constructed
+|---Encode () 2019-04-18 12:31:49 PM
+|---|---Init compressed () 2019-04-18 12:31:49 PM
+|---|---Extact edge types () 2019-04-18 12:31:49 PM
+|---|---|---Extract messages () 2019-04-18 12:31:49 PM
+|---|---|---|---graph_message::update_message init () 2019-04-18 12:31:49 PM
+|---|---|---|---resizing messages () 2019-04-18 12:31:49 PM
+|---|---|---|---initializing messages () 2019-04-18 12:31:49 PM
+|---|---|---|---updating messages () 2019-04-18 12:31:49 PM
+|---|---|---|---* symmetrizing () 2019-04-18 12:31:51 PM
+|---|---|---colored_graph::init init () 2019-04-18 12:31:51 PM
+|---|---|---updating adj_list () 2019-04-18 12:31:51 PM
+|---|---|---Find deg and ver_types () 2019-04-18 12:31:51 PM
+ number of types 24971
+|---|---Encode * vertices () 2019-04-18 12:31:52 PM
+|---|---Encode * edges () 2019-04-18 12:31:53 PM
+|---|---Encode vertex types () 2019-04-18 12:31:53 PM
+|---|---Extract partition graphs () 2019-04-18 12:31:54 PM
+|---|---Encode partition b graphs () 2019-04-18 12:31:58 PM
+|---|---Encode partition graphs () 2019-04-18 12:32:00 PM
+|---Decode () 2019-04-18 12:32:00 PM
+|---|---Init () 2019-04-18 12:32:00 PM
+|---|---Decode * vertices () 2019-04-18 12:32:00 PM
+|---|---Decode * edges () 2019-04-18 12:32:01 PM
+|---|---Decode vertex types () 2019-04-18 12:32:01 PM
+|---|---Decode partition graphs () 2019-04-18 12:32:06 PM
+|---|---Decode partition b graphs () 2019-04-18 12:32:06 PM
+|---|---Construct decoded graph () 2019-04-18 12:32:09 PM
+|---compare () 2019-04-18 12:32:10 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.778341s [3.410910%]
+|---Encode (): 10.788221s [47.277035%]
+|---|---Init compressed (): 0.000678s [0.006282%]
+|---|---Extact edge types (): 2.875751s [26.656393%]
+|---|---|---Extract messages (): 1.559093s [54.215176%]
+|---|---|---|---graph_message::update_message init (): 0.002387s [0.153073%]
+|---|---|---|---resizing messages (): 0.026026s [1.669308%]
+|---|---|---|---initializing messages (): 0.152151s [9.758941%]
+|---|---|---|---updating messages (): 1.284092s [82.361481%]
+|---|---|---|---* symmetrizing (): 0.094420s [6.056058%]
+|---|---|---colored_graph::init init (): 0.025348s [0.881431%]
+|---|---|---updating adj_list (): 0.161420s [5.613137%]
+|---|---|---Find deg and ver_types (): 1.129845s [39.288700%]
+|---|---Encode * vertices (): 1.139338s [10.560946%]
+|---|---Encode * edges (): 0.000044s [0.000405%]
+|---|---Encode vertex types (): 1.179079s [10.929317%]
+|---|---Extract partition graphs (): 3.359696s [31.142258%]
+|---|---Encode partition b graphs (): 2.062739s [19.120291%]
+|---|---Encode partition graphs (): 0.169248s [1.568820%]
+|---Decode (): 9.480145s [41.544674%]
+|---|---Init (): 0.000008s [0.000087%]
+|---|---Decode * vertices (): 1.263069s [13.323313%]
+|---|---Decode * edges (): 0.000074s [0.000778%]
+|---|---Decode vertex types (): 4.252406s [44.855915%]
+|---|---Decode partition graphs (): 0.003155s [0.033284%]
+|---|---Decode partition b graphs (): 3.423949s [36.117058%]
+|---|---Construct decoded graph (): 0.537452s [5.669237%]
+|---compare (): 1.772439s [7.767329%]
+       22.82 real        21.98 user         0.43 sys
+```
+
+</details>
+
+
+If I want to improve this even more, I think I should go for parallel programming: there are two places that we can do parallel computing: extract messages (as different nodes act independently) and compression of partition graphs (each partition graph has independent calculations). I think this can be pretty useful. But I want to first implement the binarization and count the actual number of bits and draw a plot that compares it with the actual entropy. 
+
+Also, [this](https://arxiv.org/pdf/1006.0809.pdf) paper might be useful, as it has some plots that compares time and compression rate for different methods. I can see that the order of time is microseconds per edge! With this, I have ~20 seconds for ~ 300,000 edges, which is ~73 microseconds per edge, but they have ~ 1 microseconds / edge. But we are compressing different graphs. Perhaps I can somehow understand what graphs they use and just do a comparison. This will take some time.
