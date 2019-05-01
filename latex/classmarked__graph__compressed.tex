@@ -8,7 +8,9 @@
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}{clear} ()
-\end{DoxyCompactItemize}
+\item 
+void \hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\+\_\+write} (F\+I\+LE $\ast$f)
+\begin{DoxyCompactList}\small\item\em writes the compressed data to a binary file \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,6 +37,89 @@ map$<$ int, pair$<$ mpz\+\_\+class, vector$<$ int $>$ $>$ $>$ \hyperlink{classma
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}\label{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}} 
+\index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!binary\+\_\+write@{binary\+\_\+write}}
+\index{binary\+\_\+write@{binary\+\_\+write}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}
+\subsubsection{\texorpdfstring{binary\+\_\+write()}{binary\_write()}}
+{\footnotesize\ttfamily void marked\+\_\+graph\+\_\+compressed\+::binary\+\_\+write (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{f }\end{DoxyParamCaption})}
+
+
+
+writes the compressed data to a binary file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & a {\ttfamily F\+I\+L\+E$\ast$} object which is the address of the binary file to write \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+15                                                  \{
+16   \textcolor{comment}{// ==== write n, h, delta}
+17   fwrite(&\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, 1, f);
+18   fwrite(&\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, 1, f);
+19   fwrite(&\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, 1, f);
+20 
+21   \textcolor{keywordtype}{int} int\_out; \textcolor{comment}{// auxiliary variable, an integer value to be written to output}
+22   \textcolor{comment}{// ==== write type\_mark}
+23   \textcolor{comment}{// first, the number of types}
+24   int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();
+25   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+26   \textcolor{comment}{// then, marks one by one}
+27   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();i++)\{
+28     int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[i];
+29     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+30   \}
+31 
+32 
+33   \textcolor{comment}{// ==== write star vertices}
+34   \textcolor{comment}{// first, write the frequency, note that star\_vertices.first is a vector of size 2 with the first entry
+       being the number of zeros, and the second one the number of ones, so it enough to write only one of them}
+35   int\_out = \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0];
+36   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+37 
+38   \textcolor{comment}{// then, we write the integer representation star\_vertices.second}
+39   mpz\_out\_raw(f, \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.second.get\_mpz\_t());
+40 
+41   \textcolor{comment}{// ==== write star edges}
+42 
+43   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log\_2 n), which
+       is the number of bits to encode vertices}
+44   \textcolor{keywordtype}{int} n\_copy = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
+45   \textcolor{keywordflow}{while}(n\_copy > 0)\{
+46     n\_copy >>= 1;
+47     log2n ++;
+48   \}
+49   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
+50 
+51   map<pair<int, int>, vector<vector<int> > >::iterator it;
+52   \textcolor{keywordtype}{int} x, xp;
+53   \textcolor{keywordtype}{string} s; \textcolor{comment}{// the bit stream}
+54 
+55   \textcolor{comment}{// first, write the size of star\_edges so that the decoder knows how many blocks are coming}
+56   int\_out = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.size();
+57   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+58   
+59   \textcolor{keywordflow}{for} (it = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.begin(); it!= \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end(); it++)\{
+60     x = it->first.first;
+61     xp = it->first.second;
+62     \textcolor{comment}{//write x and xp}
+63     fwrite(&x, \textcolor{keyword}{sizeof} x, 1, f);
+64     fwrite(&xp, \textcolor{keyword}{sizeof} xp, 1, f);
+65     s = \textcolor{stringliteral}{""};
+66     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<it->second.size();i++)\{
+67       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<it->second[i].size();j++)\{
+68         s += \textcolor{stringliteral}{"1"};
+69         B = it->second[i][j]; \textcolor{comment}{// convert the index of the other endpoint to binary}
+70         s += B.to\_string().substr(8*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) - log2n, log2n); \textcolor{comment}{// take only log2n many bits of the
+       representation (and this should be taken from the least significant bits)}
+71       \}
+72       s += \textcolor{stringliteral}{"0"}; \textcolor{comment}{// to indicate that the neighbor list of this vertex is over now}
+73     \}
+74     \hyperlink{compression__helper_8cpp_accfebfd921b967c2f09e8c11569eb832}{bit\_string\_write}(f, s); \textcolor{comment}{// write this bitstream to the output}
+75   \}
+76 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}\label{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!clear@{clear}}
 \index{clear@{clear}!marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}}

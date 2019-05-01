@@ -678,3 +678,100 @@ I implemented a version of regular graph which generates a graph which is nearly
 If I want to improve this even more, I think I should go for parallel programming: there are two places that we can do parallel computing: extract messages (as different nodes act independently) and compression of partition graphs (each partition graph has independent calculations). I think this can be pretty useful. But I want to first implement the binarization and count the actual number of bits and draw a plot that compares it with the actual entropy. 
 
 Also, [this](https://arxiv.org/pdf/1006.0809.pdf) paper might be useful, as it has some plots that compares time and compression rate for different methods. I can see that the order of time is microseconds per edge! With this, I have ~20 seconds for ~ 300,000 edges, which is ~73 microseconds per edge, but they have ~ 1 microseconds / edge. But we are compressing different graphs. Perhaps I can somehow understand what graphs they use and just do a comparison. This will take some time.
+
+## 2019-04-19 
+
+I converted messages to strings to see if I get an improvement, but it actually made it worse (~ 24s for ER 100,000 example). So I think I will revert. In this new messaging protocol, I also include the mark from v to w in the message v sends to w, so that when aggregating messages, I do not have to add this as well, which makes the string even longer. 
+
+This is commit fc3792f, branch `mp_improve_string_message`
+
+<details>
+
+<summary> details </summary>
+
+```
+|---Construct G () 2019-04-24 06:42:19 PM
+ edges size 299643
+ graph constructed
+|---Encode () 2019-04-24 06:42:20 PM
+|---|---Init compressed () 2019-04-24 06:42:20 PM
+|---|---Extact edge types () 2019-04-24 06:42:20 PM
+|---|---|---Extract messages () 2019-04-24 06:42:20 PM
+|---|---|---|---graph_message::update_message init () 2019-04-24 06:42:20 PM
+|---|---|---|---resizing messages () 2019-04-24 06:42:20 PM
+|---|---|---|---initializing messages () 2019-04-24 06:42:20 PM
+|---|---|---|---updating messages () 2019-04-24 06:42:20 PM
+|---|---|---|---* symmetrizing () 2019-04-24 06:42:25 PM
+|---|---|---colored_graph::init init () 2019-04-24 06:42:25 PM
+|---|---|---updating adj_list () 2019-04-24 06:42:25 PM
+|---|---|---Find deg and ver_types () 2019-04-24 06:42:25 PM
+ number of types 597453
+|---|---Encode * vertices () 2019-04-24 06:42:27 PM
+|---|---Encode * edges () 2019-04-24 06:42:28 PM
+|---|---Encode vertex types () 2019-04-24 06:42:28 PM
+|---|---Extract partition graphs () 2019-04-24 06:42:29 PM
+|---|---Encode partition b graphs () 2019-04-24 06:42:32 PM
+|---|---Encode partition graphs () 2019-04-24 06:42:34 PM
+|---Decode () 2019-04-24 06:42:34 PM
+|---|---Init () 2019-04-24 06:42:34 PM
+|---|---Decode * vertices () 2019-04-24 06:42:34 PM
+|---|---Decode * edges () 2019-04-24 06:42:35 PM
+|---|---Decode vertex types () 2019-04-24 06:42:35 PM
+|---|---Decode partition graphs () 2019-04-24 06:42:39 PM
+|---|---Decode partition b graphs () 2019-04-24 06:42:39 PM
+|---|---Construct decoded graph () 2019-04-24 06:42:42 PM
+|---compare () 2019-04-24 06:42:42 PM
+ successfully decoded the marked graph :D
+
+|---Construct G (): 0.883083s [3.524292%]
+|---Encode (): 13.988238s [55.825581%]
+|---|---Init compressed (): 0.000028s [0.000201%]
+|---|---Extact edge types (): 6.800817s [48.618107%]
+|---|---|---Extract messages (): 5.342340s [78.554382%]
+|---|---|---|---graph_message::update_message init (): 0.001285s [0.024046%]
+|---|---|---|---resizing messages (): 0.025195s [0.471612%]
+|---|---|---|---initializing messages (): 0.540789s [10.122693%]
+|---|---|---|---updating messages (): 4.687753s [87.747177%]
+|---|---|---|---* symmetrizing (): 0.087298s [1.634081%]
+|---|---|---colored_graph::init init (): 0.022202s [0.326454%]
+|---|---|---updating adj_list (): 0.160734s [2.363451%]
+|---|---|---Find deg and ver_types (): 1.275526s [18.755480%]
+|---|---Encode * vertices (): 1.101893s [7.877285%]
+|---|---Encode * edges (): 0.000052s [0.000372%]
+|---|---Encode vertex types (): 1.151198s [8.229755%]
+|---|---Extract partition graphs (): 2.824238s [20.190092%]
+|---|---Encode partition b graphs (): 1.932755s [13.817003%]
+|---|---Encode partition graphs (): 0.177187s [1.266684%]
+|---Decode (): 8.496358s [33.908066%]
+|---|---Init (): 0.000008s [0.000093%]
+|---|---Decode * vertices (): 1.216012s [14.312156%]
+|---|---Decode * edges (): 0.000051s [0.000603%]
+|---|---Decode vertex types (): 3.612415s [42.517220%]
+|---|---Decode partition graphs (): 0.000160s [0.001878%]
+|---|---Decode partition b graphs (): 3.224521s [37.951805%]
+|---|---Construct decoded graph (): 0.443159s [5.215867%]
+|---compare (): 1.689352s [6.742027%]
+
+real	0m25.070s
+user	0m24.252s
+sys	0m0.486s
+```
+
+</details>
+
+
+## 2019-04-29
+
+On binarize branch. Realized last week that in order to binarize star edges, I need some work, as there is no simple bit stream data structure in C as bit is not a unit of data, byte is a unit of data. For this purpose, I did some search today to see the options: 
+
+- There is [bitset](http://www.cplusplus.com/reference/bitset/bitset/) data structure in C. The difficulty is that it requires a fixed size at construction. 
+- Apparently boost has a [dynamic bitset](https://www.boost.org/doc/libs/1_36_0/libs/dynamic_bitset/dynamic_bitset.html), but did not understand how it works. 
+- There is [this](http://stanford.edu/~stepp/cppdoc/) Stanford C++ libraries, which can be useful perhaps). 
+- I can also work with strings of zero ones and stringstreams. 
+
+I think what I am going to do is the following (see test code 13): 
+
+- Use bitset with size $\lceil \log_2 n\rceil$ to convert integer to specific number of bits, and append it to a string using `bitset::to_string`.
+- The resulting string of zero and ones can be converted back to bitstream of size 8 (one byte) using stringstream and could be written to file. 
+
+I need to test this and add it to the project, but perhaps later. 

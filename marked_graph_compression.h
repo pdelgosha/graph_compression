@@ -34,6 +34,9 @@ class marked_graph_compressed
   map<int, pair<mpz_class, vector<int> > > part_graph; //!< compressed form of partition graphs corresponding to colors in \f$C_=\f$. For a half edge type t, part_graph[t] is the compressed form of the simple unmarked graph with n vertices, where a node i is connected to a node j where there is an edge between i and j in the original graph with color (t,t)
 
   void clear();
+
+  //! writes the compressed data to a binary file
+  void binary_write(FILE* f);
 };
 
 class marked_graph_encoder

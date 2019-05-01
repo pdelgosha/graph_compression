@@ -9,7 +9,71 @@ void marked_graph_compressed::clear()
   part_graph.clear();
 }
 
+/*!
+  \param f: a `FILE*` object which is the address of the binary file to write
+ */
+void marked_graph_compressed::binary_write(FILE* f){
+  // ==== write n, h, delta
+  fwrite(&n, sizeof n, 1, f);
+  fwrite(&h, sizeof h, 1, f);
+  fwrite(&delta, sizeof delta, 1, f);
 
+  int int_out; // auxiliary variable, an integer value to be written to output
+  // ==== write type_mark
+  // first, the number of types
+  int_out = type_mark.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  // then, marks one by one
+  for (int i=0;i<type_mark.size();i++){
+    int_out = type_mark[i];
+    fwrite(&int_out, sizeof int_out, 1, f);
+  }
+
+
+  // ==== write star vertices
+  // first, write the frequency, note that star_vertices.first is a vector of size 2 with the first entry being the number of zeros, and the second one the number of ones, so it enough to write only one of them
+  int_out = star_vertices.first[0];
+  fwrite(&int_out, sizeof int_out, 1, f);
+
+  // then, we write the integer representation star_vertices.second
+  mpz_out_raw(f, star_vertices.second.get_mpz_t());
+
+  // ==== write star edges
+
+  int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
+  int n_copy = n;
+  while(n_copy > 0){
+    n_copy >>= 1;
+    log2n ++;
+  }
+  bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
+
+  map<pair<int, int>, vector<vector<int> > >::iterator it;
+  int x, xp;
+  string s; // the bit stream
+
+  // first, write the size of star_edges so that the decoder knows how many blocks are coming
+  int_out = star_edges.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  
+  for (it = star_edges.begin(); it!= star_edges.end(); it++){
+    x = it->first.first;
+    xp = it->first.second;
+    //write x and xp
+    fwrite(&x, sizeof x, 1, f);
+    fwrite(&xp, sizeof xp, 1, f);
+    s = "";
+    for (int i=0;i<it->second.size();i++){
+      for(int j=0;j<it->second[i].size();j++){
+        s += "1";
+        B = it->second[i][j]; // convert the index of the other endpoint to binary
+        s += B.to_string().substr(8*sizeof(int) - log2n, log2n); // take only log2n many bits of the representation (and this should be taken from the least significant bits)
+      }
+      s += "0"; // to indicate that the neighbor list of this vertex is over now
+    }
+    bit_string_write(f, s); // write this bitstream to the output
+  }
+}
 
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)

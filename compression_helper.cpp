@@ -74,3 +74,56 @@ mpz_class prod_factorial(const vector<int>& a, int i, int j)
     return x * y;
   }
 }
+
+
+void bit_string_write(FILE* f, const string& s){
+  // find out the number of bytes
+  int ssize = s.size();
+  int nu_bytes = ssize / 8;
+
+  if (ssize % 8 != 0) // an incomplete byte is required
+    nu_bytes++;
+
+  fwrite(&ssize, sizeof(ssize), 1, f); // first, write down how many bytes are coming.
+
+  stringstream ss;
+  ss << s;
+
+  bitset<8> B;
+  unsigned char c; 
+  while (ss >> B){
+    c = B.to_ulong();
+    fwrite(&c, sizeof(c), 1, f);
+  }
+}
+
+
+string bit_string_read(FILE* f){
+  int nu_bytes;
+  int ssize;
+  // read the number of bytes to read
+  fread(&ssize, sizeof(ssize), 1, f);
+  //cerr << " ssize " << ssize << endl;
+  nu_bytes = ssize / 8;
+  if (ssize % 8 != 0)
+    nu_bytes ++;
+
+  int last_byte_size = ssize % 8;
+  if (last_byte_size == 0)
+    last_byte_size  = 8;
+
+  unsigned char c;
+  bitset<8> B;
+  string s; 
+  for (int i=0;i<nu_bytes;i++){
+    fread(&c, sizeof(c), 1, f);
+    B = c;
+    //cout << B << endl;
+    if (i < nu_bytes -1){
+      s += B.to_string();
+    }else{
+      s += B.to_string().substr(8-last_byte_size, last_byte_size);
+    }
+  }
+  return s;
+}
