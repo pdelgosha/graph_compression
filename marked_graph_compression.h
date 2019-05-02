@@ -37,6 +37,10 @@ class marked_graph_compressed
 
   //! writes the compressed data to a binary file
   void binary_write(FILE* f);
+
+  //! read the compressed data from a binary file
+  void binary_read(FILE* f);
+
 };
 
 class marked_graph_encoder

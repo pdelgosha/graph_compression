@@ -55,7 +55,7 @@ void marked_graph_compressed::binary_write(FILE* f){
   // first, write the size of star_edges so that the decoder knows how many blocks are coming
   int_out = star_edges.size();
   fwrite(&int_out, sizeof int_out, 1, f);
-  
+
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
     x = it->first.first;
     xp = it->first.second;
@@ -75,6 +75,84 @@ void marked_graph_compressed::binary_write(FILE* f){
   }
 }
 
+/*!
+  \param f: a `FILE*` object which is the address of the binary file to write
+*/
+void marked_graph_compressed::binary_read(FILE* f){
+  clear(); // to make sure nothing is stored inside me before reading
+
+  // ==== read n, h, delta
+  fread(&n, sizeof n, 1, f);
+  fread(&h, sizeof h, 1, f);
+  fread(&delta, sizeof delta, 1, f);
+
+  int int_in; // auxiliary input integer
+  // ===== read type_mark
+  // read number of types
+  fread(&int_in, sizeof int_in, 1, f);
+  type_mark.resize(int_in);
+  for (int i=0;i<type_mark.size();i++){
+    fread(&int_in, sizeof int_in, 1, f);
+    type_mark[i] = int_in;
+  }
+
+  // ==== read star_vertices
+  // first, read the frequency.
+  star_vertices.first = vector<int>(2); // frequency,
+  // we read its first index which is number of zeros, and the second is n - the first.
+  fread(&int_in, sizeof int_in, 1, f);
+  star_vertices.first[0] = int_in;
+  star_vertices.first[1] = n - int_in;
+
+  // the integer representation which is star_vertices.second
+  mpz_inp_raw(star_vertices.second.get_mpz_t(), f);
+
+  // ==== read star_edges
+
+  int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
+  int n_copy = n;
+  while(n_copy > 0){
+    n_copy >>= 1;
+    log2n ++;
+  }
+  bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
+
+  string s;
+  stringstream ss;
+  int sp; // the index of the string s we are studying 
+
+  // read the size of star_edges
+
+  int star_edges_size;
+  fread(&star_edges_size, sizeof star_edges_size, 1, f);
+
+  int x, xp; // edge marks
+  int nu_star_vertices = star_vertices.first[1];
+
+  vector<vector<int> > V; // the list of star edges corresponding to each mark pair
+  V.resize(nu_star_vertices);
+
+  for (int i=0;i<star_edges_size;i++){
+    fread(&x, sizeof x, 1, f);
+    fread(&xp, sizeof xp, 1, f);
+  
+    s = bit_string_read(f);
+    sp = 0; // starting from zero 
+    for (int j=0; j<nu_star_vertices; j++){ // 
+      V[j].clear(); // make it freash
+      while(s[sp++] == '1'){ // there is still some edge connected to this vertex 
+        // read log2n many bits
+        ss << s.substr(sp, log2n);
+        sp += log2n;
+        ss >> B;
+        V[j].push_back(B.to_ulong());
+      }
+    }
+
+    star_edges.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
+  }
+
+}
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 {

@@ -6,6 +6,7 @@ var searchData=
   ['b_5fgraph_5fencoder',['b_graph_encoder',['../classb__graph__encoder.html',1,'b_graph_encoder'],['../classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283',1,'b_graph_encoder::b_graph_encoder()']]],
   ['b_5fgraph_5ftest',['b_graph_test',['../test_8cpp.html#aa276850b1d7d04eb917a6fc7415b9566',1,'test.cpp']]],
   ['beta',['beta',['../classb__graph__encoder.html#ae54d76cc4cee399d98951f870897a144',1,'b_graph_encoder::beta()'],['../classb__graph__decoder.html#a3e5babfb07af486c1d9e991f65251266',1,'b_graph_decoder::beta()'],['../classgraph__encoder.html#a40880adecfd63fb86e94b4b0fc3f6bc2',1,'graph_encoder::beta()'],['../classgraph__decoder.html#aa57c11e4c09c52101682ff83286162f7',1,'graph_decoder::beta()']]],
+  ['binary_5fread',['binary_read',['../classmarked__graph__compressed.html#a9db2d11bd63ad3d5a75e47b4023a89dd',1,'marked_graph_compressed']]],
   ['binary_5fwrite',['binary_write',['../classmarked__graph__compressed.html#ab9cdb7fc43badd58fb5202f74ffac723',1,'marked_graph_compressed']]],
   ['binomial',['binomial',['../compression__helper_8cpp.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp']]],
   ['bipartite_5fgraph_2ecpp',['bipartite_graph.cpp',['../bipartite__graph_8cpp.html',1,'']]],
