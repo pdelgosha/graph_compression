@@ -73,6 +73,34 @@ void marked_graph_compressed::binary_write(FILE* f){
     }
     bit_string_write(f, s); // write this bitstream to the output
   }
+
+  // ==== write vertex types
+
+  // first, we need vertex types list (ver_type_list)
+  // size of ver_type_list
+  int_out = ver_type_list.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  for (int i=0;i<ver_type_list.size();i++){
+    int_out = ver_type_list[i].size();
+    fwrite(&int_out, sizeof int_out, 1, f);
+    for (int j=0;j<ver_type_list[i].size();j++){
+      int_out = ver_type_list[i][j];
+      fwrite(&int_out, sizeof int_out, 1, f);
+    }
+  }
+
+  // then, write ver_types
+
+  // ver_types.first
+  // ver_types.first.size():
+  int_out = ver_types.first.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  for (int i =0;i<ver_types.first.size(); i++){
+    int_out = ver_types.first[i];
+    fwrite(&int_out, sizeof int_out, 1, f);
+  }
+  // ver_types.second
+  mpz_out_raw(f, ver_types.second.get_mpz_t());
 }
 
 /*!
@@ -151,6 +179,32 @@ void marked_graph_compressed::binary_read(FILE* f){
 
     star_edges.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
   }
+
+  // ==== read vertex_types
+
+  // read ver_type_list
+  fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list
+  ver_type_list.resize(int_in);
+  for (int i=0; i<ver_type_list.size();i++){
+    fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list[i]
+    ver_type_list[i].resize(int_in);
+    for (int j=0;j<ver_type_list[i].size();j++){
+      fread(&int_in, sizeof int_in, 1, f);
+      ver_type_list[i][j] = int_in;
+    }
+  }
+
+  // ver_types
+  // ver_types.first
+  // ver_types.first.size()
+  fread(&int_in, sizeof int_in, 1, f);
+  ver_types.first.resize(int_in);
+  for (int i=0;i<ver_types.first.size();i++){
+    fread(&int_in, sizeof int_in, 1, f);
+    ver_types.first[i] = int_in;
+  }
+  // ver_types.second
+  mpz_inp_raw(ver_types.second.get_mpz_t(), f);
 
 }
 

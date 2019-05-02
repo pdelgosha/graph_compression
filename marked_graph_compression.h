@@ -25,9 +25,10 @@ class marked_graph_compressed
 
   vector<int> type_mark; //!< for an edge type t, type_mark[t] denotes the mark component of t
 
-  vector<vector<int> > ver_type_list; //!< the list of all vertex types that appear in the graph, where the type of a vertex is a vector of size \f$1+L \times L\f$ with the first index being the vertex mark, and the rest being the color degree matrix stored row by row. This can be considered as a dictionary to convert actual vertex types to integers (if ver_type_list[i] = a, then the integer i represents vertex type a) and subsequently compress it as a time series and store in the ver_types member. 
+  vector<vector<int> > ver_type_list; //!< the list of all vertex types that appear in the graph, where the type of a vertex is a vector of integers, where its index 0 is the mark of the vertex, and indices \f$3k+1\f$, \f$3k+2\f$, \f$3k+3\f$ are \f$m\f$, \f$m'\f$ and \f$n_{m,m'}\f$, where \f$(m,m')\f$ is a type pair, and \f$n_{m,m'}\f$ is the number of edges connected to the vertex with that type. The list is sorted lexicographically to ensure unique representation. 
 
-  pair<vector<int>, mpz_class> ver_types; //!< the compressed form of vertex types, where the type of a vertex is the index with respect to ver_type_list of the list of size \f$1 + L \times L\f$ encapsulating the vertex mark and the
+
+  pair<vector<int>, mpz_class> ver_types; //!< the compressed form of vertex types, where the type of a vertex is the index with respect to ver_type_list of the list of integers specifying the type of the vertex (mark of the vertex followed by the number of edges of each type connected to that vertex)
 
   map<pair<int, int>, mpz_class> part_bgraph; //!< compressed form of partition bipartite graphs corresponding to colors in \f$C_<\f$. For a pair \f$0 \leq t < t' < L\f$ of half edge types, part_bgraph[pair<int, int>(t,t')] is the compressed form of the bipartite graph with n left and right nodes, where a left node i is connected to a right node j if there is an edge connecting i to j with type t towards i and type t' towards j
 
