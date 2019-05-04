@@ -101,6 +101,45 @@ void marked_graph_compressed::binary_write(FILE* f){
   }
   // ver_types.second
   mpz_out_raw(f, ver_types.second.get_mpz_t());
+
+
+  // ==== part bgraphs
+
+  // part_bgraphs.size
+  int_out = part_bgraph.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  map<pair<int, int>, mpz_class>::iterator it2;
+  for (it2 = part_bgraph.begin(); it2 != part_bgraph.end(); it2++){
+    // first, write t, t'
+    int_out = it2->first.first;
+    fwrite(&int_out, sizeof int_out, 1, f);
+    int_out = it2->first.second;
+    fwrite(&int_out, sizeof int_out, 1, f);
+    // then, the compressed integer
+    mpz_out_raw(f, it2->second.get_mpz_t());
+  }
+
+  // === part graphs
+
+  // part_graph.size
+  int_out = part_graph.size();
+  fwrite(&int_out, sizeof int_out, 1, f);
+  map< int, pair< mpz_class, vector< int > > >::iterator it3;
+  for (it3 = part_graph.begin(); it3 != part_graph.end(); it3++){
+    int_out = it3->first; // the type
+    fwrite(&int_out, sizeof int_out, 1, f);
+    // the mpz part
+    mpz_out_raw(f, it3->second.first.get_mpz_t());
+    // the vector part
+    // first its size
+    int_out = it3->second.second.size();
+    fwrite(&int_out, sizeof int_out, 1, f);
+    // then element by element
+    for(int j=0;j<it3->second.second.size();j++){
+      int_out = it3->second.second[j];
+      fwrite(&int_out, sizeof int_out, 1, f);
+    }
+  }
 }
 
 /*!
@@ -206,6 +245,43 @@ void marked_graph_compressed::binary_read(FILE* f){
   // ver_types.second
   mpz_inp_raw(ver_types.second.get_mpz_t(), f);
 
+
+  // === part bgraphs
+  int part_bgraph_size;
+  int t, tp;
+  pair<int, int> type; 
+  mpz_class part_g; 
+  fread(&part_bgraph_size, sizeof part_bgraph_size, 1, f);
+  for (int i=0;i<part_bgraph_size;i++){
+    // read t, t'
+    fread(&t, sizeof t, 1, f);
+    fread(&tp, sizeof tp, 1, f);
+    type = pair<int, int>(t, tp);
+    mpz_inp_raw(part_g.get_mpz_t(), f);
+    part_bgraph.insert(pair<pair<int, int>, mpz_class> (type, part_g));
+  }
+
+  // === part graphs
+
+  // first, the size
+  int part_graph_size;
+  int v_size;
+  vector<int> W; 
+  fread(&part_graph_size, sizeof part_graph_size, 1, f);
+  for (int i=0;i<part_graph_size; i++){
+    // first, the type
+    fread(&t, sizeof t, 1, f);
+    // then, the mpz part
+    mpz_inp_raw(part_g.get_mpz_t(), f);
+    // then, the vector size
+    fread(&v_size, sizeof v_size, 1, f);
+    W.resize(v_size);
+    for (int j=0;j<v_size; j++){
+      fread(&int_in, sizeof int_in, 1, f);
+      W[j] = int_in;
+    }
+    part_graph.insert(pair<int, pair< mpz_class, vector< int > > >(t, pair<mpz_class, vector<int> >(part_g, W)));
+  }
 }
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)

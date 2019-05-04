@@ -81,44 +81,44 @@ constructor
 
 
 \begin{DoxyCode}
-458 \{
-459   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-460   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Init"}, \textcolor{stringliteral}{""});
-461   \hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n} = compressed.\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
-462   \hyperlink{classmarked__graph__decoder_a15bb3109398ce7c1f0ffbfae512e34c9}{h} = compressed.\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h};
-463   \hyperlink{classmarked__graph__decoder_a779d91c4c405b82baf0a3374401be0a2}{delta} = compressed.\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta};
-464 
-465 
-466   \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.clear(); \textcolor{comment}{// clear the edge list of the marked graph to be decoded}
-467   \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}.clear(); \textcolor{comment}{// clear the list of vertex marks of the marked graph to be decoded}
-468 
-469   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode * vertices"}, \textcolor{stringliteral}{""});
-470   \hyperlink{classmarked__graph__decoder_a57fba34d119743414a38c7339b910d99}{decode\_star\_vertices}(compressed);
-471   \textcolor{comment}{//cerr << " decoded star vertices " << endl;}
-472 
-473   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode * edges"}, \textcolor{stringliteral}{""});
-474   \hyperlink{classmarked__graph__decoder_a79fcfb8d5616c691114ebc0a7adb18b2}{decode\_star\_edges}(compressed);
-475   \textcolor{comment}{//cerr << " decoded star edges " << endl;}
-476 
-477   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode vertex types"}, \textcolor{stringliteral}{""});
-478   \hyperlink{classmarked__graph__decoder_afc0aea714483a4dda31dd85fd20bfe5f}{decode\_vertex\_types}(compressed);
-479   \textcolor{comment}{//cerr << " decoded vertex types " << endl;}
-480 
-481   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode partition graphs"}, \textcolor{stringliteral}{""});
-482   \hyperlink{classmarked__graph__decoder_a80eb5f68b45ba160b9a00334476b6be7}{decode\_partition\_graphs}(compressed);
-483   \textcolor{comment}{//cerr << " decoded partition graphs " << endl;}
-484 
-485   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode partition b graphs"}, \textcolor{stringliteral}{""});
-486   \hyperlink{classmarked__graph__decoder_aea53529191c7d56a897620b3d842ffaa}{decode\_partition\_bgraphs}(compressed);
-487   \textcolor{comment}{//cerr << " decoded partition b graphs " << endl;}
-488 
-489   \textcolor{comment}{// now, reconstruct the original marked graphs by assembling the vertex marks and edge list}
-490   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Construct decoded graph"}, \textcolor{stringliteral}{""});
-491   \hyperlink{classmarked__graph}{marked\_graph} G(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n}, \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}, \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks});
-492 
-493   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-494   \textcolor{keywordflow}{return} G;
-495 \}
+534 \{
+535   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+536   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Init"}, \textcolor{stringliteral}{""});
+537   \hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n} = compressed.\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
+538   \hyperlink{classmarked__graph__decoder_a15bb3109398ce7c1f0ffbfae512e34c9}{h} = compressed.\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h};
+539   \hyperlink{classmarked__graph__decoder_a779d91c4c405b82baf0a3374401be0a2}{delta} = compressed.\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta};
+540 
+541 
+542   \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.clear(); \textcolor{comment}{// clear the edge list of the marked graph to be decoded}
+543   \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}.clear(); \textcolor{comment}{// clear the list of vertex marks of the marked graph to be decoded}
+544 
+545   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode * vertices"}, \textcolor{stringliteral}{""});
+546   \hyperlink{classmarked__graph__decoder_a57fba34d119743414a38c7339b910d99}{decode\_star\_vertices}(compressed);
+547   \textcolor{comment}{//cerr << " decoded star vertices " << endl;}
+548 
+549   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode * edges"}, \textcolor{stringliteral}{""});
+550   \hyperlink{classmarked__graph__decoder_a79fcfb8d5616c691114ebc0a7adb18b2}{decode\_star\_edges}(compressed);
+551   \textcolor{comment}{//cerr << " decoded star edges " << endl;}
+552 
+553   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode vertex types"}, \textcolor{stringliteral}{""});
+554   \hyperlink{classmarked__graph__decoder_afc0aea714483a4dda31dd85fd20bfe5f}{decode\_vertex\_types}(compressed);
+555   \textcolor{comment}{//cerr << " decoded vertex types " << endl;}
+556 
+557   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode partition graphs"}, \textcolor{stringliteral}{""});
+558   \hyperlink{classmarked__graph__decoder_a80eb5f68b45ba160b9a00334476b6be7}{decode\_partition\_graphs}(compressed);
+559   \textcolor{comment}{//cerr << " decoded partition graphs " << endl;}
+560 
+561   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode partition b graphs"}, \textcolor{stringliteral}{""});
+562   \hyperlink{classmarked__graph__decoder_aea53529191c7d56a897620b3d842ffaa}{decode\_partition\_bgraphs}(compressed);
+563   \textcolor{comment}{//cerr << " decoded partition b graphs " << endl;}
+564 
+565   \textcolor{comment}{// now, reconstruct the original marked graphs by assembling the vertex marks and edge list}
+566   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Construct decoded graph"}, \textcolor{stringliteral}{""});
+567   \hyperlink{classmarked__graph}{marked\_graph} G(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n}, \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}, \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks});
+568 
+569   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+570   \textcolor{keywordflow}{return} G;
+571 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_aea53529191c7d56a897620b3d842ffaa}\label{classmarked__graph__decoder_aea53529191c7d56a897620b3d842ffaa}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!decode\+\_\+partition\+\_\+bgraphs@{decode\+\_\+partition\+\_\+bgraphs}}
@@ -128,53 +128,53 @@ constructor
 
 
 \begin{DoxyCode}
-621 \{
-622   pair<int, int> c; \textcolor{comment}{// the pair of types}
-623   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types}
-624   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// mark components of t and tp}
-625 
-626   \hyperlink{classb__graph}{b\_graph} G; \textcolor{comment}{// the decoded partition bipartite graph}
-627   \textcolor{keywordtype}{int} nl\_G; \textcolor{comment}{// the number of left nodes in the partition graph G }
-628   vector<int> adj\_list; \textcolor{comment}{// adj list of a vertex in a partition bipartite graph}
-629   \textcolor{keywordtype}{int} w; \textcolor{comment}{// a right node}
-630   \textcolor{keywordtype}{int} v\_orig, w\_orig; \textcolor{comment}{// the original index of vertices v and w in partition graphs }
-631   \textcolor{keywordflow}{for} (map<pair<int, int>, mpz\_class>::const\_iterator it = compressed.
+697 \{
+698   pair<int, int> c; \textcolor{comment}{// the pair of types}
+699   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types}
+700   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// mark components of t and tp}
+701 
+702   \hyperlink{classb__graph}{b\_graph} G; \textcolor{comment}{// the decoded partition bipartite graph}
+703   \textcolor{keywordtype}{int} nl\_G; \textcolor{comment}{// the number of left nodes in the partition graph G }
+704   vector<int> adj\_list; \textcolor{comment}{// adj list of a vertex in a partition bipartite graph}
+705   \textcolor{keywordtype}{int} w; \textcolor{comment}{// a right node}
+706   \textcolor{keywordtype}{int} v\_orig, w\_orig; \textcolor{comment}{// the original index of vertices v and w in partition graphs }
+707   \textcolor{keywordflow}{for} (map<pair<int, int>, mpz\_class>::const\_iterator it = compressed.
       \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.begin(); it!=compressed.\hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.end(); it++)\{
-632     c = it->first;
-633     t = c.first;
-634     tp = c.second;
-635     x = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[t]; \textcolor{comment}{// the mark component of t}
-636     xp = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[tp]; \textcolor{comment}{// the mark component of tp }
-637 
-638     \textcolor{comment}{//cerr << " t " << t << " tp " << tp << endl;}
-639 
-640     \hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,tp)), 
+708     c = it->first;
+709     t = c.first;
+710     tp = c.second;
+711     x = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[t]; \textcolor{comment}{// the mark component of t}
+712     xp = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[tp]; \textcolor{comment}{// the mark component of tp }
+713 
+714     \textcolor{comment}{//cerr << " t " << t << " tp " << tp << endl;}
+715 
+716     \hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,tp)), 
       \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(tp,t))); \textcolor{comment}{// the degree sequence of left nodes is precisely
        part\_deg.at(pair<int, int>(t,tp)), while that of the right nodes is precisely part\_deg.at(pair<int, int>(tp,t))}
-641     \textcolor{comment}{//cerr << " decoder constructed " << endl;}
-642     \textcolor{comment}{//cerr << " part graph t = "  << t << " t' = " << tp << " nl " << part\_deg.at(pair<int,
+717     \textcolor{comment}{//cerr << " decoder constructed " << endl;}
+718     \textcolor{comment}{//cerr << " part graph t = "  << t << " t' = " << tp << " nl " << part\_deg.at(pair<int,
        int>(t,tp)).size() << " nr = " << part\_deg.at(pair<int, int>(tp,t)).size() << endl;}
-643     G = D.decode(it->second);
-644 
-645     \textcolor{comment}{//cerr << " G decoded " << endl;}
-646     nl\_G = \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,tp)).size(); \textcolor{comment}{// the number of left nodes in G is obtained
+719     G = D.decode(it->second);
+720 
+721     \textcolor{comment}{//cerr << " G decoded " << endl;}
+722     nl\_G = \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,tp)).size(); \textcolor{comment}{// the number of left nodes in G is obtained
        from the size of the degree sequence of left nodes}
-647     
-648     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nl\_G;v++)\{
-649       v\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,tp))[v];
-650       \textcolor{comment}{//cerr << " v " << v << " v\_orig " << v\_orig << endl;}
-651       adj\_list = G.get\_adj\_list(v);
-652       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<adj\_list.size();i++)\{
-653         w = adj\_list[i];
-654         w\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(tp,t))[w]; \textcolor{comment}{// since w is a right node, we
+723     
+724     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nl\_G;v++)\{
+725       v\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,tp))[v];
+726       \textcolor{comment}{//cerr << " v " << v << " v\_orig " << v\_orig << endl;}
+727       adj\_list = G.get\_adj\_list(v);
+728       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<adj\_list.size();i++)\{
+729         w = adj\_list[i];
+730         w\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(tp,t))[w]; \textcolor{comment}{// since w is a right node, we
        should read its original index through origin\_index[(tp,t)]}
-655         \textcolor{comment}{//cerr << " w " << w << " w\_orig " << w\_orig << endl;}
-656         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v\_orig,w\_orig), pair<int,
+731         \textcolor{comment}{//cerr << " w " << w << " w\_orig " << w\_orig << endl;}
+732         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v\_orig,w\_orig), pair<int,
        int>(x,xp)));
-657       \}
-658     \}
-659   \}
-660 \}
+733       \}
+734     \}
+735   \}
+736 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_a80eb5f68b45ba160b9a00334476b6be7}\label{classmarked__graph__decoder_a80eb5f68b45ba160b9a00334476b6be7}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!decode\+\_\+partition\+\_\+graphs@{decode\+\_\+partition\+\_\+graphs}}
@@ -184,45 +184,45 @@ constructor
 
 
 \begin{DoxyCode}
-584 \{
-585   \textcolor{keywordtype}{int} t; \textcolor{comment}{// the type corresponding to the partition graph}
-586   vector<int> t\_message; \textcolor{comment}{// the actual message corresponding to t}
-587   \textcolor{keywordtype}{int} x; \textcolor{comment}{// the mark component associated to t}
-588   pair< mpz\_class, vector< int > > G\_compressed; \textcolor{comment}{// the compressed form of the partition graph}
-589   \hyperlink{classgraph}{graph} G; \textcolor{comment}{// the decoded partition graph}
-590   vector<int> flist; \textcolor{comment}{// the forward adjacency list of a vertex in a partition graph}
-591   \textcolor{keywordtype}{int} w; \textcolor{comment}{// vertex in partition graph}
-592   \textcolor{keywordtype}{int} v\_orig, w\_orig; \textcolor{comment}{// the original index of vertices v and w}
-593   \textcolor{keywordtype}{int} n\_G; \textcolor{comment}{// the number of vertices of the partitioned graph }
-594 
-595   \textcolor{keywordflow}{for}(map< \textcolor{keywordtype}{int}, pair< mpz\_class, vector< int > > >::const\_iterator it=compressed.
+660 \{
+661   \textcolor{keywordtype}{int} t; \textcolor{comment}{// the type corresponding to the partition graph}
+662   vector<int> t\_message; \textcolor{comment}{// the actual message corresponding to t}
+663   \textcolor{keywordtype}{int} x; \textcolor{comment}{// the mark component associated to t}
+664   pair< mpz\_class, vector< int > > G\_compressed; \textcolor{comment}{// the compressed form of the partition graph}
+665   \hyperlink{classgraph}{graph} G; \textcolor{comment}{// the decoded partition graph}
+666   vector<int> flist; \textcolor{comment}{// the forward adjacency list of a vertex in a partition graph}
+667   \textcolor{keywordtype}{int} w; \textcolor{comment}{// vertex in partition graph}
+668   \textcolor{keywordtype}{int} v\_orig, w\_orig; \textcolor{comment}{// the original index of vertices v and w}
+669   \textcolor{keywordtype}{int} n\_G; \textcolor{comment}{// the number of vertices of the partitioned graph }
+670 
+671   \textcolor{keywordflow}{for}(map< \textcolor{keywordtype}{int}, pair< mpz\_class, vector< int > > >::const\_iterator it=compressed.
       \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.begin(); it!=compressed.\hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.end(); it++)\{
-596     t = it->first;
-597     x = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[t]; \textcolor{comment}{// the mark component of t }
-598 
-599     G\_compressed = it->second;
-600     \textcolor{comment}{// the degree sequence of the graph can be obtained from part\_deg.at(pair<int,int>(t,t))}
-601     \hyperlink{classgraph__decoder}{graph\_decoder} D(\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,t)));
-602     \textcolor{comment}{//cerr << " part\_graph t = " << t << " with " << part\_deg.at(pair<int, int>(t,t)).size() << " vertices
+672     t = it->first;
+673     x = compressed.\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[t]; \textcolor{comment}{// the mark component of t }
+674 
+675     G\_compressed = it->second;
+676     \textcolor{comment}{// the degree sequence of the graph can be obtained from part\_deg.at(pair<int,int>(t,t))}
+677     \hyperlink{classgraph__decoder}{graph\_decoder} D(\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,t)));
+678     \textcolor{comment}{//cerr << " part\_graph t = " << t << " with " << part\_deg.at(pair<int, int>(t,t)).size() << " vertices
        " << endl;}
-603     n\_G = \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,t)).size(); \textcolor{comment}{// the number of vertices in the partition graph
+679     n\_G = \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(pair<int, int>(t,t)).size(); \textcolor{comment}{// the number of vertices in the partition graph
        is read from the size of its degree sequence}
-604     G = D.decode(G\_compressed.first, G\_compressed.second);
-605     \textcolor{comment}{// for each edge in G, we should add an edge with mark pair (x,x) to the edge list of the marked graph}
-606     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n\_G;v++)\{
-607       flist = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
-608       v\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,t))[v]; \textcolor{comment}{// the index of v in the original graph
+680     G = D.decode(G\_compressed.first, G\_compressed.second);
+681     \textcolor{comment}{// for each edge in G, we should add an edge with mark pair (x,x) to the edge list of the marked graph}
+682     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n\_G;v++)\{
+683       flist = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(v);
+684       v\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,t))[v]; \textcolor{comment}{// the index of v in the original graph
        }
-609       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<flist.size();i++)\{
-610         w = flist[i]; \textcolor{comment}{// the other endpoint in the partition graph}
-611         w\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,t))[w]; \textcolor{comment}{// the index of w in the original
+685       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<flist.size();i++)\{
+686         w = flist[i]; \textcolor{comment}{// the other endpoint in the partition graph}
+687         w\_orig = \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(pair<int, int>(t,t))[w]; \textcolor{comment}{// the index of w in the original
        graph}
-612         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v\_orig,w\_orig), pair<int,
+688         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v\_orig,w\_orig), pair<int,
        int> (x,x)));
-613       \}
-614     \}
-615   \}
-616 \}
+689       \}
+690     \}
+691   \}
+692 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_a79fcfb8d5616c691114ebc0a7adb18b2}\label{classmarked__graph__decoder_a79fcfb8d5616c691114ebc0a7adb18b2}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!decode\+\_\+star\+\_\+edges@{decode\+\_\+star\+\_\+edges}}
@@ -232,26 +232,26 @@ constructor
 
 
 \begin{DoxyCode}
-509 \{
-510   pair<int, int> mark\_pair; \textcolor{comment}{// the pair of marks}
-511   vector<vector<int> > list; \textcolor{comment}{// list of edges with this pair of marks}
-512   \textcolor{keywordtype}{int} v; \textcolor{comment}{// one endpoint of the star edge}
-513   \textcolor{comment}{// iterating through the star\_edges map}
-514   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<vector<int> > >::const\_iterator it = compressed.
+585 \{
+586   pair<int, int> mark\_pair; \textcolor{comment}{// the pair of marks}
+587   vector<vector<int> > list; \textcolor{comment}{// list of edges with this pair of marks}
+588   \textcolor{keywordtype}{int} v; \textcolor{comment}{// one endpoint of the star edge}
+589   \textcolor{comment}{// iterating through the star\_edges map}
+590   \textcolor{keywordflow}{for} (map<pair<int, int>, vector<vector<int> > >::const\_iterator it = compressed.
       \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.begin(); it!=compressed.\hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end(); it++)\{
-515     mark\_pair = it->first;
-516     \textcolor{comment}{//cerr << " mark\_pair " << mark\_pair.first << " " << mark\_pair.second << endl;}
-517     list = it->second;
-518     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list.size();i++)\{
-519       v = \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}[i];
-520       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list[i].size();j++)\{
-521         \textcolor{comment}{//cerr << " list[i][j] " << list[i][j] << endl;}
-522         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,list[i][j]), mark\_pair)
+591     mark\_pair = it->first;
+592     \textcolor{comment}{//cerr << " mark\_pair " << mark\_pair.first << " " << mark\_pair.second << endl;}
+593     list = it->second;
+594     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<list.size();i++)\{
+595       v = \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}[i];
+596       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<list[i].size();j++)\{
+597         \textcolor{comment}{//cerr << " list[i][j] " << list[i][j] << endl;}
+598         \hyperlink{classmarked__graph__decoder_af9e75da0a495d9c3bdcd169e15e3261e}{edges}.push\_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,list[i][j]), mark\_pair)
       );
-523       \}
-524     \}
-525   \}
-526 \}
+599       \}
+600     \}
+601   \}
+602 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_a57fba34d119743414a38c7339b910d99}\label{classmarked__graph__decoder_a57fba34d119743414a38c7339b910d99}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!decode\+\_\+star\+\_\+vertices@{decode\+\_\+star\+\_\+vertices}}
@@ -261,15 +261,15 @@ constructor
 
 
 \begin{DoxyCode}
-498 \{
-499   \hyperlink{classtime__series__decoder}{time\_series\_decoder} D(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
-500   \hyperlink{classmarked__graph__decoder_a5c5391206cf2965b8513248e505ba48f}{is\_star\_vertex} = D.decode(compressed.\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices});
-501 
-502   \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}.clear();
-503   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};i++)
-504     \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__decoder_a5c5391206cf2965b8513248e505ba48f}{is\_star\_vertex}[i] == 1)
-505       \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}.push\_back(i);
-506 \}
+574 \{
+575   \hyperlink{classtime__series__decoder}{time\_series\_decoder} D(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
+576   \hyperlink{classmarked__graph__decoder_a5c5391206cf2965b8513248e505ba48f}{is\_star\_vertex} = D.decode(compressed.\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices});
+577 
+578   \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}.clear();
+579   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};i++)
+580     \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__decoder_a5c5391206cf2965b8513248e505ba48f}{is\_star\_vertex}[i] == 1)
+581       \hyperlink{classmarked__graph__decoder_a06fc05827db14b675f7ecc2fd915b533}{star\_vertices}.push\_back(i);
+582 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_afc0aea714483a4dda31dd85fd20bfe5f}\label{classmarked__graph__decoder_afc0aea714483a4dda31dd85fd20bfe5f}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!decode\+\_\+vertex\+\_\+types@{decode\+\_\+vertex\+\_\+types}}
@@ -279,38 +279,38 @@ constructor
 
 
 \begin{DoxyCode}
-529 \{
-530   \hyperlink{classtime__series__decoder}{time\_series\_decoder} D(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
-531   vector<int> ver\_type\_int = D.decode(compressed.\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types});
-532 
-533   \textcolor{comment}{// converting the integer value vertex types to actual vectors using the `ver\_type\_list` attribute of
+605 \{
+606   \hyperlink{classtime__series__decoder}{time\_series\_decoder} D(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
+607   vector<int> ver\_type\_int = D.decode(compressed.\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types});
+608 
+609   \textcolor{comment}{// converting the integer value vertex types to actual vectors using the `ver\_type\_list` attribute of
        compressed}
-534 
-535   \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}.resize(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n}); \textcolor{comment}{// preparing for decoding vertex marks}
-536   \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}.clear(); \textcolor{comment}{// refresh}
-537   \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}.resize(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
-538 
-539   vector<int> x; \textcolor{comment}{// auxiliary vector}
-540 
-541   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};v++)\{
-542     \textcolor{keywordflow}{if} (ver\_type\_int[v] >= compressed.\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size())
-543       cerr << \textcolor{stringliteral}{" Warning: marked\_graph\_decoder::decode\_vertex\_types ver\_type\_int["} << v << \textcolor{stringliteral}{"] is out of
+610 
+611   \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}.resize(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n}); \textcolor{comment}{// preparing for decoding vertex marks}
+612   \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}.clear(); \textcolor{comment}{// refresh}
+613   \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}.resize(\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n});
+614 
+615   vector<int> x; \textcolor{comment}{// auxiliary vector}
+616 
+617   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};v++)\{
+618     \textcolor{keywordflow}{if} (ver\_type\_int[v] >= compressed.\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size())
+619       cerr << \textcolor{stringliteral}{" Warning: marked\_graph\_decoder::decode\_vertex\_types ver\_type\_int["} << v << \textcolor{stringliteral}{"] is out of
        range"} << endl;
-544     x = compressed.\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ver\_type\_int[v]];
-545     \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}[v] =x[0]; \textcolor{comment}{// the mark of vertex v is the first element in the type list of
+620     x = compressed.\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ver\_type\_int[v]];
+621     \hyperlink{classmarked__graph__decoder_a98be932a5abff7efbc8dd4290268b69a}{vertex\_marks}[v] =x[0]; \textcolor{comment}{// the mark of vertex v is the first element in the type list of
        this vertex}
-546     \textcolor{comment}{// now, we extract Deg[v] by looking at batches of size 3 in x}
-547     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<x.size();i+=3)\{
-548       \textcolor{keywordflow}{if} (i+2 >= x.size())
-549         cerr << \textcolor{stringliteral}{" Error: marked\_graph\_decoder::decode\_vertex\_types, the type of vertex "} << v << \textcolor{stringliteral}{" does not
+622     \textcolor{comment}{// now, we extract Deg[v] by looking at batches of size 3 in x}
+623     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<x.size();i+=3)\{
+624       \textcolor{keywordflow}{if} (i+2 >= x.size())
+625         cerr << \textcolor{stringliteral}{" Error: marked\_graph\_decoder::decode\_vertex\_types, the type of vertex "} << v << \textcolor{stringliteral}{" does not
        obey length constrains, i.e. it does not have length 1 + 3k "} << endl;
-550           \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v][pair<int, int>(x[i],x[i+1])] = x[i+2]; \textcolor{comment}{// x[i] and x[i+1] are types, and x[i+2] is the
+626           \hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v][pair<int, int>(x[i],x[i+1])] = x[i+2]; \textcolor{comment}{// x[i] and x[i+1] are types, and x[i+2] is the
        count}
-551     \}
-552   \}
-553 
-554   \hyperlink{classmarked__graph__decoder_a1e035914395d2a3a50064b758c478ffd}{find\_part\_deg\_orig\_index}(); \textcolor{comment}{// find part\_deg and orig\_index maps}
-555 \}
+627     \}
+628   \}
+629 
+630   \hyperlink{classmarked__graph__decoder_a1e035914395d2a3a50064b758c478ffd}{find\_part\_deg\_orig\_index}(); \textcolor{comment}{// find part\_deg and orig\_index maps}
+631 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__decoder_a1e035914395d2a3a50064b758c478ffd}\label{classmarked__graph__decoder_a1e035914395d2a3a50064b758c478ffd}} 
 \index{marked\+\_\+graph\+\_\+decoder@{marked\+\_\+graph\+\_\+decoder}!find\+\_\+part\+\_\+deg\+\_\+orig\+\_\+index@{find\+\_\+part\+\_\+deg\+\_\+orig\+\_\+index}}
@@ -320,33 +320,33 @@ constructor
 
 
 \begin{DoxyCode}
-558 \{
-559   \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.clear();
-560   \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.clear();
-561   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types}
-562 
-563   \textcolor{comment}{//cerr << " decoded deg : " << endl;}
-564   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};v++)\{
-565     \textcolor{comment}{//cerr << " v " << v << endl;}
-566     \textcolor{keywordflow}{for} (map<pair<int, int>, \textcolor{keywordtype}{int}>::iterator it=\hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v].begin(); it!=\hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v].end(); it++)\{
-567       t = it->first.first;
-568       tp = it->first.second;
-569       \textcolor{comment}{//cerr << " t " << t << " tp " << tp << " : " << it->second << endl;}
-570       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.find(it->first) == \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.end())\{
-571         \textcolor{comment}{// this is our first encounter with this type pair}
-572         \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}[it->first] = vector<int>(\{v\}); \textcolor{comment}{// v is the first node in the t side of the
+634 \{
+635   \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.clear();
+636   \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.clear();
+637   \textcolor{keywordtype}{int} t, tp; \textcolor{comment}{// types}
+638 
+639   \textcolor{comment}{//cerr << " decoded deg : " << endl;}
+640   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classmarked__graph__decoder_aefc93611bc4a3e9a5d3956d97649a0e9}{n};v++)\{
+641     \textcolor{comment}{//cerr << " v " << v << endl;}
+642     \textcolor{keywordflow}{for} (map<pair<int, int>, \textcolor{keywordtype}{int}>::iterator it=\hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v].begin(); it!=\hyperlink{classmarked__graph__decoder_a5040ad86467693eab415f615408bfb9e}{Deg}[v].end(); it++)\{
+643       t = it->first.first;
+644       tp = it->first.second;
+645       \textcolor{comment}{//cerr << " t " << t << " tp " << tp << " : " << it->second << endl;}
+646       \textcolor{keywordflow}{if} (\hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.find(it->first) == \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.end())\{
+647         \textcolor{comment}{// this is our first encounter with this type pair}
+648         \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}[it->first] = vector<int>(\{v\}); \textcolor{comment}{// v is the first node in the t side of the
        (t,t') partition graph}
-573         \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}[it->first] = vector<int>(\{it->second\}); \textcolor{comment}{// the degree in the partition graph is
+649         \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}[it->first] = vector<int>(\{it->second\}); \textcolor{comment}{// the degree in the partition graph is
        read from it->second}
-574       \}\textcolor{keywordflow}{else}\{
-575         \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(it->first).push\_back(v); \textcolor{comment}{// v is the next vertex observed with type
+650       \}\textcolor{keywordflow}{else}\{
+651         \hyperlink{classmarked__graph__decoder_aab3e2f6d4376ba96da32f25aa9ddd069}{origin\_index}.at(it->first).push\_back(v); \textcolor{comment}{// v is the next vertex observed with type
        t,t', so the vertex in the partition graph with index origin\_index[it->first] has original index v }
-576         \textcolor{comment}{// append degree of v, which is it->second}
-577         \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(it->first).push\_back(it->second);
-578       \}
-579     \}
-580   \}
-581 \}
+652         \textcolor{comment}{// append degree of v, which is it->second}
+653         \hyperlink{classmarked__graph__decoder_a6882e96fcad9abb10e72f1398814824a}{part\_deg}.at(it->first).push\_back(it->second);
+654       \}
+655     \}
+656   \}
+657 \}
 \end{DoxyCode}
 
 
