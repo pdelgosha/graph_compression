@@ -13,11 +13,16 @@ void marked_graph_compressed::clear()
   \param f: a `FILE*` object which is the address of the binary file to write
  */
 void marked_graph_compressed::binary_write(FILE* f){
+  logger::current_depth++;
   // ==== write n, h, delta
+  logger::add_entry("n", "");
   fwrite(&n, sizeof n, 1, f);
+  logger::add_entry("h", "");
   fwrite(&h, sizeof h, 1, f);
+  logger::add_entry("delta", "");
   fwrite(&delta, sizeof delta, 1, f);
 
+  logger::add_entry("type_mark", "");
   int int_out; // auxiliary variable, an integer value to be written to output
   // ==== write type_mark
   // first, the number of types
@@ -29,7 +34,7 @@ void marked_graph_compressed::binary_write(FILE* f){
     fwrite(&int_out, sizeof int_out, 1, f);
   }
 
-
+  logger::add_entry("star_vertices", "");
   // ==== write star vertices
   // first, write the frequency, note that star_vertices.first is a vector of size 2 with the first entry being the number of zeros, and the second one the number of ones, so it enough to write only one of them
   int_out = star_vertices.first[0];
@@ -38,6 +43,7 @@ void marked_graph_compressed::binary_write(FILE* f){
   // then, we write the integer representation star_vertices.second
   mpz_out_raw(f, star_vertices.second.get_mpz_t());
 
+  logger::add_entry("star_edges", "");
   // ==== write star edges
 
   int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
@@ -46,6 +52,7 @@ void marked_graph_compressed::binary_write(FILE* f){
     n_copy >>= 1;
     log2n ++;
   }
+  cerr << " log2n " << log2n << endl;
   bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
 
   map<pair<int, int>, vector<vector<int> > >::iterator it;
@@ -71,8 +78,17 @@ void marked_graph_compressed::binary_write(FILE* f){
       }
       s += "0"; // to indicate that the neighbor list of this vertex is over now
     }
+    //cerr << " write  x " << x << " xp " << xp << " s " << s << endl;
+    //for (int i=0;i<it->second.size();i++){
+    //  for (int j=0;j<it->second[i].size();j++){
+    //    cerr << " , " << it->second[i][j];
+    //  }
+    //  cerr << endl;
+    //}
     bit_string_write(f, s); // write this bitstream to the output
   }
+
+  logger::add_entry("vertex types", "");
 
   // ==== write vertex types
 
@@ -103,6 +119,7 @@ void marked_graph_compressed::binary_write(FILE* f){
   mpz_out_raw(f, ver_types.second.get_mpz_t());
 
 
+  logger::add_entry("partition bipartite graphs", "");
   // ==== part bgraphs
 
   // part_bgraphs.size
@@ -119,6 +136,7 @@ void marked_graph_compressed::binary_write(FILE* f){
     mpz_out_raw(f, it2->second.get_mpz_t());
   }
 
+  logger::add_entry("partition graphs", "");
   // === part graphs
 
   // part_graph.size
@@ -140,6 +158,7 @@ void marked_graph_compressed::binary_write(FILE* f){
       fwrite(&int_out, sizeof int_out, 1, f);
     }
   }
+  logger::current_depth--;
 }
 
 /*!
@@ -204,17 +223,26 @@ void marked_graph_compressed::binary_read(FILE* f){
     fread(&xp, sizeof xp, 1, f);
   
     s = bit_string_read(f);
+    //cerr << " read  x " << x << " xp " << xp << " s " << s << endl;
     sp = 0; // starting from zero 
     for (int j=0; j<nu_star_vertices; j++){ // 
-      V[j].clear(); // make it freash
+      V[j].clear(); // make it fresh
       while(s[sp++] == '1'){ // there is still some edge connected to this vertex 
         // read log2n many bits
-        ss << s.substr(sp, log2n);
+        //cerr << " s subtr " << s.substr(sp, log2n);
+        //ss << s.substr(sp, log2n);
+        B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
+        //cerr << " ss " << ss.str() << endl;
         sp += log2n;
-        ss >> B;
+        //ss >> B;
+
         V[j].push_back(B.to_ulong());
       }
+      //for (int k=0;k<V[j].size();k++)
+      //  cerr << " , " << V[j][k];
+      //cerr << endl;
     }
+
 
     star_edges.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
   }
@@ -353,6 +381,11 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
   
   logger::current_depth--;
   return compressed;
+}
+
+void marked_graph_encoder::encode(const marked_graph& G, FILE* f){
+  marked_graph_compressed comp = encode(G);
+  comp.binary_write(f);
 }
 
 void marked_graph_encoder::encode_vertex_types()

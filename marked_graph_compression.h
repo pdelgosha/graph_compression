@@ -93,7 +93,11 @@ class marked_graph_encoder
  public:
 
  marked_graph_encoder(int h_, int delta_): h(h_), delta(delta_) {}
+  //! compresses a simple marked graph G, and returns the compressed form as an object of type `marked_graph_compressed`
   marked_graph_compressed encode(const marked_graph& G);
+
+  //! compresses a simple marked graph G, and writes the compressed form in a binary file f
+  void encode(const marked_graph& G, FILE* f);
 
 };
 

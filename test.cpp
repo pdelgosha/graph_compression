@@ -97,11 +97,26 @@ void marked_graph_encoder_test()
   marked_graph_encoder E(3,20);
   //marked_graph_encoder E(1,20);
   marked_graph_compressed C = E.encode(G);
+  FILE* f;
+  logger::add_entry("write to binary file", "");
+  f = fopen("test.dat", "wb+");
+  C.binary_write(f);
+  fclose(f);
   //cerr << " graph encoded " << endl;
+
+  FILE* g;
+  g = fopen("test.dat", "rb+");
+  marked_graph_compressed Chat;
+  logger::add_entry("read from binary file", "");
+  Chat.binary_read(g);
+  fclose(g);
+
+  if (Chat.star_edges != C.star_edges)
+    cerr << " star edges do not match " << endl;
 
   logger::add_entry("Decode", "");
   marked_graph_decoder D; 
-  marked_graph Ghat = D.decode(C);
+  marked_graph Ghat = D.decode(Chat);
 
   //cout << " Ghat " << endl;
   //cout << Ghat << endl;
