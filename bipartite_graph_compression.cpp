@@ -77,12 +77,15 @@ mpz_class b_graph_encoder::encode(const b_graph& G)
   init(G); // initialize U and beta for G
   pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_left_vertices()-1, G);
 
-  mpz_class prod_b_factorial = prod_factorial(b, 0, b.size()-1); // \prod_{i=0}^{n-1} b_i
+  //mpz_class prod_b_factorial = prod_factorial(b, 0, b.size()-1); // \prod_{i=0}^{n-1} b_i
+
+  //if (prod_b_factorial != ans.second)
+  //  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod_b_factorial != ans.second" << endl;
 
   bool ceil = false;
-  if (ans.first % prod_b_factorial != 0)
+  if (ans.first % ans.second != 0)
     ceil = true;
-  ans.first /= prod_b_factorial;
+  ans.first /= ans.second;
   if (ceil)
     ans.first ++;
   return ans.first;

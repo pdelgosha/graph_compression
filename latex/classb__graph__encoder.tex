@@ -172,16 +172,19 @@ encodes the given bipartite graph $G$ and returns an integer in the specified ra
 77   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G); \textcolor{comment}{// initialize U and beta for G}
 78   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(0,G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}()-1, G);
 79 
-80   mpz\_class prod\_b\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}, 0, \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
+80   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
 81 
-82   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
-83   \textcolor{keywordflow}{if} (ans.first % prod\_b\_factorial != 0)
-84     ceil = \textcolor{keyword}{true};
-85   ans.first /= prod\_b\_factorial;
-86   \textcolor{keywordflow}{if} (ceil)
-87     ans.first ++;
-88   \textcolor{keywordflow}{return} ans.first;
-89 \}
+82   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
+83   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
+84 
+85   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
+86   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
+87     ceil = \textcolor{keyword}{true};
+88   ans.first /= ans.second;
+89   \textcolor{keywordflow}{if} (ceil)
+90     ans.first ++;
+91   \textcolor{keywordflow}{return} ans.first;
+92 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!init@{init}}
