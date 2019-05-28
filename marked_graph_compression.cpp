@@ -52,7 +52,7 @@ void marked_graph_compressed::binary_write(FILE* f){
     n_copy >>= 1;
     log2n ++;
   }
-  cerr << " log2n " << log2n << endl;
+  //cerr << " log2n " << log2n << endl;
   bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
 
   map<pair<int, int>, vector<vector<int> > >::iterator it;
@@ -404,7 +404,7 @@ void marked_graph_encoder::extract_edge_types(const marked_graph& G)
   logger::current_depth++;
   logger::add_entry("Extract messages", "");
   C = colored_graph(G, h, delta);
-  cerr << " number of types " << C.M.message_mark.size() << endl;
+  //cerr << " number of types " << C.M.message_mark.size() << endl;
   is_star_vertex = C.is_star_vertex;
   star_vertices = C.star_vertices;
   logger::current_depth--;

@@ -94,6 +94,33 @@ bool edge_compare(const pair<int, pair<int, int> >& a, pair<int, pair<int, int> 
 
 ostream& operator<< (ostream& o, const marked_graph& G)
 {
+  o << G.nu_vertices << endl;
+  for (int v=0;v<G.nu_vertices;v++){
+    o << G.ver_mark[v];
+    if (v < G.nu_vertices-1)
+      o << " ";
+  }
+  o << endl;
+
+  vector<pair<pair<int, int>, pair<int, int> > > edges;
+  pair<pair<int, int> , pair<int, int> > edge; // the current edge to be added to the list
+  for (int v=0;v<G.nu_vertices;v++){
+    for (int i=0;i<G.adj_list[v].size();i++){
+      if (G.adj_list[v][i].first > v){ // avoid duplicate in edge list, only add edges where the other endpoint has a greater index
+        edge.first.first = v;
+        edge.first.second = G.adj_list[v][i].first;
+        edge.second = G.adj_list[v][i].second;
+        edges.push_back(edge);
+      }
+    }
+  }
+  sort(edges.begin(), edges.end());
+  o << edges.size() << endl;
+  for(int i=0;i<edges.size();i++){
+    o << edges[i].first.first << " " << edges[i].first.second << " " << edges[i].second.first << " " << edges[i].second.second << endl;
+  }
+  return o;
+  /*
   o << " number of vertices " << G.nu_vertices << endl;
   vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex
   for (int v=0; v<G.nu_vertices; v++){
@@ -109,4 +136,5 @@ ostream& operator<< (ostream& o, const marked_graph& G)
     o << endl << endl;
   }
   return o;
+  */
 }

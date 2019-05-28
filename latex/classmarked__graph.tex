@@ -151,22 +151,52 @@ prints a marked graph to the output
 
 \begin{DoxyCode}
 96 \{
-97   o << \textcolor{stringliteral}{" number of vertices "} << G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} << endl;
-98   vector<pair<int, pair<int, int> > > l; \textcolor{comment}{// the adjacency list of a vertex}
-99   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; v++)\{
-100     o << \textcolor{stringliteral}{" vertex "} << v << \textcolor{stringliteral}{" mark "} << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] << endl;
-101     \textcolor{comment}{//o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;}
-102     o << \textcolor{stringliteral}{" adj list "} << endl;
-103     l = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
-104     sort(l.begin(), l.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
-105     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<l.size();i++)\{
-106       \textcolor{keywordflow}{if} (l[i].first > v)
-107         o << \textcolor{stringliteral}{" ("} << l[i].first << \textcolor{stringliteral}{", ("} << l[i].second.first << \textcolor{stringliteral}{", "} << l[i].second.second << \textcolor{stringliteral}{")) "};
-108     \}
-109     o << endl << endl;
-110   \}
-111   \textcolor{keywordflow}{return} o;
-112 \}
+97   o << G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} << endl;
+98   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
+99     o << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
+100     \textcolor{keywordflow}{if} (v < G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}-1)
+101       o << \textcolor{stringliteral}{" "};
+102   \}
+103   o << endl;
+104 
+105   vector<pair<pair<int, int>, pair<int, int> > > edges;
+106   pair<pair<int, int> , pair<int, int> > edge; \textcolor{comment}{// the current edge to be added to the list}
+107   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
+108     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+109       \textcolor{keywordflow}{if} (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first > v)\{ \textcolor{comment}{// avoid duplicate in edge list, only add edges where the
+       other endpoint has a greater index}
+110         edge.first.first = v;
+111         edge.first.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
+112         edge.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second;
+113         edges.push\_back(edge);
+114       \}
+115     \}
+116   \}
+117   sort(edges.begin(), edges.end());
+118   o << edges.size() << endl;
+119   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<edges.size();i++)\{
+120     o << edges[i].first.first << \textcolor{stringliteral}{" "} << edges[i].first.second << \textcolor{stringliteral}{" "} << edges[i].second.first << \textcolor{stringliteral}{" "} << 
+      edges[i].second.second << endl;
+121   \}
+122   \textcolor{keywordflow}{return} o;
+123   \textcolor{comment}{/*}
+124 \textcolor{comment}{  o << " number of vertices " << G.nu\_vertices << endl;}
+125 \textcolor{comment}{  vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex}
+126 \textcolor{comment}{  for (int v=0; v<G.nu\_vertices; v++)\{}
+127 \textcolor{comment}{    o << " vertex " << v << " mark " << G.ver\_mark[v] << endl;}
+128 \textcolor{comment}{    //o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;}
+129 \textcolor{comment}{    o << " adj list " << endl;}
+130 \textcolor{comment}{    l = G.adj\_list[v];}
+131 \textcolor{comment}{    sort(l.begin(), l.end(), edge\_compare);}
+132 \textcolor{comment}{    for (int i=0;i<l.size();i++)\{}
+133 \textcolor{comment}{      if (l[i].first > v)}
+134 \textcolor{comment}{        o << " (" << l[i].first << ", (" << l[i].second.first << ", " << l[i].second.second << ")) ";}
+135 \textcolor{comment}{    \}}
+136 \textcolor{comment}{    o << endl << endl;}
+137 \textcolor{comment}{  \}}
+138 \textcolor{comment}{  return o;}
+139 \textcolor{comment}{  */}
+140 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}\label{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}} 
 \index{marked\+\_\+graph@{marked\+\_\+graph}!operator==@{operator==}}

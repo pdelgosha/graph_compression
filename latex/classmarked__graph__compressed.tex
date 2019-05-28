@@ -265,7 +265,7 @@ writes the compressed data to a binary file
 52     n\_copy >>= 1;
 53     log2n ++;
 54   \}
-55   cerr << \textcolor{stringliteral}{" log2n "} << log2n << endl;
+55   \textcolor{comment}{//cerr << " log2n " << log2n << endl;}
 56   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
 57 
 58   map<pair<int, int>, vector<vector<int> > >::iterator it;

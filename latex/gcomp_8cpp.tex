@@ -1,0 +1,130 @@
+\hypertarget{gcomp_8cpp}{}\section{gcomp.\+cpp File Reference}
+\label{gcomp_8cpp}\index{gcomp.\+cpp@{gcomp.\+cpp}}
+
+
+To compress / decompress simple marked graphs.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}marked\+\_\+graph\+\_\+compression.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+To compress / decompress simple marked graphs. 
+
+This code has two functionalities\+: 1) gets a simple marked graph and compresses it, 2) gets a simple marked graph in its compressed form and decompresses it.
+
+In order to compress a graph, the hyperparameters h and delta should be given using -\/h and -\/d, respectively. The input graph should be given using -\/i option, followed by the name of the file containing the graph. Also, the compressed graph will be stored in the file specified by -\/o option. A graph must be specified using its edge list in the following format\+: first, the number of vertices comes, then the mark of vertices in order, then each line contains the information on an edge, which is of the form i j x y, meaning there is an edge between vertices i and j, with mark x and y towards i and j, respectively.
+
+In order to decompress, the compressed file should be given after -\/i, the file to store the decompressed graph should be given using -\/o, and an argument -\/u for uncompress should be given. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{gcomp.\+cpp@{gcomp.\+cpp}!main@{main}}
+\index{main@{main}!gcomp.\+cpp@{gcomp.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+22                                 \{
+23   \textcolor{keywordtype}{int} h, delta;
+24   \textcolor{keywordtype}{string} infile, outfile;
+25   \textcolor{keywordtype}{bool} uncompress = \textcolor{keyword}{false}; \textcolor{comment}{// becomes true if -u option is given (to decompress)}
+26   \textcolor{keywordtype}{bool} quiet = \textcolor{keyword}{true}; \textcolor{comment}{// becomes false if -v option is given (verbose)}
+27   \textcolor{keywordtype}{char} opt;
+28 
+29   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:u"})) != EOF)\{
+30     \textcolor{keywordflow}{switch}(opt)\{
+31     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
+32       h = atoi(optarg);
+33       \textcolor{keywordflow}{break};
+34     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
+35       delta = atoi(optarg);
+36       \textcolor{keywordflow}{break};
+37     \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+38       infile = string(optarg);
+39       \textcolor{keywordflow}{break};
+40     \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
+41       outfile = string(optarg);
+42       \textcolor{keywordflow}{break};
+43     \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
+44       uncompress = \textcolor{keyword}{true}; \textcolor{comment}{// in the decompression phase }
+45       \textcolor{keywordflow}{break};
+46     \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+47       quiet = \textcolor{keyword}{false};
+48       \textcolor{keywordflow}{break};
+49     \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+50       cerr << \textcolor{stringliteral}{"Error: option -"} << char(optopt) << \textcolor{stringliteral}{" requires an argument"} << endl;
+51       \textcolor{keywordflow}{return} 1;
+52     \}
+53   \}
+54   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and h <= 0)\{
+55     cerr << \textcolor{stringliteral}{"Error: parameter h must be a positive integer. Instead, the value "} << h << \textcolor{stringliteral}{" was given."} << 
+      endl;
+56     \textcolor{keywordflow}{return} 1;
+57   \}
+58   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and delta <= 0)\{
+59     cerr << \textcolor{stringliteral}{"Error: parameter d (delta) must be a positive integer. Instead, the value "} << delta << \textcolor{stringliteral}{" was
+       given."} << endl;
+60     \textcolor{keywordflow}{return} 1;
+61   \}
+62 
+63   ifstream inp(infile.c\_str());
+64   ofstream oup(outfile.c\_str());
+65 
+66   \textcolor{keywordflow}{if} (!inp.good())\{
+67     cerr << \textcolor{stringliteral}{"Error: invalid input file <"} << infile << \textcolor{stringliteral}{"> given "} << endl;
+68     \textcolor{keywordflow}{return} 1;
+69   \}
+70 
+71   \textcolor{keywordflow}{if} (!oup.good())\{
+72     cerr << \textcolor{stringliteral}{"Error: invalid output file <"} << outfile << \textcolor{stringliteral}{"> given "} << endl;
+73     \textcolor{keywordflow}{return} 1;
+74   \}
+75 
+76 
+77   \textcolor{keywordflow}{if} (quiet == \textcolor{keyword}{true})\{
+78     \textcolor{comment}{// do not log }
+79     \hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose} = \textcolor{keyword}{false}; \textcolor{comment}{// no run time log }
+80     \hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{logger::report} = \textcolor{keyword}{false}; \textcolor{comment}{// no final report}
+81   \}
+82 
+83   \textcolor{comment}{//cout << " h = " << h << " delta = " << delta << " infile = " << infile << " outfile = " << outfile <<
+       endl;}
+84 
+85   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
+86   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false})\{
+87     \textcolor{comment}{// goal is compression}
+88     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
+89     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
+90     inp >> G;
+91     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
+92     FILE* f;
+93     f = fopen(outfile.c\_str(), \textcolor{stringliteral}{"wb+"});
+94     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(f);
+95     fclose(f);
+96   \}\textcolor{keywordflow}{else}\{
+97     \textcolor{comment}{// goal is to decompess}
+98     FILE* f;
+99     f = fopen(infile.c\_str(), \textcolor{stringliteral}{"rb+"});
+100     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
+101     C.\hyperlink{classmarked__graph__compressed_a9db2d11bd63ad3d5a75e47b4023a89dd}{binary\_read}(f);
+102     fclose(f);
+103     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
+104     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
+105     oup << G;
+106   \}
+107   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
+108   \textcolor{keywordflow}{return} 0;
+109 \}
+\end{DoxyCode}

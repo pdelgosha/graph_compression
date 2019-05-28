@@ -1,6 +1,7 @@
 var searchData=
 [
   ['g',['G',['../classtime__series__encoder.html#aa40f761a56f696e78e8888e50e8f45b9',1,'time_series_encoder::G()'],['../classtime__series__decoder.html#a66abe50babd1ebe2eb5a130d4b8091f1',1,'time_series_decoder::G()']]],
+  ['gcomp_2ecpp',['gcomp.cpp',['../gcomp_8cpp.html',1,'']]],
   ['get_5fadj_5flist',['get_adj_list',['../classb__graph.html#aa81c7179b9c6cb4986c4b41e84a85799',1,'b_graph']]],
   ['get_5fdegree',['get_degree',['../classgraph.html#a593245054bf5ded344fbf304bcdc7fbe',1,'graph']]],
   ['get_5fdegree_5fsequence',['get_degree_sequence',['../classgraph.html#afdca627df7fb93a7d1d8a547f616e948',1,'graph']]],

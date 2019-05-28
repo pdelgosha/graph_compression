@@ -1,5 +1,16 @@
 # Discussions
 
+<input type="text" value="/Users/pdelgosha/Documents/Projects/Venkat/Codes/008_marked-graph-compression/report/report.md" id="myInput" readonly>
+<button onclick="myFunction()">Copy Source Location</button>
+
+<script>
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
 ## 2019-04-08 
 
 Improved MP by avoiding doing things twice. Since the commit of 3/13 (8642e59), I have made the following modifications: 
@@ -775,3 +786,7 @@ I think what I am going to do is the following (see test code 13):
 - The resulting string of zero and ones can be converted back to bitstream of size 8 (one byte) using stringstream and could be written to file. 
 
 I need to test this and add it to the project, but perhaps later. 
+
+## 2019-05-17 
+
+Trying to clean up the code to make it easy for experiments. Now, I am learning about option parsers. One option is Boost and the other is an old one called getopt. [This](https://coderwall.com/p/y3xnxg/using-getopt-vs-boost-in-c-to-handle-arguments) is a nice short comparison. I tried Boost but it gave me linker errors, maybe my boost is not installed correctly? I think I will try to use getopt. 
