@@ -2,7 +2,7 @@ var searchData=
 [
   ['main_20page',['Main Page',['../index.html',1,'']]],
   ['m',['M',['../classcolored__graph.html#ab72c568fe12f7c849ca6bffb145aec47',1,'colored_graph']]],
-  ['main',['main',['../gcomp_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;gcomp.cpp'],['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test.cpp'],['../test__mp_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_mp.cpp']]],
+  ['main',['main',['../gcomp_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;gcomp.cpp'],['../rnd__graph_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;rnd_graph.cpp'],['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test.cpp'],['../test__mp_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_mp.cpp']]],
   ['marked_5fer',['marked_ER',['../random__graph_8cpp.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp'],['../random__graph_8h.html#a643ca20d84dd6981854da9b1a8c7a6c5',1,'marked_ER(int n, double p, int ver_mark, int edge_mark):&#160;random_graph.cpp']]],
   ['marked_5fgraph',['marked_graph',['../classmarked__graph.html',1,'marked_graph'],['../classmarked__graph.html#acff011a677859b66513c42c4f7e8d531',1,'marked_graph::marked_graph()'],['../classmarked__graph.html#a83ae66845b006cfeeed677bdc2d584db',1,'marked_graph::marked_graph(int n, vector&lt; pair&lt; pair&lt; int, int &gt;, pair&lt; int, int &gt; &gt; &gt; edges, vector&lt; int &gt; vertex_marks)']]],
   ['marked_5fgraph_2ecpp',['marked_graph.cpp',['../marked__graph_8cpp.html',1,'']]],
