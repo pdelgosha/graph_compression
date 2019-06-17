@@ -26,7 +26,7 @@ int main(int argc, char ** argv){
   bool quiet = true; // becomes false if -v option is given (verbose)
   char opt;
 
-  while ((opt = getopt(argc, argv, "h:d:i:o:u")) != EOF){
+  while ((opt = getopt(argc, argv, "h:d:i:o:uv")) != EOF){
     switch(opt){
     case 'h':
       h = atoi(optarg);

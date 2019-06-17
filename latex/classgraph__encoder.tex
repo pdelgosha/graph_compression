@@ -210,16 +210,19 @@ A pair, where the first component is $\lceil N(G) / \prod_{i=1}^n a_i! \rceil$ w
 105   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
 106   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
 107 
-108   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}, 0,\hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=1\}^n a\_i!}
-109   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
-110   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
-111   \textcolor{keywordflow}{if} (N\_ans.first % prod\_a\_factorial != 0)
-112     ceil = \textcolor{keyword}{true};
-113   N\_ans.first /= prod\_a\_factorial;
-114   \textcolor{keywordflow}{if} (ceil)
-115     N\_ans.first ++;
-116   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
-117 \}
+108   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+109   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
+110   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
+111   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
+112   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
+113   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
+114   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
+115     ceil = \textcolor{keyword}{true};
+116   N\_ans.first /= N\_ans.second;
+117   \textcolor{keywordflow}{if} (ceil)
+118     N\_ans.first ++;
+119   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
+120 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}\label{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!init@{init}}

@@ -105,12 +105,15 @@ pair<mpz_class, vector<int> > graph_encoder::encode(const graph& G){
   init(G); // initialize U and beta 
   pair<mpz_class, mpz_class> N_ans  = compute_N(0,G.nu_vertices()-1,1, G);
 
-  mpz_class prod_a_factorial = prod_factorial(a, 0,a.size()-1); // \prod_{i=1}^n a_i!
+  //mpz_class prod_a_factorial = prod_factorial(a, 0,a.size()-1); // \prod_{i=1}^n a_i!
+  //if (prod_a_factorial!= N_ans.second)
+  //  cerr << " ERROR: not equal " << endl;
+  // N_ans.second = \prod_{i=1}^n a_i!
   // we need the ceiling of the ratio of N_ans.first and prod_a_factorial
   bool ceil = false; // if true, we will add one to the integer division
-  if (N_ans.first % prod_a_factorial != 0)
+  if (N_ans.first % N_ans.second != 0)
     ceil = true;
-  N_ans.first /= prod_a_factorial;
+  N_ans.first /= N_ans.second;
   if (ceil)
     N_ans.first ++;
   return pair<mpz_class, vector<int> > (N_ans.first, Stilde);

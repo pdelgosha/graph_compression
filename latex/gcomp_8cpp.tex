@@ -43,7 +43,7 @@ In order to decompress, the compressed file should be given after -\/i, the file
 26   \textcolor{keywordtype}{bool} quiet = \textcolor{keyword}{true}; \textcolor{comment}{// becomes false if -v option is given (verbose)}
 27   \textcolor{keywordtype}{char} opt;
 28 
-29   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:u"})) != EOF)\{
+29   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:uv"})) != EOF)\{
 30     \textcolor{keywordflow}{switch}(opt)\{
 31     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
 32       h = atoi(optarg);

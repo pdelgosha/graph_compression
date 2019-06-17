@@ -790,3 +790,517 @@ I need to test this and add it to the project, but perhaps later.
 ## 2019-05-17 
 
 Trying to clean up the code to make it easy for experiments. Now, I am learning about option parsers. One option is Boost and the other is an old one called getopt. [This](https://coderwall.com/p/y3xnxg/using-getopt-vs-boost-in-c-to-handle-arguments) is a nice short comparison. I tried Boost but it gave me linker errors, maybe my boost is not installed correctly? I think I will try to use getopt. 
+
+## 2019-05-29
+
+I am trying to download webgraph examples, and see how my algorithm performs in those examples. But I am facing difficulties. First of all, the webgraph java file downloaded from [maven](https://search.maven.org/search?q=g:it.unimi.dsi) site (that was mentioned in the [webgraph](http://webgraph.di.unimi.it/) site) does not work. More specifically, when I try `java -jar webgraph-3.6.1.jar`, I get the error `no main manifest attribute, in webgraph-3.6.1.jar`. I also downloaded the c++ version ([webgraph++](https://cnets.indiana.edu/groups/nan/webgraph/)) from [here](https://github.com/jacobratkiewicz/webgraph), but when I try to make it, I receive Boost errors (`fatal error: 'boost/iterator/iterator_facade.hpp' file not found`). I tried to dig through a sample graph database, for instance the eu-2005 graph which can be found in [this](http://law.di.unimi.it/webdata/eu-2005/) page. This graph has ~800k nodes and 19M edges. But the .graph file seems to be binary, and I could not parse it. 
+
+## 2019-05-30 
+
+I experimented a little bit regarding information theoretic optimality, i.e. the length of the compressed form. In order to do this, I did the following:
+
+- generated a Poisson random graph with $n = 10^6$ nodes, $d = 2$, $2001001$ edges and no marks (vertex and edge mark set size 1).
+- compressed using $h = 1$ and $d = 10$. 
+
+<details> 
+
+<summary> compression timing </summary>
+
+```
+|---Init compressed () 2019-05-30 04:21:24 PM
+|---Extact edge types () 2019-05-30 04:21:24 PM
+|---|---Extract messages () 2019-05-30 04:21:24 PM
+|---|---|---graph_message::update_message init () 2019-05-30 04:21:24 PM
+|---|---|---resizing messages () 2019-05-30 04:21:24 PM
+|---|---|---initializing messages () 2019-05-30 04:21:24 PM
+|---|---|---updating messages () 2019-05-30 04:21:25 PM
+|---|---|---* symmetrizing () 2019-05-30 04:21:25 PM
+|---|---colored_graph::init init () 2019-05-30 04:21:25 PM
+|---|---updating adj_list () 2019-05-30 04:21:25 PM
+|---|---Find deg and ver_types () 2019-05-30 04:21:25 PM
+|---Encode * vertices () 2019-05-30 04:21:26 PM
+|---Encode * edges () 2019-05-30 04:21:38 PM
+|---Encode vertex types () 2019-05-30 04:21:38 PM
+|---Extract partition graphs () 2019-05-30 04:21:51 PM
+|---Encode partition b graphs () 2019-05-30 04:21:52 PM
+|---Encode partition graphs () 2019-05-30 04:21:52 PM
+|---n () 2019-05-30 04:22:13 PM
+|---h () 2019-05-30 04:22:13 PM
+|---delta () 2019-05-30 04:22:13 PM
+|---type_mark () 2019-05-30 04:22:13 PM
+|---star_vertices () 2019-05-30 04:22:13 PM
+|---star_edges () 2019-05-30 04:22:13 PM
+|---vertex types () 2019-05-30 04:22:13 PM
+|---partition bipartite graphs () 2019-05-30 04:22:13 PM
+|---partition graphs () 2019-05-30 04:22:13 PM
+
+|---Init compressed (): 0.000640s [0.001200%]
+|---Extact edge types (): 1.418929s [2.661711%]
+|---|---Extract messages (): 0.432765s [30.499405%]
+|---|---|---graph_message::update_message init (): 0.006561s [1.516094%]
+|---|---|---resizing messages (): 0.092744s [21.430672%]
+|---|---|---initializing messages (): 0.164339s [37.974270%]
+|---|---|---updating messages (): 0.000057s [0.013142%]
+|---|---|---* symmetrizing (): 0.169049s [39.062645%]
+|---|---colored_graph::init init (): 0.171702s [12.100852%]
+|---|---updating adj_list (): 0.445012s [31.362545%]
+|---|---Find deg and ver_types (): 0.369436s [26.036285%]
+|---Encode * vertices (): 11.945025s [22.407188%]
+|---Encode * edges (): 0.000032s [0.000060%]
+|---Encode vertex types (): 13.403196s [25.142511%]
+|---Extract partition graphs (): 0.913653s [1.713885%]
+|---Encode partition b graphs (): 0.000038s [0.000072%]
+|---Encode partition graphs (): 20.758921s [38.940819%]
+|---n (): 0.000045s [0.000084%]
+|---h (): 0.000009s [0.000016%]
+|---delta (): 0.000007s [0.000014%]
+|---type_mark (): 0.000008s [0.000015%]
+|---star_vertices (): 0.000175s [0.000327%]
+|---star_edges (): 0.000043s [0.000080%]
+|---vertex types (): 0.000462s [0.000867%]
+|---partition bipartite graphs (): 0.000014s [0.000026%]
+|---partition graphs (): 1.121322s [2.103443%]
+
+real	0m53.359s
+user	0m51.498s
+sys	0m0.929s
+```
+
+</details>
+
+- compression took ~ 1 min. 
+- decompression takes ~ 3 min. 
+
+<details>
+
+<summary> decompression timing </summary>
+
+```
+|---Init () 2019-05-30 04:23:28 PM
+|---Decode * vertices () 2019-05-30 04:23:28 PM
+|---Decode * edges () 2019-05-30 04:23:41 PM
+|---Decode vertex types () 2019-05-30 04:23:41 PM
+|---Decode partition graphs () 2019-05-30 04:23:58 PM
+|---Decode partition b graphs () 2019-05-30 04:26:45 PM
+|---Construct decoded graph () 2019-05-30 04:26:45 PM
+
+|---Init (): 0.000628s [0.000306%]
+|---Decode * vertices (): 12.993829s [6.324592%]
+|---Decode * edges (): 0.000242s [0.000118%]
+|---Decode vertex types (): 17.179178s [8.361760%]
+|---Decode partition graphs (): 167.431870s [81.495468%]
+|---Decode partition b graphs (): 0.000118s [0.000057%]
+|---Construct decoded graph (): 7.836465s [3.814306%]
+
+real	3m25.487s
+user	3m15.511s
+sys	0m4.333s
+```
+
+</details>
+
+- the size of the compressed file is 4889783 bytes. 
+- I assume that the local weak limit is Poisson Galton Watson with average degree $2 \times d = 4$. Therefore, the length of compressed form must be around $m \log_2 n + s(2d) n$. Substituting with $m = 2001001$, $n = 10^6$ and $d =2$, and then dividing by 8 (to convert bits to bytes) we get 4888812 bytes, which is pretty close to the actual file size (4889783). 
+
+## 2019-06-06
+
+I realized that there is a slight problem in the above calculations, since I did not consider that everything should be either nats or bits. In fact BC entropy is in base e, not base 2, and $s(2d)$ should be normalized in the above calculations. So the correct entropy in base 2 would be $\tilde{s}(x) := s(x) \times \log_2 e = \frac{x}{2} \log_2 e - \frac{x}{2} \log_2 x$. So $\tilde{s}(4) \approx -1.114$. Hence, the expected codeword length would be $m \log_2 n + \tilde{s}(2d) n$ which now becomes 4846060 bytes, which is close to the actual 4888812 bytes, but not as close as it seemed above. Difference per vertex = 0.042752 bytes. 
+
+New test: $ n = 5 \times 10^6$, $m = 10000636$, $d = 2$, file name = `poi_5M.grp` edge size 10000636. Expected 27122010 compressed size: actual compressed file size: 27284623 bytes. Difference per vertex = 0.0325226 bytes. Compression timing ~5 min, decompression timing ~20 m. Compression ratio: ~21.8 bits / edge. 
+
+<details>
+
+<summary> Compression Timing </summary>
+
+```
+|---Init compressed () 2019-06-06 10:50:22 PM
+|---Extact edge types () 2019-06-06 10:50:22 PM
+|---|---Extract messages () 2019-06-06 10:50:22 PM
+|---|---|---graph_message::update_message init () 2019-06-06 10:50:22 PM
+|---|---|---resizing messages () 2019-06-06 10:50:22 PM
+|---|---|---initializing messages () 2019-06-06 10:50:23 PM
+|---|---|---updating messages () 2019-06-06 10:50:23 PM
+|---|---|---* symmetrizing () 2019-06-06 10:50:23 PM
+|---|---colored_graph::init init () 2019-06-06 10:50:24 PM
+|---|---updating adj_list () 2019-06-06 10:50:25 PM
+|---|---Find deg and ver_types () 2019-06-06 10:50:28 PM
+|---Encode * vertices () 2019-06-06 10:50:30 PM
+|---Encode * edges () 2019-06-06 10:51:37 PM
+|---Encode vertex types () 2019-06-06 10:51:37 PM
+|---Extract partition graphs () 2019-06-06 10:52:55 PM
+|---Encode partition b graphs () 2019-06-06 10:53:00 PM
+|---Encode partition graphs () 2019-06-06 10:53:00 PM
+|---n () 2019-06-06 10:54:53 PM
+|---h () 2019-06-06 10:54:53 PM
+|---delta () 2019-06-06 10:54:53 PM
+|---type_mark () 2019-06-06 10:54:53 PM
+|---star_vertices () 2019-06-06 10:54:53 PM
+|---star_edges () 2019-06-06 10:54:53 PM
+|---vertex types () 2019-06-06 10:54:53 PM
+|---partition bipartite graphs () 2019-06-06 10:54:53 PM
+|---partition graphs () 2019-06-06 10:54:53 PM
+
+|---Init compressed (): 0.000922s [0.000309%]
+|---Extact edge types (): 7.967569s [2.670819%]
+|---|---Extract messages (): 2.263304s [28.406450%]
+|---|---|---graph_message::update_message init (): 0.055628s [2.457841%]
+|---|---|---resizing messages (): 0.441868s [19.523134%]
+|---|---|---initializing messages (): 0.795968s [35.168438%]
+|---|---|---updating messages (): 0.000041s [0.001833%]
+|---|---|---* symmetrizing (): 0.969267s [42.825321%]
+|---|---colored_graph::init init (): 1.017033s [12.764660%]
+|---|---updating adj_list (): 2.664784s [33.445381%]
+|---|---Find deg and ver_types (): 2.022431s [25.383287%]
+|---Encode * vertices (): 67.190575s [22.523037%]
+|---Encode * edges (): 0.000030s [0.000010%]
+|---Encode vertex types (): 77.823105s [26.087179%]
+|---Extract partition graphs (): 4.915626s [1.647773%]
+|---Encode partition b graphs (): 0.000037s [0.000012%]
+|---Encode partition graphs (): 113.398972s [38.012611%]
+|---n (): 0.000040s [0.000014%]
+|---h (): 0.000007s [0.000002%]
+|---delta (): 0.000006s [0.000002%]
+|---type_mark (): 0.000007s [0.000002%]
+|---star_vertices (): 0.000021s [0.000007%]
+|---star_edges (): 0.000828s [0.000278%]
+|---vertex types (): 0.002035s [0.000682%]
+|---partition bipartite graphs (): 0.000040s [0.000013%]
+|---partition graphs (): 6.490985s [2.175851%]
+
+real	4m58.436s
+user	4m47.772s
+sys	0m5.596s
+```
+
+</details>
+
+<details>
+
+<summary> Decompression Timing </summary>
+
+```
+|---Init () 2019-06-06 10:59:11 PM
+|---Decode * vertices () 2019-06-06 10:59:11 PM
+|---Decode * edges () 2019-06-06 11:00:21 PM
+|---Decode vertex types () 2019-06-06 11:00:21 PM
+|---Decode partition graphs () 2019-06-06 11:02:12 PM
+|---Decode partition b graphs () 2019-06-06 11:20:23 PM
+|---Construct decoded graph () 2019-06-06 11:20:23 PM
+
+|---Init (): 0.001214s [0.000092%]
+|---Decode * vertices (): 70.394814s [5.362854%]
+|---Decode * edges (): 0.000148s [0.000011%]
+|---Decode vertex types (): 110.201263s [8.395408%]
+|---Decode partition graphs (): 1092.062988s [83.196091%]
+|---Decode partition b graphs (): 0.000035s [0.000003%]
+|---Construct decoded graph (): 39.932926s [3.042190%]
+
+real	21m52.152s
+user	20m46.071s
+sys	0m26.025s
+```
+
+</details>
+
+
+### Experiment on time sensitivity on the number of edges. 
+
+Fixed $n = 10000$, Poisson random graph with different values of $d$ and no marks. Fixed $h = 1$ and $d = 100$. All the files are in the folder `/Users/pdelgosha/Documents/Projects/Venkat/Codes/test/015_gcomp`
+
+
+|      d |     number of edges | file name              | Compression time     |     time per node |     time per edge ($\mu$ s) |
+| :----: | :-----------------: | :--------------------: | :------------------: | :---------------: | :-------------------------: |
+|      2 |               19914 | `poi_10k_d_02.grp`     | 0.309 s              |              30.9 |                     15.5167 |
+|      4 |               39775 | `poi_10k_d_04.grp`     | 0.457 s              |              45.7 |                     11.4896 |
+|      8 |               79922 | `poi_10k_d_08.grp`     | 0.801 s              |              80.1 |                     10.0223 |
+|     16 |              160448 | `poi_10k_d_16.grp`     | 1.859 s              |             185.9 |                     11.5863 |
+|     32 |              318659 | `poi_10k_d_32.grp`     | 5.334 s              |             533.4 |                     16.7389 |
+
+So it roughly increases semi linearly with the number of edges. 
+
+
+## 2019-06-07 
+
+I am trying to download and test the [EU-2005](http://law.di.unimi.it/webdata/eu-2005/) graph. I found [this](http://law.di.unimi.it/tutorial.php) page to learn how to use their graph format. First I need to make sure WebGraph is installed properly?
+
+I installed Maven following the instructions in [this](https://maven.apache.org/install.html) link. Note that in Mac, the correct `bash_profile` analogous is `~/.profile` where you can add to PATH and all those stuff. 
+
+I did the following which partly works: I downloaded the POM file from [here](https://search.maven.org/remotecontent?filepath=it/unimi/dsi/webgraph/3.6.1/webgraph-3.6.1.pom), changed its name to pom.xml, as well as the jar file from [here](https://search.maven.org/remotecontent?filepath=it/unimi/dsi/webgraph/3.6.1/webgraph-3.6.1.jar). Then, in the downloaded directory, entered `maven package`. It downloaded some packages and did some work, but there was a problem with one dependency: `Could not find artifact ch.qos.logback:logback-classic.jar:jar:3.6.1 in central`. 
+
+<details>
+
+<summary> details </summary>
+
+```
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------------< it.unimi.dsi:webgraph >------------------------
+[INFO] Building WebGraph 3.6.1
+[INFO] --------------------------------[ jar ]---------------------------------
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom (8.1 kB at 9.6 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom (9.2 kB at 307 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom (30 kB at 289 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom (15 kB at 529 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar (30 kB at 820 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.pom (10 kB at 464 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/24/maven-plugins-24.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/24/maven-plugins-24.pom (11 kB at 515 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/23/maven-parent-23.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/23/maven-parent-23.pom (33 kB at 795 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/13/apache-13.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/13/apache-13.pom (14 kB at 499 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.jar (43 kB at 1.5 MB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.pom (10 kB at 419 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.12.4/surefire-2.12.4.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.12.4/surefire-2.12.4.pom (14 kB at 445 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.jar (30 kB at 725 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.pom (5.8 kB at 307 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom (13 kB at 483 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/21/maven-parent-21.pom (26 kB at 599 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/10/apache-10.pom (15 kB at 569 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.jar (34 kB at 851 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic.jar/3.6.1/logback-classic.jar-3.6.1.pom
+[WARNING] The POM for ch.qos.logback:logback-classic.jar:jar:3.6.1 is missing, no dependency information available
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.1.0/fastutil-8.1.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.1.0/fastutil-8.1.0.pom (1.4 kB at 3.6 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/sux4j/4.2.0/sux4j-4.2.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/sux4j/4.2.0/sux4j-4.2.0.pom (3.3 kB at 38 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.4.2/dsiutils-2.4.2.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.4.2/dsiutils-2.4.2.pom (3.4 kB at 149 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/martiansoftware/jsap/2.1/jsap-2.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/martiansoftware/jsap/2.1/jsap-2.1.pom (815 B at 48 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/23.2-jre/guava-23.2-jre.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/23.2-jre/guava-23.2-jre.pom (5.9 kB at 295 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/23.2-jre/guava-parent-23.2-jre.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/23.2-jre/guava-parent-23.2-jre.pom (9.1 kB at 286 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom (4.8 kB at 284 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.pom (965 B at 60 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.pom (1.6 kB at 91 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.0.18/error_prone_parent-2.0.18.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.0.18/error_prone_parent-2.0.18.pom (5.0 kB at 228 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.pom (2.8 kB at 184 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.pom (2.5 kB at 121 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.14/animal-sniffer-parent-1.14.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.14/animal-sniffer-parent-1.14.pom (4.4 kB at 244 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom (24 kB at 553 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom (4.8 kB at 284 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.pom (3.8 kB at 213 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.25/slf4j-parent-1.7.25.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.25/slf4j-parent-1.7.25.pom (14 kB at 643 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.pom (13 kB at 623 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-parent/1.2.3/logback-parent-1.2.3.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-parent/1.2.3/logback-parent-1.2.3.pom (18 kB at 481 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.pom (4.2 kB at 200 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.pom (21 kB at 575 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/32/commons-parent-32.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/32/commons-parent-32.pom (53 kB at 668 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.pom (17 kB at 729 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/17/commons-parent-17.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/17/commons-parent-17.pom (31 kB at 945 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/7/apache-7.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/7/apache-7.pom (14 kB at 534 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.pom (18 kB at 706 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/5/commons-parent-5.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/5/commons-parent-5.pom (16 kB at 802 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/4/apache-4.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/4/apache-4.pom (4.5 kB at 321 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.5/commons-io-2.5.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.5/commons-io-2.5.pom (13 kB at 492 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/39/commons-parent-39.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/39/commons-parent-39.pom (62 kB at 1.1 MB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/16/apache-16.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/16/apache-16.pom (15 kB at 855 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-collections/commons-collections/20040616/commons-collections-20040616.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-collections/commons-collections/20040616/commons-collections-20040616.pom (175 B at 13 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.pom (29 kB at 897 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.pom (14 kB at 679 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/42/commons-parent-42.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/42/commons-parent-42.pom (68 kB at 1.2 MB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/18/apache-18.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/18/apache-18.pom (16 kB at 712 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-api/2.1.1/jung-api-2.1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-api/2.1.1/jung-api-2.1.1.pom (1.2 kB at 72 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-parent/2.1.1/jung-parent-2.1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-parent/2.1.1/jung-parent-2.1.1.pom (9.6 kB at 419 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/19.0/guava-19.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/19.0/guava-19.0.pom (6.8 kB at 377 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/19.0/guava-parent-19.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/19.0/guava-parent-19.0.pom (9.9 kB at 494 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-io/2.1.1/jung-io-2.1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-io/2.1.1/jung-io-2.1.1.pom (1.2 kB at 16 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-algorithms/2.1.1/jung-algorithms-2.1.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-algorithms/2.1.1/jung-algorithms-2.1.1.pom (1.1 kB at 63 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.pom (24 kB at 764 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.pom (766 B at 59 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-parent/1.3/hamcrest-parent-1.3.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-parent/1.3/hamcrest-parent-1.3.pom (2.0 kB at 164 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/emma/emma/2.1.5320/emma-2.1.5320.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/emma/emma/2.1.5320/emma-2.1.5320.pom (1.3 kB at 14 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/emma/emma_ant/2.1.5320/emma_ant-2.1.5320.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/emma/emma_ant/2.1.5320/emma_ant-2.1.5320.pom (1.3 kB at 75 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.pom (28 kB at 787 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic.jar/3.6.1/logback-classic.jar-3.6.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.1.0/fastutil-8.1.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/sux4j/4.2.0/sux4j-4.2.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.jar
+Downloading from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+Downloading from central: https://repo.maven.apache.org/maven2/commons-collections/commons-collections/20040616/commons-collections-20040616.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.6/commons-io-2.6.jar (215 kB at 382 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.4.2/dsiutils-2.4.2.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar (284 kB at 364 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/23.2-jre/guava-23.2-jre.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/sux4j/4.2.0/sux4j-4.2.0.jar (394 kB at 428 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar (33 kB at 35 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.jar (12 kB at 12 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-collections/commons-collections/20040616/commons-collections-20040616.jar (563 kB at 551 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar (8.8 kB at 8.5 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar (3.5 kB at 3.3 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar (41 kB at 37 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-api/2.1.1/jung-api-2.1.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-api/2.1.1/jung-api-2.1.1.jar (42 kB at 33 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-io/2.1.1/jung-io-2.1.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.4.2/dsiutils-2.4.2.jar (439 kB at 339 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-algorithms/2.1.1/jung-algorithms-2.1.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-io/2.1.1/jung-io-2.1.1.jar (80 kB at 49 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/com/martiansoftware/jsap/2.1/jsap-2.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/com/martiansoftware/jsap/2.1/jsap-2.1.jar (69 kB at 38 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/jung/jung-algorithms/2.1.1/jung-algorithms-2.1.1.jar (230 kB at 123 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar (45 kB at 22 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/emma/emma/2.1.5320/emma-2.1.5320.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.jar (315 kB at 132 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/emma/emma_ant/2.1.5320/emma_ant-2.1.5320.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/emma/emma_ant/2.1.5320/emma_ant-2.1.5320.jar (41 kB at 15 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar (290 kB at 88 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/emma/emma/2.1.5320/emma-2.1.5320.jar (468 kB at 142 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar
+Downloading from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar (363 kB at 92 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar (61 kB at 15 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar (2.2 MB at 535 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar (472 kB at 113 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/23.2-jre/guava-23.2-jre.jar (2.6 MB at 625 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar (500 kB at 115 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.1.0/fastutil-8.1.0.jar (19 MB at 1.9 MB/s)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.646 s
+[INFO] Finished at: 2019-06-07T16:02:00-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project webgraph: Could not resolve dependencies for project it.unimi.dsi:webgraph:jar:3.6.1: Could not find artifact ch.qos.logback:logback-classic.jar:jar:3.6.1 in central (https://repo.maven.apache.org/maven2) -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+```
+
+</details>
+
+
+I am confused and tired, will continue later!
+
+## 2019-06-10
+
+I tried to install `ch.qos.logback` separately from [here](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.2.3) but it did not help. What I did was to download both jar and pom files in a directory, and run `mvn install:install-file -Dfile=logback-classic-1.2.3.jar` (I found this from [here](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html)). It run with no error, but did not help with webgraph, it still gives logback errors. 
+
+Finally, I removed the lines related to logback from the pom file and it built with no errors. However, I am not sure if it works properly. Going to test it. 
+
+Not sure how to test it, trying to follow the instructions in [this](http://law.di.unimi.it/tutorial.php) page to first download [eu-2005](http://law.di.unimi.it/webdata/eu-2005/). First run `for ext in .properties .graph .md5sums; do wget -c http://data.law.di.unimi.it/webdata/eu-2005/eu-2005$ext; done`. Did not check md5sum for now. Run `java it.unimi.dsi.webgraph.BVGraph -o -O -L eu-2005`, but I get the error 
+
+```
+Error: Could not find or load main class it.unimi.dsi.webgraph.BVGraph
+Caused by: java.lang.ClassNotFoundException: it.unimi.dsi.webgraph.BVGraph
+```
+
+I do not know what to do. Even tried to install webgraph++, but got boost errors. I came across [this](https://groups.google.com/forum/#!topic/web-data-commons/v4n3KdPPSWU) google group page but not sure if it is helpful. 
+
+
+## 2019-06-12
+
+I realized that the boost header files that webgraph++ needs exist on my machine, but perhaps it can not find it. They are located on `/opt/local/include/boost/`. This can be given via `-I` command to `gcc`, but I do not know how to change their `Makefile` to force this. Trying to see what is the default place to find include files. I realized from [here](https://stackoverflow.com/questions/344317/where-does-gcc-look-for-c-and-c-header-files) answer by user292283 that the set of paths the compiler looks for can be obtained by `cpp -v`. I tried 
+
+```
+sudo cp -R /opt/local/include/boost/ /usr/local/include/boost
+```
+
+
+to see if now the program can see boost headers. With this, I receive other errors, which seems to be related to their code, not compiling:
+
+~~~~~~
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C asciigraph all
+g++ -I/u/jpr/old_code/webgraph -L/u/jpr/old_code/webgraph -Wall -DCONFIG_FAST -O3  -c offline_edge_iterator.cpp
+clang: warning: argument unused during compilation: '-L/u/jpr/old_code/webgraph'
+g++ -I/u/jpr/old_code/webgraph -L/u/jpr/old_code/webgraph -Wall -DCONFIG_FAST -O3  -c offline_vertex_iterator.cpp
+clang: warning: argument unused during compilation: '-L/u/jpr/old_code/webgraph'
+g++ -I/u/jpr/old_code/webgraph -L/u/jpr/old_code/webgraph -Wall -DCONFIG_FAST -O3  -c offline_graph.cpp
+clang: warning: argument unused during compilation: '-L/u/jpr/old_code/webgraph'
+offline_graph.cpp:70:4: error: use of undeclared identifier 'tie'; did you mean 'boost::tie'?
+   tie( b, e ) = result.get_edge_iterator();
+   ^~~
+   boost::tie
+/usr/local/include/boost/tuple/detail/tuple_basic.hpp:877:1: note: 'boost::tie' declared here
+tie(T0& t0, T1& t1) {
+^
+1 error generated.
+make[1]: *** [offline_graph.o] Error 1
+make: *** [libs] Error 2
+~~~~~~
+
+I am thinking that it might be the case that the pom file is only meant to install the dependencies, not necessarily the package itself? The reason is that in directory `~/.m2/repository/it/unim/dsi`, I can see folders with names `dsiutils`, `fastutil` and `sux4j`, which  surprisingly appear in the [webgraph maven page](https://search.maven.org/search?q=g:it.unimi.dsi) as well. But there is no `webgraph` page. So I created a folder named `webgraph`, inside it a folder named `3.6.1`, and I copied `webgraph-3.6.1.jar`. Lets see what happens.  Again I receive the same error that the class not found. 
+
+
+## 2019-06-13 
+
+I came across [this](https://stackoverflow.com/questions/21918454/trying-to-install-webgraph-to-run-a-class) stackoverflow page which seems to be quite relevant, because I get the same error. I realized that I do not know how to install the jar file, but rather I can use `java -cp` to specify the __class path__ which is basically the address of the desired jar file. So I copied webgraph jar file near the eu-2005 files, and tried to run `java -cp ./webgraph-3.6.1.jar it.unimi.dsi.webgraph.BVGraph -o -O -L eu-2005`, but I got the error 
+
+```
+Error: Could not find or load main class it.unimi.dsi.webgraph.BVGraph
+Caused by: java.lang.NoClassDefFoundError: it/unimi/dsi/lang/FlyweightPrototype
+```
+
+Which is very close to the one mentioned in the stackoverflow page above. 
