@@ -14,9 +14,9 @@ simple unmarked graph
 \item 
 \hyperlink{classgraph_a6aaa56b4528d2fdb8f0ecd97e04f6651}{graph} ()
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
-\hyperlink{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}{graph} (vector$<$ vector$<$ int $>$ $>$ list, vector$<$ int $>$ deg)
+\hyperlink{classgraph_aa3c320d16aa30fd79690d4acac3371cb}{graph} (const vector$<$ vector$<$ int $>$ $>$ \&list, const vector$<$ int $>$ \&deg)
 \begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
-\hyperlink{classgraph_afad830c445cfc831ee37eb755170a4a7}{graph} (vector$<$ vector$<$ int $>$ $>$ list)
+\hyperlink{classgraph_aa3102f160759896897b1eb3665f2ac13}{graph} (const vector$<$ vector$<$ int $>$ $>$ \&list)
 \begin{DoxyCompactList}\small\item\em constructor, given only the forward adjacency list \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\+\_\+forward\+\_\+list} (int v) const
 \begin{DoxyCompactList}\small\item\em returns the forward adjacency list of a given vertex \end{DoxyCompactList}\item 
@@ -66,11 +66,11 @@ default constructor
 \begin{DoxyCode}
 16 : \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n}(0) \{\}
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}\label{classgraph_a0f89acfea28c8996a0d8df4d07e6ecf2}} 
+\mbox{\Hypertarget{classgraph_aa3c320d16aa30fd79690d4acac3371cb}\label{classgraph_aa3c320d16aa30fd79690d4acac3371cb}} 
 \index{graph@{graph}!graph@{graph}}
 \index{graph@{graph}!graph@{graph}}
 \subsubsection{\texorpdfstring{graph()}{graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily graph\+::graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list,  }\item[{vector$<$ int $>$}]{deg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily graph\+::graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list,  }\item[{const vector$<$ int $>$ \&}]{deg }\end{DoxyParamCaption})}
 
 
 
@@ -85,7 +85,7 @@ This constructor takes the list of adjacent vertices and the degree sequence, an
 \end{DoxyParams}
 
 \begin{DoxyCode}
-9                                                       \{
+9                                                                       \{
 10   \hyperlink{classgraph_ac8b3474ce95c04087c312508ec1443b6}{n} = list.size();
 11   \hyperlink{classgraph_a7d6441850d586d6a99fb73df57b70362}{forward\_adj\_list} = list;
 12   \textcolor{comment}{// sorting the list}
@@ -94,11 +94,11 @@ This constructor takes the list of adjacent vertices and the degree sequence, an
 15   \hyperlink{classgraph_a0b31295672bfe37669c9eb3640977fe6}{degree\_sequence} = deg;
 16 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph_afad830c445cfc831ee37eb755170a4a7}\label{classgraph_afad830c445cfc831ee37eb755170a4a7}} 
+\mbox{\Hypertarget{classgraph_aa3102f160759896897b1eb3665f2ac13}\label{classgraph_aa3102f160759896897b1eb3665f2ac13}} 
 \index{graph@{graph}!graph@{graph}}
 \index{graph@{graph}!graph@{graph}}
 \subsubsection{\texorpdfstring{graph()}{graph()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily graph\+::graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily graph\+::graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list }\end{DoxyParamCaption})}
 
 
 

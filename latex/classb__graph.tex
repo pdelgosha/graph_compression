@@ -14,11 +14,11 @@ simple unmarked bipartite graph
 \item 
 \hyperlink{classb__graph_a83ebab7ff22a3cf19c0cf62de3f8b306}{b\+\_\+graph} ()
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
-\hyperlink{classb__graph_a147326d0a78853a1f33ca4bed03393cc}{b\+\_\+graph} (const vector$<$ vector$<$ int $>$ $>$ \&list, const vector$<$ int $>$ \&left\+\_\+deg, const vector$<$ int $>$ right\+\_\+deg)
+\hyperlink{classb__graph_a2d8ef8201dcab38f6e3a8ead01ef0448}{b\+\_\+graph} (const vector$<$ vector$<$ int $>$ $>$ \&list, const vector$<$ int $>$ \&left\+\_\+deg, const vector$<$ int $>$ \&right\+\_\+deg)
 \begin{DoxyCompactList}\small\item\em a fast constructor getting adjacency list and both left and right degree sequences \end{DoxyCompactList}\item 
-\hyperlink{classb__graph_a6032fbf9681d275260dd9a8587447e61}{b\+\_\+graph} (vector$<$ vector$<$ int $>$ $>$ list, vector$<$ int $>$ right\+\_\+deg)
+\hyperlink{classb__graph_a1d679a9d82fef1457da6bca7f8a19342}{b\+\_\+graph} (const vector$<$ vector$<$ int $>$ $>$ \&list, const vector$<$ int $>$ \&right\+\_\+deg)
 \begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
-\hyperlink{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}{b\+\_\+graph} (vector$<$ vector$<$ int $>$ $>$ list)
+\hyperlink{classb__graph_a070770b36a9d003289813dde31238263}{b\+\_\+graph} (const vector$<$ vector$<$ int $>$ $>$ \&list)
 \begin{DoxyCompactList}\small\item\em a constructor \end{DoxyCompactList}\item 
 vector$<$ int $>$ \hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\+\_\+adj\+\_\+list} (int v) const
 \begin{DoxyCompactList}\small\item\em returns the adjacency list of a given left vertex \end{DoxyCompactList}\item 
@@ -90,11 +90,11 @@ default constructor
 \begin{DoxyCode}
 33 : \hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}(0), \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np}(0) \{\}
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph_a147326d0a78853a1f33ca4bed03393cc}\label{classb__graph_a147326d0a78853a1f33ca4bed03393cc}} 
+\mbox{\Hypertarget{classb__graph_a2d8ef8201dcab38f6e3a8ead01ef0448}\label{classb__graph_a2d8ef8201dcab38f6e3a8ead01ef0448}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list,  }\item[{const vector$<$ int $>$ \&}]{left\+\_\+deg,  }\item[{const vector$<$ int $>$}]{right\+\_\+deg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list,  }\item[{const vector$<$ int $>$ \&}]{left\+\_\+deg,  }\item[{const vector$<$ int $>$ \&}]{right\+\_\+deg }\end{DoxyParamCaption})}
 
 
 
@@ -119,11 +119,11 @@ This constructor takes the adjacency list of left vertices assuming it is sorted
 9   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
 10 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph_a6032fbf9681d275260dd9a8587447e61}\label{classb__graph_a6032fbf9681d275260dd9a8587447e61}} 
+\mbox{\Hypertarget{classb__graph_a1d679a9d82fef1457da6bca7f8a19342}\label{classb__graph_a1d679a9d82fef1457da6bca7f8a19342}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list,  }\item[{vector$<$ int $>$}]{right\+\_\+deg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list,  }\item[{const vector$<$ int $>$ \&}]{right\+\_\+deg }\end{DoxyParamCaption})}
 
 
 
@@ -151,11 +151,11 @@ This constructor takes the list of adjacent vertices and the right degree sequen
 23   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
 24 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}\label{classb__graph_af94e3bc6694a312f13c9305ec5ffe4ee}} 
+\mbox{\Hypertarget{classb__graph_a070770b36a9d003289813dde31238263}\label{classb__graph_a070770b36a9d003289813dde31238263}} 
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \index{b\+\_\+graph@{b\+\_\+graph}!b\+\_\+graph@{b\+\_\+graph}}
 \subsubsection{\texorpdfstring{b\+\_\+graph()}{b\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ int $>$ $>$}]{list }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily b\+\_\+graph\+::b\+\_\+graph (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ int $>$ $>$ \&}]{list }\end{DoxyParamCaption})}
 
 
 

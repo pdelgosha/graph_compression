@@ -6,7 +6,7 @@
   \param list list[v] is the list of vertices w adjacent to v such that \f$w > v\f$. However, this list does not have to be sorted.
   \param deg deg[v] is the overall degree of the vertex (not only the ones with greater index).
 */
-graph::graph(vector<vector<int> > list, vector<int> deg){
+graph::graph(const vector<vector<int> > & list, const vector<int> & deg){
   n = list.size();
   forward_adj_list = list;
   // sorting the list
@@ -18,7 +18,7 @@ graph::graph(vector<vector<int> > list, vector<int> deg){
 /*!
   This constructor only takes the forward adjacency list and computes the degree sequence itself
  */
-graph::graph(vector<vector<int> > list)
+graph::graph(const vector<vector<int> > &list)
 {
   n = list.size();
   forward_adj_list = list;

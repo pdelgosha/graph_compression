@@ -39,7 +39,7 @@ public:
     \param left_deg left_deg[v] is the degree of the left node v
     \param right_deg right_deg[w] is the degree of the right node w
    */
-  b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> right_deg);
+  b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> &right_deg);
 
   //! a constructor
   /*!
@@ -47,14 +47,14 @@ public:
     \param list list[v] for a left node v is the list of right nodes w connected to v. This list does not have to be sorted 
     \param right_deg right_deg[v] is the degree of the right node v
   */
-  b_graph(vector<vector<int> > list, vector<int> right_deg);
+  b_graph(const vector<vector<int> > &list, const vector<int> &right_deg);
 
   //! a constructor
   /*!
     This constructor takes the list of adjacent vertices 
     \param list list[v] for a left node v is the list of right nodes w connected to v. This list does not have to be sorted 
   */
-  b_graph(vector<vector<int> > list);
+  b_graph(const vector<vector<int> > &list);
 
 
   //! returns the adjacency list of a given left vertex 

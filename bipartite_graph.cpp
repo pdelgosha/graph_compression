@@ -1,6 +1,6 @@
 #include "bipartite_graph.h"
 
-b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> right_deg)
+b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, const vector<int> &right_deg)
 {
   n = left_deg.size();
   np = right_deg.size();
@@ -9,7 +9,7 @@ b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &left_deg, 
   right_deg_seq = right_deg;
 }
 
-b_graph::b_graph(vector<vector<int> > list, vector<int> right_deg)
+b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &right_deg)
 {
   n = list.size();
   np = right_deg.size(); // the number of right nodes
@@ -23,7 +23,7 @@ b_graph::b_graph(vector<vector<int> > list, vector<int> right_deg)
   right_deg_seq = right_deg;
 }
 
-b_graph::b_graph(vector<vector<int> > list)
+b_graph::b_graph(const vector<vector<int> > &list)
 {
   // goal: finding right degrees and calling the above constructor
   // first, we find the number of right nodes
