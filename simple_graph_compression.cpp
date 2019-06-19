@@ -92,7 +92,9 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I, const g
     Sj = U.sum(j+1);
     rtj = compute_product(St-1, (St - Sj)/2, 2);
     //cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;
+    logger::item_start("simple_N_mul");
     Nij = Nit * rtj + lit * Ntj ;
+    logger::item_stop("simple_N_mul");
     lij = lit * ltj;
     //cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;
     return pair<mpz_class, mpz_class> (Nij, lij);

@@ -6,6 +6,7 @@
 #include "simple_graph.h"
 #include "compression_helper.h"
 #include "fenwick.h"
+#include "logger.h"
 
 //! Encodes a simple unmarked graph
 /*!

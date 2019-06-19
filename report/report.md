@@ -1,3 +1,8 @@
+# To-Do
+
+- [ ] constructors for bipartite graph are problematic, i.e. in some places a vector is passed instead of its reference. 
+- [ ] The same problem holds for simple graphs. 
+
 # Discussions
 
 <input type="text" value="/Users/pdelgosha/Documents/Projects/Venkat/Codes/008_marked-graph-compression/report/report.md" id="myInput" readonly>

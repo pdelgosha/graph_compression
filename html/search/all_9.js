@@ -6,5 +6,9 @@ var searchData=
   ['init_5ffreq',['init_freq',['../classtime__series__encoder.html#af4b8988acb10fe076be59302e47084be',1,'time_series_encoder']]],
   ['init_5fg',['init_G',['../classtime__series__encoder.html#a90eb54134d6af2ab2cca36ee13956470',1,'time_series_encoder']]],
   ['is_5fstar_5fmessage',['is_star_message',['../classgraph__message.html#a55ff5531a0043106369e84a7bc45e22d',1,'graph_message']]],
-  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#ad41163e970530c7e45878d299f0dc961',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#ac36f6c2430af6fa4d20584569859bb59',1,'marked_graph_encoder::is_star_vertex()'],['../classmarked__graph__decoder.html#a5c5391206cf2965b8513248e505ba48f',1,'marked_graph_decoder::is_star_vertex()']]]
+  ['is_5fstar_5fvertex',['is_star_vertex',['../classcolored__graph.html#ad41163e970530c7e45878d299f0dc961',1,'colored_graph::is_star_vertex()'],['../classmarked__graph__encoder.html#ac36f6c2430af6fa4d20584569859bb59',1,'marked_graph_encoder::is_star_vertex()'],['../classmarked__graph__decoder.html#a5c5391206cf2965b8513248e505ba48f',1,'marked_graph_decoder::is_star_vertex()']]],
+  ['item_5fduration',['item_duration',['../classlogger.html#a8097637b66086185096030c96a1189ba',1,'logger']]],
+  ['item_5flast_5fstart',['item_last_start',['../classlogger.html#af21bf7ca37e55cf225b282ab2f312c95',1,'logger']]],
+  ['item_5fstart',['item_start',['../classlogger.html#a7e21ec6ad2d40cfc2c6a383521b5641a',1,'logger']]],
+  ['item_5fstop',['item_stop',['../classlogger.html#a6775fee9681c437fc9c05d71cfbbe4a2',1,'logger']]]
 ];

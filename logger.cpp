@@ -7,6 +7,10 @@ ostream& logger::verbose_stream = cout;
 bool logger::report = true;
 ostream& logger::report_stream = cout; 
 
+map<string, float> logger::item_duration;
+map<string, high_resolution_clock::time_point> logger::item_last_start;
+
+
 log_entry::log_entry(string name_, string description_, int depth_){
   name = name_;
   description = description_;
@@ -93,6 +97,10 @@ void logger::log(){
     s +=  logs[i].name + " (" + logs[i].description + "): " + to_string(dur[i]) + "s " + "[" + to_string(block_percent[i]) + "\%]" + " ";
     report_stream << s << endl;
   }
+
+  report_stream << endl << " itemized log " << endl;
+  for (map<string, float>::iterator it = item_duration.begin(); it!= item_duration.end(); it++)
+    report_stream << it->first << " : " << it->second << endl;
 }
 
 //void __attribute__ ((constructor)) prog_start(){
@@ -112,4 +120,15 @@ void logger::stop(){
   if (report)
     log();
 
+}
+
+
+void logger::item_start(string name){
+  item_last_start[name] = high_resolution_clock::now();
+}
+
+void logger::item_stop(string name){
+  high_resolution_clock::time_point t = high_resolution_clock::now();
+  duration<float> diff = t - item_last_start[name];
+  item_duration[name] += diff.count();
 }

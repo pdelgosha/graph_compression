@@ -6,6 +6,7 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
+#include <map>
 
 using namespace std;
 using namespace std::chrono;
@@ -32,6 +33,10 @@ class logger{
   static void start();
   static void stop();
   static void log();
+  static void item_start(string name);
+  static void item_stop(string name);
+  static map<string, float> item_duration; //<! maps the title of each item to its duration
+  static map<string, high_resolution_clock::time_point> item_last_start; //!< the last time each item was started
 };
 
 

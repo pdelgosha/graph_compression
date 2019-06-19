@@ -176,12 +176,14 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 92     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
 93     rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St-1, (St - Sj)/2, 2);
 94     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
-95     Nij = Nit * rtj + lit * Ntj ;
-96     lij = lit * ltj;
-97     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
-98     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-99   \}
-100 \}
+95     \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"simple\_N\_mul"});
+96     Nij = Nit * rtj + lit * Ntj ;
+97     \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"simple\_N\_mul"});
+98     lij = lit * ltj;
+99     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
+100     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+101   \}
+102 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}\label{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!encode@{encode}}
@@ -203,26 +205,26 @@ A pair, where the first component is $\lceil N(G) / \prod_{i=1}^n a_i! \rceil$ w
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-102                                                                  \{
-103   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
-104     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
+104                                                                  \{
+105   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
+106     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
        graph "};
-105   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
-106   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
-107 
-108   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
-109   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
-110   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
-111   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
-112   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
-113   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
-114   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
-115     ceil = \textcolor{keyword}{true};
-116   N\_ans.first /= N\_ans.second;
-117   \textcolor{keywordflow}{if} (ceil)
-118     N\_ans.first ++;
-119   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
-120 \}
+107   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
+108   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
+109 
+110   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+111   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
+112   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
+113   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
+114   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
+115   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
+116   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
+117     ceil = \textcolor{keyword}{true};
+118   N\_ans.first /= N\_ans.second;
+119   \textcolor{keywordflow}{if} (ceil)
+120     N\_ans.first ++;
+121   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
+122 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}\label{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!init@{init}}
