@@ -7,10 +7,11 @@
 #include <stdio.h>
 #include <bitset>
 #include <sstream>
+#include "logger.h"
 
 using namespace std;
 
-//! This function computes the product of consecutive integers separated by a given iteration 
+//! This function computes the product of consecutive integers separated by a given iteration. This is the old version which uses standard recursion. 
 /*!
   \param N The first term in the product
   \param k the number of terms in the product
@@ -18,6 +19,15 @@ using namespace std;
   \return the product N \f$ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) \f$
 */
 //mpz_class compute_product(mpz_class N, mpz_class k, int s);
+mpz_class compute_product_old(int N, int k, int s);
+
+//! This function computes the product of consecutive integers separated by a given iteration. This is the new version which implements recursion via stack. 
+/*!
+  \param N The first term in the product
+  \param k the number of terms in the product
+  \param s the iteration
+  \return the product N \f$ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) \f$
+*/
 mpz_class compute_product(int N, int k, int s);
 
 

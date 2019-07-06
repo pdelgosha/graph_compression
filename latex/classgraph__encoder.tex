@@ -136,54 +136,60 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 56     \textcolor{keywordflow}{if} (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] != x.size())
 57       cerr << \textcolor{stringliteral}{" DANGER! beta[i] is not the same as x.size()!!"} << endl;
 58     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<x.size();k++)\{
-59       zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
+59       \textcolor{comment}{//logger::item\_start("simple\_cp\_1");}
+60       zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k, 1); \textcolor{comment}{// we are zero based
        here, so instead of -k + 1, we have -k}
-60       zi += li * zik;
-61       lik = (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k) * \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]]; \textcolor{comment}{// we are zero based here, so instead of -k + 1, we have -k}
-62       li *= lik;
-63       \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]] --;
-64       \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k], -1);
-65     \}
-66     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << zi << " l " << li << endl;}
-67     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(zi, li);
-68   \}\textcolor{keywordflow}{else}\{
-69     \textcolor{keywordtype}{int} t = (i+j) / 2;
-70     mpz\_class Nit, lit; \textcolor{comment}{// \(\backslash\)f$N\_\{i,t\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:t]\}\(\backslash\)f$}
-71     mpz\_class Ntj, ltj; \textcolor{comment}{// \(\backslash\)f$N\_\{t+1,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[t+1:j]\}\(\backslash\)f$}
-72     mpz\_class Nij, lij; \textcolor{comment}{// \(\backslash\)f$N\_\{i,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:j]\}\(\backslash\)f$}
-73     \textcolor{keywordtype}{int} St, Sj; \textcolor{comment}{// \(\backslash\)f$S\_\{t+1\}\(\backslash\)f$ and \(\backslash\)f$S\_\{j+1\}\(\backslash\)f$}
-74     mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$r\_\{[t+1:j]\}\(\backslash\)f$}
-75 
-76     pair<mpz\_class, mpz\_class> return\_left = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(i,t, 2*I, G); \textcolor{comment}{// calling for the interval
+61       \textcolor{comment}{//logger::item\_stop("simple\_cp\_1");}
+62       \textcolor{comment}{//logger::item\_start("simple\_ar");}
+63       zi += li * zik;
+64       lik = (\hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[i] - k) * \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]]; \textcolor{comment}{// we are zero based here, so instead of -k + 1, we have -k}
+65       li *= lik;
+66       \textcolor{comment}{//logger::item\_stop("simple\_ar");}
+67       \hyperlink{classgraph__encoder_a40880adecfd63fb86e94b4b0fc3f6bc2}{beta}[x[k]] --;
+68       \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k], -1);
+69     \}
+70     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << zi << " l " << li << endl;}
+71     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(zi, li);
+72   \}\textcolor{keywordflow}{else}\{
+73     \textcolor{keywordtype}{int} t = (i+j) / 2;
+74     mpz\_class Nit, lit; \textcolor{comment}{// \(\backslash\)f$N\_\{i,t\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:t]\}\(\backslash\)f$}
+75     mpz\_class Ntj, ltj; \textcolor{comment}{// \(\backslash\)f$N\_\{t+1,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[t+1:j]\}\(\backslash\)f$}
+76     mpz\_class Nij, lij; \textcolor{comment}{// \(\backslash\)f$N\_\{i,j\}\(\backslash\)f$ and \(\backslash\)f$l\_\{[i:j]\}\(\backslash\)f$}
+77     \textcolor{keywordtype}{int} St, Sj; \textcolor{comment}{// \(\backslash\)f$S\_\{t+1\}\(\backslash\)f$ and \(\backslash\)f$S\_\{j+1\}\(\backslash\)f$}
+78     mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$r\_\{[t+1:j]\}\(\backslash\)f$}
+79 
+80     pair<mpz\_class, mpz\_class> return\_left = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(i,t, 2*I, G); \textcolor{comment}{// calling for the interval
        i,t}
-77     Nit = return\_left.first;
-78     lit = return\_left.second;
-79     St = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
-80 
-81     \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})\{\textcolor{comment}{// we should save the midpoint sum St}
-82       \textcolor{comment}{//cerr << " i " << i << " j " << j << " I " << I << " storing St " << St << endl;}
-83       \textcolor{keywordflow}{if} (I >= \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() )\{
-84         cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::compute\_N index I is out of range.  I= "} << I << \textcolor{stringliteral}{" Stilde.size()= 
+81     Nit = return\_left.first;
+82     lit = return\_left.second;
+83     St = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
+84 
+85     \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})\{\textcolor{comment}{// we should save the midpoint sum St}
+86       \textcolor{comment}{//cerr << " i " << i << " j " << j << " I " << I << " storing St " << St << endl;}
+87       \textcolor{keywordflow}{if} (I >= \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() )\{
+88         cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::compute\_N index I is out of range.  I= "} << I << \textcolor{stringliteral}{" Stilde.size()= 
       "}<< \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}.size() <<  \textcolor{stringliteral}{" i= "} << i << \textcolor{stringliteral}{" j= "} << j << \textcolor{stringliteral}{" logn2= "} << \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2} << endl;
-85       \}
-86       \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St;
-87     \}
-88 
-89     pair<mpz\_class, mpz\_class> return\_right = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(t+1, j, 2*I + 1, G); \textcolor{comment}{// calling for the
+89       \}
+90       \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St;
+91     \}
+92 
+93     pair<mpz\_class, mpz\_class> return\_right = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(t+1, j, 2*I + 1, G); \textcolor{comment}{// calling for the
        interval t+1, j}
-90     Ntj = return\_right.first;
-91     ltj = return\_right.second;
-92     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-93     rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St-1, (St - Sj)/2, 2);
-94     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
-95     \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"simple\_N\_mul"});
-96     Nij = Nit * rtj + lit * Ntj ;
-97     \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"simple\_N\_mul"});
-98     lij = lit * ltj;
-99     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
-100     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-101   \}
-102 \}
+94     Ntj = return\_right.first;
+95     ltj = return\_right.second;
+96     Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
+97     \textcolor{comment}{//logger::item\_start("simple\_cp"); }
+98     rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St-1, (St - Sj)/2, 2);
+99     \textcolor{comment}{//logger::item\_stop("simple\_cp");}
+100     \textcolor{comment}{//cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;}
+101     \textcolor{comment}{//logger::item\_start("simple\_ar");}
+102     Nij = Nit * rtj + lit * Ntj ;
+103     lij = lit * ltj;
+104     \textcolor{comment}{//logger::item\_stop("simple\_ar");}
+105     \textcolor{comment}{//cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;}
+106     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+107   \}
+108 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}\label{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!encode@{encode}}
@@ -205,26 +211,28 @@ A pair, where the first component is $\lceil N(G) / \prod_{i=1}^n a_i! \rceil$ w
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-104                                                                  \{
-105   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
-106     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
+110                                                                  \{
+111   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
+112     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
        graph "};
-107   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
-108   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
-109 
-110   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
-111   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
-112   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
-113   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
-114   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
-115   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
-116   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
-117     ceil = \textcolor{keyword}{true};
-118   N\_ans.first /= N\_ans.second;
-119   \textcolor{keywordflow}{if} (ceil)
-120     N\_ans.first ++;
-121   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
-122 \}
+113   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// initialize U and beta }
+114   pair<mpz\_class, mpz\_class> N\_ans  = \hyperlink{classgraph__encoder_ae7273c47d6dab8367daa5ee6a9cdbc72}{compute\_N}(0,G.\hyperlink{classgraph_a70a6e0e4e0a874ab122405abd38f83cd}{nu\_vertices}()-1,1, G);
+115 
+116   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+117   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
+118   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
+119   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
+120   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
+121   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
+122   \textcolor{comment}{//logger::item\_start("simple\_ar");}
+123   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
+124     ceil = \textcolor{keyword}{true};
+125   N\_ans.first /= N\_ans.second;
+126   \textcolor{keywordflow}{if} (ceil)
+127     N\_ans.first ++;
+128   \textcolor{comment}{//logger::item\_stop("simple\_ar");}
+129   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
+130 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}\label{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!init@{init}}

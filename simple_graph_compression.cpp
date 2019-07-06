@@ -56,10 +56,14 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I, const g
     if (beta[i] != x.size())
       cerr << " DANGER! beta[i] is not the same as x.size()!!" << endl;
     for (int k=0;k<x.size();k++){
+      //logger::item_start("simple_cp_1");
       zik = compute_product(U.sum(1+x[k]), beta[i] - k, 1); // we are zero based here, so instead of -k + 1, we have -k
+      //logger::item_stop("simple_cp_1");
+      //logger::item_start("simple_ar");
       zi += li * zik;
       lik = (beta[i] - k) * beta[x[k]]; // we are zero based here, so instead of -k + 1, we have -k
       li *= lik;
+      //logger::item_stop("simple_ar");
       beta[x[k]] --;
       U.add(x[k], -1);
     }
@@ -90,12 +94,14 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N(int i, int j, int I, const g
     Ntj = return_right.first;
     ltj = return_right.second;
     Sj = U.sum(j+1);
+    //logger::item_start("simple_cp"); 
     rtj = compute_product(St-1, (St - Sj)/2, 2);
+    //logger::item_stop("simple_cp");
     //cerr << "( " << i << " , " << j << ") St " << St << " Sj " << Sj << " rtj " << rtj << endl;
-    logger::item_start("simple_N_mul");
+    //logger::item_start("simple_ar");
     Nij = Nit * rtj + lit * Ntj ;
-    logger::item_stop("simple_N_mul");
     lij = lit * ltj;
+    //logger::item_stop("simple_ar");
     //cerr << " returning (" << i << " , " << j << ") N " << Nij << " l " << lij << endl;
     return pair<mpz_class, mpz_class> (Nij, lij);
   }
@@ -113,11 +119,13 @@ pair<mpz_class, vector<int> > graph_encoder::encode(const graph& G){
   // N_ans.second = \prod_{i=1}^n a_i!
   // we need the ceiling of the ratio of N_ans.first and prod_a_factorial
   bool ceil = false; // if true, we will add one to the integer division
+  //logger::item_start("simple_ar");
   if (N_ans.first % N_ans.second != 0)
     ceil = true;
   N_ans.first /= N_ans.second;
   if (ceil)
     N_ans.first ++;
+  //logger::item_stop("simple_ar");
   return pair<mpz_class, vector<int> > (N_ans.first, Stilde);
 }
 

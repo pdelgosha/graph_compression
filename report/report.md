@@ -1,7 +1,7 @@
 # To-Do
 
-- [ ] constructors for bipartite graph are problematic, i.e. in some places a vector is passed instead of its reference. 
-- [ ] The same problem holds for simple graphs. 
+- [x] constructors for bipartite graph are problematic, i.e. in some places a vector is passed instead of its reference. 
+- [x] The same problem holds for simple graphs. 
 
 # Discussions
 
@@ -1309,3 +1309,267 @@ Caused by: java.lang.NoClassDefFoundError: it/unimi/dsi/lang/FlyweightPrototype
 ```
 
 Which is very close to the one mentioned in the stackoverflow page above. 
+
+
+## 2019-06-20
+
+Apparently there is a python implementation as well, see [here](https://github.com/mapio/py-web-graph). I want to try and see if this works. Downloaded and installed using `python setup.py build` and `python setup.py install` in python 2 (`source activate py27`). Also, tried to install jython, did that, but when I use `jython` in command line, I receive `command not found`. [This](https://pythonhosted.org/pyWebGraph/) page is the documentation of pywebgraph, and in [this](https://pythonhosted.org/pyWebGraph/quickstart/console.html) page, we have the console documentation. I followed [these](https://wiki.python.org/jython/InstallationInstructions) instructions for jython.
+
+Also, [this](http://www.cs.rpi.edu/~slotag/classes/FA16/slides/lec17-comp.pdf) slides is perhaps useful. It apparently has some numbers both in terms of time and also compression rate. The slides are from [this](http://www.cs.rpi.edu/~slotag/classes/FA16/index.html) course whose material might be useful. 
+
+## 2019-06-20
+
+I think I know how to resolve issue with Jython: I should add `~/jython2.7.0/bin` to PATH. Know I have jython, but I do not know where `pywebgraph.console` is. 
+
+I found some perhaps useful stuff from the comments regarding one of the issues of pywebgraph that can be found [here](https://github.com/mapio/py-web-graph/issues/2). Let me copy the instructions (the last one by massimo.santini):
+
+```
+I don't think your pahts are ok. Here is what to do to setup a minimalistic 
+test environment:
+
+# prepare a dir to store all the needed jar
+mkdir lib
+
+# download and extract dependencies
+curl -s http://webgraph.dsi.unimi.it/webgraph-deps.tar.gz | tar -C lib -zxvf -
+
+# download and extract webgraph jar
+curl -s http://webgraph.dsi.unimi.it/webgraph-3.0.7-bin.tar.gz | tar 
+--strip-components 1 -C lib -zxvf - webgraph-3.0.7/webgraph-3.0.7.jar
+
+# set the classpath
+export CLASSPATH=$(ls -1 lib/*.jar | paste -d : -s )
+
+# download the pywebgraph package
+svn export  http://py-web-graph.googlecode.com/svn/trunk src
+
+# set the python path for jython
+export JYTHONPATH=src
+
+# download a sample dataset
+for ext in graph properties; do
+    curl -s http://data.law.dsi.unimi.it/webdata/cnr-2000/cnr-2000.$ext > example.$ext
+done
+
+# recompute the offsets (see http://law.dsi.unimi.it/tutorial.php)
+java it.unimi.dsi.webgraph.BVGraph -o -O -L example
+
+# launch the console 
+jython -m pywebgraph.console
+
+# here is the output i got following 
+http://packages.python.org/pyWebGraph/quickstart/console.html example
+# >> graph example
+# >> pwn
+# #0 
+# >> ls
+# 0: #1 
+# 1: #4 
+# 2: #8 
+# 3: #219 
+# 4: #220
+
+I'm closing the bugrep again. If you still have issues, please submit a 
+complete and precise set of steps needed to replicate it.
+
+Hope this helps,
+    Massimo
+```
+
+I needed to modify the commands, since the website is `webgraph.di.unimo.it` not `webgraph.dsi.unimo.it`, and also the package version seems to have changed (now is 3.6.2). Here are the commands I run. I also had to put a dash for `paste` in the fourth line to force read from standard input (`paste -d : -s -`). I could not run `svn export  http://py-web-graph.googlecode.com/svn/trunk src`, apparently the repo does not exist. I know pywebgraph is on github, but I do not know what they mean by `src`, there is no folder with such name on github.
+
+```
+mkdir lib
+curl -s http://webgraph.di.unimi.it/webgraph-deps.tar.gz | tar -C lib -zxvf -
+curl -s http://webgraph.di.unimi.it/webgraph-3.6.2-bin.tar.gz | tar --strip-components 1 -C lib -zxvf - webgraph-3.6.2/webgraph-3.6.2.jar
+export CLASSPATH=$(ls -1 lib/*.jar | paste -d : -s -)
+for ext in graph properties; do
+    curl -s http://data.law.dsi.unimi.it/webdata/cnr-2000/cnr-2000.$ext > example.$ext
+done
+java it.unimi.dsi.webgraph.BVGraph -o -O -L example
+```
+
+After the last line, I get 
+
+```
+Exception in thread "main" java.io.IOException: The property file for example does not contain a graphclass property
+	at it.unimi.dsi.webgraph.ImmutableGraph.load(ImmutableGraph.java:646)
+	at it.unimi.dsi.webgraph.ImmutableGraph.loadOffline(ImmutableGraph.java:532)
+	at it.unimi.dsi.webgraph.BVGraph.main(BVGraph.java:2404)
+```
+
+But it seems that setting `CLASSPATH` to include all jar files using the ls piped with paste is indeed making a difference in that at least I do not get the error webgraph does not exist. 
+
+I realized what the problem is, the graph data website is not correct! The correct URL is `data.law.di.unimi.it`. I also realized that the usage of `curl` was not appropriate, use `wget` instead.  trying with this, let me include the full code:
+
+```
+mkdir lib
+curl -s http://webgraph.di.unimi.it/webgraph-deps.tar.gz | tar -C lib -zxvf -
+curl -s http://webgraph.di.unimi.it/webgraph-3.6.2-bin.tar.gz | tar --strip-components 1 -C lib -zxvf - webgraph-3.6.2/webgraph-3.6.2.jar
+export CLASSPATH=$(ls -1 lib/*.jar | paste -d : -s -)
+for ext in graph properties; do
+    wget -c http://data.law.di.unimi.it/webdata/cnr-2000/cnr-2000.$ext -O example.$ext
+done
+java it.unimi.dsi.webgraph.BVGraph -o -O -L example
+```
+
+
+With this, I yet receive other errors:
+
+```
+Exception in thread "main" java.io.IOException: Missing format version information
+	at it.unimi.dsi.webgraph.BVGraph.loadInternal(BVGraph.java:1448)
+	at it.unimi.dsi.webgraph.BVGraph.load(BVGraph.java:1305)
+	at it.unimi.dsi.webgraph.BVGraph.loadOffline(BVGraph.java:1404)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at it.unimi.dsi.webgraph.ImmutableGraph.load(ImmutableGraph.java:667)
+	at it.unimi.dsi.webgraph.ImmutableGraph.loadOffline(ImmutableGraph.java:532)
+	at it.unimi.dsi.webgraph.BVGraph.main(BVGraph.java:2404)
+```
+
+I could not even solve it by replacing webgraph version 3.6.2 by 3.6.1. 
+
+
+## 2019-07-01 
+
+I am planning to contact the people in charge of the webgraph algorithm to see why I can not run it. Before that, I want to make sure if the problem is replicable. 
+
+In the process of doing this, I realized that surprisingly it worked without an error. The following bash code was used and generated a `.obl` and a `.offsets` file:
+
+```
+#!/bin/bash
+
+echo "Download dependencies? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+    curl -s http://webgraph.di.unimi.it/webgraph-deps.tar.gz | tar -C lib -zxvf -
+fi
+
+echo "Download webgraph 3.6.2? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+    curl -s http://webgraph.di.unimi.it/webgraph-3.6.2-bin.tar.gz | tar --strip-components 1 -C lib -zxvf - webgraph-3.6.2/webgraph-3.6.2.jar
+fi
+
+export CLASSPATH=$(ls -1 lib/*.jar | paste -d : -s -)
+
+echo "Download graph? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+    for ext in graph properties; do
+        wget -c http://data.law.di.unimi.it/webdata/cnr-2000/cnr-2000.$ext -O example.$ext
+    done
+fi
+java it.unimi.dsi.webgraph.BVGraph -o -O -L example
+
+```
+
+The output is 
+
+```
+17:23:31.068 [main] INFO it.unimi.dsi.webgraph.BVGraph - Writing offsets...
+17:23:31.374 [main] INFO it.unimi.dsi.webgraph.BVGraph - Completed.
+17:23:31.381 [main] INFO it.unimi.dsi.webgraph.BVGraph - Elapsed: 305ms [325,557 items, 1,070,911.18 items/s, 933.78 ns/item]
+```
+
+I need to see where to go from this point. Anyways, I sent a mail to Vigna and asked him on how about the simplest way to obtain adjacency list of a graph. 
+
+## 2019-07-02
+
+After sending an email to Vigna, he responded by simply saying `The Javadoc contains detailed instructions on how to convert to, say, adjacency lists in text format.` He is actually right, I realized that in [this](http://webgraph.di.unimi.it/docs/) documentation, there is a section called _Exporting to other formats_ which suggests the following command to convert graph to different ascii modes: 
+
+```
+java -server it.unimi.dsi.webgraph.ASCIIGraph sourcebasename dest
+```
+
+converts to a format where the first line is the number of vertices, and each line is adjacent nodes to each vertex. Also, 
+
+```
+java -server it.unimi.dsi.webgraph.ArcListASCIIGraph sourcebasename dest
+```
+
+converts to a format where each line is an edge by representing endpoints of that edge. In both formats, each edge is represented twice. 
+
+Also, as seen [here](http://webgraph.di.unimi.it/docs/it/unimi/dsi/webgraph/ASCIIGraph.html), in order to convert an ascii file to bvgraph mode, one can run 
+
+```
+java it.unimi.dsi.webgraph.BVGraph -g ASCIIGraph example bvexample
+```
+
+here, the ascii file name is `example.graph-txt`. 
+
+
+Running my code on `eu-2005` and comparing with webgraph, I did not get good results. 
+
+<details>
+<summary> details </summary>
+
+```
+|---Init compressed () 2019-07-02 06:58:41 PM
+|---Extact edge types () 2019-07-02 06:58:41 PM
+|---|---Extract messages () 2019-07-02 06:58:41 PM
+|---|---|---graph_message::update_message init () 2019-07-02 06:58:41 PM
+|---|---|---resizing messages () 2019-07-02 06:58:41 PM
+|---|---|---initializing messages () 2019-07-02 06:58:42 PM
+|---|---|---updating messages () 2019-07-02 06:58:42 PM
+|---|---|---* symmetrizing () 2019-07-02 06:58:42 PM
+|---|---colored_graph::init init () 2019-07-02 06:58:42 PM
+|---|---updating adj_list () 2019-07-02 06:58:42 PM
+|---|---Find deg and ver_types () 2019-07-02 06:58:43 PM
+|---Encode * vertices () 2019-07-02 06:58:43 PM
+|---Encode * edges () 2019-07-02 06:58:53 PM
+|---Encode vertex types () 2019-07-02 06:58:53 PM
+|---Extract partition graphs () 2019-07-02 06:59:04 PM
+|---Encode partition b graphs () 2019-07-02 06:59:04 PM
+|---Encode partition graphs () 2019-07-02 06:59:04 PM
+|---n () 2019-07-02 07:02:45 PM
+|---h () 2019-07-02 07:02:45 PM
+|---delta () 2019-07-02 07:02:45 PM
+|---type_mark () 2019-07-02 07:02:45 PM
+|---star_vertices () 2019-07-02 07:02:45 PM
+|---star_edges () 2019-07-02 07:02:45 PM
+|---vertex types () 2019-07-02 07:02:45 PM
+|---partition bipartite graphs () 2019-07-02 07:02:45 PM
+|---partition graphs () 2019-07-02 07:02:45 PM
+
+|---Init compressed (): 0.000656s [0.000255%]
+|---Extact edge types (): 1.642491s [0.639807%]
+|---|---Extract messages (): 0.637405s [38.807240%]
+|---|---|---graph_message::update_message init (): 0.008738s [1.370852%]
+|---|---|---resizing messages (): 0.092300s [14.480634%]
+|---|---|---initializing messages (): 0.372523s [58.443665%]
+|---|---|---updating messages (): 0.000054s [0.008477%]
+|---|---|---* symmetrizing (): 0.163748s [25.689741%]
+|---|---colored_graph::init init (): 0.161631s [9.840630%]
+|---|---updating adj_list (): 0.366205s [22.295702%]
+|---|---Find deg and ver_types (): 0.477234s [29.055532%]
+|---Encode * vertices (): 9.578348s [3.731099%]
+|---Encode * edges (): 0.000034s [0.000013%]
+|---Encode vertex types (): 10.881365s [4.238669%]
+|---Extract partition graphs (): 0.836821s [0.325971%]
+|---Encode partition b graphs (): 0.000036s [0.000014%]
+|---Encode partition graphs (): 221.084335s [86.120018%]
+|---n (): 0.000071s [0.000027%]
+|---h (): 0.000020s [0.000008%]
+|---delta (): 0.000028s [0.000011%]
+|---type_mark (): 0.000016s [0.000006%]
+|---star_vertices (): 0.000345s [0.000134%]
+|---star_edges (): 0.000024s [0.000009%]
+|---vertex types (): 0.001534s [0.000598%]
+|---partition bipartite graphs (): 0.000016s [0.000006%]
+|---partition graphs (): 1.262120s [0.491640%]
+
+ itemized log
+simple_N_mul : 15.9349
+
+real	4m16.758s
+user	4m3.295s
+sys	0m3.950s
+```
+
+</details>
+
+It took around 4 minutes to compress with parameters h = 1 and delta = 20. The size of the compressed file is 15439870 bytes, while the webgraph compressed form seems to be 10 times less than this. 

@@ -17,7 +17,7 @@ b_graph::b_graph(const vector<vector<int> > &list, const vector<int> &right_deg)
   left_deg_seq.resize(n);
   // sorting the list
   for (int v=0; v<n; v++){
-    sort(adj_list[v].begin(), adj_list[v].end());
+     sort(adj_list[v].begin(), adj_list[v].end()); 
     left_deg_seq[v] = adj_list[v].size();
   }
   right_deg_seq = right_deg;
@@ -33,7 +33,7 @@ b_graph::b_graph(const vector<vector<int> > &list)
   left_deg_seq.resize(n);
   for (int v=0;v<adj_list.size();v++){
     //cerr << " v " << v << endl;
-    sort(adj_list[v].begin(), adj_list[v].end());
+     sort(adj_list[v].begin(), adj_list[v].end()); 
     if (adj_list[v].size() > 0 and adj_list[v][adj_list[v].size()-1] > np)
       np = adj_list[v][adj_list[v].size()-1];
     left_deg_seq[v] = adj_list[v].size();

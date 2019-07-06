@@ -140,7 +140,9 @@ void random_graph_test()
   //cout << G << endl;
 }
 int main(){
-  logger::start();
+  cout << compute_product(100,100,1) << endl;
+  cout << compute_product_old(100,100,1) << endl;
+  //logger::start();
   //marked_graph G;
   //ifstream inp("star_graph.txt");
   //inp >> G;
@@ -148,9 +150,9 @@ int main(){
   //M.update_messages();
   //graph_test();
   //time_series_compression_test();
-  marked_graph_encoder_test();
+  //marked_graph_encoder_test();
   //random_graph_test();
-  logger::stop();
+  //logger::stop();
   return 0;
   // vector<vector<int> > list = {{}, {}, {}};
 

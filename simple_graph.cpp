@@ -10,7 +10,7 @@ graph::graph(const vector<vector<int> > & list, const vector<int> & deg){
   n = list.size();
   forward_adj_list = list;
   // sorting the list
-  for (int v=0; v<n; v++)
+  for (int v=0; v<n; v++) 
     sort(forward_adj_list[v].begin(), forward_adj_list[v].end());
   degree_sequence = deg;
 }

@@ -8,5 +8,6 @@ var searchData=
   ['compression_5fhelper_2eh',['compression_helper.h',['../compression__helper_8h.html',1,'']]],
   ['compute_5fn',['compute_N',['../classb__graph__encoder.html#a3ffcfb945e8563d01e683fc5e5127d6d',1,'b_graph_encoder::compute_N()'],['../classgraph__encoder.html#ae7273c47d6dab8367daa5ee6a9cdbc72',1,'graph_encoder::compute_N()']]],
   ['compute_5fproduct',['compute_product',['../compression__helper_8cpp.html#ae2afb43aabe50f7d42aae8f82b5a35f4',1,'compute_product(int N, int k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#ae2afb43aabe50f7d42aae8f82b5a35f4',1,'compute_product(int N, int k, int s):&#160;compression_helper.cpp']]],
+  ['compute_5fproduct_5fold',['compute_product_old',['../compression__helper_8cpp.html#a4e5c8137a0b072800c7a8f0a80978468',1,'compute_product_old(int N, int k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a4e5c8137a0b072800c7a8f0a80978468',1,'compute_product_old(int N, int k, int s):&#160;compression_helper.cpp']]],
   ['current_5fdepth',['current_depth',['../classlogger.html#a9d29b49bd318a719a8e85b59eac54fe0',1,'logger']]]
 ];

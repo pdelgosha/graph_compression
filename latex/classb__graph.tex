@@ -145,7 +145,7 @@ This constructor takes the list of adjacent vertices and the right degree sequen
 17   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
 18   \textcolor{comment}{// sorting the list}
 19   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n}; v++)\{
-20     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+20      sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end()); 
 21     \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}[v] = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size();
 22   \}
 23   \hyperlink{classb__graph_ae4c875ed6a583a78f38dfe958f20fad5}{right\_deg\_seq} = right\_deg;
@@ -177,7 +177,7 @@ This constructor takes the list of adjacent vertices
 33   \hyperlink{classb__graph_a311d16462dbb10c47b3a6c80a42139d9}{left\_deg\_seq}.resize(\hyperlink{classb__graph_a9e211d40c1799bc9b125de472ff06642}{n});
 34   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}.size();v++)\{
 35     \textcolor{comment}{//cerr << " v " << v << endl;}
-36     sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end());
+36      sort(\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].begin(), \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].end()); 
 37     \textcolor{keywordflow}{if} (\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size() > 0 and \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1] > 
       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np})
 38       \hyperlink{classb__graph_acffdd5f20329515eb6ec17ad24f1ca64}{np} = \hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v][\hyperlink{classb__graph_a2a89d2e8f958270952aab2e8769b7342}{adj\_list}[v].size()-1];
