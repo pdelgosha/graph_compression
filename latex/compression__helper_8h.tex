@@ -184,7 +184,7 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 47   \}
 48 
 49   \textcolor{keywordflow}{if} (k == 2)
-50     \textcolor{keywordflow}{return} N * (N-s);
+50     \textcolor{keywordflow}{return} mpz\_class(N) * mpz\_class(N-s);
 51 
 52   \textcolor{keywordtype}{int} k\_bits = 0; \textcolor{comment}{// roughly , the number of bits in k, the depth of the stack during run time}
 53   \textcolor{keywordtype}{int} k\_copy = k;
@@ -229,7 +229,7 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 91         call\_pointer --; \textcolor{comment}{// pop this element}
 92       \}
 93       \textcolor{keywordflow}{if} (k\_now == 2)\{
-94         return\_stack[return\_pointer++] = N\_now * (N\_now - s);
+94         return\_stack[return\_pointer++] = mpz\_class(N\_now) * mpz\_class(N\_now - s);
 95         call\_pointer --; 
 96       \}
 97       \textcolor{keywordflow}{if} (k\_now > 2)\{
@@ -293,7 +293,7 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 19   \}
 20 
 21   \textcolor{keywordflow}{if} (k == 2)
-22     \textcolor{keywordflow}{return} N * (N-s);
+22     \textcolor{keywordflow}{return} mpz\_class(N) * mpz\_class(N-s);
 23   \textcolor{comment}{// we do this by dividing the terms into two parts}
 24   \textcolor{keywordtype}{int} m = k / 2; \textcolor{comment}{// the middle point}
 25   mpz\_class left, right; \textcolor{comment}{// each of the half products }

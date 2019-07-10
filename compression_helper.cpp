@@ -19,7 +19,7 @@ mpz_class compute_product_old(int N, int k, int s){
   }
 
   if (k == 2)
-    return N * (N-s);
+    return mpz_class(N) * mpz_class(N-s);
   // we do this by dividing the terms into two parts
   int m = k / 2; // the middle point
   mpz_class left, right; // each of the half products 
@@ -47,7 +47,7 @@ mpz_class compute_product(int N, int k, int s){
   }
 
   if (k == 2)
-    return N * (N-s);
+    return mpz_class(N) * mpz_class(N-s);
 
   int k_bits = 0; // roughly , the number of bits in k, the depth of the stack during run time
   int k_copy = k;
@@ -91,7 +91,7 @@ mpz_class compute_product(int N, int k, int s){
         call_pointer --; // pop this element
       }
       if (k_now == 2){
-        return_stack[return_pointer++] = N_now * (N_now - s);
+        return_stack[return_pointer++] = mpz_class(N_now) * mpz_class(N_now - s);
         call_pointer --; 
       }
       if (k_now > 2){
