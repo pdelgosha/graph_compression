@@ -1,6 +1,12 @@
 #include "compression_helper.h"
 
 
+namespace helper_vars{
+  mpz_class mul_1, mul_2; //!< helper variables in order to avoid initialization
+  vector<mpz_class> return_stack;
+};
+
+
 mpz_class compute_product_old(int N, int k, int s){
   //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
 
@@ -46,8 +52,11 @@ mpz_class compute_product(int N, int k, int s){
     return 0;
   }
 
-  if (k == 2)
-    return mpz_class(N) * mpz_class(N-s);
+  if (k == 2){
+    helper_vars::mul_1 = N;
+    helper_vars::mul_2 = N - s;
+    return helper_vars::mul_1 * helper_vars::mul_2;
+  }
 
   int k_bits = 0; // roughly , the number of bits in k, the depth of the stack during run time
   int k_copy = k;
@@ -60,7 +69,8 @@ mpz_class compute_product(int N, int k, int s){
   //cout << " 2 * k_bits " << 2 * k_bits << endl; 
   int call_pointer = 0; // size of the call pointer, so the top index is call_pointer - 1
   vector<int> status_stack(2 * k_bits); // 0: first meet, 1: to return 
-  vector<mpz_class> return_stack(2 * k_bits);
+  //vector<mpz_class> return_stack(2 * k_bits);
+  helper_vars::return_stack.resize(2*k_bits);
   int return_pointer = 0;
 
   call_stack[call_pointer] = pair<int, int> (N, k);
@@ -80,18 +90,20 @@ mpz_class compute_product(int N, int k, int s){
     //}
     if (status_stack[call_pointer-1] == 1){ // we should multiply two top elements in the return stack
       // to collect two top elements in return stack and multiply them
-      return_stack[return_pointer-2] = return_stack[return_pointer-2] * return_stack[return_pointer-1];
+      helper_vars::return_stack[return_pointer-2] = helper_vars::return_stack[return_pointer-2] * helper_vars::return_stack[return_pointer-1];
       return_pointer--; // remove two items, add one item
       call_pointer --;
     }else{
       //cout << " else " << endl;
       if(k_now == 1){
         // to return the corresponding N
-        return_stack[return_pointer++] = call_stack[call_pointer-1].first;
+        helper_vars::return_stack[return_pointer++] = call_stack[call_pointer-1].first;
         call_pointer --; // pop this element
       }
       if (k_now == 2){
-        return_stack[return_pointer++] = mpz_class(N_now) * mpz_class(N_now - s);
+        helper_vars::mul_1 = N_now;
+        helper_vars::mul_2 = N_now - s;
+        helper_vars::return_stack[return_pointer++] = helper_vars::mul_1 * helper_vars::mul_2;
         call_pointer --; 
       }
       if (k_now > 2){
@@ -109,8 +121,98 @@ mpz_class compute_product(int N, int k, int s){
   if (return_pointer != 1){
     cerr << " return pointer is not zero";
   }
-  return return_stack[0]; // the top element remaining in the return stack 
+  return helper_vars::return_stack[0]; // the top element remaining in the return stack 
 }
+
+
+/*
+void compute_product_void(int N, int k, int s){
+  if (k==1)
+    return N;
+  if (k == 0) // TO CHECK because there are no terms to compute product
+    return 1;
+
+  if (k < 0){
+    cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
+    return 1;
+  }
+  if (N - (k-1) * s <= 0){ // the terms go negative
+    //cerr << " WARNING: compute_product called for N - (k-1) * s <= 0 " << endl;
+    return 0;
+  }
+
+  if (k == 2){
+    helper_vars::mul_1 = N;
+    helper_vars::mul_2 = N - s;
+    return helper_vars::mul_1 * helper_vars::mul_2;
+  }
+
+  int k_bits = 0; // roughly , the number of bits in k, the depth of the stack during run time
+  int k_copy = k;
+  while (k_copy > 0){
+    k_bits ++;
+    k_copy >>= 1;
+  }
+  k_bits += 2; 
+  vector<pair<int, int> > call_stack(2 * k_bits);
+  //cout << " 2 * k_bits " << 2 * k_bits << endl; 
+  int call_pointer = 0; // size of the call pointer, so the top index is call_pointer - 1
+  vector<int> status_stack(2 * k_bits); // 0: first meet, 1: to return 
+  //vector<mpz_class> return_stack(2 * k_bits);
+  helper_vars::return_stack.resize(2*k_bits);
+  int return_pointer = 0;
+
+  call_stack[call_pointer] = pair<int, int> (N, k);
+  status_stack[call_pointer] = 0;
+  call_pointer ++;
+
+  int m;
+  int N_now, k_now; // N and k for the current stack element
+  
+  while (call_pointer > 0){
+    N_now = call_stack[call_pointer-1].first;
+    k_now = call_stack[call_pointer-1].second;
+    //cout << "call_pointer = " << call_pointer << " N = " << N_now << " k = " << k_now << " stat = " << status_stack[call_pointer-1] << endl;
+    //cout << " the whole stack " << endl;
+    //for (int i=0;i<call_pointer; i++){
+    //  cout << call_stack[i].first << " , " << call_stack[i].second << " " << status_stack[i] << endl;
+    //}
+    if (status_stack[call_pointer-1] == 1){ // we should multiply two top elements in the return stack
+      // to collect two top elements in return stack and multiply them
+      helper_vars::return_stack[return_pointer-2] = helper_vars::return_stack[return_pointer-2] * helper_vars::return_stack[return_pointer-1];
+      return_pointer--; // remove two items, add one item
+      call_pointer --;
+    }else{
+      //cout << " else " << endl;
+      if(k_now == 1){
+        // to return the corresponding N
+        helper_vars::return_stack[return_pointer++] = call_stack[call_pointer-1].first;
+        call_pointer --; // pop this element
+      }
+      if (k_now == 2){
+        helper_vars::mul_1 = N_now;
+        helper_vars::mul_2 = N_now - s;
+        helper_vars::return_stack[return_pointer++] = helper_vars::mul_1 * helper_vars::mul_2;
+        call_pointer --; 
+      }
+      if (k_now > 2){
+        m = k_now / 2;
+        status_stack[call_pointer-1] = 1; // when return to this state, we know that we should aggregate 
+        call_stack[call_pointer] = pair<int, int>(N_now, m);
+        status_stack[call_pointer] = 0; // just added
+        call_stack[call_pointer+1] = pair<int, int>(N_now - m*s, k_now - m );
+        status_stack[call_pointer+1]  = 0;
+        call_pointer += 2; 
+      }
+    }
+  }
+  // make sure there is exactly one element in return stack
+  if (return_pointer != 1){
+    cerr << " return pointer is not zero";
+  }
+  //return helper_vars::return_stack[0]; // the top element remaining in the return stack 
+}
+*/
 
 // this is another way of implementing compute_product, which splits the terms even / odd. But I did not see much improvement with this!
 /*

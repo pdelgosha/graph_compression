@@ -57,6 +57,7 @@ class graph_encoder{
    */
 
   pair<mpz_class, mpz_class> compute_N(int i, int j, int I, const graph& G);
+  pair<mpz_class, mpz_class> compute_N_new(const graph& G);
 
   //! Encodes the graph and returns N together with Stilde
   /*!
