@@ -1,11 +1,8 @@
 #include "compression_helper.h"
 
-
-namespace helper_vars{
-  mpz_class mul_1, mul_2; //!< helper variables in order to avoid initialization
-  vector<mpz_class> return_stack;
-};
-
+mpz_class helper_vars::mul_1;
+mpz_class helper_vars::mul_2;
+vector<mpz_class> helper_vars::return_stack;
 
 mpz_class compute_product_old(int N, int k, int s){
   //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
@@ -38,6 +35,7 @@ mpz_class compute_product_old(int N, int k, int s){
 }
 
 mpz_class compute_product(int N, int k, int s){
+
   if (k==1)
     return N;
   if (k == 0) // TO CHECK because there are no terms to compute product
@@ -125,26 +123,39 @@ mpz_class compute_product(int N, int k, int s){
 }
 
 
-/*
+
 void compute_product_void(int N, int k, int s){
-  if (k==1)
-    return N;
-  if (k == 0) // TO CHECK because there are no terms to compute product
-    return 1;
+  //cerr << " void called N " << N << " k " << k << " s " << s << endl;
+  if (k==1){
+    helper_vars::return_stack.resize(1);
+    helper_vars::return_stack[0] = N;//return N;
+    return;
+  }
+  if (k == 0){ // TO CHECK because there are no terms to compute product
+    helper_vars::return_stack.resize(1);
+    helper_vars::return_stack[0] = 1;//return 1;
+    return;
+  }
 
   if (k < 0){
     cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
-    return 1;
+    helper_vars::return_stack.resize(1);
+    helper_vars::return_stack[0] = 1;//return 1;
+    return;
   }
   if (N - (k-1) * s <= 0){ // the terms go negative
     //cerr << " WARNING: compute_product called for N - (k-1) * s <= 0 " << endl;
-    return 0;
+    helper_vars::return_stack.resize(1);
+    helper_vars::return_stack[0] = 0; //return 0;
+    return;
   }
 
   if (k == 2){
     helper_vars::mul_1 = N;
     helper_vars::mul_2 = N - s;
-    return helper_vars::mul_1 * helper_vars::mul_2;
+    helper_vars::return_stack.resize(1);
+    helper_vars::return_stack[0] = helper_vars::mul_1 * helper_vars::mul_2;
+    return;
   }
 
   int k_bits = 0; // roughly , the number of bits in k, the depth of the stack during run time
@@ -212,7 +223,7 @@ void compute_product_void(int N, int k, int s){
   }
   //return helper_vars::return_stack[0]; // the top element remaining in the return stack 
 }
-*/
+
 
 // this is another way of implementing compute_product, which splits the terms even / odd. But I did not see much improvement with this!
 /*

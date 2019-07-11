@@ -164,8 +164,9 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
       // cerr << endl;
 
       for (int k=0;k<gamma.size();k++){
-        zik = compute_product(U.sum(1+gamma[k]), beta[i] - k, 1); // we are zero based here, so instead of -k + 1, we have -k
-        //zik = helper_vars::return_stack[0];
+        compute_product_void(U.sum(1+gamma[k]), beta[i] - k, 1); // we are zero based here, so instead of -k + 1, we have -k
+        zik = helper_vars::return_stack[0];
+        //cerr << " zik " << zik << endl;
         return_stack[return_size].first += return_stack[return_size].second * zik;
         lik = (beta[i] - k) * beta[gamma[k]]; // we are zero based here, so instead of -k + 1, we have -k
         //cerr << " lik " << lik << endl;
@@ -206,8 +207,8 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
       if (status == 2){
         // both are returned, and results can be accessed by the top two elements in return stack
         Sj = U.sum(j+1);
-        rtj = compute_product(St_stack[call_size-1]-1, (St_stack[call_size-1] - Sj)/2, 2);
-        //rtj = helper_vars::return_stack[0];
+        compute_product_void(St_stack[call_size-1]-1, (St_stack[call_size-1] - Sj)/2, 2);
+        rtj = helper_vars::return_stack[0];
         //cerr << " rtj " << rtj << endl;
         //Nij = Nit * rtj + lit * Ntj ;
         Nit_rtj = return_stack[return_size-2].first * rtj;

@@ -10,5 +10,6 @@ var searchData=
   ['compute_5fn_5fnew',['compute_N_new',['../classgraph__encoder.html#aeab221523400ec73da6146fdbbd11274',1,'graph_encoder']]],
   ['compute_5fproduct',['compute_product',['../compression__helper_8cpp.html#ae2afb43aabe50f7d42aae8f82b5a35f4',1,'compute_product(int N, int k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#ae2afb43aabe50f7d42aae8f82b5a35f4',1,'compute_product(int N, int k, int s):&#160;compression_helper.cpp']]],
   ['compute_5fproduct_5fold',['compute_product_old',['../compression__helper_8cpp.html#a4e5c8137a0b072800c7a8f0a80978468',1,'compute_product_old(int N, int k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a4e5c8137a0b072800c7a8f0a80978468',1,'compute_product_old(int N, int k, int s):&#160;compression_helper.cpp']]],
+  ['compute_5fproduct_5fvoid',['compute_product_void',['../compression__helper_8cpp.html#af75857c18e9c23bb114e12642aa8c067',1,'compute_product_void(int N, int k, int s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#af75857c18e9c23bb114e12642aa8c067',1,'compute_product_void(int N, int k, int s):&#160;compression_helper.cpp']]],
   ['current_5fdepth',['current_depth',['../classlogger.html#a9d29b49bd318a719a8e85b59eac54fe0',1,'logger']]]
 ];

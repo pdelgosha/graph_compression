@@ -11,6 +11,11 @@
 
 using namespace std;
 
+namespace helper_vars{
+  extern mpz_class mul_1, mul_2; //!< helper variables in order to avoid initialization
+  extern vector<mpz_class> return_stack;
+};
+
 
 //! This function computes the product of consecutive integers separated by a given iteration. This is the old version which uses standard recursion. 
 /*!
@@ -30,7 +35,7 @@ mpz_class compute_product_old(int N, int k, int s);
   \return the product N \f$ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) \f$
 */
 mpz_class compute_product(int N, int k, int s);
-//void compute_product_void(int N, int k, int s);
+void compute_product_void(int N, int k, int s);
 
 
 //! computes the binomial coefficient n choose m = n! / m! (n-m)!
