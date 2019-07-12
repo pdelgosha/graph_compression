@@ -56,155 +56,155 @@ read the compressed data from a binary file
 \end{DoxyParams}
 
 \begin{DoxyCode}
-167                                                 \{
-168   \hyperlink{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}{clear}(); \textcolor{comment}{// to make sure nothing is stored inside me before reading}
-169 
-170   \textcolor{comment}{// ==== read n, h, delta}
-171   fread(&\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, 1, f);
-172   fread(&\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, 1, f);
-173   fread(&\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, 1, f);
-174 
-175   \textcolor{keywordtype}{int} int\_in; \textcolor{comment}{// auxiliary input integer}
-176   \textcolor{comment}{// ===== read type\_mark}
-177   \textcolor{comment}{// read number of types}
-178   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-179   \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.resize(int\_in);
-180   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();i++)\{
-181     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-182     \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[i] = int\_in;
-183   \}
+182                                                 \{
+183   \hyperlink{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}{clear}(); \textcolor{comment}{// to make sure nothing is stored inside me before reading}
 184 
-185   \textcolor{comment}{// ==== read star\_vertices}
-186   \textcolor{comment}{// first, read the frequency.}
-187   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first = vector<int>(2); \textcolor{comment}{// frequency,}
-188   \textcolor{comment}{// we read its first index which is number of zeros, and the second is n - the first.}
-189   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-190   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0] = int\_in;
-191   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[1] = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n} - int\_in;
-192 
-193   \textcolor{comment}{// the integer representation which is star\_vertices.second}
-194   mpz\_inp\_raw(\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.second.get\_mpz\_t(), f);
-195 
-196   \textcolor{comment}{// ==== read star\_edges}
-197 
-198   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log\_2 n), which
+185   \textcolor{comment}{// ==== read n, h, delta}
+186   fread(&\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, 1, f);
+187   fread(&\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, 1, f);
+188   fread(&\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, 1, f);
+189 
+190   \textcolor{keywordtype}{int} int\_in; \textcolor{comment}{// auxiliary input integer}
+191   \textcolor{comment}{// ===== read type\_mark}
+192   \textcolor{comment}{// read number of types}
+193   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+194   \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.resize(int\_in);
+195   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();i++)\{
+196     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+197     \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[i] = int\_in;
+198   \}
+199 
+200   \textcolor{comment}{// ==== read star\_vertices}
+201   \textcolor{comment}{// first, read the frequency.}
+202   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first = vector<int>(2); \textcolor{comment}{// frequency,}
+203   \textcolor{comment}{// we read its first index which is number of zeros, and the second is n - the first.}
+204   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+205   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0] = int\_in;
+206   \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[1] = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n} - int\_in;
+207 
+208   \textcolor{comment}{// the integer representation which is star\_vertices.second}
+209   mpz\_inp\_raw(\hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.second.get\_mpz\_t(), f);
+210 
+211   \textcolor{comment}{// ==== read star\_edges}
+212 
+213   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log\_2 n), which
        is the number of bits to encode vertices}
-199   \textcolor{keywordtype}{int} n\_copy = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
-200   \textcolor{keywordflow}{while}(n\_copy > 0)\{
-201     n\_copy >>= 1;
-202     log2n ++;
-203   \}
-204   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
-205 
-206   \textcolor{keywordtype}{string} s;
-207   stringstream ss;
-208   \textcolor{keywordtype}{int} sp; \textcolor{comment}{// the index of the string s we are studying }
-209 
-210   \textcolor{comment}{// read the size of star\_edges}
-211 
-212   \textcolor{keywordtype}{int} star\_edges\_size;
-213   fread(&star\_edges\_size, \textcolor{keyword}{sizeof} star\_edges\_size, 1, f);
-214 
-215   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// edge marks}
-216   \textcolor{keywordtype}{int} nu\_star\_vertices = \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[1];
-217 
-218   vector<vector<int> > V; \textcolor{comment}{// the list of star edges corresponding to each mark pair}
-219   V.resize(nu\_star\_vertices);
+214   \textcolor{keywordtype}{int} n\_copy = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
+215   \textcolor{keywordflow}{while}(n\_copy > 0)\{
+216     n\_copy >>= 1;
+217     log2n ++;
+218   \}
+219   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
 220 
-221   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<star\_edges\_size;i++)\{
-222     fread(&x, \textcolor{keyword}{sizeof} x, 1, f);
-223     fread(&xp, \textcolor{keyword}{sizeof} xp, 1, f);
-224   
-225     s = \hyperlink{compression__helper_8cpp_a40e8dcbc036f96b28e003e882c4890b7}{bit\_string\_read}(f);
-226     \textcolor{comment}{//cerr << " read  x " << x << " xp " << xp << " s " << s << endl;}
-227     sp = 0; \textcolor{comment}{// starting from zero }
-228     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<nu\_star\_vertices; j++)\{ \textcolor{comment}{// }
-229       V[j].clear(); \textcolor{comment}{// make it fresh}
-230       \textcolor{keywordflow}{while}(s[sp++] == \textcolor{charliteral}{'1'})\{ \textcolor{comment}{// there is still some edge connected to this vertex }
-231         \textcolor{comment}{// read log2n many bits}
-232         \textcolor{comment}{//cerr << " s subtr " << s.substr(sp, log2n);}
-233         \textcolor{comment}{//ss << s.substr(sp, log2n);}
-234         B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
-235         \textcolor{comment}{//cerr << " ss " << ss.str() << endl;}
-236         sp += log2n;
-237         \textcolor{comment}{//ss >> B;}
-238 
-239         V[j].push\_back(B.to\_ulong());
-240       \}
-241       \textcolor{comment}{//for (int k=0;k<V[j].size();k++)}
-242       \textcolor{comment}{//  cerr << " , " << V[j][k];}
-243       \textcolor{comment}{//cerr << endl;}
-244     \}
-245 
-246 
-247     \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
-248   \}
-249 
-250   \textcolor{comment}{// ==== read vertex\_types}
-251 
-252   \textcolor{comment}{// read ver\_type\_list}
-253   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f); \textcolor{comment}{// size of ver\_type\_list}
-254   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.resize(int\_in);
-255   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();i++)\{
-256     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f); \textcolor{comment}{// size of ver\_type\_list[i]}
-257     \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(int\_in);
-258     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();j++)\{
-259       fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-260       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][j] = int\_in;
-261     \}
-262   \}
-263 
-264   \textcolor{comment}{// ver\_types}
-265   \textcolor{comment}{// ver\_types.first}
-266   \textcolor{comment}{// ver\_types.first.size()}
-267   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-268   \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.resize(int\_in);
-269   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size();i++)\{
-270     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-271     \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first[i] = int\_in;
-272   \}
-273   \textcolor{comment}{// ver\_types.second}
-274   mpz\_inp\_raw(\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.second.get\_mpz\_t(), f);
-275 
-276 
-277   \textcolor{comment}{// === part bgraphs}
-278   \textcolor{keywordtype}{int} part\_bgraph\_size;
-279   \textcolor{keywordtype}{int} t, tp;
-280   pair<int, int> type; 
-281   mpz\_class part\_g; 
-282   fread(&part\_bgraph\_size, \textcolor{keyword}{sizeof} part\_bgraph\_size, 1, f);
-283   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<part\_bgraph\_size;i++)\{
-284     \textcolor{comment}{// read t, t'}
-285     fread(&t, \textcolor{keyword}{sizeof} t, 1, f);
-286     fread(&tp, \textcolor{keyword}{sizeof} tp, 1, f);
-287     type = pair<int, int>(t, tp);
-288     mpz\_inp\_raw(part\_g.get\_mpz\_t(), f);
-289     \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.insert(pair<pair<int, int>, mpz\_class> (type, part\_g));
-290   \}
+221   \textcolor{keywordtype}{string} s;
+222   stringstream ss;
+223   \textcolor{keywordtype}{int} sp; \textcolor{comment}{// the index of the string s we are studying }
+224 
+225   \textcolor{comment}{// read the size of star\_edges}
+226 
+227   \textcolor{keywordtype}{int} star\_edges\_size;
+228   fread(&star\_edges\_size, \textcolor{keyword}{sizeof} star\_edges\_size, 1, f);
+229 
+230   \textcolor{keywordtype}{int} x, xp; \textcolor{comment}{// edge marks}
+231   \textcolor{keywordtype}{int} nu\_star\_vertices = \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[1];
+232 
+233   vector<vector<int> > V; \textcolor{comment}{// the list of star edges corresponding to each mark pair}
+234   V.resize(nu\_star\_vertices);
+235 
+236   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<star\_edges\_size;i++)\{
+237     fread(&x, \textcolor{keyword}{sizeof} x, 1, f);
+238     fread(&xp, \textcolor{keyword}{sizeof} xp, 1, f);
+239   
+240     s = \hyperlink{compression__helper_8cpp_a40e8dcbc036f96b28e003e882c4890b7}{bit\_string\_read}(f);
+241     \textcolor{comment}{//cerr << " read  x " << x << " xp " << xp << " s " << s << endl;}
+242     sp = 0; \textcolor{comment}{// starting from zero }
+243     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<nu\_star\_vertices; j++)\{ \textcolor{comment}{// }
+244       V[j].clear(); \textcolor{comment}{// make it fresh}
+245       \textcolor{keywordflow}{while}(s[sp++] == \textcolor{charliteral}{'1'})\{ \textcolor{comment}{// there is still some edge connected to this vertex }
+246         \textcolor{comment}{// read log2n many bits}
+247         \textcolor{comment}{//cerr << " s subtr " << s.substr(sp, log2n);}
+248         \textcolor{comment}{//ss << s.substr(sp, log2n);}
+249         B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
+250         \textcolor{comment}{//cerr << " ss " << ss.str() << endl;}
+251         sp += log2n;
+252         \textcolor{comment}{//ss >> B;}
+253 
+254         V[j].push\_back(B.to\_ulong());
+255       \}
+256       \textcolor{comment}{//for (int k=0;k<V[j].size();k++)}
+257       \textcolor{comment}{//  cerr << " , " << V[j][k];}
+258       \textcolor{comment}{//cerr << endl;}
+259     \}
+260 
+261 
+262     \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
+263   \}
+264 
+265   \textcolor{comment}{// ==== read vertex\_types}
+266 
+267   \textcolor{comment}{// read ver\_type\_list}
+268   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f); \textcolor{comment}{// size of ver\_type\_list}
+269   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.resize(int\_in);
+270   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();i++)\{
+271     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f); \textcolor{comment}{// size of ver\_type\_list[i]}
+272     \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(int\_in);
+273     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();j++)\{
+274       fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+275       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][j] = int\_in;
+276     \}
+277   \}
+278 
+279   \textcolor{comment}{// ver\_types}
+280   \textcolor{comment}{// ver\_types.first}
+281   \textcolor{comment}{// ver\_types.first.size()}
+282   fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+283   \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.resize(int\_in);
+284   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size();i++)\{
+285     fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+286     \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first[i] = int\_in;
+287   \}
+288   \textcolor{comment}{// ver\_types.second}
+289   mpz\_inp\_raw(\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.second.get\_mpz\_t(), f);
+290 
 291 
-292   \textcolor{comment}{// === part graphs}
-293 
-294   \textcolor{comment}{// first, the size}
-295   \textcolor{keywordtype}{int} part\_graph\_size;
-296   \textcolor{keywordtype}{int} v\_size;
-297   vector<int> W; 
-298   fread(&part\_graph\_size, \textcolor{keyword}{sizeof} part\_graph\_size, 1, f);
-299   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<part\_graph\_size; i++)\{
-300     \textcolor{comment}{// first, the type}
-301     fread(&t, \textcolor{keyword}{sizeof} t, 1, f);
-302     \textcolor{comment}{// then, the mpz part}
+292   \textcolor{comment}{// === part bgraphs}
+293   \textcolor{keywordtype}{int} part\_bgraph\_size;
+294   \textcolor{keywordtype}{int} t, tp;
+295   pair<int, int> type; 
+296   mpz\_class part\_g; 
+297   fread(&part\_bgraph\_size, \textcolor{keyword}{sizeof} part\_bgraph\_size, 1, f);
+298   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<part\_bgraph\_size;i++)\{
+299     \textcolor{comment}{// read t, t'}
+300     fread(&t, \textcolor{keyword}{sizeof} t, 1, f);
+301     fread(&tp, \textcolor{keyword}{sizeof} tp, 1, f);
+302     type = pair<int, int>(t, tp);
 303     mpz\_inp\_raw(part\_g.get\_mpz\_t(), f);
-304     \textcolor{comment}{// then, the vector size}
-305     fread(&v\_size, \textcolor{keyword}{sizeof} v\_size, 1, f);
-306     W.resize(v\_size);
-307     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<v\_size; j++)\{
-308       fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
-309       W[j] = int\_in;
-310     \}
-311     \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.insert(pair<\textcolor{keywordtype}{int}, pair< mpz\_class, vector< int > > >(t, pair<mpz\_class, vector<int>
+304     \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.insert(pair<pair<int, int>, mpz\_class> (type, part\_g));
+305   \}
+306 
+307   \textcolor{comment}{// === part graphs}
+308 
+309   \textcolor{comment}{// first, the size}
+310   \textcolor{keywordtype}{int} part\_graph\_size;
+311   \textcolor{keywordtype}{int} v\_size;
+312   vector<int> W; 
+313   fread(&part\_graph\_size, \textcolor{keyword}{sizeof} part\_graph\_size, 1, f);
+314   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<part\_graph\_size; i++)\{
+315     \textcolor{comment}{// first, the type}
+316     fread(&t, \textcolor{keyword}{sizeof} t, 1, f);
+317     \textcolor{comment}{// then, the mpz part}
+318     mpz\_inp\_raw(part\_g.get\_mpz\_t(), f);
+319     \textcolor{comment}{// then, the vector size}
+320     fread(&v\_size, \textcolor{keyword}{sizeof} v\_size, 1, f);
+321     W.resize(v\_size);
+322     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<v\_size; j++)\{
+323       fread(&int\_in, \textcolor{keyword}{sizeof} int\_in, 1, f);
+324       W[j] = int\_in;
+325     \}
+326     \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.insert(pair<\textcolor{keywordtype}{int}, pair< mpz\_class, vector< int > > >(t, pair<mpz\_class, vector<int>
        >(part\_g, W)));
-312   \}
-313 \}
+327   \}
+328 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}\label{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!binary\+\_\+write@{binary\+\_\+write}}
@@ -224,156 +224,171 @@ writes the compressed data to a binary file
 
 \begin{DoxyCode}
 15                                                  \{
-16   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-17   \textcolor{comment}{// ==== write n, h, delta}
-18   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"n"}, \textcolor{stringliteral}{""});
-19   fwrite(&\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, 1, f);
-20   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"h"}, \textcolor{stringliteral}{""});
-21   fwrite(&\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, 1, f);
-22   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"delta"}, \textcolor{stringliteral}{""});
-23   fwrite(&\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, 1, f);
-24 
-25   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"type\_mark"}, \textcolor{stringliteral}{""});
-26   \textcolor{keywordtype}{int} int\_out; \textcolor{comment}{// auxiliary variable, an integer value to be written to output}
-27   \textcolor{comment}{// ==== write type\_mark}
-28   \textcolor{comment}{// first, the number of types}
-29   int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();
-30   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-31   \textcolor{comment}{// then, marks one by one}
-32   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();i++)\{
-33     int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[i];
-34     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-35   \}
-36 
-37   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"star\_vertices"}, \textcolor{stringliteral}{""});
-38   \textcolor{comment}{// ==== write star vertices}
-39   \textcolor{comment}{// first, write the frequency, note that star\_vertices.first is a vector of size 2 with the first entry
+16 
+17   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+18   \textcolor{comment}{// ==== write n, h, delta}
+19   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"n"}, \textcolor{stringliteral}{""});
+20   fwrite(&\hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n}, 1, f);
+21   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"h"}, \textcolor{stringliteral}{""});
+22   fwrite(&\hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h}, 1, f);
+23   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"delta"}, \textcolor{stringliteral}{""});
+24   fwrite(&\hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, \textcolor{keyword}{sizeof} \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta}, 1, f);
+25 
+26   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"type\_mark"}, \textcolor{stringliteral}{""});
+27   \textcolor{keywordtype}{int} int\_out; \textcolor{comment}{// auxiliary variable, an integer value to be written to output}
+28   \textcolor{comment}{// ==== write type\_mark}
+29   \textcolor{comment}{// first, the number of types}
+30   int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();
+31   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+32   \textcolor{comment}{// then, marks one by one}
+33   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size();i++)\{
+34     int\_out = \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}[i];
+35     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+36   \}
+37 
+38   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"star\_vertices"}, \textcolor{stringliteral}{""});
+39   \textcolor{comment}{// ==== write star vertices}
+40   \textcolor{comment}{// first, write the frequency, note that star\_vertices.first is a vector of size 2 with the first entry
        being the number of zeros, and the second one the number of ones, so it enough to write only one of them}
-40   int\_out = \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0];
-41   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-42 
-43   \textcolor{comment}{// then, we write the integer representation star\_vertices.second}
-44   mpz\_out\_raw(f, \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.second.get\_mpz\_t());
-45 
-46   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"star\_edges"}, \textcolor{stringliteral}{""});
-47   \textcolor{comment}{// ==== write star edges}
-48 
-49   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log\_2 n), which
+41   int\_out = \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0];
+42   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+43 
+44   \textcolor{comment}{// then, we write the integer representation star\_vertices.second}
+45   mpz\_out\_raw(f, \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.second.get\_mpz\_t());
+46 
+47   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"star\_edges"}, \textcolor{stringliteral}{""});
+48   \textcolor{comment}{// ==== write star edges}
+49 
+50   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log\_2 n), which
        is the number of bits to encode vertices}
-50   \textcolor{keywordtype}{int} n\_copy = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
-51   \textcolor{keywordflow}{while}(n\_copy > 0)\{
-52     n\_copy >>= 1;
-53     log2n ++;
-54   \}
-55   \textcolor{comment}{//cerr << " log2n " << log2n << endl;}
-56   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
-57 
-58   map<pair<int, int>, vector<vector<int> > >::iterator it;
-59   \textcolor{keywordtype}{int} x, xp;
-60   \textcolor{keywordtype}{string} s; \textcolor{comment}{// the bit stream}
-61 
-62   \textcolor{comment}{// first, write the size of star\_edges so that the decoder knows how many blocks are coming}
-63   int\_out = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.size();
-64   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-65 
-66   \textcolor{keywordflow}{for} (it = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.begin(); it!= \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end(); it++)\{
-67     x = it->first.first;
-68     xp = it->first.second;
-69     \textcolor{comment}{//write x and xp}
-70     fwrite(&x, \textcolor{keyword}{sizeof} x, 1, f);
-71     fwrite(&xp, \textcolor{keyword}{sizeof} xp, 1, f);
-72     s = \textcolor{stringliteral}{""};
-73     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<it->second.size();i++)\{
-74       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<it->second[i].size();j++)\{
-75         s += \textcolor{stringliteral}{"1"};
-76         B = it->second[i][j]; \textcolor{comment}{// convert the index of the other endpoint to binary}
-77         s += B.to\_string().substr(8*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) - log2n, log2n); \textcolor{comment}{// take only log2n many bits of the
+51   \textcolor{keywordtype}{int} n\_copy = \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n};
+52   \textcolor{keywordflow}{while}(n\_copy > 0)\{
+53     n\_copy >>= 1;
+54     log2n ++;
+55   \}
+56   \textcolor{comment}{//cerr << " log2n " << log2n << endl;}
+57   bitset<8*sizeof(int)> B; \textcolor{comment}{// a bit stream with maximum length of int to store a vertex index}
+58 
+59   map<pair<int, int>, vector<vector<int> > >::iterator it;
+60   \textcolor{keywordtype}{int} x, xp;
+61   \textcolor{keywordtype}{string} s; \textcolor{comment}{// the bit stream}
+62 
+63   \textcolor{comment}{// first, write the size of star\_edges so that the decoder knows how many blocks are coming}
+64   int\_out = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.size();
+65   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+66 
+67   \textcolor{keywordtype}{int} nu\_star\_edges = 0; \textcolor{comment}{// number of star edges }
+68   \textcolor{keywordflow}{for} (it = \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.begin(); it!= \hyperlink{classmarked__graph__compressed_a7df5779d313486644132bd816937f532}{star\_edges}.end(); it++)\{
+69     x = it->first.first;
+70     xp = it->first.second;
+71     \textcolor{comment}{//write x and xp}
+72     fwrite(&x, \textcolor{keyword}{sizeof} x, 1, f);
+73     fwrite(&xp, \textcolor{keyword}{sizeof} xp, 1, f);
+74     s = \textcolor{stringliteral}{""};
+75     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<it->second.size();i++)\{
+76       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<it->second[i].size();j++)\{
+77         s += \textcolor{stringliteral}{"1"};
+78         B = it->second[i][j]; \textcolor{comment}{// convert the index of the other endpoint to binary}
+79         s += B.to\_string().substr(8*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) - log2n, log2n); \textcolor{comment}{// take only log2n many bits of the
        representation (and this should be taken from the least significant bits)}
-78       \}
-79       s += \textcolor{stringliteral}{"0"}; \textcolor{comment}{// to indicate that the neighbor list of this vertex is over now}
-80     \}
-81     \textcolor{comment}{//cerr << " write  x " << x << " xp " << xp << " s " << s << endl;}
-82     \textcolor{comment}{//for (int i=0;i<it->second.size();i++)\{}
-83     \textcolor{comment}{//  for (int j=0;j<it->second[i].size();j++)\{}
-84     \textcolor{comment}{//    cerr << " , " << it->second[i][j];}
-85     \textcolor{comment}{//  \}}
-86     \textcolor{comment}{//  cerr << endl;}
-87     \textcolor{comment}{//\}}
-88     \hyperlink{compression__helper_8cpp_accfebfd921b967c2f09e8c11569eb832}{bit\_string\_write}(f, s); \textcolor{comment}{// write this bitstream to the output}
-89   \}
-90 
-91   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"vertex types"}, \textcolor{stringliteral}{""});
-92 
-93   \textcolor{comment}{// ==== write vertex types}
-94 
-95   \textcolor{comment}{// first, we need vertex types list (ver\_type\_list)}
-96   \textcolor{comment}{// size of ver\_type\_list}
-97   int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();
-98   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-99   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();i++)\{
-100     int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();
-101     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-102     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();j++)\{
-103       int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][j];
-104       fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-105     \}
-106   \}
-107 
-108   \textcolor{comment}{// then, write ver\_types}
-109 
-110   \textcolor{comment}{// ver\_types.first}
-111   \textcolor{comment}{// ver\_types.first.size():}
-112   int\_out = \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size();
-113   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-114   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i =0;i<\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size(); i++)\{
-115     int\_out = \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first[i];
-116     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-117   \}
-118   \textcolor{comment}{// ver\_types.second}
-119   mpz\_out\_raw(f, \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.second.get\_mpz\_t());
-120 
-121 
-122   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"partition bipartite graphs"}, \textcolor{stringliteral}{""});
-123   \textcolor{comment}{// ==== part bgraphs}
+80         nu\_star\_edges ++;
+81       \}
+82       s += \textcolor{stringliteral}{"0"}; \textcolor{comment}{// to indicate that the neighbor list of this vertex is over now}
+83     \}
+84     \textcolor{comment}{//cerr << " write  x " << x << " xp " << xp << " s " << s << endl;}
+85     \textcolor{comment}{//for (int i=0;i<it->second.size();i++)\{}
+86     \textcolor{comment}{//  for (int j=0;j<it->second[i].size();j++)\{}
+87     \textcolor{comment}{//    cerr << " , " << it->second[i][j];}
+88     \textcolor{comment}{//  \}}
+89     \textcolor{comment}{//  cerr << endl;}
+90     \textcolor{comment}{//\}}
+91     \hyperlink{compression__helper_8cpp_accfebfd921b967c2f09e8c11569eb832}{bit\_string\_write}(f, s); \textcolor{comment}{// write this bitstream to the output}
+92   \}
+93 
+94   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"vertex types"}, \textcolor{stringliteral}{""});
+95 
+96   \textcolor{comment}{// ==== write vertex types}
+97 
+98   \textcolor{comment}{// first, we need vertex types list (ver\_type\_list)}
+99   \textcolor{comment}{// size of ver\_type\_list}
+100   int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();
+101   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+102   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();i++)\{
+103     int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();
+104     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+105     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size();j++)\{
+106       int\_out = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][j];
+107       fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+108     \}
+109   \}
+110 
+111   \textcolor{comment}{// then, write ver\_types}
+112 
+113   \textcolor{comment}{// ver\_types.first}
+114   \textcolor{comment}{// ver\_types.first.size():}
+115   int\_out = \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size();
+116   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+117   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i =0;i<\hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first.size(); i++)\{
+118     int\_out = \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.first[i];
+119     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+120   \}
+121   \textcolor{comment}{// ver\_types.second}
+122   mpz\_out\_raw(f, \hyperlink{classmarked__graph__compressed_af446cc5e23c241a92b76642fd5ebc403}{ver\_types}.second.get\_mpz\_t());
+123 
 124 
-125   \textcolor{comment}{// part\_bgraphs.size}
-126   int\_out = \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.size();
-127   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-128   map<pair<int, int>, mpz\_class>::iterator it2;
-129   \textcolor{keywordflow}{for} (it2 = \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.begin(); it2 != \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.end(); it2++)\{
-130     \textcolor{comment}{// first, write t, t'}
-131     int\_out = it2->first.first;
-132     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-133     int\_out = it2->first.second;
-134     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-135     \textcolor{comment}{// then, the compressed integer}
-136     mpz\_out\_raw(f, it2->second.get\_mpz\_t());
-137   \}
-138 
-139   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"partition graphs"}, \textcolor{stringliteral}{""});
-140   \textcolor{comment}{// === part graphs}
+125   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"partition bipartite graphs"}, \textcolor{stringliteral}{""});
+126   \textcolor{comment}{// ==== part bgraphs}
+127 
+128   \textcolor{comment}{// part\_bgraphs.size}
+129   int\_out = \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.size();
+130   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+131   map<pair<int, int>, mpz\_class>::iterator it2;
+132   \textcolor{keywordflow}{for} (it2 = \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.begin(); it2 != \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.end(); it2++)\{
+133     \textcolor{comment}{// first, write t, t'}
+134     int\_out = it2->first.first;
+135     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+136     int\_out = it2->first.second;
+137     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+138     \textcolor{comment}{// then, the compressed integer}
+139     mpz\_out\_raw(f, it2->second.get\_mpz\_t());
+140   \}
 141 
-142   \textcolor{comment}{// part\_graph.size}
-143   int\_out = \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.size();
-144   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-145   map< int, pair< mpz\_class, vector< int > > >::iterator it3;
-146   \textcolor{keywordflow}{for} (it3 = \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.begin(); it3 != \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.end(); it3++)\{
-147     int\_out = it3->first; \textcolor{comment}{// the type}
-148     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-149     \textcolor{comment}{// the mpz part}
-150     mpz\_out\_raw(f, it3->second.first.get\_mpz\_t());
-151     \textcolor{comment}{// the vector part}
-152     \textcolor{comment}{// first its size}
-153     int\_out = it3->second.second.size();
-154     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-155     \textcolor{comment}{// then element by element}
-156     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<it3->second.second.size();j++)\{
-157       int\_out = it3->second.second[j];
-158       fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
-159     \}
-160   \}
-161   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-162 \}
+142   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"partition graphs"}, \textcolor{stringliteral}{""});
+143   \textcolor{comment}{// === part graphs}
+144 
+145   \textcolor{comment}{// part\_graph.size}
+146   int\_out = \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.size();
+147   fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+148   map< int, pair< mpz\_class, vector< int > > >::iterator it3;
+149   \textcolor{keywordflow}{for} (it3 = \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.begin(); it3 != \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.end(); it3++)\{
+150     int\_out = it3->first; \textcolor{comment}{// the type}
+151     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+152     \textcolor{comment}{// the mpz part}
+153     mpz\_out\_raw(f, it3->second.first.get\_mpz\_t());
+154     \textcolor{comment}{// the vector part}
+155     \textcolor{comment}{// first its size}
+156     int\_out = it3->second.second.size();
+157     fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+158     \textcolor{comment}{// then element by element}
+159     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<it3->second.second.size();j++)\{
+160       int\_out = it3->second.second[j];
+161       fwrite(&int\_out, \textcolor{keyword}{sizeof} int\_out, 1, f);
+162     \}
+163   \}
+164   \textcolor{keywordflow}{if} (\hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{logger::stat})\{
+165     cout << \textcolor{stringliteral}{" ==== statistics ==== "} << endl;
+166     cout << \textcolor{stringliteral}{" n:                "} << \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n} << endl;
+167     cout << \textcolor{stringliteral}{" h:                "} << \hyperlink{classmarked__graph__compressed_af6ff623407b673d08d0cab77b39c2193}{h} << endl;
+168     cout << \textcolor{stringliteral}{" delta:            "} << \hyperlink{classmarked__graph__compressed_a8b2aaac68e9332ddc78d88eb60b323a7}{delta} << endl;
+169     cout << \textcolor{stringliteral}{" No. types         "} << \hyperlink{classmarked__graph__compressed_a86b00223525703e973415cbc9c94da68}{type\_mark}.size() << endl;
+170     cout << \textcolor{stringliteral}{" No. * vertices    "} << \hyperlink{classmarked__graph__compressed_a8d841016ddb11cfd33748c8deb6277ba}{n} - \hyperlink{classmarked__graph__compressed_a7a4ced4586e2e353f9076bd447df5208}{star\_vertices}.first[0] << endl;
+171     cout << \textcolor{stringliteral}{" No. * edges       "} << nu\_star\_edges << endl;
+172     cout << \textcolor{stringliteral}{" No. part bgraphs  "} << \hyperlink{classmarked__graph__compressed_a7b3267063fba30b45eb21b3ba4e07536}{part\_bgraph}.size() << endl;
+173     cout << \textcolor{stringliteral}{" No. part graphs   "} << \hyperlink{classmarked__graph__compressed_ae179a4737e6eab905c18a94d44ef64b7}{part\_graph}.size() << endl;
+174   \}
+175 
+176   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+177 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}\label{classmarked__graph__compressed_af58307bfadcaa4c3ca6dd594c2f9b3a9}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!clear@{clear}}

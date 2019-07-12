@@ -13,6 +13,7 @@ void marked_graph_compressed::clear()
   \param f: a `FILE*` object which is the address of the binary file to write
  */
 void marked_graph_compressed::binary_write(FILE* f){
+
   logger::current_depth++;
   // ==== write n, h, delta
   logger::add_entry("n", "");
@@ -63,6 +64,7 @@ void marked_graph_compressed::binary_write(FILE* f){
   int_out = star_edges.size();
   fwrite(&int_out, sizeof int_out, 1, f);
 
+  int nu_star_edges = 0; // number of star edges 
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
     x = it->first.first;
     xp = it->first.second;
@@ -75,6 +77,7 @@ void marked_graph_compressed::binary_write(FILE* f){
         s += "1";
         B = it->second[i][j]; // convert the index of the other endpoint to binary
         s += B.to_string().substr(8*sizeof(int) - log2n, log2n); // take only log2n many bits of the representation (and this should be taken from the least significant bits)
+        nu_star_edges ++;
       }
       s += "0"; // to indicate that the neighbor list of this vertex is over now
     }
@@ -158,6 +161,18 @@ void marked_graph_compressed::binary_write(FILE* f){
       fwrite(&int_out, sizeof int_out, 1, f);
     }
   }
+  if (logger::stat){
+    cout << " ==== statistics ==== " << endl;
+    cout << " n:                " << n << endl;
+    cout << " h:                " << h << endl;
+    cout << " delta:            " << delta << endl;
+    cout << " No. types         " << type_mark.size() << endl;
+    cout << " No. * vertices    " << n - star_vertices.first[0] << endl;
+    cout << " No. * edges       " << nu_star_edges << endl;
+    cout << " No. part bgraphs  " << part_bgraph.size() << endl;
+    cout << " No. part graphs   " << part_graph.size() << endl;
+  }
+
   logger::current_depth--;
 }
 

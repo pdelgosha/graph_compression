@@ -3,6 +3,7 @@
 vector<log_entry> logger::logs;
 int logger::current_depth = 1; // use depth 0 only for start and finish entries
 bool logger::verbose = true;
+bool logger::stat = false;
 ostream& logger::verbose_stream = cout;
 bool logger::report = true;
 ostream& logger::report_stream = cout; 

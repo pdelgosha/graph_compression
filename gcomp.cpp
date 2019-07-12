@@ -24,9 +24,10 @@ int main(int argc, char ** argv){
   string infile, outfile;
   bool uncompress = false; // becomes true if -u option is given (to decompress)
   bool quiet = true; // becomes false if -v option is given (verbose)
+  bool stat = false; // if true, statistics on the properties of the compressed graph, e.g. number of star vertices / edges or the number of partition graphs will be given
   char opt;
 
-  while ((opt = getopt(argc, argv, "h:d:i:o:uv")) != EOF){
+  while ((opt = getopt(argc, argv, "h:d:i:o:uvs")) != EOF){
     switch(opt){
     case 'h':
       h = atoi(optarg);
@@ -45,6 +46,9 @@ int main(int argc, char ** argv){
       break;
     case 'v':
       quiet = false;
+      break;
+    case 's':
+      stat = true;
       break;
     case '?':
       cerr << "Error: option -" << char(optopt) << " requires an argument" << endl;
@@ -79,6 +83,10 @@ int main(int argc, char ** argv){
     logger::verbose = false; // no run time log 
     logger::report = false; // no final report
   }
+
+  if (stat == true){
+    logger::stat = true;
+  } 
 
   //cout << " h = " << h << " delta = " << delta << " infile = " << infile << " outfile = " << outfile << endl;
 
