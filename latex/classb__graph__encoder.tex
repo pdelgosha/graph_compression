@@ -18,6 +18,8 @@ void \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init} 
 \begin{DoxyCompactList}\small\item\em initializes beta and U \end{DoxyCompactList}\item 
 pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\+\_\+N} (int i, int j, const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
 \begin{DoxyCompactList}\small\item\em computes $N_{i,j}(G)$ \end{DoxyCompactList}\item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}{compute\+\_\+\+N\+\_\+new} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\item 
 mpz\+\_\+class \hyperlink{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}{encode} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
 \begin{DoxyCompactList}\small\item\em encodes the given bipartite graph $G$ and returns an integer in the specified range \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
@@ -104,52 +106,148 @@ A pair, where the first component is $N_{i,j}(G)$, and the second component is $
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-24   \{
-25     mpz\_class Nij = 0;
-26     mpz\_class lij = 1;
-27     \textcolor{keywordflow}{if} (i == j)\{
-28       vector<int> x = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i); \textcolor{comment}{// the adjacency list of the vertex}
-29       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
-30         Nij += lij * \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
-31         lij *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]];
-32         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]] --;
-33         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k],-1);
-34       \}
-35       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-36     \}\textcolor{keywordflow}{else}\{
-37       \textcolor{keywordtype}{int} t = (i+j)/ 2;
-38       mpz\_class Nit, lit; \textcolor{comment}{// for the left subinterval i, j}
-39       mpz\_class Ntj, ltj; \textcolor{comment}{// for the right subinterval t+1, j}
-40       mpz\_class Nij, lij; \textcolor{comment}{// to return}
-41       \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
-42       \textcolor{keywordtype}{int} Sj; \textcolor{comment}{// S\_\{j+1\}}
+24 \{
+25   mpz\_class Nij = 0;
+26   mpz\_class lij = 1;
+27   \textcolor{keywordflow}{if} (i == j)\{
+28     vector<int> x = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i); \textcolor{comment}{// the adjacency list of the vertex}
+29     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
+30       Nij += lij * \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+x[k]), a[i] - k);
+31       lij *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]];
+32       \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[x[k]] --;
+33       \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[k],-1);
+34     \}
+35     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+36   \}\textcolor{keywordflow}{else}\{
+37     \textcolor{keywordtype}{int} t = (i+j)/ 2;
+38     mpz\_class Nit, lit; \textcolor{comment}{// for the left subinterval i, j}
+39     mpz\_class Ntj, ltj; \textcolor{comment}{// for the right subinterval t+1, j}
+40     mpz\_class Nij, lij; \textcolor{comment}{// to return}
+41     \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
+42     \textcolor{keywordtype}{int} Sj; \textcolor{comment}{// S\_\{j+1\}}
 43 
-44       pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// for collecting the results from subintervals}
+44     pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// for collecting the results from subintervals}
 45 
-46       \textcolor{comment}{// left subinterval}
-47       ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(i,t, G);
-48       Nit = ans.first;
-49       lit = ans.second;
-50       St = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+46     \textcolor{comment}{// left subinterval}
+47     ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(i,t, G);
+48     Nit = ans.first;
+49     lit = ans.second;
+50     St = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
 51 
-52       \textcolor{comment}{// right subinterval}
-53       ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(t+1, j, G);
-54       Ntj = ans.first;
-55       ltj = ans.second;
-56       Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+52     \textcolor{comment}{// right subinterval}
+53     ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(t+1, j, G);
+54     Ntj = ans.first;
+55     ltj = ans.second;
+56     Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
 57 
-58       mpz\_class rtj; \textcolor{comment}{// r\_\{t+1, j\}}
-59       mpz\_class prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j);; \textcolor{comment}{// the product of a\_k! for t + 1 <= k
+58     mpz\_class rtj; \textcolor{comment}{// r\_\{t+1, j\}}
+59     mpz\_class prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j);; \textcolor{comment}{// the product of a\_k! for t + 1 <= k
        <= j}
 60 
 61 
-62       rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
+62     rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St, St - Sj, 1) / prod\_afac; 
 63 
-64       Nij = Nit * rtj + lit * Ntj;
-65       lij = lit * ltj;
-66       \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Nij, lij);
-67     \}
-68   \}
+64     Nij = Nit * rtj + lit * Ntj;
+65     lij = lit * ltj;
+66     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Nij, lij);
+67   \}
+68 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}\label{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}} 
+\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!compute\+\_\+\+N\+\_\+new@{compute\+\_\+\+N\+\_\+new}}
+\index{compute\+\_\+\+N\+\_\+new@{compute\+\_\+\+N\+\_\+new}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{compute\+\_\+\+N\+\_\+new()}{compute\_N\_new()}}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+\+N\+\_\+new (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+71                                                                          \{
+72   \textcolor{keywordtype}{int} n\_l = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}(); \textcolor{comment}{// number of left vertices}
+73   \textcolor{keywordtype}{int} n\_bits = 0;
+74   \textcolor{keywordtype}{int} n\_copy = n\_l;
+75   \textcolor{keywordflow}{while} (n\_copy > 0)\{
+76     n\_bits ++;
+77     n\_copy >>= 1;
+78   \}
+79   n\_bits += 2;
+80 
+81   vector<pair<int, int> > call\_stack(2 * n\_bits);
+82   vector<pair<mpz\_class, mpz\_class> > \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}(2 * n\_bits); \textcolor{comment}{// first = N, second = l}
+83   vector<int> status\_stack(2 * n\_bits);
+84   vector<int> St\_stack(2 * n\_bits); \textcolor{comment}{// stack to store values of St}
+85  
+86   call\_stack[0] = pair<int, int> (0,n\_l-1); \textcolor{comment}{// i j }
+87   status\_stack[0] = 0; \textcolor{comment}{// newly added}
+88  
+89   \textcolor{keywordtype}{int} call\_size = 1; \textcolor{comment}{// the size of the call stack}
+90   \textcolor{keywordtype}{int} return\_size = 0; \textcolor{comment}{// the size of the return stack}
+91 
+92   \textcolor{keywordtype}{int} i, j, t, Sj;
+93   \textcolor{keywordtype}{int} status;
+94  
+95   vector<int> gamma; \textcolor{comment}{// forward list  of the graph}
+96 
+97   mpz\_class rtj, prod\_afac, Nit\_rtj, lit\_Ntj;
+98   \textcolor{keywordflow}{while}(call\_size > 0)\{
+99     \textcolor{comment}{//cerr << " call\_size " << call\_size << endl;}
+100     i = call\_stack[call\_size-1].first;
+101     j = call\_stack[call\_size-1].second;
+102     \textcolor{keywordflow}{if} (i==j)\{
+103       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first = 0; \textcolor{comment}{// N\_\{i,j\} is initialized with 0}
+104       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second = 1; \textcolor{comment}{// l\_\{i,j\} is initialized with 1}
+105       gamma = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+106       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
+107         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first += \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second * 
+      \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+gamma[k]), a[i] - k);
+108         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]];
+109         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]] --;
+110         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(gamma[k],-1);
+111       \}
+112       return\_size ++;
+113       call\_size --;
+114     \}\textcolor{keywordflow}{else}\{
+115       t = (i+j)/2;
+116       status = status\_stack[call\_size - 1];
+117       \textcolor{keywordflow}{if} (status == 0)\{
+118         \textcolor{comment}{// newly added, left node must be called}
+119         call\_stack[call\_size].first = i;
+120         call\_stack[call\_size].second = t;
+121         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
+122         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
+123         call\_size++;
+124       \}
+125       \textcolor{keywordflow}{if} (status == 1)\{
+126         \textcolor{comment}{// left is returned}
+127         St\_stack[call\_size-1] = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+128         \textcolor{comment}{// call the right child}
+129         call\_stack[call\_size].first = t+1;
+130         call\_stack[call\_size].second = j;
+131         status\_stack[call\_size-1] = 2; \textcolor{comment}{//right is called}
+132         status\_stack[call\_size] = 0;  \textcolor{comment}{// newly called}
+133         call\_size ++;
+134       \}
+135       \textcolor{keywordflow}{if} (status == 2)\{
+136         Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+137         prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j); \textcolor{comment}{// the product of a\_k! for t + 1 <= k <= j}
+138         rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St\_stack[call\_size-1], St\_stack[call\_size-1] - Sj, 1) / 
+      prod\_afac;
+139         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * rtj;
+140         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
+      first;
+141         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
+142         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
+      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].second; \textcolor{comment}{// lij}
+143         return\_size --; \textcolor{comment}{// pop 2 add 1}
+144         call\_size --;
+145       \}
+146     \}
+147 
+148   \}
+149   \textcolor{keywordflow}{if} (return\_size != 1)\{
+150     cerr << \textcolor{stringliteral}{" error: bip compute\_N return\_size is not 1 it is "} << return\_size << endl;
+151   \}
+152   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
+153 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}\label{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!encode@{encode}}
@@ -163,28 +261,36 @@ encodes the given bipartite graph $G$ and returns an integer in the specified ra
 
 
 \begin{DoxyCode}
-73 \{
-74   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
+157 \{
+158   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
       \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
-75     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
+159     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
        of the given bipartite graph  "} << endl;
-76 
-77   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G); \textcolor{comment}{// initialize U and beta for G}
-78   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_a3ffcfb945e8563d01e683fc5e5127d6d}{compute\_N}(0,G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}()-1, G);
-79 
-80   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
-81 
-82   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
-83   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
-84 
-85   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
-86   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
-87     ceil = \textcolor{keyword}{true};
-88   ans.first /= ans.second;
-89   \textcolor{keywordflow}{if} (ceil)
-90     ans.first ++;
-91   \textcolor{keywordflow}{return} ans.first;
-92 \}
+160 
+161   \textcolor{comment}{//init(G); // initialize U and beta for G}
+162   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N(0,G.nu\_left\_vertices()-1, G);}
+163   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G);
+164   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}{compute\_N\_new}(G);
+165   \textcolor{comment}{//if (ans.first!= ans\_2.first or ans.second != ans\_2.second)\{}
+166   \textcolor{comment}{//  cerr << " bip ans != ans\_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" <<
+       ans\_2.first << " , " << ans\_2.second << " ) "  << endl;}
+167   \textcolor{comment}{//\}//else\{}
+168   \textcolor{comment}{//cerr << " the same! ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" << ans\_2.first << "
+       , " << ans\_2.second << " ) "  << endl;}
+169   \textcolor{comment}{//\}}
+170   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
+171 
+172   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
+173   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
+174 
+175   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
+176   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
+177     ceil = \textcolor{keyword}{true};
+178   ans.first /= ans.second;
+179   \textcolor{keywordflow}{if} (ceil)
+180     ans.first ++;
+181   \textcolor{keywordflow}{return} ans.first;
+182 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!init@{init}}

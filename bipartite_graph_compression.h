@@ -57,6 +57,7 @@ public:
    */
   pair<mpz_class, mpz_class> compute_N(int i, int j, const b_graph& G);
 
+  pair<mpz_class, mpz_class> compute_N_new(const b_graph& G);
 
   //! encodes the given bipartite graph \f$G\f$ and returns an integer in the specified range
   mpz_class encode(const b_graph& G);

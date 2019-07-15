@@ -21,52 +21,136 @@ void b_graph_encoder::init(const b_graph& G)
 
 
 pair<mpz_class, mpz_class> b_graph_encoder::compute_N(int i, int j, const b_graph& G)
-  {
-    mpz_class Nij = 0;
-    mpz_class lij = 1;
-    if (i == j){
-      vector<int> x = G.get_adj_list(i); // the adjacency list of the vertex
-      for (int k=0;k<a[i];k++){
-        Nij += lij * binomial(U.sum(1+x[k]), a[i] - k);
-        lij *= beta[x[k]];
-        beta[x[k]] --;
-        U.add(x[k],-1);
-      }
-      return pair<mpz_class, mpz_class> (Nij, lij);
-    }else{
-      int t = (i+j)/ 2;
-      mpz_class Nit, lit; // for the left subinterval i, j
-      mpz_class Ntj, ltj; // for the right subinterval t+1, j
-      mpz_class Nij, lij; // to return
-      int St; // S_{t+1}
-      int Sj; // S_{j+1}
-
-      pair<mpz_class, mpz_class> ans; // for collecting the results from subintervals
-
-      // left subinterval
-      ans = compute_N(i,t, G);
-      Nit = ans.first;
-      lit = ans.second;
-      St = U.sum(0);
-
-      // right subinterval
-      ans = compute_N(t+1, j, G);
-      Ntj = ans.first;
-      ltj = ans.second;
-      Sj = U.sum(0);
-
-      mpz_class rtj; // r_{t+1, j}
-      mpz_class prod_afac = prod_factorial(a, t+1, j);; // the product of a_k! for t + 1 <= k <= j
-
-
-      rtj = compute_product(St, St - Sj, 1) / prod_afac; 
-
-      Nij = Nit * rtj + lit * Ntj;
-      lij = lit * ltj;
-      return pair<mpz_class, mpz_class>(Nij, lij);
+{
+  mpz_class Nij = 0;
+  mpz_class lij = 1;
+  if (i == j){
+    vector<int> x = G.get_adj_list(i); // the adjacency list of the vertex
+    for (int k=0;k<a[i];k++){
+      Nij += lij * binomial(U.sum(1+x[k]), a[i] - k);
+      lij *= beta[x[k]];
+      beta[x[k]] --;
+      U.add(x[k],-1);
     }
-  }
+    return pair<mpz_class, mpz_class> (Nij, lij);
+  }else{
+    int t = (i+j)/ 2;
+    mpz_class Nit, lit; // for the left subinterval i, j
+    mpz_class Ntj, ltj; // for the right subinterval t+1, j
+    mpz_class Nij, lij; // to return
+    int St; // S_{t+1}
+    int Sj; // S_{j+1}
 
+    pair<mpz_class, mpz_class> ans; // for collecting the results from subintervals
+
+    // left subinterval
+    ans = compute_N(i,t, G);
+    Nit = ans.first;
+    lit = ans.second;
+    St = U.sum(0);
+
+    // right subinterval
+    ans = compute_N(t+1, j, G);
+    Ntj = ans.first;
+    ltj = ans.second;
+    Sj = U.sum(0);
+
+    mpz_class rtj; // r_{t+1, j}
+    mpz_class prod_afac = prod_factorial(a, t+1, j);; // the product of a_k! for t + 1 <= k <= j
+
+
+    rtj = compute_product(St, St - Sj, 1) / prod_afac; 
+
+    Nij = Nit * rtj + lit * Ntj;
+    lij = lit * ltj;
+    return pair<mpz_class, mpz_class>(Nij, lij);
+  }
+}
+
+
+pair<mpz_class, mpz_class> b_graph_encoder::compute_N_new(const b_graph& G){
+  int n_l = G.nu_left_vertices(); // number of left vertices
+  int n_bits = 0;
+  int n_copy = n_l;
+  while (n_copy > 0){
+    n_bits ++;
+    n_copy >>= 1;
+  }
+  n_bits += 2;
+
+  vector<pair<int, int> > call_stack(2 * n_bits);
+  vector<pair<mpz_class, mpz_class> > return_stack(2 * n_bits); // first = N, second = l
+  vector<int> status_stack(2 * n_bits);
+  vector<int> St_stack(2 * n_bits); // stack to store values of St
+ 
+  call_stack[0] = pair<int, int> (0,n_l-1); // i j 
+  status_stack[0] = 0; // newly added
+ 
+  int call_size = 1; // the size of the call stack
+  int return_size = 0; // the size of the return stack
+
+  int i, j, t, Sj;
+  int status;
+ 
+  vector<int> gamma; // forward list  of the graph
+
+  mpz_class rtj, prod_afac, Nit_rtj, lit_Ntj;
+  while(call_size > 0){
+    //cerr << " call_size " << call_size << endl;
+    i = call_stack[call_size-1].first;
+    j = call_stack[call_size-1].second;
+    if (i==j){
+      return_stack[return_size].first = 0; // N_{i,j} is initialized with 0
+      return_stack[return_size].second = 1; // l_{i,j} is initialized with 1
+      gamma = G.get_adj_list(i);
+      for (int k=0;k<a[i];k++){
+        return_stack[return_size].first += return_stack[return_size].second * binomial(U.sum(1+gamma[k]), a[i] - k);
+        return_stack[return_size].second *= beta[gamma[k]];
+        beta[gamma[k]] --;
+        U.add(gamma[k],-1);
+      }
+      return_size ++;
+      call_size --;
+    }else{
+      t = (i+j)/2;
+      status = status_stack[call_size - 1];
+      if (status == 0){
+        // newly added, left node must be called
+        call_stack[call_size].first = i;
+        call_stack[call_size].second = t;
+        status_stack[call_size-1] = 1; // left is called
+        status_stack[call_size] = 0; // newly added
+        call_size++;
+      }
+      if (status == 1){
+        // left is returned
+        St_stack[call_size-1] = U.sum(0);
+        // call the right child
+        call_stack[call_size].first = t+1;
+        call_stack[call_size].second = j;
+        status_stack[call_size-1] = 2; //right is called
+        status_stack[call_size] = 0;  // newly called
+        call_size ++;
+      }
+      if (status == 2){
+        Sj = U.sum(0);
+        prod_afac = prod_factorial(a, t+1, j); // the product of a_k! for t + 1 <= k <= j
+        rtj = compute_product(St_stack[call_size-1], St_stack[call_size-1] - Sj, 1) / prod_afac;
+        Nit_rtj = return_stack[return_size-2].first * rtj;
+        lit_Ntj = return_stack[return_size-2].second * return_stack[return_size-1].first;
+        return_stack[return_size-2].first = Nit_rtj + lit_Ntj; // Nij
+        return_stack[return_size-2].second = return_stack[return_size-2].second * return_stack[return_size-1].second; // lij
+        return_size --; // pop 2 add 1
+        call_size --;
+      }
+    }
+
+  }
+  if (return_size != 1){
+    cerr << " error: bip compute_N return_size is not 1 it is " << return_size << endl;
+  }
+  return return_stack[0];
+}
 
 
 mpz_class b_graph_encoder::encode(const b_graph& G)
@@ -74,9 +158,15 @@ mpz_class b_graph_encoder::encode(const b_graph& G)
   if (a != G.get_left_degree_sequence() or b != G.get_right_degree_sequence())
     cerr << " WARNING b_graph_encoder::encoder : vectors a and/or b do not match with the degree sequences of the given bipartite graph  " << endl;
 
-  init(G); // initialize U and beta for G
-  pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_left_vertices()-1, G);
-
+  //init(G); // initialize U and beta for G
+  //pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_left_vertices()-1, G);
+  init(G);
+  pair<mpz_class, mpz_class> ans = compute_N_new(G);
+  //if (ans.first!= ans_2.first or ans.second != ans_2.second){
+  //  cerr << " bip ans != ans_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans_2 = (" << ans_2.first << " , " << ans_2.second << " ) "  << endl;
+  //}//else{
+  //cerr << " the same! ans = (" << ans.first << " , " << ans.second <<  " ) ans_2 = (" << ans_2.first << " , " << ans_2.second << " ) "  << endl;
+  //}
   //mpz_class prod_b_factorial = prod_factorial(b, 0, b.size()-1); // \prod_{i=0}^{n-1} b_i
 
   //if (prod_b_factorial != ans.second)
