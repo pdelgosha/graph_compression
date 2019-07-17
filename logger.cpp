@@ -4,9 +4,10 @@ vector<log_entry> logger::logs;
 int logger::current_depth = 1; // use depth 0 only for start and finish entries
 bool logger::verbose = true;
 bool logger::stat = false;
-ostream& logger::verbose_stream = cout;
+ostream* logger::verbose_stream = &cout;
 bool logger::report = true;
-ostream& logger::report_stream = cout; 
+ostream* logger::report_stream = &cout; 
+ostream* logger::stat_stream = &cout;
 
 map<string, float> logger::item_duration;
 map<string, high_resolution_clock::time_point> logger::item_last_start;
@@ -31,12 +32,12 @@ void logger::add_entry(string name, string description)
     time_t tt = system_clock::to_time_t(new_entry.sys_t);
     char buffer[80];
     strftime(buffer, 80, "%F %r", localtime(&tt));
-    for (int i=1;i<current_depth;i++)
+    for (int i=1;i<(current_depth-1);i++)
       s += "|---";
     string buffer_str(buffer);
     s +=  name + " (" + description + ") ";
     s += buffer_str;
-    verbose_stream << s << endl;
+    *verbose_stream << s << endl;
   }
 }
 
@@ -78,7 +79,7 @@ void logger::log(){
   duration<float> diff;
   string s;
   //cerr << " logs.size() " << logs.size() << endl;
-  report_stream << endl;
+  *report_stream << endl;
   for (int i=1;i<(logs.size()-1); i++){
     //cerr << " i " << i << endl;
     // finding duration[i]
@@ -93,15 +94,15 @@ void logger::log(){
     //cerr << " block_percent[i] " << block_percent[i] << endl;
     s = "";
     //cerr << " logs[i].depth " << logs[i].depth << endl;
-    for (int j=1;j<logs[i].depth; j++)
+    for (int j=1;j<(logs[i].depth-1); j++)
       s += "|---";
     s +=  logs[i].name + " (" + logs[i].description + "): " + to_string(dur[i]) + "s " + "[" + to_string(block_percent[i]) + "\%]" + " ";
-    report_stream << s << endl;
+    *report_stream << s << endl;
   }
 
-  report_stream << endl << " itemized log " << endl;
+  *report_stream << endl << " itemized log " << endl;
   for (map<string, float>::iterator it = item_duration.begin(); it!= item_duration.end(); it++)
-    report_stream << it->first << " : " << it->second << endl;
+    *report_stream << it->first << " : " << it->second << endl;
 }
 
 //void __attribute__ ((constructor)) prog_start(){

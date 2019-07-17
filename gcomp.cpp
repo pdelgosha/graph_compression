@@ -27,7 +27,10 @@ int main(int argc, char ** argv){
   bool stat = false; // if true, statistics on the properties of the compressed graph, e.g. number of star vertices / edges or the number of partition graphs will be given
   char opt;
 
-  while ((opt = getopt(argc, argv, "h:d:i:o:uvs")) != EOF){
+  string report_file, stat_file;
+  ofstream report_stream, stat_stream; 
+
+  while ((opt = getopt(argc, argv, "h:d:i:o:uvsV:S:")) != EOF){
     switch(opt){
     case 'h':
       h = atoi(optarg);
@@ -47,8 +50,22 @@ int main(int argc, char ** argv){
     case 'v':
       quiet = false;
       break;
+    case 'V':
+      report_file = string(optarg);
+      if (report_file != ""){
+        report_stream.open(report_file);
+        logger::report_stream = &report_stream;
+      }
+      break;
     case 's':
       stat = true;
+      break;
+    case 'S':
+      stat_file = string(optarg);
+      if (stat_file != ""){
+        stat_stream.open(stat_file);
+        logger::stat_stream = &stat_stream;
+      }
       break;
     case '?':
       cerr << "Error: option -" << char(optopt) << " requires an argument" << endl;
@@ -96,21 +113,38 @@ int main(int argc, char ** argv){
     marked_graph_encoder E(h, delta);
     marked_graph G; // the input graph to be compressed
     inp >> G;
+    logger::current_depth++;
+    logger::add_entry("Encode", "");
     marked_graph_compressed C = E.encode(G);
+    logger::current_depth--;
     FILE* f;
     f = fopen(outfile.c_str(), "wb+");
+    logger::current_depth++;
+    logger::add_entry("Write to binary", "");
     C.binary_write(f);
     fclose(f);
+    logger::current_depth--;
   }else{
     // goal is to decompess
     FILE* f;
     f = fopen(infile.c_str(), "rb+");
     marked_graph_compressed C;
+    logger::current_depth++;
+    logger::add_entry("Read from binary", "");
     C.binary_read(f);
     fclose(f);
+    logger::current_depth--;
+
+    logger::current_depth++;
+    logger::add_entry("Decode", "");
     marked_graph_decoder D;
     marked_graph G = D.decode(C);
+    logger::current_depth--;
+
+    logger::current_depth++;
+    logger::add_entry("Write decoded graph to output file","");
     oup << G;
+    logger::current_depth--;
   }
   logger::stop();
   return 0;

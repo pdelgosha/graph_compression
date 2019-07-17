@@ -162,15 +162,15 @@ void marked_graph_compressed::binary_write(FILE* f){
     }
   }
   if (logger::stat){
-    cout << " ==== statistics ==== " << endl;
-    cout << " n:                " << n << endl;
-    cout << " h:                " << h << endl;
-    cout << " delta:            " << delta << endl;
-    cout << " No. types         " << type_mark.size() << endl;
-    cout << " No. * vertices    " << n - star_vertices.first[0] << endl;
-    cout << " No. * edges       " << nu_star_edges << endl;
-    cout << " No. part bgraphs  " << part_bgraph.size() << endl;
-    cout << " No. part graphs   " << part_graph.size() << endl;
+    *logger::stat_stream << " ==== statistics ==== " << endl;
+    *logger::stat_stream << " n:                " << n << endl;
+    *logger::stat_stream << " h:                " << h << endl;
+    *logger::stat_stream << " delta:            " << delta << endl;
+    *logger::stat_stream << " No. types         " << type_mark.size() << endl;
+    *logger::stat_stream << " No. * vertices    " << n - star_vertices.first[0] << endl;
+    *logger::stat_stream << " No. * edges       " << nu_star_edges << endl;
+    *logger::stat_stream << " No. part bgraphs  " << part_bgraph.size() << endl;
+    *logger::stat_stream << " No. part graphs   " << part_graph.size() << endl;
   }
 
   logger::current_depth--;
@@ -399,7 +399,9 @@ marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 }
 
 void marked_graph_encoder::encode(const marked_graph& G, FILE* f){
+  logger::add_entry("Encode","");
   marked_graph_compressed comp = encode(G);
+  logger::add_entry("Write to binary file", "");
   comp.binary_write(f);
 }
 

@@ -45,95 +45,129 @@ In order to decompress, the compressed file should be given after -\/i, the file
        vertices / edges or the number of partition graphs will be given}
 28   \textcolor{keywordtype}{char} opt;
 29 
-30   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:uvs"})) != EOF)\{
-31     \textcolor{keywordflow}{switch}(opt)\{
-32     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
-33       h = atoi(optarg);
-34       \textcolor{keywordflow}{break};
-35     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
-36       delta = atoi(optarg);
+30   \textcolor{keywordtype}{string} report\_file, stat\_file;
+31   ofstream report\_stream, stat\_stream; 
+32 
+33   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:uvsV:S:"})) != EOF)\{
+34     \textcolor{keywordflow}{switch}(opt)\{
+35     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
+36       h = atoi(optarg);
 37       \textcolor{keywordflow}{break};
-38     \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
-39       infile = string(optarg);
+38     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
+39       delta = atoi(optarg);
 40       \textcolor{keywordflow}{break};
-41     \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
-42       outfile = string(optarg);
+41     \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+42       infile = string(optarg);
 43       \textcolor{keywordflow}{break};
-44     \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
-45       uncompress = \textcolor{keyword}{true}; \textcolor{comment}{// in the decompression phase }
+44     \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
+45       outfile = string(optarg);
 46       \textcolor{keywordflow}{break};
-47     \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
-48       quiet = \textcolor{keyword}{false};
+47     \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
+48       uncompress = \textcolor{keyword}{true}; \textcolor{comment}{// in the decompression phase }
 49       \textcolor{keywordflow}{break};
-50     \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
-51       stat = \textcolor{keyword}{true};
+50     \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+51       quiet = \textcolor{keyword}{false};
 52       \textcolor{keywordflow}{break};
-53     \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
-54       cerr << \textcolor{stringliteral}{"Error: option -"} << char(optopt) << \textcolor{stringliteral}{" requires an argument"} << endl;
-55       \textcolor{keywordflow}{return} 1;
-56     \}
-57   \}
-58   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and h <= 0)\{
-59     cerr << \textcolor{stringliteral}{"Error: parameter h must be a positive integer. Instead, the value "} << h << \textcolor{stringliteral}{" was given."} << 
+53     \textcolor{keywordflow}{case} \textcolor{charliteral}{'V'}:
+54       report\_file = string(optarg);
+55       \textcolor{keywordflow}{if} (report\_file != \textcolor{stringliteral}{""})\{
+56         report\_stream.open(report\_file);
+57         \hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{logger::report\_stream} = &report\_stream;
+58       \}
+59       \textcolor{keywordflow}{break};
+60     \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
+61       stat = \textcolor{keyword}{true};
+62       \textcolor{keywordflow}{break};
+63     \textcolor{keywordflow}{case} \textcolor{charliteral}{'S'}:
+64       stat\_file = string(optarg);
+65       \textcolor{keywordflow}{if} (stat\_file != \textcolor{stringliteral}{""})\{
+66         stat\_stream.open(stat\_file);
+67         \hyperlink{classlogger_a7db37821f875f2ba3540980b355779f5}{logger::stat\_stream} = &stat\_stream;
+68       \}
+69       \textcolor{keywordflow}{break};
+70     \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+71       cerr << \textcolor{stringliteral}{"Error: option -"} << char(optopt) << \textcolor{stringliteral}{" requires an argument"} << endl;
+72       \textcolor{keywordflow}{return} 1;
+73     \}
+74   \}
+75   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and h <= 0)\{
+76     cerr << \textcolor{stringliteral}{"Error: parameter h must be a positive integer. Instead, the value "} << h << \textcolor{stringliteral}{" was given."} << 
       endl;
-60     \textcolor{keywordflow}{return} 1;
-61   \}
-62   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and delta <= 0)\{
-63     cerr << \textcolor{stringliteral}{"Error: parameter d (delta) must be a positive integer. Instead, the value "} << delta << \textcolor{stringliteral}{" was
-       given."} << endl;
-64     \textcolor{keywordflow}{return} 1;
-65   \}
-66 
-67   ifstream inp(infile.c\_str());
-68   ofstream oup(outfile.c\_str());
-69 
-70   \textcolor{keywordflow}{if} (!inp.good())\{
-71     cerr << \textcolor{stringliteral}{"Error: invalid input file <"} << infile << \textcolor{stringliteral}{"> given "} << endl;
-72     \textcolor{keywordflow}{return} 1;
-73   \}
-74 
-75   \textcolor{keywordflow}{if} (!oup.good())\{
-76     cerr << \textcolor{stringliteral}{"Error: invalid output file <"} << outfile << \textcolor{stringliteral}{"> given "} << endl;
 77     \textcolor{keywordflow}{return} 1;
 78   \}
-79 
-80 
-81   \textcolor{keywordflow}{if} (quiet == \textcolor{keyword}{true})\{
-82     \textcolor{comment}{// do not log }
-83     \hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose} = \textcolor{keyword}{false}; \textcolor{comment}{// no run time log }
-84     \hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{logger::report} = \textcolor{keyword}{false}; \textcolor{comment}{// no final report}
-85   \}
+79   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and delta <= 0)\{
+80     cerr << \textcolor{stringliteral}{"Error: parameter d (delta) must be a positive integer. Instead, the value "} << delta << \textcolor{stringliteral}{" was
+       given."} << endl;
+81     \textcolor{keywordflow}{return} 1;
+82   \}
+83 
+84   ifstream inp(infile.c\_str());
+85   ofstream oup(outfile.c\_str());
 86 
-87   \textcolor{keywordflow}{if} (stat == \textcolor{keyword}{true})\{
-88     \hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{logger::stat} = \textcolor{keyword}{true};
-89   \} 
-90 
-91   \textcolor{comment}{//cout << " h = " << h << " delta = " << delta << " infile = " << infile << " outfile = " << outfile <<
+87   \textcolor{keywordflow}{if} (!inp.good())\{
+88     cerr << \textcolor{stringliteral}{"Error: invalid input file <"} << infile << \textcolor{stringliteral}{"> given "} << endl;
+89     \textcolor{keywordflow}{return} 1;
+90   \}
+91 
+92   \textcolor{keywordflow}{if} (!oup.good())\{
+93     cerr << \textcolor{stringliteral}{"Error: invalid output file <"} << outfile << \textcolor{stringliteral}{"> given "} << endl;
+94     \textcolor{keywordflow}{return} 1;
+95   \}
+96 
+97 
+98   \textcolor{keywordflow}{if} (quiet == \textcolor{keyword}{true})\{
+99     \textcolor{comment}{// do not log }
+100     \hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose} = \textcolor{keyword}{false}; \textcolor{comment}{// no run time log }
+101     \hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{logger::report} = \textcolor{keyword}{false}; \textcolor{comment}{// no final report}
+102   \}
+103 
+104   \textcolor{keywordflow}{if} (stat == \textcolor{keyword}{true})\{
+105     \hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{logger::stat} = \textcolor{keyword}{true};
+106   \} 
+107 
+108   \textcolor{comment}{//cout << " h = " << h << " delta = " << delta << " infile = " << infile << " outfile = " << outfile <<
        endl;}
-92 
-93   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
-94   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false})\{
-95     \textcolor{comment}{// goal is compression}
-96     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
-97     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
-98     inp >> G;
-99     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
-100     FILE* f;
-101     f = fopen(outfile.c\_str(), \textcolor{stringliteral}{"wb+"});
-102     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(f);
-103     fclose(f);
-104   \}\textcolor{keywordflow}{else}\{
-105     \textcolor{comment}{// goal is to decompess}
-106     FILE* f;
-107     f = fopen(infile.c\_str(), \textcolor{stringliteral}{"rb+"});
-108     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
-109     C.\hyperlink{classmarked__graph__compressed_a9db2d11bd63ad3d5a75e47b4023a89dd}{binary\_read}(f);
-110     fclose(f);
-111     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
-112     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
-113     oup << G;
-114   \}
-115   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
-116   \textcolor{keywordflow}{return} 0;
-117 \}
+109 
+110   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
+111   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false})\{
+112     \textcolor{comment}{// goal is compression}
+113     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
+114     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
+115     inp >> G;
+116     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+117     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Encode"}, \textcolor{stringliteral}{""});
+118     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
+119     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+120     FILE* f;
+121     f = fopen(outfile.c\_str(), \textcolor{stringliteral}{"wb+"});
+122     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+123     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write to binary"}, \textcolor{stringliteral}{""});
+124     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(f);
+125     fclose(f);
+126     logger::current\_depth--;
+127   \}\textcolor{keywordflow}{else}\{
+128     \textcolor{comment}{// goal is to decompess}
+129     FILE* f;
+130     f = fopen(infile.c\_str(), \textcolor{stringliteral}{"rb+"});
+131     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
+132     logger::current\_depth++;
+133     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read from binary"}, \textcolor{stringliteral}{""});
+134     C.binary\_read(f);
+135     fclose(f);
+136     logger::current\_depth--;
+137 
+138     logger::current\_depth++;
+139     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode"}, \textcolor{stringliteral}{""});
+140     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
+141     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
+142     logger::current\_depth--;
+143 
+144     logger::current\_depth++;
+145     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write decoded graph to output file"},\textcolor{stringliteral}{""});
+146     oup << G;
+147     logger::current\_depth--;
+148   \}
+149   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
+150   \textcolor{keywordflow}{return} 0;
+151 \}
 \end{DoxyCode}

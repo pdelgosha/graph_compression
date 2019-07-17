@@ -25,9 +25,10 @@ class logger{
  public:
   static bool verbose; //!< if true, every entry is printed at the time of its report, default is false
   static bool stat; //!< if true, statistics will be displayed, e.g. number of star vertices / edges or the number of partition graphs etc
-  static ostream& verbose_stream; //!< the stream for printing entries at the time of arrival, default is cout
+  static ostream* verbose_stream; //!< the stream for printing entries at the time of arrival, default is cout
   static bool report; //!< if true, at the end of the program, a hierarchical report is printed 
-  static ostream& report_stream; //!< the stream to report the final report. Default is cout 
+  static ostream* report_stream; //!< the stream to report the final report. Default is cout
+  static ostream* stat_stream; //!< the stream to report the statistics. Default is cout
   static vector<log_entry> logs;
   static int current_depth;
   static void add_entry(string name, string description);
