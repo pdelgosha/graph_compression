@@ -17,8 +17,10 @@
 \item 
 mpz\+\_\+class \hyperlink{compression__helper_8h_a4e5c8137a0b072800c7a8f0a80978468}{compute\+\_\+product\+\_\+old} (int N, int k, int s)
 \begin{DoxyCompactList}\small\item\em This function computes the product of consecutive integers separated by a given iteration. This is the old version which uses standard recursion. \end{DoxyCompactList}\item 
-mpz\+\_\+class \hyperlink{compression__helper_8h_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\+\_\+product} (int N, int k, int s)
+mpz\+\_\+class \hyperlink{compression__helper_8h_a53d66dd1f27fd1a1986f80419cd2ff36}{compute\+\_\+product\+\_\+stack} (int N, int k, int s)
 \begin{DoxyCompactList}\small\item\em This function computes the product of consecutive integers separated by a given iteration. This is the new version which implements recursion via stack. \end{DoxyCompactList}\item 
+mpz\+\_\+class \hyperlink{compression__helper_8h_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\+\_\+product} (int N, int k, int s)
+\item 
 void \hyperlink{compression__helper_8h_af75857c18e9c23bb114e12642aa8c067}{compute\+\_\+product\+\_\+void} (int N, int k, int s)
 \item 
 mpz\+\_\+class \hyperlink{compression__helper_8h_acecca9cb279d3b3d82915a07d67818cf}{binomial} (const int n, const int m)
@@ -37,6 +39,8 @@ mpz\+\_\+class \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1
 mpz\+\_\+class \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\+\_\+vars\+::mul\+\_\+2}
 \begin{DoxyCompactList}\small\item\em helper variables in order to avoid initialization \end{DoxyCompactList}\item 
 vector$<$ mpz\+\_\+class $>$ \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\+\_\+vars\+::return\+\_\+stack}
+\item 
+vector$<$ mpz\+\_\+class $>$ \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\+\_\+vars\+::mpz\+\_\+vec}
 \end{DoxyCompactItemize}
 
 
@@ -63,11 +67,11 @@ the binomial coefficient n! / m! (n-\/m)!. If n $<$= 0, or m $>$ n, or m $<$= 0,
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-257 \{
-258   \textcolor{keywordflow}{if} (n <= 0 or m > n or m <= 0)
-259     \textcolor{keywordflow}{return} 0;
-260   \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(n, m, 1) / \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(m, m, 1);
-261 \}
+300 \{
+301   \textcolor{keywordflow}{if} (n <= 0 or m > n or m <= 0)
+302     \textcolor{keywordflow}{return} 0;
+303   \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(n, m, 1) / \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(m, m, 1);
+304 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_a40e8dcbc036f96b28e003e882c4890b7}\label{compression__helper_8h_a40e8dcbc036f96b28e003e882c4890b7}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!bit\+\_\+string\+\_\+read@{bit\+\_\+string\+\_\+read}}
@@ -89,35 +93,35 @@ a string of zeros and ones.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-299                                \{
-300   \textcolor{keywordtype}{int} nu\_bytes;
-301   \textcolor{keywordtype}{int} ssize;
-302   \textcolor{comment}{// read the number of bytes to read}
-303   fread(&ssize, \textcolor{keyword}{sizeof}(ssize), 1, f);
-304   \textcolor{comment}{//cerr << " ssize " << ssize << endl;}
-305   nu\_bytes = ssize / 8;
-306   \textcolor{keywordflow}{if} (ssize % 8 != 0)
-307     nu\_bytes ++;
-308 
-309   \textcolor{keywordtype}{int} last\_byte\_size = ssize % 8;
-310   \textcolor{keywordflow}{if} (last\_byte\_size == 0)
-311     last\_byte\_size  = 8;
-312 
-313   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} c;
-314   bitset<8> B;
-315   \textcolor{keywordtype}{string} s; 
-316   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_bytes;i++)\{
-317     fread(&c, \textcolor{keyword}{sizeof}(c), 1, f);
-318     B = c;
-319     \textcolor{comment}{//cout << B << endl;}
-320     \textcolor{keywordflow}{if} (i < nu\_bytes -1)\{
-321       s += B.to\_string();
-322     \}\textcolor{keywordflow}{else}\{
-323       s += B.to\_string().substr(8-last\_byte\_size, last\_byte\_size);
-324     \}
-325   \}
-326   \textcolor{keywordflow}{return} s;
-327 \}
+342                                \{
+343   \textcolor{keywordtype}{int} nu\_bytes;
+344   \textcolor{keywordtype}{int} ssize;
+345   \textcolor{comment}{// read the number of bytes to read}
+346   fread(&ssize, \textcolor{keyword}{sizeof}(ssize), 1, f);
+347   \textcolor{comment}{//cerr << " ssize " << ssize << endl;}
+348   nu\_bytes = ssize / 8;
+349   \textcolor{keywordflow}{if} (ssize % 8 != 0)
+350     nu\_bytes ++;
+351 
+352   \textcolor{keywordtype}{int} last\_byte\_size = ssize % 8;
+353   \textcolor{keywordflow}{if} (last\_byte\_size == 0)
+354     last\_byte\_size  = 8;
+355 
+356   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} c;
+357   bitset<8> B;
+358   \textcolor{keywordtype}{string} s; 
+359   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<nu\_bytes;i++)\{
+360     fread(&c, \textcolor{keyword}{sizeof}(c), 1, f);
+361     B = c;
+362     \textcolor{comment}{//cout << B << endl;}
+363     \textcolor{keywordflow}{if} (i < nu\_bytes -1)\{
+364       s += B.to\_string();
+365     \}\textcolor{keywordflow}{else}\{
+366       s += B.to\_string().substr(8-last\_byte\_size, last\_byte\_size);
+367     \}
+368   \}
+369   \textcolor{keywordflow}{return} s;
+370 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_accfebfd921b967c2f09e8c11569eb832}\label{compression__helper_8h_accfebfd921b967c2f09e8c11569eb832}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!bit\+\_\+string\+\_\+write@{bit\+\_\+string\+\_\+write}}
@@ -138,26 +142,26 @@ First, the size of the bit sequence is written to the output, then the input is 
 \end{DoxyParams}
 
 \begin{DoxyCode}
-277                                                \{
-278   \textcolor{comment}{// find out the number of bytes}
-279   \textcolor{keywordtype}{int} ssize = s.size();
-280   \textcolor{keywordtype}{int} nu\_bytes = ssize / 8;
-281 
-282   \textcolor{keywordflow}{if} (ssize % 8 != 0) \textcolor{comment}{// an incomplete byte is required}
-283     nu\_bytes++;
-284 
-285   fwrite(&ssize, \textcolor{keyword}{sizeof}(ssize), 1, f); \textcolor{comment}{// first, write down how many bytes are coming.}
-286 
-287   stringstream ss;
-288   ss << s;
-289 
-290   bitset<8> B;
-291   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} c; 
-292   \textcolor{keywordflow}{while} (ss >> B)\{
-293     c = B.to\_ulong();
-294     fwrite(&c, \textcolor{keyword}{sizeof}(c), 1, f);
-295   \}
-296 \}
+320                                                \{
+321   \textcolor{comment}{// find out the number of bytes}
+322   \textcolor{keywordtype}{int} ssize = s.size();
+323   \textcolor{keywordtype}{int} nu\_bytes = ssize / 8;
+324 
+325   \textcolor{keywordflow}{if} (ssize % 8 != 0) \textcolor{comment}{// an incomplete byte is required}
+326     nu\_bytes++;
+327 
+328   fwrite(&ssize, \textcolor{keyword}{sizeof}(ssize), 1, f); \textcolor{comment}{// first, write down how many bytes are coming.}
+329 
+330   stringstream ss;
+331   ss << s;
+332 
+333   bitset<8> B;
+334   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} c; 
+335   \textcolor{keywordflow}{while} (ss >> B)\{
+336     c = B.to\_ulong();
+337     fwrite(&c, \textcolor{keyword}{sizeof}(c), 1, f);
+338   \}
+339 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_ae2afb43aabe50f7d42aae8f82b5a35f4}\label{compression__helper_8h_ae2afb43aabe50f7d42aae8f82b5a35f4}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!compute\+\_\+product@{compute\+\_\+product}}
@@ -166,117 +170,43 @@ First, the size of the bit sequence is written to the output, then the input is 
 {\footnotesize\ttfamily mpz\+\_\+class compute\+\_\+product (\begin{DoxyParamCaption}\item[{int}]{N,  }\item[{int}]{k,  }\item[{int}]{s }\end{DoxyParamCaption})}
 
 
-
-This function computes the product of consecutive integers separated by a given iteration. This is the new version which implements recursion via stack. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em N} & The first term in the product \\
-\hline
-{\em k} & the number of terms in the product \\
-\hline
-{\em s} & the iteration \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $ 
-\end{DoxyReturn}
-
 \begin{DoxyCode}
-37                                               \{
-38 
-39   \textcolor{keywordflow}{if} (k==1)
-40     \textcolor{keywordflow}{return} N;
-41   \textcolor{keywordflow}{if} (k == 0) \textcolor{comment}{// TO CHECK because there are no terms to compute product}
-42     \textcolor{keywordflow}{return} 1;
-43 
-44   \textcolor{keywordflow}{if} (k < 0)\{
-45     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
+235                                               \{
+236   \textcolor{keywordflow}{if} (k==1)
+237     \textcolor{keywordflow}{return} N;
+238   \textcolor{keywordflow}{if} (k == 0) \textcolor{comment}{// TO CHECK because there are no terms to compute product}
+239     \textcolor{keywordflow}{return} 1;
+240 
+241   \textcolor{keywordflow}{if} (k < 0)\{
+242     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
        << endl;
-46     \textcolor{keywordflow}{return} 1;
-47   \}
-48   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
-49     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
-50     \textcolor{keywordflow}{return} 0;
-51   \}
-52 
-53   \textcolor{keywordflow}{if} (k == 2)\{
-54     \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N;
-55     \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N - s;
-56     \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
-57   \}
-58 
-59   \textcolor{keywordtype}{int} k\_bits = 0; \textcolor{comment}{// roughly , the number of bits in k, the depth of the stack during run time}
-60   \textcolor{keywordtype}{int} k\_copy = k;
-61   \textcolor{keywordflow}{while} (k\_copy > 0)\{
-62     k\_bits ++;
-63     k\_copy >>= 1;
-64   \}
-65   k\_bits += 2; 
-66   vector<pair<int, int> > call\_stack(2 * k\_bits);
-67   \textcolor{comment}{//cout << " 2 * k\_bits " << 2 * k\_bits << endl; }
-68   \textcolor{keywordtype}{int} call\_pointer = 0; \textcolor{comment}{// size of the call pointer, so the top index is call\_pointer - 1}
-69   vector<int> status\_stack(2 * k\_bits); \textcolor{comment}{// 0: first meet, 1: to return }
-70   \textcolor{comment}{//vector<mpz\_class> return\_stack(2 * k\_bits);}
-71   \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(2*k\_bits);
-72   \textcolor{keywordtype}{int} return\_pointer = 0;
-73 
-74   call\_stack[call\_pointer] = pair<int, int> (N, k);
-75   status\_stack[call\_pointer] = 0;
-76   call\_pointer ++;
-77 
-78   \textcolor{keywordtype}{int} m;
-79   \textcolor{keywordtype}{int} N\_now, k\_now; \textcolor{comment}{// N and k for the current stack element}
-80   
-81   \textcolor{keywordflow}{while} (call\_pointer > 0)\{
-82     N\_now = call\_stack[call\_pointer-1].first;
-83     k\_now = call\_stack[call\_pointer-1].second;
-84     \textcolor{comment}{//cout << "call\_pointer = " << call\_pointer << " N = " << N\_now << " k = " << k\_now << " stat = " <<
-       status\_stack[call\_pointer-1] << endl;}
-85     \textcolor{comment}{//cout << " the whole stack " << endl;}
-86     \textcolor{comment}{//for (int i=0;i<call\_pointer; i++)\{}
-87     \textcolor{comment}{//  cout << call\_stack[i].first << " , " << call\_stack[i].second << " " << status\_stack[i] << endl;}
-88     \textcolor{comment}{//\}}
-89     \textcolor{keywordflow}{if} (status\_stack[call\_pointer-1] == 1)\{ \textcolor{comment}{// we should multiply two top elements in the return stack}
-90       \textcolor{comment}{// to collect two top elements in return stack and multiply them}
-91       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] = 
-      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] * 
-      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-1];
-92       return\_pointer--; \textcolor{comment}{// remove two items, add one item}
-93       call\_pointer --;
-94     \}\textcolor{keywordflow}{else}\{
-95       \textcolor{comment}{//cout << " else " << endl;}
-96       \textcolor{keywordflow}{if}(k\_now == 1)\{
-97         \textcolor{comment}{// to return the corresponding N}
-98         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = call\_stack[call\_pointer-1].
-      first;
-99         call\_pointer --; \textcolor{comment}{// pop this element}
-100       \}
-101       \textcolor{keywordflow}{if} (k\_now == 2)\{
-102         \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N\_now;
-103         \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N\_now - s;
-104         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = 
-      \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
-105         call\_pointer --; 
-106       \}
-107       \textcolor{keywordflow}{if} (k\_now > 2)\{
-108         m = k\_now / 2;
-109         status\_stack[call\_pointer-1] = 1; \textcolor{comment}{// when return to this state, we know that we should aggregate }
-110         call\_stack[call\_pointer] = pair<int, int>(N\_now, m);
-111         status\_stack[call\_pointer] = 0; \textcolor{comment}{// just added}
-112         call\_stack[call\_pointer+1] = pair<int, int>(N\_now - m*s, k\_now - m );
-113         status\_stack[call\_pointer+1]  = 0;
-114         call\_pointer += 2; 
-115       \}
-116     \}
-117   \}
-118   \textcolor{comment}{// make sure there is exactly one element in return stack}
-119   \textcolor{keywordflow}{if} (return\_pointer != 1)\{
-120     cerr << \textcolor{stringliteral}{" return pointer is not zero"};
-121   \}
-122   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0]; \textcolor{comment}{// the top element remaining in the return
-       stack }
-123 \}
+243     \textcolor{keywordflow}{return} 1;
+244   \}
+245   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
+246     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
+247     \textcolor{keywordflow}{return} 0;
+248   \}
+249 
+250   \textcolor{keywordflow}{if} (k == 2)\{
+251     \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N;
+252     \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N - s;
+253     \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
+254   \}
+255 
+256   \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\_vars::mpz\_vec}.resize(k);
+257   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<k;i++)
+258     \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\_vars::mpz\_vec}[i] = N - i * s;
+259 
+260   \textcolor{keywordtype}{int} step\_size, to\_mul; 
+261 
+262   \textcolor{keywordflow}{for} (step\_size = 2, to\_mul = 1; to\_mul < k; step\_size <<=1, to\_mul <<=1)\{
+263     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<k; i+=step\_size)\{
+264       \textcolor{keywordflow}{if} (i+to\_mul < k)
+265         \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\_vars::mpz\_vec}[i] *= \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\_vars::mpz\_vec}[i+to\_mul];
+266     \}
+267   \}
+268   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a54af4d4cefd8ae34c16c2b89992da473}{helper\_vars::mpz\_vec}[0];
+269 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_a4e5c8137a0b072800c7a8f0a80978468}\label{compression__helper_8h_a4e5c8137a0b072800c7a8f0a80978468}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!compute\+\_\+product\+\_\+old@{compute\+\_\+product\+\_\+old}}
@@ -302,36 +232,162 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-7                                                   \{
-8   \textcolor{comment}{//cerr << " compute\_product  N " << N << " k " << k << " s " << s << endl;}
-9 
-10   \textcolor{keywordflow}{if} (k==1)
-11     \textcolor{keywordflow}{return} N;
-12   \textcolor{keywordflow}{if} (k == 0) \textcolor{comment}{// TO CHECK because there are no terms to compute product}
-13     \textcolor{keywordflow}{return} 1;
-14 
-15   \textcolor{keywordflow}{if} (k < 0)\{
-16     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
+8                                                   \{
+9   \textcolor{comment}{//cerr << " compute\_product  N " << N << " k " << k << " s " << s << endl;}
+10 
+11   \textcolor{keywordflow}{if} (k==1)
+12     \textcolor{keywordflow}{return} N;
+13   \textcolor{keywordflow}{if} (k == 0) \textcolor{comment}{// TO CHECK because there are no terms to compute product}
+14     \textcolor{keywordflow}{return} 1;
+15 
+16   \textcolor{keywordflow}{if} (k < 0)\{
+17     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
        << endl;
-17     \textcolor{keywordflow}{return} 1;
-18   \}
-19   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
-20     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
-21     \textcolor{keywordflow}{return} 0;
-22   \}
-23 
-24   \textcolor{keywordflow}{if} (k == 2)
-25     \textcolor{keywordflow}{return} mpz\_class(N) * mpz\_class(N-s);
-26   \textcolor{comment}{// we do this by dividing the terms into two parts}
-27   \textcolor{keywordtype}{int} m = k / 2; \textcolor{comment}{// the middle point}
-28   mpz\_class left, right; \textcolor{comment}{// each of the half products }
-29   left = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(N, m, s);
-30   right = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(N-m * s, k-m, s);
-31   \textcolor{comment}{//logger::item\_start("cp\_mul");}
-32   mpz\_class ans = left*right;
-33   \textcolor{comment}{//logger::item\_stop("cp\_mul");}
-34   \textcolor{keywordflow}{return} ans;
-35 \}
+18     \textcolor{keywordflow}{return} 1;
+19   \}
+20   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
+21     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
+22     \textcolor{keywordflow}{return} 0;
+23   \}
+24 
+25   \textcolor{keywordflow}{if} (k == 2)
+26     \textcolor{keywordflow}{return} mpz\_class(N) * mpz\_class(N-s);
+27   \textcolor{comment}{// we do this by dividing the terms into two parts}
+28   \textcolor{keywordtype}{int} m = k / 2; \textcolor{comment}{// the middle point}
+29   mpz\_class left, right; \textcolor{comment}{// each of the half products }
+30   left = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(N, m, s);
+31   right = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(N-m * s, k-m, s);
+32   \textcolor{comment}{//logger::item\_start("cp\_mul");}
+33   mpz\_class ans = left*right;
+34   \textcolor{comment}{//logger::item\_stop("cp\_mul");}
+35   \textcolor{keywordflow}{return} ans;
+36 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{compression__helper_8h_a53d66dd1f27fd1a1986f80419cd2ff36}\label{compression__helper_8h_a53d66dd1f27fd1a1986f80419cd2ff36}} 
+\index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!compute\+\_\+product\+\_\+stack@{compute\+\_\+product\+\_\+stack}}
+\index{compute\+\_\+product\+\_\+stack@{compute\+\_\+product\+\_\+stack}!compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}}
+\subsubsection{\texorpdfstring{compute\+\_\+product\+\_\+stack()}{compute\_product\_stack()}}
+{\footnotesize\ttfamily mpz\+\_\+class compute\+\_\+product\+\_\+stack (\begin{DoxyParamCaption}\item[{int}]{N,  }\item[{int}]{k,  }\item[{int}]{s }\end{DoxyParamCaption})}
+
+
+
+This function computes the product of consecutive integers separated by a given iteration. This is the new version which implements recursion via stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & The first term in the product \\
+\hline
+{\em k} & the number of terms in the product \\
+\hline
+{\em s} & the iteration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+38                                                     \{
+39 
+40   \textcolor{keywordflow}{if} (k==1)
+41     \textcolor{keywordflow}{return} N;
+42   \textcolor{keywordflow}{if} (k == 0) \textcolor{comment}{// TO CHECK because there are no terms to compute product}
+43     \textcolor{keywordflow}{return} 1;
+44 
+45   \textcolor{keywordflow}{if} (k < 0)\{
+46     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
+       << endl;
+47     \textcolor{keywordflow}{return} 1;
+48   \}
+49   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
+50     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
+51     \textcolor{keywordflow}{return} 0;
+52   \}
+53 
+54   \textcolor{keywordflow}{if} (k == 2)\{
+55     \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N;
+56     \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N - s;
+57     \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
+58   \}
+59 
+60   \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"CP body"});
+61 
+62   \textcolor{keywordtype}{int} k\_bits = 0; \textcolor{comment}{// roughly , the number of bits in k, the depth of the stack during run time}
+63   \textcolor{keywordtype}{int} k\_copy = k;
+64   \textcolor{keywordflow}{while} (k\_copy > 0)\{
+65     k\_bits ++;
+66     k\_copy >>= 1;
+67   \}
+68   k\_bits += 2; 
+69   vector<pair<int, int> > call\_stack(2 * k\_bits);
+70   \textcolor{comment}{//cout << " 2 * k\_bits " << 2 * k\_bits << endl; }
+71   \textcolor{keywordtype}{int} call\_pointer = 0; \textcolor{comment}{// size of the call pointer, so the top index is call\_pointer - 1}
+72   vector<int> status\_stack(2 * k\_bits); \textcolor{comment}{// 0: first meet, 1: to return }
+73   \textcolor{comment}{//vector<mpz\_class> return\_stack(2 * k\_bits);}
+74   \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(2*k\_bits);
+75   \textcolor{keywordtype}{int} return\_pointer = 0;
+76 
+77   call\_stack[call\_pointer] = pair<int, int> (N, k);
+78   status\_stack[call\_pointer] = 0;
+79   call\_pointer ++;
+80 
+81   \textcolor{keywordtype}{int} m;
+82   \textcolor{keywordtype}{int} N\_now, k\_now; \textcolor{comment}{// N and k for the current stack element}
+83   
+84   \textcolor{keywordflow}{while} (call\_pointer > 0)\{
+85     N\_now = call\_stack[call\_pointer-1].first;
+86     k\_now = call\_stack[call\_pointer-1].second;
+87     \textcolor{comment}{//cout << "call\_pointer = " << call\_pointer << " N = " << N\_now << " k = " << k\_now << " stat = " <<
+       status\_stack[call\_pointer-1] << endl;}
+88     \textcolor{comment}{//cout << " the whole stack " << endl;}
+89     \textcolor{comment}{//for (int i=0;i<call\_pointer; i++)\{}
+90     \textcolor{comment}{//  cout << call\_stack[i].first << " , " << call\_stack[i].second << " " << status\_stack[i] << endl;}
+91     \textcolor{comment}{//\}}
+92     \textcolor{keywordflow}{if} (status\_stack[call\_pointer-1] == 1)\{ \textcolor{comment}{// we should multiply two top elements in the return stack}
+93       \textcolor{comment}{// to collect two top elements in return stack and multiply them}
+94       \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"CP arithmetic"});
+95       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] = 
+      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] * 
+      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-1];
+96       \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"CP arithmetic"});
+97       return\_pointer--; \textcolor{comment}{// remove two items, add one item}
+98       call\_pointer --;
+99     \}\textcolor{keywordflow}{else}\{
+100       \textcolor{comment}{//cout << " else " << endl;}
+101       \textcolor{keywordflow}{if}(k\_now == 1)\{
+102         \textcolor{comment}{// to return the corresponding N}
+103         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = call\_stack[call\_pointer-1].
+      first;
+104         call\_pointer --; \textcolor{comment}{// pop this element}
+105       \}
+106       \textcolor{keywordflow}{if} (k\_now == 2)\{
+107         \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N\_now;
+108         \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N\_now - s;
+109         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"CP arithmetic"});
+110         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = 
+      \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
+111         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"CP arithmetic"});
+112         call\_pointer --; 
+113       \}
+114       \textcolor{keywordflow}{if} (k\_now > 2)\{
+115         m = k\_now / 2;
+116         status\_stack[call\_pointer-1] = 1; \textcolor{comment}{// when return to this state, we know that we should aggregate }
+117         call\_stack[call\_pointer] = pair<int, int>(N\_now, m);
+118         status\_stack[call\_pointer] = 0; \textcolor{comment}{// just added}
+119         call\_stack[call\_pointer+1] = pair<int, int>(N\_now - m*s, k\_now - m );
+120         status\_stack[call\_pointer+1]  = 0;
+121         call\_pointer += 2; 
+122       \}
+123     \}
+124   \}
+125   \textcolor{comment}{// make sure there is exactly one element in return stack}
+126   \textcolor{keywordflow}{if} (return\_pointer != 1)\{
+127     cerr << \textcolor{stringliteral}{" return pointer is not zero"};
+128   \}
+129   \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"CP body"});
+130   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0]; \textcolor{comment}{// the top element remaining in the return
+       stack }
+131 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_af75857c18e9c23bb114e12642aa8c067}\label{compression__helper_8h_af75857c18e9c23bb114e12642aa8c067}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!compute\+\_\+product\+\_\+void@{compute\+\_\+product\+\_\+void}}
@@ -341,112 +397,112 @@ the product N $ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) $
 
 
 \begin{DoxyCode}
-127                                               \{
-128   \textcolor{comment}{//cerr << " void called N " << N << " k " << k << " s " << s << endl;}
-129   \textcolor{keywordflow}{if} (k==1)\{
-130     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
-131     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = N;\textcolor{comment}{//return N;}
-132     \textcolor{keywordflow}{return};
-133   \}
-134   \textcolor{keywordflow}{if} (k == 0)\{ \textcolor{comment}{// TO CHECK because there are no terms to compute product}
-135     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
-136     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 1;\textcolor{comment}{//return 1;}
-137     \textcolor{keywordflow}{return};
-138   \}
-139 
-140   \textcolor{keywordflow}{if} (k < 0)\{
-141     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
+135                                               \{
+136   \textcolor{comment}{//cerr << " void called N " << N << " k " << k << " s " << s << endl;}
+137   \textcolor{keywordflow}{if} (k==1)\{
+138     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
+139     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = N;\textcolor{comment}{//return N;}
+140     \textcolor{keywordflow}{return};
+141   \}
+142   \textcolor{keywordflow}{if} (k == 0)\{ \textcolor{comment}{// TO CHECK because there are no terms to compute product}
+143     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
+144     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 1;\textcolor{comment}{//return 1;}
+145     \textcolor{keywordflow}{return};
+146   \}
+147 
+148   \textcolor{keywordflow}{if} (k < 0)\{
+149     cerr << \textcolor{stringliteral}{" WARNING: compute\_product called for k < 0, returning 1, N  "} << N << \textcolor{stringliteral}{" k "} << k << \textcolor{stringliteral}{" s "} << s
        << endl;
-142     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
-143     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 1;\textcolor{comment}{//return 1;}
-144     \textcolor{keywordflow}{return};
-145   \}
-146   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
-147     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
-148     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
-149     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 0; \textcolor{comment}{//return 0;}
-150     \textcolor{keywordflow}{return};
-151   \}
-152 
-153   \textcolor{keywordflow}{if} (k == 2)\{
-154     \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N;
-155     \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N - s;
+150     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
+151     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 1;\textcolor{comment}{//return 1;}
+152     \textcolor{keywordflow}{return};
+153   \}
+154   \textcolor{keywordflow}{if} (N - (k-1) * s <= 0)\{ \textcolor{comment}{// the terms go negative}
+155     \textcolor{comment}{//cerr << " WARNING: compute\_product called for N - (k-1) * s <= 0 " << endl;}
 156     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
-157     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * 
-      \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
+157     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = 0; \textcolor{comment}{//return 0;}
 158     \textcolor{keywordflow}{return};
 159   \}
 160 
-161   \textcolor{keywordtype}{int} k\_bits = 0; \textcolor{comment}{// roughly , the number of bits in k, the depth of the stack during run time}
-162   \textcolor{keywordtype}{int} k\_copy = k;
-163   \textcolor{keywordflow}{while} (k\_copy > 0)\{
-164     k\_bits ++;
-165     k\_copy >>= 1;
-166   \}
-167   k\_bits += 2; 
-168   vector<pair<int, int> > call\_stack(2 * k\_bits);
-169   \textcolor{comment}{//cout << " 2 * k\_bits " << 2 * k\_bits << endl; }
-170   \textcolor{keywordtype}{int} call\_pointer = 0; \textcolor{comment}{// size of the call pointer, so the top index is call\_pointer - 1}
-171   vector<int> status\_stack(2 * k\_bits); \textcolor{comment}{// 0: first meet, 1: to return }
-172   \textcolor{comment}{//vector<mpz\_class> return\_stack(2 * k\_bits);}
-173   \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(2*k\_bits);
-174   \textcolor{keywordtype}{int} return\_pointer = 0;
-175 
-176   call\_stack[call\_pointer] = pair<int, int> (N, k);
-177   status\_stack[call\_pointer] = 0;
-178   call\_pointer ++;
-179 
-180   \textcolor{keywordtype}{int} m;
-181   \textcolor{keywordtype}{int} N\_now, k\_now; \textcolor{comment}{// N and k for the current stack element}
-182   
-183   \textcolor{keywordflow}{while} (call\_pointer > 0)\{
-184     N\_now = call\_stack[call\_pointer-1].first;
-185     k\_now = call\_stack[call\_pointer-1].second;
-186     \textcolor{comment}{//cout << "call\_pointer = " << call\_pointer << " N = " << N\_now << " k = " << k\_now << " stat = " <<
+161   \textcolor{keywordflow}{if} (k == 2)\{
+162     \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N;
+163     \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N - s;
+164     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(1);
+165     \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0] = \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * 
+      \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
+166     \textcolor{keywordflow}{return};
+167   \}
+168 
+169   \textcolor{keywordtype}{int} k\_bits = 0; \textcolor{comment}{// roughly , the number of bits in k, the depth of the stack during run time}
+170   \textcolor{keywordtype}{int} k\_copy = k;
+171   \textcolor{keywordflow}{while} (k\_copy > 0)\{
+172     k\_bits ++;
+173     k\_copy >>= 1;
+174   \}
+175   k\_bits += 2; 
+176   vector<pair<int, int> > call\_stack(2 * k\_bits);
+177   \textcolor{comment}{//cout << " 2 * k\_bits " << 2 * k\_bits << endl; }
+178   \textcolor{keywordtype}{int} call\_pointer = 0; \textcolor{comment}{// size of the call pointer, so the top index is call\_pointer - 1}
+179   vector<int> status\_stack(2 * k\_bits); \textcolor{comment}{// 0: first meet, 1: to return }
+180   \textcolor{comment}{//vector<mpz\_class> return\_stack(2 * k\_bits);}
+181   \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}.resize(2*k\_bits);
+182   \textcolor{keywordtype}{int} return\_pointer = 0;
+183 
+184   call\_stack[call\_pointer] = pair<int, int> (N, k);
+185   status\_stack[call\_pointer] = 0;
+186   call\_pointer ++;
+187 
+188   \textcolor{keywordtype}{int} m;
+189   \textcolor{keywordtype}{int} N\_now, k\_now; \textcolor{comment}{// N and k for the current stack element}
+190   
+191   \textcolor{keywordflow}{while} (call\_pointer > 0)\{
+192     N\_now = call\_stack[call\_pointer-1].first;
+193     k\_now = call\_stack[call\_pointer-1].second;
+194     \textcolor{comment}{//cout << "call\_pointer = " << call\_pointer << " N = " << N\_now << " k = " << k\_now << " stat = " <<
        status\_stack[call\_pointer-1] << endl;}
-187     \textcolor{comment}{//cout << " the whole stack " << endl;}
-188     \textcolor{comment}{//for (int i=0;i<call\_pointer; i++)\{}
-189     \textcolor{comment}{//  cout << call\_stack[i].first << " , " << call\_stack[i].second << " " << status\_stack[i] << endl;}
-190     \textcolor{comment}{//\}}
-191     \textcolor{keywordflow}{if} (status\_stack[call\_pointer-1] == 1)\{ \textcolor{comment}{// we should multiply two top elements in the return stack}
-192       \textcolor{comment}{// to collect two top elements in return stack and multiply them}
-193       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] = 
+195     \textcolor{comment}{//cout << " the whole stack " << endl;}
+196     \textcolor{comment}{//for (int i=0;i<call\_pointer; i++)\{}
+197     \textcolor{comment}{//  cout << call\_stack[i].first << " , " << call\_stack[i].second << " " << status\_stack[i] << endl;}
+198     \textcolor{comment}{//\}}
+199     \textcolor{keywordflow}{if} (status\_stack[call\_pointer-1] == 1)\{ \textcolor{comment}{// we should multiply two top elements in the return stack}
+200       \textcolor{comment}{// to collect two top elements in return stack and multiply them}
+201       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] = 
       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-2] * 
       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer-1];
-194       return\_pointer--; \textcolor{comment}{// remove two items, add one item}
-195       call\_pointer --;
-196     \}\textcolor{keywordflow}{else}\{
-197       \textcolor{comment}{//cout << " else " << endl;}
-198       \textcolor{keywordflow}{if}(k\_now == 1)\{
-199         \textcolor{comment}{// to return the corresponding N}
-200         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = call\_stack[call\_pointer-1].
+202       return\_pointer--; \textcolor{comment}{// remove two items, add one item}
+203       call\_pointer --;
+204     \}\textcolor{keywordflow}{else}\{
+205       \textcolor{comment}{//cout << " else " << endl;}
+206       \textcolor{keywordflow}{if}(k\_now == 1)\{
+207         \textcolor{comment}{// to return the corresponding N}
+208         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = call\_stack[call\_pointer-1].
       first;
-201         call\_pointer --; \textcolor{comment}{// pop this element}
-202       \}
-203       \textcolor{keywordflow}{if} (k\_now == 2)\{
-204         \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N\_now;
-205         \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N\_now - s;
-206         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = 
+209         call\_pointer --; \textcolor{comment}{// pop this element}
+210       \}
+211       \textcolor{keywordflow}{if} (k\_now == 2)\{
+212         \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} = N\_now;
+213         \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2} = N\_now - s;
+214         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[return\_pointer++] = 
       \hyperlink{namespacehelper__vars_af190146bcb041e9501bb622fd0a70e1e}{helper\_vars::mul\_1} * \hyperlink{namespacehelper__vars_a3ef4720a3a8f70853c651c0bba5107b2}{helper\_vars::mul\_2};
-207         call\_pointer --; 
-208       \}
-209       \textcolor{keywordflow}{if} (k\_now > 2)\{
-210         m = k\_now / 2;
-211         status\_stack[call\_pointer-1] = 1; \textcolor{comment}{// when return to this state, we know that we should aggregate }
-212         call\_stack[call\_pointer] = pair<int, int>(N\_now, m);
-213         status\_stack[call\_pointer] = 0; \textcolor{comment}{// just added}
-214         call\_stack[call\_pointer+1] = pair<int, int>(N\_now - m*s, k\_now - m );
-215         status\_stack[call\_pointer+1]  = 0;
-216         call\_pointer += 2; 
-217       \}
-218     \}
-219   \}
-220   \textcolor{comment}{// make sure there is exactly one element in return stack}
-221   \textcolor{keywordflow}{if} (return\_pointer != 1)\{
-222     cerr << \textcolor{stringliteral}{" return pointer is not zero"};
-223   \}
-224   \textcolor{comment}{//return helper\_vars::return\_stack[0]; // the top element remaining in the return stack }
-225 \}
+215         call\_pointer --; 
+216       \}
+217       \textcolor{keywordflow}{if} (k\_now > 2)\{
+218         m = k\_now / 2;
+219         status\_stack[call\_pointer-1] = 1; \textcolor{comment}{// when return to this state, we know that we should aggregate }
+220         call\_stack[call\_pointer] = pair<int, int>(N\_now, m);
+221         status\_stack[call\_pointer] = 0; \textcolor{comment}{// just added}
+222         call\_stack[call\_pointer+1] = pair<int, int>(N\_now - m*s, k\_now - m );
+223         status\_stack[call\_pointer+1]  = 0;
+224         call\_pointer += 2; 
+225       \}
+226     \}
+227   \}
+228   \textcolor{comment}{// make sure there is exactly one element in return stack}
+229   \textcolor{keywordflow}{if} (return\_pointer != 1)\{
+230     cerr << \textcolor{stringliteral}{" return pointer is not zero"};
+231   \}
+232   \textcolor{comment}{//return helper\_vars::return\_stack[0]; // the top element remaining in the return stack }
+233 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8h_a86d8a20e022dc06b23df3b08ac10b7d1}\label{compression__helper_8h_a86d8a20e022dc06b23df3b08ac10b7d1}} 
 \index{compression\+\_\+helper.\+h@{compression\+\_\+helper.\+h}!prod\+\_\+factorial@{prod\+\_\+factorial}}
@@ -470,14 +526,14 @@ $\prod_{v = i}^j a_v ! $
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-265 \{
-266   \textcolor{keywordflow}{if} (i == j)\{
-267     \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(a[i], a[i], 1);
-268   \}\textcolor{keywordflow}{else}\{
-269     \textcolor{keywordtype}{int} k = (i+j)/2;
-270     mpz\_class x = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, i, k);
-271     mpz\_class y = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, k+1, j);
-272     \textcolor{keywordflow}{return} x * y;
-273   \}
-274 \}
+308 \{
+309   \textcolor{keywordflow}{if} (i == j)\{
+310     \textcolor{keywordflow}{return} \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(a[i], a[i], 1);
+311   \}\textcolor{keywordflow}{else}\{
+312     \textcolor{keywordtype}{int} k = (i+j)/2;
+313     mpz\_class x = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, i, k);
+314     mpz\_class y = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, k+1, j);
+315     \textcolor{keywordflow}{return} x * y;
+316   \}
+317 \}
 \end{DoxyCode}

@@ -3,6 +3,7 @@
 mpz_class helper_vars::mul_1;
 mpz_class helper_vars::mul_2;
 vector<mpz_class> helper_vars::return_stack;
+vector<mpz_class> helper_vars::mpz_vec;
 
 mpz_class compute_product_old(int N, int k, int s){
   //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
@@ -34,7 +35,7 @@ mpz_class compute_product_old(int N, int k, int s){
   return ans;
 }
 
-mpz_class compute_product(int N, int k, int s){
+mpz_class compute_product_stack(int N, int k, int s){
 
   if (k==1)
     return N;
@@ -55,6 +56,8 @@ mpz_class compute_product(int N, int k, int s){
     helper_vars::mul_2 = N - s;
     return helper_vars::mul_1 * helper_vars::mul_2;
   }
+
+  logger::item_start("CP body");
 
   int k_bits = 0; // roughly , the number of bits in k, the depth of the stack during run time
   int k_copy = k;
@@ -88,7 +91,9 @@ mpz_class compute_product(int N, int k, int s){
     //}
     if (status_stack[call_pointer-1] == 1){ // we should multiply two top elements in the return stack
       // to collect two top elements in return stack and multiply them
+      logger::item_start("CP arithmetic");
       helper_vars::return_stack[return_pointer-2] = helper_vars::return_stack[return_pointer-2] * helper_vars::return_stack[return_pointer-1];
+      logger::item_stop("CP arithmetic");
       return_pointer--; // remove two items, add one item
       call_pointer --;
     }else{
@@ -101,7 +106,9 @@ mpz_class compute_product(int N, int k, int s){
       if (k_now == 2){
         helper_vars::mul_1 = N_now;
         helper_vars::mul_2 = N_now - s;
+        logger::item_start("CP arithmetic");
         helper_vars::return_stack[return_pointer++] = helper_vars::mul_1 * helper_vars::mul_2;
+        logger::item_stop("CP arithmetic");
         call_pointer --; 
       }
       if (k_now > 2){
@@ -119,6 +126,7 @@ mpz_class compute_product(int N, int k, int s){
   if (return_pointer != 1){
     cerr << " return pointer is not zero";
   }
+  logger::item_stop("CP body");
   return helper_vars::return_stack[0]; // the top element remaining in the return stack 
 }
 
@@ -224,6 +232,41 @@ void compute_product_void(int N, int k, int s){
   //return helper_vars::return_stack[0]; // the top element remaining in the return stack 
 }
 
+mpz_class compute_product(int N, int k, int s){
+  if (k==1)
+    return N;
+  if (k == 0) // TO CHECK because there are no terms to compute product
+    return 1;
+
+  if (k < 0){
+    cerr << " WARNING: compute_product called for k < 0, returning 1, N  " << N << " k " << k << " s " << s << endl;
+    return 1;
+  }
+  if (N - (k-1) * s <= 0){ // the terms go negative
+    //cerr << " WARNING: compute_product called for N - (k-1) * s <= 0 " << endl;
+    return 0;
+  }
+
+  if (k == 2){
+    helper_vars::mul_1 = N;
+    helper_vars::mul_2 = N - s;
+    return helper_vars::mul_1 * helper_vars::mul_2;
+  }
+
+  helper_vars::mpz_vec.resize(k);
+  for (int i=0;i<k;i++)
+    helper_vars::mpz_vec[i] = N - i * s;
+
+  int step_size, to_mul; 
+
+  for (step_size = 2, to_mul = 1; to_mul < k; step_size <<=1, to_mul <<=1){
+    for (int i=0; i<k; i+=step_size){
+      if (i+to_mul < k)
+        helper_vars::mpz_vec[i] *= helper_vars::mpz_vec[i+to_mul];
+    }
+  }
+  return helper_vars::mpz_vec[0];
+}
 
 // this is another way of implementing compute_product, which splits the terms even / odd. But I did not see much improvement with this!
 /*

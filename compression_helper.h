@@ -14,6 +14,7 @@ using namespace std;
 namespace helper_vars{
   extern mpz_class mul_1, mul_2; //!< helper variables in order to avoid initialization
   extern vector<mpz_class> return_stack;
+  extern vector<mpz_class> mpz_vec;
 };
 
 
@@ -34,6 +35,7 @@ mpz_class compute_product_old(int N, int k, int s);
   \param s the iteration
   \return the product N \f$ N \times (N-s) \times (N-2s) \times \dots \times (N-(k-1)s) \f$
 */
+mpz_class compute_product_stack(int N, int k, int s);
 mpz_class compute_product(int N, int k, int s);
 void compute_product_void(int N, int k, int s);
 
