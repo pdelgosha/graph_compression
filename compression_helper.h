@@ -15,6 +15,7 @@ namespace helper_vars{
   extern mpz_class mul_1, mul_2; //!< helper variables in order to avoid initialization
   extern vector<mpz_class> return_stack;
   extern vector<mpz_class> mpz_vec;
+  extern vector<mpz_class> mpz_vec2;
 };
 
 
@@ -39,6 +40,8 @@ mpz_class compute_product_stack(int N, int k, int s);
 mpz_class compute_product(int N, int k, int s);
 void compute_product_void(int N, int k, int s);
 
+//! computes the product of elements in vector a by inline multiplication of adjacent elements recursively. The results will be in a[0].
+void compute_array_product(vector<mpz_class>& a);
 
 //! computes the binomial coefficient n choose m = n! / m! (n-m)!
 /*!
@@ -55,6 +58,8 @@ mpz_class binomial(const int n, const int m);
   \param i,j endpoints of the interval
   \return \f$\prod_{v = i}^j a_v ! \f$
 */
+mpz_class prod_factorial_old(const vector<int>& a, int i, int j);
+
 mpz_class prod_factorial(const vector<int>& a, int i, int j);
 
 //! Write a string containing 0 and 1 to a binary file, treating the string as a bit sequence. 

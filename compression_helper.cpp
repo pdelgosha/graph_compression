@@ -4,6 +4,7 @@ mpz_class helper_vars::mul_1;
 mpz_class helper_vars::mul_2;
 vector<mpz_class> helper_vars::return_stack;
 vector<mpz_class> helper_vars::mpz_vec;
+vector<mpz_class> helper_vars::mpz_vec2;
 
 mpz_class compute_product_old(int N, int k, int s){
   //cerr << " compute_product  N " << N << " k " << k << " s " << s << endl;
@@ -232,6 +233,21 @@ void compute_product_void(int N, int k, int s){
   //return helper_vars::return_stack[0]; // the top element remaining in the return stack 
 }
 
+
+void compute_array_product(vector<mpz_class>& a){
+  logger::item_start("CAP");
+  int step_size, to_mul; 
+  int k = a.size(); 
+  for (step_size = 2, to_mul = 1; to_mul < k; step_size <<=1, to_mul <<=1){
+    for (int i=0; i<k; i+=step_size){
+      if (i+to_mul < k)
+        a[i] *= a[i+to_mul];
+    }
+  }
+  logger::item_stop("CAP");
+}
+
+
 mpz_class compute_product(int N, int k, int s){
   if (k==1)
     return N;
@@ -257,14 +273,17 @@ mpz_class compute_product(int N, int k, int s){
   for (int i=0;i<k;i++)
     helper_vars::mpz_vec[i] = N - i * s;
 
-  int step_size, to_mul; 
+  compute_array_product(helper_vars::mpz_vec);
 
-  for (step_size = 2, to_mul = 1; to_mul < k; step_size <<=1, to_mul <<=1){
-    for (int i=0; i<k; i+=step_size){
-      if (i+to_mul < k)
-        helper_vars::mpz_vec[i] *= helper_vars::mpz_vec[i+to_mul];
-    }
-  }
+  // int step_size, to_mul; 
+
+
+  // for (step_size = 2, to_mul = 1; to_mul < k; step_size <<=1, to_mul <<=1){
+  //   for (int i=0; i<k; i+=step_size){
+  //     if (i+to_mul < k)
+  //       helper_vars::mpz_vec[i] *= helper_vars::mpz_vec[i+to_mul];
+  //   }
+  // }
   return helper_vars::mpz_vec[0];
 }
 
@@ -304,7 +323,7 @@ mpz_class binomial(const int n, const int m)
 }
 
 
-mpz_class prod_factorial(const vector<int>& a, int i, int j)
+mpz_class prod_factorial_old(const vector<int>& a, int i, int j)
 {
   if (i == j){
     return compute_product(a[i], a[i], 1);
@@ -316,6 +335,17 @@ mpz_class prod_factorial(const vector<int>& a, int i, int j)
   }
 }
 
+mpz_class prod_factorial(const vector<int>&a, int i, int j){
+  if (i==j){
+    return compute_product(a[i], a[i], 1);
+  }else{
+    helper_vars::mpz_vec2.resize(j-i+1);
+    for (int k = i; k<=j;k++)
+      helper_vars::mpz_vec2[k- i] = compute_product(a[k], a[k],1);
+    compute_array_product(helper_vars::mpz_vec2);
+    return helper_vars::mpz_vec2[0];
+  }
+}
 
 void bit_string_write(FILE* f, const string& s){
   // find out the number of bytes
