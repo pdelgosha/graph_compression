@@ -80,22 +80,22 @@ inputs an object of type {\ttfamily pair$<$vector$<$int$>$, mpz\+\_\+class$>$} g
 
 
 \begin{DoxyCode}
-68 \{
-69   \hyperlink{classtime__series__decoder_a25875d5879e79eeda27588b9cbcad591}{freq} = E.first;
-70   mpz\_class f = E.second;
-71   vector<int> left\_deg(\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n},1); \textcolor{comment}{// the left degree sequence}
-72   \hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(left\_deg, \hyperlink{classtime__series__decoder_a25875d5879e79eeda27588b9cbcad591}{freq}); \textcolor{comment}{// the bipartite graph decoder to convert f to G}
-73   \hyperlink{classtime__series__decoder_a66abe50babd1ebe2eb5a130d4b8091f1}{G} = D.decode(f);
-74 
-75   \textcolor{comment}{// reconstructing the original sequence given G}
-76   vector<int> x(\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n});
-77   vector<int> adj\_list;
-78   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n};i++)\{
-79     adj\_list = \hyperlink{classtime__series__decoder_a66abe50babd1ebe2eb5a130d4b8091f1}{G}.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
-80     x[i] = adj\_list[0];
-81   \}
-82   \textcolor{keywordflow}{return} x;
-83 \}
+77 \{
+78   \hyperlink{classtime__series__decoder_a25875d5879e79eeda27588b9cbcad591}{freq} = E.first;
+79   mpz\_class f = E.second;
+80   vector<int> left\_deg(\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n},1); \textcolor{comment}{// the left degree sequence}
+81   \hyperlink{classb__graph__decoder}{b\_graph\_decoder} D(left\_deg, \hyperlink{classtime__series__decoder_a25875d5879e79eeda27588b9cbcad591}{freq}); \textcolor{comment}{// the bipartite graph decoder to convert f to G}
+82   \hyperlink{classtime__series__decoder_a66abe50babd1ebe2eb5a130d4b8091f1}{G} = D.decode(f);
+83 
+84   \textcolor{comment}{// reconstructing the original sequence given G}
+85   vector<int> x(\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n});
+86   vector<int> adj\_list;
+87   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classtime__series__decoder_a05f75c42ac2acd63766714e6e09f1a65}{n};i++)\{
+88     adj\_list = \hyperlink{classtime__series__decoder_a66abe50babd1ebe2eb5a130d4b8091f1}{G}.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+89     x[i] = adj\_list[0];
+90   \}
+91   \textcolor{keywordflow}{return} x;
+92 \}
 \end{DoxyCode}
 
 

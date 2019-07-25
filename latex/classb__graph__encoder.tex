@@ -20,6 +20,8 @@ pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_a3f
 \begin{DoxyCompactList}\small\item\em computes $N_{i,j}(G)$ \end{DoxyCompactList}\item 
 pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}{compute\+\_\+\+N\+\_\+new} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
 \item 
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_aa2e816b095e96eecacdbf805d79db1af}{compute\+\_\+\+N\+\_\+new\+\_\+r} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+\item 
 mpz\+\_\+class \hyperlink{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}{encode} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
 \begin{DoxyCompactList}\small\item\em encodes the given bipartite graph $G$ and returns an integer in the specified range \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
@@ -195,76 +197,201 @@ A pair, where the first component is $N_{i,j}(G)$, and the second component is $
 102     i = call\_stack[call\_size-1].first;
 103     j = call\_stack[call\_size-1].second;
 104     \textcolor{keywordflow}{if} (i==j)\{
-105       \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i = j"});
+105       \textcolor{comment}{//logger::item\_start("bip enc i = j");}
 106       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first = 0; \textcolor{comment}{// N\_\{i,j\} is initialized with 0}
 107       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second = 1; \textcolor{comment}{// l\_\{i,j\} is initialized with 1}
 108       gamma = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
 109       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
-110         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i = j binomial"});
+110         \textcolor{comment}{//logger::item\_start("bip enc i = j binomial");}
 111         bin = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+gamma[k]), a[i] - k);
-112         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"bip enc i = j binomial"});
+112         \textcolor{comment}{//logger::item\_stop("bip enc i = j binomial");}
 113 
-114         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i = j arithmetic"});
+114         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
 115         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first += \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second * bin;
 116         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]];
-117         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i = j arithmetic"});
+117         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
 118         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]] --;
 119         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(gamma[k],-1);
 120       \}
 121       return\_size ++;
 122       call\_size --;
-123       \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"bip enc i = j"});
+123       \textcolor{comment}{//logger::item\_stop("bip enc i = j");}
 124     \}\textcolor{keywordflow}{else}\{
-125       t = (i+j)/2;
-126       status = status\_stack[call\_size - 1];
-127       \textcolor{keywordflow}{if} (status == 0)\{
-128         \textcolor{comment}{// newly added, left node must be called}
-129         call\_stack[call\_size].first = i;
-130         call\_stack[call\_size].second = t;
-131         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
-132         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
-133         call\_size++;
-134       \}
-135       \textcolor{keywordflow}{if} (status == 1)\{
-136         \textcolor{comment}{// left is returned}
-137         St\_stack[call\_size-1] = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
-138         \textcolor{comment}{// call the right child}
-139         call\_stack[call\_size].first = t+1;
-140         call\_stack[call\_size].second = j;
-141         status\_stack[call\_size-1] = 2; \textcolor{comment}{//right is called}
-142         status\_stack[call\_size] = 0;  \textcolor{comment}{// newly called}
-143         call\_size ++;
-144       \}
-145       \textcolor{keywordflow}{if} (status == 2)\{
-146         Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
-147         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i neq j prod\_factorial"});
-148         prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j); \textcolor{comment}{// the product of a\_k! for t + 1 <= k <= j}
-149         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"bip enc i neq j prod\_factorial"});
-150 
-151         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i neq j compute\_product"});
-152         rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St\_stack[call\_size-1], St\_stack[call\_size-1] - Sj, 1) / 
+125       \textcolor{comment}{//logger::item\_start("bip enc i neq j");}
+126       t = (i+j)/2;
+127       status = status\_stack[call\_size - 1];
+128       \textcolor{comment}{//logger::item\_start("bip enc stacking 0 1");}
+129       \textcolor{keywordflow}{if} (status == 0)\{
+130         \textcolor{comment}{// newly added, left node must be called}
+131         call\_stack[call\_size].first = i;
+132         call\_stack[call\_size].second = t;
+133         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
+134         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
+135         call\_size++;
+136       \}
+137       \textcolor{keywordflow}{if} (status == 1)\{
+138         \textcolor{comment}{// left is returned}
+139         St\_stack[call\_size-1] = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+140         \textcolor{comment}{// call the right child}
+141         call\_stack[call\_size].first = t+1;
+142         call\_stack[call\_size].second = j;
+143         status\_stack[call\_size-1] = 2; \textcolor{comment}{//right is called}
+144         status\_stack[call\_size] = 0;  \textcolor{comment}{// newly called}
+145         call\_size ++;
+146       \}
+147       \textcolor{comment}{//logger::item\_stop("bip enc stacking 0 1");}
+148       \textcolor{keywordflow}{if} (status == 2)\{
+149         Sj = \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0);
+150         \textcolor{comment}{//logger::item\_start("bip enc i neq j prod\_factorial");}
+151         prod\_afac = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(a, t+1, j); \textcolor{comment}{// the product of a\_k! for t + 1 <= k <= j}
+152         \textcolor{comment}{//logger::item\_stop("bip enc i neq j prod\_factorial");}
+153 
+154         \textcolor{comment}{//logger::item\_start("bip enc i neq j compute\_product");}
+155         rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St\_stack[call\_size-1], St\_stack[call\_size-1] - Sj, 1) / 
       prod\_afac;
-153         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"bip enc i neq j compute\_product"});
-154 
-155         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"bip enc i neq j arithmetic"});
-156         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * rtj;
-157         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
+156         \textcolor{comment}{//logger::item\_stop("bip enc i neq j compute\_product");}
+157 
+158         \textcolor{comment}{//logger::item\_start("bip enc i neq j arithmetic");}
+159         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * rtj;
+160         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
       first;
-158         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
-159         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
+161         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
+162         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].second; \textcolor{comment}{// lij}
-160         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"bip enc i neq j arithmetic"});
-161         return\_size --; \textcolor{comment}{// pop 2 add 1}
-162         call\_size --;
-163       \}
-164     \}
-165 
-166   \}
-167   \textcolor{keywordflow}{if} (return\_size != 1)\{
-168     cerr << \textcolor{stringliteral}{" error: bip compute\_N return\_size is not 1 it is "} << return\_size << endl;
-169   \}
-170   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
-171 \}
+163         \textcolor{comment}{//logger::item\_stop("bip enc i neq j arithmetic");}
+164         return\_size --; \textcolor{comment}{// pop 2 add 1}
+165         call\_size --;
+166       \}
+167       \textcolor{comment}{//logger::item\_stop("bip enc i neq j");}
+168     \}
+169 
+170   \}
+171   \textcolor{keywordflow}{if} (return\_size != 1)\{
+172     cerr << \textcolor{stringliteral}{" error: bip compute\_N return\_size is not 1 it is "} << return\_size << endl;
+173   \}
+174   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
+175 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classb__graph__encoder_aa2e816b095e96eecacdbf805d79db1af}\label{classb__graph__encoder_aa2e816b095e96eecacdbf805d79db1af}} 
+\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!compute\+\_\+\+N\+\_\+new\+\_\+r@{compute\+\_\+\+N\+\_\+new\+\_\+r}}
+\index{compute\+\_\+\+N\+\_\+new\+\_\+r@{compute\+\_\+\+N\+\_\+new\+\_\+r}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
+\subsubsection{\texorpdfstring{compute\+\_\+\+N\+\_\+new\+\_\+r()}{compute\_N\_new\_r()}}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+\+N\+\_\+new\+\_\+r (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+179                                                                            \{
+180   \textcolor{comment}{//logger::item\_start("bip init");}
+181   \textcolor{keywordtype}{int} n\_l = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}(); \textcolor{comment}{// number of left vertices}
+182   \textcolor{keywordtype}{int} n\_bits = 0;
+183   \textcolor{keywordtype}{int} n\_copy = n\_l;
+184   \textcolor{keywordflow}{while} (n\_copy > 0)\{
+185     n\_bits ++;
+186     n\_copy >>= 1;
+187   \}
+188   n\_bits += 2;
+189 
+190   vector<pair<int, int> > call\_stack(2 * n\_bits);
+191   vector<pair<mpz\_class, mpz\_class> > \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}(2 * n\_bits); \textcolor{comment}{// first = N, second = l}
+192   vector<mpz\_class> r\_stack(2 * n\_bits); \textcolor{comment}{// stack of r values}
+193 
+194   vector<int> status\_stack(2 * n\_bits);
+195   \textcolor{comment}{//vector<int> St\_stack(2 * n\_bits); // stack to store values of St}
+196  
+197   call\_stack[0] = pair<int, int> (0,n\_l-1); \textcolor{comment}{// i j }
+198   status\_stack[0] = 0; \textcolor{comment}{// newly added}
+199  
+200   \textcolor{keywordtype}{int} call\_size = 1; \textcolor{comment}{// the size of the call stack}
+201   \textcolor{keywordtype}{int} return\_size = 0; \textcolor{comment}{// the size of the return stack}
+202 
+203   \textcolor{keywordtype}{int} i, j, t, Sj;
+204   \textcolor{keywordtype}{int} status;
+205  
+206   vector<int> gamma; \textcolor{comment}{// forward list  of the graph}
+207 
+208   mpz\_class rtj, prod\_afac, Nit\_rtj, lit\_Ntj, bin;
+209   \textcolor{comment}{//logger::item\_stop("bip init");}
+210   \textcolor{keywordflow}{while}(call\_size > 0)\{
+211     \textcolor{comment}{//cerr << " call\_size " << call\_size << endl;}
+212     i = call\_stack[call\_size-1].first;
+213     j = call\_stack[call\_size-1].second;
+214     \textcolor{keywordflow}{if} (i==j)\{
+215       \textcolor{comment}{//logger::item\_start("bip enc i = j");}
+216       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first = 0; \textcolor{comment}{// N\_\{i,j\} is initialized with 0}
+217       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second = 1; \textcolor{comment}{// l\_\{i,j\} is initialized with 1}
+218       r\_stack[return\_size] = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0), \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i]); \textcolor{comment}{// r\_i = \(\backslash\)binom\{S\_i\}\{a\_i\}, s\_i =
+       U.sum(0)}
+219       gamma = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
+220       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
+221         \textcolor{comment}{//logger::item\_start("bip enc i = j binomial");}
+222         bin = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+gamma[k]), a[i] - k);
+223         \textcolor{comment}{//logger::item\_stop("bip enc i = j binomial");}
+224 
+225         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
+226         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first += \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second * bin;
+227         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]];
+228         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
+229         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]] --;
+230         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(gamma[k],-1);
+231       \}
+232       return\_size ++;
+233       call\_size --;
+234       \textcolor{comment}{//logger::item\_stop("bip enc i = j");}
+235     \}\textcolor{keywordflow}{else}\{
+236       \textcolor{comment}{//logger::item\_start("bip enc i neq j");}
+237       t = (i+j)/2;
+238       status = status\_stack[call\_size - 1];
+239       \textcolor{comment}{//logger::item\_start("bip enc stacking 0 1");}
+240       \textcolor{keywordflow}{if} (status == 0)\{
+241         \textcolor{comment}{// newly added, left node must be called}
+242         call\_stack[call\_size].first = i;
+243         call\_stack[call\_size].second = t;
+244         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
+245         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
+246         call\_size++;
+247       \}
+248       \textcolor{keywordflow}{if} (status == 1)\{
+249         \textcolor{comment}{// left is returned}
+250         \textcolor{comment}{//St\_stack[call\_size-1] = U.sum(0);}
+251         \textcolor{comment}{// call the right child}
+252         call\_stack[call\_size].first = t+1;
+253         call\_stack[call\_size].second = j;
+254         status\_stack[call\_size-1] = 2; \textcolor{comment}{//right is called}
+255         status\_stack[call\_size] = 0;  \textcolor{comment}{// newly called}
+256         call\_size ++;
+257       \}
+258       \textcolor{comment}{//logger::item\_stop("bip enc stacking 0 1");}
+259       \textcolor{keywordflow}{if} (status == 2)\{
+260         \textcolor{comment}{//Sj = U.sum(0);}
+261         \textcolor{comment}{//logger::item\_start("bip enc i neq j prod\_factorial");}
+262         \textcolor{comment}{//prod\_afac = prod\_factorial(a, t+1, j); // the product of a\_k! for t + 1 <= k <= j}
+263         \textcolor{comment}{//logger::item\_stop("bip enc i neq j prod\_factorial");}
+264 
+265         \textcolor{comment}{//logger::item\_start("bip enc i neq j compute\_product");}
+266         \textcolor{comment}{//rtj = compute\_product(St\_stack[call\_size-1], St\_stack[call\_size-1] - Sj, 1) / prod\_afac;}
+267         \textcolor{comment}{//logger::item\_stop("bip enc i neq j compute\_product");}
+268 
+269         \textcolor{comment}{//logger::item\_start("bip enc i neq j arithmetic");}
+270         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * r\_stack[return\_size-1]; 
+271         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
+      first;
+272         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
+273         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
+      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].second; \textcolor{comment}{// lij}
+274         r\_stack[return\_size - 2] = r\_stack[return\_size-2] * r\_stack[return\_size-1];
+275         \textcolor{comment}{//logger::item\_stop("bip enc i neq j arithmetic");}
+276         return\_size --; \textcolor{comment}{// pop 2 add 1}
+277         call\_size --;
+278       \}
+279       \textcolor{comment}{//logger::item\_stop("bip enc i neq j");}
+280     \}
+281 
+282   \}
+283   \textcolor{keywordflow}{if} (return\_size != 1)\{
+284     cerr << \textcolor{stringliteral}{" error: bip compute\_N return\_size is not 1 it is "} << return\_size << endl;
+285   \}
+286   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
+287 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}\label{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!encode@{encode}}
@@ -278,36 +405,53 @@ encodes the given bipartite graph $G$ and returns an integer in the specified ra
 
 
 \begin{DoxyCode}
-175 \{
-176   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
+291 \{
+292   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
       \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
-177     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
+293     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
        of the given bipartite graph  "} << endl;
-178 
-179   \textcolor{comment}{//init(G); // initialize U and beta for G}
-180   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N(0,G.nu\_left\_vertices()-1, G);}
-181   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G);
-182   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_abb9153c776f8c9ec9aeb6361080e84d4}{compute\_N\_new}(G);
-183   \textcolor{comment}{//if (ans.first!= ans\_2.first or ans.second != ans\_2.second)\{}
-184   \textcolor{comment}{//  cerr << " bip ans != ans\_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" <<
+294 
+295   \textcolor{comment}{//init(G); // initialize U and beta for G}
+296   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N(0,G.nu\_left\_vertices()-1, G);}
+297   \textcolor{comment}{//init(G);}
+298   \textcolor{comment}{//logger::item\_start("bip enc compute N");}
+299   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N\_new(G);}
+300   \textcolor{comment}{//logger::item\_stop("bip enc compute N");}
+301 
+302   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G);
+303   \textcolor{comment}{//logger::item\_start("bip enc compute N new r");}
+304   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_aa2e816b095e96eecacdbf805d79db1af}{compute\_N\_new\_r}(G);
+305   \textcolor{comment}{//logger::item\_stop("bip enc compute N new r");}
+306   \textcolor{comment}{// if (ans.first == ans2.first and ans.second == ans2.second)\{}
+307   \textcolor{comment}{//   cout << " = " << endl;}
+308   \textcolor{comment}{// \}else\{}
+309   \textcolor{comment}{//   cout << " != " << endl;}
+310   \textcolor{comment}{// \}}
+311   \textcolor{comment}{//if (ans.first!= ans\_2.first or ans.second != ans\_2.second)\{}
+312   \textcolor{comment}{//  cerr << " bip ans != ans\_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" <<
        ans\_2.first << " , " << ans\_2.second << " ) "  << endl;}
-185   \textcolor{comment}{//\}//else\{}
-186   \textcolor{comment}{//cerr << " the same! ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" << ans\_2.first << "
+313   \textcolor{comment}{//\}//else\{}
+314   \textcolor{comment}{//cerr << " the same! ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" << ans\_2.first << "
        , " << ans\_2.second << " ) "  << endl;}
-187   \textcolor{comment}{//\}}
-188   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
-189 
-190   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
-191   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
-192 
-193   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
-194   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
-195     ceil = \textcolor{keyword}{true};
-196   ans.first /= ans.second;
-197   \textcolor{keywordflow}{if} (ceil)
-198     ans.first ++;
-199   \textcolor{keywordflow}{return} ans.first;
-200 \}
+315   \textcolor{comment}{//\}}
+316   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
+317 
+318   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
+319   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
+320 
+321   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
+322   \textcolor{comment}{//logger::item\_start("bip enc ceil");}
+323   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
+324     ceil = \textcolor{keyword}{true};
+325   \textcolor{comment}{//logger::item\_stop("bip enc ceil");}
+326 
+327   \textcolor{comment}{//logger::item\_start("bip enc final div");}
+328   ans.first /= ans.second;
+329   \textcolor{comment}{//logger::item\_stop("bip enc final div");}
+330   \textcolor{keywordflow}{if} (ceil)
+331     ans.first ++;
+332   \textcolor{keywordflow}{return} ans.first;
+333 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}} 
 \index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!init@{init}}

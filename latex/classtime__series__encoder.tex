@@ -101,19 +101,28 @@ an object of type {\ttfamily pair$<$vector$<$int$>$, mpz\+\_\+class$>$}. The fir
        x.size() = "} << x.size() << endl;
 39 
 40   \textcolor{comment}{// initialize alph\_size, freq and G}
-41   \hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\_alph\_size}(x);
-42   \hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\_freq}(x);
-43   \hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\_G}(x);
-44   
-45   \textcolor{comment}{// initializing a b\_graph\_encoder}
-46   vector<int> left\_deg(\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}, 1); \textcolor{comment}{// the left degree sequence}
-47   \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(left\_deg, \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}); \textcolor{comment}{// the right degree sequence is freq}
-48   mpz\_class f = E.encode(\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G});
-49   pair<vector<int>, mpz\_class> ans;
-50   ans.first = \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq};
-51   ans.second  = f;
-52   \textcolor{keywordflow}{return} ans;
-53 \}
+41   \textcolor{comment}{//logger::item\_start("time series init alph size");}
+42   \hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\_alph\_size}(x);
+43   \textcolor{comment}{//logger::item\_stop("time series init alph size");}
+44   \textcolor{comment}{//logger::item\_start("time series init freq");}
+45   \hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\_freq}(x);
+46   \textcolor{comment}{//logger::item\_stop("time series init freq");}
+47 
+48   \textcolor{comment}{//logger::item\_start("time series init G");}
+49   \hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\_G}(x);
+50   \textcolor{comment}{//logger::item\_stop("time series init G");}
+51   
+52   \textcolor{comment}{// initializing a b\_graph\_encoder}
+53   vector<int> left\_deg(\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}, 1); \textcolor{comment}{// the left degree sequence}
+54   \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(left\_deg, \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}); \textcolor{comment}{// the right degree sequence is freq}
+55   \textcolor{comment}{//logger::item\_start("time series encode");}
+56   mpz\_class f = E.encode(\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G});
+57   \textcolor{comment}{//logger::item\_stop("time series encode");}
+58   pair<vector<int>, mpz\_class> ans;
+59   ans.first = \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq};
+60   ans.second  = f;
+61   \textcolor{keywordflow}{return} ans;
+62 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}\label{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}} 
 \index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!init\+\_\+alph\+\_\+size@{init\+\_\+alph\+\_\+size}}

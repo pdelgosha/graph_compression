@@ -158,7 +158,7 @@ computes the product of elements in vector a by inline multiplication of adjacen
 
 \begin{DoxyCode}
 237                                                 \{
-238   \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"Compute Array Product"});
+238   \textcolor{comment}{//logger::item\_start("Compute Array Product");}
 239   \textcolor{keywordtype}{int} step\_size, to\_mul; 
 240   \textcolor{keywordtype}{int} k = a.size(); 
 241   \textcolor{keywordflow}{for} (step\_size = 2, to\_mul = 1; to\_mul < k; step\_size <<=1, to\_mul <<=1)\{
@@ -167,7 +167,7 @@ computes the product of elements in vector a by inline multiplication of adjacen
 244         a[i] *= a[i+to\_mul];
 245     \}
 246   \}
-247   \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"Compute Array Product"});
+247   \textcolor{comment}{//logger::item\_stop("Compute Array Product");}
 248 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}\label{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}} 

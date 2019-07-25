@@ -97,13 +97,13 @@ constructor
 
 
 \begin{DoxyCode}
-208 \{
-209   \hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a} = a\_;
-210   \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b} = b\_;
-211   \hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n} = \hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}.size();
-212   \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np} = \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b}.size();
-213   \hyperlink{classb__graph__decoder_a9498e8aa7391480cc663bffef3718c6b}{init}();
-214 \}
+341 \{
+342   \hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a} = a\_;
+343   \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b} = b\_;
+344   \hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n} = \hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}.size();
+345   \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np} = \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b}.size();
+346   \hyperlink{classb__graph__decoder_a9498e8aa7391480cc663bffef3718c6b}{init}();
+347 \}
 \end{DoxyCode}
 
 
@@ -128,12 +128,12 @@ the decoded bipartite graph $G$
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-290 \{
-291   mpz\_class prod\_b\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b}, 0, \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np}-1);
-292   mpz\_class tN = f * prod\_b\_factorial;
-293   \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(0,\hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n}-1,tN);
-294   \textcolor{keywordflow}{return} \hyperlink{classb__graph}{b\_graph}(\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}, \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b});
-295 \}
+423 \{
+424   mpz\_class prod\_b\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b}, 0, \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np}-1);
+425   mpz\_class tN = f * prod\_b\_factorial;
+426   \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(0,\hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n}-1,tN);
+427   \textcolor{keywordflow}{return} \hyperlink{classb__graph}{b\_graph}(\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}, \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b});
+428 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}\label{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}} 
 \index{b\+\_\+graph\+\_\+decoder@{b\+\_\+graph\+\_\+decoder}!decode\+\_\+interval@{decode\+\_\+interval}}
@@ -157,33 +157,33 @@ decodes the connectivity list of vertices in the range and updated member x. Fur
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-261 \{
-262   \textcolor{keywordflow}{if} (i==j)
-263     \textcolor{keywordflow}{return} \hyperlink{classb__graph__decoder_a3d6d38da4436a92ebd01693cd3eb7c16}{decode\_node}(i,tN);
-264   \textcolor{keywordtype}{int} k = (i+j)/ 2; \textcolor{comment}{// midpoint to break}
-265   \textcolor{keywordtype}{int} Wk = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(k+1);
-266   \textcolor{keywordtype}{int} Wj = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-267   mpz\_class rkj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(Wk, Wk - Wj, 1) / 
+394 \{
+395   \textcolor{keywordflow}{if} (i==j)
+396     \textcolor{keywordflow}{return} \hyperlink{classb__graph__decoder_a3d6d38da4436a92ebd01693cd3eb7c16}{decode\_node}(i,tN);
+397   \textcolor{keywordtype}{int} k = (i+j)/ 2; \textcolor{comment}{// midpoint to break}
+398   \textcolor{keywordtype}{int} Wk = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(k+1);
+399   \textcolor{keywordtype}{int} Wj = \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
+400   mpz\_class rkj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(Wk, Wk - Wj, 1) / 
       \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}, k+1, j); \textcolor{comment}{// r\_\{t+1, j\}}
-268   mpz\_class tNik = tN / rkj; \textcolor{comment}{// \(\backslash\)tilde\{N\}\_\{i,k\}}
-269   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// to keep the return for each subinterval}
-270 
-271   \textcolor{comment}{// calling the left subinterval }
-272   ans = \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(i,k,tNik);
-273 
-274   \textcolor{comment}{// preparing for the right subinterval}
-275   mpz\_class Nik = ans.first;
-276   mpz\_class lik = ans.second;
-277   mpz\_class tNkj = (tN - Nik * rkj) / lik; \textcolor{comment}{// \(\backslash\)tilde\{N\}\_\{k+1, j\}}
-278 
-279   \textcolor{comment}{// calling the right subinterval}
-280   ans = \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(k+1, j, tNkj);
-281   mpz\_class Nkj = ans.first;
-282   mpz\_class lkj = ans.second;
-283   mpz\_class Nij = Nik * rkj + lik * Nkj;
-284   mpz\_class lij = lik * lkj;
-285   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-286 \}
+401   mpz\_class tNik = tN / rkj; \textcolor{comment}{// \(\backslash\)tilde\{N\}\_\{i,k\}}
+402   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// to keep the return for each subinterval}
+403 
+404   \textcolor{comment}{// calling the left subinterval }
+405   ans = \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(i,k,tNik);
+406 
+407   \textcolor{comment}{// preparing for the right subinterval}
+408   mpz\_class Nik = ans.first;
+409   mpz\_class lik = ans.second;
+410   mpz\_class tNkj = (tN - Nik * rkj) / lik; \textcolor{comment}{// \(\backslash\)tilde\{N\}\_\{k+1, j\}}
+411 
+412   \textcolor{comment}{// calling the right subinterval}
+413   ans = \hyperlink{classb__graph__decoder_ae8b20698e015819cbdb8da7997888fd8}{decode\_interval}(k+1, j, tNkj);
+414   mpz\_class Nkj = ans.first;
+415   mpz\_class lkj = ans.second;
+416   mpz\_class Nij = Nik * rkj + lik * Nkj;
+417   mpz\_class lij = lik * lkj;
+418   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+419 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__decoder_a3d6d38da4436a92ebd01693cd3eb7c16}\label{classb__graph__decoder_a3d6d38da4436a92ebd01693cd3eb7c16}} 
 \index{b\+\_\+graph\+\_\+decoder@{b\+\_\+graph\+\_\+decoder}!decode\+\_\+node@{decode\+\_\+node}}
@@ -207,37 +207,37 @@ decodes the connectivity list and updates the x member, and returns a pair, wher
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-227 \{
-228   mpz\_class li = 1;
-229   mpz\_class Ni = 0;
-230   \textcolor{keywordtype}{int} f, g; \textcolor{comment}{// endpoints of the interval for binary search}
-231   \textcolor{keywordtype}{int} v;
-232   mpz\_class y; \textcolor{comment}{// helper}
-233   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i].clear(); \textcolor{comment}{// make sure nothing is in the list to be decoded}
-234   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}[i];k++)\{
-235     \textcolor{comment}{// finding x[i][k]}
-236     \textcolor{keywordflow}{if} (k==0)
-237       f = 0;
-238     \textcolor{keywordflow}{else}
-239       f = 1 + \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k-1];
-240     g = \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np}-1;
-241     \textcolor{keywordflow}{while} (g > f)\{
-242       v = (f+g)/2;
-243       \textcolor{keywordflow}{if} (\hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+v) , a[i] - k) <= tN)
-244         g = v;
-245       \textcolor{keywordflow}{else}
-246         f = v + 1;
-247     \}
-248     \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i].push\_back(f); \textcolor{comment}{// decoded the kth connection of vertex i}
-249     y = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]), a[i] - k);
-250     tN = (tN - y) / \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];
-251     Ni += li * y;
-252     li *= \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];
-253     \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[x[i][k]] --;
-254     \hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[i][k], -1);
-255   \}
-256   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Ni, li);
-257 \}
+360 \{
+361   mpz\_class li = 1;
+362   mpz\_class Ni = 0;
+363   \textcolor{keywordtype}{int} f, g; \textcolor{comment}{// endpoints of the interval for binary search}
+364   \textcolor{keywordtype}{int} v;
+365   mpz\_class y; \textcolor{comment}{// helper}
+366   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i].clear(); \textcolor{comment}{// make sure nothing is in the list to be decoded}
+367   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a}[i];k++)\{
+368     \textcolor{comment}{// finding x[i][k]}
+369     \textcolor{keywordflow}{if} (k==0)
+370       f = 0;
+371     \textcolor{keywordflow}{else}
+372       f = 1 + \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k-1];
+373     g = \hyperlink{classb__graph__decoder_a7eca48cf8793e722d1b29dbdc9fd2dca}{np}-1;
+374     \textcolor{keywordflow}{while} (g > f)\{
+375       v = (f+g)/2;
+376       \textcolor{keywordflow}{if} (\hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+v) , a[i] - k) <= tN)
+377         g = v;
+378       \textcolor{keywordflow}{else}
+379         f = v + 1;
+380     \}
+381     \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i].push\_back(f); \textcolor{comment}{// decoded the kth connection of vertex i}
+382     y = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]), a[i] - k);
+383     tN = (tN - y) / \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];
+384     Ni += li * y;
+385     li *= \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[\hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}[i][k]];
+386     \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta}[x[i][k]] --;
+387     \hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(x[i][k], -1);
+388   \}
+389   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class>(Ni, li);
+390 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classb__graph__decoder_a9498e8aa7391480cc663bffef3718c6b}\label{classb__graph__decoder_a9498e8aa7391480cc663bffef3718c6b}} 
 \index{b\+\_\+graph\+\_\+decoder@{b\+\_\+graph\+\_\+decoder}!init@{init}}
@@ -251,14 +251,14 @@ initializes x as empty list of size n, beta as b, U with b and W with a
 
 
 \begin{DoxyCode}
-217 \{
-218   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}.clear();
-219   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}.resize(\hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n});
-220   \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta} = \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b};
-221   \hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b});
-222   \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a});
-223   
-224 \}
+350 \{
+351   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}.clear();
+352   \hyperlink{classb__graph__decoder_a6bba2e67984f9733fc60c40dd4956587}{x}.resize(\hyperlink{classb__graph__decoder_a2caddd63df6808c95e2ee738f7c77870}{n});
+353   \hyperlink{classb__graph__decoder_a3e5babfb07af486c1d9e991f65251266}{beta} = \hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b};
+354   \hyperlink{classb__graph__decoder_ae15e74088bb60a096562a9bdaf380f2c}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__decoder_a12d1a4a91f342111d2116196cb826317}{b});
+355   \hyperlink{classb__graph__decoder_a2c3f91db1f54ddfd411f74d18b01b606}{W} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__decoder_afcf783e4199fb8f9d6828db08bb12333}{a});
+356   
+357 \}
 \end{DoxyCode}
 
 

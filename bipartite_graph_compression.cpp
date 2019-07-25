@@ -102,28 +102,30 @@ pair<mpz_class, mpz_class> b_graph_encoder::compute_N_new(const b_graph& G){
     i = call_stack[call_size-1].first;
     j = call_stack[call_size-1].second;
     if (i==j){
-      logger::item_start("bip enc i = j");
+      //logger::item_start("bip enc i = j");
       return_stack[return_size].first = 0; // N_{i,j} is initialized with 0
       return_stack[return_size].second = 1; // l_{i,j} is initialized with 1
       gamma = G.get_adj_list(i);
       for (int k=0;k<a[i];k++){
-        logger::item_start("bip enc i = j binomial");
+        //logger::item_start("bip enc i = j binomial");
         bin = binomial(U.sum(1+gamma[k]), a[i] - k);
-        logger::item_stop("bip enc i = j binomial");
+        //logger::item_stop("bip enc i = j binomial");
 
-        logger::item_start("bip enc i = j arithmetic");
+        //logger::item_start("bip enc i = j arithmetic");
         return_stack[return_size].first += return_stack[return_size].second * bin;
         return_stack[return_size].second *= beta[gamma[k]];
-        logger::item_start("bip enc i = j arithmetic");
+        //logger::item_start("bip enc i = j arithmetic");
         beta[gamma[k]] --;
         U.add(gamma[k],-1);
       }
       return_size ++;
       call_size --;
-      logger::item_stop("bip enc i = j");
+      //logger::item_stop("bip enc i = j");
     }else{
+      //logger::item_start("bip enc i neq j");
       t = (i+j)/2;
       status = status_stack[call_size - 1];
+      //logger::item_start("bip enc stacking 0 1");
       if (status == 0){
         // newly added, left node must be called
         call_stack[call_size].first = i;
@@ -142,25 +144,139 @@ pair<mpz_class, mpz_class> b_graph_encoder::compute_N_new(const b_graph& G){
         status_stack[call_size] = 0;  // newly called
         call_size ++;
       }
+      //logger::item_stop("bip enc stacking 0 1");
       if (status == 2){
         Sj = U.sum(0);
-        logger::item_start("bip enc i neq j prod_factorial");
+        //logger::item_start("bip enc i neq j prod_factorial");
         prod_afac = prod_factorial(a, t+1, j); // the product of a_k! for t + 1 <= k <= j
-        logger::item_stop("bip enc i neq j prod_factorial");
+        //logger::item_stop("bip enc i neq j prod_factorial");
 
-        logger::item_start("bip enc i neq j compute_product");
+        //logger::item_start("bip enc i neq j compute_product");
         rtj = compute_product(St_stack[call_size-1], St_stack[call_size-1] - Sj, 1) / prod_afac;
-        logger::item_stop("bip enc i neq j compute_product");
+        //logger::item_stop("bip enc i neq j compute_product");
 
-        logger::item_start("bip enc i neq j arithmetic");
+        //logger::item_start("bip enc i neq j arithmetic");
         Nit_rtj = return_stack[return_size-2].first * rtj;
         lit_Ntj = return_stack[return_size-2].second * return_stack[return_size-1].first;
         return_stack[return_size-2].first = Nit_rtj + lit_Ntj; // Nij
         return_stack[return_size-2].second = return_stack[return_size-2].second * return_stack[return_size-1].second; // lij
-        logger::item_stop("bip enc i neq j arithmetic");
+        //logger::item_stop("bip enc i neq j arithmetic");
         return_size --; // pop 2 add 1
         call_size --;
       }
+      //logger::item_stop("bip enc i neq j");
+    }
+
+  }
+  if (return_size != 1){
+    cerr << " error: bip compute_N return_size is not 1 it is " << return_size << endl;
+  }
+  return return_stack[0];
+}
+
+
+
+pair<mpz_class, mpz_class> b_graph_encoder::compute_N_new_r(const b_graph& G){
+  //logger::item_start("bip init");
+  int n_l = G.nu_left_vertices(); // number of left vertices
+  int n_bits = 0;
+  int n_copy = n_l;
+  while (n_copy > 0){
+    n_bits ++;
+    n_copy >>= 1;
+  }
+  n_bits += 2;
+
+  vector<pair<int, int> > call_stack(2 * n_bits);
+  vector<pair<mpz_class, mpz_class> > return_stack(2 * n_bits); // first = N, second = l
+  vector<mpz_class> r_stack(2 * n_bits); // stack of r values
+
+  vector<int> status_stack(2 * n_bits);
+  //vector<int> St_stack(2 * n_bits); // stack to store values of St
+ 
+  call_stack[0] = pair<int, int> (0,n_l-1); // i j 
+  status_stack[0] = 0; // newly added
+ 
+  int call_size = 1; // the size of the call stack
+  int return_size = 0; // the size of the return stack
+
+  int i, j, t, Sj;
+  int status;
+ 
+  vector<int> gamma; // forward list  of the graph
+
+  mpz_class rtj, prod_afac, Nit_rtj, lit_Ntj, bin;
+  //logger::item_stop("bip init");
+  while(call_size > 0){
+    //cerr << " call_size " << call_size << endl;
+    i = call_stack[call_size-1].first;
+    j = call_stack[call_size-1].second;
+    if (i==j){
+      //logger::item_start("bip enc i = j");
+      return_stack[return_size].first = 0; // N_{i,j} is initialized with 0
+      return_stack[return_size].second = 1; // l_{i,j} is initialized with 1
+      r_stack[return_size] = binomial(U.sum(0), a[i]); // r_i = \binom{S_i}{a_i}, s_i = U.sum(0)
+      gamma = G.get_adj_list(i);
+      for (int k=0;k<a[i];k++){
+        //logger::item_start("bip enc i = j binomial");
+        bin = binomial(U.sum(1+gamma[k]), a[i] - k);
+        //logger::item_stop("bip enc i = j binomial");
+
+        //logger::item_start("bip enc i = j arithmetic");
+        return_stack[return_size].first += return_stack[return_size].second * bin;
+        return_stack[return_size].second *= beta[gamma[k]];
+        //logger::item_start("bip enc i = j arithmetic");
+        beta[gamma[k]] --;
+        U.add(gamma[k],-1);
+      }
+      return_size ++;
+      call_size --;
+      //logger::item_stop("bip enc i = j");
+    }else{
+      //logger::item_start("bip enc i neq j");
+      t = (i+j)/2;
+      status = status_stack[call_size - 1];
+      //logger::item_start("bip enc stacking 0 1");
+      if (status == 0){
+        // newly added, left node must be called
+        call_stack[call_size].first = i;
+        call_stack[call_size].second = t;
+        status_stack[call_size-1] = 1; // left is called
+        status_stack[call_size] = 0; // newly added
+        call_size++;
+      }
+      if (status == 1){
+        // left is returned
+        //St_stack[call_size-1] = U.sum(0);
+        // call the right child
+        call_stack[call_size].first = t+1;
+        call_stack[call_size].second = j;
+        status_stack[call_size-1] = 2; //right is called
+        status_stack[call_size] = 0;  // newly called
+        call_size ++;
+      }
+      //logger::item_stop("bip enc stacking 0 1");
+      if (status == 2){
+        //Sj = U.sum(0);
+        //logger::item_start("bip enc i neq j prod_factorial");
+        //prod_afac = prod_factorial(a, t+1, j); // the product of a_k! for t + 1 <= k <= j
+        //logger::item_stop("bip enc i neq j prod_factorial");
+
+        //logger::item_start("bip enc i neq j compute_product");
+        //rtj = compute_product(St_stack[call_size-1], St_stack[call_size-1] - Sj, 1) / prod_afac;
+        //logger::item_stop("bip enc i neq j compute_product");
+
+        //logger::item_start("bip enc i neq j arithmetic");
+        Nit_rtj = return_stack[return_size-2].first * r_stack[return_size-1]; 
+        lit_Ntj = return_stack[return_size-2].second * return_stack[return_size-1].first;
+        return_stack[return_size-2].first = Nit_rtj + lit_Ntj; // Nij
+        return_stack[return_size-2].second = return_stack[return_size-2].second * return_stack[return_size-1].second; // lij
+        r_stack[return_size - 2] = r_stack[return_size-2] * r_stack[return_size-1];
+        //logger::item_stop("bip enc i neq j arithmetic");
+        return_size --; // pop 2 add 1
+        call_size --;
+      }
+      //logger::item_stop("bip enc i neq j");
     }
 
   }
@@ -178,8 +294,20 @@ mpz_class b_graph_encoder::encode(const b_graph& G)
 
   //init(G); // initialize U and beta for G
   //pair<mpz_class, mpz_class> ans = compute_N(0,G.nu_left_vertices()-1, G);
+  //init(G);
+  //logger::item_start("bip enc compute N");
+  //pair<mpz_class, mpz_class> ans = compute_N_new(G);
+  //logger::item_stop("bip enc compute N");
+
   init(G);
-  pair<mpz_class, mpz_class> ans = compute_N_new(G);
+  //logger::item_start("bip enc compute N new r");
+  pair<mpz_class, mpz_class> ans = compute_N_new_r(G);
+  //logger::item_stop("bip enc compute N new r");
+  // if (ans.first == ans2.first and ans.second == ans2.second){
+  //   cout << " = " << endl;
+  // }else{
+  //   cout << " != " << endl;
+  // }
   //if (ans.first!= ans_2.first or ans.second != ans_2.second){
   //  cerr << " bip ans != ans_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans_2 = (" << ans_2.first << " , " << ans_2.second << " ) "  << endl;
   //}//else{
@@ -191,9 +319,14 @@ mpz_class b_graph_encoder::encode(const b_graph& G)
   //  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod_b_factorial != ans.second" << endl;
 
   bool ceil = false;
+  //logger::item_start("bip enc ceil");
   if (ans.first % ans.second != 0)
     ceil = true;
+  //logger::item_stop("bip enc ceil");
+
+  //logger::item_start("bip enc final div");
   ans.first /= ans.second;
+  //logger::item_stop("bip enc final div");
   if (ceil)
     ans.first ++;
   return ans.first;

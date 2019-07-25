@@ -38,14 +38,23 @@ pair<vector<int>, mpz_class> time_series_encoder::encode(const vector<int>& x)
     cerr << " WARNING: time_series_encoder::encode, called for a vector with size different from n, x.size() = " << x.size() << endl;
 
   // initialize alph_size, freq and G
+  //logger::item_start("time series init alph size");
   init_alph_size(x);
+  //logger::item_stop("time series init alph size");
+  //logger::item_start("time series init freq");
   init_freq(x);
+  //logger::item_stop("time series init freq");
+
+  //logger::item_start("time series init G");
   init_G(x);
+  //logger::item_stop("time series init G");
   
   // initializing a b_graph_encoder
   vector<int> left_deg(n, 1); // the left degree sequence
   b_graph_encoder E(left_deg, freq); // the right degree sequence is freq
+  //logger::item_start("time series encode");
   mpz_class f = E.encode(G);
+  //logger::item_stop("time series encode");
   pair<vector<int>, mpz_class> ans;
   ans.first = freq;
   ans.second  = f;
