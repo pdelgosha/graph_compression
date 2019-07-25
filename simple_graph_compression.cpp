@@ -150,7 +150,7 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
     j = call_stack[call_size-1].first.second;
     I = call_stack[call_size-1].second;
     if (i==j){
-
+      logger::item_start("sim enc i = j");
       return_stack[return_size].first = 0; // z_i is initialized with 0
       return_stack[return_size].second = 1; // l_i is initialize with 1
       gamma = G.get_forward_list(i); // the forward adjacency list of vertex i
@@ -176,6 +176,7 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
       }
       return_size ++; // establish the return
       call_size --;
+      logger::item_stop("sim enc i = j");
     }else{
       status = status_stack[call_size-1];
       if (status == 0){
@@ -207,14 +208,18 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
       if (status == 2){
         // both are returned, and results can be accessed by the top two elements in return stack
         Sj = U.sum(j+1);
-        compute_product_void(St_stack[call_size-1]-1, (St_stack[call_size-1] - Sj)/2, 2);
-        rtj = helper_vars::return_stack[0];
+        logger::item_start("sim enc i neq j compute_product");
+        rtj = compute_product(St_stack[call_size-1]-1, (St_stack[call_size-1] - Sj)/2, 2);
+        logger::item_stop("sim enc i neq j compute_product");
+        //rtj = helper_vars::return_stack[0];
         //cerr << " rtj " << rtj << endl;
         //Nij = Nit * rtj + lit * Ntj ;
+        logger::item_start("sim enc i neq j arithmetic");
         Nit_rtj = return_stack[return_size-2].first * rtj;
         lit_Ntj = return_stack[return_size-2].second * return_stack[return_size-1].first;
         return_stack[return_size-2].first = Nit_rtj + lit_Ntj; // Nij
         return_stack[return_size-2].second = return_stack[return_size-2].second * return_stack[return_size-1].second; // lij
+        logger::item_stop("sim enc i neq j arithmetic");
         return_size --; // pop 2 add 1
         call_size --;
       }

@@ -244,7 +244,7 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 150     j = call\_stack[call\_size-1].first.second;
 151     I = call\_stack[call\_size-1].second;
 152     \textcolor{keywordflow}{if} (i==j)\{
-153 
+153       \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"sim enc i = j"});
 154       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first = 0; \textcolor{comment}{// z\_i is initialized with 0}
 155       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second = 1; \textcolor{comment}{// l\_i is initialize with 1}
 156       gamma = G.\hyperlink{classgraph_aa8fbee52a7b3604dbbd9175040c7ead5}{get\_forward\_list}(i); \textcolor{comment}{// the forward adjacency list of vertex i}
@@ -272,60 +272,64 @@ A pair, where the first component is $N_{i,j}(G)$ and the second component is $l
 176       \}
 177       return\_size ++; \textcolor{comment}{// establish the return}
 178       call\_size --;
-179     \}\textcolor{keywordflow}{else}\{
-180       status = status\_stack[call\_size-1];
-181       \textcolor{keywordflow}{if} (status == 0)\{
-182         \textcolor{comment}{// newly added node, we should call its left child}
-183         t = (i+j) / 2;
-184         call\_stack[call\_size].first.first = i;
-185         call\_stack[call\_size].first.second = t;
-186         call\_stack[call\_size].second = 2*I;
-187         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
-188         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
-189         call\_size++;
-190       \}
-191       \textcolor{keywordflow}{if} (status == 1)\{
-192         \textcolor{comment}{// left is returned}
-193         t = (i+j) / 2;
-194         St\_stack[call\_size-1] = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
-195         \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})
-196           \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St\_stack[call\_size-1];
-197         \textcolor{comment}{// prepare to call right}
-198         
-199         call\_stack[call\_size].first.first = t + 1;
-200         call\_stack[call\_size].first.second = j;
-201         call\_stack[call\_size].second = 2*I + 1;
-202         status\_stack[call\_size-1] = 2; \textcolor{comment}{// right is called}
-203         status\_stack[call\_size] = 0; \textcolor{comment}{// newly called}
-204         call\_size ++;
-205       \}
-206 
-207       \textcolor{keywordflow}{if} (status == 2)\{
-208         \textcolor{comment}{// both are returned, and results can be accessed by the top two elements in return stack}
-209         Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
-210         \hyperlink{compression__helper_8cpp_af75857c18e9c23bb114e12642aa8c067}{compute\_product\_void}(St\_stack[call\_size-1]-1, (St\_stack[call\_size-1] - Sj)/2, 2
-      );
-211         rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{helper\_vars::return\_stack}[0];
-212         \textcolor{comment}{//cerr << " rtj " << rtj << endl;}
-213         \textcolor{comment}{//Nij = Nit * rtj + lit * Ntj ;}
-214         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * rtj;
-215         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
+179       \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"sim enc i = j"});
+180     \}\textcolor{keywordflow}{else}\{
+181       status = status\_stack[call\_size-1];
+182       \textcolor{keywordflow}{if} (status == 0)\{
+183         \textcolor{comment}{// newly added node, we should call its left child}
+184         t = (i+j) / 2;
+185         call\_stack[call\_size].first.first = i;
+186         call\_stack[call\_size].first.second = t;
+187         call\_stack[call\_size].second = 2*I;
+188         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
+189         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
+190         call\_size++;
+191       \}
+192       \textcolor{keywordflow}{if} (status == 1)\{
+193         \textcolor{comment}{// left is returned}
+194         t = (i+j) / 2;
+195         St\_stack[call\_size-1] = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1);
+196         \textcolor{keywordflow}{if} (j - i > \hyperlink{classgraph__encoder_a27fde3a95a280304877b1e37fc4d8553}{logn2})
+197           \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde}[I] = St\_stack[call\_size-1];
+198         \textcolor{comment}{// prepare to call right}
+199         
+200         call\_stack[call\_size].first.first = t + 1;
+201         call\_stack[call\_size].first.second = j;
+202         call\_stack[call\_size].second = 2*I + 1;
+203         status\_stack[call\_size-1] = 2; \textcolor{comment}{// right is called}
+204         status\_stack[call\_size] = 0; \textcolor{comment}{// newly called}
+205         call\_size ++;
+206       \}
+207 
+208       \textcolor{keywordflow}{if} (status == 2)\{
+209         \textcolor{comment}{// both are returned, and results can be accessed by the top two elements in return stack}
+210         Sj = \hyperlink{classgraph__encoder_a3314c40920f2ee132958a6b0ce7e7995}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(j+1);
+211         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"sim enc i neq j compute\_product"});
+212         rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St\_stack[call\_size-1]-1, (St\_stack[call\_size-1] - Sj)/2, 2);
+213         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"sim enc i neq j compute\_product"});
+214         \textcolor{comment}{//rtj = helper\_vars::return\_stack[0];}
+215         \textcolor{comment}{//cerr << " rtj " << rtj << endl;}
+216         \textcolor{comment}{//Nij = Nit * rtj + lit * Ntj ;}
+217         \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{logger::item\_start}(\textcolor{stringliteral}{"sim enc i neq j arithmetic"});
+218         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * rtj;
+219         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
       first;
-216         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
-217         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
+220         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
+221         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].second; \textcolor{comment}{// lij}
-218         return\_size --; \textcolor{comment}{// pop 2 add 1}
-219         call\_size --;
-220       \}
-221     \}
-222 
-223   \}
-224 
-225   \textcolor{keywordflow}{if} (return\_size != 1)\{
-226     cerr << \textcolor{stringliteral}{" error: return\_size is not 1 it is "} << return\_size << endl;
-227   \}
-228   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
-229 \}
+222         \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{logger::item\_stop}(\textcolor{stringliteral}{"sim enc i neq j arithmetic"});
+223         return\_size --; \textcolor{comment}{// pop 2 add 1}
+224         call\_size --;
+225       \}
+226     \}
+227 
+228   \}
+229 
+230   \textcolor{keywordflow}{if} (return\_size != 1)\{
+231     cerr << \textcolor{stringliteral}{" error: return\_size is not 1 it is "} << return\_size << endl;
+232   \}
+233   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
+234 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}\label{classgraph__encoder_a23350e4c0986763b24d14c5ef1beb37e}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!encode@{encode}}
@@ -347,35 +351,35 @@ A pair, where the first component is $\lceil N(G) / \prod_{i=1}^n a_i! \rceil$ w
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-231                                                                  \{
-232   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
-233     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
+236                                                                  \{
+237   \textcolor{keywordflow}{if} (G.\hyperlink{classgraph_afdca627df7fb93a7d1d8a547f616e948}{get\_degree\_sequence}()!= \hyperlink{classgraph__encoder_a56eb5cf480ae5c2fca9f3a45f2ffd4f1}{a})
+238     cerr << \textcolor{stringliteral}{" WARNING graph\_encoder::encode : vector a does not match with the degree sequence of the given
        graph "};
-234   \textcolor{comment}{//init(G); // initialize U and beta }
-235   \textcolor{comment}{//pair<mpz\_class, mpz\_class> N\_ans  = compute\_N(0,G.nu\_vertices()-1,1, G);}
-236   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// re initializing U abd beta for the second test}
-237   pair<mpz\_class, mpz\_class> N\_ans = \hyperlink{classgraph__encoder_aeab221523400ec73da6146fdbbd11274}{compute\_N\_new}(G);
-238   \textcolor{comment}{//if (N\_ans.first != N\_ans\_2.first or N\_ans.second != N\_ans\_2.second)}
-239   \textcolor{comment}{//  cerr << " error N\_ans and N\_ans\_2 are not the same, "  << endl << "N\_ans = (" << N\_ans.first << " , "
+239   \textcolor{comment}{//init(G); // initialize U and beta }
+240   \textcolor{comment}{//pair<mpz\_class, mpz\_class> N\_ans  = compute\_N(0,G.nu\_vertices()-1,1, G);}
+241   \hyperlink{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}{init}(G); \textcolor{comment}{// re initializing U abd beta for the second test}
+242   pair<mpz\_class, mpz\_class> N\_ans = \hyperlink{classgraph__encoder_aeab221523400ec73da6146fdbbd11274}{compute\_N\_new}(G);
+243   \textcolor{comment}{//if (N\_ans.first != N\_ans\_2.first or N\_ans.second != N\_ans\_2.second)}
+244   \textcolor{comment}{//  cerr << " error N\_ans and N\_ans\_2 are not the same, "  << endl << "N\_ans = (" << N\_ans.first << " , "
        << N\_ans.second << ") " << endl << "N\_ans\_2 = (" << N\_ans\_2.first << " , " << N\_ans\_2.second << ")" <<
        endl;}
-240   \textcolor{comment}{//else}
-241   \textcolor{comment}{//  cerr << " N\_ans = N\_ans\_2 " << endl;}
-242   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
-243   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
-244   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
-245   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
-246   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
-247   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
-248   \textcolor{comment}{//logger::item\_start("simple\_ar");}
-249   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
-250     ceil = \textcolor{keyword}{true};
-251   N\_ans.first /= N\_ans.second;
-252   \textcolor{keywordflow}{if} (ceil)
-253     N\_ans.first ++;
-254   \textcolor{comment}{//logger::item\_stop("simple\_ar");}
-255   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
-256 \}
+245   \textcolor{comment}{//else}
+246   \textcolor{comment}{//  cerr << " N\_ans = N\_ans\_2 " << endl;}
+247   \textcolor{comment}{//mpz\_class prod\_a\_factorial = prod\_factorial(a, 0,a.size()-1); // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+248   \textcolor{comment}{//if (prod\_a\_factorial!= N\_ans.second)}
+249   \textcolor{comment}{//  cerr << " ERROR: not equal " << endl;}
+250   \textcolor{comment}{// N\_ans.second = \(\backslash\)prod\_\{i=1\}^n a\_i!}
+251   \textcolor{comment}{// we need the ceiling of the ratio of N\_ans.first and prod\_a\_factorial}
+252   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false}; \textcolor{comment}{// if true, we will add one to the integer division}
+253   \textcolor{comment}{//logger::item\_start("simple\_ar");}
+254   \textcolor{keywordflow}{if} (N\_ans.first % N\_ans.second != 0)
+255     ceil = \textcolor{keyword}{true};
+256   N\_ans.first /= N\_ans.second;
+257   \textcolor{keywordflow}{if} (ceil)
+258     N\_ans.first ++;
+259   \textcolor{comment}{//logger::item\_stop("simple\_ar");}
+260   \textcolor{keywordflow}{return} pair<mpz\_class, vector<int> > (N\_ans.first, \hyperlink{classgraph__encoder_a342688a3fdee511b7fae3f155cfb10cf}{Stilde});
+261 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}\label{classgraph__encoder_a6cfb6fca4bc50d4e5d267060a91f43c3}} 
 \index{graph\+\_\+encoder@{graph\+\_\+encoder}!init@{init}}

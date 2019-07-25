@@ -121,35 +121,35 @@ sends a message by setting messages, and puts it in the message hash table messa
 \end{DoxyParams}
 
 \begin{DoxyCode}
-479                                                                          \{
-480   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
-481   \textcolor{comment}{/*}
-482 \textcolor{comment}{  cerr << " send message (";}
-483 \textcolor{comment}{  for (int k=0;k<m.size();k++)\{}
-484 \textcolor{comment}{    cerr << m[k];}
-485 \textcolor{comment}{    if (k<m.size()-1)}
-486 \textcolor{comment}{      cerr << ", ";}
-487 \textcolor{comment}{   \}}
-488 \textcolor{comment}{  cerr << "): " << v << " -> " << i;}
-489 \textcolor{comment}{  */}
-490 
-491   it = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.find(m);
-492   \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.end())\{
-493     \textcolor{comment}{// this is a new message}
-494     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size())); \textcolor{comment}{// insert
+487                                                                          \{
+488   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
+489   \textcolor{comment}{/*}
+490 \textcolor{comment}{  cerr << " send message (";}
+491 \textcolor{comment}{  for (int k=0;k<m.size();k++)\{}
+492 \textcolor{comment}{    cerr << m[k];}
+493 \textcolor{comment}{    if (k<m.size()-1)}
+494 \textcolor{comment}{      cerr << ", ";}
+495 \textcolor{comment}{   \}}
+496 \textcolor{comment}{  cerr << "): " << v << " -> " << i;}
+497 \textcolor{comment}{  */}
+498 
+499   it = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.find(m);
+500   \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.end())\{
+501     \textcolor{comment}{// this is a new message}
+502     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size())); \textcolor{comment}{// insert
        the message into the hash table, message\_mark[s].size() is in fact the number of registered marks at step s}
-495     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size(); \textcolor{comment}{// set the message}
-496     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.push\_back(m.back()); \textcolor{comment}{// register m by adding its mark component (which is
+503     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size(); \textcolor{comment}{// set the message}
+504     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.push\_back(m.back()); \textcolor{comment}{// register m by adding its mark component (which is
        m.back() the last element in m) to the list of marks at step s}
-497     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.push\_back(m[0]==-1); \textcolor{comment}{// check if m is star type, and add this
+505     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.push\_back(m[0]==-1); \textcolor{comment}{// check if m is star type, and add this
        information to the list}
-498   \}\textcolor{keywordflow}{else}\{
-499     \textcolor{comment}{// the message already exists, just use the registered integer value corresponding to m and send the
+506   \}\textcolor{keywordflow}{else}\{
+507     \textcolor{comment}{// the message already exists, just use the registered integer value corresponding to m and send the
        message}
-500     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = it->second;
-501   \}
-502   \textcolor{comment}{//cerr << " message = " << messages[v][i] << endl;}
-503 \}
+508     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = it->second;
+509   \}
+510   \textcolor{comment}{//cerr << " message = " << messages[v][i] << endl;}
+511 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}\label{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}} 
 \index{graph\+\_\+message@{graph\+\_\+message}!update\+\_\+messages@{update\+\_\+messages}}
@@ -446,214 +446,224 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 275           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
 276           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
 277         \}
-278       \}
-279     \}
-280   \}
-281   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-282 
-283 
-284 
-285 
-286   \textcolor{comment}{// ==================================================}
-287   \textcolor{comment}{// ==================================================}
-288   \textcolor{comment}{// ==================================================}
-289   \textcolor{comment}{// ==================================================}
-290   \textcolor{comment}{// ==================================================}
-291   \textcolor{comment}{// ==================================================}
-292   \textcolor{comment}{// ==================================================}
-293   \textcolor{comment}{// ==================================================}
-294 
-295   \textcolor{comment}{/*}
-296 \textcolor{comment}{  for (int t=1;t<h;t++)\{}
-297 \textcolor{comment}{    for (int v=0;v<nu\_vertices;v++)\{}
-298 \textcolor{comment}{      //cerr << " vertex " << v << endl;}
-299 \textcolor{comment}{      if (G.adj\_list[v].size() <= Delta)\{}
-300 \textcolor{comment}{        // the degree of v is no more than Delta}
-301 \textcolor{comment}{        // do the standard message passing by aggregating messages from neighbors}
-302 \textcolor{comment}{        // stacking all the messages from neighbors of v towards v}
-303 \textcolor{comment}{        neighbor\_messages.clear();}
-304 \textcolor{comment}{}
-305 \textcolor{comment}{        // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
+278         \textcolor{keywordflow}{if} ((!star1 and !star2) and (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() > \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} or G.
+      \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[w].size()>\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}))\{ \textcolor{comment}{// this activates only when h = 1, ensures truncation of degrees
+       bigger than delta}
+279           \textcolor{comment}{// message[w][my\_location] should be star}
+280           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second;
+281           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,w,my\_location);
+282           \textcolor{comment}{// messages[v][i] should also become star}
+283           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
+284           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
+285         \}
+286       \}
+287     \}
+288   \}
+289   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+290 
+291 
+292 
+293 
+294   \textcolor{comment}{// ==================================================}
+295   \textcolor{comment}{// ==================================================}
+296   \textcolor{comment}{// ==================================================}
+297   \textcolor{comment}{// ==================================================}
+298   \textcolor{comment}{// ==================================================}
+299   \textcolor{comment}{// ==================================================}
+300   \textcolor{comment}{// ==================================================}
+301   \textcolor{comment}{// ==================================================}
+302 
+303   \textcolor{comment}{/*}
+304 \textcolor{comment}{  for (int t=1;t<h;t++)\{}
+305 \textcolor{comment}{    for (int v=0;v<nu\_vertices;v++)\{}
+306 \textcolor{comment}{      //cerr << " vertex " << v << endl;}
+307 \textcolor{comment}{      if (G.adj\_list[v].size() <= Delta)\{}
+308 \textcolor{comment}{        // the degree of v is no more than Delta}
+309 \textcolor{comment}{        // do the standard message passing by aggregating messages from neighbors}
+310 \textcolor{comment}{        // stacking all the messages from neighbors of v towards v}
+311 \textcolor{comment}{        neighbor\_messages.clear();}
+312 \textcolor{comment}{}
+313 \textcolor{comment}{        // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
        between w and v towards v is added to it, and then all these objects are stacked in neighbor\_messages to be
        sorted and used afterwards}
-306 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
-307 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-308 \textcolor{comment}{          w = G.adj\_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the
+314 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
+315 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
+316 \textcolor{comment}{          w = G.adj\_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the
        ith neighbor of vertex v }
-309 \textcolor{comment}{          //my\_location = G.adj\_location[w].at(v); <--- the inefficient way}
-310 \textcolor{comment}{          my\_location = G.index\_in\_neighbor[v][i];}
-311 \textcolor{comment}{          // where is the place of node v among the list of neighbors of the ith neighbor of v}
-312 \textcolor{comment}{          int previous\_message = messages[w][my\_location][t-1]; // the message sent from this neighbor
+317 \textcolor{comment}{          //my\_location = G.adj\_location[w].at(v); <--- the inefficient way}
+318 \textcolor{comment}{          my\_location = G.index\_in\_neighbor[v][i];}
+319 \textcolor{comment}{          // where is the place of node v among the list of neighbors of the ith neighbor of v}
+320 \textcolor{comment}{          int previous\_message = messages[w][my\_location][t-1]; // the message sent from this neighbor
        towards v at time t-1}
-313 \textcolor{comment}{          int mark\_to\_v = G.adj\_list[v][i].second.first;}
-314 \textcolor{comment}{          neighbor\_messages.push\_back(pair<pair<int, int> , int> (pair<int,int>(previous\_message,
+321 \textcolor{comment}{          int mark\_to\_v = G.adj\_list[v][i].second.first;}
+322 \textcolor{comment}{          neighbor\_messages.push\_back(pair<pair<int, int> , int> (pair<int,int>(previous\_message,
        mark\_to\_v), w));}
-315 \textcolor{comment}{        \}}
-316 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
-317 \textcolor{comment}{        //diff = t2 - t1;}
-318 \textcolor{comment}{        //agg\_neigh\_message += diff.count();}
-319 \textcolor{comment}{}
-320 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
-321 \textcolor{comment}{        sort(neighbor\_messages.begin(), neighbor\_messages.end()); // sorts lexicographically}
-322 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
-323 \textcolor{comment}{        //diff = t2 - t1;}
-324 \textcolor{comment}{        //agg\_sort += diff.count();}
-325 \textcolor{comment}{}
-326 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-327 \textcolor{comment}{          // let w be the current ith neighbor of v}
-328 \textcolor{comment}{          int w = G.adj\_list[v][i].first;}
-329 \textcolor{comment}{          // first, start with the mark of v and the number of offsprings in the subgraph component of the
+323 \textcolor{comment}{        \}}
+324 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
+325 \textcolor{comment}{        //diff = t2 - t1;}
+326 \textcolor{comment}{        //agg\_neigh\_message += diff.count();}
+327 \textcolor{comment}{}
+328 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
+329 \textcolor{comment}{        sort(neighbor\_messages.begin(), neighbor\_messages.end()); // sorts lexicographically}
+330 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
+331 \textcolor{comment}{        //diff = t2 - t1;}
+332 \textcolor{comment}{        //agg\_sort += diff.count();}
+333 \textcolor{comment}{}
+334 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
+335 \textcolor{comment}{          // let w be the current ith neighbor of v}
+336 \textcolor{comment}{          int w = G.adj\_list[v][i].first;}
+337 \textcolor{comment}{          // first, start with the mark of v and the number of offsprings in the subgraph component of the
        message}
-330 \textcolor{comment}{          //vector<int> m; // the message that v is going to send to w}
-331 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-332 \textcolor{comment}{          m.clear();}
-333 \textcolor{comment}{          m.push\_back(G.ver\_mark[v]); // mark of v}
-334 \textcolor{comment}{          m.push\_back(G.adj\_list[v].size()-1); // the number of offsprings in the subgraph component of the
+338 \textcolor{comment}{          //vector<int> m; // the message that v is going to send to w}
+339 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
+340 \textcolor{comment}{          m.clear();}
+341 \textcolor{comment}{          m.push\_back(G.ver\_mark[v]); // mark of v}
+342 \textcolor{comment}{          m.push\_back(G.adj\_list[v].size()-1); // the number of offsprings in the subgraph component of the
        message}
-335 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-336 \textcolor{comment}{          //diff = t2 - t1;}
-337 \textcolor{comment}{          //agg\_m += diff.count();}
-338 \textcolor{comment}{}
-339 \textcolor{comment}{          // stacking messages from all neighbors of v expect for w towards v at time t-1}
-340 \textcolor{comment}{          for (int j=0;j<G.adj\_list[v].size();j++)\{}
-341 \textcolor{comment}{            if (neighbor\_messages[j].second != w)\{}
-342 \textcolor{comment}{              if (message\_list[t-1][neighbor\_messages[j].first.first][0] == -1)\{}
-343 \textcolor{comment}{                // this means that one of the messages that should be aggregated is * typed, therefore the
+343 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
+344 \textcolor{comment}{          //diff = t2 - t1;}
+345 \textcolor{comment}{          //agg\_m += diff.count();}
+346 \textcolor{comment}{}
+347 \textcolor{comment}{          // stacking messages from all neighbors of v expect for w towards v at time t-1}
+348 \textcolor{comment}{          for (int j=0;j<G.adj\_list[v].size();j++)\{}
+349 \textcolor{comment}{            if (neighbor\_messages[j].second != w)\{}
+350 \textcolor{comment}{              if (message\_list[t-1][neighbor\_messages[j].first.first][0] == -1)\{}
+351 \textcolor{comment}{                // this means that one of the messages that should be aggregated is * typed, therefore the
        outgoing messages should also be * typed}
-344 \textcolor{comment}{                // i.e. the message has only two entries: (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark of the
+352 \textcolor{comment}{                // i.e. the message has only two entries: (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark of the
        edge between v and w towards v}
-345 \textcolor{comment}{                // since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
+353 \textcolor{comment}{                // since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
        starting with 'finally'), we only add the initial -1 part}
-346 \textcolor{comment}{                //t1 = high\_resolution\_clock::now();}
-347 \textcolor{comment}{                m.resize(0);}
-348 \textcolor{comment}{                m.push\_back(-1);}
-349 \textcolor{comment}{                //t2 = high\_resolution\_clock::now();}
-350 \textcolor{comment}{                //diff = t2 - t1;}
-351 \textcolor{comment}{                //agg\_m += diff.count();}
-352 \textcolor{comment}{                break; // the message is decided, we do not need to go over any of the other neighbor
+354 \textcolor{comment}{                //t1 = high\_resolution\_clock::now();}
+355 \textcolor{comment}{                m.resize(0);}
+356 \textcolor{comment}{                m.push\_back(-1);}
+357 \textcolor{comment}{                //t2 = high\_resolution\_clock::now();}
+358 \textcolor{comment}{                //diff = t2 - t1;}
+359 \textcolor{comment}{                //agg\_m += diff.count();}
+360 \textcolor{comment}{                break; // the message is decided, we do not need to go over any of the other neighbor
        messages, hence break}
-353 \textcolor{comment}{              \}}
-354 \textcolor{comment}{              // this message should be added to the list of messages}
-355 \textcolor{comment}{              //t1 = high\_resolution\_clock::now();}
-356 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.first); // message part}
-357 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.second); // mark part towards v}
-358 \textcolor{comment}{              //t2 = high\_resolution\_clock::now();}
-359 \textcolor{comment}{              //diff = t2 - t1;}
-360 \textcolor{comment}{              //agg\_m += diff.count();}
-361 \textcolor{comment}{}
-362 \textcolor{comment}{            \}}
-363 \textcolor{comment}{          \}}
-364 \textcolor{comment}{          // if we break, we reach at this point and message is (-1), otherwise the message is of the form
+361 \textcolor{comment}{              \}}
+362 \textcolor{comment}{              // this message should be added to the list of messages}
+363 \textcolor{comment}{              //t1 = high\_resolution\_clock::now();}
+364 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.first); // message part}
+365 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.second); // mark part towards v}
+366 \textcolor{comment}{              //t2 = high\_resolution\_clock::now();}
+367 \textcolor{comment}{              //diff = t2 - t1;}
+368 \textcolor{comment}{              //agg\_m += diff.count();}
+369 \textcolor{comment}{}
+370 \textcolor{comment}{            \}}
+371 \textcolor{comment}{          \}}
+372 \textcolor{comment}{          // if we break, we reach at this point and message is (-1), otherwise the message is of the form
        (\(\backslash\)tau(v), \(\backslash\)deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. }
-365 \textcolor{comment}{          // finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
+373 \textcolor{comment}{          // finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
        list}
-366 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-367 \textcolor{comment}{          m.push\_back(G.adj\_list[v][i].second.first);}
-368 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-369 \textcolor{comment}{          //diff = t2 - t1;}
-370 \textcolor{comment}{          //agg\_m += diff.count();}
-371 \textcolor{comment}{}
-372 \textcolor{comment}{          // set the current message}
-373 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-374 \textcolor{comment}{          it = message\_dict[t].find(m);}
-375 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-376 \textcolor{comment}{          //diff = t2 - t1;}
-377 \textcolor{comment}{          //agg\_search += diff.count();}
-378 \textcolor{comment}{}
-379 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
-380 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
-381 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
-382 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
-383 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
-384 \textcolor{comment}{            //diff = t2 - t1;}
-385 \textcolor{comment}{            //agg\_insert += diff.count();}
+374 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
+375 \textcolor{comment}{          m.push\_back(G.adj\_list[v][i].second.first);}
+376 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
+377 \textcolor{comment}{          //diff = t2 - t1;}
+378 \textcolor{comment}{          //agg\_m += diff.count();}
+379 \textcolor{comment}{}
+380 \textcolor{comment}{          // set the current message}
+381 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
+382 \textcolor{comment}{          it = message\_dict[t].find(m);}
+383 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
+384 \textcolor{comment}{          //diff = t2 - t1;}
+385 \textcolor{comment}{          //agg\_search += diff.count();}
 386 \textcolor{comment}{}
-387 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
-388 \textcolor{comment}{            message\_list[t].push\_back(m);}
-389 \textcolor{comment}{          \}else\{}
-390 \textcolor{comment}{            messages[v][i][t] = it->second;}
-391 \textcolor{comment}{          \}}
-392 \textcolor{comment}{        \}}
-393 \textcolor{comment}{      \}else\{}
-394 \textcolor{comment}{        // if the degree of v is bigger than Delta, the message towards all neighbors is of the form *}
-395 \textcolor{comment}{        // i.e. message of v towards a neighbor w is of the form (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark
+387 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
+388 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
+389 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
+390 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
+391 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
+392 \textcolor{comment}{            //diff = t2 - t1;}
+393 \textcolor{comment}{            //agg\_insert += diff.count();}
+394 \textcolor{comment}{}
+395 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
+396 \textcolor{comment}{            message\_list[t].push\_back(m);}
+397 \textcolor{comment}{          \}else\{}
+398 \textcolor{comment}{            messages[v][i][t] = it->second;}
+399 \textcolor{comment}{          \}}
+400 \textcolor{comment}{        \}}
+401 \textcolor{comment}{      \}else\{}
+402 \textcolor{comment}{        // if the degree of v is bigger than Delta, the message towards all neighbors is of the form *}
+403 \textcolor{comment}{        // i.e. message of v towards a neighbor w is of the form (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark
        of the edge between v and w towards v}
-396 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-397 \textcolor{comment}{          //vector<int> m; // the current message from v to ith neighbor}
-398 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-399 \textcolor{comment}{          m.clear();}
-400 \textcolor{comment}{          m.resize(2);}
-401 \textcolor{comment}{          m[0] = -1;}
-402 \textcolor{comment}{          m[1] = G.adj\_list[v][i].second.first;}
-403 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-404 \textcolor{comment}{          //diff = t2 - t1;}
-405 \textcolor{comment}{          //agg\_m += diff.count();}
-406 \textcolor{comment}{}
-407 \textcolor{comment}{          // set the current message}
-408 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-409 \textcolor{comment}{          it = message\_dict[t].find(m);}
-410 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-411 \textcolor{comment}{          //diff = t2 - t1;}
-412 \textcolor{comment}{          //agg\_search += diff.count();}
-413 \textcolor{comment}{}
-414 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
-415 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
-416 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
-417 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
-418 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
-419 \textcolor{comment}{            //diff = t2 - t1;}
-420 \textcolor{comment}{            //agg\_insert += diff.count();}
-421 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
-422 \textcolor{comment}{            message\_list[t].push\_back(m);}
-423 \textcolor{comment}{          \}else\{}
-424 \textcolor{comment}{            messages[v][i][t] = it->second;}
-425 \textcolor{comment}{          \}}
-426 \textcolor{comment}{        \}}
-427 \textcolor{comment}{      \}}
-428 \textcolor{comment}{    \}}
-429 \textcolor{comment}{  \}}
-430 \textcolor{comment}{  cerr << " total time to search in hash table: " << agg\_search << endl;}
-431 \textcolor{comment}{  cerr << " total time to insert in hash table: " << agg\_insert << endl;}
-432 \textcolor{comment}{  cerr << " total time to modify vector m  " << agg\_m << endl;}
-433 \textcolor{comment}{  cerr << " total time to sort  " << agg\_sort << endl;}
-434 \textcolor{comment}{  cerr << " total time to collect neighbor messages " <<  agg\_neigh\_message << endl;}
-435 \textcolor{comment}{  // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the
+404 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
+405 \textcolor{comment}{          //vector<int> m; // the current message from v to ith neighbor}
+406 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
+407 \textcolor{comment}{          m.clear();}
+408 \textcolor{comment}{          m.resize(2);}
+409 \textcolor{comment}{          m[0] = -1;}
+410 \textcolor{comment}{          m[1] = G.adj\_list[v][i].second.first;}
+411 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
+412 \textcolor{comment}{          //diff = t2 - t1;}
+413 \textcolor{comment}{          //agg\_m += diff.count();}
+414 \textcolor{comment}{}
+415 \textcolor{comment}{          // set the current message}
+416 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
+417 \textcolor{comment}{          it = message\_dict[t].find(m);}
+418 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
+419 \textcolor{comment}{          //diff = t2 - t1;}
+420 \textcolor{comment}{          //agg\_search += diff.count();}
+421 \textcolor{comment}{}
+422 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
+423 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
+424 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
+425 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
+426 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
+427 \textcolor{comment}{            //diff = t2 - t1;}
+428 \textcolor{comment}{            //agg\_insert += diff.count();}
+429 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
+430 \textcolor{comment}{            message\_list[t].push\_back(m);}
+431 \textcolor{comment}{          \}else\{}
+432 \textcolor{comment}{            messages[v][i][t] = it->second;}
+433 \textcolor{comment}{          \}}
+434 \textcolor{comment}{        \}}
+435 \textcolor{comment}{      \}}
+436 \textcolor{comment}{    \}}
+437 \textcolor{comment}{  \}}
+438 \textcolor{comment}{  cerr << " total time to search in hash table: " << agg\_search << endl;}
+439 \textcolor{comment}{  cerr << " total time to insert in hash table: " << agg\_insert << endl;}
+440 \textcolor{comment}{  cerr << " total time to modify vector m  " << agg\_m << endl;}
+441 \textcolor{comment}{  cerr << " total time to sort  " << agg\_sort << endl;}
+442 \textcolor{comment}{  cerr << " total time to collect neighbor messages " <<  agg\_neigh\_message << endl;}
+443 \textcolor{comment}{  // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the
        form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \(\backslash\)xi(v,w)}
-436 \textcolor{comment}{  logger::add\_entry("* symmetrizing", "");}
-437 \textcolor{comment}{  for (int v=0;v<nu\_vertices;v++)\{}
-438 \textcolor{comment}{    for (int i=0;i<G.adj\_list[v].size();i++)\{}
-439 \textcolor{comment}{      if (message\_list[h-1][messages[v][i][h-1]][0] == -1)\{}
-440 \textcolor{comment}{        // it is of the form *}
-441 \textcolor{comment}{        w = G.adj\_list[v][i].first; // the other endpoint of the edge}
-442 \textcolor{comment}{        //my\_location = G.adj\_location[w].at(v); // so that adj\_list[w][my\_location].first = v}
-443 \textcolor{comment}{        my\_location = G.index\_in\_neighbor[v][i];}
-444 \textcolor{comment}{}
-445 \textcolor{comment}{        //vector<int> m;}
-446 \textcolor{comment}{        m.clear();}
-447 \textcolor{comment}{        m.resize(2);}
-448 \textcolor{comment}{        m[0] = -1;}
-449 \textcolor{comment}{        m[1] = G.adj\_list[v][i].second.second; // the mark towards w}
-450 \textcolor{comment}{        if (message\_dict[h-1].find(m) == message\_dict[h-1].end())\{}
-451 \textcolor{comment}{          message\_dict[h-1][m] = message\_list[h-1].size();}
-452 \textcolor{comment}{          message\_list[h-1].push\_back(m);}
-453 \textcolor{comment}{        \}}
-454 \textcolor{comment}{        messages[w][my\_location][h-1] = message\_dict[h-1][m];}
-455 \textcolor{comment}{      \}}
-456 \textcolor{comment}{    \}}
-457 \textcolor{comment}{  \}}
-458 \textcolor{comment}{}
-459 \textcolor{comment}{  // setting message\_mark and is\_star\_message}
-460 \textcolor{comment}{  logger::add\_entry("setting message\_mark and is\_star\_message", "");}
-461 \textcolor{comment}{  message\_mark.resize(message\_list[h-1].size());}
-462 \textcolor{comment}{  is\_star\_message.resize(message\_list[h-1].size());}
-463 \textcolor{comment}{  for (int i=0;i<message\_list[h-1].size();i++)\{}
-464 \textcolor{comment}{    message\_mark[i] = message\_list[h-1][i].back(); // the last element is the mark component}
-465 \textcolor{comment}{    is\_star\_message[i] = (message\_list[h-1][i][0] == -1); // message is star type when the first element is
+444 \textcolor{comment}{  logger::add\_entry("* symmetrizing", "");}
+445 \textcolor{comment}{  for (int v=0;v<nu\_vertices;v++)\{}
+446 \textcolor{comment}{    for (int i=0;i<G.adj\_list[v].size();i++)\{}
+447 \textcolor{comment}{      if (message\_list[h-1][messages[v][i][h-1]][0] == -1)\{}
+448 \textcolor{comment}{        // it is of the form *}
+449 \textcolor{comment}{        w = G.adj\_list[v][i].first; // the other endpoint of the edge}
+450 \textcolor{comment}{        //my\_location = G.adj\_location[w].at(v); // so that adj\_list[w][my\_location].first = v}
+451 \textcolor{comment}{        my\_location = G.index\_in\_neighbor[v][i];}
+452 \textcolor{comment}{}
+453 \textcolor{comment}{        //vector<int> m;}
+454 \textcolor{comment}{        m.clear();}
+455 \textcolor{comment}{        m.resize(2);}
+456 \textcolor{comment}{        m[0] = -1;}
+457 \textcolor{comment}{        m[1] = G.adj\_list[v][i].second.second; // the mark towards w}
+458 \textcolor{comment}{        if (message\_dict[h-1].find(m) == message\_dict[h-1].end())\{}
+459 \textcolor{comment}{          message\_dict[h-1][m] = message\_list[h-1].size();}
+460 \textcolor{comment}{          message\_list[h-1].push\_back(m);}
+461 \textcolor{comment}{        \}}
+462 \textcolor{comment}{        messages[w][my\_location][h-1] = message\_dict[h-1][m];}
+463 \textcolor{comment}{      \}}
+464 \textcolor{comment}{    \}}
+465 \textcolor{comment}{  \}}
+466 \textcolor{comment}{}
+467 \textcolor{comment}{  // setting message\_mark and is\_star\_message}
+468 \textcolor{comment}{  logger::add\_entry("setting message\_mark and is\_star\_message", "");}
+469 \textcolor{comment}{  message\_mark.resize(message\_list[h-1].size());}
+470 \textcolor{comment}{  is\_star\_message.resize(message\_list[h-1].size());}
+471 \textcolor{comment}{  for (int i=0;i<message\_list[h-1].size();i++)\{}
+472 \textcolor{comment}{    message\_mark[i] = message\_list[h-1][i].back(); // the last element is the mark component}
+473 \textcolor{comment}{    is\_star\_message[i] = (message\_list[h-1][i][0] == -1); // message is star type when the first element is
        -1}
-466 \textcolor{comment}{  \}}
-467 \textcolor{comment}{  logger::current\_depth--;}
-468 \textcolor{comment}{  */}
-469 \}
+474 \textcolor{comment}{  \}}
+475 \textcolor{comment}{  logger::current\_depth--;}
+476 \textcolor{comment}{  */}
+477 \}
 \end{DoxyCode}
 
 

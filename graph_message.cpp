@@ -275,6 +275,14 @@ void graph_message::update_messages(const marked_graph& G)
           m[1] = G.adj_list[v][i].second.first;
           send_message(m,v,i);
         }
+        if ((!star1 and !star2) and (G.adj_list[v].size() > Delta or G.adj_list[w].size()>Delta)){ // this activates only when h = 1, ensures truncation of degrees bigger than delta
+          // message[w][my_location] should be star
+          m[1] = G.adj_list[v][i].second.second;
+          send_message(m,w,my_location);
+          // messages[v][i] should also become star
+          m[1] = G.adj_list[v][i].second.first;
+          send_message(m,v,i);
+        }
       }
     }
   }

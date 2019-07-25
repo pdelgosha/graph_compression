@@ -235,7 +235,7 @@ void compute_product_void(int N, int k, int s){
 
 
 void compute_array_product(vector<mpz_class>& a){
-  logger::item_start("CAP");
+  logger::item_start("Compute Array Product");
   int step_size, to_mul; 
   int k = a.size(); 
   for (step_size = 2, to_mul = 1; to_mul < k; step_size <<=1, to_mul <<=1){
@@ -244,7 +244,7 @@ void compute_array_product(vector<mpz_class>& a){
         a[i] *= a[i+to_mul];
     }
   }
-  logger::item_stop("CAP");
+  logger::item_stop("Compute Array Product");
 }
 
 

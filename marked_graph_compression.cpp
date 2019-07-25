@@ -129,6 +129,18 @@ void marked_graph_compressed::binary_write(FILE* f){
   int_out = part_bgraph.size();
   fwrite(&int_out, sizeof int_out, 1, f);
   map<pair<int, int>, mpz_class>::iterator it2;
+  if (logger::stat){
+    *logger::stat_stream << " ==== statistics ==== " << endl;
+    *logger::stat_stream << " n:                " << n << endl;
+    *logger::stat_stream << " h:                " << h << endl;
+    *logger::stat_stream << " delta:            " << delta << endl;
+    *logger::stat_stream << " No. types         " << type_mark.size() << endl;
+    *logger::stat_stream << " No. * vertices    " << n - star_vertices.first[0] << endl;
+    *logger::stat_stream << " No. * edges       " << nu_star_edges << endl;
+    *logger::stat_stream << " No. part bgraphs  " << part_bgraph.size() << endl;
+    *logger::stat_stream << " No. part graphs   " << part_graph.size() << endl;
+  }
+
   for (it2 = part_bgraph.begin(); it2 != part_bgraph.end(); it2++){
     // first, write t, t'
     int_out = it2->first.first;
@@ -160,17 +172,6 @@ void marked_graph_compressed::binary_write(FILE* f){
       int_out = it3->second.second[j];
       fwrite(&int_out, sizeof int_out, 1, f);
     }
-  }
-  if (logger::stat){
-    *logger::stat_stream << " ==== statistics ==== " << endl;
-    *logger::stat_stream << " n:                " << n << endl;
-    *logger::stat_stream << " h:                " << h << endl;
-    *logger::stat_stream << " delta:            " << delta << endl;
-    *logger::stat_stream << " No. types         " << type_mark.size() << endl;
-    *logger::stat_stream << " No. * vertices    " << n - star_vertices.first[0] << endl;
-    *logger::stat_stream << " No. * edges       " << nu_star_edges << endl;
-    *logger::stat_stream << " No. part bgraphs  " << part_bgraph.size() << endl;
-    *logger::stat_stream << " No. part graphs   " << part_graph.size() << endl;
   }
 
   logger::current_depth--;
@@ -528,13 +529,25 @@ void marked_graph_encoder::extract_partition_graphs()
   }
 
   // using partition_adj_list in order to construct partition graphs
+  if(logger::stat){
+    *logger::stat_stream << " partition graphs size: " << endl;
+    *logger::stat_stream << " ====================== " << endl;
+  }
   for (map<pair<int, int>, vector<vector<int> > >::iterator it=part_adj_list.begin(); it!=part_adj_list.end();it++){
     t = it->first.first;
     tp = it->first.second;
-    if (t<tp)
+    if (t<tp){
       part_bgraph[it->first] = b_graph(it->second, part_deg.at(pair<int, int>(t,tp)), part_deg.at(pair<int, int>(tp, t))); // left and right degree sequences are read from the part_deg map
-    if (t == tp)
+      if (logger::stat){
+        *logger::stat_stream << " bipartite: (" << part_deg.at(pair<int, int> (t,tp)).size() << " , " << part_deg.at(pair<int, int>(tp,t)).size() << ")" << endl;
+      }
+    }
+    if (t == tp){
       part_graph[t] = graph(it->second, part_deg.at(pair<int, int>(t,t)));
+      if (logger::stat){
+        *logger::stat_stream << " simple: "  << part_deg.at(pair<int, int>(t,t)).size() << endl;
+      }
+    }
   }
 }
 
