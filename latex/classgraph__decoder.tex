@@ -93,21 +93,21 @@ constructor given the degree sequence
 
 
 \begin{DoxyCode}
-272 \{
-273   \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a} = a\_;
-274   \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size();
-275 
-276   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// log of n in base 2}
-277   \textcolor{keywordtype}{int} nn = \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}; \textcolor{comment}{// a copy of n}
-278   \textcolor{keywordflow}{while} (nn>0)\{
-279     log2n ++;
-280     nn = nn >> 1; \textcolor{comment}{// divide by 2}
-281   \} \textcolor{comment}{// eventually, we count the number of bits in n}
-282   log2n --; \textcolor{comment}{// we count extra, e.g. when n = 1, we end up having 1, rather than 0}
-283   \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2} = log2n * log2n;
-284 
-285   \hyperlink{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}{init}(); \textcolor{comment}{// init x, beta and U}
-286 \}
+408 \{
+409   \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a} = a\_;
+410   \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size();
+411 
+412   \textcolor{keywordtype}{int} log2n = 0; \textcolor{comment}{// log of n in base 2}
+413   \textcolor{keywordtype}{int} nn = \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}; \textcolor{comment}{// a copy of n}
+414   \textcolor{keywordflow}{while} (nn>0)\{
+415     log2n ++;
+416     nn = nn >> 1; \textcolor{comment}{// divide by 2}
+417   \} \textcolor{comment}{// eventually, we count the number of bits in n}
+418   log2n --; \textcolor{comment}{// we count extra, e.g. when n = 1, we end up having 1, rather than 0}
+419   \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2} = log2n * log2n;
+420 
+421   \hyperlink{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}{init}(); \textcolor{comment}{// init x, beta and U}
+422 \}
 \end{DoxyCode}
 
 
@@ -124,18 +124,18 @@ given $\tilde{N}$ and a vector $\tilde{S}$, decodes the graph and returns an obj
 
 
 \begin{DoxyCode}
-297 \{
-298   \hyperlink{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}{init}(); \textcolor{comment}{// make x, U and beta ready for decoding }
-299   \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS} = tS\_;
-300   \textcolor{comment}{//mpz\_class prod\_a\_factorial = 1; // \(\backslash\)prod\_\{i=1\}^n a\_i!}
-301   \textcolor{comment}{//for (int i=0; i<a.size();i++)}
-302   \textcolor{comment}{//  prod\_a\_factorial *= compute\_product(a[i], a[i], 1);}
-303 
-304   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}, 0,\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} a\_i!}
-305   mpz\_class tN = f * prod\_a\_factorial;
-306   \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(0,\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1,1,tN,0);
-307   \textcolor{keywordflow}{return} \hyperlink{classgraph}{graph}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}, \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
-308 \}
+433 \{
+434   \hyperlink{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}{init}(); \textcolor{comment}{// make x, U and beta ready for decoding }
+435   \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS} = tS\_;
+436   \textcolor{comment}{//mpz\_class prod\_a\_factorial = 1; // \(\backslash\)prod\_\{i=1\}^n a\_i!}
+437   \textcolor{comment}{//for (int i=0; i<a.size();i++)}
+438   \textcolor{comment}{//  prod\_a\_factorial *= compute\_product(a[i], a[i], 1);}
+439 
+440   mpz\_class prod\_a\_factorial = \hyperlink{compression__helper_8cpp_a86d8a20e022dc06b23df3b08ac10b7d1}{prod\_factorial}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}, 0,\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a}.size()-1); \textcolor{comment}{// \(\backslash\)prod\_\{i=0\}^\{n-1\} a\_i!}
+441   mpz\_class tN = f * prod\_a\_factorial;
+442   \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(0,\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1,1,tN,0);
+443   \textcolor{keywordflow}{return} \hyperlink{classgraph}{graph}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}, \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
+444 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}\label{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}} 
 \index{graph\+\_\+decoder@{graph\+\_\+decoder}!decode\+\_\+interval@{decode\+\_\+interval}}
@@ -163,61 +163,61 @@ a pair $N_{i,j}, l_{i,j}$ where $N_{i,j} = N_{i,j}(G)$ and $l_{i,j} = l_{i,j}(G)
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-363 \{
-364   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " tN " << tN << endl;}
-365   \textcolor{keywordflow}{if} (i == j)
-366     \textcolor{keywordflow}{return} \hyperlink{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}{decode\_node}(i, tN);
-367 
-368   \textcolor{comment}{// sweeping for zero nodes}
-369 
-370   \textcolor{keywordtype}{int} t; \textcolor{comment}{// place to break}
-371   \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
-372   \textcolor{keywordflow}{if} ((j-i) > \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2})\{
-373     \textcolor{comment}{//cerr << " long interval I = " << I << endl;}
-374     t = (i+j) / 2; \textcolor{comment}{// break at middle, since we have \(\backslash\)tilde\{S\}}
-375     St = \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS}[I]; \textcolor{comment}{// looking at the \(\backslash\)f$\(\backslash\)tilde\{S\}\(\backslash\)f$ vector}
-376   \}\textcolor{keywordflow}{else}\{
-377     \textcolor{comment}{//cerr << " short interval " << endl;}
-378     t = i;
-379     St = \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(i) - 2 * \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];
-380   \}
-381 
-382   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " t " << t << " St " << St << " Sj " << Sj << endl;}
-383   mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$t\_\{t+1, j\}\(\backslash\)f$}
-384   mpz\_class tNit; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{i,t\}\(\backslash\)f$ for the left decoder}
-385   mpz\_class tNtj; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{t+1, j\}\(\backslash\)f$ for the right decoder }
-386   mpz\_class Nit; \textcolor{comment}{// the true N\_\{i,t\} returned by the left decoder}
-387   mpz\_class lit; \textcolor{comment}{// the true l\_\{i,t\} returned by the left decoder}
-388   mpz\_class Ntj; \textcolor{comment}{// the true N\_\{t+1, j\} returned by the right decoder}
-389   mpz\_class ltj; \textcolor{comment}{// the true l\_\{t+1,j\} returned by the right decoder}
-390   mpz\_class Nij; \textcolor{comment}{// the true N\_\{i,j\} to return}
-391   mpz\_class lij; \textcolor{comment}{// the true l\_\{i,j\} to return}
-392 
-393   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// returned by subintervals }
-394 
-395 
-396   rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St - 1, (St - Sj)/2, 2);
-397   \textcolor{comment}{//cerr << " interval " << i << " " << j << " t " << t << " St " << St << " rtj " << rtj << endl;}
-398   tNit = tN / rtj;
-399 
-400   \textcolor{comment}{// calling the left decoder }
-401   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(i,t,2*I,tNit, St); 
-402   Nit = ans.first;
-403   lit = ans.second;
-404 
-405   \textcolor{comment}{// reducing the contribution of the left decoder to prepare for the right decoder}
-406   tNtj = (tN - Nit * rtj) / lit;
-407 
-408   \textcolor{comment}{// calling the right decoder}
-409   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(t+1, j, 2*I + 1, tNtj, Sj);
-410   Ntj = ans.first;
-411   ltj = ans.second;
-412 
-413   \textcolor{comment}{// preparing Nij and lij to return}
-414   Nij = Nit * rtj + lit * Ntj;
-415   lij = lit * ltj;
-416   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
-417 \}
+499 \{
+500   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " tN " << tN << endl;}
+501   \textcolor{keywordflow}{if} (i == j)
+502     \textcolor{keywordflow}{return} \hyperlink{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}{decode\_node}(i, tN);
+503 
+504   \textcolor{comment}{// sweeping for zero nodes}
+505 
+506   \textcolor{keywordtype}{int} t; \textcolor{comment}{// place to break}
+507   \textcolor{keywordtype}{int} St; \textcolor{comment}{// S\_\{t+1\}}
+508   \textcolor{keywordflow}{if} ((j-i) > \hyperlink{classgraph__decoder_a59663482843ffa5059128bd6ed866f11}{logn2})\{
+509     \textcolor{comment}{//cerr << " long interval I = " << I << endl;}
+510     t = (i+j) / 2; \textcolor{comment}{// break at middle, since we have \(\backslash\)tilde\{S\}}
+511     St = \hyperlink{classgraph__decoder_ac466636b9b21122f4fa0246aa624978c}{tS}[I]; \textcolor{comment}{// looking at the \(\backslash\)f$\(\backslash\)tilde\{S\}\(\backslash\)f$ vector}
+512   \}\textcolor{keywordflow}{else}\{
+513     \textcolor{comment}{//cerr << " short interval " << endl;}
+514     t = i;
+515     St = \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(i) - 2 * \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];
+516   \}
+517 
+518   \textcolor{comment}{//cerr << " decode interval " << i << " " << j << " t " << t << " St " << St << " Sj " << Sj << endl;}
+519   mpz\_class rtj; \textcolor{comment}{// \(\backslash\)f$t\_\{t+1, j\}\(\backslash\)f$}
+520   mpz\_class tNit; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{i,t\}\(\backslash\)f$ for the left decoder}
+521   mpz\_class tNtj; \textcolor{comment}{// \(\backslash\)f$\(\backslash\)tilde\{N\}\_\{t+1, j\}\(\backslash\)f$ for the right decoder }
+522   mpz\_class Nit; \textcolor{comment}{// the true N\_\{i,t\} returned by the left decoder}
+523   mpz\_class lit; \textcolor{comment}{// the true l\_\{i,t\} returned by the left decoder}
+524   mpz\_class Ntj; \textcolor{comment}{// the true N\_\{t+1, j\} returned by the right decoder}
+525   mpz\_class ltj; \textcolor{comment}{// the true l\_\{t+1,j\} returned by the right decoder}
+526   mpz\_class Nij; \textcolor{comment}{// the true N\_\{i,j\} to return}
+527   mpz\_class lij; \textcolor{comment}{// the true l\_\{i,j\} to return}
+528 
+529   pair<mpz\_class, mpz\_class> ans; \textcolor{comment}{// returned by subintervals }
+530 
+531 
+532   rtj = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(St - 1, (St - Sj)/2, 2);
+533   \textcolor{comment}{//cerr << " interval " << i << " " << j << " t " << t << " St " << St << " rtj " << rtj << endl;}
+534   tNit = tN / rtj;
+535 
+536   \textcolor{comment}{// calling the left decoder }
+537   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(i,t,2*I,tNit, St); 
+538   Nit = ans.first;
+539   lit = ans.second;
+540 
+541   \textcolor{comment}{// reducing the contribution of the left decoder to prepare for the right decoder}
+542   tNtj = (tN - Nit * rtj) / lit;
+543 
+544   \textcolor{comment}{// calling the right decoder}
+545   ans = \hyperlink{classgraph__decoder_a2cb0bd279889a833d4c825e99eb72410}{decode\_interval}(t+1, j, 2*I + 1, tNtj, Sj);
+546   Ntj = ans.first;
+547   ltj = ans.second;
+548 
+549   \textcolor{comment}{// preparing Nij and lij to return}
+550   Nij = Nit * rtj + lit * Ntj;
+551   lij = lit * ltj;
+552   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Nij, lij);
+553 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}\label{classgraph__decoder_af3ff99a4de6035ad257ebd7c6519cdd8}} 
 \index{graph\+\_\+decoder@{graph\+\_\+decoder}!decode\+\_\+node@{decode\+\_\+node}}
@@ -241,55 +241,55 @@ a pair $(N_{i,i}, l_i)$ where $l_i = l_i(G)$ and $N_{i,i} = N_{i,i}(G)$
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-311 \{
-312   \textcolor{comment}{//cerr << " decode node " << i << " tN " << tN << endl;}
-313   \textcolor{comment}{//cerr << " beta[i] " << beta[i] << endl;}
-314   \textcolor{comment}{//cerr << " beta " << endl;}
-315   \textcolor{comment}{//for (int k = i; k< n;k++)}
-316   \textcolor{comment}{//  cerr << k << " " << beta[k] << endl;}
-317   \textcolor{comment}{//cerr << " U " << endl;}
-318   \textcolor{comment}{//for (int k=i;k<n;k++)}
-319   \textcolor{comment}{//  cerr << k << " " << U.sum(k) << endl;}
-320 
-321   \textcolor{keywordflow}{if} (\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i] == 0)
-322     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (0,1);
-323 
-324   mpz\_class li = 1; \textcolor{comment}{// l\_i(G)}
-325   mpz\_class Ni = 0; \textcolor{comment}{// N\_\{i,i\}(G)}
-326   \textcolor{keywordtype}{int} f, g; \textcolor{comment}{// endpoints for the binary search}
-327   \textcolor{keywordtype}{int} t; \textcolor{comment}{// midpoint for the binary search}
-328   mpz\_class zik, lik; 
-329   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];k++)\{
-330     \textcolor{keywordflow}{if} (k==0)
-331       f = i+1;
-332     \textcolor{keywordflow}{else}
-333       f = \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k-1]+1;
-334     g = \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1;
-335     \textcolor{keywordflow}{while}(g > f)\{
-336       \textcolor{comment}{//cerr << " f , g " << f << " " << g << endl;}
-337       t = (f+g)/2;
-338       \textcolor{comment}{// binary search:}
-339       \textcolor{keywordflow}{if}(\hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1), beta[i] - k, 1) <= tN)
-340         g = t;
-341       \textcolor{keywordflow}{else}
-342         f = t+1;
-343     \}
-344     \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i].push\_back(f);
-345     zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]+1), beta[i] - k, 1);
-346     Ni += li * zik;
-347     lik = (beta[i] - k) * beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]];
-348     li *= lik;
-349     tN -= zik;
-350     tN /= lik;
-351     \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k],-1);
-352     beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]] --;
-353   \}
-354   \textcolor{comment}{//cerr << " decoded for " << i << " x: " << endl;}
-355   \textcolor{comment}{//for (int j=0;j<x[i].size(); j++)}
-356   \textcolor{comment}{//  cerr << x[i][j] << " " ;}
-357   \textcolor{comment}{//cerr << endl;}
-358   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Ni, li);
-359 \}
+447 \{
+448   \textcolor{comment}{//cerr << " decode node " << i << " tN " << tN << endl;}
+449   \textcolor{comment}{//cerr << " beta[i] " << beta[i] << endl;}
+450   \textcolor{comment}{//cerr << " beta " << endl;}
+451   \textcolor{comment}{//for (int k = i; k< n;k++)}
+452   \textcolor{comment}{//  cerr << k << " " << beta[k] << endl;}
+453   \textcolor{comment}{//cerr << " U " << endl;}
+454   \textcolor{comment}{//for (int k=i;k<n;k++)}
+455   \textcolor{comment}{//  cerr << k << " " << U.sum(k) << endl;}
+456 
+457   \textcolor{keywordflow}{if} (\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i] == 0)
+458     \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (0,1);
+459 
+460   mpz\_class li = 1; \textcolor{comment}{// l\_i(G)}
+461   mpz\_class Ni = 0; \textcolor{comment}{// N\_\{i,i\}(G)}
+462   \textcolor{keywordtype}{int} f, g; \textcolor{comment}{// endpoints for the binary search}
+463   \textcolor{keywordtype}{int} t; \textcolor{comment}{// midpoint for the binary search}
+464   mpz\_class zik, lik; 
+465   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta}[i];k++)\{
+466     \textcolor{keywordflow}{if} (k==0)
+467       f = i+1;
+468     \textcolor{keywordflow}{else}
+469       f = \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k-1]+1;
+470     g = \hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n}-1;
+471     \textcolor{keywordflow}{while}(g > f)\{
+472       \textcolor{comment}{//cerr << " f , g " << f << " " << g << endl;}
+473       t = (f+g)/2;
+474       \textcolor{comment}{// binary search:}
+475       \textcolor{keywordflow}{if}(\hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(t+1), beta[i] - k, 1) <= tN)
+476         g = t;
+477       \textcolor{keywordflow}{else}
+478         f = t+1;
+479     \}
+480     \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i].push\_back(f);
+481     zik = \hyperlink{compression__helper_8cpp_ae2afb43aabe50f7d42aae8f82b5a35f4}{compute\_product}(\hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]+1), beta[i] - k, 1);
+482     Ni += li * zik;
+483     lik = (beta[i] - k) * beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]];
+484     li *= lik;
+485     tN -= zik;
+486     tN /= lik;
+487     \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k],-1);
+488     beta[\hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}[i][k]] --;
+489   \}
+490   \textcolor{comment}{//cerr << " decoded for " << i << " x: " << endl;}
+491   \textcolor{comment}{//for (int j=0;j<x[i].size(); j++)}
+492   \textcolor{comment}{//  cerr << x[i][j] << " " ;}
+493   \textcolor{comment}{//cerr << endl;}
+494   \textcolor{keywordflow}{return} pair<mpz\_class, mpz\_class> (Ni, li);
+495 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}\label{classgraph__decoder_a97a9dcd5af21ece86fa91adcb41ca9cc}} 
 \index{graph\+\_\+decoder@{graph\+\_\+decoder}!init@{init}}
@@ -303,12 +303,12 @@ initializes x to be empty vector of size n, and U and beta by a
 
 
 \begin{DoxyCode}
-289 \{
-290   \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}.clear();
-291   \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}.resize(\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n});
-292   \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a};
-293   \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
-294 \}
+425 \{
+426   \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}.clear();
+427   \hyperlink{classgraph__decoder_aa3f2776afe387668cf7f68109428e14e}{x}.resize(\hyperlink{classgraph__decoder_a6bc1e72b2f7a913d14b789a6c2d92c1e}{n});
+428   \hyperlink{classgraph__decoder_aa57c11e4c09c52101682ff83286162f7}{beta} = \hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a};
+429   \hyperlink{classgraph__decoder_a2fa9fec2cef06aaa410e57fb59d5c1ad}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classgraph__decoder_a9dd7c3c11b8a45a12cb7c3c2d2bfa2cc}{a});
+430 \}
 \end{DoxyCode}
 
 

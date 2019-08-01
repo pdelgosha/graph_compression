@@ -233,13 +233,149 @@ pair<mpz_class, mpz_class> graph_encoder::compute_N_new(const graph& G)
   return return_stack[0];
 }
 
+pair<mpz_class, mpz_class> graph_encoder::compute_N_new_r(const graph& G)
+{
+
+  int n = G.nu_vertices();
+  int n_bits = 0;
+  int n_copy = n;
+  while (n_copy > 0){
+    n_bits ++;
+    n_copy >>= 1;
+  }
+  n_bits += 2;
+
+  vector<pair<pair<int, int>, int > > call_stack(2 * n_bits);
+  vector<pair<mpz_class, mpz_class> > return_stack(2 * n_bits); // first = N, second = l
+  vector<mpz_class> r_stack(2 * n_bits); // stack of r values 
+  vector<int> status_stack(2 * n_bits);
+  //vector<int> St_stack(2 * n_bits); // stack to store values of St
+
+  call_stack[0].first = pair<int, int> (0,n-1); // i j 
+  call_stack[0].second = 1; // I
+  status_stack[0] = 0; // newly added
+
+  int call_size = 1; // the size of the call stack
+  int return_size = 0; // the size of the return stack
+
+  int i, j, I, t, Sj;
+  int status;
+
+  vector<int> gamma; // forward list  of the graph
+  mpz_class zik, lik, rtj; // intermediate variables
+  mpz_class Nit_rtj; // result of Nij * rtj
+  mpz_class lit_Ntj; // result of lit * Ntj 
+  while (call_size > 0){
+    // cerr << " printing the whole stack " << endl;
+    // for (int k = 0; k<call_size; k++){
+    //   cerr << k << " : " << call_stack[k].first.first << " " << call_stack[k].first.second << " I " << call_stack[k].second << "s= " << status_stack[k] << endl;
+    // }
+    // cerr << " return stack " << endl;
+    // for (int k=0;k<return_size;k++)
+    //   cerr << k << ": " << return_stack[k].first << " " << return_stack[k].second << endl;
+    i = call_stack[call_size-1].first.first;
+    j = call_stack[call_size-1].first.second;
+    I = call_stack[call_size-1].second;
+    if (i==j){
+      //logger::item_start("sim enc i = j");
+      return_stack[return_size].first = 0; // z_i is initialized with 0
+      return_stack[return_size].second = 1; // l_i is initialize with 1
+      gamma = G.get_forward_list(i); // the forward adjacency list of vertex i
+      r_stack[return_size] = compute_product(U.sum(i) - 1, beta[i], 2); // this is r_i
+      // cerr << " i " << i << " j " << j << " gamma: " << endl;
+      // for (int k=0;k<gamma.size();k++)
+      //   cerr << gamma[k] << " ";
+      // cerr << endl;
+      // cerr << " beta " << endl;
+      // for (int k=0; k<n; k++)
+      //   cerr << beta[k] << " ";
+      // cerr << endl;
+
+      for (int k=0;k<gamma.size();k++){
+        zik = compute_product(U.sum(1+gamma[k]), beta[i] - k, 1); // we are zero based here, so instead of -k + 1, we have -k
+        //zik = helper_vars::return_stack[0];
+        //cerr << " zik " << zik << endl;
+        return_stack[return_size].first += return_stack[return_size].second * zik;
+        lik = (beta[i] - k) * beta[gamma[k]]; // we are zero based here, so instead of -k + 1, we have -k
+        //cerr << " lik " << lik << endl;
+        return_stack[return_size].second *= lik;
+        beta[gamma[k]] -- ;
+        U.add(gamma[k],-1);
+      }
+      return_size ++; // establish the return
+      call_size --;
+      //logger::item_stop("sim enc i = j");
+    }else{
+      status = status_stack[call_size-1];
+      if (status == 0){
+        // newly added node, we should call its left child
+        t = (i+j) / 2;
+        call_stack[call_size].first.first = i;
+        call_stack[call_size].first.second = t;
+        call_stack[call_size].second = 2*I;
+        status_stack[call_size-1] = 1; // left is called
+        status_stack[call_size] = 0; // newly added
+        call_size++;
+      }
+      if (status == 1){
+        // left is returned
+        t = (i+j) / 2;
+        //St_stack[call_size-1] = U.sum(t+1);
+        if (j - i > logn2)
+          Stilde[I] = U.sum(t+1);//St_stack[call_size-1];
+        // prepare to call right
+        
+        call_stack[call_size].first.first = t + 1;
+        call_stack[call_size].first.second = j;
+        call_stack[call_size].second = 2*I + 1;
+        status_stack[call_size-1] = 2; // right is called
+        status_stack[call_size] = 0; // newly called
+        call_size ++;
+      }
+
+      if (status == 2){
+        // both are returned, and results can be accessed by the top two elements in return stack
+        //Sj = U.sum(j+1);
+        //logger::item_start("sim enc i neq j compute_product");
+        //rtj = compute_product(St_stack[call_size-1]-1, (St_stack[call_size-1] - Sj)/2, 2);
+        //logger::item_stop("sim enc i neq j compute_product");
+        //rtj = helper_vars::return_stack[0];
+        //cerr << " rtj " << rtj << endl;
+        //Nij = Nit * rtj + lit * Ntj ;
+        //logger::item_start("sim enc i neq j arithmetic");
+        Nit_rtj = return_stack[return_size-2].first * r_stack[return_size-1];
+        lit_Ntj = return_stack[return_size-2].second * return_stack[return_size-1].first;
+        return_stack[return_size-2].first = Nit_rtj + lit_Ntj; // Nij
+        return_stack[return_size-2].second = return_stack[return_size-2].second * return_stack[return_size-1].second; // lij
+        r_stack[return_size-2] = r_stack[return_size-2] * r_stack[return_size-1];
+        //logger::item_stop("sim enc i neq j arithmetic");
+        return_size --; // pop 2 add 1
+        call_size --;
+      }
+    }
+
+  }
+
+  if (return_size != 1){
+    cerr << " error: return_size is not 1 it is " << return_size << endl;
+  }
+  return return_stack[0];
+}
+
 pair<mpz_class, vector<int> > graph_encoder::encode(const graph& G){
   if (G.get_degree_sequence()!= a)
     cerr << " WARNING graph_encoder::encode : vector a does not match with the degree sequence of the given graph ";
   //init(G); // initialize U and beta 
   //pair<mpz_class, mpz_class> N_ans  = compute_N(0,G.nu_vertices()-1,1, G);
   init(G); // re initializing U abd beta for the second test
-  pair<mpz_class, mpz_class> N_ans = compute_N_new(G);
+  pair<mpz_class, mpz_class> N_ans = compute_N_new_r(G);
+  // init(G);
+  // pair<mpz_class, mpz_class> N_ans_2 = compute_N_new_r(G);
+  // if (N_ans.first == N_ans_2.first and N_ans.second == N_ans_2.second){
+  //   cerr << " = " << endl;
+  // }else{
+  //   cerr << " error N_ans and N_ans_2 are not the same, "  << endl << "N_ans = (" << N_ans.first << " , " << N_ans.second << ") " << endl << "N_ans_2 = (" << N_ans_2.first << " , " << N_ans_2.second << ")" << endl; 
+  // }
   //if (N_ans.first != N_ans_2.first or N_ans.second != N_ans_2.second)
   //  cerr << " error N_ans and N_ans_2 are not the same, "  << endl << "N_ans = (" << N_ans.first << " , " << N_ans.second << ") " << endl << "N_ans_2 = (" << N_ans_2.first << " , " << N_ans_2.second << ")" << endl;
   //else
