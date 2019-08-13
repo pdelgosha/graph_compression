@@ -250,6 +250,257 @@ void marked_graph_compressed::binary_write(FILE* f){
   logger::current_depth--;
 }
 
+
+
+void marked_graph_compressed::binary_write(string s){
+  
+  obitstream oup(s);
+
+  vector<pair<string, int> > space_log; // stores the number of bits used to store each category. The string part is description of the category, and the int part is the number of bits of output used to express that part.
+
+  //int output_bits; // the number of bits in the output corresponding to the current category under investigation, to be zeroed at each step.
+
+  logger::current_depth++;
+  // ==== write n, h, delta
+  //output_bits = 0;
+  logger::add_entry("n", "");
+  oup << n; //fwrite(&n, sizeof n, 1, f);
+  //output_bits += sizeof n;
+
+  logger::add_entry("h", "");
+  oup << h; //fwrite(&h, sizeof h, 1, f);
+  //output_bits += sizeof h;
+
+  logger::add_entry("delta", "");
+  oup << delta; //fwrite(&delta, sizeof delta, 1, f);
+  //output_bits += sizeof delta;
+
+  //space_log.push_back(pair<string, int> ("n, h, delta", output_bits));
+
+  logger::add_entry("type_mark", "");
+  //output_bits = 0;
+
+  int int_out; // auxiliary variable, an integer value to be written to output
+  // ==== write type_mark
+  // first, the number of types
+  oup <<  type_mark.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+  // then, marks one by one
+  for (int i=0;i<type_mark.size();i++){
+    oup <<  type_mark[i];
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+  }
+
+  //space_log.push_back(pair<string, int>("type mark", output_bits));
+
+  logger::add_entry("star_vertices", "");
+  //output_bits = 0;
+  // ==== write star vertices
+  // first, write the frequency, note that star_vertices.first is a vector of size 2 with the first entry being the number of zeros, and the second one the number of ones, so it enough to write only one of them
+  oup << star_vertices.first[0];
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  // then, we write the integer representation star_vertices.second
+  oup << star_vertices.second;
+  //output_bits +=  mpz_out_raw(f, star_vertices.second.get_mpz_t()); // mpz_out_raw returns the number of bytes written to the output
+
+  //space_log.push_back(pair<string, int> ("star vertices", output_bits));
+
+  logger::add_entry("star_edges", "");
+  // ==== write star edges
+  //output_bits = 0;
+  //int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
+  //int n_copy = n;
+  //while(n_copy > 0){
+  //n_copy >>= 1;
+  //log2n ++;
+  //}
+  //cerr << " log2n " << log2n << endl;
+  //bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
+
+  map<pair<int, int>, vector<vector<int> > >::iterator it;
+  int x, xp;
+  //string s; // the bit stream
+
+  // first, write the size of star_edges so that the decoder knows how many blocks are coming
+  oup << star_edges.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  int nu_star_edges = 0; // number of star edges 
+  for (it = star_edges.begin(); it!= star_edges.end(); it++){
+    x = it->first.first;
+    xp = it->first.second;
+    //write x and xp
+    oup << x;
+    //fwrite(&x, sizeof x, 1, f);
+    oup << xp;
+    //fwrite(&xp, sizeof xp, 1, f);
+    //output_bits += sizeof x;
+    //output_bits += sizeof xp;
+    //s = "";
+    for (int i=0;i<it->second.size();i++){
+      for(int j=0;j<it->second[i].size();j++){
+        oup.write_bits(1,1); // write a single bit with value 1
+        //s += "1";
+        oup <<  it->second[i][j]; 
+        nu_star_edges ++;
+      }
+      oup.write_bits(0,1); // write 1 bit with value 0 
+      //s += "0"; // to indicate that the neighbor list of this vertex is over now
+    }
+    //cerr << " write  x " << x << " xp " << xp << " s " << s << endl;
+    //for (int i=0;i<it->second.size();i++){
+    //  for (int j=0;j<it->second[i].size();j++){
+    //    cerr << " , " << it->second[i][j];
+    //  }
+    //  cerr << endl;
+    //}
+    //output_bits += bit_string_write(f, s); // write this bitstream to the output
+  }
+
+  //space_log.push_back(pair<string, int> ("star edges", output_bits));
+
+
+  logger::add_entry("vertex types", "");
+  //output_bits = 0;
+  
+  // ==== write vertex types
+
+  // first, we need vertex types list (ver_type_list)
+  // size of ver_type_list
+  oup <<  ver_type_list.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  for (int i=0;i<ver_type_list.size();i++){
+    oup << ver_type_list[i].size();
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+
+    for (int j=0;j<ver_type_list[i].size();j++){
+      oup << ver_type_list[i][j];
+      //fwrite(&int_out, sizeof int_out, 1, f);
+      //output_bits += sizeof int_out;
+    }
+  }
+  //space_log.push_back(pair<string, int>("vertex type list", output_bits));
+  //output_bits = 0;
+  
+  // then, write ver_types
+
+  // ver_types.first
+  // ver_types.first.size():
+  oup << ver_types.first.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  for (int i =0;i<ver_types.first.size(); i++){
+    oup <<  ver_types.first[i];
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+  }
+  // ver_types.second
+  oup << ver_types.second;
+  //output_bits += mpz_out_raw(f, ver_types.second.get_mpz_t());
+
+  //space_log.push_back(pair<string, int> ("vertex types", output_bits));
+
+  logger::add_entry("partition bipartite graphs", "");
+  
+
+  // ==== part bgraphs
+  //output_bits = 0;
+
+  // part_bgraphs.size
+  oup << part_bgraph.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  map<pair<int, int>, mpz_class>::iterator it2;
+  if (logger::stat){
+    *logger::stat_stream << " ==== statistics ==== " << endl;
+    *logger::stat_stream << " n:                " << n << endl;
+    *logger::stat_stream << " h:                " << h << endl;
+    *logger::stat_stream << " delta:            " << delta << endl;
+    *logger::stat_stream << " No. types         " << type_mark.size() << endl;
+    *logger::stat_stream << " No. * vertices    " << n - star_vertices.first[0] << endl;
+    *logger::stat_stream << " No. * edges       " << nu_star_edges << endl;
+    *logger::stat_stream << " No. part bgraphs  " << part_bgraph.size() << endl;
+    *logger::stat_stream << " No. part graphs   " << part_graph.size() << endl;
+  }
+
+  for (it2 = part_bgraph.begin(); it2 != part_bgraph.end(); it2++){
+    // first, write t, t'
+    oup << it2->first.first;
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+    oup <<  it2->first.second;
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+    // then, the compressed integer
+    oup << it2->second;
+    //output_bits += mpz_out_raw(f, it2->second.get_mpz_t());
+  }
+
+  //space_log.push_back(pair<string, int> ("partition bipartite graphs", output_bits));
+
+  logger::add_entry("partition graphs", "");
+  //output_bits = 0;
+  // === part graphs
+
+  // part_graph.size
+  oup <<  part_graph.size();
+  //fwrite(&int_out, sizeof int_out, 1, f);
+  //output_bits += sizeof int_out;
+
+  map< int, pair< mpz_class, vector< int > > >::iterator it3;
+  for (it3 = part_graph.begin(); it3 != part_graph.end(); it3++){
+    oup <<  it3->first; // the type
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+
+    // the mpz part
+    oup << it3->second.first;
+    //output_bits += mpz_out_raw(f, it3->second.first.get_mpz_t());
+    // the vector part
+    // first its size
+    oup <<  it3->second.second.size();
+    //fwrite(&int_out, sizeof int_out, 1, f);
+    //output_bits += sizeof int_out;
+    // then element by element
+    for(int j=0;j<it3->second.second.size();j++){
+      oup <<  it3->second.second[j];
+      //fwrite(&int_out, sizeof int_out, 1, f);
+      //output_bits += sizeof int_out;
+    }
+  }
+  //space_log.push_back(pair<string, int>("partition graphs", output_bits));
+
+  /*
+  if (logger::stat){
+    *logger::stat_stream << endl << endl;
+    *logger::stat_stream << " Number of bytes used for each part " << endl;
+    *logger::stat_stream << " ---------------------------------- " << endl << endl;
+
+    int total_bytes = 0;
+    for (int i=0; i < space_log.size(); i++)
+      total_bytes += space_log[i].second;
+
+    for (int i=0; i < space_log.size(); i++){
+      *logger::stat_stream << space_log[i].first << " -> "  << space_log[i].second << " ( " << float(100) * float(space_log[i].second) / float(total_bytes) << " % " << endl;
+    }
+
+    *logger::stat_stream << " Total number of bytes wrote to the output = " << total_bytes << endl;
+  }
+  */
+  oup.close();
+  logger::current_depth--;
+}
+
 /*!
   \param f: a `FILE*` object which is the address of the binary file to write
 */
@@ -400,6 +651,189 @@ void marked_graph_compressed::binary_read(FILE* f){
     part_graph.insert(pair<int, pair< mpz_class, vector< int > > >(t, pair<mpz_class, vector<int> >(part_g, W)));
   }
 }
+
+
+void marked_graph_compressed::binary_read(string s){
+  clear(); // to make sure nothing is stored inside me before reading
+  ibitstream inp(s);
+
+  // ==== read n, h, delta
+  unsigned int int_in; // auxiliary input integer
+  inp >> int_in; 
+  n = int_in; // I need to do this, since ibitstream::operator >> gets unsigned int& and the compile can not cast int& to unsigned int&
+  inp >> int_in;
+  h = int_in;
+  inp >> int_in;
+  delta = int_in;
+
+  //fread(&n, sizeof n, 1, f);
+  //fread(&h, sizeof h, 1, f);
+  //fread(&delta, sizeof delta, 1, f);
+
+
+  // ===== read type_mark
+  // read number of types
+  inp >> int_in;
+  //fread(&int_in, sizeof int_in, 1, f);
+  type_mark.resize(int_in);
+  for (int i=0;i<type_mark.size();i++){
+    inp >> int_in;
+    type_mark[i] = int_in;
+    //fread(&int_in, sizeof int_in, 1, f);
+    //type_mark[i] = int_in;
+  }
+
+  // ==== read star_vertices
+  // first, read the frequency.
+  star_vertices.first = vector<int>(2); // frequency,
+  // we read its first index which is number of zeros, and the second is n - the first.
+  inp >> int_in;
+  //fread(&int_in, sizeof int_in, 1, f);
+  star_vertices.first[0] = int_in;
+  star_vertices.first[1] = n - int_in;
+
+  // the integer representation which is star_vertices.second
+  inp >> star_vertices.second;
+  //mpz_inp_raw(star_vertices.second.get_mpz_t(), f);
+
+  // ==== read star_edges
+
+  //int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
+  //int n_copy = n;
+  //while(n_copy > 0){
+  //n_copy >>= 1;
+  //log2n ++;
+  //}
+  //bitset<8*sizeof(int)> B; // a bit stream with maximum length of int to store a vertex index
+
+  //string s;
+  //stringstream ss;
+  //int sp; // the index of the string s we are studying 
+
+  // read the size of star_edges
+
+  unsigned int star_edges_size;
+  inp >> star_edges_size;
+  //fread(&star_edges_size, sizeof star_edges_size, 1, f);
+
+  unsigned int x, xp; // edge marks
+  int nu_star_vertices = star_vertices.first[1];
+
+  vector<vector<int> > V; // the list of star edges corresponding to each mark pair
+  V.resize(nu_star_vertices);
+
+  for (int i=0;i<star_edges_size;i++){
+    inp >> x;
+    inp >> xp;
+    //fread(&x, sizeof x, 1, f);
+    //fread(&xp, sizeof xp, 1, f);
+  
+    //s = bit_string_read(f);
+    //cerr << " read  x " << x << " xp " << xp << " s " << s << endl;
+    //sp = 0; // starting from zero 
+    for (int j=0; j<nu_star_vertices; j++){ // 
+      V[j].clear(); // make it fresh
+      while(inp.read_bit()){ // there is still some edge connected to this vertex 
+        // read log2n many bits
+        //cerr << " s subtr " << s.substr(sp, log2n);
+        //ss << s.substr(sp, log2n);
+        //B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
+        //cerr << " ss " << ss.str() << endl;
+        //sp += log2n;
+        //ss >> B;
+        inp >> int_in; 
+        V[j].push_back(int_in);
+      }
+      //for (int k=0;k<V[j].size();k++)
+      //  cerr << " , " << V[j][k];
+      //cerr << endl;
+    }
+
+
+    star_edges.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
+  }
+
+  // ==== read vertex_types
+
+  // read ver_type_list
+  inp >> int_in;
+  //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list
+  ver_type_list.resize(int_in);
+  for (int i=0; i<ver_type_list.size();i++){
+    inp >> int_in;
+    //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list[i]
+    ver_type_list[i].resize(int_in);
+    for (int j=0;j<ver_type_list[i].size();j++){
+      //fread(&int_in, sizeof int_in, 1, f);
+      inp >> int_in;
+      ver_type_list[i][j] = int_in;
+    }
+  }
+
+  // ver_types
+  // ver_types.first
+  // ver_types.first.size()
+  inp >> int_in;
+  //fread(&int_in, sizeof int_in, 1, f);
+  ver_types.first.resize(int_in);
+  for (int i=0;i<ver_types.first.size();i++){
+    //fread(&int_in, sizeof int_in, 1, f);
+    inp >> int_in;
+    ver_types.first[i] = int_in;// = int_in;
+  }
+  // ver_types.second
+  inp >> ver_types.second;
+  //mpz_inp_raw(ver_types.second.get_mpz_t(), f);
+
+
+  // === part bgraphs
+  unsigned int part_bgraph_size;
+  unsigned int t, tp;
+  pair<int, int> type; 
+  mpz_class part_g;
+  inp >> part_bgraph_size;
+  //fread(&part_bgraph_size, sizeof part_bgraph_size, 1, f);
+  for (int i=0;i<part_bgraph_size;i++){
+    // read t, t'
+    inp >> t;
+    inp >> tp;
+    //fread(&t, sizeof t, 1, f);
+    //fread(&tp, sizeof tp, 1, f);
+    type = pair<int, int>(t, tp);
+    inp >> part_g;
+    //mpz_inp_raw(part_g.get_mpz_t(), f);
+    part_bgraph.insert(pair<pair<int, int>, mpz_class> (type, part_g));
+  }
+
+  // === part graphs
+
+  // first, the size
+  unsigned int part_graph_size;
+  unsigned int v_size;
+  vector<int> W; 
+  inp >> part_graph_size;
+  //fread(&part_graph_size, sizeof part_graph_size, 1, f);
+  for (int i=0;i<part_graph_size; i++){
+    // first, the type
+    inp >> t; 
+    //fread(&t, sizeof t, 1, f);
+    // then, the mpz part
+    inp >> part_g;
+    //mpz_inp_raw(part_g.get_mpz_t(), f);
+    // then, the vector size
+    inp >> v_size;
+    //fread(&v_size, sizeof v_size, 1, f);
+    W.resize(v_size);
+    for (int j=0;j<v_size; j++){
+      //fread(&int_in, sizeof int_in, 1, f);
+      inp >> int_in;
+      W[j] = int_in; //= int_in;
+    }
+    part_graph.insert(pair<int, pair< mpz_class, vector< int > > >(t, pair<mpz_class, vector<int> >(part_g, W)));
+  }
+  inp.close();
+}
+
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
 {

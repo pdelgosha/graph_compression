@@ -11,6 +11,8 @@
 #include "bipartite_graph_compression.h"
 #include "time_series_compression.h"
 #include "logger.h"
+#include "bitstream.h"
+
 
 using namespace std;
 
@@ -39,8 +41,16 @@ class marked_graph_compressed
   //! writes the compressed data to a binary file
   void binary_write(FILE* f);
 
+  //! writes the compressed data to a binary file
+  //! \param s string containing the name of the binary file
+  void binary_write(string s);
+
   //! read the compressed data from a binary file
   void binary_read(FILE* f);
+
+  //! read the compressed data from a binary file
+  //! \param s string containing the name of the binary file
+  void binary_read(string s);
 
 };
 

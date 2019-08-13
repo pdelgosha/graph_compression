@@ -6,13 +6,20 @@ var searchData=
   ['b_5fgraph_5fencoder',['b_graph_encoder',['../classb__graph__encoder.html',1,'b_graph_encoder'],['../classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283',1,'b_graph_encoder::b_graph_encoder()']]],
   ['b_5fgraph_5ftest',['b_graph_test',['../test_8cpp.html#aa276850b1d7d04eb917a6fc7415b9566',1,'test.cpp']]],
   ['beta',['beta',['../classb__graph__encoder.html#ae54d76cc4cee399d98951f870897a144',1,'b_graph_encoder::beta()'],['../classb__graph__decoder.html#a3e5babfb07af486c1d9e991f65251266',1,'b_graph_decoder::beta()'],['../classgraph__encoder.html#a40880adecfd63fb86e94b4b0fc3f6bc2',1,'graph_encoder::beta()'],['../classgraph__decoder.html#aa57c11e4c09c52101682ff83286162f7',1,'graph_decoder::beta()']]],
-  ['binary_5fread',['binary_read',['../classmarked__graph__compressed.html#a9db2d11bd63ad3d5a75e47b4023a89dd',1,'marked_graph_compressed']]],
-  ['binary_5fwrite',['binary_write',['../classmarked__graph__compressed.html#ab9cdb7fc43badd58fb5202f74ffac723',1,'marked_graph_compressed']]],
+  ['binary_5fread',['binary_read',['../classmarked__graph__compressed.html#a9db2d11bd63ad3d5a75e47b4023a89dd',1,'marked_graph_compressed::binary_read(FILE *f)'],['../classmarked__graph__compressed.html#a01c67fe4234738db6bb60459515c3ad8',1,'marked_graph_compressed::binary_read(string s)']]],
+  ['binary_5fwrite',['binary_write',['../classmarked__graph__compressed.html#ab9cdb7fc43badd58fb5202f74ffac723',1,'marked_graph_compressed::binary_write(FILE *f)'],['../classmarked__graph__compressed.html#a13ab09e4b399f179ec91746ae2b8b38c',1,'marked_graph_compressed::binary_write(string s)']]],
   ['binomial',['binomial',['../compression__helper_8cpp.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp'],['../compression__helper_8h.html#acecca9cb279d3b3d82915a07d67818cf',1,'binomial(const int n, const int m):&#160;compression_helper.cpp']]],
   ['bipartite_5fgraph_2ecpp',['bipartite_graph.cpp',['../bipartite__graph_8cpp.html',1,'']]],
   ['bipartite_5fgraph_2eh',['bipartite_graph.h',['../bipartite__graph_8h.html',1,'']]],
   ['bipartite_5fgraph_5fcompression_2ecpp',['bipartite_graph_compression.cpp',['../bipartite__graph__compression_8cpp.html',1,'']]],
   ['bipartite_5fgraph_5fcompression_2eh',['bipartite_graph_compression.h',['../bipartite__graph__compression_8h.html',1,'']]],
+  ['bit_5fint',['BIT_INT',['../bitstream_8h.html#afcadf5aa65c5159bfb96c4d82ebc0a5d',1,'bitstream.h']]],
+  ['bit_5fpipe',['bit_pipe',['../classbit__pipe.html',1,'bit_pipe'],['../classbit__pipe.html#a6dab67e6a47c1d1f020fe769df27cef1',1,'bit_pipe::bit_pipe()'],['../classbit__pipe.html#a381c4371859988c65802767d31fc7458',1,'bit_pipe::bit_pipe(const unsigned int &amp;n)'],['../classbit__pipe.html#adc311ad05b01a2ec6e979882aa8b703e',1,'bit_pipe::bit_pipe(const mpz_class &amp;n)']]],
   ['bit_5fstring_5fread',['bit_string_read',['../compression__helper_8cpp.html#a40e8dcbc036f96b28e003e882c4890b7',1,'bit_string_read(FILE *f):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a40e8dcbc036f96b28e003e882c4890b7',1,'bit_string_read(FILE *f):&#160;compression_helper.cpp']]],
-  ['bit_5fstring_5fwrite',['bit_string_write',['../compression__helper_8cpp.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp']]]
+  ['bit_5fstring_5fwrite',['bit_string_write',['../compression__helper_8cpp.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp']]],
+  ['bits',['bits',['../classbit__pipe.html#a86f38af1e9736b053728033490476b50',1,'bit_pipe']]],
+  ['bitstream_2ecpp',['bitstream.cpp',['../bitstream_8cpp.html',1,'']]],
+  ['bitstream_2eh',['bitstream.h',['../bitstream_8h.html',1,'']]],
+  ['buffer',['buffer',['../classobitstream.html#aeaccad00a395a404aa16472bfa052be3',1,'obitstream::buffer()'],['../classibitstream.html#a73f0b24d3d4402369f1abbb43f7f70ef',1,'ibitstream::buffer()']]],
+  ['byte_5fint',['BYTE_INT',['../bitstream_8h.html#adcaf4dd854153bb193477f88f921eb36',1,'bitstream.h']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['f',['f',['../classobitstream.html#ac589d74745217748c888ae777ab324a7',1,'obitstream::f()'],['../classibitstream.html#a3ea2cdd0cf97820f0e1520c42e364308',1,'ibitstream::f()']]],
   ['fenwick_2ecpp',['fenwick.cpp',['../fenwick_8cpp.html',1,'']]],
   ['fenwick_2eh',['fenwick.h',['../fenwick_8h.html',1,'']]],
   ['fenwick_5ftree',['fenwick_tree',['../classfenwick__tree.html',1,'fenwick_tree'],['../classfenwick__tree.html#a6a23235d1eb40c9858057525d7ed6d70',1,'fenwick_tree::fenwick_tree()'],['../classfenwick__tree.html#a35288559f8182d96aef8ddba5cb46adb',1,'fenwick_tree::fenwick_tree(vector&lt; int &gt;)']]],

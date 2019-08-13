@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vint_5fhash',['vint_hash',['../structvint__hash.html',1,'']]]
+  ['reverse_5ffenwick_5ftree',['reverse_fenwick_tree',['../classreverse__fenwick__tree.html',1,'']]]
 ];

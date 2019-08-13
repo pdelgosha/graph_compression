@@ -6,5 +6,6 @@ var searchData=
   ['marked_5fgraph_5fdecoder',['marked_graph_decoder',['../classmarked__graph__decoder.html#ad13aa15246efd3754b3ba7d2c28300d9',1,'marked_graph_decoder']]],
   ['marked_5fgraph_5fencoder',['marked_graph_encoder',['../classmarked__graph__encoder.html#a128d2a38b23ce620c77d00a5eff487ea',1,'marked_graph_encoder']]],
   ['marked_5fgraph_5fencoder_5ftest',['marked_graph_encoder_test',['../test_8cpp.html#af087647683f99aca0cfa687af0d88813',1,'test.cpp']]],
+  ['mask_5fgen',['mask_gen',['../bitstream_8cpp.html#a6364b017a9400a38f7a994376bb3ebee',1,'mask_gen(int n):&#160;bitstream.cpp'],['../bitstream_8h.html#a6364b017a9400a38f7a994376bb3ebee',1,'mask_gen(int n):&#160;bitstream.cpp']]],
   ['mp_5ftest',['mp_test',['../test__mp_8cpp.html#a2f49a1fae1f238b0451e12ece3ed2f12',1,'test_mp.cpp']]]
 ];

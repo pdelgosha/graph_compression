@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['last_5fbits',['last_bits',['../classbit__pipe.html#a0f3e84b02751803adaab499b5dad86fe',1,'bit_pipe']]],
   ['left_5fdeg_5fseq',['left_deg_seq',['../classb__graph.html#a311d16462dbb10c47b3a6c80a42139d9',1,'b_graph']]],
   ['log',['log',['../classlogger.html#ab518e6d927694bb7329e933fa75c27bf',1,'logger']]],
   ['log_5fentry',['log_entry',['../classlog__entry.html',1,'log_entry'],['../classlog__entry.html#ac5c6d1454c9285c418e3359b82cdd573',1,'log_entry::log_entry()']]],

@@ -120,22 +120,24 @@ int main(int argc, char ** argv){
     logger::add_entry("Encode", "");
     marked_graph_compressed C = E.encode(G);
     logger::current_depth--;
-    FILE* f;
-    f = fopen(outfile.c_str(), "wb+");
+    //FILE* f;
+    //f = fopen(outfile.c_str(), "wb+");
     logger::current_depth++;
     logger::add_entry("Write to binary", "");
-    C.binary_write(f);
-    fclose(f);
+    //C.binary_write(f);
+    C.binary_write(outfile);
+    //fclose(f);
     logger::current_depth--;
   }else{
     // goal is to decompess
-    FILE* f;
-    f = fopen(infile.c_str(), "rb+");
+    //FILE* f;
+    //f = fopen(infile.c_str(), "rb+");
     marked_graph_compressed C;
     logger::current_depth++;
     logger::add_entry("Read from binary", "");
-    C.binary_read(f);
-    fclose(f);
+    //C.binary_read(f);
+    C.binary_read(infile);
+    //fclose(f);
     logger::current_depth--;
 
     logger::current_depth++;

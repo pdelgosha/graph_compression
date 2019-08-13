@@ -1,0 +1,231 @@
+\hypertarget{classobitstream}{}\section{obitstream Class Reference}
+\label{classobitstream}\index{obitstream@{obitstream}}
+
+
+handles writing bitstreams to binary files  
+
+
+
+
+{\ttfamily \#include $<$bitstream.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classobitstream_a99e4f20344a99c1e8d892eb0c28b3daa}{obitstream} (string file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+void \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\+\_\+bits} (unsigned int n, unsigned int \hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\+\_\+bits})
+\begin{DoxyCompactList}\small\item\em write the bits given as unsigned int to the output \end{DoxyCompactList}\item 
+\hyperlink{classobitstream}{obitstream} \& \hyperlink{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}{operator$<$$<$} (const unsigned int \&n)
+\begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
+\hyperlink{classobitstream}{obitstream} \& \hyperlink{classobitstream_aed715e98e8b47e19e465da1445372229}{operator$<$$<$} (const mpz\+\_\+class \&n)
+\begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative mpz\+\_\+class integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
+void \hyperlink{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}{close} ()
+\begin{DoxyCompactList}\small\item\em closes the session by writing the remaining chunk to the output (if any) and closing the file pointer f \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write} ()
+\begin{DoxyCompactList}\small\item\em writes complete chunks to the output \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbit__pipe}{bit\+\_\+pipe} \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}
+\begin{DoxyCompactList}\small\item\em a \hyperlink{classbit__pipe}{bit\+\_\+pipe} carrying the buffered data \end{DoxyCompactList}\item 
+F\+I\+LE $\ast$ \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+handles writing bitstreams to binary files 
+
+When trying to write to binary files, we sometimes need to write less than a byte, or a few bytes followed by say 2 bits. This is not possible unless we turn those 2 bits to 8 bits by basically adding 6 zeros. . However, if we want to do a lot of such operations, this can result in space inefficiencies. To avoid this, we can concatenate the bitstreams together and perhaps gain a lot in space. This class also handles Elias delta encoding of unsigned int and mpz\+\_\+class. The way it is done is to buffer the data, write complete bytes to the output, and keeping the residuals for future operations.
+
+In order to make sure that the carry over from the last operation is also written to the output, we should call the \hyperlink{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}{close()} function. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classobitstream_a99e4f20344a99c1e8d892eb0c28b3daa}\label{classobitstream_a99e4f20344a99c1e8d892eb0c28b3daa}} 
+\index{obitstream@{obitstream}!obitstream@{obitstream}}
+\index{obitstream@{obitstream}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{obitstream()}{obitstream()}}
+{\footnotesize\ttfamily obitstream\+::obitstream (\begin{DoxyParamCaption}\item[{string}]{file\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor 
+
+
+\begin{DoxyCode}
+86                               \{
+87     \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"wb+"});
+88   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}\label{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}} 
+\index{obitstream@{obitstream}!close@{close}}
+\index{close@{close}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void obitstream\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+closes the session by writing the remaining chunk to the output (if any) and closing the file pointer f 
+
+
+\begin{DoxyCode}
+254                       \{
+255   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 0)\{
+256     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), 
+      \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
+257     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.clear();
+258     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;
+259   \}
+260   fclose(\hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
+261 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}\label{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}} 
+\index{obitstream@{obitstream}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{classobitstream}{obitstream} \& obitstream\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{n }\end{DoxyParamCaption})}
+
+
+
+uses Elias delta code to write a nonnegative integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead 
+
+
+\begin{DoxyCode}
+220                                                          \{
+221   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
+222     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
+223   \}
+224   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+225   \textcolor{keywordtype}{int} buffer\_res = 0; 
+226   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+227     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+228     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+229   \}
+230   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
+231   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+       operation}
+232   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
+233   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
+234   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+235 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classobitstream_aed715e98e8b47e19e465da1445372229}\label{classobitstream_aed715e98e8b47e19e465da1445372229}} 
+\index{obitstream@{obitstream}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{classobitstream}{obitstream} \& obitstream\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{const mpz\+\_\+class \&}]{n }\end{DoxyParamCaption})}
+
+
+
+uses Elias delta code to write a nonnegative mpz\+\_\+class integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead 
+
+
+\begin{DoxyCode}
+237                                                       \{
+238   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
+239     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
+240   \}
+241   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+242   \textcolor{keywordtype}{int} buffer\_res = 0; 
+243   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+244     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+245     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+246   \}
+247   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
+248   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+       operation}
+249   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
+250   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
+251   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+252 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classobitstream_a5ac23633932baad040856f0a33ee1ebf}\label{classobitstream_a5ac23633932baad040856f0a33ee1ebf}} 
+\index{obitstream@{obitstream}!write@{write}}
+\index{write@{write}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void obitstream\+::write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+writes complete chunks to the output 
+
+
+\begin{DoxyCode}
+191                       \{
+192   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
+193     \textcolor{comment}{// write the first chunks to the output}
+194     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1, 
+      \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
+195     \textcolor{comment}{// then, remove the first buffer.bits.size()-1 chunks which were written to the output}
+196     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + 
+      \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1); 
+197   \}
+198 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classobitstream_afb0cc2fb4f739881436d887bd4770355}\label{classobitstream_afb0cc2fb4f739881436d887bd4770355}} 
+\index{obitstream@{obitstream}!write\+\_\+bits@{write\+\_\+bits}}
+\index{write\+\_\+bits@{write\+\_\+bits}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{write\+\_\+bits()}{write\_bits()}}
+{\footnotesize\ttfamily void obitstream\+::write\+\_\+bits (\begin{DoxyParamCaption}\item[{unsigned int}]{n,  }\item[{unsigned int}]{nu\+\_\+bits }\end{DoxyParamCaption})}
+
+
+
+write the bits given as unsigned int to the output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & bits to be written to the output in the form of an unsigned int (4 bytes of data) \\
+\hline
+{\em nu\+\_\+bits} & number of bits, counted from L\+SB of n, to write to the output. For instance if n = 1 and nu\+\_\+bits = 1, a single bit with value 1 is written \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+204                                                                \{
+205   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+206   \textcolor{keywordtype}{int} buffer\_res = 0; \textcolor{comment}{// number of bits remaining in the buffer}
+207   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+208     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+209     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+210   \}
+211   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(1);
+212   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] = n << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}); \textcolor{comment}{// shift left so that exactly nu\_bits
+       many bits are in the buffer}
+213   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits};
+214   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+       operation}
+215   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual }
+216   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}(); \textcolor{comment}{// write the buffer to the output}
+217 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classobitstream_aeaccad00a395a404aa16472bfa052be3}\label{classobitstream_aeaccad00a395a404aa16472bfa052be3}} 
+\index{obitstream@{obitstream}!buffer@{buffer}}
+\index{buffer@{buffer}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \hyperlink{classbit__pipe}{bit\+\_\+pipe} obitstream\+::buffer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a \hyperlink{classbit__pipe}{bit\+\_\+pipe} carrying the buffered data 
+
+\mbox{\Hypertarget{classobitstream_ac589d74745217748c888ae777ab324a7}\label{classobitstream_ac589d74745217748c888ae777ab324a7}} 
+\index{obitstream@{obitstream}!f@{f}}
+\index{f@{f}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{f}{f}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ obitstream\+::f\hspace{0.3cm}{\ttfamily [private]}}
+
+pointer to the binary output file 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{bitstream_8h}{bitstream.\+h}\item 
+\hyperlink{bitstream_8cpp}{bitstream.\+cpp}\end{DoxyCompactItemize}

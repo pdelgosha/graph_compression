@@ -1,11 +1,13 @@
 var searchData=
 [
   ['send_5fmessage',['send_message',['../classgraph__message.html#aa76d1d5420a12477fa1dddd878d78c8f',1,'graph_message']]],
+  ['shift_5fleft',['shift_left',['../classbit__pipe.html#a148fab2b6b3ee730fbaa52539d5a4d74',1,'bit_pipe']]],
+  ['shift_5fright',['shift_right',['../classbit__pipe.html#a341a1f62d728a67f730503ca722a7770',1,'bit_pipe']]],
   ['simple_5fgraph_2ecpp',['simple_graph.cpp',['../simple__graph_8cpp.html',1,'']]],
   ['simple_5fgraph_2eh',['simple_graph.h',['../simple__graph_8h.html',1,'']]],
   ['simple_5fgraph_5fcompression_2ecpp',['simple_graph_compression.cpp',['../simple__graph__compression_8cpp.html',1,'']]],
   ['simple_5fgraph_5fcompression_2eh',['simple_graph_compression.h',['../simple__graph__compression_8h.html',1,'']]],
-  ['size',['size',['../classfenwick__tree.html#abedd21a2ddbbb830195c8eba1330112f',1,'fenwick_tree::size()'],['../classreverse__fenwick__tree.html#ae15a8ac2ee6049baadcd110a98ae96e8',1,'reverse_fenwick_tree::size()']]],
+  ['size',['size',['../classbit__pipe.html#a4bdc57f1f598bfad0eaa40860f17000c',1,'bit_pipe::size()'],['../classfenwick__tree.html#abedd21a2ddbbb830195c8eba1330112f',1,'fenwick_tree::size()'],['../classreverse__fenwick__tree.html#ae15a8ac2ee6049baadcd110a98ae96e8',1,'reverse_fenwick_tree::size()']]],
   ['star_5fedges',['star_edges',['../classmarked__graph__compressed.html#a7df5779d313486644132bd816937f532',1,'marked_graph_compressed']]],
   ['star_5fvertices',['star_vertices',['../classcolored__graph.html#ab7ee8d717abde7ad7467ef695038f574',1,'colored_graph::star_vertices()'],['../classmarked__graph__compressed.html#a7a4ced4586e2e353f9076bd447df5208',1,'marked_graph_compressed::star_vertices()'],['../classmarked__graph__encoder.html#a08fdf6fcd7dcd8c5d1667f2d7ff06c2c',1,'marked_graph_encoder::star_vertices()'],['../classmarked__graph__decoder.html#a06fc05827db14b675f7ecc2fd915b533',1,'marked_graph_decoder::star_vertices()']]],
   ['start',['start',['../classlogger.html#afba86118a3bb044060be8309b3fa755a',1,'logger']]],

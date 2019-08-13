@@ -4,5 +4,6 @@ var searchData=
   ['add',['add',['../classfenwick__tree.html#ab2f999bba718bcd57d066db754d85ad4',1,'fenwick_tree::add()'],['../classreverse__fenwick__tree.html#a942d7f49b37e53ebfec3076d177691d7',1,'reverse_fenwick_tree::add()']]],
   ['add_5fentry',['add_entry',['../classlogger.html#a710163deb17bc81f70d53d285b8ac9ac',1,'logger']]],
   ['adj_5flist',['adj_list',['../classb__graph.html#a2a89d2e8f958270952aab2e8769b7342',1,'b_graph::adj_list()'],['../classcolored__graph.html#a45dce16965079286cf3f41a54a1b2ea4',1,'colored_graph::adj_list()'],['../classmarked__graph.html#a1a0bf7ca413a278763f7c878b3b6fd6f',1,'marked_graph::adj_list()']]],
-  ['alph_5fsize',['alph_size',['../classtime__series__encoder.html#a7e73867e25ea5ae643bf05eaf33ea9ac',1,'time_series_encoder::alph_size()'],['../classtime__series__decoder.html#a9e712b2d41cc124485c4d6f497504c29',1,'time_series_decoder::alph_size()']]]
+  ['alph_5fsize',['alph_size',['../classtime__series__encoder.html#a7e73867e25ea5ae643bf05eaf33ea9ac',1,'time_series_encoder::alph_size()'],['../classtime__series__decoder.html#a9e712b2d41cc124485c4d6f497504c29',1,'time_series_decoder::alph_size()']]],
+  ['append_5fleft',['append_left',['../classbit__pipe.html#a0b14715c897cba1713a0ea19ea2996d8',1,'bit_pipe']]]
 ];

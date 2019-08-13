@@ -74,6 +74,9 @@ $(function() {
 <li>add_entry()
 : <a class="el" href="classlogger.html#a710163deb17bc81f70d53d285b8ac9ac">logger</a>
 </li>
+<li>append_left()
+: <a class="el" href="classbit__pipe.html#a0b14715c897cba1713a0ea19ea2996d8">bit_pipe</a>
+</li>
 </ul>
 
 
@@ -88,17 +91,27 @@ $(function() {
 : <a class="el" href="classb__graph__encoder.html#a77b8fc4f060a8ef159583f1cfa35f283">b_graph_encoder</a>
 </li>
 <li>binary_read()
-: <a class="el" href="classmarked__graph__compressed.html#a9db2d11bd63ad3d5a75e47b4023a89dd">marked_graph_compressed</a>
+: <a class="el" href="classmarked__graph__compressed.html#a01c67fe4234738db6bb60459515c3ad8">marked_graph_compressed</a>
 </li>
 <li>binary_write()
 : <a class="el" href="classmarked__graph__compressed.html#ab9cdb7fc43badd58fb5202f74ffac723">marked_graph_compressed</a>
+</li>
+<li>bit_pipe()
+: <a class="el" href="classbit__pipe.html#adc311ad05b01a2ec6e979882aa8b703e">bit_pipe</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>chunks()
+: <a class="el" href="classbit__pipe.html#aebf19a4d9425e5ca10fc4fd3d78cada2">bit_pipe</a>
+</li>
 <li>clear()
 : <a class="el" href="classmarked__graph__compressed.html#af58307bfadcaa4c3ca6dd594c2f9b3a9">marked_graph_compressed</a>
+</li>
+<li>close()
+: <a class="el" href="classibitstream.html#aa7b59600e58571b802d6d0dadf92d37a">ibitstream</a>
+, <a class="el" href="classobitstream.html#a6d76dbba302e1181fbc9609072a4c2a0">obitstream</a>
 </li>
 <li>colored_graph()
 : <a class="el" href="classcolored__graph.html#a0374481a0474ac8e9b77689f74b5ed9b">colored_graph</a>
@@ -147,7 +160,7 @@ $(function() {
 <li>encode()
 : <a class="el" href="classb__graph__encoder.html#a9dbf40f42a2eb12822b14ca10d580763">b_graph_encoder</a>
 , <a class="el" href="classgraph__encoder.html#a23350e4c0986763b24d14c5ef1beb37e">graph_encoder</a>
-, <a class="el" href="classmarked__graph__encoder.html#a75b32c3c4557bec3322df60ac476fdc9">marked_graph_encoder</a>
+, <a class="el" href="classmarked__graph__encoder.html#aa7fa19a225dd9b31d6fef9583fab8cf1">marked_graph_encoder</a>
 , <a class="el" href="classtime__series__encoder.html#a6d3fbf4d839978c6c82efc2160cdc465">time_series_encoder</a>
 </li>
 <li>encode_partition_bgraphs()
@@ -231,6 +244,9 @@ $(function() {
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>ibitstream()
+: <a class="el" href="classibitstream.html#af5f00b64072ed3ffe495b7712a71e3eb">ibitstream</a>
+</li>
 <li>init()
 : <a class="el" href="classb__graph__decoder.html#a9498e8aa7391480cc663bffef3718c6b">b_graph_decoder</a>
 , <a class="el" href="classb__graph__encoder.html#a9b62ac0580191ac42b98d764046af7cb">b_graph_encoder</a>
@@ -293,15 +309,42 @@ $(function() {
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
+<li>obitstream()
+: <a class="el" href="classobitstream.html#a99e4f20344a99c1e8d892eb0c28b3daa">obitstream</a>
+</li>
 <li>operator()()
 : <a class="el" href="structvint__hash.html#a4cbe939bbbf51cf2e77c688ce6f1bf78">vint_hash</a>
+</li>
+<li>operator&lt;&lt;()
+: <a class="el" href="classobitstream.html#aed715e98e8b47e19e465da1445372229">obitstream</a>
+</li>
+<li>operator&gt;&gt;()
+: <a class="el" href="classibitstream.html#ae3e91ecc9ff17eef98d72d44aec02eca">ibitstream</a>
+</li>
+<li>operator[]()
+: <a class="el" href="classbit__pipe.html#a58c67130ac4b0fd511998f991c8ad58d">bit_pipe</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>read_bit()
+: <a class="el" href="classibitstream.html#a895239acf7179f6778388c39c97643e4">ibitstream</a>
+</li>
+<li>read_bits()
+: <a class="el" href="classibitstream.html#a2fdcaecf10fefa6942dcd5286a2696e0">ibitstream</a>
+</li>
+<li>read_bits_append()
+: <a class="el" href="classibitstream.html#acec2e9efa21551ce8db784f5b0bbd1b5">ibitstream</a>
+</li>
+<li>read_chunk()
+: <a class="el" href="classibitstream.html#ac62c26004436d83f337f4aeba0895e20">ibitstream</a>
+</li>
+<li>residue()
+: <a class="el" href="classbit__pipe.html#a283f47fa4422ac50b9b28e8f276f7252">bit_pipe</a>
+</li>
 <li>reverse_fenwick_tree()
-: <a class="el" href="classreverse__fenwick__tree.html#ab6cfb68e31b66f39f4b98db43c60f71e">reverse_fenwick_tree</a>
+: <a class="el" href="classreverse__fenwick__tree.html#a508722d0bd06d2a591fc34e34b94c905">reverse_fenwick_tree</a>
 </li>
 </ul>
 
@@ -310,8 +353,15 @@ $(function() {
 <li>send_message()
 : <a class="el" href="classgraph__message.html#aa76d1d5420a12477fa1dddd878d78c8f">graph_message</a>
 </li>
+<li>shift_left()
+: <a class="el" href="classbit__pipe.html#a148fab2b6b3ee730fbaa52539d5a4d74">bit_pipe</a>
+</li>
+<li>shift_right()
+: <a class="el" href="classbit__pipe.html#a341a1f62d728a67f730503ca722a7770">bit_pipe</a>
+</li>
 <li>size()
-: <a class="el" href="classfenwick__tree.html#abedd21a2ddbbb830195c8eba1330112f">fenwick_tree</a>
+: <a class="el" href="classbit__pipe.html#a4bdc57f1f598bfad0eaa40860f17000c">bit_pipe</a>
+, <a class="el" href="classfenwick__tree.html#abedd21a2ddbbb830195c8eba1330112f">fenwick_tree</a>
 , <a class="el" href="classreverse__fenwick__tree.html#ae15a8ac2ee6049baadcd110a98ae96e8">reverse_fenwick_tree</a>
 </li>
 <li>start()
@@ -340,6 +390,16 @@ $(function() {
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>update_messages()
 : <a class="el" href="classgraph__message.html#a40dadc59d582b290202e79bc4a9e896c">graph_message</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>write()
+: <a class="el" href="classobitstream.html#a5ac23633932baad040856f0a33ee1ebf">obitstream</a>
+</li>
+<li>write_bits()
+: <a class="el" href="classobitstream.html#afb0cc2fb4f739881436d887bd4770355">obitstream</a>
 </li>
 </ul>
 </div><!-- contents -->
