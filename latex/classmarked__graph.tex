@@ -134,9 +134,9 @@ checks whether two marked graphs are not equal
 
 
 \begin{DoxyCode}
-85 \{
-86   \textcolor{keywordflow}{return} !(G1 == G2);
-87 \}
+88 \{
+89   \textcolor{keywordflow}{return} !(G1 == G2);
+90 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph_a4f98d2df29f50f6da1365a14fd80d764}\label{classmarked__graph_a4f98d2df29f50f6da1365a14fd80d764}} 
 \index{marked\+\_\+graph@{marked\+\_\+graph}!operator$<$$<$@{operator$<$$<$}}
@@ -150,53 +150,53 @@ prints a marked graph to the output
 
 
 \begin{DoxyCode}
-96 \{
-97   o << G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} << endl;
-98   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
-99     o << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
-100     \textcolor{keywordflow}{if} (v < G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}-1)
-101       o << \textcolor{stringliteral}{" "};
-102   \}
-103   o << endl;
-104 
-105   vector<pair<pair<int, int>, pair<int, int> > > edges;
-106   pair<pair<int, int> , pair<int, int> > edge; \textcolor{comment}{// the current edge to be added to the list}
-107   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
-108     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-109       \textcolor{keywordflow}{if} (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first > v)\{ \textcolor{comment}{// avoid duplicate in edge list, only add edges where the
+99 \{
+100   o << G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} << endl;
+101   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
+102     o << G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
+103     \textcolor{keywordflow}{if} (v < G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}-1)
+104       o << \textcolor{stringliteral}{" "};
+105   \}
+106   o << endl;
+107 
+108   vector<pair<pair<int, int>, pair<int, int> > > edges;
+109   pair<pair<int, int> , pair<int, int> > edge; \textcolor{comment}{// the current edge to be added to the list}
+110   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};v++)\{
+111     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
+112       \textcolor{keywordflow}{if} (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first > v)\{ \textcolor{comment}{// avoid duplicate in edge list, only add edges where the
        other endpoint has a greater index}
-110         edge.first.first = v;
-111         edge.first.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
-112         edge.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second;
-113         edges.push\_back(edge);
-114       \}
-115     \}
-116   \}
-117   sort(edges.begin(), edges.end());
-118   o << edges.size() << endl;
-119   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<edges.size();i++)\{
-120     o << edges[i].first.first << \textcolor{stringliteral}{" "} << edges[i].first.second << \textcolor{stringliteral}{" "} << edges[i].second.first << \textcolor{stringliteral}{" "} << 
+113         edge.first.first = v;
+114         edge.first.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
+115         edge.second = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second;
+116         edges.push\_back(edge);
+117       \}
+118     \}
+119   \}
+120   sort(edges.begin(), edges.end());
+121   o << edges.size() << endl;
+122   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<edges.size();i++)\{
+123     o << edges[i].first.first << \textcolor{stringliteral}{" "} << edges[i].first.second << \textcolor{stringliteral}{" "} << edges[i].second.first << \textcolor{stringliteral}{" "} << 
       edges[i].second.second << endl;
-121   \}
-122   \textcolor{keywordflow}{return} o;
-123   \textcolor{comment}{/*}
-124 \textcolor{comment}{  o << " number of vertices " << G.nu\_vertices << endl;}
-125 \textcolor{comment}{  vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex}
-126 \textcolor{comment}{  for (int v=0; v<G.nu\_vertices; v++)\{}
-127 \textcolor{comment}{    o << " vertex " << v << " mark " << G.ver\_mark[v] << endl;}
-128 \textcolor{comment}{    //o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;}
-129 \textcolor{comment}{    o << " adj list " << endl;}
-130 \textcolor{comment}{    l = G.adj\_list[v];}
-131 \textcolor{comment}{    sort(l.begin(), l.end(), edge\_compare);}
-132 \textcolor{comment}{    for (int i=0;i<l.size();i++)\{}
-133 \textcolor{comment}{      if (l[i].first > v)}
-134 \textcolor{comment}{        o << " (" << l[i].first << ", (" << l[i].second.first << ", " << l[i].second.second << ")) ";}
-135 \textcolor{comment}{    \}}
-136 \textcolor{comment}{    o << endl << endl;}
-137 \textcolor{comment}{  \}}
-138 \textcolor{comment}{  return o;}
-139 \textcolor{comment}{  */}
-140 \}
+124   \}
+125   \textcolor{keywordflow}{return} o;
+126   \textcolor{comment}{/*}
+127 \textcolor{comment}{  o << " number of vertices " << G.nu\_vertices << endl;}
+128 \textcolor{comment}{  vector<pair<int, pair<int, int> > > l; // the adjacency list of a vertex}
+129 \textcolor{comment}{  for (int v=0; v<G.nu\_vertices; v++)\{}
+130 \textcolor{comment}{    o << " vertex " << v << " mark " << G.ver\_mark[v] << endl;}
+131 \textcolor{comment}{    //o << " adj list (connections to vertices with greater index): format (j, (x,y))" << endl;}
+132 \textcolor{comment}{    o << " adj list " << endl;}
+133 \textcolor{comment}{    l = G.adj\_list[v];}
+134 \textcolor{comment}{    sort(l.begin(), l.end(), edge\_compare);}
+135 \textcolor{comment}{    for (int i=0;i<l.size();i++)\{}
+136 \textcolor{comment}{      if (l[i].first > v)}
+137 \textcolor{comment}{        o << " (" << l[i].first << ", (" << l[i].second.first << ", " << l[i].second.second << ")) ";}
+138 \textcolor{comment}{    \}}
+139 \textcolor{comment}{    o << endl << endl;}
+140 \textcolor{comment}{  \}}
+141 \textcolor{comment}{  return o;}
+142 \textcolor{comment}{  */}
+143 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}\label{classmarked__graph_a1718b82e881f8c37552018df1f83f82c}} 
 \index{marked\+\_\+graph@{marked\+\_\+graph}!operator==@{operator==}}
@@ -210,28 +210,28 @@ checks whether two marked graphs are the same.
 
 two marked graphs are said to be the same if\+: 1) they have the same number of vertices, 2) vertex marks match and 3) each vertex has the same set of neighbors with matching marks. 
 \begin{DoxyCode}
-63 \{
-64   \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} != G2.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices})
-65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-66   \textcolor{keywordflow}{return} G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list} == G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list};
-67   \textcolor{keywordtype}{int} n = G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; \textcolor{comment}{// number of vertices of the two graphs}
-68   vector< pair< int, pair< int, int > > > l1, l2; \textcolor{comment}{// the adjacency list of a vertex in two graphs for
+66 \{
+67   \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices} != G2.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices})
+68     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+69   \textcolor{keywordflow}{return} G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list} == G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list};
+70   \textcolor{keywordtype}{int} n = G1.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}; \textcolor{comment}{// number of vertices of the two graphs}
+71   vector< pair< int, pair< int, int > > > l1, l2; \textcolor{comment}{// the adjacency list of a vertex in two graphs for
        comparison. }
-69   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n;v++)\{
-70     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] != G2.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]) \textcolor{comment}{// mark of each vertex should be the same}
-71       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-72     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() != G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()) \textcolor{comment}{// each vertex must have the same
+72   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<n;v++)\{
+73     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v] != G2.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]) \textcolor{comment}{// mark of each vertex should be the same}
+74       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+75     \textcolor{keywordflow}{if} (G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() != G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()) \textcolor{comment}{// each vertex must have the same
        degree in two graphs}
-73       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-74     l1 = G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
-75     l2 = G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
-76     sort(l1.begin(), l1.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare}); \textcolor{comment}{// sort with respect to the other endpoint}
-77     sort(l2.begin(), l2.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
-78     \textcolor{keywordflow}{if} (l1 != l2) \textcolor{comment}{// after sorting, the lists must match}
-79       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-80   \}
-81   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-82 \}
+76       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+77     l1 = G1.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+78     l2 = G2.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v];
+79     sort(l1.begin(), l1.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare}); \textcolor{comment}{// sort with respect to the other endpoint}
+80     sort(l2.begin(), l2.end(), \hyperlink{marked__graph_8cpp_a09dd24caed50b1d106e10538e688b6ac}{edge\_compare});
+81     \textcolor{keywordflow}{if} (l1 != l2) \textcolor{comment}{// after sorting, the lists must match}
+82       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+83   \}
+84   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+85 \}
 \end{DoxyCode}
 
 

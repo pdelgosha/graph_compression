@@ -5,7 +5,7 @@
 #include<vector>
 #include<map>
 #include<fstream>
-
+#include "logger.h"
 using namespace std;
 
 //! simple marked graph

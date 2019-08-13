@@ -110,9 +110,12 @@ int main(int argc, char ** argv){
   logger::start();
   if (uncompress == false){
     // goal is compression
+    logger::current_depth++;
+    logger::add_entry("Read Graph", "");
     marked_graph_encoder E(h, delta);
     marked_graph G; // the input graph to be compressed
     inp >> G;
+    logger::current_depth--;
     logger::current_depth++;
     logger::add_entry("Encode", "");
     marked_graph_compressed C = E.encode(G);

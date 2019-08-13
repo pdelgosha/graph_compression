@@ -14,39 +14,61 @@ void marked_graph_compressed::clear()
  */
 void marked_graph_compressed::binary_write(FILE* f){
 
+  vector<pair<string, int> > space_log; // stores the number of bits used to store each category. The string part is description of the category, and the int part is the number of bits of output used to express that part.
+
+  int output_bits; // the number of bits in the output corresponding to the current category under investigation, to be zeroed at each step.
+
   logger::current_depth++;
   // ==== write n, h, delta
+  output_bits = 0;
   logger::add_entry("n", "");
   fwrite(&n, sizeof n, 1, f);
+  output_bits += sizeof n;
+
   logger::add_entry("h", "");
   fwrite(&h, sizeof h, 1, f);
+  output_bits += sizeof h;
+
   logger::add_entry("delta", "");
   fwrite(&delta, sizeof delta, 1, f);
+  output_bits += sizeof delta;
+
+  space_log.push_back(pair<string, int> ("n, h, delta", output_bits));
 
   logger::add_entry("type_mark", "");
+  output_bits = 0;
+
   int int_out; // auxiliary variable, an integer value to be written to output
   // ==== write type_mark
   // first, the number of types
   int_out = type_mark.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
   // then, marks one by one
   for (int i=0;i<type_mark.size();i++){
     int_out = type_mark[i];
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
   }
 
+  space_log.push_back(pair<string, int>("type mark", output_bits));
+
   logger::add_entry("star_vertices", "");
+  output_bits = 0;
   // ==== write star vertices
   // first, write the frequency, note that star_vertices.first is a vector of size 2 with the first entry being the number of zeros, and the second one the number of ones, so it enough to write only one of them
   int_out = star_vertices.first[0];
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
 
   // then, we write the integer representation star_vertices.second
-  mpz_out_raw(f, star_vertices.second.get_mpz_t());
+  output_bits +=  mpz_out_raw(f, star_vertices.second.get_mpz_t()); // mpz_out_raw returns the number of bytes written to the output
+
+  space_log.push_back(pair<string, int> ("star vertices", output_bits));
 
   logger::add_entry("star_edges", "");
   // ==== write star edges
-
+  output_bits = 0;
   int log2n = 0; // the ceiling of log (n+1) in base 2 (which is equal to 1 + the floor of log_2 n), which is the number of bits to encode vertices
   int n_copy = n;
   while(n_copy > 0){
@@ -63,6 +85,7 @@ void marked_graph_compressed::binary_write(FILE* f){
   // first, write the size of star_edges so that the decoder knows how many blocks are coming
   int_out = star_edges.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
 
   int nu_star_edges = 0; // number of star edges 
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
@@ -71,6 +94,8 @@ void marked_graph_compressed::binary_write(FILE* f){
     //write x and xp
     fwrite(&x, sizeof x, 1, f);
     fwrite(&xp, sizeof xp, 1, f);
+    output_bits += sizeof x;
+    output_bits += sizeof xp;
     s = "";
     for (int i=0;i<it->second.size();i++){
       for(int j=0;j<it->second[i].size();j++){
@@ -88,10 +113,14 @@ void marked_graph_compressed::binary_write(FILE* f){
     //  }
     //  cerr << endl;
     //}
-    bit_string_write(f, s); // write this bitstream to the output
+    output_bits += bit_string_write(f, s); // write this bitstream to the output
   }
 
+  space_log.push_back(pair<string, int> ("star edges", output_bits));
+
+
   logger::add_entry("vertex types", "");
+  output_bits = 0;
 
   // ==== write vertex types
 
@@ -99,35 +128,51 @@ void marked_graph_compressed::binary_write(FILE* f){
   // size of ver_type_list
   int_out = ver_type_list.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
+
   for (int i=0;i<ver_type_list.size();i++){
     int_out = ver_type_list[i].size();
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
+
     for (int j=0;j<ver_type_list[i].size();j++){
       int_out = ver_type_list[i][j];
       fwrite(&int_out, sizeof int_out, 1, f);
+      output_bits += sizeof int_out;
     }
   }
-
+  space_log.push_back(pair<string, int>("vertex type list", output_bits));
+  output_bits = 0;
+  
   // then, write ver_types
 
   // ver_types.first
   // ver_types.first.size():
   int_out = ver_types.first.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
+
   for (int i =0;i<ver_types.first.size(); i++){
     int_out = ver_types.first[i];
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
   }
   // ver_types.second
-  mpz_out_raw(f, ver_types.second.get_mpz_t());
+  output_bits += mpz_out_raw(f, ver_types.second.get_mpz_t());
 
+  space_log.push_back(pair<string, int> ("vertex types", output_bits));
 
   logger::add_entry("partition bipartite graphs", "");
+  
+
   // ==== part bgraphs
+  output_bits = 0;
 
   // part_bgraphs.size
   int_out = part_bgraph.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
+
   map<pair<int, int>, mpz_class>::iterator it2;
   if (logger::stat){
     *logger::stat_stream << " ==== statistics ==== " << endl;
@@ -145,35 +190,63 @@ void marked_graph_compressed::binary_write(FILE* f){
     // first, write t, t'
     int_out = it2->first.first;
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
     int_out = it2->first.second;
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
     // then, the compressed integer
-    mpz_out_raw(f, it2->second.get_mpz_t());
+    output_bits += mpz_out_raw(f, it2->second.get_mpz_t());
   }
 
+  space_log.push_back(pair<string, int> ("partition bipartite graphs", output_bits));
+
   logger::add_entry("partition graphs", "");
+  output_bits = 0;
   // === part graphs
 
   // part_graph.size
   int_out = part_graph.size();
   fwrite(&int_out, sizeof int_out, 1, f);
+  output_bits += sizeof int_out;
+
   map< int, pair< mpz_class, vector< int > > >::iterator it3;
   for (it3 = part_graph.begin(); it3 != part_graph.end(); it3++){
     int_out = it3->first; // the type
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
+
     // the mpz part
-    mpz_out_raw(f, it3->second.first.get_mpz_t());
+    output_bits += mpz_out_raw(f, it3->second.first.get_mpz_t());
     // the vector part
     // first its size
     int_out = it3->second.second.size();
     fwrite(&int_out, sizeof int_out, 1, f);
+    output_bits += sizeof int_out;
     // then element by element
     for(int j=0;j<it3->second.second.size();j++){
       int_out = it3->second.second[j];
       fwrite(&int_out, sizeof int_out, 1, f);
+      output_bits += sizeof int_out;
     }
   }
+  space_log.push_back(pair<string, int>("partition graphs", output_bits));
 
+
+  if (logger::stat){
+    *logger::stat_stream << endl << endl;
+    *logger::stat_stream << " Number of bytes used for each part " << endl;
+    *logger::stat_stream << " ---------------------------------- " << endl << endl;
+
+    int total_bytes = 0;
+    for (int i=0; i < space_log.size(); i++)
+      total_bytes += space_log[i].second;
+
+    for (int i=0; i < space_log.size(); i++){
+      *logger::stat_stream << space_log[i].first << " -> "  << space_log[i].second << " ( " << float(100) * float(space_log[i].second) / float(total_bytes) << " % " << endl;
+    }
+
+    *logger::stat_stream << " Total number of bytes wrote to the output = " << total_bytes << endl;
+  }
   logger::current_depth--;
 }
 
@@ -529,24 +602,24 @@ void marked_graph_encoder::extract_partition_graphs()
   }
 
   // using partition_adj_list in order to construct partition graphs
-  if(logger::stat){
-    *logger::stat_stream << " partition graphs size: " << endl;
-    *logger::stat_stream << " ====================== " << endl;
-  }
+  //if(logger::stat){
+  //*logger::stat_stream << " partition graphs size: " << endl;
+  //*logger::stat_stream << " ====================== " << endl;
+  //}
   for (map<pair<int, int>, vector<vector<int> > >::iterator it=part_adj_list.begin(); it!=part_adj_list.end();it++){
     t = it->first.first;
     tp = it->first.second;
     if (t<tp){
       part_bgraph[it->first] = b_graph(it->second, part_deg.at(pair<int, int>(t,tp)), part_deg.at(pair<int, int>(tp, t))); // left and right degree sequences are read from the part_deg map
-      if (logger::stat){
-        *logger::stat_stream << " bipartite: (" << part_deg.at(pair<int, int> (t,tp)).size() << " , " << part_deg.at(pair<int, int>(tp,t)).size() << ")" << endl;
-      }
+      //if (logger::stat){
+      //*logger::stat_stream << " bipartite: (" << part_deg.at(pair<int, int> (t,tp)).size() << " , " << part_deg.at(pair<int, int>(tp,t)).size() << ")" << endl;
+      //}
     }
     if (t == tp){
       part_graph[t] = graph(it->second, part_deg.at(pair<int, int>(t,t)));
-      if (logger::stat){
-        *logger::stat_stream << " simple: "  << part_deg.at(pair<int, int>(t,t)).size() << endl;
-      }
+      //if (logger::stat){
+      //*logger::stat_stream << " simple: "  << part_deg.at(pair<int, int>(t,t)).size() << endl;
+      //}
     }
   }
 }

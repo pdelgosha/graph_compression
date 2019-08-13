@@ -347,15 +347,16 @@ mpz_class prod_factorial(const vector<int>&a, int i, int j){
   }
 }
 
-void bit_string_write(FILE* f, const string& s){
+int bit_string_write(FILE* f, const string& s){
   // find out the number of bytes
   int ssize = s.size();
-  int nu_bytes = ssize / 8;
+  int nu_bytes; // number of bytes wrote to the output
 
-  if (ssize % 8 != 0) // an incomplete byte is required
-    nu_bytes++;
+  //if (ssize % 8 != 0) // an incomplete byte is required
+  //nu_bytes++;
 
   fwrite(&ssize, sizeof(ssize), 1, f); // first, write down how many bytes are coming.
+  nu_bytes += sizeof(ssize);
 
   stringstream ss;
   ss << s;
@@ -365,7 +366,9 @@ void bit_string_write(FILE* f, const string& s){
   while (ss >> B){
     c = B.to_ulong();
     fwrite(&c, sizeof(c), 1, f);
+    nu_bytes += sizeof(c);
   }
+  return nu_bytes; 
 }
 
 

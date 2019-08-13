@@ -131,43 +131,46 @@ In order to decompress, the compressed file should be given after -\/i, the file
 110   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
 111   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false})\{
 112     \textcolor{comment}{// goal is compression}
-113     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
-114     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
-115     inp >> G;
-116     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-117     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Encode"}, \textcolor{stringliteral}{""});
-118     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
-119     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-120     FILE* f;
-121     f = fopen(outfile.c\_str(), \textcolor{stringliteral}{"wb+"});
-122     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-123     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write to binary"}, \textcolor{stringliteral}{""});
-124     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(f);
-125     fclose(f);
-126     logger::current\_depth--;
-127   \}\textcolor{keywordflow}{else}\{
-128     \textcolor{comment}{// goal is to decompess}
-129     FILE* f;
-130     f = fopen(infile.c\_str(), \textcolor{stringliteral}{"rb+"});
-131     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
-132     logger::current\_depth++;
-133     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read from binary"}, \textcolor{stringliteral}{""});
-134     C.binary\_read(f);
-135     fclose(f);
-136     logger::current\_depth--;
-137 
-138     logger::current\_depth++;
-139     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode"}, \textcolor{stringliteral}{""});
-140     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
-141     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
-142     logger::current\_depth--;
-143 
-144     logger::current\_depth++;
-145     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write decoded graph to output file"},\textcolor{stringliteral}{""});
-146     oup << G;
-147     logger::current\_depth--;
-148   \}
-149   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
-150   \textcolor{keywordflow}{return} 0;
-151 \}
+113     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+114     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read Graph"}, \textcolor{stringliteral}{""});
+115     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
+116     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
+117     inp >> G;
+118     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+119     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+120     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Encode"}, \textcolor{stringliteral}{""});
+121     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
+122     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
+123     FILE* f;
+124     f = fopen(outfile.c\_str(), \textcolor{stringliteral}{"wb+"});
+125     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
+126     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write to binary"}, \textcolor{stringliteral}{""});
+127     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(f);
+128     fclose(f);
+129     logger::current\_depth--;
+130   \}\textcolor{keywordflow}{else}\{
+131     \textcolor{comment}{// goal is to decompess}
+132     FILE* f;
+133     f = fopen(infile.c\_str(), \textcolor{stringliteral}{"rb+"});
+134     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
+135     logger::current\_depth++;
+136     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read from binary"}, \textcolor{stringliteral}{""});
+137     C.binary\_read(f);
+138     fclose(f);
+139     logger::current\_depth--;
+140 
+141     logger::current\_depth++;
+142     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode"}, \textcolor{stringliteral}{""});
+143     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
+144     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
+145     logger::current\_depth--;
+146 
+147     logger::current\_depth++;
+148     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write decoded graph to output file"},\textcolor{stringliteral}{""});
+149     oup << G;
+150     logger::current\_depth--;
+151   \}
+152   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
+153   \textcolor{keywordflow}{return} 0;
+154 \}
 \end{DoxyCode}

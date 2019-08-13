@@ -39,6 +39,8 @@ marked_graph::marked_graph(int n, vector<pair< pair<int, int> , pair<int, int> >
 
 istream& operator>>(istream& inp, marked_graph& G)
 {
+  logger::current_depth++;
+  logger::add_entry("Read vertex marks and edges","");
   int nu_vertices;
   inp >> nu_vertices;
 
@@ -54,8 +56,9 @@ istream& operator>>(istream& inp, marked_graph& G)
   for (int i=0;i<nu_edges;i++)
     inp >> edges[i].first.first >> edges[i].first.second >> edges[i].second.first >> edges[i].second.second;
 
+  logger::add_entry("Constructing marked graph", "");
   G = marked_graph(nu_vertices, edges, ver_marks);
-
+  logger::current_depth--;
   return inp;
 }
 

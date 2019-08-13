@@ -14,5 +14,5 @@ var searchData=
   ['bipartite_5fgraph_5fcompression_2ecpp',['bipartite_graph_compression.cpp',['../bipartite__graph__compression_8cpp.html',1,'']]],
   ['bipartite_5fgraph_5fcompression_2eh',['bipartite_graph_compression.h',['../bipartite__graph__compression_8h.html',1,'']]],
   ['bit_5fstring_5fread',['bit_string_read',['../compression__helper_8cpp.html#a40e8dcbc036f96b28e003e882c4890b7',1,'bit_string_read(FILE *f):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a40e8dcbc036f96b28e003e882c4890b7',1,'bit_string_read(FILE *f):&#160;compression_helper.cpp']]],
-  ['bit_5fstring_5fwrite',['bit_string_write',['../compression__helper_8cpp.html#accfebfd921b967c2f09e8c11569eb832',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#accfebfd921b967c2f09e8c11569eb832',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp']]]
+  ['bit_5fstring_5fwrite',['bit_string_write',['../compression__helper_8cpp.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp'],['../compression__helper_8h.html#a9a2fbdf1fe0e38f631e7e242a819883b',1,'bit_string_write(FILE *f, const string &amp;s):&#160;compression_helper.cpp']]]
 ];
