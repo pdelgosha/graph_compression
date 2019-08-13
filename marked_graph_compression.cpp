@@ -338,7 +338,8 @@ void marked_graph_compressed::binary_write(string s){
   //fwrite(&int_out, sizeof int_out, 1, f);
   //output_bits += sizeof int_out;
 
-  int nu_star_edges = 0; // number of star edges 
+  int nu_star_edges = 0; // number of star edges
+  unsigned int n_bits = nu_bits(n); // the number of bits in n, i.e. \f$1 + \lfloor \log_2 n \rfloor\f$
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
     x = it->first.first;
     xp = it->first.second;
@@ -354,7 +355,8 @@ void marked_graph_compressed::binary_write(string s){
       for(int j=0;j<it->second[i].size();j++){
         oup.write_bits(1,1); // write a single bit with value 1
         //s += "1";
-        oup <<  it->second[i][j]; 
+        //oup <<  it->second[i][j];
+        oup.write_bits(it->second[i][j], n_bits); // use 1 + log2n bits to save the other endpoint
         nu_star_edges ++;
       }
       oup.write_bits(0,1); // write 1 bit with value 0 
@@ -743,6 +745,8 @@ void marked_graph_compressed::binary_read(string s){
   vector<vector<int> > V; // the list of star edges corresponding to each mark pair
   V.resize(nu_star_vertices);
 
+  unsigned int n_bits = nu_bits(n); // the number of bits in n, i.e. \f$1 + \lfloor \log_2 n \rfloor\f$
+
   for (int i=0;i<star_edges_size;i++){
     inp >> x;
     inp >> xp;
@@ -762,7 +766,8 @@ void marked_graph_compressed::binary_read(string s){
         //cerr << " ss " << ss.str() << endl;
         //sp += log2n;
         //ss >> B;
-        inp >> int_in; 
+        //inp >> int_in;
+        int_in = inp.read_bits(n_bits);
         V[j].push_back(int_in);
       }
       //for (int k=0;k<V[j].size();k++)
