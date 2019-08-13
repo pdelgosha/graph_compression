@@ -49,16 +49,13 @@ public:
   void init(const b_graph& G);
 
 
-  //! computes \f$N_{i,j}(G)\f$
+  //! computes \f$N(G)\f$
   /*!
-    \param i,j the interval for which we compute \f$N_{i,j}(G)\f$
     \param G reference to the bipartite graph for which we compute N
-    \return A pair, where the first component is \f$N_{i,j}(G)\f$, and the second component is \f$l_{i,j}(G)\f$
+    \return A pair, where the first component is \f$N(G)\f$, and the second component is \f$l(G)\f$
    */
-  pair<mpz_class, mpz_class> compute_N(int i, int j, const b_graph& G);
 
-  pair<mpz_class, mpz_class> compute_N_new(const b_graph& G);
-  pair<mpz_class, mpz_class> compute_N_new_r(const b_graph& G);
+  pair<mpz_class, mpz_class> compute_N(const b_graph& G);
 
   //! encodes the given bipartite graph \f$G\f$ and returns an integer in the specified range
   mpz_class encode(const b_graph& G);
