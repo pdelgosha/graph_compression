@@ -48,17 +48,13 @@ class graph_encoder{
   //! initializes beta and U, clears Stilde for a fresh use
   void init(const graph& G);
   
-  //! computes \f$N_{i,j}(G)\f$
+  //! computes \f$N(G)\f$
   /*!
-    \param i,j the interval for which we compute \f$N_{i,j}(G)\f$
-    \param I The integer index corresponding to the current interval (follows a heap convention).
     \param G the reference to the simple graph G
-    \return A pair, where the first component is \f$N_{i,j}(G)\f$ and the second component is \f$l_{i,j}(G)\f$.
+    \return A pair, where the first component is \f$N(G)\f$ and the second component is \f$l(G)\f$.
    */
 
-  pair<mpz_class, mpz_class> compute_N(int i, int j, int I, const graph& G);
-  pair<mpz_class, mpz_class> compute_N_new(const graph& G);
-  pair<mpz_class, mpz_class> compute_N_new_r(const graph& G);
+  pair<mpz_class, mpz_class> compute_N(const graph& G);
 
   //! Encodes the graph and returns N together with Stilde
   /*!
