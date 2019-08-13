@@ -20,6 +20,8 @@ void \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\+\_\+bi
 \begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
 \hyperlink{classobitstream}{obitstream} \& \hyperlink{classobitstream_aed715e98e8b47e19e465da1445372229}{operator$<$$<$} (const mpz\+\_\+class \&n)
 \begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative mpz\+\_\+class integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
+unsigned int \hyperlink{classobitstream_ae835de27953b678b5b4ce5b33033d529}{chunks} ()
+\begin{DoxyCompactList}\small\item\em returns the number of chunks (each is B\+I\+T\+\_\+\+I\+NT = 32 bits) to the output. \end{DoxyCompactList}\item 
 void \hyperlink{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}{close} ()
 \begin{DoxyCompactList}\small\item\em closes the session by writing the remaining chunk to the output (if any) and closing the file pointer f \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
@@ -33,7 +35,9 @@ void \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write} ()
 \hyperlink{classbit__pipe}{bit\+\_\+pipe} \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}
 \begin{DoxyCompactList}\small\item\em a \hyperlink{classbit__pipe}{bit\+\_\+pipe} carrying the buffered data \end{DoxyCompactList}\item 
 F\+I\+LE $\ast$ \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f}
-\end{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\+\_\+written}
+\begin{DoxyCompactList}\small\item\em the number of chunks written to the output so far \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -56,13 +60,30 @@ constructor
 
 
 \begin{DoxyCode}
-86                               \{
-87     \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"wb+"});
-88   \}
+87                               \{
+88     \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"wb+"});
+89     \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\_written} = 0;
+90   \}
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classobitstream_ae835de27953b678b5b4ce5b33033d529}\label{classobitstream_ae835de27953b678b5b4ce5b33033d529}} 
+\index{obitstream@{obitstream}!chunks@{chunks}}
+\index{chunks@{chunks}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{chunks()}{chunks()}}
+{\footnotesize\ttfamily unsigned int obitstream\+::chunks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the number of chunks (each is B\+I\+T\+\_\+\+I\+NT = 32 bits) to the output. 
+
+
+\begin{DoxyCode}
+102                        \{
+103     \textcolor{keywordflow}{return} \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\_written}; 
+104   \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}\label{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}} 
 \index{obitstream@{obitstream}!close@{close}}
 \index{close@{close}!obitstream@{obitstream}}
@@ -75,15 +96,15 @@ closes the session by writing the remaining chunk to the output (if any) and clo
 
 
 \begin{DoxyCode}
-254                       \{
-255   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 0)\{
-256     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), 
+256                       \{
+257   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 0)\{
+258     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), 
       \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
-257     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.clear();
-258     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;
-259   \}
-260   fclose(\hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
-261 \}
+259     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.clear();
+260     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;
+261   \}
+262   fclose(\hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
+263 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}\label{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}} 
 \index{obitstream@{obitstream}!operator$<$$<$@{operator$<$$<$}}
@@ -97,23 +118,23 @@ uses Elias delta code to write a nonnegative integer to the output. In order to 
 
 
 \begin{DoxyCode}
-220                                                          \{
-221   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
-222     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
-223   \}
-224   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
-225   \textcolor{keywordtype}{int} buffer\_res = 0; 
-226   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
-227     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
-228     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
-229   \}
-230   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
-231   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+222                                                          \{
+223   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
+224     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
+225   \}
+226   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+227   \textcolor{keywordtype}{int} buffer\_res = 0; 
+228   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+229     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+230     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+231   \}
+232   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
+233   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
        operation}
-232   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
-233   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
-234   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-235 \}
+234   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
+235   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
+236   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+237 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_aed715e98e8b47e19e465da1445372229}\label{classobitstream_aed715e98e8b47e19e465da1445372229}} 
 \index{obitstream@{obitstream}!operator$<$$<$@{operator$<$$<$}}
@@ -127,23 +148,23 @@ uses Elias delta code to write a nonnegative mpz\+\_\+class integer to the outpu
 
 
 \begin{DoxyCode}
-237                                                       \{
-238   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
-239     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
-240   \}
-241   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
-242   \textcolor{keywordtype}{int} buffer\_res = 0; 
-243   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
-244     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
-245     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
-246   \}
-247   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
-248   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+239                                                       \{
+240   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 1)\{
+241     cerr << \textcolor{stringliteral}{" ERROR: buffer has more than 1 chunk! "} << endl;
+242   \}
+243   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+244   \textcolor{keywordtype}{int} buffer\_res = 0; 
+245   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+246     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+247     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+248   \}
+249   \hyperlink{bitstream_8cpp_a63daa014203b9a5b2622a264cbfdff7b}{elias\_delta\_encode}(n+1, \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}); \textcolor{comment}{// find the delta encoded version of n + 1 }
+250   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
        operation}
-249   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
-250   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
-251   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-252 \}
+251   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual}
+252   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}();
+253   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+254 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_a5ac23633932baad040856f0a33ee1ebf}\label{classobitstream_a5ac23633932baad040856f0a33ee1ebf}} 
 \index{obitstream@{obitstream}!write@{write}}
@@ -162,11 +183,13 @@ writes complete chunks to the output
 193     \textcolor{comment}{// write the first chunks to the output}
 194     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1, 
       \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
-195     \textcolor{comment}{// then, remove the first buffer.bits.size()-1 chunks which were written to the output}
-196     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + 
+195     \textcolor{comment}{// add the number of chunks written to chunks\_written}
+196     \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\_written} += \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() -1;
+197     \textcolor{comment}{// then, remove the first buffer.bits.size()-1 chunks which were written to the output}
+198     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + 
       \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1); 
-197   \}
-198 \}
+199   \}
+200 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_afb0cc2fb4f739881436d887bd4770355}\label{classobitstream_afb0cc2fb4f739881436d887bd4770355}} 
 \index{obitstream@{obitstream}!write\+\_\+bits@{write\+\_\+bits}}
@@ -187,22 +210,22 @@ write the bits given as unsigned int to the output
 \end{DoxyParams}
 
 \begin{DoxyCode}
-204                                                                \{
-205   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
-206   \textcolor{keywordtype}{int} buffer\_res = 0; \textcolor{comment}{// number of bits remaining in the buffer}
-207   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
-208     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
-209     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
-210   \}
-211   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(1);
-212   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] = n << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}); \textcolor{comment}{// shift left so that exactly nu\_bits
+206                                                                \{
+207   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} buffer\_backup = 0; \textcolor{comment}{// the backup of the remaining chunk in }
+208   \textcolor{keywordtype}{int} buffer\_res = 0; \textcolor{comment}{// number of bits remaining in the buffer}
+209   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0)\{
+210     buffer\_backup = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0];
+211     buffer\_res = \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};
+212   \}
+213   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(1);
+214   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] = n << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}); \textcolor{comment}{// shift left so that exactly nu\_bits
        many bits are in the buffer}
-213   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits};
-214   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
+215   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits};
+216   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(buffer\_res); \textcolor{comment}{// open up space for the residual of the previous
        operation}
-215   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual }
-216   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}(); \textcolor{comment}{// write the buffer to the output}
-217 \}
+217   \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= buffer\_backup; \textcolor{comment}{// add the residual }
+218   \hyperlink{classobitstream_a5ac23633932baad040856f0a33ee1ebf}{write}(); \textcolor{comment}{// write the buffer to the output}
+219 \}
 \end{DoxyCode}
 
 
@@ -216,6 +239,16 @@ write the bits given as unsigned int to the output
 
 
 a \hyperlink{classbit__pipe}{bit\+\_\+pipe} carrying the buffered data 
+
+\mbox{\Hypertarget{classobitstream_a3022397f2b6133ea5990016d9d078a2f}\label{classobitstream_a3022397f2b6133ea5990016d9d078a2f}} 
+\index{obitstream@{obitstream}!chunks\+\_\+written@{chunks\+\_\+written}}
+\index{chunks\+\_\+written@{chunks\+\_\+written}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{chunks\+\_\+written}{chunks\_written}}
+{\footnotesize\ttfamily unsigned int obitstream\+::chunks\+\_\+written\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of chunks written to the output so far 
 
 \mbox{\Hypertarget{classobitstream_ac589d74745217748c888ae777ab324a7}\label{classobitstream_ac589d74745217748c888ae777ab324a7}} 
 \index{obitstream@{obitstream}!f@{f}}

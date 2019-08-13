@@ -80,11 +80,13 @@ class obitstream{
   bit_pipe buffer; //!< a bit_pipe carrying the buffered data 
   FILE* f; //!< pointer to the binary output file
   //! writes complete chunks to the output
-  void write(); 
+  void write();
+  unsigned int chunks_written; //!< the number of chunks written to the output so far
  public:
   //! constructor 
   obitstream(string file_name){
     f = fopen(file_name.c_str(), "wb+");
+    chunks_written = 0;
   }
 
   //! write the bits given as unsigned int to the output
@@ -96,6 +98,11 @@ class obitstream{
   //! uses Elias delta code to write a nonnegative mpz_class integer to the output. In order to make sure that n >= 1, we effectively encode n + 1 instead 
   obitstream& operator << (const mpz_class& n);
 
+  //! returns the number of chunks (each is BIT_INT = 32 bits) to the output.
+  unsigned int chunks(){
+    return chunks_written; 
+  }
+  
   //! closes the session by writing the remaining chunk to the output (if any) and closing the file pointer f
   void close(); 
 };

@@ -1,7 +1,8 @@
 var searchData=
 [
   ['c',['C',['../classmarked__graph__encoder.html#af82bc0653414091291cb75553a407bdb',1,'marked_graph_encoder']]],
-  ['chunks',['chunks',['../classbit__pipe.html#aebf19a4d9425e5ca10fc4fd3d78cada2',1,'bit_pipe']]],
+  ['chunks',['chunks',['../classbit__pipe.html#aebf19a4d9425e5ca10fc4fd3d78cada2',1,'bit_pipe::chunks()'],['../classobitstream.html#ae835de27953b678b5b4ce5b33033d529',1,'obitstream::chunks()']]],
+  ['chunks_5fwritten',['chunks_written',['../classobitstream.html#a3022397f2b6133ea5990016d9d078a2f',1,'obitstream']]],
   ['clear',['clear',['../classmarked__graph__compressed.html#af58307bfadcaa4c3ca6dd594c2f9b3a9',1,'marked_graph_compressed']]],
   ['close',['close',['../classobitstream.html#a6d76dbba302e1181fbc9609072a4c2a0',1,'obitstream::close()'],['../classibitstream.html#aa7b59600e58571b802d6d0dadf92d37a',1,'ibitstream::close()']]],
   ['colored_5fgraph',['colored_graph',['../classcolored__graph.html',1,'colored_graph'],['../classcolored__graph.html#a0374481a0474ac8e9b77689f74b5ed9b',1,'colored_graph::colored_graph(const marked_graph &amp;graph, int depth, int max_degree)'],['../classcolored__graph.html#a104bcd930e68c04e4786678923bfdca1',1,'colored_graph::colored_graph()']]],

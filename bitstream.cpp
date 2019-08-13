@@ -192,6 +192,8 @@ void obitstream::write(){
   if (buffer.bits.size() > 1){
     // write the first chunks to the output
     fwrite(&buffer.bits[0], sizeof(unsigned int), buffer.bits.size()-1, f);
+    // add the number of chunks written to chunks_written
+    chunks_written += buffer.bits.size() -1;
     // then, remove the first buffer.bits.size()-1 chunks which were written to the output
     buffer.bits.erase(buffer.bits.begin(), buffer.bits.begin() + buffer.bits.size()-1); 
   }

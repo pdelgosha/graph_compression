@@ -259,6 +259,8 @@ void marked_graph_compressed::binary_write(string s){
   vector<pair<string, int> > space_log; // stores the number of bits used to store each category. The string part is description of the category, and the int part is the number of bits of output used to express that part.
 
   //int output_bits; // the number of bits in the output corresponding to the current category under investigation, to be zeroed at each step.
+  unsigned int chunks = 0; // number of chunks written to the output. Each chunk is sizeof(unsigned int) = 32 bits long
+  unsigned int chunks_new =0; // to take the difference in each step
 
   logger::current_depth++;
   // ==== write n, h, delta
@@ -275,7 +277,9 @@ void marked_graph_compressed::binary_write(string s){
   oup << delta; //fwrite(&delta, sizeof delta, 1, f);
   //output_bits += sizeof delta;
 
-  //space_log.push_back(pair<string, int> ("n, h, delta", output_bits));
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int> ("n, h, delta", chunks_new - chunks));
+  chunks = chunks_new;
 
   logger::add_entry("type_mark", "");
   //output_bits = 0;
@@ -293,7 +297,9 @@ void marked_graph_compressed::binary_write(string s){
     //output_bits += sizeof int_out;
   }
 
-  //space_log.push_back(pair<string, int>("type mark", output_bits));
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int>("type mark", chunks_new - chunks));
+  chunks = chunks_new;
 
   logger::add_entry("star_vertices", "");
   //output_bits = 0;
@@ -307,7 +313,9 @@ void marked_graph_compressed::binary_write(string s){
   oup << star_vertices.second;
   //output_bits +=  mpz_out_raw(f, star_vertices.second.get_mpz_t()); // mpz_out_raw returns the number of bytes written to the output
 
-  //space_log.push_back(pair<string, int> ("star vertices", output_bits));
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int> ("star vertices", chunks_new - chunks));
+  chunks = oup.chunks();
 
   logger::add_entry("star_edges", "");
   // ==== write star edges
@@ -361,9 +369,10 @@ void marked_graph_compressed::binary_write(string s){
     //}
     //output_bits += bit_string_write(f, s); // write this bitstream to the output
   }
-
-  //space_log.push_back(pair<string, int> ("star edges", output_bits));
-
+  
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int> ("star edges", chunks_new - chunks));
+  chunks = oup.chunks();
 
   logger::add_entry("vertex types", "");
   //output_bits = 0;
@@ -387,7 +396,11 @@ void marked_graph_compressed::binary_write(string s){
       //output_bits += sizeof int_out;
     }
   }
-  //space_log.push_back(pair<string, int>("vertex type list", output_bits));
+
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int>("vertex type list", chunks_new - chunks));
+  chunks = chunks_new;
+
   //output_bits = 0;
   
   // then, write ver_types
@@ -407,7 +420,9 @@ void marked_graph_compressed::binary_write(string s){
   oup << ver_types.second;
   //output_bits += mpz_out_raw(f, ver_types.second.get_mpz_t());
 
-  //space_log.push_back(pair<string, int> ("vertex types", output_bits));
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int> ("vertex types", chunks_new - chunks));
+  chunks = chunks_new;
 
   logger::add_entry("partition bipartite graphs", "");
   
@@ -446,7 +461,9 @@ void marked_graph_compressed::binary_write(string s){
     //output_bits += mpz_out_raw(f, it2->second.get_mpz_t());
   }
 
-  //space_log.push_back(pair<string, int> ("partition bipartite graphs", output_bits));
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int> ("partition bipartite graphs", chunks_new - chunks));
+  chunks = chunks_new;
 
   logger::add_entry("partition graphs", "");
   //output_bits = 0;
@@ -478,25 +495,29 @@ void marked_graph_compressed::binary_write(string s){
       //output_bits += sizeof int_out;
     }
   }
-  //space_log.push_back(pair<string, int>("partition graphs", output_bits));
 
-  /*
+  chunks_new = oup.chunks();
+  space_log.push_back(pair<string, int>("partition graphs", chunks_new - chunks));
+  chunks = chunks_new;
+
+  
   if (logger::stat){
     *logger::stat_stream << endl << endl;
     *logger::stat_stream << " Number of bytes used for each part " << endl;
     *logger::stat_stream << " ---------------------------------- " << endl << endl;
 
-    int total_bytes = 0;
+    int total_chunks = 0;
     for (int i=0; i < space_log.size(); i++)
-      total_bytes += space_log[i].second;
+      total_chunks += space_log[i].second;
 
     for (int i=0; i < space_log.size(); i++){
-      *logger::stat_stream << space_log[i].first << " -> "  << space_log[i].second << " ( " << float(100) * float(space_log[i].second) / float(total_bytes) << " % " << endl;
+      // each chunks is 4 bytes. 
+      *logger::stat_stream << space_log[i].first << " -> "  << 4 * space_log[i].second << " ( " << float(100) * float(space_log[i].second) / float(total_chunks) << " % " << endl;
     }
 
-    *logger::stat_stream << " Total number of bytes wrote to the output = " << total_bytes << endl;
+    *logger::stat_stream << " Total number of bytes wrote to the output = " << 4 * total_chunks << endl;
   }
-  */
+  
   oup.close();
   logger::current_depth--;
 }
