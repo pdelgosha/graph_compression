@@ -525,17 +525,18 @@ ibitstream& ibitstream::operator >> (mpz_class& n){
 
 /*!
   \param b The number of bits  used in the compression phase to encode size of array and lower and upper values (for graph compression, it is number of bits in the number of vertices).
+  \param a reference to the array to add elements to. Here, we do not erase a, so you need to make sure a is empty.
  */
-vector<int> ibitstream::bin_inter_decode(int b){
+void ibitstream::bin_inter_decode(vector<int>& a, int b){
   unsigned int a_size;
   a_size = read_bits(b); // size of the vector
   //cout << "a_size " << a_size << endl;
-  vector<int> a; // we do not resize a since we will push_back to it
+
   if (a_size == 0)
-    return a;
+    return;
   if (a_size == 1){
     a.push_back(read_bits(b));
-    return a;
+    return;
   }
 
   // read low and high values
@@ -544,7 +545,7 @@ vector<int> ibitstream::bin_inter_decode(int b){
   high = read_bits(b);
   //cout << " low " << low << " high " << high << endl;
   bin_inter_decode(a, 0, a_size - 1, low, high);
-  return a;
+  return;
 }
 
 

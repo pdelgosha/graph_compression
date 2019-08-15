@@ -151,7 +151,7 @@ class ibitstream{
   ibitstream& operator >> (mpz_class& n);
 
   //! uses binary interpolative coding algorithm to decode for an array of increasing nonnegative integers. Caution: we do not sort the decoding vector for efficiency purposes and return elements in the order they were encoded (mid point first left subinterval then subinterval)
-  vector<int> bin_inter_decode(int b);
+  void bin_inter_decode(vector<int>& a, int b);
 
 
   //! using bit interpolative coding algorithm to decode for a subinterval of an array

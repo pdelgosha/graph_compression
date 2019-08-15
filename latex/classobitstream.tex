@@ -20,6 +20,10 @@ void \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\+\_\+bi
 \begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
 \hyperlink{classobitstream}{obitstream} \& \hyperlink{classobitstream_aed715e98e8b47e19e465da1445372229}{operator$<$$<$} (const mpz\+\_\+class \&n)
 \begin{DoxyCompactList}\small\item\em uses Elias delta code to write a nonnegative mpz\+\_\+class integer to the output. In order to make sure that n $>$= 1, we effectively encode n + 1 instead \end{DoxyCompactList}\item 
+void \hyperlink{classobitstream_a945c237be04936240953ba927486cde1}{bin\+\_\+inter\+\_\+code} (const vector$<$ int $>$ \&a, int b)
+\begin{DoxyCompactList}\small\item\em uses binary interpolative coding to encode an increasing sequence of integers \end{DoxyCompactList}\item 
+void \hyperlink{classobitstream_aae355189c570d0fb7c3aa01ee3e71d8a}{bin\+\_\+inter\+\_\+code} (const vector$<$ int $>$ \&a, int i, int j, int low, int high)
+\begin{DoxyCompactList}\small\item\em binary interpolative coding for array a, interval \mbox{[}i,j\mbox{]}, where values are in the range \mbox{[}low, high\mbox{]} \end{DoxyCompactList}\item 
 unsigned int \hyperlink{classobitstream_ae835de27953b678b5b4ce5b33033d529}{chunks} ()
 \begin{DoxyCompactList}\small\item\em returns the number of chunks (each is B\+I\+T\+\_\+\+I\+NT = 32 bits) to the output. \end{DoxyCompactList}\item 
 void \hyperlink{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}{close} ()
@@ -68,6 +72,96 @@ constructor
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classobitstream_a945c237be04936240953ba927486cde1}\label{classobitstream_a945c237be04936240953ba927486cde1}} 
+\index{obitstream@{obitstream}!bin\+\_\+inter\+\_\+code@{bin\+\_\+inter\+\_\+code}}
+\index{bin\+\_\+inter\+\_\+code@{bin\+\_\+inter\+\_\+code}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{bin\+\_\+inter\+\_\+code()}{bin\_inter\_code()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void obitstream\+::bin\+\_\+inter\+\_\+code (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+uses binary interpolative coding to encode an increasing sequence of integers 
+
+We use the binary interpolative coding algorithm introduced by Moffat and Stuiver, reference\+:
+
+Moffat, Alistair, and Lang Stuiver. \char`\"{}\+Binary interpolative coding for effective index compression.\char`\"{} Information Retrieval 3.\+1 (2000)\+: 25-\/47.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & array of nonnegative increasing integers (this function assumes a contains nonnegative increasing integers, and does not check it) \\
+\hline
+{\em b} & an upper bound on the number of bits necessary to encode values in a and the size of a \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+264                                                           \{
+265   \textcolor{comment}{// write a.size}
+266 
+267   \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a.size(),b);
+268   \textcolor{keywordflow}{if} (a.size() == 0)
+269     \textcolor{keywordflow}{return};
+270   \textcolor{keywordflow}{if} (a.size()==1)\{
+271     \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a[0],b);
+272     \textcolor{keywordflow}{return};
+273   \}
+274   \textcolor{comment}{// write low and high values in a}
+275   \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a[0], b);
+276   \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a[a.size()-1], b);
+277 
+278   \textcolor{comment}{// then, encode recursively}
+279   \hyperlink{classobitstream_a945c237be04936240953ba927486cde1}{bin\_inter\_code}(a, 0, a.size()-1, a[0], a[a.size()-1]);
+280 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classobitstream_aae355189c570d0fb7c3aa01ee3e71d8a}\label{classobitstream_aae355189c570d0fb7c3aa01ee3e71d8a}} 
+\index{obitstream@{obitstream}!bin\+\_\+inter\+\_\+code@{bin\+\_\+inter\+\_\+code}}
+\index{bin\+\_\+inter\+\_\+code@{bin\+\_\+inter\+\_\+code}!obitstream@{obitstream}}
+\subsubsection{\texorpdfstring{bin\+\_\+inter\+\_\+code()}{bin\_inter\_code()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void obitstream\+::bin\+\_\+inter\+\_\+code (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{a,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{low,  }\item[{int}]{high }\end{DoxyParamCaption})}
+
+
+
+binary interpolative coding for array a, interval \mbox{[}i,j\mbox{]}, where values are in the range \mbox{[}low, high\mbox{]} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & array of increasing nonnegative integers \\
+\hline
+{\em i,j} & endpoints of the interval to be encoded \\
+\hline
+{\em low} & lower bound for the integers in the interval \mbox{[}i,j\mbox{]} \\
+\hline
+{\em high} & upper bound for the integers in the interval \mbox{[}i,j\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+288                                                                                     \{
+289   \textcolor{keywordflow}{if} (j < i)
+290     \textcolor{keywordflow}{return};
+291   \textcolor{keywordflow}{if} (i==j)\{
+292     \textcolor{comment}{// we should encode a[i] using the assumption that it is bounded by high - low}
+293     \textcolor{comment}{// therefore low <= a[i] <= high}
+294     \textcolor{comment}{// so 0 <= a[i]-low <= high - low}
+295     \textcolor{comment}{// so we can encode a[i]-low using nu\_bits(high - low) bits}
+296     \textcolor{keywordflow}{if} (high > low) \textcolor{comment}{// otherwise, there will be nothing to be printed }
+297       \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a[i] - low, \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low));
+298     \textcolor{keywordflow}{return};
+299   \}
+300   \textcolor{comment}{// find the intermediate value}
+301   \textcolor{keywordtype}{int} m = (i+j)/ 2;
+302   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = low + m - i; \textcolor{comment}{// lower bound on a[m]}
+303   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} H = high - (j - m); \textcolor{comment}{// upper bound on a[m]}
+304   \textcolor{comment}{// so L <= a[m] <= H}
+305   \textcolor{comment}{// and we can encode a[m] - L using nu\_bits(H-L) bits}
+306   \textcolor{keywordflow}{if} (H > L) \textcolor{comment}{// otherwise, a[m] is clearly H = L and nothing need to be written }
+307     \hyperlink{classobitstream_afb0cc2fb4f739881436d887bd4770355}{write\_bits}(a[m] - L, \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L));
+308 
+309   \textcolor{comment}{// then, we should recursively encode intervals [i,m-1] and [m+1, j]}
+310   \hyperlink{classobitstream_a945c237be04936240953ba927486cde1}{bin\_inter\_code}(a, i, m-1, low, a[m]-1);
+311   \hyperlink{classobitstream_a945c237be04936240953ba927486cde1}{bin\_inter\_code}(a, m+1, j, a[m]+1, high);
+312 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_ae835de27953b678b5b4ce5b33033d529}\label{classobitstream_ae835de27953b678b5b4ce5b33033d529}} 
 \index{obitstream@{obitstream}!chunks@{chunks}}
 \index{chunks@{chunks}!obitstream@{obitstream}}
@@ -80,9 +174,9 @@ returns the number of chunks (each is B\+I\+T\+\_\+\+I\+NT = 32 bits) to the out
 
 
 \begin{DoxyCode}
-102                        \{
-103     \textcolor{keywordflow}{return} \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\_written}; 
-104   \}
+107                        \{
+108     \textcolor{keywordflow}{return} \hyperlink{classobitstream_a3022397f2b6133ea5990016d9d078a2f}{chunks\_written}; 
+109   \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}\label{classobitstream_a6d76dbba302e1181fbc9609072a4c2a0}} 
 \index{obitstream@{obitstream}!close@{close}}
@@ -96,15 +190,15 @@ closes the session by writing the remaining chunk to the output (if any) and clo
 
 
 \begin{DoxyCode}
-256                       \{
-257   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 0)\{
-258     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), 
+315                       \{
+316   \textcolor{keywordflow}{if} (\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() > 0)\{
+317     fwrite(&\hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), 
       \hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
-259     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.clear();
-260     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;
-261   \}
-262   fclose(\hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
-263 \}
+318     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.clear();
+319     \hyperlink{classobitstream_aeaccad00a395a404aa16472bfa052be3}{buffer}.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;
+320   \}
+321   fclose(\hyperlink{classobitstream_ac589d74745217748c888ae777ab324a7}{f});
+322 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}\label{classobitstream_a09352e38c7d1d5bcff438c0b8ba41ff4}} 
 \index{obitstream@{obitstream}!operator$<$$<$@{operator$<$$<$}}

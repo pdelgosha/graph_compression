@@ -49,22 +49,22 @@ returns the Elias delta representation of an integer in \hyperlink{classbit__pip
 
 
 \begin{DoxyCode}
-512                                                   \{
-513   \textcolor{keywordflow}{if} (n == 0)\{
-514     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
-515   \}
-516   \textcolor{comment}{// first, find number of bits in n }
-517   \textcolor{keywordtype}{int} n\_bits = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n); \textcolor{comment}{// or equivalently \(\backslash\)f$\(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor + 1\(\backslash\)f$}
-518   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
+631                                                   \{
+632   \textcolor{keywordflow}{if} (n == 0)\{
+633     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
+634   \}
+635   \textcolor{comment}{// first, find number of bits in n }
+636   \textcolor{keywordtype}{int} n\_bits = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n); \textcolor{comment}{// or equivalently \(\backslash\)f$\(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor + 1\(\backslash\)f$}
+637   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
        \(\backslash\)log\_2 n \(\backslash\)rfloor\(\backslash\)f$}
-519 
-520   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
-521   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
-522   \hyperlink{classbit__pipe}{bit\_pipe} n\_pipe(n); \textcolor{comment}{// binary representation of n}
-523   n\_pipe.shift\_left(1); \textcolor{comment}{// remove the leading 1}
-524   n\_pipe.append\_left(N);
-525   \textcolor{keywordflow}{return} n\_pipe;
-526 \}
+638 
+639   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
+640   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
+641   \hyperlink{classbit__pipe}{bit\_pipe} n\_pipe(n); \textcolor{comment}{// binary representation of n}
+642   n\_pipe.shift\_left(1); \textcolor{comment}{// remove the leading 1}
+643   n\_pipe.append\_left(N);
+644   \textcolor{keywordflow}{return} n\_pipe;
+645 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bitstream_8h_a8fd72ee0083b9078e104235efe63116a}\label{bitstream_8h_a8fd72ee0083b9078e104235efe63116a}} 
 \index{bitstream.\+h@{bitstream.\+h}!elias\+\_\+delta\+\_\+encode@{elias\+\_\+delta\+\_\+encode}}
@@ -78,21 +78,21 @@ performs Elias delta encode for an integer, and stores the results in the given 
 
 
 \begin{DoxyCode}
-528                                                            \{
-529   \textcolor{keywordflow}{if} (n == 0)\{
-530     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
-531   \}
-532   \textcolor{comment}{// first, find number of bits in n }
-533   \textcolor{keywordtype}{int} n\_bits = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n); \textcolor{comment}{// or equivalently \(\backslash\)f$\(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor + 1\(\backslash\)f$}
-534   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
+647                                                            \{
+648   \textcolor{keywordflow}{if} (n == 0)\{
+649     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
+650   \}
+651   \textcolor{comment}{// first, find number of bits in n }
+652   \textcolor{keywordtype}{int} n\_bits = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n); \textcolor{comment}{// or equivalently \(\backslash\)f$\(\backslash\)lfloor \(\backslash\)log\_2 n \(\backslash\)rfloor + 1\(\backslash\)f$}
+653   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
        \(\backslash\)log\_2 n \(\backslash\)rfloor\(\backslash\)f$}
-535 
-536   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
-537   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
-538   B = \hyperlink{classbit__pipe}{bit\_pipe}(n); \textcolor{comment}{// binary representation of n}
-539   B.\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(1); \textcolor{comment}{// remove the leading 1}
-540   B.\hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\_left}(N);
-541 \}
+654 
+655   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
+656   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
+657   B = \hyperlink{classbit__pipe}{bit\_pipe}(n); \textcolor{comment}{// binary representation of n}
+658   B.\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(1); \textcolor{comment}{// remove the leading 1}
+659   B.\hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\_left}(N);
+660 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bitstream_8h_aceec12b5bacffb4c3fa4f5bb6039acd6}\label{bitstream_8h_aceec12b5bacffb4c3fa4f5bb6039acd6}} 
 \index{bitstream.\+h@{bitstream.\+h}!elias\+\_\+delta\+\_\+encode@{elias\+\_\+delta\+\_\+encode}}
@@ -106,22 +106,22 @@ returns the Elias delta representation of an mpz\+\_\+class in \hyperlink{classb
 
 
 \begin{DoxyCode}
-544                                                \{
-545   \textcolor{keywordflow}{if} (n == 0)\{
-546     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
-547   \}
-548   \textcolor{comment}{// first, find number of bits in n }
-549   \textcolor{keywordtype}{int} n\_bits = mpz\_sizeinbase(n.get\_mpz\_t(), 2); \textcolor{comment}{// number of bits in n}
-550   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
+663                                                \{
+664   \textcolor{keywordflow}{if} (n == 0)\{
+665     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
+666   \}
+667   \textcolor{comment}{// first, find number of bits in n }
+668   \textcolor{keywordtype}{int} n\_bits = mpz\_sizeinbase(n.get\_mpz\_t(), 2); \textcolor{comment}{// number of bits in n}
+669   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
        \(\backslash\)log\_2 n \(\backslash\)rfloor\(\backslash\)f$}
-551 
-552   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
-553   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
-554   \hyperlink{classbit__pipe}{bit\_pipe} n\_pipe(n); \textcolor{comment}{// binary representation of n}
-555   n\_pipe.shift\_left(1); \textcolor{comment}{// remove the leading 1}
-556   n\_pipe.append\_left(N);
-557   \textcolor{keywordflow}{return} n\_pipe;
-558 \}
+670 
+671   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
+672   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
+673   \hyperlink{classbit__pipe}{bit\_pipe} n\_pipe(n); \textcolor{comment}{// binary representation of n}
+674   n\_pipe.shift\_left(1); \textcolor{comment}{// remove the leading 1}
+675   n\_pipe.append\_left(N);
+676   \textcolor{keywordflow}{return} n\_pipe;
+677 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bitstream_8h_a67fbc6ab6caf918029af2a4a4b12dc4b}\label{bitstream_8h_a67fbc6ab6caf918029af2a4a4b12dc4b}} 
 \index{bitstream.\+h@{bitstream.\+h}!elias\+\_\+delta\+\_\+encode@{elias\+\_\+delta\+\_\+encode}}
@@ -135,21 +135,21 @@ performs Elias delta encoding on n, and stores the results in the given referenc
 
 
 \begin{DoxyCode}
-560                                                         \{
-561   \textcolor{keywordflow}{if} (n == 0)\{
-562     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
-563   \}
-564   \textcolor{comment}{// first, find number of bits in n }
-565   \textcolor{keywordtype}{int} n\_bits = mpz\_sizeinbase(n.get\_mpz\_t(), 2); \textcolor{comment}{// number of bits in n}
-566   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
+679                                                         \{
+680   \textcolor{keywordflow}{if} (n == 0)\{
+681     cerr << \textcolor{stringliteral}{" ERROR: elias delta called for 0, input must be a positive integer"} << endl;
+682   \}
+683   \textcolor{comment}{// first, find number of bits in n }
+684   \textcolor{keywordtype}{int} n\_bits = mpz\_sizeinbase(n.get\_mpz\_t(), 2); \textcolor{comment}{// number of bits in n}
+685   \textcolor{keywordtype}{int} L = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n\_bits) - 1; \textcolor{comment}{// this is \(\backslash\)f$\(\backslash\)floor \(\backslash\)og\_2 (N+1) \(\backslash\)rfloor\(\backslash\)f$ where \(\backslash\)f$N = \(\backslash\)lfloor
        \(\backslash\)log\_2 n \(\backslash\)rfloor\(\backslash\)f$}
-567 
-568   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
-569   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
-570   B = \hyperlink{classbit__pipe}{bit\_pipe}(n); \textcolor{comment}{// binary representation of n}
-571   B.\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(1); \textcolor{comment}{// remove the leading 1}
-572   B.\hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\_left}(N);
-573 \}
+686 
+687   \hyperlink{classbit__pipe}{bit\_pipe} N(n\_bits); \textcolor{comment}{// binary representation}
+688   N.shift\_right(L); \textcolor{comment}{// it is as if I write L zeros followed by binary representation of N}
+689   B = \hyperlink{classbit__pipe}{bit\_pipe}(n); \textcolor{comment}{// binary representation of n}
+690   B.\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(1); \textcolor{comment}{// remove the leading 1}
+691   B.\hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\_left}(N);
+692 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bitstream_8h_a6364b017a9400a38f7a994376bb3ebee}\label{bitstream_8h_a6364b017a9400a38f7a994376bb3ebee}} 
 \index{bitstream.\+h@{bitstream.\+h}!mask\+\_\+gen@{mask\+\_\+gen}}
@@ -163,18 +163,18 @@ generates a binary mask with n consecutive ones in L\+SB
 
 Example\+: n = 1 -\/$>$ 00000001, n = 7 -\/$>$ 01111111 
 \begin{DoxyCode}
-499                             \{
-500   \textcolor{keywordflow}{if} (n < 1 or n > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-501     cerr << \textcolor{stringliteral}{" ERROR: mask\_gen called for n outside the range [1,BIT\_INT] "} << endl;
-502     \textcolor{keywordflow}{return} 0;
-503   \}
-504   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = 1; 
-505   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1; i<n; i++)\{
-506     mask <<= 1;
-507     mask += 1;
-508   \}
-509   \textcolor{keywordflow}{return} mask;
-510 \}
+618                             \{
+619   \textcolor{keywordflow}{if} (n < 1 or n > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
+620     cerr << \textcolor{stringliteral}{" ERROR: mask\_gen called for n outside the range [1,BIT\_INT] "} << endl;
+621     \textcolor{keywordflow}{return} 0;
+622   \}
+623   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = 1; 
+624   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1; i<n; i++)\{
+625     mask <<= 1;
+626     mask += 1;
+627   \}
+628   \textcolor{keywordflow}{return} mask;
+629 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}\label{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}} 
 \index{bitstream.\+h@{bitstream.\+h}!nu\+\_\+bits@{nu\+\_\+bits}}
@@ -188,15 +188,15 @@ returns number of bits in a positive integer n, e.\+g. 3 has 3 bits, 12 has 4 bi
 
 This is in fact nothing but $\lfloor \log_2 n \rfloor + 1$ 
 \begin{DoxyCode}
-485                                     \{
-486   \textcolor{keywordtype}{int} \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits} = 0;
-487   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n\_copy = n;
-488   \textcolor{keywordflow}{while} (n\_copy > 0)\{
-489     nu\_bits ++;
-490     n\_copy >>= 1;
-491   \}
-492   \textcolor{keywordflow}{return} \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}; 
-493 \}
+604                                     \{
+605   \textcolor{keywordtype}{int} \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits} = 0;
+606   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n\_copy = n;
+607   \textcolor{keywordflow}{while} (n\_copy > 0)\{
+608     nu\_bits ++;
+609     n\_copy >>= 1;
+610   \}
+611   \textcolor{keywordflow}{return} \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}; 
+612 \}
 \end{DoxyCode}
 
 

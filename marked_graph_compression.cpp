@@ -345,31 +345,11 @@ void marked_graph_compressed::binary_write(string s){
     xp = it->first.second;
     //write x and xp
     oup << x;
-    //fwrite(&x, sizeof x, 1, f);
     oup << xp;
-    //fwrite(&xp, sizeof xp, 1, f);
-    //output_bits += sizeof x;
-    //output_bits += sizeof xp;
-    //s = "";
     for (int i=0;i<it->second.size();i++){
-      for(int j=0;j<it->second[i].size();j++){
-        oup.write_bits(1,1); // write a single bit with value 1
-        //s += "1";
-        //oup <<  it->second[i][j];
-        oup.write_bits(it->second[i][j], n_bits); // use 1 + log2n bits to save the other endpoint
-        nu_star_edges ++;
-      }
-      oup.write_bits(0,1); // write 1 bit with value 0 
-      //s += "0"; // to indicate that the neighbor list of this vertex is over now
+      oup.bin_inter_code(it->second[i], n_bits);
+      nu_star_edges += it->second[i].size();
     }
-    //cerr << " write  x " << x << " xp " << xp << " s " << s << endl;
-    //for (int i=0;i<it->second.size();i++){
-    //  for (int j=0;j<it->second[i].size();j++){
-    //    cerr << " , " << it->second[i][j];
-    //  }
-    //  cerr << endl;
-    //}
-    //output_bits += bit_string_write(f, s); // write this bitstream to the output
   }
   
   chunks_new = oup.chunks();
@@ -758,18 +738,19 @@ void marked_graph_compressed::binary_read(string s){
     //sp = 0; // starting from zero 
     for (int j=0; j<nu_star_vertices; j++){ // 
       V[j].clear(); // make it fresh
-      while(inp.read_bit()){ // there is still some edge connected to this vertex 
-        // read log2n many bits
-        //cerr << " s subtr " << s.substr(sp, log2n);
-        //ss << s.substr(sp, log2n);
-        //B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
-        //cerr << " ss " << ss.str() << endl;
-        //sp += log2n;
-        //ss >> B;
-        //inp >> int_in;
-        int_in = inp.read_bits(n_bits);
-        V[j].push_back(int_in);
-      }
+      inp.bin_inter_decode(V[j], n_bits); // use binary interpolative decoding 
+      // while(inp.read_bit()){ // there is still some edge connected to this vertex 
+      //   // read log2n many bits
+      //   //cerr << " s subtr " << s.substr(sp, log2n);
+      //   //ss << s.substr(sp, log2n);
+      //   //B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
+      //   //cerr << " ss " << ss.str() << endl;
+      //   //sp += log2n;
+      //   //ss >> B;
+      //   //inp >> int_in;
+      //   int_in = inp.read_bits(n_bits);
+      //   V[j].push_back(int_in);
+      // }
       //for (int k=0;k<V[j].size();k++)
       //  cerr << " , " << V[j][k];
       //cerr << endl;
