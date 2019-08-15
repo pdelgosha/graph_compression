@@ -98,6 +98,11 @@ class obitstream{
   //! uses Elias delta code to write a nonnegative mpz_class integer to the output. In order to make sure that n >= 1, we effectively encode n + 1 instead 
   obitstream& operator << (const mpz_class& n);
 
+  //! uses binary interpolative coding to encode an increasing sequence of integers
+  void bin_inter_code(const vector<int>& a, int b);
+
+  //! binary interpolative coding for array a, interval [i,j], where values are in the range [low, high]
+  void bin_inter_code(const vector<int>& a, int i, int j, int low, int high);
   //! returns the number of chunks (each is BIT_INT = 32 bits) to the output.
   unsigned int chunks(){
     return chunks_written; 
@@ -144,6 +149,15 @@ class ibitstream{
 
   //! reads a nonnegative mpz_class integer using Elias delta decoding and stores in the reference given
   ibitstream& operator >> (mpz_class& n);
+
+  //! uses binary interpolative coding algorithm to decode for an array of increasing nonnegative integers. Caution: we do not sort the decoding vector for efficiency purposes and return elements in the order they were encoded (mid point first left subinterval then subinterval)
+  vector<int> bin_inter_decode(int b);
+
+
+  //! using bit interpolative coding algorithm to decode for a subinterval of an array
+  void bin_inter_decode(vector<int>& a, int i, int j, int low, int high);
+
+
 
   //! closes the session by closing the input file
   void close(){fclose(f);}

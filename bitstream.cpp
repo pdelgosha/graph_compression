@@ -253,6 +253,65 @@ obitstream& obitstream::operator << (const mpz_class& n){
   return *this;
 }
 
+/*!
+  We use the binary interpolative coding algorithm introduced by Moffat and Stuiver, reference:
+
+  Moffat, Alistair, and Lang Stuiver. "Binary interpolative coding for effective index compression." Information Retrieval 3.1 (2000): 25-47.
+
+  \param a array of nonnegative increasing integers (this function assumes a contains nonnegative increasing integers, and does not check it)
+  \param b an upper bound on the number of bits necessary to encode values in a and the size of a 
+ */
+void obitstream::bin_inter_code(const vector<int>& a, int b){
+  // write a.size
+
+  write_bits(a.size(),b);
+  if (a.size() == 0)
+    return;
+  if (a.size()==1){
+    write_bits(a[0],b);
+    return;
+  }
+  // write low and high values in a
+  write_bits(a[0], b);
+  write_bits(a[a.size()-1], b);
+
+  // then, encode recursively
+  bin_inter_code(a, 0, a.size()-1, a[0], a[a.size()-1]);
+}
+
+/*!
+  \param a array of increasing nonnegative integers
+  \param i, j endpoints of the interval to be encoded
+  \param low lower bound for the integers in the interval [i,j]
+  \param high upper bound for the integers in the interval [i,j]
+ */
+void obitstream::bin_inter_code(const vector<int>& a, int i, int j, int low, int high){
+  if (j < i)
+    return;
+  if (i==j){
+    // we should encode a[i] using the assumption that it is bounded by high - low
+    // therefore low <= a[i] <= high
+    // so 0 <= a[i]-low <= high - low
+    // so we can encode a[i]-low using nu_bits(high - low) bits
+    if (high > low) // otherwise, there will be nothing to be printed 
+      write_bits(a[i] - low, nu_bits(high-low));
+    return;
+  }
+  // find the intermediate value
+  int m = (i+j)/ 2;
+  unsigned int L = low + m - i; // lower bound on a[m]
+  unsigned int H = high - (j - m); // upper bound on a[m]
+  // so L <= a[m] <= H
+  // and we can encode a[m] - L using nu_bits(H-L) bits
+  if (H > L) // otherwise, a[m] is clearly H = L and nothing need to be written 
+    write_bits(a[m] - L, nu_bits(H-L));
+
+  // then, we should recursively encode intervals [i,m-1] and [m+1, j]
+  bin_inter_code(a, i, m-1, low, a[m]-1);
+  bin_inter_code(a, m+1, j, a[m]+1, high);
+}
+
+
 void obitstream::close(){
   if (buffer.bits.size() > 0){
     fwrite(&buffer.bits[0], sizeof(unsigned int), buffer.bits.size(), f);
@@ -462,6 +521,65 @@ ibitstream& ibitstream::operator >> (mpz_class& n){
 
   n --; // when encoding, we added 1 to make sure it is positive
   return *this;
+}
+
+/*!
+  \param b The number of bits  used in the compression phase to encode size of array and lower and upper values (for graph compression, it is number of bits in the number of vertices).
+ */
+vector<int> ibitstream::bin_inter_decode(int b){
+  unsigned int a_size;
+  a_size = read_bits(b); // size of the vector
+  //cout << "a_size " << a_size << endl;
+  vector<int> a; // we do not resize a since we will push_back to it
+  if (a_size == 0)
+    return a;
+  if (a_size == 1){
+    a.push_back(read_bits(b));
+    return a;
+  }
+
+  // read low and high values
+  unsigned int low, high;
+  low = read_bits(b);
+  high = read_bits(b);
+  //cout << " low " << low << " high " << high << endl;
+  bin_inter_decode(a, 0, a_size - 1, low, high);
+  return a;
+}
+
+
+
+/*!
+  \param a reference to the array to add elements to
+  \param i,j the endpoints of the interval to be decoded (with respect to the encoded array)
+  \param low lower bound on the elements of the encoded array in the interval [i,j]n
+  \param high lower bound on the elements of the encoded array in the interval [i,j]
+*/
+void ibitstream::bin_inter_decode(vector<int>& a, int i, int j, int low, int high){
+  // cout << " i " << i << " j " << j << " low " << low << " high " << high << endl;
+  if (j < i)
+    return;
+  if (i==j){
+    if(low == high)
+      a.push_back(low); // the element must be low = high, no other change, nothing to read
+    else
+      a.push_back(read_bits(nu_bits(high-low)) + low);
+    return;
+  }
+
+  int m = (i+j)/2;
+  unsigned int L = low + m - i; // lower bound on a[m]
+  unsigned int H = high - (j - m); // upper bound on a[m]
+  unsigned int a_m; // the value of the intermediate point
+  if (L == H)
+    a_m = L; // there will be no bits to read
+  else
+    a_m = read_bits(nu_bits(H-L)) + L;
+  
+  a.push_back(a_m);
+
+  bin_inter_decode(a, i, m-1, low, a_m - 1);
+  bin_inter_decode(a, m+1, j, a_m + 1, high);
 }
 
 
