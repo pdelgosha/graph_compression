@@ -340,6 +340,13 @@ void marked_graph_compressed::binary_write(string s){
 
   int nu_star_edges = 0; // number of star edges
   unsigned int n_bits = nu_bits(n); // the number of bits in n, i.e. \f$1 + \lfloor \log_2 n \rfloor\f$
+  unsigned int diff; // the difference for differential coding
+  unsigned int nu_star_vertices = n - star_vertices.first[0]; // number of star vertices
+  unsigned int nb_nsv = nu_bits(nu_star_vertices-1); // defined to chose compression method, see below 
+  unsigned int nb_nb_nsv = nu_bits(nb_nsv); // defined to chose compression method, see below 
+  unsigned int diff_threshold = nb_nsv - nb_nb_nsv;
+  unsigned int nb_diff; // number of bits in diff
+
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
     x = it->first.first;
     xp = it->first.second;
@@ -347,7 +354,40 @@ void marked_graph_compressed::binary_write(string s){
     oup << x;
     oup << xp;
     for (int i=0;i<it->second.size();i++){
-      oup.bin_inter_code(it->second[i], n_bits);
+      //oup.bin_inter_code(it->second[i], n_bits);
+      oup << it->second[i].size(); // how many star edges are going next
+      for (int j=0;j<it->second[i].size();j++){
+        if (j==0)
+          diff = it->second[i][j] - i;
+        else
+          diff = it->second[i][j] - it->second[i][j-1];
+        // diff is bounded by the number of star vertices
+        // we can either encode diff by a modification of Elias delta, using the extra assumption that 1 <= diff <= number of star vertices - 1
+        // number of star vertices = n - star_vertices.first[0] lets call it nu_star_vertices defined above before the loop
+        // with this extra assumption in Elias delta, we do not use the unary part of the code and store nu_bits(diff) 
+        // using nu_bits(nu_bits(nu_star_vertices-1))
+        // if we chose this method of compression, we use nu_bits(nu_bits(nu_star_vertices-1)) + nu_bits(diff)
+        // if we only use diff <= nu_star_vertices - 1, we spend nu_bits(nu_star_vertices-1) bits
+        // so we should spend the first method iff we have nu_bits(nu_bits(nu_star_vertices-1)) + nu_bits(diff) < nu_bits(nu_star_vertices-1)
+        // or equivalently if nu_bits(diff) < nu_bits(nu_star_vertices-1) - nu_bits(nu_bits(nu_star_vertices-1))
+        // we define  nu_bits(nu_star_vertices-1) =: nb_nsv and nu_bits(nu_bits(nu_star_vertices-1)) =: nb_nb_nsv this is define above the loop
+        // we also have defined the difference above as diff_threshold to simplify
+        nb_diff = nu_bits(diff);
+        if (nb_diff < diff_threshold){
+          // we choose the first method
+          // we write a flag 1 upfront to tell decoder which method we use
+          oup.write_bits(1,1); // write a single bit with value 1
+          oup.write_bits(nb_diff, nb_nb_nsv); // write the number of bits in diff 
+          diff -= (1<<(nb_diff-1)); // remove the leading (MSB) bit from diff
+          if (nb_diff > 1) // otherwise, we do not need to write anything (note we remove leading one, so if diff = 1, we should not write anything at this stage)
+            oup.write_bits(diff, nb_diff-1); // write diff to the output
+        }else{
+          // we should choose the second method
+          // write a flag 0 upfront
+          oup.write_bits(0,1);
+          oup.write_bits(diff, nb_nsv);
+        }
+      }
       nu_star_edges += it->second[i].size();
     }
   }
@@ -721,11 +761,17 @@ void marked_graph_compressed::binary_read(string s){
 
   unsigned int x, xp; // edge marks
   int nu_star_vertices = star_vertices.first[1];
+  unsigned int nb_nsv = nu_bits(nu_star_vertices-1); // defined to chose compression method, see below
+  unsigned int nb_nb_nsv = nu_bits(nb_nsv-1); // defined to chose compression method, see below
+  unsigned int diff_threshold = nb_nsv - nb_nb_nsv;
+  unsigned int nb_diff; // number of bits in diff
+
 
   vector<vector<int> > V; // the list of star edges corresponding to each mark pair
   V.resize(nu_star_vertices);
 
   unsigned int n_bits = nu_bits(n); // the number of bits in n, i.e. \f$1 + \lfloor \log_2 n \rfloor\f$
+  unsigned int diff; // to decode differences between star vertex indices in star edges
 
   for (int i=0;i<star_edges_size;i++){
     inp >> x;
@@ -738,22 +784,24 @@ void marked_graph_compressed::binary_read(string s){
     //sp = 0; // starting from zero 
     for (int j=0; j<nu_star_vertices; j++){ // 
       V[j].clear(); // make it fresh
-      inp.bin_inter_decode(V[j], n_bits); // use binary interpolative decoding 
-      // while(inp.read_bit()){ // there is still some edge connected to this vertex 
-      //   // read log2n many bits
-      //   //cerr << " s subtr " << s.substr(sp, log2n);
-      //   //ss << s.substr(sp, log2n);
-      //   //B = bitset<8*sizeof(int)>(s.substr(sp, log2n));
-      //   //cerr << " ss " << ss.str() << endl;
-      //   //sp += log2n;
-      //   //ss >> B;
-      //   //inp >> int_in;
-      //   int_in = inp.read_bits(n_bits);
-      //   V[j].push_back(int_in);
-      // }
-      //for (int k=0;k<V[j].size();k++)
-      //  cerr << " , " << V[j][k];
-      //cerr << endl;
+      //inp.bin_inter_decode(V[j], n_bits); // use binary interpolative decoding
+      inp >> int_in; // the number of star edges connected to jth star vertex
+      for (int k=0; k<int_in; k++){
+        // read diff
+        if (inp.read_bit()){ // the flag bit is one, we have used the first method 
+          nb_diff = inp.read_bits(nb_nb_nsv);
+          diff = 0; // initialize
+          if (nb_diff > 1) // otherwise, reading zero bits is as iff diff = 0 (before adding the leading one) this is important when real diff is 1
+            diff = inp.read_bits(nb_diff-1);
+          diff += (1<<(nb_diff-1)); // bring the lading bit in diff back 
+        }else{ // use the second method to read diff
+          diff = inp.read_bits(nb_nsv);
+        }
+        if(k==0)
+          V[j].push_back(j+diff);
+        else
+          V[j].push_back(V[j][k-1]+diff);
+      }
     }
 
 
@@ -947,11 +995,15 @@ void marked_graph_encoder::encode_star_vertices()
   // compress the is_star_vertex list
   time_series_encoder star_encoder(n);
   vector<int> is_star_vertex_int(is_star_vertex.size());
+  index_in_star.resize(is_star_vertex.size());
+  int star_count = 0; // the number of star vertices 
   for (int i=0;i<is_star_vertex.size();i++){
-    if(is_star_vertex[i] == true)
+    if(is_star_vertex[i] == true){
       is_star_vertex_int[i] = 1;
-    else
+      index_in_star[i] = star_count ++;
+    }else{
       is_star_vertex_int[i] = 0;
+    }
   }
   compressed.star_vertices = star_encoder.encode(is_star_vertex_int);
 }
@@ -971,12 +1023,12 @@ void marked_graph_encoder::encode_star_edges()
         if (x < xp){ // if x > xp, we only store this edge when visiting the other endpoint (w), since we do not want to express an edge twice
           if (compressed.star_edges.find(pair<int, int>(x,xp)) == compressed.star_edges.end()) // this pair does not exist
             compressed.star_edges[pair<int, int>(x,xp)].resize(star_vertices.size()); // open space for all star vertices 
-          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(w); // add w to the position of v (which is k)
+          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(index_in_star[w]); // add the index of w among star vertices to the position of v (which is k)
         }
         if (x == xp and w > v){ // if w < v, we store this edge when visiting the other endpoint (w) to avoid storing and edge twice
           if (compressed.star_edges.find(pair<int, int>(x,xp)) == compressed.star_edges.end()) // not yet exist
             compressed.star_edges[pair<int, int>(x,xp)].resize(star_vertices.size()); // open space
-          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(w);
+          compressed.star_edges.at(pair<int, int>(x,xp))[k].push_back(index_in_star[w]);
         }
       }
     }
@@ -1162,7 +1214,7 @@ void marked_graph_decoder::decode_star_edges(const marked_graph_compressed& comp
 {
   pair<int, int> mark_pair; // the pair of marks
   vector<vector<int> > list; // list of edges with this pair of marks
-  int v; // one endpoint of the star edge
+  int v, w; //endpoints of the star edge
   // iterating through the star_edges map
   for (map<pair<int, int>, vector<vector<int> > >::const_iterator it = compressed.star_edges.begin(); it!=compressed.star_edges.end(); it++){
     mark_pair = it->first;
@@ -1172,7 +1224,8 @@ void marked_graph_decoder::decode_star_edges(const marked_graph_compressed& comp
       v = star_vertices[i];
       for (int j=0;j<list[i].size();j++){
         //cerr << " list[i][j] " << list[i][j] << endl;
-        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,list[i][j]), mark_pair));
+        w = star_vertices[list[i][j]]; // star edges are stored in compressed format using to the indexing with respect to star vertices
+        edges.push_back(pair<pair<int, int>, pair<int, int> >(pair<int, int>(v,w), mark_pair));
       }
     }
   }

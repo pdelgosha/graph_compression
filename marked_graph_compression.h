@@ -62,6 +62,8 @@ class marked_graph_encoder
   colored_graph C; //!< the auxiliary object to extract edge types
   //int L; //!< the number of edge colors, excluding star types 
   vector<bool> is_star_vertex; //!< for \f$0 \leq v < n\f$, is_star_vertex[v] is true if there is at least one star type edge connected to v and false otherwise.
+  vector<int> index_in_star; //!< for \f$0 \leq v < n\f$, if v is a star vertex, index_in_star[v] is the index of v among star vertices (this is to encode star edges)
+  
   vector<int> star_vertices; //!< the list of star vertices
 
   map<pair<int, int>, b_graph> part_bgraph; //!< for \f$0 \leq t < t' < L\f$, part_bgraph[pair<int, int> (t,t')] is a bipartite graph with n left vertex and n right vertex. In this bipartite graph, a left vertex i is connected to a right vertex j iff there is an edge in the graph between vertices i and j with a half edge type towards i equal to t and a half edge type towards j equal to t'.

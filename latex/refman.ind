@@ -1,392 +1,907 @@
 \begin{theindex}
 
+  \item {\+\_\+\+\_\+attribute\+\_\+\+\_\+}
+    \subitem {logger.\+h}, \hyperpage{171}
+
+  \indexspace
+
   \item {a}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{20}
-    \subitem {graph\+\_\+decoder}, \hyperpage{37}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{29}
+    \subitem {graph\+\_\+decoder}, \hyperpage{56}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
   \item {add}
-    \subitem {fenwick\+\_\+tree}, \hyperpage{28}
-    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{52}
+    \subitem {fenwick\+\_\+tree}, \hyperpage{45}
+    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{129}
+  \item {add\+\_\+entry}
+    \subitem {logger}, \hyperpage{84}
   \item {adj\+\_\+list}
-    \subitem {b\+\_\+graph}, \hyperpage{10}
-    \subitem {colored\+\_\+graph}, \hyperpage{24}
-    \subitem {marked\+\_\+graph}, \hyperpage{50}
-  \item {adj\+\_\+location}
-    \subitem {colored\+\_\+graph}, \hyperpage{24}
-    \subitem {marked\+\_\+graph}, \hyperpage{50}
+    \subitem {b\+\_\+graph}, \hyperpage{17}
+    \subitem {colored\+\_\+graph}, \hyperpage{41}
+    \subitem {marked\+\_\+graph}, \hyperpage{92}
+  \item {alph\+\_\+size}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{132}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{136}
+  \item {append\+\_\+left}
+    \subitem {bit\+\_\+pipe}, \hyperpage{32}
 
   \indexspace
 
   \item {b}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{20}
-  \item {b\+\_\+graph}, \hyperpage{5}
-    \subitem {adj\+\_\+list}, \hyperpage{10}
-    \subitem {b\+\_\+graph}, \hyperpage{6, 7}
-    \subitem {get\+\_\+adj\+\_\+list}, \hyperpage{7}
-    \subitem {get\+\_\+left\+\_\+degree}, \hyperpage{8}
-    \subitem {get\+\_\+left\+\_\+degree\+\_\+sequence}, \hyperpage{8}
-    \subitem {get\+\_\+right\+\_\+degree}, \hyperpage{8}
-    \subitem {get\+\_\+right\+\_\+degree\+\_\+sequence}, \hyperpage{8}
-    \subitem {left\+\_\+deg\+\_\+seq}, \hyperpage{10}
-    \subitem {n}, \hyperpage{11}
-    \subitem {np}, \hyperpage{11}
-    \subitem {nu\+\_\+left\+\_\+vertices}, \hyperpage{9}
-    \subitem {nu\+\_\+right\+\_\+vertices}, \hyperpage{9}
-    \subitem {operator!=}, \hyperpage{9}
-    \subitem {operator$<$$<$}, \hyperpage{9}
-    \subitem {operator==}, \hyperpage{10}
-    \subitem {right\+\_\+deg\+\_\+seq}, \hyperpage{11}
-  \item {b\+\_\+graph\+\_\+decoder}, \hyperpage{11}
-    \subitem {a}, \hyperpage{16}
-    \subitem {b}, \hyperpage{16}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{13}
-    \subitem {beta}, \hyperpage{16}
-    \subitem {decode}, \hyperpage{13}
-    \subitem {decode\+\_\+interval}, \hyperpage{14}
-    \subitem {decode\+\_\+node}, \hyperpage{14}
-    \subitem {init}, \hyperpage{15}
-    \subitem {n}, \hyperpage{16}
-    \subitem {np}, \hyperpage{16}
-    \subitem {U}, \hyperpage{16}
-    \subitem {W}, \hyperpage{17}
-    \subitem {x}, \hyperpage{17}
-  \item {b\+\_\+graph\+\_\+encoder}, \hyperpage{17}
-    \subitem {a}, \hyperpage{20}
-    \subitem {b}, \hyperpage{20}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{18}
-    \subitem {beta}, \hyperpage{21}
-    \subitem {compute\+\_\+N}, \hyperpage{19}
-    \subitem {encode}, \hyperpage{19}
-    \subitem {init}, \hyperpage{20}
-    \subitem {U}, \hyperpage{21}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{29}
+  \item {b\+\_\+graph}, \hyperpage{11}
+    \subitem {adj\+\_\+list}, \hyperpage{17}
+    \subitem {b\+\_\+graph}, \hyperpage{12--14}
+    \subitem {get\+\_\+adj\+\_\+list}, \hyperpage{14}
+    \subitem {get\+\_\+left\+\_\+degree}, \hyperpage{15}
+    \subitem {get\+\_\+left\+\_\+degree\+\_\+sequence}, \hyperpage{15}
+    \subitem {get\+\_\+right\+\_\+degree}, \hyperpage{15}
+    \subitem {get\+\_\+right\+\_\+degree\+\_\+sequence}, \hyperpage{15}
+    \subitem {left\+\_\+deg\+\_\+seq}, \hyperpage{17}
+    \subitem {n}, \hyperpage{18}
+    \subitem {np}, \hyperpage{18}
+    \subitem {nu\+\_\+left\+\_\+vertices}, \hyperpage{16}
+    \subitem {nu\+\_\+right\+\_\+vertices}, \hyperpage{16}
+    \subitem {operator!=}, \hyperpage{16}
+    \subitem {operator$<$$<$}, \hyperpage{16}
+    \subitem {operator==}, \hyperpage{17}
+    \subitem {right\+\_\+deg\+\_\+seq}, \hyperpage{18}
+  \item {b\+\_\+graph\+\_\+decoder}, \hyperpage{18}
+    \subitem {a}, \hyperpage{23}
+    \subitem {b}, \hyperpage{23}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{20}
+    \subitem {beta}, \hyperpage{23}
+    \subitem {decode}, \hyperpage{20}
+    \subitem {decode\+\_\+interval}, \hyperpage{21}
+    \subitem {decode\+\_\+node}, \hyperpage{21}
+    \subitem {init}, \hyperpage{22}
+    \subitem {n}, \hyperpage{23}
+    \subitem {np}, \hyperpage{23}
+    \subitem {U}, \hyperpage{23}
+    \subitem {W}, \hyperpage{24}
+    \subitem {x}, \hyperpage{24}
+  \item {b\+\_\+graph\+\_\+encoder}, \hyperpage{24}
+    \subitem {a}, \hyperpage{29}
+    \subitem {b}, \hyperpage{29}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{25}
+    \subitem {beta}, \hyperpage{29}
+    \subitem {compute\+\_\+N}, \hyperpage{26}
+    \subitem {encode}, \hyperpage{28}
+    \subitem {init}, \hyperpage{29}
+    \subitem {U}, \hyperpage{30}
+  \item {b\+\_\+graph\+\_\+test}
+    \subitem {test.\+cpp}, \hyperpage{187}
+  \item {B\+I\+T\+\_\+\+I\+NT}
+    \subitem {bitstream.\+h}, \hyperpage{148}
+  \item {B\+Y\+T\+E\+\_\+\+I\+NT}
+    \subitem {bitstream.\+h}, \hyperpage{148}
   \item {beta}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{21}
-    \subitem {graph\+\_\+decoder}, \hyperpage{37}
-    \subitem {graph\+\_\+encoder}, \hyperpage{42}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{29}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
+  \item {bin\+\_\+inter\+\_\+code}
+    \subitem {obitstream}, \hyperpage{124, 125}
+  \item {bin\+\_\+inter\+\_\+decode}
+    \subitem {ibitstream}, \hyperpage{75, 76}
+  \item {binary\+\_\+read}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{93}, 
+		\hyperpage{95}
+  \item {binary\+\_\+write}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{98}, 
+		\hyperpage{101}
   \item {binomial}
-    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{57}
-    \subitem {compression\+\_\+helper.\+h}, \hyperpage{59}
-  \item {bipartite\+\_\+graph.\+cpp}, \hyperpage{55}
-    \subitem {operator!=}, \hyperpage{55}
-    \subitem {operator$<$$<$}, \hyperpage{55}
-    \subitem {operator==}, \hyperpage{56}
-  \item {bipartite\+\_\+graph.\+h}, \hyperpage{56}
-  \item {bipartite\+\_\+graph\+\_\+compression.\+cpp}, \hyperpage{57}
-  \item {bipartite\+\_\+graph\+\_\+compression.\+h}, \hyperpage{57}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{149}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{158}
+  \item {bipartite\+\_\+graph.\+cpp}, \hyperpage{139}
+    \subitem {operator!=}, \hyperpage{139}
+    \subitem {operator$<$$<$}, \hyperpage{139}
+    \subitem {operator==}, \hyperpage{140}
+  \item {bipartite\+\_\+graph.\+h}, \hyperpage{140}
+  \item {bipartite\+\_\+graph\+\_\+compression.\+cpp}, \hyperpage{141}
+  \item {bipartite\+\_\+graph\+\_\+compression.\+h}, \hyperpage{141}
+  \item {bit\+\_\+pipe}, \hyperpage{30}
+    \subitem {append\+\_\+left}, \hyperpage{32}
+    \subitem {bit\+\_\+pipe}, \hyperpage{31, 32}
+    \subitem {bits}, \hyperpage{37}
+    \subitem {chunks}, \hyperpage{33}
+    \subitem {ibitstream}, \hyperpage{35}
+    \subitem {last\+\_\+bits}, \hyperpage{37}
+    \subitem {obitstream}, \hyperpage{35}
+    \subitem {operator$<$$<$}, \hyperpage{36}
+    \subitem {operator$>$$>$}, \hyperpage{36}
+    \subitem {operator[]}, \hyperpage{33}
+    \subitem {residue}, \hyperpage{34}
+    \subitem {shift\+\_\+left}, \hyperpage{34}
+    \subitem {shift\+\_\+right}, \hyperpage{34}
+    \subitem {size}, \hyperpage{35}
+  \item {bit\+\_\+string\+\_\+read}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{149}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{158}
+  \item {bit\+\_\+string\+\_\+write}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{150}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{159}
+  \item {bits}
+    \subitem {bit\+\_\+pipe}, \hyperpage{37}
+  \item {bitstream.\+cpp}, \hyperpage{141}
+    \subitem {elias\+\_\+delta\+\_\+encode}, \hyperpage{142, 143}
+    \subitem {mask\+\_\+gen}, \hyperpage{143}
+    \subitem {nu\+\_\+bits}, \hyperpage{143}
+    \subitem {operator$<$$<$}, \hyperpage{144}
+    \subitem {operator$>$$>$}, \hyperpage{144}
+  \item {bitstream.\+h}, \hyperpage{145}
+    \subitem {B\+I\+T\+\_\+\+I\+NT}, \hyperpage{148}
+    \subitem {B\+Y\+T\+E\+\_\+\+I\+NT}, \hyperpage{148}
+    \subitem {elias\+\_\+delta\+\_\+encode}, \hyperpage{146, 147}
+    \subitem {mask\+\_\+gen}, \hyperpage{147}
+    \subitem {nu\+\_\+bits}, \hyperpage{147}
+  \item {buffer}
+    \subitem {ibitstream}, \hyperpage{81}
+    \subitem {obitstream}, \hyperpage{128}
 
   \indexspace
 
-  \item {colored\+\_\+graph}, \hyperpage{21}
-    \subitem {adj\+\_\+list}, \hyperpage{24}
-    \subitem {adj\+\_\+location}, \hyperpage{24}
-    \subitem {colored\+\_\+graph}, \hyperpage{23}
-    \subitem {Delta}, \hyperpage{25}
-    \subitem {G}, \hyperpage{25}
-    \subitem {h}, \hyperpage{25}
-    \subitem {init}, \hyperpage{23}
-    \subitem {M}, \hyperpage{25}
-    \subitem {nu\+\_\+vertices}, \hyperpage{25}
-    \subitem {ver\+\_\+type}, \hyperpage{25}
-    \subitem {ver\+\_\+type\+\_\+dict}, \hyperpage{26}
-    \subitem {ver\+\_\+type\+\_\+int}, \hyperpage{26}
-    \subitem {ver\+\_\+type\+\_\+list}, \hyperpage{26}
-  \item {compression\+\_\+helper.\+cpp}, \hyperpage{57}
-    \subitem {binomial}, \hyperpage{57}
-    \subitem {compute\+\_\+product}, \hyperpage{58}
-    \subitem {prod\+\_\+factorial}, \hyperpage{58}
-  \item {compression\+\_\+helper.\+h}, \hyperpage{59}
-    \subitem {binomial}, \hyperpage{59}
-    \subitem {compute\+\_\+product}, \hyperpage{60}
-    \subitem {prod\+\_\+factorial}, \hyperpage{60}
+  \item {C}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{121}
+  \item {chunks}
+    \subitem {bit\+\_\+pipe}, \hyperpage{33}
+    \subitem {obitstream}, \hyperpage{126}
+  \item {chunks\+\_\+written}
+    \subitem {obitstream}, \hyperpage{128}
+  \item {clear}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{104}
+  \item {close}
+    \subitem {ibitstream}, \hyperpage{77}
+    \subitem {obitstream}, \hyperpage{126}
+  \item {colored\+\_\+graph}, \hyperpage{37}
+    \subitem {adj\+\_\+list}, \hyperpage{41}
+    \subitem {colored\+\_\+graph}, \hyperpage{39}
+    \subitem {deg}, \hyperpage{41}
+    \subitem {Delta}, \hyperpage{42}
+    \subitem {h}, \hyperpage{42}
+    \subitem {index\+\_\+in\+\_\+neighbor}, \hyperpage{42}
+    \subitem {init}, \hyperpage{40}
+    \subitem {is\+\_\+star\+\_\+vertex}, \hyperpage{42}
+    \subitem {M}, \hyperpage{42}
+    \subitem {nu\+\_\+vertices}, \hyperpage{42}
+    \subitem {star\+\_\+vertices}, \hyperpage{43}
+    \subitem {ver\+\_\+type}, \hyperpage{43}
+    \subitem {ver\+\_\+type\+\_\+dict}, \hyperpage{43}
+    \subitem {ver\+\_\+type\+\_\+int}, \hyperpage{43}
+    \subitem {ver\+\_\+type\+\_\+list}, \hyperpage{43}
+  \item {compressed}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{121}
+  \item {compression\+\_\+helper.\+cpp}, \hyperpage{148}
+    \subitem {binomial}, \hyperpage{149}
+    \subitem {bit\+\_\+string\+\_\+read}, \hyperpage{149}
+    \subitem {bit\+\_\+string\+\_\+write}, \hyperpage{150}
+    \subitem {compute\+\_\+array\+\_\+product}, \hyperpage{151}
+    \subitem {compute\+\_\+product}, \hyperpage{151}
+    \subitem {compute\+\_\+product\+\_\+old}, \hyperpage{152}
+    \subitem {compute\+\_\+product\+\_\+stack}, \hyperpage{153}
+    \subitem {compute\+\_\+product\+\_\+void}, \hyperpage{154}
+    \subitem {prod\+\_\+factorial}, \hyperpage{156}
+    \subitem {prod\+\_\+factorial\+\_\+old}, \hyperpage{156}
+  \item {compression\+\_\+helper.\+h}, \hyperpage{157}
+    \subitem {binomial}, \hyperpage{158}
+    \subitem {bit\+\_\+string\+\_\+read}, \hyperpage{158}
+    \subitem {bit\+\_\+string\+\_\+write}, \hyperpage{159}
+    \subitem {compute\+\_\+array\+\_\+product}, \hyperpage{160}
+    \subitem {compute\+\_\+product}, \hyperpage{160}
+    \subitem {compute\+\_\+product\+\_\+old}, \hyperpage{161}
+    \subitem {compute\+\_\+product\+\_\+stack}, \hyperpage{162}
+    \subitem {compute\+\_\+product\+\_\+void}, \hyperpage{163}
+    \subitem {prod\+\_\+factorial}, \hyperpage{165}
+    \subitem {prod\+\_\+factorial\+\_\+old}, \hyperpage{165}
+  \item {compute\+\_\+array\+\_\+product}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{151}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{160}
   \item {compute\+\_\+N}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{19}
-    \subitem {graph\+\_\+encoder}, \hyperpage{40}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{26}
+    \subitem {graph\+\_\+encoder}, \hyperpage{59}
   \item {compute\+\_\+product}
-    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{58}
-    \subitem {compression\+\_\+helper.\+h}, \hyperpage{60}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{151}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{160}
+  \item {compute\+\_\+product\+\_\+old}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{152}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{161}
+  \item {compute\+\_\+product\+\_\+stack}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{153}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{162}
+  \item {compute\+\_\+product\+\_\+void}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{154}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{163}
+  \item {current\+\_\+depth}
+    \subitem {logger}, \hyperpage{86}
 
   \indexspace
 
   \item {decode}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{13}
-    \subitem {graph\+\_\+decoder}, \hyperpage{35}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{20}
+    \subitem {graph\+\_\+decoder}, \hyperpage{54}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{108}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{132}
   \item {decode\+\_\+interval}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{14}
-    \subitem {graph\+\_\+decoder}, \hyperpage{35}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{21}
+    \subitem {graph\+\_\+decoder}, \hyperpage{54}
   \item {decode\+\_\+node}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{14}
-    \subitem {graph\+\_\+decoder}, \hyperpage{36}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{21}
+    \subitem {graph\+\_\+decoder}, \hyperpage{55}
+  \item {decode\+\_\+partition\+\_\+bgraphs}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{109}
+  \item {decode\+\_\+partition\+\_\+graphs}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{109}
+  \item {decode\+\_\+star\+\_\+edges}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{110}
+  \item {decode\+\_\+star\+\_\+vertices}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{110}
+  \item {decode\+\_\+vertex\+\_\+types}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{111}
+  \item {Deg}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{112}
+  \item {deg}
+    \subitem {colored\+\_\+graph}, \hyperpage{41}
   \item {degree\+\_\+sequence}
-    \subitem {graph}, \hyperpage{33}
+    \subitem {graph}, \hyperpage{51}
   \item {Delta}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
-    \subitem {graph\+\_\+message}, \hyperpage{47}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
+  \item {delta}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{105}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{112}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{121}
+  \item {depth}
+    \subitem {log\+\_\+entry}, \hyperpage{83}
+  \item {description}
+    \subitem {log\+\_\+entry}, \hyperpage{83}
 
   \indexspace
 
+  \item {edge\+\_\+compare}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{171}
+    \subitem {marked\+\_\+graph.\+h}, \hyperpage{174}
+  \item {edges}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{112}
+  \item {elias\+\_\+delta\+\_\+encode}
+    \subitem {bitstream.\+cpp}, \hyperpage{142, 143}
+    \subitem {bitstream.\+h}, \hyperpage{146, 147}
   \item {encode}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{19}
-    \subitem {graph\+\_\+encoder}, \hyperpage{41}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{28}
+    \subitem {graph\+\_\+encoder}, \hyperpage{61}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{116, 117}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{134}
+  \item {encode\+\_\+partition\+\_\+bgraphs}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{117}
+  \item {encode\+\_\+partition\+\_\+graphs}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{117}
+  \item {encode\+\_\+star\+\_\+edges}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{118}
+  \item {encode\+\_\+star\+\_\+vertices}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{118}
+  \item {encode\+\_\+vertex\+\_\+types}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{119}
+  \item {extract\+\_\+edge\+\_\+types}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{119}
+  \item {extract\+\_\+partition\+\_\+graphs}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{119}
 
   \indexspace
 
-  \item {fenwick.\+cpp}, \hyperpage{61}
-  \item {fenwick.\+h}, \hyperpage{61}
-  \item {fenwick\+\_\+tree}, \hyperpage{26}
-    \subitem {add}, \hyperpage{28}
-    \subitem {fenwick\+\_\+tree}, \hyperpage{27}
-    \subitem {size}, \hyperpage{28}
-    \subitem {sum}, \hyperpage{28}
-    \subitem {sums}, \hyperpage{29}
+  \item {f}
+    \subitem {ibitstream}, \hyperpage{81}
+    \subitem {obitstream}, \hyperpage{128}
+  \item {fenwick.\+cpp}, \hyperpage{166}
+  \item {fenwick.\+h}, \hyperpage{166}
+  \item {fenwick\+\_\+tree}, \hyperpage{44}
+    \subitem {add}, \hyperpage{45}
+    \subitem {fenwick\+\_\+tree}, \hyperpage{44, 45}
+    \subitem {size}, \hyperpage{46}
+    \subitem {sum}, \hyperpage{46}
+    \subitem {sums}, \hyperpage{46}
+  \item {find\+\_\+part\+\_\+deg\+\_\+orig\+\_\+index}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{111}
+  \item {find\+\_\+part\+\_\+index\+\_\+deg}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{120}
   \item {forward\+\_\+adj\+\_\+list}
-    \subitem {graph}, \hyperpage{33}
+    \subitem {graph}, \hyperpage{51}
+  \item {freq}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{132}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{136}
   \item {FT}
-    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{53}
+    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{130}
 
   \indexspace
 
   \item {G}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
-    \subitem {graph\+\_\+encoder}, \hyperpage{42}
-    \subitem {graph\+\_\+message}, \hyperpage{47}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{133}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{136}
+  \item {gcomp.\+cpp}, \hyperpage{166}
+    \subitem {main}, \hyperpage{167}
   \item {get\+\_\+adj\+\_\+list}
-    \subitem {b\+\_\+graph}, \hyperpage{7}
+    \subitem {b\+\_\+graph}, \hyperpage{14}
   \item {get\+\_\+degree}
-    \subitem {graph}, \hyperpage{31}
+    \subitem {graph}, \hyperpage{49}
   \item {get\+\_\+degree\+\_\+sequence}
-    \subitem {graph}, \hyperpage{31}
+    \subitem {graph}, \hyperpage{49}
   \item {get\+\_\+forward\+\_\+degree}
-    \subitem {graph}, \hyperpage{31}
+    \subitem {graph}, \hyperpage{49}
   \item {get\+\_\+forward\+\_\+list}
-    \subitem {graph}, \hyperpage{31}
+    \subitem {graph}, \hyperpage{50}
   \item {get\+\_\+left\+\_\+degree}
-    \subitem {b\+\_\+graph}, \hyperpage{8}
+    \subitem {b\+\_\+graph}, \hyperpage{15}
   \item {get\+\_\+left\+\_\+degree\+\_\+sequence}
-    \subitem {b\+\_\+graph}, \hyperpage{8}
+    \subitem {b\+\_\+graph}, \hyperpage{15}
   \item {get\+\_\+right\+\_\+degree}
-    \subitem {b\+\_\+graph}, \hyperpage{8}
+    \subitem {b\+\_\+graph}, \hyperpage{15}
   \item {get\+\_\+right\+\_\+degree\+\_\+sequence}
-    \subitem {b\+\_\+graph}, \hyperpage{8}
-  \item {graph}, \hyperpage{29}
-    \subitem {degree\+\_\+sequence}, \hyperpage{33}
-    \subitem {forward\+\_\+adj\+\_\+list}, \hyperpage{33}
-    \subitem {get\+\_\+degree}, \hyperpage{31}
-    \subitem {get\+\_\+degree\+\_\+sequence}, \hyperpage{31}
-    \subitem {get\+\_\+forward\+\_\+degree}, \hyperpage{31}
-    \subitem {get\+\_\+forward\+\_\+list}, \hyperpage{31}
-    \subitem {graph}, \hyperpage{30}
-    \subitem {n}, \hyperpage{34}
-    \subitem {nu\+\_\+vertices}, \hyperpage{32}
-    \subitem {operator!=}, \hyperpage{32}
-    \subitem {operator$<$$<$}, \hyperpage{32}
-    \subitem {operator==}, \hyperpage{33}
-  \item {graph\+\_\+decoder}, \hyperpage{34}
-    \subitem {a}, \hyperpage{37}
-    \subitem {beta}, \hyperpage{37}
-    \subitem {decode}, \hyperpage{35}
-    \subitem {decode\+\_\+interval}, \hyperpage{35}
-    \subitem {decode\+\_\+node}, \hyperpage{36}
-    \subitem {graph\+\_\+decoder}, \hyperpage{35}
-    \subitem {logn2}, \hyperpage{38}
-    \subitem {n}, \hyperpage{38}
-    \subitem {tS}, \hyperpage{38}
-    \subitem {U}, \hyperpage{38}
-    \subitem {x}, \hyperpage{38}
-  \item {graph\+\_\+encoder}, \hyperpage{39}
-    \subitem {beta}, \hyperpage{42}
-    \subitem {compute\+\_\+N}, \hyperpage{40}
-    \subitem {encode}, \hyperpage{41}
-    \subitem {G}, \hyperpage{42}
-    \subitem {graph\+\_\+encoder}, \hyperpage{39}
-    \subitem {init}, \hyperpage{41}
-    \subitem {logn2}, \hyperpage{42}
-    \subitem {Stilde}, \hyperpage{42}
-    \subitem {U}, \hyperpage{43}
-  \item {graph\+\_\+message}, \hyperpage{43}
-    \subitem {Delta}, \hyperpage{47}
-    \subitem {G}, \hyperpage{47}
-    \subitem {graph\+\_\+message}, \hyperpage{44}
-    \subitem {h}, \hyperpage{47}
-    \subitem {message\+\_\+dict}, \hyperpage{47}
-    \subitem {message\+\_\+list}, \hyperpage{47}
-    \subitem {messages}, \hyperpage{48}
-    \subitem {update\+\_\+message\+\_\+dictionary}, \hyperpage{44}
-    \subitem {update\+\_\+messages}, \hyperpage{45}
-  \item {graph\+\_\+message.\+cpp}, \hyperpage{61}
-    \subitem {pair\+\_\+compare}, \hyperpage{62}
-  \item {graph\+\_\+message.\+h}, \hyperpage{62}
-    \subitem {pair\+\_\+compare}, \hyperpage{62}
+    \subitem {b\+\_\+graph}, \hyperpage{15}
+  \item {graph}, \hyperpage{47}
+    \subitem {degree\+\_\+sequence}, \hyperpage{51}
+    \subitem {forward\+\_\+adj\+\_\+list}, \hyperpage{51}
+    \subitem {get\+\_\+degree}, \hyperpage{49}
+    \subitem {get\+\_\+degree\+\_\+sequence}, \hyperpage{49}
+    \subitem {get\+\_\+forward\+\_\+degree}, \hyperpage{49}
+    \subitem {get\+\_\+forward\+\_\+list}, \hyperpage{50}
+    \subitem {graph}, \hyperpage{48}
+    \subitem {n}, \hyperpage{52}
+    \subitem {nu\+\_\+vertices}, \hyperpage{50}
+    \subitem {operator!=}, \hyperpage{50}
+    \subitem {operator$<$$<$}, \hyperpage{50}
+    \subitem {operator==}, \hyperpage{51}
+  \item {graph\+\_\+decoder}, \hyperpage{52}
+    \subitem {a}, \hyperpage{56}
+    \subitem {beta}, \hyperpage{57}
+    \subitem {decode}, \hyperpage{54}
+    \subitem {decode\+\_\+interval}, \hyperpage{54}
+    \subitem {decode\+\_\+node}, \hyperpage{55}
+    \subitem {graph\+\_\+decoder}, \hyperpage{53}
+    \subitem {init}, \hyperpage{56}
+    \subitem {logn2}, \hyperpage{57}
+    \subitem {n}, \hyperpage{57}
+    \subitem {tS}, \hyperpage{57}
+    \subitem {U}, \hyperpage{57}
+    \subitem {x}, \hyperpage{57}
+  \item {graph\+\_\+encoder}, \hyperpage{58}
+    \subitem {a}, \hyperpage{63}
+    \subitem {beta}, \hyperpage{63}
+    \subitem {compute\+\_\+N}, \hyperpage{59}
+    \subitem {encode}, \hyperpage{61}
+    \subitem {graph\+\_\+encoder}, \hyperpage{59}
+    \subitem {init}, \hyperpage{62}
+    \subitem {logn2}, \hyperpage{63}
+    \subitem {n}, \hyperpage{63}
+    \subitem {Stilde}, \hyperpage{63}
+    \subitem {U}, \hyperpage{63}
+  \item {graph\+\_\+message}, \hyperpage{64}
+    \subitem {Delta}, \hyperpage{73}
+    \subitem {graph\+\_\+message}, \hyperpage{65}
+    \subitem {h}, \hyperpage{73}
+    \subitem {is\+\_\+star\+\_\+message}, \hyperpage{73}
+    \subitem {message\+\_\+dict}, \hyperpage{73}
+    \subitem {message\+\_\+mark}, \hyperpage{73}
+    \subitem {messages}, \hyperpage{73}
+    \subitem {send\+\_\+message}, \hyperpage{66}
+    \subitem {update\+\_\+messages}, \hyperpage{66}
+  \item {graph\+\_\+message.\+cpp}, \hyperpage{169}
+    \subitem {pair\+\_\+compare}, \hyperpage{169}
+  \item {graph\+\_\+message.\+h}, \hyperpage{169}
+    \subitem {pair\+\_\+compare}, \hyperpage{170}
+  \item {graph\+\_\+test}
+    \subitem {test.\+cpp}, \hyperpage{187}
 
   \indexspace
 
   \item {h}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
-    \subitem {graph\+\_\+message}, \hyperpage{47}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{105}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{112}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{121}
+  \item {head\+\_\+mask}
+    \subitem {ibitstream}, \hyperpage{81}
+  \item {head\+\_\+place}
+    \subitem {ibitstream}, \hyperpage{82}
+  \item {helper\+\_\+vars}, \hyperpage{9}
+    \subitem {mpz\+\_\+vec}, \hyperpage{9}
+    \subitem {mpz\+\_\+vec2}, \hyperpage{9}
+    \subitem {mul\+\_\+1}, \hyperpage{9}
+    \subitem {mul\+\_\+2}, \hyperpage{9}
+    \subitem {return\+\_\+stack}, \hyperpage{10}
 
   \indexspace
 
+  \item {ibitstream}, \hyperpage{74}
+    \subitem {bin\+\_\+inter\+\_\+decode}, \hyperpage{75, 76}
+    \subitem {bit\+\_\+pipe}, \hyperpage{35}
+    \subitem {buffer}, \hyperpage{81}
+    \subitem {close}, \hyperpage{77}
+    \subitem {f}, \hyperpage{81}
+    \subitem {head\+\_\+mask}, \hyperpage{81}
+    \subitem {head\+\_\+place}, \hyperpage{82}
+    \subitem {ibitstream}, \hyperpage{75}
+    \subitem {operator$>$$>$}, \hyperpage{77}
+    \subitem {read\+\_\+bit}, \hyperpage{78}
+    \subitem {read\+\_\+bits}, \hyperpage{79}
+    \subitem {read\+\_\+bits\+\_\+append}, \hyperpage{80}
+    \subitem {read\+\_\+chunk}, \hyperpage{81}
+  \item {index\+\_\+in\+\_\+neighbor}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
+    \subitem {marked\+\_\+graph}, \hyperpage{92}
   \item {init}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{15}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{20}
-    \subitem {colored\+\_\+graph}, \hyperpage{23}
-    \subitem {graph\+\_\+encoder}, \hyperpage{41}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{22}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{29}
+    \subitem {colored\+\_\+graph}, \hyperpage{40}
+    \subitem {graph\+\_\+decoder}, \hyperpage{56}
+    \subitem {graph\+\_\+encoder}, \hyperpage{62}
+  \item {init\+\_\+alph\+\_\+size}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{135}
+  \item {init\+\_\+freq}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{135}
+  \item {init\+\_\+G}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{136}
+  \item {is\+\_\+star\+\_\+message}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
+  \item {is\+\_\+star\+\_\+vertex}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+  \item {item\+\_\+duration}
+    \subitem {logger}, \hyperpage{87}
+  \item {item\+\_\+last\+\_\+start}
+    \subitem {logger}, \hyperpage{87}
+  \item {item\+\_\+start}
+    \subitem {logger}, \hyperpage{84}
+  \item {item\+\_\+stop}
+    \subitem {logger}, \hyperpage{85}
 
   \indexspace
 
+  \item {last\+\_\+bits}
+    \subitem {bit\+\_\+pipe}, \hyperpage{37}
   \item {left\+\_\+deg\+\_\+seq}
-    \subitem {b\+\_\+graph}, \hyperpage{10}
+    \subitem {b\+\_\+graph}, \hyperpage{17}
+  \item {log}
+    \subitem {logger}, \hyperpage{85}
+  \item {log\+\_\+entry}, \hyperpage{82}
+    \subitem {depth}, \hyperpage{83}
+    \subitem {description}, \hyperpage{83}
+    \subitem {log\+\_\+entry}, \hyperpage{82}
+    \subitem {name}, \hyperpage{83}
+    \subitem {sys\+\_\+t}, \hyperpage{83}
+    \subitem {t}, \hyperpage{83}
+  \item {logger}, \hyperpage{84}
+    \subitem {add\+\_\+entry}, \hyperpage{84}
+    \subitem {current\+\_\+depth}, \hyperpage{86}
+    \subitem {item\+\_\+duration}, \hyperpage{87}
+    \subitem {item\+\_\+last\+\_\+start}, \hyperpage{87}
+    \subitem {item\+\_\+start}, \hyperpage{84}
+    \subitem {item\+\_\+stop}, \hyperpage{85}
+    \subitem {log}, \hyperpage{85}
+    \subitem {logs}, \hyperpage{87}
+    \subitem {report}, \hyperpage{87}
+    \subitem {report\+\_\+stream}, \hyperpage{87}
+    \subitem {start}, \hyperpage{86}
+    \subitem {stat}, \hyperpage{87}
+    \subitem {stat\+\_\+stream}, \hyperpage{87}
+    \subitem {stop}, \hyperpage{86}
+    \subitem {verbose}, \hyperpage{88}
+    \subitem {verbose\+\_\+stream}, \hyperpage{88}
+  \item {logger.\+cpp}, \hyperpage{170}
+  \item {logger.\+h}, \hyperpage{170}
+    \subitem {\+\_\+\+\_\+attribute\+\_\+\+\_\+}, \hyperpage{171}
   \item {logn2}
-    \subitem {graph\+\_\+decoder}, \hyperpage{38}
-    \subitem {graph\+\_\+encoder}, \hyperpage{42}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
+  \item {logs}
+    \subitem {logger}, \hyperpage{87}
 
   \indexspace
 
   \item {M}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
   \item {main}
-    \subitem {test.\+cpp}, \hyperpage{67}
-  \item {marked\+\_\+graph}, \hyperpage{48}
-    \subitem {adj\+\_\+list}, \hyperpage{50}
-    \subitem {adj\+\_\+location}, \hyperpage{50}
-    \subitem {marked\+\_\+graph}, \hyperpage{49}
-    \subitem {nu\+\_\+vertices}, \hyperpage{50}
-    \subitem {ver\+\_\+mark}, \hyperpage{50}
-  \item {marked\+\_\+graph.\+cpp}, \hyperpage{63}
-    \subitem {operator$>$$>$}, \hyperpage{63}
-  \item {marked\+\_\+graph.\+h}, \hyperpage{64}
-    \subitem {operator$>$$>$}, \hyperpage{64}
+    \subitem {gcomp.\+cpp}, \hyperpage{167}
+    \subitem {rnd\+\_\+graph.\+cpp}, \hyperpage{183}
+    \subitem {test.\+cpp}, \hyperpage{187}
+    \subitem {test\+\_\+mp.\+cpp}, \hyperpage{190}
+  \item {marked\+\_\+\+ER}
+    \subitem {random\+\_\+graph.\+cpp}, \hyperpage{176}
+    \subitem {random\+\_\+graph.\+h}, \hyperpage{180}
+  \item {marked\+\_\+graph}, \hyperpage{88}
+    \subitem {adj\+\_\+list}, \hyperpage{92}
+    \subitem {index\+\_\+in\+\_\+neighbor}, \hyperpage{92}
+    \subitem {marked\+\_\+graph}, \hyperpage{89}
+    \subitem {nu\+\_\+vertices}, \hyperpage{92}
+    \subitem {operator!=}, \hyperpage{90}
+    \subitem {operator$<$$<$}, \hyperpage{90}
+    \subitem {operator==}, \hyperpage{91}
+    \subitem {ver\+\_\+mark}, \hyperpage{92}
+  \item {marked\+\_\+graph.\+cpp}, \hyperpage{171}
+    \subitem {edge\+\_\+compare}, \hyperpage{171}
+    \subitem {operator!=}, \hyperpage{172}
+    \subitem {operator$<$$<$}, \hyperpage{172}
+    \subitem {operator$>$$>$}, \hyperpage{173}
+    \subitem {operator==}, \hyperpage{173}
+  \item {marked\+\_\+graph.\+h}, \hyperpage{174}
+    \subitem {edge\+\_\+compare}, \hyperpage{174}
+    \subitem {operator$>$$>$}, \hyperpage{175}
+  \item {marked\+\_\+graph\+\_\+compressed}, \hyperpage{93}
+    \subitem {binary\+\_\+read}, \hyperpage{93}, \hyperpage{95}
+    \subitem {binary\+\_\+write}, \hyperpage{98}, \hyperpage{101}
+    \subitem {clear}, \hyperpage{104}
+    \subitem {delta}, \hyperpage{105}
+    \subitem {h}, \hyperpage{105}
+    \subitem {n}, \hyperpage{105}
+    \subitem {part\+\_\+bgraph}, \hyperpage{105}
+    \subitem {part\+\_\+graph}, \hyperpage{105}
+    \subitem {star\+\_\+edges}, \hyperpage{106}
+    \subitem {star\+\_\+vertices}, \hyperpage{106}
+    \subitem {type\+\_\+mark}, \hyperpage{106}
+    \subitem {ver\+\_\+type\+\_\+list}, \hyperpage{106}
+    \subitem {ver\+\_\+types}, \hyperpage{106}
+  \item {marked\+\_\+graph\+\_\+compression.\+cpp}, \hyperpage{175}
+  \item {marked\+\_\+graph\+\_\+compression.\+h}, \hyperpage{176}
+  \item {marked\+\_\+graph\+\_\+decoder}, \hyperpage{107}
+    \subitem {decode}, \hyperpage{108}
+    \subitem {decode\+\_\+partition\+\_\+bgraphs}, \hyperpage{109}
+    \subitem {decode\+\_\+partition\+\_\+graphs}, \hyperpage{109}
+    \subitem {decode\+\_\+star\+\_\+edges}, \hyperpage{110}
+    \subitem {decode\+\_\+star\+\_\+vertices}, \hyperpage{110}
+    \subitem {decode\+\_\+vertex\+\_\+types}, \hyperpage{111}
+    \subitem {Deg}, \hyperpage{112}
+    \subitem {delta}, \hyperpage{112}
+    \subitem {edges}, \hyperpage{112}
+    \subitem {find\+\_\+part\+\_\+deg\+\_\+orig\+\_\+index}, 
+		\hyperpage{111}
+    \subitem {h}, \hyperpage{112}
+    \subitem {is\+\_\+star\+\_\+vertex}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{108}
+    \subitem {n}, \hyperpage{113}
+    \subitem {origin\+\_\+index}, \hyperpage{113}
+    \subitem {part\+\_\+bgraph}, \hyperpage{113}
+    \subitem {part\+\_\+deg}, \hyperpage{113}
+    \subitem {part\+\_\+graph}, \hyperpage{113}
+    \subitem {star\+\_\+vertices}, \hyperpage{114}
+    \subitem {vertex\+\_\+marks}, \hyperpage{114}
+  \item {marked\+\_\+graph\+\_\+encoder}, \hyperpage{114}
+    \subitem {C}, \hyperpage{121}
+    \subitem {compressed}, \hyperpage{121}
+    \subitem {delta}, \hyperpage{121}
+    \subitem {encode}, \hyperpage{116, 117}
+    \subitem {encode\+\_\+partition\+\_\+bgraphs}, \hyperpage{117}
+    \subitem {encode\+\_\+partition\+\_\+graphs}, \hyperpage{117}
+    \subitem {encode\+\_\+star\+\_\+edges}, \hyperpage{118}
+    \subitem {encode\+\_\+star\+\_\+vertices}, \hyperpage{118}
+    \subitem {encode\+\_\+vertex\+\_\+types}, \hyperpage{119}
+    \subitem {extract\+\_\+edge\+\_\+types}, \hyperpage{119}
+    \subitem {extract\+\_\+partition\+\_\+graphs}, \hyperpage{119}
+    \subitem {find\+\_\+part\+\_\+index\+\_\+deg}, \hyperpage{120}
+    \subitem {h}, \hyperpage{121}
+    \subitem {is\+\_\+star\+\_\+vertex}, \hyperpage{122}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{116}
+    \subitem {n}, \hyperpage{122}
+    \subitem {part\+\_\+bgraph}, \hyperpage{122}
+    \subitem {part\+\_\+deg}, \hyperpage{122}
+    \subitem {part\+\_\+graph}, \hyperpage{122}
+    \subitem {part\+\_\+index}, \hyperpage{122}
+    \subitem {star\+\_\+vertices}, \hyperpage{123}
+  \item {marked\+\_\+graph\+\_\+encoder\+\_\+test}
+    \subitem {test.\+cpp}, \hyperpage{188}
+  \item {mask\+\_\+gen}
+    \subitem {bitstream.\+cpp}, \hyperpage{143}
+    \subitem {bitstream.\+h}, \hyperpage{147}
   \item {message\+\_\+dict}
-    \subitem {graph\+\_\+message}, \hyperpage{47}
-  \item {message\+\_\+list}
-    \subitem {graph\+\_\+message}, \hyperpage{47}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
+  \item {message\+\_\+mark}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
   \item {messages}
-    \subitem {graph\+\_\+message}, \hyperpage{48}
+    \subitem {graph\+\_\+message}, \hyperpage{73}
+  \item {mp\+\_\+test}
+    \subitem {test\+\_\+mp.\+cpp}, \hyperpage{190}
+  \item {mpz\+\_\+vec}
+    \subitem {helper\+\_\+vars}, \hyperpage{9}
+  \item {mpz\+\_\+vec2}
+    \subitem {helper\+\_\+vars}, \hyperpage{9}
+  \item {mul\+\_\+1}
+    \subitem {helper\+\_\+vars}, \hyperpage{9}
+  \item {mul\+\_\+2}
+    \subitem {helper\+\_\+vars}, \hyperpage{9}
 
   \indexspace
 
   \item {n}
-    \subitem {b\+\_\+graph}, \hyperpage{11}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
-    \subitem {graph}, \hyperpage{34}
-    \subitem {graph\+\_\+decoder}, \hyperpage{38}
+    \subitem {b\+\_\+graph}, \hyperpage{18}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+    \subitem {graph}, \hyperpage{52}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{105}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{133}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{137}
+  \item {name}
+    \subitem {log\+\_\+entry}, \hyperpage{83}
+  \item {near\+\_\+regular\+\_\+graph}
+    \subitem {random\+\_\+graph.\+cpp}, \hyperpage{177}
+    \subitem {random\+\_\+graph.\+h}, \hyperpage{180}
   \item {np}
-    \subitem {b\+\_\+graph}, \hyperpage{11}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
+    \subitem {b\+\_\+graph}, \hyperpage{18}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+  \item {nu\+\_\+bits}
+    \subitem {bitstream.\+cpp}, \hyperpage{143}
+    \subitem {bitstream.\+h}, \hyperpage{147}
   \item {nu\+\_\+left\+\_\+vertices}
-    \subitem {b\+\_\+graph}, \hyperpage{9}
+    \subitem {b\+\_\+graph}, \hyperpage{16}
   \item {nu\+\_\+right\+\_\+vertices}
-    \subitem {b\+\_\+graph}, \hyperpage{9}
+    \subitem {b\+\_\+graph}, \hyperpage{16}
   \item {nu\+\_\+vertices}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
-    \subitem {graph}, \hyperpage{32}
-    \subitem {marked\+\_\+graph}, \hyperpage{50}
+    \subitem {colored\+\_\+graph}, \hyperpage{42}
+    \subitem {graph}, \hyperpage{50}
+    \subitem {marked\+\_\+graph}, \hyperpage{92}
 
   \indexspace
 
+  \item {obitstream}, \hyperpage{123}
+    \subitem {bin\+\_\+inter\+\_\+code}, \hyperpage{124, 125}
+    \subitem {bit\+\_\+pipe}, \hyperpage{35}
+    \subitem {buffer}, \hyperpage{128}
+    \subitem {chunks}, \hyperpage{126}
+    \subitem {chunks\+\_\+written}, \hyperpage{128}
+    \subitem {close}, \hyperpage{126}
+    \subitem {f}, \hyperpage{128}
+    \subitem {obitstream}, \hyperpage{124}
+    \subitem {operator$<$$<$}, \hyperpage{126}
+    \subitem {write}, \hyperpage{127}
+    \subitem {write\+\_\+bits}, \hyperpage{127}
   \item {operator!=}
-    \subitem {b\+\_\+graph}, \hyperpage{9}
-    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{55}
-    \subitem {graph}, \hyperpage{32}
-    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{65}
+    \subitem {b\+\_\+graph}, \hyperpage{16}
+    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{139}
+    \subitem {graph}, \hyperpage{50}
+    \subitem {marked\+\_\+graph}, \hyperpage{90}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{172}
+    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{184}
   \item {operator$<$$<$}
-    \subitem {b\+\_\+graph}, \hyperpage{9}
-    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{55}
-    \subitem {graph}, \hyperpage{32}
-    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{65}
-    \subitem {test.\+cpp}, \hyperpage{68}
+    \subitem {b\+\_\+graph}, \hyperpage{16}
+    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{139}
+    \subitem {bit\+\_\+pipe}, \hyperpage{36}
+    \subitem {bitstream.\+cpp}, \hyperpage{144}
+    \subitem {graph}, \hyperpage{50}
+    \subitem {marked\+\_\+graph}, \hyperpage{90}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{172}
+    \subitem {obitstream}, \hyperpage{126}
+    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{184}
+    \subitem {test.\+cpp}, \hyperpage{189}
+    \subitem {test\+\_\+mp.\+cpp}, \hyperpage{191}
   \item {operator$>$$>$}
-    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{63}
-    \subitem {marked\+\_\+graph.\+h}, \hyperpage{64}
+    \subitem {bit\+\_\+pipe}, \hyperpage{36}
+    \subitem {bitstream.\+cpp}, \hyperpage{144}
+    \subitem {ibitstream}, \hyperpage{77}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{173}
+    \subitem {marked\+\_\+graph.\+h}, \hyperpage{175}
+  \item {operator()}
+    \subitem {vint\+\_\+hash}, \hyperpage{137}
   \item {operator==}
-    \subitem {b\+\_\+graph}, \hyperpage{10}
-    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{56}
-    \subitem {graph}, \hyperpage{33}
-    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{65}
+    \subitem {b\+\_\+graph}, \hyperpage{17}
+    \subitem {bipartite\+\_\+graph.\+cpp}, \hyperpage{140}
+    \subitem {graph}, \hyperpage{51}
+    \subitem {marked\+\_\+graph}, \hyperpage{91}
+    \subitem {marked\+\_\+graph.\+cpp}, \hyperpage{173}
+    \subitem {simple\+\_\+graph.\+cpp}, \hyperpage{185}
+  \item {operator[]}
+    \subitem {bit\+\_\+pipe}, \hyperpage{33}
+  \item {origin\+\_\+index}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
 
   \indexspace
 
   \item {pair\+\_\+compare}
-    \subitem {graph\+\_\+message.\+cpp}, \hyperpage{62}
-    \subitem {graph\+\_\+message.\+h}, \hyperpage{62}
+    \subitem {graph\+\_\+message.\+cpp}, \hyperpage{169}
+    \subitem {graph\+\_\+message.\+h}, \hyperpage{170}
+  \item {part\+\_\+bgraph}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{105}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+  \item {part\+\_\+deg}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+  \item {part\+\_\+graph}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{105}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{113}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+  \item {part\+\_\+index}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{122}
+  \item {poisson\+\_\+graph}
+    \subitem {random\+\_\+graph.\+cpp}, \hyperpage{178}
+    \subitem {random\+\_\+graph.\+h}, \hyperpage{181}
+  \item {print\+\_\+usage}
+    \subitem {rnd\+\_\+graph.\+cpp}, \hyperpage{183}
   \item {prod\+\_\+factorial}
-    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{58}
-    \subitem {compression\+\_\+helper.\+h}, \hyperpage{60}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{156}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{165}
+  \item {prod\+\_\+factorial\+\_\+old}
+    \subitem {compression\+\_\+helper.\+cpp}, \hyperpage{156}
+    \subitem {compression\+\_\+helper.\+h}, \hyperpage{165}
 
   \indexspace
 
-  \item {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{51}
-    \subitem {add}, \hyperpage{52}
-    \subitem {FT}, \hyperpage{53}
-    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{51}
-    \subitem {size}, \hyperpage{52}
-    \subitem {sum}, \hyperpage{52}
+  \item {R\+E\+A\+D\+M\+E.\+md}, \hyperpage{182}
+  \item {random\+\_\+graph.\+cpp}, \hyperpage{176}
+    \subitem {marked\+\_\+\+ER}, \hyperpage{176}
+    \subitem {near\+\_\+regular\+\_\+graph}, \hyperpage{177}
+    \subitem {poisson\+\_\+graph}, \hyperpage{178}
+  \item {random\+\_\+graph.\+h}, \hyperpage{179}
+    \subitem {marked\+\_\+\+ER}, \hyperpage{180}
+    \subitem {near\+\_\+regular\+\_\+graph}, \hyperpage{180}
+    \subitem {poisson\+\_\+graph}, \hyperpage{181}
+  \item {random\+\_\+graph\+\_\+test}
+    \subitem {test.\+cpp}, \hyperpage{189}
+    \subitem {test\+\_\+mp.\+cpp}, \hyperpage{191}
+  \item {read\+\_\+bit}
+    \subitem {ibitstream}, \hyperpage{78}
+  \item {read\+\_\+bits}
+    \subitem {ibitstream}, \hyperpage{79}
+  \item {read\+\_\+bits\+\_\+append}
+    \subitem {ibitstream}, \hyperpage{80}
+  \item {read\+\_\+chunk}
+    \subitem {ibitstream}, \hyperpage{81}
+  \item {report}
+    \subitem {logger}, \hyperpage{87}
+  \item {report\+\_\+stream}
+    \subitem {logger}, \hyperpage{87}
+  \item {residue}
+    \subitem {bit\+\_\+pipe}, \hyperpage{34}
+  \item {return\+\_\+stack}
+    \subitem {helper\+\_\+vars}, \hyperpage{10}
+  \item {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{128}
+    \subitem {add}, \hyperpage{129}
+    \subitem {FT}, \hyperpage{130}
+    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{129}
+    \subitem {size}, \hyperpage{130}
+    \subitem {sum}, \hyperpage{130}
   \item {right\+\_\+deg\+\_\+seq}
-    \subitem {b\+\_\+graph}, \hyperpage{11}
+    \subitem {b\+\_\+graph}, \hyperpage{18}
+  \item {rnd\+\_\+graph.\+cpp}, \hyperpage{182}
+    \subitem {main}, \hyperpage{183}
+    \subitem {print\+\_\+usage}, \hyperpage{183}
 
   \indexspace
 
-  \item {simple\+\_\+graph.\+cpp}, \hyperpage{65}
-    \subitem {operator!=}, \hyperpage{65}
-    \subitem {operator$<$$<$}, \hyperpage{65}
-    \subitem {operator==}, \hyperpage{65}
-  \item {simple\+\_\+graph.\+h}, \hyperpage{66}
-  \item {simple\+\_\+graph\+\_\+compression.\+cpp}, \hyperpage{66}
-  \item {simple\+\_\+graph\+\_\+compression.\+h}, \hyperpage{66}
+  \item {send\+\_\+message}
+    \subitem {graph\+\_\+message}, \hyperpage{66}
+  \item {shift\+\_\+left}
+    \subitem {bit\+\_\+pipe}, \hyperpage{34}
+  \item {shift\+\_\+right}
+    \subitem {bit\+\_\+pipe}, \hyperpage{34}
+  \item {simple\+\_\+graph.\+cpp}, \hyperpage{184}
+    \subitem {operator!=}, \hyperpage{184}
+    \subitem {operator$<$$<$}, \hyperpage{184}
+    \subitem {operator==}, \hyperpage{185}
+  \item {simple\+\_\+graph.\+h}, \hyperpage{185}
+  \item {simple\+\_\+graph\+\_\+compression.\+cpp}, \hyperpage{186}
+  \item {simple\+\_\+graph\+\_\+compression.\+h}, \hyperpage{186}
   \item {size}
-    \subitem {fenwick\+\_\+tree}, \hyperpage{28}
-    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{52}
+    \subitem {bit\+\_\+pipe}, \hyperpage{35}
+    \subitem {fenwick\+\_\+tree}, \hyperpage{46}
+    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{130}
+  \item {star\+\_\+edges}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{106}
+  \item {star\+\_\+vertices}
+    \subitem {colored\+\_\+graph}, \hyperpage{43}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{106}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{114}
+    \subitem {marked\+\_\+graph\+\_\+encoder}, \hyperpage{123}
+  \item {start}
+    \subitem {logger}, \hyperpage{86}
+  \item {stat}
+    \subitem {logger}, \hyperpage{87}
+  \item {stat\+\_\+stream}
+    \subitem {logger}, \hyperpage{87}
   \item {Stilde}
-    \subitem {graph\+\_\+encoder}, \hyperpage{42}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
+  \item {stop}
+    \subitem {logger}, \hyperpage{86}
   \item {sum}
-    \subitem {fenwick\+\_\+tree}, \hyperpage{28}
-    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{52}
+    \subitem {fenwick\+\_\+tree}, \hyperpage{46}
+    \subitem {reverse\+\_\+fenwick\+\_\+tree}, \hyperpage{130}
   \item {sums}
-    \subitem {fenwick\+\_\+tree}, \hyperpage{29}
+    \subitem {fenwick\+\_\+tree}, \hyperpage{46}
+  \item {sys\+\_\+t}
+    \subitem {log\+\_\+entry}, \hyperpage{83}
 
   \indexspace
 
-  \item {test.\+cpp}, \hyperpage{67}
-    \subitem {main}, \hyperpage{67}
-    \subitem {operator$<$$<$}, \hyperpage{68}
+  \item {t}
+    \subitem {log\+\_\+entry}, \hyperpage{83}
+  \item {test.\+cpp}, \hyperpage{186}
+    \subitem {b\+\_\+graph\+\_\+test}, \hyperpage{187}
+    \subitem {graph\+\_\+test}, \hyperpage{187}
+    \subitem {main}, \hyperpage{187}
+    \subitem {marked\+\_\+graph\+\_\+encoder\+\_\+test}, 
+		\hyperpage{188}
+    \subitem {operator$<$$<$}, \hyperpage{189}
+    \subitem {random\+\_\+graph\+\_\+test}, \hyperpage{189}
+    \subitem {time\+\_\+series\+\_\+compression\+\_\+test}, 
+		\hyperpage{189}
+  \item {test\+\_\+mp.\+cpp}, \hyperpage{190}
+    \subitem {main}, \hyperpage{190}
+    \subitem {mp\+\_\+test}, \hyperpage{190}
+    \subitem {operator$<$$<$}, \hyperpage{191}
+    \subitem {random\+\_\+graph\+\_\+test}, \hyperpage{191}
+  \item {time\+\_\+series\+\_\+compression.\+cpp}, \hyperpage{192}
+  \item {time\+\_\+series\+\_\+compression.\+h}, \hyperpage{192}
+  \item {time\+\_\+series\+\_\+compression\+\_\+test}
+    \subitem {test.\+cpp}, \hyperpage{189}
+  \item {time\+\_\+series\+\_\+decoder}, \hyperpage{131}
+    \subitem {alph\+\_\+size}, \hyperpage{132}
+    \subitem {decode}, \hyperpage{132}
+    \subitem {freq}, \hyperpage{132}
+    \subitem {G}, \hyperpage{133}
+    \subitem {n}, \hyperpage{133}
+    \subitem {time\+\_\+series\+\_\+decoder}, \hyperpage{132}
+  \item {time\+\_\+series\+\_\+encoder}, \hyperpage{133}
+    \subitem {alph\+\_\+size}, \hyperpage{136}
+    \subitem {encode}, \hyperpage{134}
+    \subitem {freq}, \hyperpage{136}
+    \subitem {G}, \hyperpage{136}
+    \subitem {init\+\_\+alph\+\_\+size}, \hyperpage{135}
+    \subitem {init\+\_\+freq}, \hyperpage{135}
+    \subitem {init\+\_\+G}, \hyperpage{136}
+    \subitem {n}, \hyperpage{137}
+    \subitem {time\+\_\+series\+\_\+encoder}, \hyperpage{134}
   \item {tS}
-    \subitem {graph\+\_\+decoder}, \hyperpage{38}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
+  \item {type\+\_\+mark}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{106}
 
   \indexspace
 
   \item {U}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{16}
-    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{21}
-    \subitem {graph\+\_\+decoder}, \hyperpage{38}
-    \subitem {graph\+\_\+encoder}, \hyperpage{43}
-  \item {update\+\_\+message\+\_\+dictionary}
-    \subitem {graph\+\_\+message}, \hyperpage{44}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{23}
+    \subitem {b\+\_\+graph\+\_\+encoder}, \hyperpage{30}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
+    \subitem {graph\+\_\+encoder}, \hyperpage{63}
   \item {update\+\_\+messages}
-    \subitem {graph\+\_\+message}, \hyperpage{45}
+    \subitem {graph\+\_\+message}, \hyperpage{66}
 
   \indexspace
 
   \item {ver\+\_\+mark}
-    \subitem {marked\+\_\+graph}, \hyperpage{50}
+    \subitem {marked\+\_\+graph}, \hyperpage{92}
   \item {ver\+\_\+type}
-    \subitem {colored\+\_\+graph}, \hyperpage{25}
+    \subitem {colored\+\_\+graph}, \hyperpage{43}
   \item {ver\+\_\+type\+\_\+dict}
-    \subitem {colored\+\_\+graph}, \hyperpage{26}
+    \subitem {colored\+\_\+graph}, \hyperpage{43}
   \item {ver\+\_\+type\+\_\+int}
-    \subitem {colored\+\_\+graph}, \hyperpage{26}
+    \subitem {colored\+\_\+graph}, \hyperpage{43}
   \item {ver\+\_\+type\+\_\+list}
-    \subitem {colored\+\_\+graph}, \hyperpage{26}
+    \subitem {colored\+\_\+graph}, \hyperpage{43}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{106}
+  \item {ver\+\_\+types}
+    \subitem {marked\+\_\+graph\+\_\+compressed}, \hyperpage{106}
+  \item {verbose}
+    \subitem {logger}, \hyperpage{88}
+  \item {verbose\+\_\+stream}
+    \subitem {logger}, \hyperpage{88}
+  \item {vertex\+\_\+marks}
+    \subitem {marked\+\_\+graph\+\_\+decoder}, \hyperpage{114}
+  \item {vint\+\_\+hash}, \hyperpage{137}
+    \subitem {operator()}, \hyperpage{137}
 
   \indexspace
 
   \item {W}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{17}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{24}
+  \item {write}
+    \subitem {obitstream}, \hyperpage{127}
+  \item {write\+\_\+bits}
+    \subitem {obitstream}, \hyperpage{127}
 
   \indexspace
 
   \item {x}
-    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{17}
-    \subitem {graph\+\_\+decoder}, \hyperpage{38}
+    \subitem {b\+\_\+graph\+\_\+decoder}, \hyperpage{24}
+    \subitem {graph\+\_\+decoder}, \hyperpage{57}
 
 \end{theindex}
