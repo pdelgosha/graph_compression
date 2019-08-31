@@ -347,15 +347,25 @@ void marked_graph_compressed::binary_write(string s){
   unsigned int diff_threshold = nb_nsv - nb_nb_nsv;
   unsigned int nb_diff; // number of bits in diff
 
+  map<int, int> deg_map;
+
+  if (logger::stat){
+    *logger::stat_stream << " * degree stat: " << endl;
+    *logger::stat_stream << " -------------- " << endl;
+  }
+
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
     x = it->first.first;
     xp = it->first.second;
     //write x and xp
     oup << x;
     oup << xp;
+    deg_map.clear();
+
     for (int i=0;i<it->second.size();i++){
       //oup.bin_inter_code(it->second[i], n_bits);
       oup << it->second[i].size(); // how many star edges are going next
+      deg_map[it->second[i].size()] ++;
       //cout << " i " << i << endl;
       for (int j=0;j<it->second[i].size();j++){
         //cout << " j " << j << " -> " << it->second[i][j] << endl;
@@ -392,6 +402,14 @@ void marked_graph_compressed::binary_write(string s){
         }
       }
       nu_star_edges += it->second[i].size();
+      
+    }
+    if (logger::stat){
+      *logger::stat_stream << "mark pair: " <<  x << ", " << xp << endl;
+      for (map<int, int>::iterator deg_it = deg_map.begin(); deg_it != deg_map.end(); deg_it++){
+        *logger::stat_stream << " d " << deg_it->first << " # " << deg_it->second;
+      }
+      *logger::stat_stream << endl;
     }
   }
   
