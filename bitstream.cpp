@@ -1,5 +1,7 @@
 #include "bitstream.h"
 
+
+
 /*!
   Some examples: n = 1, bits = 1|0000000 (followed by 3 zero bytes)
   n = 12, bits = 1100|0000 (followed by 3 zero bytes)
@@ -156,7 +158,8 @@ void bit_pipe::append_left(const bit_pipe& B){
   // then, my leftmost chunk must be combined with the rightmost chunk of B:
   bits[0] |= B[B.size()-1];
   // then insert all but the rightmost chunk of B at my left
-  bits.insert(bits.begin(), B.chunks().begin(), B.chunks().end()-1);
+  if (B.chunks().size()>1)
+    bits.insert(bits.begin(), B.chunks().begin(), B.chunks().end()-1);
 }
 
 
@@ -363,8 +366,12 @@ unsigned int ibitstream::read_bits(unsigned int k){
     // we do these two steps recursively
     // but first need to store the number of bits we will have to read in the future, since these variables will be modified later:
     unsigned int future_bits = k - head_place;
+    if (head_place > BIT_INT)
+      cerr << " 367 head_place = " << head_place << endl;
     unsigned int a = read_bits(head_place); // the bits from the current buffer
     read_chunk();
+    if (future_bits > BIT_INT)
+      cerr << " 371 future_bits = " << future_bits << endl;
     unsigned int b = read_bits(future_bits); // bits from the next buffer
     // now we need to combine these
     // in order to do so, we need to shift a to the left and combine with b
@@ -392,6 +399,8 @@ void ibitstream::read_bits_append(int k, bit_pipe& B){
     unsigned int res_bits = k % BIT_INT; // the remaining bits to be read
     if (res_bits > 0){
       // we need to read an extra res bits
+      if (res_bits > BIT_INT)
+        cerr << " 400 res_bits = " << res_bits << endl;
       unsigned int res = read_bits (res_bits); // read res many bits
       // we should shift res_bits so that its MSB is the leftmost bits of the chunk
       res <<= (BIT_INT - res_bits);
@@ -401,6 +410,8 @@ void ibitstream::read_bits_append(int k, bit_pipe& B){
   }else{
     if (k <= head_place){
       // there are enough bits to read
+      if (k > BIT_INT)
+        cerr << " 411 k = " << k << endl;
       unsigned int a = read_bits(k);
       // no need to shift a since we need LSB of a to be in the rightmost bit
       B.bits.push_back(a);
@@ -408,7 +419,9 @@ void ibitstream::read_bits_append(int k, bit_pipe& B){
     }else{
       // read head_place bits and call again
       unsigned int future_read; // number of bits to read in future after calling the read_bits function below
-      future_read = k - head_place; 
+      future_read = k - head_place;
+      if (head_place > BIT_INT)
+        cerr << " 421 head_place = " << head_place << endl;
       unsigned int a = read_bits(head_place);
       B.bits.push_back(a);
       B.last_bits = BIT_INT;
@@ -458,11 +471,15 @@ ibitstream& ibitstream::operator >> (unsigned int& n){
     n = 0; // we had subtracted one when encoding 
     return *this;
   }
+  if (L > BIT_INT)
+    cerr << " 472 L = " << L << endl;
   N = read_bits(L); // read L digits
   
   N += (1<<L); // we must add 2^L
   N --; // this was N + 1
-  
+
+  if (N > BIT_INT)
+    cerr << " 479 N = " << N << " L = " << L << endl;
   n = read_bits(N); // read N digits
   n += (1 << N); // we must add 2^N
   n --; // when we encoded, in order to get a positive integer, we added one, now we subtract one
@@ -485,6 +502,8 @@ ibitstream& ibitstream::operator >> (mpz_class& n){
     return *this;
   }
 
+  if (L > BIT_INT)
+    cerr << " 503 L = " << L << endl;
   N = read_bits(L); // read L digits
   
   N += (1<<L); // we must add 2^L
@@ -529,18 +548,24 @@ ibitstream& ibitstream::operator >> (mpz_class& n){
  */
 void ibitstream::bin_inter_decode(vector<int>& a, int b){
   unsigned int a_size;
+  if (b > BIT_INT)
+    cerr << " 549 b = " << b << endl;
   a_size = read_bits(b); // size of the vector
   //cout << "a_size " << a_size << endl;
 
   if (a_size == 0)
     return;
   if (a_size == 1){
+    if (b > BIT_INT)
+      cerr << " 557 b = " << b << endl;
     a.push_back(read_bits(b));
     return;
   }
 
   // read low and high values
   unsigned int low, high;
+  if (b > BIT_INT)
+    cerr << " 565 b = " << b << endl;
   low = read_bits(b);
   high = read_bits(b);
   //cout << " low " << low << " high " << high << endl;
@@ -561,10 +586,13 @@ void ibitstream::bin_inter_decode(vector<int>& a, int i, int j, int low, int hig
   if (j < i)
     return;
   if (i==j){
-    if(low == high)
+    if(low == high){
       a.push_back(low); // the element must be low = high, no other change, nothing to read
-    else
+    }else{
+      if (nu_bits(high-low) > BIT_INT)
+        cerr << " 590 nu_bits(high-low) = " << nu_bits(high-low) << endl;
       a.push_back(read_bits(nu_bits(high-low)) + low);
+    }
     return;
   }
 
@@ -572,10 +600,13 @@ void ibitstream::bin_inter_decode(vector<int>& a, int i, int j, int low, int hig
   unsigned int L = low + m - i; // lower bound on a[m]
   unsigned int H = high - (j - m); // upper bound on a[m]
   unsigned int a_m; // the value of the intermediate point
-  if (L == H)
+  if (L == H){
     a_m = L; // there will be no bits to read
-  else
+  }else{
+    if (nu_bits(H-L) > BIT_INT)
+      cerr << " 604 nu_bits(H-L) = " << nu_bits(H-L) << endl;
     a_m = read_bits(nu_bits(H-L)) + L;
+  }
   
   a.push_back(a_m);
 

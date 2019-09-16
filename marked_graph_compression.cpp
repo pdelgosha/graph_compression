@@ -1,5 +1,10 @@
 #include "marked_graph_compression.h"
 
+
+
+
+
+
 void marked_graph_compressed::clear()
 {
   star_edges.clear();
@@ -335,6 +340,7 @@ void marked_graph_compressed::binary_write(string s){
 
   // first, write the size of star_edges so that the decoder knows how many blocks are coming
   oup << star_edges.size();
+  //cerr << " star edges size " << star_edges.size() << endl;
   //fwrite(&int_out, sizeof int_out, 1, f);
   //output_bits += sizeof int_out;
 
@@ -355,24 +361,32 @@ void marked_graph_compressed::binary_write(string s){
   }
 
   for (it = star_edges.begin(); it!= star_edges.end(); it++){
+
     x = it->first.first;
     xp = it->first.second;
+    //cerr << " x " << x << " xp " << xp << endl;
     //write x and xp
+
     oup << x;
     oup << xp;
+
     deg_map.clear();
 
     for (int i=0;i<it->second.size();i++){
+      //cerr << " star vertex " << i << endl;
       //oup.bin_inter_code(it->second[i], n_bits);
       oup << it->second[i].size(); // how many star edges are going next
       deg_map[it->second[i].size()] ++;
       //cout << " i " << i << endl;
       for (int j=0;j<it->second[i].size();j++){
+        
         //cout << " j " << j << " -> " << it->second[i][j] << endl;
         if (j==0)
           diff = it->second[i][j] - i;
         else
           diff = it->second[i][j] - it->second[i][j-1];
+        //if (it->second[i].size() < 100)
+        //  cerr << diff << " ";
         //cerr << " diff " << diff << endl;
         // diff is bounded by the number of star vertices
         // we can either encode diff by a modification of Elias delta, using the extra assumption that 1 <= diff <= number of star vertices - 1
@@ -387,6 +401,8 @@ void marked_graph_compressed::binary_write(string s){
         // we also have defined the difference above as diff_threshold to simplify
         nb_diff = nu_bits(diff);
         if (nb_diff < diff_threshold){
+          //if (it->second[i].size() < 100)
+          //  cerr << " f ";
           // we choose the first method
           // we write a flag 1 upfront to tell decoder which method we use
           oup.write_bits(1,1); // write a single bit with value 1
@@ -395,12 +411,17 @@ void marked_graph_compressed::binary_write(string s){
           if (nb_diff > 1) // otherwise, we do not need to write anything (note we remove leading one, so if diff = 1, we should not write anything at this stage)
             oup.write_bits(diff, nb_diff-1); // write diff to the output
         }else{
+          //if (it->second[i].size() < 100)
+          //  cerr << " s ";
           // we should choose the second method
           // write a flag 0 upfront
           oup.write_bits(0,1);
           oup.write_bits(diff, nb_nsv);
         }
       }
+      //if (it->second[i].size() < 100)
+      //  cerr << endl;
+
       nu_star_edges += it->second[i].size();
       
     }
@@ -718,15 +739,19 @@ void marked_graph_compressed::binary_read(FILE* f){
 
 
 void marked_graph_compressed::binary_read(string s){
+  logger::current_depth++;
   clear(); // to make sure nothing is stored inside me before reading
   ibitstream inp(s);
 
   // ==== read n, h, delta
   unsigned int int_in; // auxiliary input integer
+  logger::add_entry("n", "");
   inp >> int_in; 
   n = int_in; // I need to do this, since ibitstream::operator >> gets unsigned int& and the compile can not cast int& to unsigned int&
+  logger::add_entry("h", "");
   inp >> int_in;
   h = int_in;
+  logger::add_entry("delta", "");
   inp >> int_in;
   delta = int_in;
 
@@ -734,7 +759,7 @@ void marked_graph_compressed::binary_read(string s){
   //fread(&h, sizeof h, 1, f);
   //fread(&delta, sizeof delta, 1, f);
 
-
+  logger::add_entry("type_mark", "");
   // ===== read type_mark
   // read number of types
   inp >> int_in;
@@ -747,6 +772,7 @@ void marked_graph_compressed::binary_read(string s){
     //type_mark[i] = int_in;
   }
 
+  logger::add_entry("star vertices", "");
   // ==== read star_vertices
   // first, read the frequency.
   star_vertices.first = vector<int>(2); // frequency,
@@ -759,6 +785,8 @@ void marked_graph_compressed::binary_read(string s){
   // the integer representation which is star_vertices.second
   inp >> star_vertices.second;
   //mpz_inp_raw(star_vertices.second.get_mpz_t(), f);
+
+  logger::add_entry("star edges", "");
 
   // ==== read star_edges
 
@@ -778,12 +806,13 @@ void marked_graph_compressed::binary_read(string s){
 
   unsigned int star_edges_size;
   inp >> star_edges_size;
+  //cerr << " star edges size " << star_edges_size << endl;
   //fread(&star_edges_size, sizeof star_edges_size, 1, f);
 
   unsigned int x, xp; // edge marks
   int nu_star_vertices = star_vertices.first[1];
   unsigned int nb_nsv = nu_bits(nu_star_vertices-1); // defined to chose compression method, see below
-  unsigned int nb_nb_nsv = nu_bits(nb_nsv-1); // defined to chose compression method, see below
+  unsigned int nb_nb_nsv = nu_bits(nb_nsv); // defined to chose compression method, see below
   unsigned int diff_threshold = nb_nsv - nb_nb_nsv;
   unsigned int nb_diff; // number of bits in diff
 
@@ -795,8 +824,10 @@ void marked_graph_compressed::binary_read(string s){
   unsigned int diff; // to decode differences between star vertex indices in star edges
 
   for (int i=0;i<star_edges_size;i++){
+
     inp >> x;
     inp >> xp;
+    //cerr << " x  " << x << " xp " << xp << " i = " << i << endl; 
     //fread(&x, sizeof x, 1, f);
     //fread(&xp, sizeof xp, 1, f);
   
@@ -806,9 +837,12 @@ void marked_graph_compressed::binary_read(string s){
     for (int j=0; j<nu_star_vertices; j++){ // 
       V[j].clear(); // make it fresh
       //inp.bin_inter_decode(V[j], n_bits); // use binary interpolative decoding
+      //cerr << "  jth star vertex j = " << j<< endl; 
       inp >> int_in; // the number of star edges connected to jth star vertex
+      //cerr << " number of star edges " << int_in << endl;
       for (int k=0; k<int_in; k++){
         // read diff
+        //cerr << " k " << k << endl;
         if (inp.read_bit()){ // the flag bit is one, we have used the first method 
           nb_diff = inp.read_bits(nb_nb_nsv);
           diff = 0; // initialize
@@ -818,18 +852,23 @@ void marked_graph_compressed::binary_read(string s){
         }else{ // use the second method to read diff
           diff = inp.read_bits(nb_nsv);
         }
+        //if (int_in < 100)
+        //  cerr << diff << " ";
         //cerr << " diff " << diff << endl;
         if(k==0)
           V[j].push_back(j+diff);
         else
           V[j].push_back(V[j][k-1]+diff);
       }
+      //if (int_in < 100)
+      //  cerr << endl;
     }
 
 
     star_edges.insert(pair< pair<int, int> , vector<vector<int> > > (pair<int, int>(x, xp), V));
   }
 
+  logger::add_entry("vertex types", "");
   // ==== read vertex_types
 
   // read ver_type_list
@@ -863,6 +902,7 @@ void marked_graph_compressed::binary_read(string s){
   //mpz_inp_raw(ver_types.second.get_mpz_t(), f);
 
 
+  logger::add_entry("partition bipartite graphs", "");
   // === part bgraphs
   unsigned int part_bgraph_size;
   unsigned int t, tp;
@@ -882,6 +922,7 @@ void marked_graph_compressed::binary_read(string s){
     part_bgraph.insert(pair<pair<int, int>, mpz_class> (type, part_g));
   }
 
+  logger::add_entry("partition graphs", "");
   // === part graphs
 
   // first, the size
@@ -909,6 +950,7 @@ void marked_graph_compressed::binary_read(string s){
     part_graph.insert(pair<int, pair< mpz_class, vector< int > > >(t, pair<mpz_class, vector<int> >(part_g, W)));
   }
   inp.close();
+  logger::current_depth--;
 }
 
 

@@ -59,12 +59,12 @@ deals with reading bit streams from binary files, this is the reverse of obitstr
 
 
 \begin{DoxyCode}
-140                               \{
-141     \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"rb+"});
-142     \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} =0;
-143     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 0;
-144     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = 0;
-145   \}
+142                               \{
+143     \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"rb+"});
+144     \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} =0;
+145     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 0;
+146     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = 0;
+147   \}
 \end{DoxyCode}
 
 
@@ -88,26 +88,32 @@ uses binary interpolative coding algorithm to decode for an array of increasing 
 \end{DoxyParams}
 
 \begin{DoxyCode}
-530                                                       \{
-531   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_size;
-532   a\_size = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b); \textcolor{comment}{// size of the vector}
-533   \textcolor{comment}{//cout << "a\_size " << a\_size << endl;}
-534 
-535   \textcolor{keywordflow}{if} (a\_size == 0)
-536     \textcolor{keywordflow}{return};
-537   \textcolor{keywordflow}{if} (a\_size == 1)\{
-538     a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b));
-539     \textcolor{keywordflow}{return};
-540   \}
-541 
-542   \textcolor{comment}{// read low and high values}
-543   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} low, high;
-544   low = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
-545   high = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
-546   \textcolor{comment}{//cout << " low " << low << " high " << high << endl;}
-547   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, 0, a\_size - 1, low, high);
-548   \textcolor{keywordflow}{return};
-549 \}
+549                                                       \{
+550   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_size;
+551   \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+552     cerr << \textcolor{stringliteral}{" 549 b = "} << b << endl;
+553   a\_size = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b); \textcolor{comment}{// size of the vector}
+554   \textcolor{comment}{//cout << "a\_size " << a\_size << endl;}
+555 
+556   \textcolor{keywordflow}{if} (a\_size == 0)
+557     \textcolor{keywordflow}{return};
+558   \textcolor{keywordflow}{if} (a\_size == 1)\{
+559     \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+560       cerr << \textcolor{stringliteral}{" 557 b = "} << b << endl;
+561     a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b));
+562     \textcolor{keywordflow}{return};
+563   \}
+564 
+565   \textcolor{comment}{// read low and high values}
+566   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} low, high;
+567   \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+568     cerr << \textcolor{stringliteral}{" 565 b = "} << b << endl;
+569   low = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
+570   high = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
+571   \textcolor{comment}{//cout << " low " << low << " high " << high << endl;}
+572   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, 0, a\_size - 1, low, high);
+573   \textcolor{keywordflow}{return};
+574 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_a97983c20903c908fafb26e250bf9e812}\label{classibitstream_a97983c20903c908fafb26e250bf9e812}} 
 \index{ibitstream@{ibitstream}!bin\+\_\+inter\+\_\+decode@{bin\+\_\+inter\+\_\+decode}}
@@ -132,32 +138,38 @@ using bit interpolative coding algorithm to decode for a subinterval of an array
 \end{DoxyParams}
 
 \begin{DoxyCode}
-559                                                                                 \{
-560   \textcolor{comment}{// cout << " i " << i << " j " << j << " low " << low << " high " << high << endl;}
-561   \textcolor{keywordflow}{if} (j < i)
-562     \textcolor{keywordflow}{return};
-563   \textcolor{keywordflow}{if} (i==j)\{
-564     \textcolor{keywordflow}{if}(low == high)
-565       a.push\_back(low); \textcolor{comment}{// the element must be low = high, no other change, nothing to read}
-566     \textcolor{keywordflow}{else}
-567       a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low)) + low);
-568     \textcolor{keywordflow}{return};
-569   \}
-570 
-571   \textcolor{keywordtype}{int} m = (i+j)/2;
-572   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = low + m - i; \textcolor{comment}{// lower bound on a[m]}
-573   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} H = high - (j - m); \textcolor{comment}{// upper bound on a[m]}
-574   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_m; \textcolor{comment}{// the value of the intermediate point}
-575   \textcolor{keywordflow}{if} (L == H)
-576     a\_m = L; \textcolor{comment}{// there will be no bits to read}
-577   \textcolor{keywordflow}{else}
-578     a\_m = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L)) + L;
-579   
-580   a.push\_back(a\_m);
-581 
-582   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, i, m-1, low, a\_m - 1);
-583   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, m+1, j, a\_m + 1, high);
-584 \}
+584                                                                                 \{
+585   \textcolor{comment}{// cout << " i " << i << " j " << j << " low " << low << " high " << high << endl;}
+586   \textcolor{keywordflow}{if} (j < i)
+587     \textcolor{keywordflow}{return};
+588   \textcolor{keywordflow}{if} (i==j)\{
+589     \textcolor{keywordflow}{if}(low == high)\{
+590       a.push\_back(low); \textcolor{comment}{// the element must be low = high, no other change, nothing to read}
+591     \}\textcolor{keywordflow}{else}\{
+592       \textcolor{keywordflow}{if} (\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low) > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+593         cerr << \textcolor{stringliteral}{" 590 nu\_bits(high-low) = "} << \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low) << endl;
+594       a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low)) + low);
+595     \}
+596     \textcolor{keywordflow}{return};
+597   \}
+598 
+599   \textcolor{keywordtype}{int} m = (i+j)/2;
+600   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = low + m - i; \textcolor{comment}{// lower bound on a[m]}
+601   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} H = high - (j - m); \textcolor{comment}{// upper bound on a[m]}
+602   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_m; \textcolor{comment}{// the value of the intermediate point}
+603   \textcolor{keywordflow}{if} (L == H)\{
+604     a\_m = L; \textcolor{comment}{// there will be no bits to read}
+605   \}\textcolor{keywordflow}{else}\{
+606     \textcolor{keywordflow}{if} (\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L) > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+607       cerr << \textcolor{stringliteral}{" 604 nu\_bits(H-L) = "} << \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L) << endl;
+608     a\_m = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L)) + L;
+609   \}
+610   
+611   a.push\_back(a\_m);
+612 
+613   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, i, m-1, low, a\_m - 1);
+614   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, m+1, j, a\_m + 1, high);
+615 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}\label{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}} 
 \index{ibitstream@{ibitstream}!close@{close}}
@@ -171,7 +183,7 @@ closes the session by closing the input file
 
 
 \begin{DoxyCode}
-163 \{fclose(\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});\}
+165 \{fclose(\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});\}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}\label{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}} 
 \index{ibitstream@{ibitstream}!operator$>$$>$@{operator$>$$>$}}
@@ -185,35 +197,39 @@ reads an unsigned int from the input using Elias delta decoding and saves it in 
 
 
 \begin{DoxyCode}
-442                                                    \{
-443   \textcolor{comment}{// implement Elias delta decoding}
-444   \textcolor{comment}{//bitset<32> B(buffer);}
-445   \textcolor{comment}{//cerr << " buffer " << B << endl;}
-446   \textcolor{comment}{//cerr << " head " << bitset<32>(head\_mask) << endl;}
-447   \textcolor{comment}{//cerr << " head position " << head\_place << endl;}
-448   
-449   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
-450   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
-451     \textcolor{comment}{// read until reach one}
-452     L++;
-453   \}
-454   \textcolor{comment}{//cerr << " L " << L << endl;}
-455   
-456   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
-457   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
-458     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
-459     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-460   \}
-461   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
-462   
-463   N += (1<<L); \textcolor{comment}{// we must add 2^L}
-464   N --; \textcolor{comment}{// this was N + 1}
-465   
-466   n = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N); \textcolor{comment}{// read N digits}
-467   n += (1 << N); \textcolor{comment}{// we must add 2^N}
-468   n --; \textcolor{comment}{// when we encoded, in order to get a positive integer, we added one, now we subtract one}
-469   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-470 \}
+455                                                    \{
+456   \textcolor{comment}{// implement Elias delta decoding}
+457   \textcolor{comment}{//bitset<32> B(buffer);}
+458   \textcolor{comment}{//cerr << " buffer " << B << endl;}
+459   \textcolor{comment}{//cerr << " head " << bitset<32>(head\_mask) << endl;}
+460   \textcolor{comment}{//cerr << " head position " << head\_place << endl;}
+461   
+462   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
+463   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
+464     \textcolor{comment}{// read until reach one}
+465     L++;
+466   \}
+467   \textcolor{comment}{//cerr << " L " << L << endl;}
+468   
+469   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
+470   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
+471     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
+472     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+473   \}
+474   \textcolor{keywordflow}{if} (L > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+475     cerr << \textcolor{stringliteral}{" 472 L = "} << L << endl;
+476   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
+477   
+478   N += (1<<L); \textcolor{comment}{// we must add 2^L}
+479   N --; \textcolor{comment}{// this was N + 1}
+480 
+481   \textcolor{keywordflow}{if} (N > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+482     cerr << \textcolor{stringliteral}{" 479 N = "} << N << \textcolor{stringliteral}{" L = "} << L << endl;
+483   n = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N); \textcolor{comment}{// read N digits}
+484   n += (1 << N); \textcolor{comment}{// we must add 2^N}
+485   n --; \textcolor{comment}{// when we encoded, in order to get a positive integer, we added one, now we subtract one}
+486   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+487 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}\label{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}} 
 \index{ibitstream@{ibitstream}!operator$>$$>$@{operator$>$$>$}}
@@ -227,61 +243,63 @@ reads a nonnegative mpz\+\_\+class integer using Elias delta decoding and stores
 
 
 \begin{DoxyCode}
-472                                                 \{
-473   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
-474   \textcolor{comment}{//cout << "head\_place " << head\_place << endl;}
-475   \textcolor{comment}{//cout << "head\_mask  " << head\_mask << endl;}
-476   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
-477     \textcolor{comment}{// read until reach one}
-478     L++;
-479   \}
-480 
-481   \textcolor{comment}{//cout << " L = " << L << endl;}
-482   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
-483   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
-484     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
-485     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-486   \}
-487 
-488   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
-489   
-490   N += (1<<L); \textcolor{comment}{// we must add 2^L}
-491   N --; \textcolor{comment}{// this was N + 1}
-492 
-493   \textcolor{comment}{// we must read N bits and form n based on that}
-494 
-495   \hyperlink{classbit__pipe}{bit\_pipe} B;
-496   \textcolor{comment}{//cout << " N " << N << endl;}
-497   \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N, B);
-498   \textcolor{comment}{//cout << " B first " << B << endl;}
-499   \textcolor{comment}{// we should add a leading 1 to B}
-500   \textcolor{comment}{// in order to do so, we should consider 2 cases:}
-501   \textcolor{keywordflow}{if} (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} == 0)\{
-502     \textcolor{comment}{// this is the tricky case, since B now contains full chunks and there is no room to add the leading 1}
-503     \textcolor{comment}{// so we need to insert a chunk at the beginning and place the leading bit there}
-504     \textcolor{comment}{// since the leading bit will be in the rightmost bit in this case, the value of the initial chunk is 1
+489                                                 \{
+490   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
+491   \textcolor{comment}{//cout << "head\_place " << head\_place << endl;}
+492   \textcolor{comment}{//cout << "head\_mask  " << head\_mask << endl;}
+493   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
+494     \textcolor{comment}{// read until reach one}
+495     L++;
+496   \}
+497 
+498   \textcolor{comment}{//cout << " L = " << L << endl;}
+499   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
+500   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
+501     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
+502     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+503   \}
+504 
+505   \textcolor{keywordflow}{if} (L > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+506     cerr << \textcolor{stringliteral}{" 503 L = "} << L << endl;
+507   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
+508   
+509   N += (1<<L); \textcolor{comment}{// we must add 2^L}
+510   N --; \textcolor{comment}{// this was N + 1}
+511 
+512   \textcolor{comment}{// we must read N bits and form n based on that}
+513 
+514   \hyperlink{classbit__pipe}{bit\_pipe} B;
+515   \textcolor{comment}{//cout << " N " << N << endl;}
+516   \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N, B);
+517   \textcolor{comment}{//cout << " B first " << B << endl;}
+518   \textcolor{comment}{// we should add a leading 1 to B}
+519   \textcolor{comment}{// in order to do so, we should consider 2 cases:}
+520   \textcolor{keywordflow}{if} (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} == 0)\{
+521     \textcolor{comment}{// this is the tricky case, since B now contains full chunks and there is no room to add the leading 1}
+522     \textcolor{comment}{// so we need to insert a chunk at the beginning and place the leading bit there}
+523     \textcolor{comment}{// since the leading bit will be in the rightmost bit in this case, the value of the initial chunk is 1
        in this case}
-505     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), 1);
-506   \}\textcolor{keywordflow}{else}\{
-507     \textcolor{comment}{// in this case, the lading bit will be placed in the first chunk of B}
-508     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= (1 << (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}));
-509   \}
-510   \textcolor{comment}{//cout << " B " << B << endl;}
-511   \textcolor{comment}{//cout << B.bits[0] << endl;}
-512 
-513   \textcolor{comment}{// construct the mpz\_clas}
-514   mpz\_import(n.get\_mpz\_t(),
-515              B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), \textcolor{comment}{// the number of words}
-516              1, \textcolor{comment}{// order: 1 means first significant word first}
-517              \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), \textcolor{comment}{// each word is this many bytes}
-518              0, \textcolor{comment}{// endian can be 1 for most significant byte first, -1 for least significant first, or 0
+524     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), 1);
+525   \}\textcolor{keywordflow}{else}\{
+526     \textcolor{comment}{// in this case, the lading bit will be placed in the first chunk of B}
+527     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= (1 << (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}));
+528   \}
+529   \textcolor{comment}{//cout << " B " << B << endl;}
+530   \textcolor{comment}{//cout << B.bits[0] << endl;}
+531 
+532   \textcolor{comment}{// construct the mpz\_clas}
+533   mpz\_import(n.get\_mpz\_t(),
+534              B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), \textcolor{comment}{// the number of words}
+535              1, \textcolor{comment}{// order: 1 means first significant word first}
+536              \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), \textcolor{comment}{// each word is this many bytes}
+537              0, \textcolor{comment}{// endian can be 1 for most significant byte first, -1 for least significant first, or 0
        for the native endianness of the host CPU.}
-519              0, \textcolor{comment}{// nails}
-520              &B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0]); \textcolor{comment}{//&B.bits[0]);}
-521 
-522   n --; \textcolor{comment}{// when encoding, we added 1 to make sure it is positive}
-523   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-524 \}
+538              0, \textcolor{comment}{// nails}
+539              &B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0]); \textcolor{comment}{//&B.bits[0]);}
+540 
+541   n --; \textcolor{comment}{// when encoding, we added 1 to make sure it is positive}
+542   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+543 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_a895239acf7179f6778388c39c97643e4}\label{classibitstream_a895239acf7179f6778388c39c97643e4}} 
 \index{ibitstream@{ibitstream}!read\+\_\+bit@{read\+\_\+bit}}
@@ -295,18 +313,18 @@ read one bit from input and return true if its value is 1 and false otherwise.
 
 
 \begin{DoxyCode}
-587                          \{
-588   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} == 0)\{ \textcolor{comment}{// nothing is in buffer}
-589     \textcolor{comment}{//cerr << " read a chunk " << endl;}
-590     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-591   \}
-592   \textcolor{keywordtype}{bool} ans = \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} & \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}; \textcolor{comment}{// look at the value of buffer at the bit where the
+618                          \{
+619   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} == 0)\{ \textcolor{comment}{// nothing is in buffer}
+620     \textcolor{comment}{//cerr << " read a chunk " << endl;}
+621     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
+622   \}
+623   \textcolor{keywordtype}{bool} ans = \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} & \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}; \textcolor{comment}{// look at the value of buffer at the bit where the
        head\_mask is pointing to}
-593   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1; \textcolor{comment}{// go one bit to the right}
-594   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} --;
-595   \textcolor{comment}{//cerr << " read bit " << ans << endl;}
-596   \textcolor{keywordflow}{return} ans;
-597 \}
+624   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1; \textcolor{comment}{// go one bit to the right}
+625   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} --;
+626   \textcolor{comment}{//cerr << " read bit " << ans << endl;}
+627   \textcolor{keywordflow}{return} ans;
+628 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}\label{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}} 
 \index{ibitstream@{ibitstream}!read\+\_\+bits@{read\+\_\+bits}}
@@ -320,52 +338,56 @@ read k bits from the input, interpret it as integer (first bit read is M\+SB) an
 
 
 \begin{DoxyCode}
-333                                                 \{
-334 
-335   \textcolor{comment}{//cerr << " read bits with k = " << k << endl;}
-336   \textcolor{keywordflow}{if} (k < 1 or k > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-337     cerr << \textcolor{stringliteral}{"ERROR: ibitstream::read\_bits called with k out of range, k = "} << k << endl;
-338   \}
-339   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\textcolor{comment}{// no bits left}
-340     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-341   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} >= k)\{ \textcolor{comment}{// head\_place is effectively the number of unread bits remaining in the
+336                                                 \{
+337 
+338   \textcolor{comment}{//cerr << " read bits with k = " << k << endl;}
+339   \textcolor{keywordflow}{if} (k < 1 or k > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
+340     cerr << \textcolor{stringliteral}{"ERROR: ibitstream::read\_bits called with k out of range, k = "} << k << endl;
+341   \}
+342   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\textcolor{comment}{// no bits left}
+343     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
+344   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} >= k)\{ \textcolor{comment}{// head\_place is effectively the number of unread bits remaining in the
        buffer}
-342     \textcolor{comment}{//cerr << " head\_place >= k head\_mask = " << head\_mask << " head\_place = " << head\_place << endl;}
-343     \textcolor{comment}{// there are enough number of bits in the current buffer to read}
-344     \textcolor{comment}{// mask the input}
-345     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = \hyperlink{bitstream_8cpp_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}(k); \textcolor{comment}{// k ones}
-346     \textcolor{comment}{// now we should shift mask to start at head\_place}
-347     mask <<= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k);
-348     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ans = \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} & mask; \textcolor{comment}{// mask out the corresponding bits}
-349     ans >>= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k); \textcolor{comment}{// bring it back to LSB}
-350 
-351     \textcolor{comment}{// we need to shift head k bits to the right}
-352     \textcolor{comment}{// in some compilers, >>= 32 does strange things, in fact it does nothing. To avoid that, I shift k - 1
+345     \textcolor{comment}{//cerr << " head\_place >= k head\_mask = " << head\_mask << " head\_place = " << head\_place << endl;}
+346     \textcolor{comment}{// there are enough number of bits in the current buffer to read}
+347     \textcolor{comment}{// mask the input}
+348     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = \hyperlink{bitstream_8cpp_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}(k); \textcolor{comment}{// k ones}
+349     \textcolor{comment}{// now we should shift mask to start at head\_place}
+350     mask <<= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k);
+351     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ans = \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} & mask; \textcolor{comment}{// mask out the corresponding bits}
+352     ans >>= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k); \textcolor{comment}{// bring it back to LSB}
+353 
+354     \textcolor{comment}{// we need to shift head k bits to the right}
+355     \textcolor{comment}{// in some compilers, >>= 32 does strange things, in fact it does nothing. To avoid that, I shift k - 1
        bits and then an extra 1 bit}
-353     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= k - 1;
-354     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1;
-355     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} -= k;
-356     \textcolor{comment}{//cerr << " after head\_mask " << head\_mask << " head\_place = " << head\_place << endl;}
-357     \textcolor{keywordflow}{return} ans;
-358   \}\textcolor{keywordflow}{else}\{
-359     \textcolor{comment}{// there is not enough bits in the current buffer.}
-360     \textcolor{comment}{// So we should read head\_place many bits from the current buffer}
-361     \textcolor{comment}{// then read another chunk from input file}
-362     \textcolor{comment}{// and then read k - head\_place bits from the new buffer}
-363     \textcolor{comment}{// we do these two steps recursively}
-364     \textcolor{comment}{// but first need to store the number of bits we will have to read in the future, since these variables
+356     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= k - 1;
+357     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1;
+358     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} -= k;
+359     \textcolor{comment}{//cerr << " after head\_mask " << head\_mask << " head\_place = " << head\_place << endl;}
+360     \textcolor{keywordflow}{return} ans;
+361   \}\textcolor{keywordflow}{else}\{
+362     \textcolor{comment}{// there is not enough bits in the current buffer.}
+363     \textcolor{comment}{// So we should read head\_place many bits from the current buffer}
+364     \textcolor{comment}{// then read another chunk from input file}
+365     \textcolor{comment}{// and then read k - head\_place bits from the new buffer}
+366     \textcolor{comment}{// we do these two steps recursively}
+367     \textcolor{comment}{// but first need to store the number of bits we will have to read in the future, since these variables
        will be modified later:}
-365     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_bits = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place};
-366     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place); \textcolor{comment}{// the bits from the current buffer}
-367     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-368     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} b = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(future\_bits); \textcolor{comment}{// bits from the next buffer}
-369     \textcolor{comment}{// now we need to combine these}
-370     \textcolor{comment}{// in order to do so, we need to shift a to the left and combine with b}
-371     \textcolor{comment}{// but the number of bits we need to shift a is exactly future bits}
-372     a <<= future\_bits;
-373     \textcolor{keywordflow}{return} a | b;
-374   \}
-375 \}
+368     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_bits = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place};
+369     \textcolor{keywordflow}{if} (head\_place > BIT\_INT)
+370       cerr << \textcolor{stringliteral}{" 367 head\_place = "} << head\_place << endl;
+371     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place); \textcolor{comment}{// the bits from the current buffer}
+372     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
+373     \textcolor{keywordflow}{if} (future\_bits > BIT\_INT)
+374       cerr << \textcolor{stringliteral}{" 371 future\_bits = "} << future\_bits << endl;
+375     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} b = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(future\_bits); \textcolor{comment}{// bits from the next buffer}
+376     \textcolor{comment}{// now we need to combine these}
+377     \textcolor{comment}{// in order to do so, we need to shift a to the left and combine with b}
+378     \textcolor{comment}{// but the number of bits we need to shift a is exactly future bits}
+379     a <<= future\_bits;
+380     \textcolor{keywordflow}{return} a | b;
+381   \}
+382 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}\label{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}} 
 \index{ibitstream@{ibitstream}!read\+\_\+bits@{read\+\_\+bits}}
@@ -379,23 +401,23 @@ reads k bits from input and stores in the given \hyperlink{classbit__pipe}{bit\+
 
 
 \begin{DoxyCode}
-425                                             \{
-426   \textcolor{comment}{//cerr << " read\_bits " << k << endl;}
-427   \textcolor{comment}{// assumption: B is empty bit\_pipe}
-428   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0 or B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} != 0)\{
-429     cerr << \textcolor{stringliteral}{" ERROR: ibitstream::read\_bits(int k, bit\_pipe& B) must be called with an empty bit\_pipe, a
+438                                             \{
+439   \textcolor{comment}{//cerr << " read\_bits " << k << endl;}
+440   \textcolor{comment}{// assumption: B is empty bit\_pipe}
+441   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0 or B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} != 0)\{
+442     cerr << \textcolor{stringliteral}{" ERROR: ibitstream::read\_bits(int k, bit\_pipe& B) must be called with an empty bit\_pipe, a
        nonempty bitpipe is given with B.bits.size() = "} << B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() << endl;
-430   \}
-431   \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(k, B);
-432   \textcolor{comment}{// there might be a few zero chunks at the beginning of B which are redundant, we remove them here}
-433   \textcolor{comment}{// the number of nonzero chunks is exactly the floor of k / BIT\_INT}
-434   \textcolor{keywordtype}{int} nonzero\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-435   \textcolor{keywordflow}{if} (k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} != 0)
-436     nonzero\_chunks ++; \textcolor{comment}{// take the floor}
-437   \textcolor{comment}{//cerr << " nonzero\_chunks " << nonzero\_chunks << endl;}
-438   \textcolor{keywordflow}{if} (nonzero\_chunks < B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size())
-439     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - nonzero\_chunks);
-440 \}
+443   \}
+444   \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(k, B);
+445   \textcolor{comment}{// there might be a few zero chunks at the beginning of B which are redundant, we remove them here}
+446   \textcolor{comment}{// the number of nonzero chunks is exactly the floor of k / BIT\_INT}
+447   \textcolor{keywordtype}{int} nonzero\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
+448   \textcolor{keywordflow}{if} (k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} != 0)
+449     nonzero\_chunks ++; \textcolor{comment}{// take the floor}
+450   \textcolor{comment}{//cerr << " nonzero\_chunks " << nonzero\_chunks << endl;}
+451   \textcolor{keywordflow}{if} (nonzero\_chunks < B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size())
+452     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - nonzero\_chunks);
+453 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}\label{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}} 
 \index{ibitstream@{ibitstream}!read\+\_\+bits\+\_\+append@{read\+\_\+bits\+\_\+append}}
@@ -409,57 +431,63 @@ similar to read\+\_\+bits, but B does not have to be empty and the result will b
 
 
 \begin{DoxyCode}
-377                                                    \{
-378   \textcolor{comment}{//cout << " read\_bits called k = " << k << " head\_place = " << head\_place << endl;}
-379   \textcolor{comment}{// by assumption, when calling this function, B has full chunks (last\_bits is either zero so BIT\_INT)}
-380   \textcolor{keywordflow}{if} (k == 0)
-381     \textcolor{keywordflow}{return}; \textcolor{comment}{// nothing remains to be done}
-382   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\{
-383     \textcolor{comment}{// we are over with the current bits in the buffer}
-384     \textcolor{comment}{// so we need to load a few chunks from the input}
-385     \textcolor{comment}{// we should append k / BIT\_INT full chunks to B and then k % BIT\_INT bits from the next chunk}
-386     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} full\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-387     \textcolor{keywordflow}{if} (full\_chunks > 0)\{
-388       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() + full\_chunks);
-389       fread(&B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - full\_chunks], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), full\_chunks, 
+384                                                    \{
+385   \textcolor{comment}{//cout << " read\_bits called k = " << k << " head\_place = " << head\_place << endl;}
+386   \textcolor{comment}{// by assumption, when calling this function, B has full chunks (last\_bits is either zero so BIT\_INT)}
+387   \textcolor{keywordflow}{if} (k == 0)
+388     \textcolor{keywordflow}{return}; \textcolor{comment}{// nothing remains to be done}
+389   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\{
+390     \textcolor{comment}{// we are over with the current bits in the buffer}
+391     \textcolor{comment}{// so we need to load a few chunks from the input}
+392     \textcolor{comment}{// we should append k / BIT\_INT full chunks to B and then k % BIT\_INT bits from the next chunk}
+393     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} full\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
+394     \textcolor{keywordflow}{if} (full\_chunks > 0)\{
+395       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() + full\_chunks);
+396       fread(&B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - full\_chunks], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), full\_chunks, 
       \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}); \textcolor{comment}{// read full\_chunks many chunks}
-390       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the last chunk contains full bits }
-391     \}
-392     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res\_bits = k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the remaining bits to be read}
-393     \textcolor{keywordflow}{if} (res\_bits > 0)\{
-394       \textcolor{comment}{// we need to read an extra res bits}
-395       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits} (res\_bits); \textcolor{comment}{// read res many bits}
-396       \textcolor{comment}{// we should shift res\_bits so that its MSB is the leftmost bits of the chunk}
-397       res <<= (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - res\_bits);
-398       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(res);
-399       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = res\_bits;
-400     \}
-401   \}\textcolor{keywordflow}{else}\{
-402     \textcolor{keywordflow}{if} (k <= \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place})\{
-403       \textcolor{comment}{// there are enough bits to read}
-404       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(k);
-405       \textcolor{comment}{// no need to shift a since we need LSB of a to be in the rightmost bit}
-406       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
-407       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-408     \}\textcolor{keywordflow}{else}\{
-409       \textcolor{comment}{// read head\_place bits and call again}
-410       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_read; \textcolor{comment}{// number of bits to read in future after calling the read\_bits function
+397       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the last chunk contains full bits }
+398     \}
+399     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res\_bits = k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the remaining bits to be read}
+400     \textcolor{keywordflow}{if} (res\_bits > 0)\{
+401       \textcolor{comment}{// we need to read an extra res bits}
+402       \textcolor{keywordflow}{if} (res\_bits > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+403         cerr << \textcolor{stringliteral}{" 400 res\_bits = "} << res\_bits << endl;
+404       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits} (res\_bits); \textcolor{comment}{// read res many bits}
+405       \textcolor{comment}{// we should shift res\_bits so that its MSB is the leftmost bits of the chunk}
+406       res <<= (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - res\_bits);
+407       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(res);
+408       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = res\_bits;
+409     \}
+410   \}\textcolor{keywordflow}{else}\{
+411     \textcolor{keywordflow}{if} (k <= \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place})\{
+412       \textcolor{comment}{// there are enough bits to read}
+413       \textcolor{keywordflow}{if} (k > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+414         cerr << \textcolor{stringliteral}{" 411 k = "} << k << endl;
+415       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(k);
+416       \textcolor{comment}{// no need to shift a since we need LSB of a to be in the rightmost bit}
+417       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
+418       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
+419     \}\textcolor{keywordflow}{else}\{
+420       \textcolor{comment}{// read head\_place bits and call again}
+421       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_read; \textcolor{comment}{// number of bits to read in future after calling the read\_bits function
        below}
-411       future\_read = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}; 
-412       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place);
-413       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
-414       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-415       \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(future\_read, B); \textcolor{comment}{// read the remaining bits }
-416     \}
-417   \}
-418 
-419   B.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}); \textcolor{comment}{// so that LSB of B is the rightmost bit
+422       future\_read = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place};
+423       \textcolor{keywordflow}{if} (head\_place > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
+424         cerr << \textcolor{stringliteral}{" 421 head\_place = "} << head\_place << endl;
+425       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place);
+426       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
+427       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
+428       \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(future\_read, B); \textcolor{comment}{// read the remaining bits }
+429     \}
+430   \}
+431 
+432   B.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}); \textcolor{comment}{// so that LSB of B is the rightmost bit
        of the lats chunk.}
-420 
-421   \textcolor{comment}{// this is important to make sure that B is correctly representing an integer and can be converted to
+433 
+434   \textcolor{comment}{// this is important to make sure that B is correctly representing an integer and can be converted to
        mpz\_class}
-422   \textcolor{comment}{// TODO issue of 2^k - 1 correct}
-423 \}
+435   \textcolor{comment}{// TODO issue of 2^k - 1 correct}
+436 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classibitstream_ac62c26004436d83f337f4aeba0895e20}\label{classibitstream_ac62c26004436d83f337f4aeba0895e20}} 
 \index{ibitstream@{ibitstream}!read\+\_\+chunk@{read\+\_\+chunk}}
@@ -473,12 +501,12 @@ reads one chunk (4 bytes) from the input file and stores it in buffer
 
 
 \begin{DoxyCode}
-325                            \{
-326   fread(&\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), 1, \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});
-327   \textcolor{comment}{//cout << " in read chunk  buffer = " << bitset<32>(buffer) << endl;}
-328   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 1 << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - 1); \textcolor{comment}{// pointing to the MSB which is the first bit to consider}
-329   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-330 \}
+328                            \{
+329   fread(&\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), 1, \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});
+330   \textcolor{comment}{//cout << " in read chunk  buffer = " << bitset<32>(buffer) << endl;}
+331   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 1 << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - 1); \textcolor{comment}{// pointing to the MSB which is the first bit to consider}
+332   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
+333 \}
 \end{DoxyCode}
 
 
