@@ -455,7 +455,10 @@ void marked_graph_compressed::binary_write(string s){
     //output_bits += sizeof int_out;
 
     for (int j=0;j<ver_type_list[i].size();j++){
-      oup << ver_type_list[i][j];
+      if (j%3 == 0 and j > 0) // we know that these indices are the count part (list is of the form \theta, t, t', n_{t,t'}, \dots but the n_{t,t'} \geq 1, so in Elias delta encoding of oup << we do not need to add one. So it would be more efficient to subtract one here, and add one during decompression)
+        oup << ver_type_list[i][j]-1;
+      else
+        oup << ver_type_list[i][j];
       //fwrite(&int_out, sizeof int_out, 1, f);
       //output_bits += sizeof int_out;
     }
@@ -882,6 +885,8 @@ void marked_graph_compressed::binary_read(string s){
     for (int j=0;j<ver_type_list[i].size();j++){
       //fread(&int_in, sizeof int_in, 1, f);
       inp >> int_in;
+      if (j%3 == 0 and j > 0) // we know that the cont part is positive, so no need to add one during compression. So during compression, we subtract one to make it nonnegative
+        int_in ++;
       ver_type_list[i][j] = int_in;
     }
   }
