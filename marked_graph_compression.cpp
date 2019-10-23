@@ -454,6 +454,30 @@ void marked_graph_compressed::binary_write(string s){
     //fwrite(&int_out, sizeof int_out, 1, f);
     //output_bits += sizeof int_out;
 
+    oup << ver_type_list[i][0]; // write the vertex mark
+    // then, we know that the rest of the list is (t,t',n_{t,t')}) chunks, each of course with size 3
+    for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
+      // the triple is 3j+1, 3j+2, 3j+3
+      if (j==0){
+        // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
+        oup << ver_type_list[i][3*j+1];
+        oup << ver_type_list[i][3*j+2];
+        oup << ver_type_list[i][3*j+3]-1;
+      }else{
+        // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
+        oup << ver_type_list[i][3*j+1] - ver_type_list[i][3*(j-1)+1];
+        // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
+        if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
+          oup << ver_type_list[i][3*j+2] - ver_type_list[i][3*(j-1)+2];
+        }else{
+          // otherwise, just write t'_here
+          oup << ver_type_list[i][3*j+2];
+        }
+        oup << ver_type_list[i][3*j+3]-1;
+      }
+    }
+
+    /* the old way of writing the list:
     for (int j=0;j<ver_type_list[i].size();j++){
       if (j%3 == 0 and j > 0) // we know that these indices are the count part (list is of the form \theta, t, t', n_{t,t'}, \dots but the n_{t,t'} \geq 1, so in Elias delta encoding of oup << we do not need to add one. So it would be more efficient to subtract one here, and add one during decompression)
         oup << ver_type_list[i][j]-1;
@@ -462,6 +486,7 @@ void marked_graph_compressed::binary_write(string s){
       //fwrite(&int_out, sizeof int_out, 1, f);
       //output_bits += sizeof int_out;
     }
+    */
   }
 
   chunks_new = oup.chunks();
@@ -882,6 +907,40 @@ void marked_graph_compressed::binary_read(string s){
     inp >> int_in;
     //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list[i]
     ver_type_list[i].resize(int_in);
+
+    inp >> int_in;
+    ver_type_list[i][0] = int_in; // read the vertex mark part
+
+    for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
+      // the triple is 3j+1, 3j+2, 3j+3
+      if (j==0){
+        // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
+        inp >> int_in;
+        ver_type_list[i][3*j+1] = int_in;
+        inp >> int_in;
+        ver_type_list[i][3*j+2] = int_in;
+        inp >> int_in;
+        ver_type_list[i][3*j+3] = int_in + 1; // since we had subtracted one during compression
+      }else{
+        // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
+        inp >> int_in;
+        ver_type_list[i][3*j+1] = int_in + ver_type_list[i][3*(j-1)+1]; // since we had encoded the difference during the compression phasen
+
+        // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
+        if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
+          inp >> int_in;
+          ver_type_list[i][3*j+2] = int_in + ver_type_list[i][3*(j-1)+2];
+        }else{
+          // otherwise, just write t'_here
+          inp >> int_in;
+          ver_type_list[i][3*j+2] = int_in;
+        }
+        inp >> int_in;
+        ver_type_list[i][3*j+3]= int_in + 1; // since we had subtracted one during compression
+      }
+    }
+
+    /* the old way of reading the list
     for (int j=0;j<ver_type_list[i].size();j++){
       //fread(&int_in, sizeof int_in, 1, f);
       inp >> int_in;
@@ -889,6 +948,7 @@ void marked_graph_compressed::binary_read(string s){
         int_in ++;
       ver_type_list[i][j] = int_in;
     }
+    */
   }
 
   // ver_types
