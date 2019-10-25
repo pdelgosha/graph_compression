@@ -227,7 +227,22 @@ initializes other variables. Here, G is the reference to the marked graph based 
 615     \}
 616     \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}[v] = \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[vt];
 617   \}
-618 \}
+618 
+619   \textcolor{comment}{// editing vertex types so that the vertex type list is sorted lexicographically}
+620   
+621   map<vector<int>, \textcolor{keywordtype}{int} >::iterator it;
+622   \textcolor{keywordtype}{int} counter = 0;
+623   \textcolor{keywordflow}{for} (it=\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.begin(); it!=\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.end(); it++)\{
+624     \textcolor{comment}{// sweeping over elements in the dictionary increasingly }
+625     it->second = counter; 
+626     \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}[counter] = it->first; \textcolor{comment}{// edit the ver\_type\_list as well}
+627     counter ++;
+628   \}
+629 
+630   \textcolor{comment}{// edit vertex types given the updated ver\_type\_dict}
+631   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)
+632     \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}[v] = \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v]]; 
+633 \}
 \end{DoxyCode}
 
 

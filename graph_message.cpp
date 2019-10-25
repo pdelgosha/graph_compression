@@ -615,4 +615,19 @@ void colored_graph::init(const marked_graph& G)
     }
     ver_type_int[v] = ver_type_dict[vt];
   }
+
+  // editing vertex types so that the vertex type list is sorted lexicographically
+  
+  map<vector<int>, int >::iterator it;
+  int counter = 0;
+  for (it=ver_type_dict.begin(); it!=ver_type_dict.end(); it++){
+    // sweeping over elements in the dictionary increasingly 
+    it->second = counter; 
+    ver_type_list[counter] = it->first; // edit the ver_type_list as well
+    counter ++;
+  }
+
+  // edit vertex types given the updated ver_type_dict
+  for (int v=0; v<nu_vertices;v++)
+    ver_type_int[v] = ver_type_dict[ver_type[v]]; 
 }
