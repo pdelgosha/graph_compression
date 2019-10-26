@@ -52,6 +52,47 @@ class marked_graph_compressed
   //! \param s string containing the name of the binary file
   void binary_read(string s);
 
+  //! finds the maximum number of (t,t',n) blocks that match between two entries of ver_type_list
+  // \param i, j entries of ver_type_list to be compared, i.e. we compare ver_type_list[i] and ver_type_list[j]
+  int vtype_max_match(int i, int j);
+
+  //! writes the ver_type_list array to the output using difference coding, assuming that its entries are lexicographically sorted (as vectors)
+  // \param oup output bitstream used to write the bit stream 
+  void vtype_list_write(obitstream& oup);
+
+  //! reads the ver_type_list array from the input, assuming the bit sequence was generated during compression using vtype_list_write
+  // \param inp input bitstream
+  void vtype_list_read(ibitstream& inp);
+
+  //! writes a (t,t',n) block of a vertex type list element to the output.
+  //! \param oup the output bitstream used to output the encoded bit sequence
+  //! \param i the index of ver_type_list member of this class which is going to be encoded
+  //! \param j the index of the t,t',n block of ver_type_list[i] that is going to be encoded. Hence, the block is ver_type_list[i][1+3*j], ver_type_list[i][2+3*j], and ver_type_list[i][3+3*j]
+  void vtype_block_write(obitstream& oup, int i, int j);
+
+  //! writes a (t,t',n) block of a vertex type list element with reference to another reference block to the output. We assume that this block is lexicographically greater than the reference block, and use it to encode the difference to save space
+  //! \param oup the output bitstream used to output the encoded bit sequence
+  //! \param i the index of ver_type_list member of this class which is going to be encoded
+  //! \param j the index of the t,t',n block of ver_type_list[i] that is going to be encoded. Hence, the block is ver_type_list[i][1+3*j], ver_type_list[i][2+3*j], and ver_type_list[i][3+3*j]
+  //! \param ir the index of the ver_type_list used as the reference
+  //! \param jr the index of the block in ver_type_list[ir] used as the reference. Hence, the reference block is ver_type_list[ir][1+3*jr], ver_type_list[ir][2+3*jr], and ver_type_list[ir][3+3*jr]
+  void vtype_block_write(obitstream& oup, int i, int j, int ir, int jr);
+
+
+  //! reads a (t,t',n) block of a vertex type list element from input.
+  //! \param inp the input bitstream used to read the encoded bit sequence
+  //! \param i the index of ver_type_list member of this class which is going to be decoded
+  //! \param j the index of the t,t',n block of ver_type_list[i] that is going to be decoded. Hence, the block is ver_type_list[i][1+3*j], ver_type_list[i][2+3*j], and ver_type_list[i][3+3*j]
+  void vtype_block_read(ibitstream& inp, int i, int j);
+
+  //! reads a (t,t',n) block of a vertex type list element with reference to another reference block. We assume that this block is lexicographically greater than the reference block, and this fact was used in the compression to encode the difference. The reference block must be prior to the current block so that it is already decoded and ready to be used as a reference. 
+  //! \param inp the input bitstream used to read the encoded bit sequence
+  //! \param i the index of ver_type_list member of this class which is going to be decoded
+  //! \param j the index of the t,t',n block of ver_type_list[i] that is going to be decoded. Hence, the block is ver_type_list[i][1+3*j], ver_type_list[i][2+3*j], and ver_type_list[i][3+3*j]
+  //! \param ir the index of the ver_type_list used as the reference
+  //! \param jr the index of the block in ver_type_list[ir] used as the reference. Hence, the reference block is ver_type_list[ir][1+3*jr], ver_type_list[ir][2+3*jr], and ver_type_list[ir][3+3*jr]
+  void vtype_block_read(ibitstream& inp, int i, int j, int ir, int jr);
+
 };
 
 class marked_graph_encoder

@@ -445,49 +445,56 @@ void marked_graph_compressed::binary_write(string s){
 
   // first, we need vertex types list (ver_type_list)
   // size of ver_type_list
-  oup <<  ver_type_list.size();
-  //fwrite(&int_out, sizeof int_out, 1, f);
-  //output_bits += sizeof int_out;
 
-  for (int i=0;i<ver_type_list.size();i++){
-    oup << ver_type_list[i].size();
-    //fwrite(&int_out, sizeof int_out, 1, f);
-    //output_bits += sizeof int_out;
 
-    oup << ver_type_list[i][0]; // write the vertex mark
-    // then, we know that the rest of the list is (t,t',n_{t,t')}) chunks, each of course with size 3
-    for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
-      // the triple is 3j+1, 3j+2, 3j+3
-      if (j==0){
-        // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
-        oup << ver_type_list[i][3*j+1];
-        oup << ver_type_list[i][3*j+2];
-        oup << ver_type_list[i][3*j+3]-1;
-      }else{
-        // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
-        oup << ver_type_list[i][3*j+1] - ver_type_list[i][3*(j-1)+1];
-        // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
-        if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
-          oup << ver_type_list[i][3*j+2] - ver_type_list[i][3*(j-1)+2];
-        }else{
-          // otherwise, just write t'_here
-          oup << ver_type_list[i][3*j+2];
-        }
-        oup << ver_type_list[i][3*j+3]-1;
-      }
-    }
+  vtype_list_write(oup);
 
-    /* the old way of writing the list:
-    for (int j=0;j<ver_type_list[i].size();j++){
-      if (j%3 == 0 and j > 0) // we know that these indices are the count part (list is of the form \theta, t, t', n_{t,t'}, \dots but the n_{t,t'} \geq 1, so in Elias delta encoding of oup << we do not need to add one. So it would be more efficient to subtract one here, and add one during decompression)
-        oup << ver_type_list[i][j]-1;
-      else
-        oup << ver_type_list[i][j];
-      //fwrite(&int_out, sizeof int_out, 1, f);
-      //output_bits += sizeof int_out;
-    }
-    */
-  }
+
+  // oup <<  ver_type_list.size();
+  // //fwrite(&int_out, sizeof int_out, 1, f);
+  // //output_bits += sizeof int_out;
+
+  // for (int i=0;i<ver_type_list.size();i++){
+  //   oup << ver_type_list[i].size();
+  //   //fwrite(&int_out, sizeof int_out, 1, f);
+  //   //output_bits += sizeof int_out;
+
+  //   oup << ver_type_list[i][0]; // write the vertex mark
+  //   // then, we know that the rest of the list is (t,t',n_{t,t')}) chunks, each of course with size 3
+  //   for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
+  //     // the triple is 3j+1, 3j+2, 3j+3
+  //     if (j==0){
+  //       // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
+  //       oup << ver_type_list[i][3*j+1];
+  //       oup << ver_type_list[i][3*j+2];
+  //       oup << ver_type_list[i][3*j+3]-1;
+  //     }else{
+  //       // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
+  //       oup << ver_type_list[i][3*j+1] - ver_type_list[i][3*(j-1)+1];
+  //       // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
+  //       if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
+  //         oup << ver_type_list[i][3*j+2] - ver_type_list[i][3*(j-1)+2];
+  //       }else{
+  //         // otherwise, just write t'_here
+  //         oup << ver_type_list[i][3*j+2];
+  //       }
+  //       oup << ver_type_list[i][3*j+3]-1;
+  //     }
+  //   }
+
+  //   /* the old way of writing the list:
+  //   for (int j=0;j<ver_type_list[i].size();j++){
+  //     if (j%3 == 0 and j > 0) // we know that these indices are the count part (list is of the form \theta, t, t', n_{t,t'}, \dots but the n_{t,t'} \geq 1, so in Elias delta encoding of oup << we do not need to add one. So it would be more efficient to subtract one here, and add one during decompression)
+  //       oup << ver_type_list[i][j]-1;
+  //     else
+  //       oup << ver_type_list[i][j];
+  //     //fwrite(&int_out, sizeof int_out, 1, f);
+  //     //output_bits += sizeof int_out;
+  //   }
+  //   */
+  // }
+
+
 
   chunks_new = oup.chunks();
   space_log.push_back(pair<string, int>("vertex type list", chunks_new - chunks));
@@ -899,57 +906,59 @@ void marked_graph_compressed::binary_read(string s){
   logger::add_entry("vertex types", "");
   // ==== read vertex_types
 
-  // read ver_type_list
-  inp >> int_in;
-  //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list
-  ver_type_list.resize(int_in);
-  for (int i=0; i<ver_type_list.size();i++){
-    inp >> int_in;
-    //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list[i]
-    ver_type_list[i].resize(int_in);
+  vtype_list_read(inp);
 
-    inp >> int_in;
-    ver_type_list[i][0] = int_in; // read the vertex mark part
+  // // read ver_type_list
+  // inp >> int_in;
+  // //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list
+  // ver_type_list.resize(int_in);
+  // for (int i=0; i<ver_type_list.size();i++){
+  //   inp >> int_in;
+  //   //fread(&int_in, sizeof int_in, 1, f); // size of ver_type_list[i]
+  //   ver_type_list[i].resize(int_in);
 
-    for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
-      // the triple is 3j+1, 3j+2, 3j+3
-      if (j==0){
-        // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
-        inp >> int_in;
-        ver_type_list[i][3*j+1] = int_in;
-        inp >> int_in;
-        ver_type_list[i][3*j+2] = int_in;
-        inp >> int_in;
-        ver_type_list[i][3*j+3] = int_in + 1; // since we had subtracted one during compression
-      }else{
-        // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
-        inp >> int_in;
-        ver_type_list[i][3*j+1] = int_in + ver_type_list[i][3*(j-1)+1]; // since we had encoded the difference during the compression phasen
+  //   inp >> int_in;
+  //   ver_type_list[i][0] = int_in; // read the vertex mark part
 
-        // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
-        if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
-          inp >> int_in;
-          ver_type_list[i][3*j+2] = int_in + ver_type_list[i][3*(j-1)+2];
-        }else{
-          // otherwise, just write t'_here
-          inp >> int_in;
-          ver_type_list[i][3*j+2] = int_in;
-        }
-        inp >> int_in;
-        ver_type_list[i][3*j+3]= int_in + 1; // since we had subtracted one during compression
-      }
-    }
+  //   for (int j=0;j<((ver_type_list[i].size()-1)/3); j++){
+  //     // the triple is 3j+1, 3j+2, 3j+3
+  //     if (j==0){
+  //       // the first chunk is written of the form t,t',n-1. The reason we write n-1 is because we know n > 0, so it is better to save some bits!
+  //       inp >> int_in;
+  //       ver_type_list[i][3*j+1] = int_in;
+  //       inp >> int_in;
+  //       ver_type_list[i][3*j+2] = int_in;
+  //       inp >> int_in;
+  //       ver_type_list[i][3*j+3] = int_in + 1; // since we had subtracted one during compression
+  //     }else{
+  //       // we know that the list is lexicographically ordered, so the t here is not less than the t is the previous chunk, so better to write their difference
+  //       inp >> int_in;
+  //       ver_type_list[i][3*j+1] = int_in + ver_type_list[i][3*(j-1)+1]; // since we had encoded the difference during the compression phasen
 
-    /* the old way of reading the list
-    for (int j=0;j<ver_type_list[i].size();j++){
-      //fread(&int_in, sizeof int_in, 1, f);
-      inp >> int_in;
-      if (j%3 == 0 and j > 0) // we know that the cont part is positive, so no need to add one during compression. So during compression, we subtract one to make it nonnegative
-        int_in ++;
-      ver_type_list[i][j] = int_in;
-    }
-    */
-  }
+  //       // if t_here is equal to t_previous, then t'_here >= t'_previous, so better to encode their difference!
+  //       if (ver_type_list[i][3*j+1] == ver_type_list[i][3*(j-1)+1]){
+  //         inp >> int_in;
+  //         ver_type_list[i][3*j+2] = int_in + ver_type_list[i][3*(j-1)+2];
+  //       }else{
+  //         // otherwise, just write t'_here
+  //         inp >> int_in;
+  //         ver_type_list[i][3*j+2] = int_in;
+  //       }
+  //       inp >> int_in;
+  //       ver_type_list[i][3*j+3]= int_in + 1; // since we had subtracted one during compression
+  //     }
+  //   }
+
+  //   /* the old way of reading the list
+  //   for (int j=0;j<ver_type_list[i].size();j++){
+  //     //fread(&int_in, sizeof int_in, 1, f);
+  //     inp >> int_in;
+  //     if (j%3 == 0 and j > 0) // we know that the cont part is positive, so no need to add one during compression. So during compression, we subtract one to make it nonnegative
+  //       int_in ++;
+  //     ver_type_list[i][j] = int_in;
+  //   }
+  //   */
+  // }
 
   // ver_types
   // ver_types.first
@@ -1017,6 +1026,260 @@ void marked_graph_compressed::binary_read(string s){
   inp.close();
   logger::current_depth--;
 }
+
+int marked_graph_compressed::vtype_max_match(int i, int j){
+  int max_match = 0;
+  int k;
+  bool flag;
+  while(true){
+    if (((3*max_match + 3) >= ver_type_list[i].size()) or ((3*max_match+3) >= ver_type_list[j].size())) // one of the lists is reached an end
+      break;
+    flag = true;
+    for (k=1;k<=3;k++)
+      if (ver_type_list[i][3*max_match+k] != ver_type_list[j][3*max_match+k])
+        flag = false;
+    if (flag == false)
+      break;
+    max_match++;
+  }
+  return max_match;
+}
+
+void marked_graph_compressed::vtype_list_write(obitstream& oup){
+  // first, we should extract information about vertex marks
+  vector<pair<int, int> > ver_types_freq; // each element (m,k) means that the ver mark m appears in k many vertex types
+  vector<pair<int, int> > ver_types_blocks; // the ith entry is (a,b), where a and b denote the range of indices in ith block. Note that the range is of the form [a,b)
+  //int prev_mark = ver_type_list[0][0]-1; // define it this way, so that initially it is different from the first mark
+  int current_mark; // the mark of the current blcok
+  int block_start = 0; // the start index of the current vertex mark block, a block is subsequent entries in ver_type_list with the same vertex marks
+  int i = 0;
+  while(i<ver_type_list.size()){
+    current_mark = ver_type_list[block_start][0];
+    while (ver_type_list[i][0] == current_mark){
+      i++;
+    }
+    ver_types_freq.push_back(pair<int, int>(current_mark, i - block_start));
+    ver_types_blocks.push_back(pair<int, int>(block_start, i));
+    block_start = i;
+  }
+
+  // writing ver_type_freq to the output
+  oup << ver_types_freq.size();
+  for (i=0;i<ver_types_freq.size();i++){
+    oup << ver_types_freq[i].first;
+    oup << ver_types_freq[i].second - 1;// since it is at least one
+  }
+
+  // now, we go over each block
+  // let b denote the block index
+  int max_match;
+
+  //for (int b=0; b<ver_types_freq.size();b++){
+  //for (i=ver_types_blocks[b].first; i<ver_types_blocks[b].second; i++){
+  for (i =0; i<ver_type_list.size();i++){
+    if (i==0){
+      // this is the first row, so its compression is different
+      oup << (ver_type_list[i].size()-1)/3; // number of blocks
+      for (int j=0;j<(ver_type_list[i].size()-1)/3; j++){
+        if (j==0)
+          vtype_block_write(oup, i, j);
+        else
+          vtype_block_write(oup, i, j, i, j-1); // use the previous block as reference
+      }
+    }else{
+      max_match = vtype_max_match(i, i-1); // compare with the previous one
+      oup << max_match;
+      oup << (ver_type_list[i].size()-1)/3 - max_match; // number of remaining blocks
+      if (max_match < (ver_type_list[i].size()-1)/3){
+        // there are still some blocks to be encoded
+        // first, we need to encode the block max_match itself
+        // if this block exists in row i-1, we use that as a reference,
+        if (max_match <(ver_type_list[i-1].size()-1)/3){
+          vtype_block_write(oup, i, max_match, i-1, max_match);
+          // then, write the remaining blocks, if any
+          for (int j = max_match+1; j<(ver_type_list[i].size()-1)/3; j++){
+            vtype_block_write(oup, i, j, i, j-1);
+          }
+        }else{
+          // if block max_match - 1 exists in row i, use it as a reference
+          if (max_match > 0){
+            for (int j = max_match; j<(ver_type_list[i].size()-1)/3; j++){
+              vtype_block_write(oup, i, j, i, j-1);
+            }
+          }else{
+            // otherwise, encode the first block standalone, and recursively go forward and use previous block as reference 
+            vtype_block_write(oup, i, max_match);
+            for (int j = max_match+1; j<(ver_type_list[i].size()-1)/3; j++){
+              vtype_block_write(oup, i, j, i, j-1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+void marked_graph_compressed::vtype_list_read(ibitstream& inp){
+  // read vertex mark block counts
+  vector<pair<int, int> > ver_types_freq; // each element (m,k) means that the ver mark m appears in k many vertex types
+  vector<pair<int, int> > ver_types_blocks; // the ith entry is (a,b), where a and b denote the range of indices in ith block. Note that the range is of the form [a,b)
+  unsigned int int_in;
+
+  inp >> int_in;
+  ver_types_freq.resize(int_in);
+  int total_types = 0; // size of ver_type_int
+  
+  for (int i=0;i<ver_types_freq.size();i++){
+    inp >> int_in;
+    ver_types_freq[i].first = int_in;
+    inp >> int_in;
+    ver_types_freq[i].second  = int_in + 1;
+    total_types += ver_types_freq[i].second;
+  }
+  ver_type_list.resize(total_types);
+  int block = 0; // the block at which we are in terms of vertex mark
+  int count_in_block = 0; // the index of me in the current blcok
+  int max_match; // maximum match with the previous row
+  int total_chunks; 
+  for (int i=0; i<ver_type_list.size(); i++){
+    if (count_in_block == ver_types_freq[block].second){
+      block++;
+      count_in_block =0 ;
+    }
+    if (i==0){
+      inp >> int_in; // the number of chunks
+      ver_type_list[i].resize(1+3*int_in);
+      ver_type_list[i][0] = ver_types_freq[block].first; // fix the vertex mark
+      for (int j=0; j<int_in; j++){ // read blocks one by one
+        if (j==0)
+          vtype_block_read(inp, i, j);
+        else
+          vtype_block_read(inp, i, j, i, j-1); // use the previous block as reference
+      }
+    }else{
+      inp >> int_in;
+      max_match = int_in;
+      inp >> int_in; // the remaining chunks
+      total_chunks = max_match + int_in; 
+      ver_type_list[i].resize(1+3*total_chunks);
+      // first, fill the matching chunks
+      ver_type_list[i][0] = ver_types_freq[block].first;
+      for (int j=0; j<max_match;j++){
+        ver_type_list[i][1+3*j] = ver_type_list[i-1][1+3*j];
+        ver_type_list[i][2+3*j] = ver_type_list[i-1][2+3*j];
+        ver_type_list[i][3+3*j] = ver_type_list[i-1][3+3*j];
+      }
+      if (max_match < total_chunks){
+        // there are still some blocks to be decoded
+        // first, we need to encode the block max_match itself
+        // if this block exists in row i-1, we use that as a reference,
+        if (max_match <(ver_type_list[i-1].size()-1)/3){
+          vtype_block_read(inp, i, max_match, i-1, max_match);
+          // then, write the remaining blocks, if any
+          for (int j = max_match+1; j<(ver_type_list[i].size()-1)/3; j++){
+            vtype_block_read(inp, i, j, i, j-1);
+          }
+        }else{
+          // if block max_match - 1 exists in row i, use it as a reference
+          if (max_match > 0){
+            for (int j = max_match; j<total_chunks; j++){
+              vtype_block_read(inp, i, j, i, j-1);
+            }
+          }else{
+            // otherwise, encode the first block standalone, and recursively go forward and use previous block as reference 
+            vtype_block_read(inp, i, max_match);
+            for (int j = max_match+1; j<total_chunks; j++){
+              vtype_block_read(inp, i, j, i, j-1);
+            }
+          }
+        }
+      }
+    }
+    count_in_block++;
+  }
+
+}
+
+void vtype_list_read(ibitstream& inp);
+
+void marked_graph_compressed::vtype_block_write(obitstream& oup, int i, int j){
+  oup << ver_type_list[i][3*j+1];
+  oup << ver_type_list[i][3*j+2];
+  oup << ver_type_list[i][3*j+3]-1;
+}
+
+void marked_graph_compressed::vtype_block_write(obitstream& oup, int i, int j, int ir, int jr){
+  // we use the following terminologies for comments:
+  // t = ver_type_list[i][3*j+1]
+  // t' = ver_type_int[i][3*j+2]
+  // n = ver_type_list[i][3*j+3]
+  // t_r = ver_type_list[ir][3*jr+1]
+  // t'_r = ver_type_list[ir][3*jr+2]
+  // n_r = ver_type_list[ir][3*jr+3]
+
+  //write the difference between the t parts, i.e. t - t_r
+  oup << ver_type_list[i][3*j+1] - ver_type_list[ir][3*jr+1];
+
+  // check if the t part is the same, i.e. t = t_r
+  if (ver_type_list[i][3*j+1] == ver_type_list[ir][3*jr+1]){
+    // encode the difference of the t' part
+    // but in this case, t' > t'_r, since (t,t') can not be the same as (t_r, t'_r). Hence, we may subtract one to save some space
+    oup << ver_type_list[i][3*j+2] - ver_type_list[ir][3*jr+2] - 1;
+    // for sanity check:
+    // TO BE REMOVED LATER
+    if (ver_type_list[i][3*j+2] == ver_type_list[ir][3*jr+2])
+      cerr << " warning marked_graph_compressed::vtype_block_write : (t,t') = (t_r, t'_r), (i,j) = " << i << ", " << j << ") and (ir, jr) = (" << ir << ", " << jr << ")" << endl;
+  }else{
+    // just write t'
+    oup << ver_type_list[i][3*j+2];
+  }
+
+  // finally, write n - 1, note that n > 0, so we encode n - 1 to save some space
+  oup << ver_type_list[i][3*j+3] - 1;
+}
+
+void marked_graph_compressed::vtype_block_read(ibitstream& inp, int i, int j){
+  unsigned int int_in;
+  inp >> int_in;
+  ver_type_list[i][3*j+1] = int_in;
+  inp >> int_in;
+  ver_type_list[i][3*j+2] = int_in;
+  inp >> int_in;
+  ver_type_list[i][3*j+3] = int_in + 1; // since we had subtracted one during compression
+}
+
+void marked_graph_compressed::vtype_block_read(ibitstream& inp, int i, int j, int ir, int jr){
+  // we use the following terminologies for comments:
+  // t = ver_type_list[i][3*j+1]
+  // t' = ver_type_int[i][3*j+2]
+  // n = ver_type_list[i][3*j+3]
+  // t_r = ver_type_list[ir][3*jr+1]
+  // t'_r = ver_type_list[ir][3*jr+2]
+  // n_r = ver_type_list[ir][3*jr+3]
+  unsigned int int_in;
+  inp >> int_in;
+  ver_type_list[i][3*j+1] = int_in + ver_type_list[ir][3*jr+1]; // since we had encoded the difference during the compression phasen
+ 
+  // if t = t_r, we have encoded t' - t'_r - 1
+  if (ver_type_list[i][3*j+1] == ver_type_list[ir][3*jr+1]){
+    inp >> int_in;
+    ver_type_list[i][3*j+2] = int_in + ver_type_list[ir][3*jr+2] + 1;
+  }else{
+    // otherwise, we have just encoded t'
+    inp >> int_in;
+    ver_type_list[i][3*j+2] = int_in;
+  }
+  inp >> int_in;
+  ver_type_list[i][3*j+3]= int_in + 1; // since we had subtracted one during compression
+}
+
+
+// ----------------------------------------
+// ----------------------------------------
+//         marked_graph_encoder
+// ----------------------------------------
+// ----------------------------------------
 
 
 marked_graph_compressed marked_graph_encoder::encode(const marked_graph& G)
