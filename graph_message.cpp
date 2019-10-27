@@ -566,6 +566,8 @@ void colored_graph::init(const marked_graph& G)
   ver_type.resize(nu_vertices);
   ver_type_int.resize(nu_vertices);
 
+  vector<int> vt; // type of v
+
   for (int v=0;v<nu_vertices;v++){
     is_star_vertex[v] = false; // it is false unless we figure out otherwise, see below
     for (int i=0;i<adj_list[v].size(); i++){
@@ -596,7 +598,7 @@ void colored_graph::init(const marked_graph& G)
     // the type of a vertex is a vector x as follows:
     // x[0] is the vertex mark of v
     // x[3k+1], x[3k+2], x[3k+3] = (m_k, mp_k, deg[v][(m_k, mp_k)]) where (m_k, mp_k) is the kt key present in the map deg[v]. Since deg[v] is a map, we read its elements in increasing order (lexicographic order for pairs (m, mp)), hence this list is on a 1-1 correspondence with the pair (\theta(v), D(v)) in the paper.
-    vector<int> vt; // type of v
+    
     vt.resize(1+3 * deg[v].size()); // motivated by the above explanation
     vt[0] = G.ver_mark[v]; // mark of v
     int k = 0; // current index of vt
@@ -604,8 +606,13 @@ void colored_graph::init(const marked_graph& G)
       vt[++k] = it->first.first; // m
       vt[++k] = it->first.second; // mp
       vt[++k] = it->second;
+      
     }
 
+    // cerr << " vt ";
+    // for (int AA=0; AA<vt.size(); AA++)
+    //   cerr << vt[AA] << " ";
+    // cerr << endl;
     ver_type[v] = vt;
     // find ver_type_int[v]
     if (ver_type_dict.find(vt) == ver_type_dict.end()){
@@ -617,7 +624,18 @@ void colored_graph::init(const marked_graph& G)
   }
 
   // editing vertex types so that the vertex type list is sorted lexicographically
-  
+
+  // cerr << " ver_type_list before sorting " << endl;
+  // for (int K=0; K<ver_type_list.size(); K++){
+  //   //for (int J=0; J<ver_type_list[K].size(); J++)
+  //   //  cerr << ver_type_list[K][J] << " ";
+  //   cerr << ver_type_list[K][0]<< ": ";
+  //   for (int j=0; j< (ver_type_list[K].size()-1)/3; j++)
+  //     cerr << "| " << ver_type_list[K][1+3*j] << " " << ver_type_list[K][2+3*j] << " " << ver_type_list[K][3+3*j] << " ";
+  //   cerr << endl;
+  // }
+  // cerr << endl << endl;
+
   map<vector<int>, int >::iterator it;
   int counter = 0;
   for (it=ver_type_dict.begin(); it!=ver_type_dict.end(); it++){

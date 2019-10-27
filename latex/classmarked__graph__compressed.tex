@@ -1208,15 +1208,15 @@ reads a (t,t\textquotesingle{},n) block of a vertex type list element from input
 \end{DoxyParams}
 
 \begin{DoxyCode}
-1242                                                                            \{
-1243   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
-1244   inp >> int\_in;
-1245   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] = int\_in;
-1246   inp >> int\_in;
-1247   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+2] = int\_in;
-1248   inp >> int\_in;
-1249   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+3] = int\_in + 1; \textcolor{comment}{// since we had subtracted one during compression}
-1250 \}
+1279                                                                            \{
+1280   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
+1281   inp >> int\_in;
+1282   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] = int\_in;
+1283   inp >> int\_in;
+1284   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+2] = int\_in;
+1285   inp >> int\_in;
+1286   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+3] = int\_in + 1; \textcolor{comment}{// since we had subtracted one during compression}
+1287 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_a01a434f3313d99b5877eddacb380cf15}\label{classmarked__graph__compressed_a01a434f3313d99b5877eddacb380cf15}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+block\+\_\+read@{vtype\+\_\+block\+\_\+read}}
@@ -1239,31 +1239,38 @@ reads a (t,t\textquotesingle{},n) block of a vertex type list element with refer
 \end{DoxyParams}
 
 \begin{DoxyCode}
-1252                                                                                            \{
-1253   \textcolor{comment}{// we use the following terminologies for comments:}
-1254   \textcolor{comment}{// t = ver\_type\_list[i][3*j+1]}
-1255   \textcolor{comment}{// t' = ver\_type\_int[i][3*j+2]}
-1256   \textcolor{comment}{// n = ver\_type\_list[i][3*j+3]}
-1257   \textcolor{comment}{// t\_r = ver\_type\_list[ir][3*jr+1]}
-1258   \textcolor{comment}{// t'\_r = ver\_type\_list[ir][3*jr+2]}
-1259   \textcolor{comment}{// n\_r = ver\_type\_list[ir][3*jr+3]}
-1260   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
-1261   inp >> int\_in;
-1262   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] = int\_in + \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ir][3*jr+1]; \textcolor{comment}{// since we had
+1289                                                                                            \{
+1290   \textcolor{comment}{// we use the following terminologies for comments:}
+1291   \textcolor{comment}{// t = ver\_type\_list[i][3*j+1]}
+1292   \textcolor{comment}{// t' = ver\_type\_int[i][3*j+2]}
+1293   \textcolor{comment}{// n = ver\_type\_list[i][3*j+3]}
+1294   \textcolor{comment}{// t\_r = ver\_type\_list[ir][3*jr+1]}
+1295   \textcolor{comment}{// t'\_r = ver\_type\_list[ir][3*jr+2]}
+1296   \textcolor{comment}{// n\_r = ver\_type\_list[ir][3*jr+3]}
+1297   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
+1298   inp >> int\_in;
+1299   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] = int\_in + \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ir][3*jr+1]; \textcolor{comment}{// since we had
        encoded the difference during the compression phasen}
-1263  
-1264   \textcolor{comment}{// if t = t\_r, we have encoded t' - t'\_r - 1}
-1265   \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+1] == ver\_type\_list[ir][3*jr+1])\{
-1266     inp >> int\_in;
-1267     ver\_type\_list[i][3*j+2] = int\_in + ver\_type\_list[ir][3*jr+2] + 1;
-1268   \}\textcolor{keywordflow}{else}\{
-1269     \textcolor{comment}{// otherwise, we have just encoded t'}
-1270     inp >> int\_in;
-1271     ver\_type\_list[i][3*j+2] = int\_in;
-1272   \}
-1273   inp >> int\_in;
-1274   ver\_type\_list[i][3*j+3]= int\_in + 1; \textcolor{comment}{// since we had subtracted one during compression}
-1275 \}
+1300  
+1301   \textcolor{comment}{// if t = t\_r, we have encoded t' - t'\_r - 1}
+1302   \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+1] == ver\_type\_list[ir][3*jr+1])\{
+1303     inp >> int\_in;
+1304     ver\_type\_list[i][3*j+2] = int\_in + ver\_type\_list[ir][3*jr+2];
+1305     \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+2] == ver\_type\_list[ir][3*jr+2])\{
+1306       inp >> int\_in; 
+1307       ver\_type\_list[i][3*j+3] = int\_in +  ver\_type\_list[ir][3*jr+3];
+1308     \}\textcolor{keywordflow}{else}\{
+1309       inp >> int\_in; 
+1310       ver\_type\_list[i][3*j+3] = int\_in +  1;
+1311     \}
+1312   \}\textcolor{keywordflow}{else}\{
+1313     \textcolor{comment}{// otherwise, we have just encoded t'}
+1314     inp >> int\_in;
+1315     ver\_type\_list[i][3*j+2] = int\_in;
+1316     inp >> int\_in;
+1317     ver\_type\_list[i][3*j+3]= int\_in + 1; \textcolor{comment}{// since we had subtracted one during compression}
+1318   \}
+1319 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}\label{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+block\+\_\+write@{vtype\+\_\+block\+\_\+write}}
@@ -1282,11 +1289,11 @@ writes a (t,t\textquotesingle{},n) block of a vertex type list element to the ou
 \end{DoxyParams}
 
 \begin{DoxyCode}
-1206                                                                             \{
-1207   oup << \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1];
-1208   oup << ver\_type\_list[i][3*j+2];
-1209   oup << ver\_type\_list[i][3*j+3]-1;
-1210 \}
+1237                                                                             \{
+1238   oup << \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1];
+1239   oup << ver\_type\_list[i][3*j+2];
+1240   oup << ver\_type\_list[i][3*j+3]-1;
+1241 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_ad443f83015addcc0f2b0e35351ae9362}\label{classmarked__graph__compressed_ad443f83015addcc0f2b0e35351ae9362}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+block\+\_\+write@{vtype\+\_\+block\+\_\+write}}
@@ -1309,37 +1316,42 @@ writes a (t,t\textquotesingle{},n) block of a vertex type list element with refe
 \end{DoxyParams}
 
 \begin{DoxyCode}
-1212                                                                                             \{
-1213   \textcolor{comment}{// we use the following terminologies for comments:}
-1214   \textcolor{comment}{// t = ver\_type\_list[i][3*j+1]}
-1215   \textcolor{comment}{// t' = ver\_type\_int[i][3*j+2]}
-1216   \textcolor{comment}{// n = ver\_type\_list[i][3*j+3]}
-1217   \textcolor{comment}{// t\_r = ver\_type\_list[ir][3*jr+1]}
-1218   \textcolor{comment}{// t'\_r = ver\_type\_list[ir][3*jr+2]}
-1219   \textcolor{comment}{// n\_r = ver\_type\_list[ir][3*jr+3]}
-1220 
-1221   \textcolor{comment}{//write the difference between the t parts, i.e. t - t\_r}
-1222   oup << \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] - \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ir][3*jr+1];
-1223 
-1224   \textcolor{comment}{// check if the t part is the same, i.e. t = t\_r}
-1225   \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+1] == ver\_type\_list[ir][3*jr+1])\{
-1226     \textcolor{comment}{// encode the difference of the t' part}
-1227     \textcolor{comment}{// but in this case, t' > t'\_r, since (t,t') can not be the same as (t\_r, t'\_r). Hence, we may subtract
-       one to save some space}
-1228     oup << ver\_type\_list[i][3*j+2] - ver\_type\_list[ir][3*jr+2] - 1;
-1229     \textcolor{comment}{// for sanity check:}
-1230     \textcolor{comment}{// TO BE REMOVED LATER}
-1231     \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+2] == ver\_type\_list[ir][3*jr+2])
-1232       cerr << \textcolor{stringliteral}{" warning marked\_graph\_compressed::vtype\_block\_write : (t,t') = (t\_r, t'\_r), (i,j) = "} << i <
-      < \textcolor{stringliteral}{", "} << j << \textcolor{stringliteral}{") and (ir, jr) = ("} << ir << \textcolor{stringliteral}{", "} << jr << \textcolor{stringliteral}{")"} << endl;
-1233   \}\textcolor{keywordflow}{else}\{
-1234     \textcolor{comment}{// just write t'}
-1235     oup << ver\_type\_list[i][3*j+2];
-1236   \}
-1237 
-1238   \textcolor{comment}{// finally, write n - 1, note that n > 0, so we encode n - 1 to save some space}
-1239   oup << ver\_type\_list[i][3*j+3] - 1;
-1240 \}
+1243                                                                                             \{
+1244   \textcolor{comment}{// we use the following terminologies for comments:}
+1245   \textcolor{comment}{// t = ver\_type\_list[i][3*j+1]}
+1246   \textcolor{comment}{// t' = ver\_type\_int[i][3*j+2]}
+1247   \textcolor{comment}{// n = ver\_type\_list[i][3*j+3]}
+1248   \textcolor{comment}{// t\_r = ver\_type\_list[ir][3*jr+1]}
+1249   \textcolor{comment}{// t'\_r = ver\_type\_list[ir][3*jr+2]}
+1250   \textcolor{comment}{// n\_r = ver\_type\_list[ir][3*jr+3]}
+1251 
+1252   \textcolor{comment}{//write the difference between the t parts, i.e. t - t\_r}
+1253   oup << \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3*j+1] - \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[ir][3*jr+1];
+1254 
+1255   \textcolor{comment}{// check if the t part is the same, i.e. t = t\_r}
+1256   \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+1] == ver\_type\_list[ir][3*jr+1])\{
+1257     \textcolor{comment}{// encode the difference of the t' part}
+1258     \textcolor{comment}{// but in this case, t' >= t'\_r, so write the difference}
+1259     oup << ver\_type\_list[i][3*j+2] - ver\_type\_list[ir][3*jr+2];
+1260     \textcolor{comment}{// for sanity check:}
+1261     \textcolor{comment}{// TO BE REMOVED LATER}
+1262     \textcolor{comment}{//if (ver\_type\_list[i][3*j+2] == ver\_type\_list[ir][3*jr+2])}
+1263     \textcolor{comment}{//cerr << " warning marked\_graph\_compressed::vtype\_block\_write : (t,t') = (t\_r, t'\_r), (i,j) = " << i
+       << ", " << j << ") and (ir, jr) = (" << ir << ", " << jr << ")" << endl;}
+1264     \textcolor{keywordflow}{if} (ver\_type\_list[i][3*j+2] == ver\_type\_list[ir][3*jr+2])\{
+1265       oup << ver\_type\_list[i][3*j+3] - ver\_type\_list[ir][3*jr+3];
+1266     \}\textcolor{keywordflow}{else}\{
+1267       oup << ver\_type\_list[i][3*j+3] - 1;
+1268     \}
+1269   \}\textcolor{keywordflow}{else}\{
+1270     \textcolor{comment}{// just write t'}
+1271     oup << ver\_type\_list[i][3*j+2];
+1272     \textcolor{comment}{// finally, write n - 1, note that n > 0, so we encode n - 1 to save some space}
+1273     oup << ver\_type\_list[i][3*j+3] - 1;
+1274   \}
+1275 
+1276   
+1277 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_af29f16cbd56583652118eb24a7c233b7}\label{classmarked__graph__compressed_af29f16cbd56583652118eb24a7c233b7}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+list\+\_\+read@{vtype\+\_\+list\+\_\+read}}
@@ -1353,89 +1365,95 @@ reads the ver\+\_\+type\+\_\+list array from the input, assuming the bit sequenc
 
 
 \begin{DoxyCode}
-1123                                                             \{
-1124   \textcolor{comment}{// read vertex mark block counts}
-1125   vector<pair<int, int> > ver\_types\_freq; \textcolor{comment}{// each element (m,k) means that the ver mark m appears in k many
+1148                                                             \{
+1149   \textcolor{comment}{// read vertex mark block counts}
+1150   vector<pair<int, int> > ver\_types\_freq; \textcolor{comment}{// each element (m,k) means that the ver mark m appears in k many
        vertex types}
-1126   vector<pair<int, int> > ver\_types\_blocks; \textcolor{comment}{// the ith entry is (a,b), where a and b denote the range of
+1151   \textcolor{comment}{//vector<pair<int, int> > ver\_types\_blocks; // the ith entry is (a,b), where a and b denote the range of
        indices in ith block. Note that the range is of the form [a,b)}
-1127   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
-1128 
-1129   inp >> int\_in;
-1130   ver\_types\_freq.resize(int\_in);
-1131   \textcolor{keywordtype}{int} total\_types = 0; \textcolor{comment}{// size of ver\_type\_int}
-1132   
-1133   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<ver\_types\_freq.size();i++)\{
-1134     inp >> int\_in;
-1135     ver\_types\_freq[i].first = int\_in;
-1136     inp >> int\_in;
-1137     ver\_types\_freq[i].second  = int\_in + 1;
-1138     total\_types += ver\_types\_freq[i].second;
-1139   \}
-1140   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.resize(total\_types);
-1141   \textcolor{keywordtype}{int} block = 0; \textcolor{comment}{// the block at which we are in terms of vertex mark}
-1142   \textcolor{keywordtype}{int} count\_in\_block = 0; \textcolor{comment}{// the index of me in the current blcok}
-1143   \textcolor{keywordtype}{int} max\_match; \textcolor{comment}{// maximum match with the previous row}
-1144   \textcolor{keywordtype}{int} total\_chunks; 
-1145   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size(); i++)\{
-1146     \textcolor{keywordflow}{if} (count\_in\_block == ver\_types\_freq[block].second)\{
-1147       block++;
-1148       count\_in\_block =0 ;
-1149     \}
-1150     \textcolor{keywordflow}{if} (i==0)\{
-1151       inp >> int\_in; \textcolor{comment}{// the number of chunks}
-1152       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(1+3*int\_in);
-1153       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] = ver\_types\_freq[block].first; \textcolor{comment}{// fix the vertex mark}
-1154       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<int\_in; j++)\{ \textcolor{comment}{// read blocks one by one}
-1155         \textcolor{keywordflow}{if} (j==0)
-1156           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j);
-1157         \textcolor{keywordflow}{else}
-1158           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1); \textcolor{comment}{// use the previous block as reference}
-1159       \}
-1160     \}\textcolor{keywordflow}{else}\{
-1161       inp >> int\_in;
-1162       max\_match = int\_in;
-1163       inp >> int\_in; \textcolor{comment}{// the remaining chunks}
-1164       total\_chunks = max\_match + int\_in; 
-1165       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(1+3*total\_chunks);
-1166       \textcolor{comment}{// first, fill the matching chunks}
-1167       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] = ver\_types\_freq[block].first;
-1168       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<max\_match;j++)\{
-1169         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][1+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][1+3*j];
-1170         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][2+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][2+3*j];
-1171         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][3+3*j];
-1172       \}
-1173       \textcolor{keywordflow}{if} (max\_match < total\_chunks)\{
-1174         \textcolor{comment}{// there are still some blocks to be decoded}
-1175         \textcolor{comment}{// first, we need to encode the block max\_match itself}
-1176         \textcolor{comment}{// if this block exists in row i-1, we use that as a reference,}
-1177         \textcolor{keywordflow}{if} (max\_match <(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1].size()-1)/3)\{
-1178           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, max\_match, i-1, max\_match);
-1179           \textcolor{comment}{// then, write the remaining blocks, if any}
-1180           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
-1181             \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
-1182           \}
-1183         \}\textcolor{keywordflow}{else}\{
-1184           \textcolor{comment}{// if block max\_match - 1 exists in row i, use it as a reference}
-1185           \textcolor{keywordflow}{if} (max\_match > 0)\{
-1186             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match; j<total\_chunks; j++)\{
-1187               \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
-1188             \}
-1189           \}\textcolor{keywordflow}{else}\{
-1190             \textcolor{comment}{// otherwise, encode the first block standalone, and recursively go forward and use previous
+1152   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} int\_in;
+1153 
+1154   inp >> int\_in;
+1155   ver\_types\_freq.resize(int\_in);
+1156   \textcolor{keywordtype}{int} total\_types = 0; \textcolor{comment}{// size of ver\_type\_int}
+1157 
+1158   \textcolor{keywordtype}{int} block\_start = 0;
+1159   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<ver\_types\_freq.size();i++)\{
+1160     inp >> int\_in;
+1161     ver\_types\_freq[i].first = int\_in;
+1162     inp >> int\_in;
+1163     ver\_types\_freq[i].second  = int\_in + 1;
+1164     total\_types += ver\_types\_freq[i].second;
+1165     \textcolor{comment}{//ver\_types\_blocks.push\_back(pair<int,int>(block\_start, block\_start+ver\_types\_freq[i].second));}
+1166     \textcolor{comment}{//block\_start += ver\_types\_freq[i].second;}
+1167   \}
+1168 
+1169   \textcolor{comment}{// create ver\_types\_blocks}
+1170 
+1171   \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.resize(total\_types);
+1172   \textcolor{keywordtype}{int} block = 0; \textcolor{comment}{// the block at which we are in terms of vertex mark}
+1173   \textcolor{keywordtype}{int} count\_in\_block = 0; \textcolor{comment}{// the index of me in the current blcok}
+1174   \textcolor{keywordtype}{int} max\_match; \textcolor{comment}{// maximum match with the previous row}
+1175   \textcolor{keywordtype}{int} total\_chunks; 
+1176   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size(); i++)\{
+1177     \textcolor{keywordflow}{if} (count\_in\_block == ver\_types\_freq[block].second)\{
+1178       block++;
+1179       count\_in\_block =0 ;
+1180     \}
+1181     \textcolor{keywordflow}{if} (count\_in\_block==0)\{
+1182       inp >> int\_in; \textcolor{comment}{// the number of chunks}
+1183       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(1+3*int\_in);
+1184       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] = ver\_types\_freq[block].first; \textcolor{comment}{// fix the vertex mark}
+1185       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<int\_in; j++)\{ \textcolor{comment}{// read blocks one by one}
+1186         \textcolor{keywordflow}{if} (j==0)
+1187           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j);
+1188         \textcolor{keywordflow}{else}
+1189           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1); \textcolor{comment}{// use the previous block as reference}
+1190       \}
+1191     \}\textcolor{keywordflow}{else}\{
+1192       inp >> int\_in;
+1193       max\_match = int\_in;
+1194       inp >> int\_in; \textcolor{comment}{// the remaining chunks}
+1195       total\_chunks = max\_match + int\_in; 
+1196       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].resize(1+3*total\_chunks);
+1197       \textcolor{comment}{// first, fill the matching chunks}
+1198       \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] = ver\_types\_freq[block].first;
+1199       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<max\_match;j++)\{
+1200         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][1+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][1+3*j];
+1201         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][2+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][2+3*j];
+1202         \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][3+3*j] = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1][3+3*j];
+1203       \}
+1204       \textcolor{keywordflow}{if} (max\_match < total\_chunks)\{
+1205         \textcolor{comment}{// there are still some blocks to be decoded}
+1206         \textcolor{comment}{// first, we need to encode the block max\_match itself}
+1207         \textcolor{comment}{// if this block exists in row i-1, we use that as a reference,}
+1208         \textcolor{keywordflow}{if} (max\_match <(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1].size()-1)/3)\{
+1209           \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, max\_match, i-1, max\_match);
+1210           \textcolor{comment}{// then, write the remaining blocks, if any}
+1211           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
+1212             \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
+1213           \}
+1214         \}\textcolor{keywordflow}{else}\{
+1215           \textcolor{comment}{// if block max\_match - 1 exists in row i, use it as a reference}
+1216           \textcolor{keywordflow}{if} (max\_match > 0)\{
+1217             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match; j<total\_chunks; j++)\{
+1218               \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
+1219             \}
+1220           \}\textcolor{keywordflow}{else}\{
+1221             \textcolor{comment}{// otherwise, encode the first block standalone, and recursively go forward and use previous
        block as reference }
-1191             \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, max\_match);
-1192             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<total\_chunks; j++)\{
-1193               \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
-1194             \}
-1195           \}
-1196         \}
-1197       \}
-1198     \}
-1199     count\_in\_block++;
-1200   \}
-1201 
-1202 \}
+1222             \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, max\_match);
+1223             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<total\_chunks; j++)\{
+1224               \hyperlink{classmarked__graph__compressed_a4bf8563a2dfd3038dc5833c014320487}{vtype\_block\_read}(inp, i, j, i, j-1);
+1225             \}
+1226           \}
+1227         \}
+1228       \}
+1229     \}
+1230     count\_in\_block++;
+1231   \}
+1232 
+1233 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_a889749dd51bc37917a156e337eac142a}\label{classmarked__graph__compressed_a889749dd51bc37917a156e337eac142a}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+list\+\_\+write@{vtype\+\_\+list\+\_\+write}}
@@ -1461,73 +1479,99 @@ writes the ver\+\_\+type\+\_\+list array to the output using difference coding, 
 1054   \textcolor{keywordtype}{int} block\_start = 0; \textcolor{comment}{// the start index of the current vertex mark block, a block is subsequent entries
        in ver\_type\_list with the same vertex marks}
 1055   \textcolor{keywordtype}{int} i = 0;
-1056   \textcolor{keywordflow}{while}(i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size())\{
-1057     current\_mark = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[block\_start][0];
-1058     \textcolor{keywordflow}{while} (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] == current\_mark)\{
-1059       i++;
-1060     \}
-1061     ver\_types\_freq.push\_back(pair<int, int>(current\_mark, i - block\_start));
-1062     ver\_types\_blocks.push\_back(pair<int, int>(block\_start, i));
-1063     block\_start = i;
-1064   \}
-1065 
-1066   \textcolor{comment}{// writing ver\_type\_freq to the output}
-1067   oup << ver\_types\_freq.size();
-1068   \textcolor{keywordflow}{for} (i=0;i<ver\_types\_freq.size();i++)\{
-1069     oup << ver\_types\_freq[i].first;
-1070     oup << ver\_types\_freq[i].second - 1;\textcolor{comment}{// since it is at least one}
-1071   \}
-1072 
-1073   \textcolor{comment}{// now, we go over each block}
-1074   \textcolor{comment}{// let b denote the block index}
-1075   \textcolor{keywordtype}{int} max\_match;
-1076 
-1077   \textcolor{comment}{//for (int b=0; b<ver\_types\_freq.size();b++)\{}
-1078   \textcolor{comment}{//for (i=ver\_types\_blocks[b].first; i<ver\_types\_blocks[b].second; i++)\{}
-1079   \textcolor{keywordflow}{for} (i =0; i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size();i++)\{
-1080     \textcolor{keywordflow}{if} (i==0)\{
-1081       \textcolor{comment}{// this is the first row, so its compression is different}
-1082       oup << (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; \textcolor{comment}{// number of blocks}
-1083       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
-1084         \textcolor{keywordflow}{if} (j==0)
-1085           \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j);
-1086         \textcolor{keywordflow}{else}
-1087           \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1); \textcolor{comment}{// use the previous block as reference}
-1088       \}
-1089     \}\textcolor{keywordflow}{else}\{
-1090       max\_match = \hyperlink{classmarked__graph__compressed_a5ce51414e335d817f4be781fdcfbe9b1}{vtype\_max\_match}(i, i-1); \textcolor{comment}{// compare with the previous one}
-1091       oup << max\_match;
-1092       oup << (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3 - max\_match; \textcolor{comment}{// number of remaining blocks}
-1093       \textcolor{keywordflow}{if} (max\_match < (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3)\{
-1094         \textcolor{comment}{// there are still some blocks to be encoded}
-1095         \textcolor{comment}{// first, we need to encode the block max\_match itself}
-1096         \textcolor{comment}{// if this block exists in row i-1, we use that as a reference,}
-1097         \textcolor{keywordflow}{if} (max\_match <(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1].size()-1)/3)\{
-1098           \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, max\_match, i-1, max\_match);
-1099           \textcolor{comment}{// then, write the remaining blocks, if any}
-1100           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
-1101             \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
-1102           \}
-1103         \}\textcolor{keywordflow}{else}\{
-1104           \textcolor{comment}{// if block max\_match - 1 exists in row i, use it as a reference}
-1105           \textcolor{keywordflow}{if} (max\_match > 0)\{
-1106             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
-1107               \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
-1108             \}
-1109           \}\textcolor{keywordflow}{else}\{
-1110             \textcolor{comment}{// otherwise, encode the first block standalone, and recursively go forward and use previous
-       block as reference }
-1111             \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, max\_match);
-1112             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
-1113               \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
-1114             \}
-1115           \}
-1116         \}
-1117       \}
-1118     \}
-1119   \}
-1120 
-1121 \}
+1056   \textcolor{comment}{// cerr << " ver\_type\_list.size() " << ver\_type\_list.size() << endl;}
+1057   \textcolor{comment}{// cerr << " ver\_type\_list " << endl;}
+1058   \textcolor{comment}{// for (int k=0; k<ver\_type\_list.size(); k++)\{}
+1059   \textcolor{comment}{//   cerr << "(" << k << ") ";}
+1060   \textcolor{comment}{//   cerr << ver\_type\_list[k][0]<< ": ";}
+1061   \textcolor{comment}{//   for (int j=0; j< (ver\_type\_list[k].size()-1)/3; j++)}
+1062   \textcolor{comment}{//     cerr << "| " << ver\_type\_list[k][1+3*j] << " " << ver\_type\_list[k][2+3*j] << " " <<
+       ver\_type\_list[k][3+3*j] << " ";}
+1063   \textcolor{comment}{//   cerr << endl;}
+1064   \textcolor{comment}{// \}}
+1065   \textcolor{keywordflow}{while}(i<\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size())\{
+1066     current\_mark = \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[block\_start][0];
+1067     \textcolor{keywordflow}{while} (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i][0] == current\_mark)\{
+1068       \textcolor{comment}{//cerr << i << " ";}
+1069       i++;
+1070       \textcolor{keywordflow}{if} (i >= \hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}.size())
+1071         \textcolor{keywordflow}{break};
+1072     \}
+1073     ver\_types\_freq.push\_back(pair<int, int>(current\_mark, i - block\_start));
+1074     ver\_types\_blocks.push\_back(pair<int, int>(block\_start, i));
+1075     block\_start = i;
+1076   \}
+1077 
+1078 
+1079   \textcolor{comment}{// writing ver\_type\_freq to the output}
+1080   oup << ver\_types\_freq.size();
+1081   \textcolor{keywordflow}{for} (i=0;i<ver\_types\_freq.size();i++)\{
+1082     \textcolor{comment}{//cerr << " mark " << ver\_types\_freq[i].first << " count " << ver\_types\_freq[i].second << endl;}
+1083     oup << ver\_types\_freq[i].first;
+1084     oup << ver\_types\_freq[i].second - 1;\textcolor{comment}{// since it is at least one}
+1085   \}
+1086 
+1087   \textcolor{comment}{// now, we go over each block}
+1088   \textcolor{comment}{// let b denote the block index}
+1089   \textcolor{keywordtype}{int} max\_match;
+1090 
+1091   \textcolor{keywordtype}{bool} cond\_1 = \textcolor{keyword}{false};
+1092   \textcolor{keywordtype}{bool} cond\_2 = \textcolor{keyword}{false};
+1093   \textcolor{keywordtype}{bool} cond\_3 = \textcolor{keyword}{false};
+1094   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} b=0; b<ver\_types\_freq.size();b++)\{
+1095     \textcolor{keywordflow}{for} (i=ver\_types\_blocks[b].first; i<ver\_types\_blocks[b].second; i++)\{
+1096       \textcolor{comment}{//for (i =0; i<ver\_type\_list.size();i++)\{}
+1097       \textcolor{keywordflow}{if} (i==ver\_types\_blocks[b].first)\{
+1098         \textcolor{comment}{// this is the first row in that block, so its compression is different}
+1099         oup << (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; \textcolor{comment}{// number of blocks}
+1100         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0;j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
+1101           \textcolor{keywordflow}{if} (j==0)
+1102             \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j);
+1103           \textcolor{keywordflow}{else}
+1104             \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1); \textcolor{comment}{// use the previous block as reference}
+1105         \}
+1106       \}\textcolor{keywordflow}{else}\{
+1107         max\_match = \hyperlink{classmarked__graph__compressed_a5ce51414e335d817f4be781fdcfbe9b1}{vtype\_max\_match}(i, i-1); \textcolor{comment}{// compare with the previous one}
+1108         oup << max\_match;
+1109         oup << (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3 - max\_match; \textcolor{comment}{// number of remaining blocks}
+1110         \textcolor{comment}{//cerr << " i " << i << " max\_match " << max\_match;}
+1111         \textcolor{keywordflow}{if} (max\_match < (\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3)\{
+1112           \textcolor{comment}{// there are still some blocks to be encoded}
+1113           \textcolor{comment}{// first, we need to encode the block max\_match itself}
+1114           \textcolor{comment}{// if this block exists in row i-1, we use that as a reference,}
+1115           \textcolor{keywordflow}{if} (max\_match <(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i-1].size()-1)/3)\{
+1116             \textcolor{comment}{//cerr << " 1" << endl;}
+1117             cond\_1 = \textcolor{keyword}{true};
+1118             \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, max\_match, i-1, max\_match);
+1119             \textcolor{comment}{// then, write the remaining blocks, if any}
+1120             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
+1121               \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
+1122             \}
+1123           \}\textcolor{keywordflow}{else}\{
+1124             \textcolor{comment}{// if block max\_match - 1 exists in row i, use it as a reference}
+1125             \textcolor{keywordflow}{if} (max\_match > 0)\{
+1126               \textcolor{comment}{//cerr << " 2" << endl;}
+1127               cond\_2 = \textcolor{keyword}{true};
+1128               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
+1129                 \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
+1130               \}
+1131             \}\textcolor{keywordflow}{else}\{
+1132               \textcolor{comment}{//cerr << " 3" << endl;}
+1133               \textcolor{comment}{// otherwise, encode the first block standalone, and recursively go forward and use previous
+       block as reference}
+1134               cond\_3 = \textcolor{keyword}{true};
+1135               \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, max\_match);
+1136               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = max\_match+1; j<(\hyperlink{classmarked__graph__compressed_af2e3e55223d436628a02758dfae88493}{ver\_type\_list}[i].size()-1)/3; j++)\{
+1137                 \hyperlink{classmarked__graph__compressed_a31f9ea72682f9072d0f90faf58a603fe}{vtype\_block\_write}(oup, i, j, i, j-1);
+1138               \}
+1139             \}
+1140           \}
+1141         \}
+1142       \}
+1143     \}
+1144   \}
+1145   \textcolor{comment}{//cerr << " cond\_1 " << cond\_1 << " cond\_2 " << cond\_2 << " cond\_3 " << cond\_3 << endl;}
+1146 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmarked__graph__compressed_a5ce51414e335d817f4be781fdcfbe9b1}\label{classmarked__graph__compressed_a5ce51414e335d817f4be781fdcfbe9b1}} 
 \index{marked\+\_\+graph\+\_\+compressed@{marked\+\_\+graph\+\_\+compressed}!vtype\+\_\+max\+\_\+match@{vtype\+\_\+max\+\_\+match}}
