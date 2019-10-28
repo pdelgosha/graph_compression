@@ -184,7 +184,8 @@ void marked_graph_compressed::binary_write(FILE* f){
     *logger::stat_stream << " n:                " << n << endl;
     *logger::stat_stream << " h:                " << h << endl;
     *logger::stat_stream << " delta:            " << delta << endl;
-    *logger::stat_stream << " No. types         " << type_mark.size() << endl;
+    *logger::stat_stream << " No. edge types    " << type_mark.size() << endl;
+    *logger::stat_stream << " No. vertex types  " << ver_type_list.size() << endl;
     *logger::stat_stream << " No. * vertices    " << n - star_vertices.first[0] << endl;
     *logger::stat_stream << " No. * edges       " << nu_star_edges << endl;
     *logger::stat_stream << " No. part bgraphs  " << part_bgraph.size() << endl;
