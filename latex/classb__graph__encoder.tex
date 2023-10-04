@@ -1,5 +1,5 @@
-\hypertarget{classb__graph__encoder}{}\section{b\+\_\+graph\+\_\+encoder Class Reference}
-\label{classb__graph__encoder}\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
+\doxysection{b\+\_\+graph\+\_\+encoder Class Reference}
+\hypertarget{classb__graph__encoder}{}\label{classb__graph__encoder}\index{b\_graph\_encoder@{b\_graph\_encoder}}
 
 
 Encodes a simple unmarked bipartite graph.  
@@ -9,66 +9,69 @@ Encodes a simple unmarked bipartite graph.
 
 {\ttfamily \#include $<$bipartite\+\_\+graph\+\_\+compression.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}{b\+\_\+graph\+\_\+encoder} (vector$<$ int $>$ a\+\_\+, vector$<$ int $>$ b\+\_\+)
+\mbox{\hyperlink{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}{b\+\_\+graph\+\_\+encoder}} (vector$<$ int $>$ a\+\_\+, vector$<$ int $>$ b\+\_\+)
 \begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
-void \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+void \mbox{\hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}} (const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&G)
 \begin{DoxyCompactList}\small\item\em initializes beta and U \end{DoxyCompactList}\item 
-pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \hyperlink{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}{compute\+\_\+N} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ \mbox{\hyperlink{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}{compute\+\_\+N}} (const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&G)
 \begin{DoxyCompactList}\small\item\em computes $N(G)$ \end{DoxyCompactList}\item 
-mpz\+\_\+class \hyperlink{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}{encode} (const \hyperlink{classb__graph}{b\+\_\+graph} \&G)
+mpz\+\_\+class \mbox{\hyperlink{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}{encode}} (const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&G)
 \begin{DoxyCompactList}\small\item\em encodes the given bipartite graph $G$ and returns an integer in the specified range \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ int $>$ \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}
+vector$<$ int $>$ \mbox{\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}}
 \begin{DoxyCompactList}\small\item\em when compute\+\_\+N is called for $i \leq j$, for $ i \leq v \leq n$, we have beta\mbox{[}v\mbox{]} = $b_v(i)$ \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}
+vector$<$ int $>$ \mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}
 \begin{DoxyCompactList}\small\item\em the degree sequence for the left nodes \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}
+vector$<$ int $>$ \mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}}
 \begin{DoxyCompactList}\small\item\em the degree sequence for the right nodes \end{DoxyCompactList}\item 
-\hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree} \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}
+\mbox{\hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree}} \mbox{\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}}
 \begin{DoxyCompactList}\small\item\em a Fenwick tree which encodes the degree of right nodes. When compute\+\_\+N is called for $i \leq j$, for $i \leq v \leq n$, we have U.\+sum\mbox{[}v\mbox{]} $= \sum_{k = v}^n b_k(i)$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Encodes a simple unmarked bipartite graph. 
 
 Encodes a simple bipartite graph in the set of bipartite graphs with given left degree sequence a and right degree sequence b. Therefore, to construct an encoder object, we need to specify these two degree sequences as vectors of int. For instance (in c++11)
 
 
-\begin{DoxyCode}
-vector<int> a = \{1,1,2\};
-vector<int> b = \{2,2\};
-\hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(a,b);
+\begin{DoxyCode}{0}
+\DoxyCodeLine{vector<int>\ \mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}\ =\ \{1,1,2\};}
+\DoxyCodeLine{vector<int>\ \mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}}\ =\ \{2,2\};}
+\DoxyCodeLine{\mbox{\hyperlink{classb__graph__encoder}{b\_graph\_encoder}}\ E(\mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}},\mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}});}
+
 \end{DoxyCode}
 
 
 constructs an encode object E which is capable of encoding bipartite graphs having 3 left nodes with degrees 1, 1, 2 (in order) and 2 right nodes with degrees 2,2 (in order). Hence, assume that we have defined such a bipartite graph by giving adjacency list\+:
 
 
-\begin{DoxyCode}
-\hyperlink{classb__graph}{b\_graph} G(\{\{0\},\{1\},\{0,1\}\});
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classb__graph}{b\_graph}}\ G(\{\{0\},\{1\},\{0,1\}\});}
+
 \end{DoxyCode}
 
 
 Note that G has left and right degree sequences which are equal to a and b, respectively. Then, we can use E to encode G as follows\+:
 
 
-\begin{DoxyCode}
-mpz\_class f = E.encode(G);
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mpz\_class\ f\ =\ E.encode(G);}
+
 \end{DoxyCode}
 
 
 In this way, the encode converts G to an integer stored in f. Later on, we can use f to decode G. 
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}\label{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{b\+\_\+graph\+\_\+encoder()}{b\_graph\_encoder()}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283}\label{classb__graph__encoder_a77b8fc4f060a8ef159583f1cfa35f283} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!b\_graph\_encoder@{b\_graph\_encoder}}
+\index{b\_graph\_encoder@{b\_graph\_encoder}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{b\_graph\_encoder()}{b\_graph\_encoder()}}
 {\footnotesize\ttfamily b\+\_\+graph\+\_\+encoder\+::b\+\_\+graph\+\_\+encoder (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{a\+\_\+,  }\item[{vector$<$ int $>$}]{b\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -76,17 +79,18 @@ In this way, the encode converts G to an integer stored in f. Later on, we can u
 constructor 
 
 
-\begin{DoxyCode}
-46 : \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}(a\_), \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}(b\_) \{\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ :\ \mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}(a\_),\ \mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}}(b\_)\ \{\}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}\label{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!compute\+\_\+N@{compute\+\_\+N}}
-\index{compute\+\_\+N@{compute\+\_\+N}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{compute\+\_\+\+N()}{compute\_N()}}
-{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}\label{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!compute\_N@{compute\_N}}
+\index{compute\_N@{compute\_N}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{compute\_N()}{compute\_N()}}
+{\footnotesize\ttfamily pair$<$ mpz\+\_\+class, mpz\+\_\+class $>$ b\+\_\+graph\+\_\+encoder\+::compute\+\_\+N (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&}]{G }\end{DoxyParamCaption})}
 
 
 
@@ -101,244 +105,238 @@ computes $N(G)$
 A pair, where the first component is $N(G)$, and the second component is $l(G)$ 
 \end{DoxyReturn}
 
-\begin{DoxyCode}
-26                                                                      \{
-27   \textcolor{comment}{//logger::item\_start("bip init");}
-28   \textcolor{keywordtype}{int} n\_l = G.\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}(); \textcolor{comment}{// number of left vertices}
-29   \textcolor{keywordtype}{int} n\_bits = 0;
-30   \textcolor{keywordtype}{int} n\_copy = n\_l;
-31   \textcolor{keywordflow}{while} (n\_copy > 0)\{
-32     n\_bits ++;
-33     n\_copy >>= 1;
-34   \}
-35   n\_bits += 2;
-36 
-37   vector<pair<int, int> > call\_stack(2 * n\_bits);
-38   vector<pair<mpz\_class, mpz\_class> > \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}(2 * n\_bits); \textcolor{comment}{// first = N, second = l}
-39   vector<mpz\_class> r\_stack(2 * n\_bits); \textcolor{comment}{// stack of r values}
-40 
-41   vector<int> status\_stack(2 * n\_bits);
-42   \textcolor{comment}{//vector<int> St\_stack(2 * n\_bits); // stack to store values of St}
-43  
-44   call\_stack[0] = pair<int, int> (0,n\_l-1); \textcolor{comment}{// i j }
-45   status\_stack[0] = 0; \textcolor{comment}{// newly added}
-46  
-47   \textcolor{keywordtype}{int} call\_size = 1; \textcolor{comment}{// the size of the call stack}
-48   \textcolor{keywordtype}{int} return\_size = 0; \textcolor{comment}{// the size of the return stack}
-49 
-50   \textcolor{keywordtype}{int} i, j, t, Sj;
-51   \textcolor{keywordtype}{int} status;
-52  
-53   vector<int> gamma; \textcolor{comment}{// forward list  of the graph}
-54 
-55   mpz\_class rtj, prod\_afac, Nit\_rtj, lit\_Ntj, bin;
-56   \textcolor{comment}{//logger::item\_stop("bip init");}
-57   \textcolor{keywordflow}{while}(call\_size > 0)\{
-58     \textcolor{comment}{//cerr << " call\_size " << call\_size << endl;}
-59     i = call\_stack[call\_size-1].first;
-60     j = call\_stack[call\_size-1].second;
-61     \textcolor{keywordflow}{if} (i==j)\{
-62       \textcolor{comment}{//logger::item\_start("bip enc i = j");}
-63       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first = 0; \textcolor{comment}{// N\_\{i,j\} is initialized with 0}
-64       \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second = 1; \textcolor{comment}{// l\_\{i,j\} is initialized with 1}
-65       r\_stack[return\_size] = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(0), \hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i]); \textcolor{comment}{// r\_i = \(\backslash\)binom\{S\_i\}\{a\_i\}, s\_i =
-       U.sum(0)}
-66       gamma = G.\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}(i);
-67       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0;k<\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}[i];k++)\{
-68         \textcolor{comment}{//logger::item\_start("bip enc i = j binomial");}
-69         bin = \hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}(\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}(1+gamma[k]), a[i] - k);
-70         \textcolor{comment}{//logger::item\_stop("bip enc i = j binomial");}
-71 
-72         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
-73         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].first += \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second * bin;
-74         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size].second *= \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]];
-75         \textcolor{comment}{//logger::item\_start("bip enc i = j arithmetic");}
-76         \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}[gamma[k]] --;
-77         \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}.\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}(gamma[k],-1);
-78       \}
-79       return\_size ++;
-80       call\_size --;
-81       \textcolor{comment}{//logger::item\_stop("bip enc i = j");}
-82     \}\textcolor{keywordflow}{else}\{
-83       \textcolor{comment}{//logger::item\_start("bip enc i neq j");}
-84       t = (i+j)/2;
-85       status = status\_stack[call\_size - 1];
-86       \textcolor{comment}{//logger::item\_start("bip enc stacking 0 1");}
-87       \textcolor{keywordflow}{if} (status == 0)\{
-88         \textcolor{comment}{// newly added, left node must be called}
-89         call\_stack[call\_size].first = i;
-90         call\_stack[call\_size].second = t;
-91         status\_stack[call\_size-1] = 1; \textcolor{comment}{// left is called}
-92         status\_stack[call\_size] = 0; \textcolor{comment}{// newly added}
-93         call\_size++;
-94       \}
-95       \textcolor{keywordflow}{if} (status == 1)\{
-96         \textcolor{comment}{// left is returned}
-97         \textcolor{comment}{//St\_stack[call\_size-1] = U.sum(0);}
-98         \textcolor{comment}{// call the right child}
-99         call\_stack[call\_size].first = t+1;
-100         call\_stack[call\_size].second = j;
-101         status\_stack[call\_size-1] = 2; \textcolor{comment}{//right is called}
-102         status\_stack[call\_size] = 0;  \textcolor{comment}{// newly called}
-103         call\_size ++;
-104       \}
-105       \textcolor{comment}{//logger::item\_stop("bip enc stacking 0 1");}
-106       \textcolor{keywordflow}{if} (status == 2)\{
-107         \textcolor{comment}{//Sj = U.sum(0);}
-108         \textcolor{comment}{//logger::item\_start("bip enc i neq j prod\_factorial");}
-109         \textcolor{comment}{//prod\_afac = prod\_factorial(a, t+1, j); // the product of a\_k! for t + 1 <= k <= j}
-110         \textcolor{comment}{//logger::item\_stop("bip enc i neq j prod\_factorial");}
-111 
-112         \textcolor{comment}{//logger::item\_start("bip enc i neq j compute\_product");}
-113         \textcolor{comment}{//rtj = compute\_product(St\_stack[call\_size-1], St\_stack[call\_size-1] - Sj, 1) / prod\_afac;}
-114         \textcolor{comment}{//logger::item\_stop("bip enc i neq j compute\_product");}
-115 
-116         \textcolor{comment}{//logger::item\_start("bip enc i neq j arithmetic");}
-117         Nit\_rtj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first * r\_stack[return\_size-1]; 
-118         lit\_Ntj = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].
-      first;
-119         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].first = Nit\_rtj + lit\_Ntj; \textcolor{comment}{// Nij}
-120         \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second = \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-2].second * 
-      \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[return\_size-1].second; \textcolor{comment}{// lij}
-121         r\_stack[return\_size - 2] = r\_stack[return\_size-2] * r\_stack[return\_size-1];
-122         \textcolor{comment}{//logger::item\_stop("bip enc i neq j arithmetic");}
-123         return\_size --; \textcolor{comment}{// pop 2 add 1}
-124         call\_size --;
-125       \}
-126       \textcolor{comment}{//logger::item\_stop("bip enc i neq j");}
-127     \}
-128 
-129   \}
-130   \textcolor{keywordflow}{if} (return\_size != 1)\{
-131     cerr << \textcolor{stringliteral}{" error: bip compute\_N return\_size is not 1 it is "} << return\_size << endl;
-132   \}
-133   \textcolor{keywordflow}{return} \hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}[0];
-134 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ init"{});}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{int}\ n\_l\ =\ G.\mbox{\hyperlink{classb__graph_a5e71d5c97f2501b0b93c17146cf7e68e}{nu\_left\_vertices}}();\ \textcolor{comment}{//\ number\ of\ left\ vertices}}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{int}\ n\_bits\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{int}\ n\_copy\ =\ n\_l;}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{while}\ (n\_copy\ >\ 0)\{}
+\DoxyCodeLine{00032\ \ \ \ \ n\_bits\ ++;}
+\DoxyCodeLine{00033\ \ \ \ \ n\_copy\ >>=\ 1;}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ \ \ n\_bits\ +=\ 2;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ vector<pair<int,\ int>\ >\ call\_stack(2\ *\ n\_bits);}
+\DoxyCodeLine{00038\ \ \ vector<pair<mpz\_class,\ mpz\_class>\ >\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}(2\ *\ n\_bits);\ \textcolor{comment}{//\ first\ =\ N,\ second\ =\ l}}
+\DoxyCodeLine{00039\ \ \ vector<mpz\_class>\ r\_stack(2\ *\ n\_bits);\ \textcolor{comment}{//\ stack\ of\ r\ values}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ vector<int>\ status\_stack(2\ *\ n\_bits);}
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//vector<int>\ St\_stack(2\ *\ n\_bits);\ //\ stack\ to\ store\ values\ of\ St}}
+\DoxyCodeLine{00043\ \ }
+\DoxyCodeLine{00044\ \ \ call\_stack[0]\ =\ pair<int,\ int>\ (0,n\_l-\/1);\ \textcolor{comment}{//\ i\ j\ }}
+\DoxyCodeLine{00045\ \ \ status\_stack[0]\ =\ 0;\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{00046\ \ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{int}\ call\_size\ =\ 1;\ \textcolor{comment}{//\ the\ size\ of\ the\ call\ stack}}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{int}\ return\_size\ =\ 0;\ \textcolor{comment}{//\ the\ size\ of\ the\ return\ stack}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{int}\ i,\ j,\ t,\ Sj;}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{int}\ status;}
+\DoxyCodeLine{00052\ \ }
+\DoxyCodeLine{00053\ \ \ vector<int>\ gamma;\ \textcolor{comment}{//\ forward\ list\ \ of\ the\ graph}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ mpz\_class\ rtj,\ prod\_afac,\ Nit\_rtj,\ lit\_Ntj,\ bin;}
+\DoxyCodeLine{00056\ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ init"{});}}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{while}(call\_size\ >\ 0)\{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ call\_size\ "{}\ <<\ call\_size\ <<\ endl;}}
+\DoxyCodeLine{00059\ \ \ \ \ i\ =\ call\_stack[call\_size-\/1].first;}
+\DoxyCodeLine{00060\ \ \ \ \ j\ =\ call\_stack[call\_size-\/1].second;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (i==j)\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ =\ j"{});}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size].first\ =\ 0;\ \textcolor{comment}{//\ N\_\{i,j\}\ is\ initialized\ with\ 0}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size].second\ =\ 1;\ \textcolor{comment}{//\ l\_\{i,j\}\ is\ initialized\ with\ 1}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ r\_stack[return\_size]\ =\ \mbox{\hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}}(\mbox{\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}}.\mbox{\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}}(0),\ \mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}[i]);\ \textcolor{comment}{//\ r\_i\ =\ \(\backslash\)binom\{S\_i\}\{a\_i\},\ s\_i\ =\ U.sum(0)}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ gamma\ =\ G.\mbox{\hyperlink{classb__graph_aa81c7179b9c6cb4986c4b41e84a85799}{get\_adj\_list}}(i);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k=0;k<\mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}[i];k++)\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ =\ j\ binomial"{});}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ bin\ =\ \mbox{\hyperlink{compression__helper_8cpp_acecca9cb279d3b3d82915a07d67818cf}{binomial}}(\mbox{\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}}.\mbox{\hyperlink{classreverse__fenwick__tree_a672731fd6395b4853430073a099a80e6}{sum}}(1+gamma[k]),\ \mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}[i]\ -\/\ k);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ =\ j\ binomial"{});}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ =\ j\ arithmetic"{});}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size].first\ +=\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size].second\ *\ bin;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size].second\ *=\ \mbox{\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}}[gamma[k]];}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ =\ j\ arithmetic"{});}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}}[gamma[k]]\ -\/-\/;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}}.\mbox{\hyperlink{classreverse__fenwick__tree_a942d7f49b37e53ebfec3076d177691d7}{add}}(gamma[k],-\/1);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ return\_size\ ++;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ call\_size\ -\/-\/;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ =\ j"{});}}
+\DoxyCodeLine{00082\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ neq\ j"{});}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ t\ =\ (i+j)/2;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ status\ =\ status\_stack[call\_size\ -\/\ 1];}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ stacking\ 0\ 1"{});}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ 0)\{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newly\ added,\ left\ node\ must\ be\ called}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ call\_stack[call\_size].first\ =\ i;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ call\_stack[call\_size].second\ =\ t;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ status\_stack[call\_size-\/1]\ =\ 1;\ \textcolor{comment}{//\ left\ is\ called}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ status\_stack[call\_size]\ =\ 0;\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ call\_size++;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ 1)\{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ left\ is\ returned}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//St\_stack[call\_size-\/1]\ =\ U.sum(0);}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ call\ the\ right\ child}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ call\_stack[call\_size].first\ =\ t+1;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ call\_stack[call\_size].second\ =\ j;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ status\_stack[call\_size-\/1]\ =\ 2;\ \textcolor{comment}{//right\ is\ called}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ status\_stack[call\_size]\ =\ 0;\ \ \textcolor{comment}{//\ newly\ called}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ call\_size\ ++;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ stacking\ 0\ 1"{});}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ 2)\{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Sj\ =\ U.sum(0);}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ neq\ j\ prod\_factorial"{});}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//prod\_afac\ =\ prod\_factorial(a,\ t+1,\ j);\ //\ the\ product\ of\ a\_k!\ for\ t\ +\ 1\ <=\ k\ <=\ j}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ neq\ j\ prod\_factorial"{});}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ neq\ j\ compute\_product"{});}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{//rtj\ =\ compute\_product(St\_stack[call\_size-\/1],\ St\_stack[call\_size-\/1]\ -\/\ Sj,\ 1)\ /\ prod\_afac;}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ neq\ j\ compute\_product"{});}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ i\ neq\ j\ arithmetic"{});}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ Nit\_rtj\ =\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/2].first\ *\ r\_stack[return\_size-\/1];\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ lit\_Ntj\ =\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/2].second\ *\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/1].first;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/2].first\ =\ Nit\_rtj\ +\ lit\_Ntj;\ \textcolor{comment}{//\ Nij}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/2].second\ =\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/2].second\ *\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[return\_size-\/1].second;\ \textcolor{comment}{//\ lij}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ r\_stack[return\_size\ -\/\ 2]\ =\ r\_stack[return\_size-\/2]\ *\ r\_stack[return\_size-\/1];}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ neq\ j\ arithmetic"{});}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ return\_size\ -\/-\/;\ \textcolor{comment}{//\ pop\ 2\ add\ 1}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ call\_size\ -\/-\/;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ i\ neq\ j"{});}}
+\DoxyCodeLine{00127\ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{if}\ (return\_size\ !=\ 1)\{}
+\DoxyCodeLine{00131\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ error:\ bip\ compute\_N\ return\_size\ is\ not\ 1\ it\ is\ "{}}\ <<\ return\_size\ <<\ endl;}
+\DoxyCodeLine{00132\ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacehelper__vars_a6d2100c373830cacd232319a9958652d}{return\_stack}}[0];}
+\DoxyCodeLine{00134\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}\label{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!encode@{encode}}
-\index{encode@{encode}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{encode()}{encode()}}
-{\footnotesize\ttfamily mpz\+\_\+class b\+\_\+graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+\Hypertarget{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763}\label{classb__graph__encoder_a9dbf40f42a2eb12822b14ca10d580763} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!encode@{encode}}
+\index{encode@{encode}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily mpz\+\_\+class b\+\_\+graph\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&}]{G }\end{DoxyParamCaption})}
 
 
 
 encodes the given bipartite graph $G$ and returns an integer in the specified range 
 
 
-\begin{DoxyCode}
-138 \{
-139   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
-      \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
-140     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::encoder : vectors a and/or b do not match with the degree sequences
-       of the given bipartite graph  "} << endl;
-141 
-142   \textcolor{comment}{//init(G); // initialize U and beta for G}
-143   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N(0,G.nu\_left\_vertices()-1, G);}
-144   \textcolor{comment}{//init(G);}
-145   \textcolor{comment}{//logger::item\_start("bip enc compute N");}
-146   \textcolor{comment}{//pair<mpz\_class, mpz\_class> ans = compute\_N\_new(G);}
-147   \textcolor{comment}{//logger::item\_stop("bip enc compute N");}
-148 
-149   \hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}(G);
-150   \textcolor{comment}{//logger::item\_start("bip enc compute N new r");}
-151   pair<mpz\_class, mpz\_class> ans = \hyperlink{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}{compute\_N}(G);
-152   \textcolor{comment}{//logger::item\_stop("bip enc compute N new r");}
-153   \textcolor{comment}{// if (ans.first == ans2.first and ans.second == ans2.second)\{}
-154   \textcolor{comment}{//   cout << " = " << endl;}
-155   \textcolor{comment}{// \}else\{}
-156   \textcolor{comment}{//   cout << " != " << endl;}
-157   \textcolor{comment}{// \}}
-158   \textcolor{comment}{//if (ans.first!= ans\_2.first or ans.second != ans\_2.second)\{}
-159   \textcolor{comment}{//  cerr << " bip ans != ans\_2 ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" <<
-       ans\_2.first << " , " << ans\_2.second << " ) "  << endl;}
-160   \textcolor{comment}{//\}//else\{}
-161   \textcolor{comment}{//cerr << " the same! ans = (" << ans.first << " , " << ans.second <<  " ) ans\_2 = (" << ans\_2.first << "
-       , " << ans\_2.second << " ) "  << endl;}
-162   \textcolor{comment}{//\}}
-163   \textcolor{comment}{//mpz\_class prod\_b\_factorial = prod\_factorial(b, 0, b.size()-1); // \(\backslash\)prod\_\{i=0\}^\{n-1\} b\_i}
-164 
-165   \textcolor{comment}{//if (prod\_b\_factorial != ans.second)}
-166   \textcolor{comment}{//  cerr << "EEEEEEEEEEEEEEEEEEEEEEEEE prod\_b\_factorial != ans.second" << endl;}
-167 
-168   \textcolor{keywordtype}{bool} ceil = \textcolor{keyword}{false};
-169   \textcolor{comment}{//logger::item\_start("bip enc ceil");}
-170   \textcolor{keywordflow}{if} (ans.first % ans.second != 0)
-171     ceil = \textcolor{keyword}{true};
-172   \textcolor{comment}{//logger::item\_stop("bip enc ceil");}
-173 
-174   \textcolor{comment}{//logger::item\_start("bip enc final div");}
-175   ans.first /= ans.second;
-176   \textcolor{comment}{//logger::item\_stop("bip enc final div");}
-177   \textcolor{keywordflow}{if} (ceil)
-178     ans.first ++;
-179   \textcolor{keywordflow}{return} ans.first;
-180 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00138\ \{}
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}\ !=\ G.\mbox{\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}}()\ or\ \mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}}\ !=\ G.\mbox{\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}}())}
+\DoxyCodeLine{00140\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ WARNING\ b\_graph\_encoder::encoder\ :\ vectors\ a\ and/or\ b\ do\ not\ match\ with\ the\ degree\ sequences\ of\ the\ given\ bipartite\ graph\ \ "{}}\ <<\ endl;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{comment}{//init(G);\ //\ initialize\ U\ and\ beta\ for\ G}}
+\DoxyCodeLine{00143\ \ \ \textcolor{comment}{//pair<mpz\_class,\ mpz\_class>\ ans\ =\ compute\_N(0,G.nu\_left\_vertices()-\/1,\ G);}}
+\DoxyCodeLine{00144\ \ \ \textcolor{comment}{//init(G);}}
+\DoxyCodeLine{00145\ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ compute\ N"{});}}
+\DoxyCodeLine{00146\ \ \ \textcolor{comment}{//pair<mpz\_class,\ mpz\_class>\ ans\ =\ compute\_N\_new(G);}}
+\DoxyCodeLine{00147\ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ compute\ N"{});}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \mbox{\hyperlink{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}{init}}(G);}
+\DoxyCodeLine{00150\ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ compute\ N\ new\ r"{});}}
+\DoxyCodeLine{00151\ \ \ pair<mpz\_class,\ mpz\_class>\ ans\ =\ \mbox{\hyperlink{classb__graph__encoder_a5a482e6783b10f2d95dd4afc0478eee0}{compute\_N}}(G);}
+\DoxyCodeLine{00152\ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ compute\ N\ new\ r"{});}}
+\DoxyCodeLine{00153\ \ \ \textcolor{comment}{//\ if\ (ans.first\ ==\ ans2.first\ and\ ans.second\ ==\ ans2.second)\{}}
+\DoxyCodeLine{00154\ \ \ \textcolor{comment}{//\ \ \ cout\ <<\ "{}\ =\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00155\ \ \ \textcolor{comment}{//\ \}else\{}}
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{//\ \ \ cout\ <<\ "{}\ !=\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00157\ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00158\ \ \ \textcolor{comment}{//if\ (ans.first!=\ ans\_2.first\ or\ ans.second\ !=\ ans\_2.second)\{}}
+\DoxyCodeLine{00159\ \ \ \textcolor{comment}{//\ \ cerr\ <<\ "{}\ bip\ ans\ !=\ ans\_2\ ans\ =\ ("{}\ <<\ ans.first\ <<\ "{}\ ,\ "{}\ <<\ ans.second\ <<\ \ "{}\ )\ ans\_2\ =\ ("{}\ <<\ ans\_2.first\ <<\ "{}\ ,\ "{}\ <<\ ans\_2.second\ <<\ "{}\ )\ "{}\ \ <<\ endl;}}
+\DoxyCodeLine{00160\ \ \ \textcolor{comment}{//\}//else\{}}
+\DoxyCodeLine{00161\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ the\ same!\ ans\ =\ ("{}\ <<\ ans.first\ <<\ "{}\ ,\ "{}\ <<\ ans.second\ <<\ \ "{}\ )\ ans\_2\ =\ ("{}\ <<\ ans\_2.first\ <<\ "{}\ ,\ "{}\ <<\ ans\_2.second\ <<\ "{}\ )\ "{}\ \ <<\ endl;}}
+\DoxyCodeLine{00162\ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{00163\ \ \ \textcolor{comment}{//mpz\_class\ prod\_b\_factorial\ =\ prod\_factorial(b,\ 0,\ b.size()-\/1);\ //\ \(\backslash\)prod\_\{i=0\}\string^\{n-\/1\}\ b\_i}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{comment}{//if\ (prod\_b\_factorial\ !=\ ans.second)}}
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{//\ \ cerr\ <<\ "{}EEEEEEEEEEEEEEEEEEEEEEEEE\ prod\_b\_factorial\ !=\ ans.second"{}\ <<\ endl;}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \textcolor{keywordtype}{bool}\ ceil\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00169\ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ ceil"{});}}
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordflow}{if}\ (ans.first\ \%\ ans.second\ !=\ 0)}
+\DoxyCodeLine{00171\ \ \ \ \ ceil\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00172\ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ ceil"{});}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \textcolor{comment}{//logger::item\_start("{}bip\ enc\ final\ div"{});}}
+\DoxyCodeLine{00175\ \ \ ans.first\ /=\ ans.second;}
+\DoxyCodeLine{00176\ \ \ \textcolor{comment}{//logger::item\_stop("{}bip\ enc\ final\ div"{});}}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{if}\ (ceil)}
+\DoxyCodeLine{00178\ \ \ \ \ ans.first\ ++;}
+\DoxyCodeLine{00179\ \ \ \textcolor{keywordflow}{return}\ ans.first;}
+\DoxyCodeLine{00180\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!init@{init}}
-\index{init@{init}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily void b\+\_\+graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}\item[{const \hyperlink{classb__graph}{b\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+\Hypertarget{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb}\label{classb__graph__encoder_a9b62ac0580191ac42b98d764046af7cb} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!init@{init}}
+\index{init@{init}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void b\+\_\+graph\+\_\+encoder\+::init (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \&}]{G }\end{DoxyParamCaption})}
 
 
 
 initializes beta and U 
 
 
-\begin{DoxyCode}
-9 \{
-10   \textcolor{comment}{// initializing beta}
-11   \hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta} = G.\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}();
-12 
-13   \textcolor{comment}{// initializing the Fenwick tree}
-14   \hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U} = \hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}(\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta});
-15 
-16   \textcolor{keywordflow}{if} (\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a} != G.\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}() or \hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b} != G.
-      \hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}())
-17     cerr << \textcolor{stringliteral}{" WARNING b\_graph\_encoder::init : vectors a and/or b do not match with the degree sequences of
-       the given bipartite graph  "} << endl;
-18 
-19 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{comment}{//\ initializing\ beta}}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}}\ =\ G.\mbox{\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}}();}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{comment}{//\ initializing\ the\ Fenwick\ tree}}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}{U}}\ =\ \mbox{\hyperlink{classreverse__fenwick__tree}{reverse\_fenwick\_tree}}(\mbox{\hyperlink{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}{beta}});}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}{a}}\ !=\ G.\mbox{\hyperlink{classb__graph_afd65fb655f7e24217393a10533b87d3c}{get\_left\_degree\_sequence}}()\ or\ \mbox{\hyperlink{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}{b}}\ !=\ G.\mbox{\hyperlink{classb__graph_a2711566385b92b02f4c03abdc1f9a582}{get\_right\_degree\_sequence}}())}
+\DoxyCodeLine{00017\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ WARNING\ b\_graph\_encoder::init\ :\ vectors\ a\ and/or\ b\ do\ not\ match\ with\ the\ degree\ sequences\ of\ the\ given\ bipartite\ graph\ \ "{}}\ <<\ endl;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}\label{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!a@{a}}
-\index{a@{a}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{a}{a}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2}\label{classb__graph__encoder_afd22d167f495cd85b41397f337c377c2} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!a@{a}}
+\index{a@{a}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{a}{a}}
 {\footnotesize\ttfamily vector$<$int$>$ b\+\_\+graph\+\_\+encoder\+::a\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the degree sequence for the left nodes 
 
-\mbox{\Hypertarget{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}\label{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!b@{b}}
-\index{b@{b}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{b}{b}}
+\Hypertarget{classb__graph__encoder_a767826e268702e45ab71565e096a52b8}\label{classb__graph__encoder_a767826e268702e45ab71565e096a52b8} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!b@{b}}
+\index{b@{b}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{b}{b}}
 {\footnotesize\ttfamily vector$<$int$>$ b\+\_\+graph\+\_\+encoder\+::b\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the degree sequence for the right nodes 
 
-\mbox{\Hypertarget{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}\label{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!beta@{beta}}
-\index{beta@{beta}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{beta}{beta}}
+\Hypertarget{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144}\label{classb__graph__encoder_ae54d76cc4cee399d98951f870897a144} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!beta@{beta}}
+\index{beta@{beta}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{beta}{beta}}
 {\footnotesize\ttfamily vector$<$int$>$ b\+\_\+graph\+\_\+encoder\+::beta\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 when compute\+\_\+N is called for $i \leq j$, for $ i \leq v \leq n$, we have beta\mbox{[}v\mbox{]} = $b_v(i)$ 
 
-\mbox{\Hypertarget{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}\label{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}} 
-\index{b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}!U@{U}}
-\index{U@{U}!b\+\_\+graph\+\_\+encoder@{b\+\_\+graph\+\_\+encoder}}
-\subsubsection{\texorpdfstring{U}{U}}
-{\footnotesize\ttfamily \hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree} b\+\_\+graph\+\_\+encoder\+::U\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce}\label{classb__graph__encoder_ac810138443002a2b2cf579ced2dc34ce} 
+\index{b\_graph\_encoder@{b\_graph\_encoder}!U@{U}}
+\index{U@{U}!b\_graph\_encoder@{b\_graph\_encoder}}
+\doxysubsubsection{\texorpdfstring{U}{U}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classreverse__fenwick__tree}{reverse\+\_\+fenwick\+\_\+tree}} b\+\_\+graph\+\_\+encoder\+::U\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -348,5 +346,5 @@ a Fenwick tree which encodes the degree of right nodes. When compute\+\_\+N is c
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{bipartite__graph__compression_8h}{bipartite\+\_\+graph\+\_\+compression.\+h}\item 
-\hyperlink{bipartite__graph__compression_8cpp}{bipartite\+\_\+graph\+\_\+compression.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{bipartite__graph__compression_8h}{bipartite\+\_\+graph\+\_\+compression.\+h}}\item 
+\mbox{\hyperlink{bipartite__graph__compression_8cpp}{bipartite\+\_\+graph\+\_\+compression.\+cpp}}\end{DoxyCompactItemize}

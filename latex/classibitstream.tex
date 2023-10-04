@@ -1,5 +1,5 @@
-\hypertarget{classibitstream}{}\section{ibitstream Class Reference}
-\label{classibitstream}\index{ibitstream@{ibitstream}}
+\doxysection{ibitstream Class Reference}
+\hypertarget{classibitstream}{}\label{classibitstream}\index{ibitstream@{ibitstream}}
 
 
 deals with reading bit streams from binary files, this is the reverse of obitstream  
@@ -9,70 +9,71 @@ deals with reading bit streams from binary files, this is the reverse of obitstr
 
 {\ttfamily \#include $<$bitstream.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\+\_\+chunk} ()
+void \mbox{\hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\+\_\+chunk}} ()
 \begin{DoxyCompactList}\small\item\em reads one chunk (4 bytes) from the input file and stores it in buffer \end{DoxyCompactList}\item 
-unsigned int \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\+\_\+bits} (unsigned int k)
-\begin{DoxyCompactList}\small\item\em read k bits from the input, interpret it as integer (first bit read is M\+SB) and return its value. Here, k must be in the range 1 $<$= k $<$= B\+I\+T\+\_\+\+I\+NT \end{DoxyCompactList}\item 
-void \hyperlink{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}{read\+\_\+bits} (int k, \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B)
-\begin{DoxyCompactList}\small\item\em reads k bits from input and stores in the given \hyperlink{classbit__pipe}{bit\+\_\+pipe}. $k \geq 1$ is arbitrary. The bits are stored in the \hyperlink{classbit__pipe}{bit\+\_\+pipe} so that can be interpreted as integer (e.\+g. mpz\+\_\+class) so the L\+SB is located in the rightmost bit of the rightmost chunk (unlike the usual \hyperlink{classbit__pipe}{bit\+\_\+pipe} situation). We assume that the B given here is an empty \hyperlink{classbit__pipe}{bit\+\_\+pipe} \end{DoxyCompactList}\item 
-void \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\+\_\+bits\+\_\+append} (int k, \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B)
+unsigned int \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\+\_\+bits}} (unsigned int k)
+\begin{DoxyCompactList}\small\item\em read k bits from the input, interpret it as integer (first bit read is MSB) and return its value. Here, k must be in the range 1 \texorpdfstring{$<$}{<}= k \texorpdfstring{$<$}{<}= BIT\+\_\+\+INT \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}{read\+\_\+bits}} (int k, \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B)
+\begin{DoxyCompactList}\small\item\em reads k bits from input and stores in the given \doxylink{classbit__pipe}{bit\+\_\+pipe}. $k \geq 1$ is arbitrary. The bits are stored in the \doxylink{classbit__pipe}{bit\+\_\+pipe} so that can be interpreted as integer (e.\+g. mpz\+\_\+class) so the LSB is located in the rightmost bit of the rightmost chunk (unlike the usual \doxylink{classbit__pipe}{bit\+\_\+pipe} situation). We assume that the B given here is an empty \doxylink{classbit__pipe}{bit\+\_\+pipe} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\+\_\+bits\+\_\+append}} (int k, \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B)
 \begin{DoxyCompactList}\small\item\em similar to read\+\_\+bits, but B does not have to be empty and the result will be appended to B (this is used in order to recursively implement read\+\_\+bits) \end{DoxyCompactList}\item 
-bool \hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\+\_\+bit} ()
+bool \mbox{\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\+\_\+bit}} ()
 \begin{DoxyCompactList}\small\item\em read one bit from input and return true if its value is 1 and false otherwise. \end{DoxyCompactList}\item 
-\hyperlink{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb}{ibitstream} (string file\+\_\+name)
+\mbox{\hyperlink{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb}{ibitstream}} (string file\+\_\+name)
 \item 
-\hyperlink{classibitstream}{ibitstream} \& \hyperlink{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}{operator$>$$>$} (unsigned int \&n)
+\mbox{\hyperlink{classibitstream}{ibitstream}} \& \mbox{\hyperlink{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}{operator$>$$>$}} (unsigned int \&n)
 \begin{DoxyCompactList}\small\item\em reads an unsigned int from the input using Elias delta decoding and saves it in the reference given \end{DoxyCompactList}\item 
-\hyperlink{classibitstream}{ibitstream} \& \hyperlink{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}{operator$>$$>$} (mpz\+\_\+class \&n)
+\mbox{\hyperlink{classibitstream}{ibitstream}} \& \mbox{\hyperlink{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}{operator$>$$>$}} (mpz\+\_\+class \&n)
 \begin{DoxyCompactList}\small\item\em reads a nonnegative mpz\+\_\+class integer using Elias delta decoding and stores in the reference given \end{DoxyCompactList}\item 
-void \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\+\_\+inter\+\_\+decode} (vector$<$ int $>$ \&a, int b)
+void \mbox{\hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\+\_\+inter\+\_\+decode}} (vector$<$ int $>$ \&a, int b)
 \begin{DoxyCompactList}\small\item\em uses binary interpolative coding algorithm to decode for an array of increasing nonnegative integers. Caution\+: we do not sort the decoding vector for efficiency purposes and return elements in the order they were encoded (mid point first left subinterval then subinterval) \end{DoxyCompactList}\item 
-void \hyperlink{classibitstream_a97983c20903c908fafb26e250bf9e812}{bin\+\_\+inter\+\_\+decode} (vector$<$ int $>$ \&a, int i, int j, int low, int high)
+void \mbox{\hyperlink{classibitstream_a97983c20903c908fafb26e250bf9e812}{bin\+\_\+inter\+\_\+decode}} (vector$<$ int $>$ \&a, int i, int j, int low, int high)
 \begin{DoxyCompactList}\small\item\em using bit interpolative coding algorithm to decode for a subinterval of an array \end{DoxyCompactList}\item 
-void \hyperlink{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}{close} ()
+void \mbox{\hyperlink{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}{close}} ()
 \begin{DoxyCompactList}\small\item\em closes the session by closing the input file \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-F\+I\+LE $\ast$ \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}
+FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}}
 \begin{DoxyCompactList}\small\item\em pointer to input binary file \end{DoxyCompactList}\item 
-unsigned int \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}
+unsigned int \mbox{\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}}
 \begin{DoxyCompactList}\small\item\em the last chunk read from the input \end{DoxyCompactList}\item 
-unsigned int \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\+\_\+mask}
-\begin{DoxyCompactList}\small\item\em the place of the head bit in buffer, represented in terms of mask. So if we are in the L\+SB, head\+\_\+mask is one, if we are in two bit left of L\+SB, this is 4 so on. When this is zero, it means the buffer is expired and we should probably read one more chunk from the input file \end{DoxyCompactList}\item 
-unsigned int \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\+\_\+place}
-\begin{DoxyCompactList}\small\item\em the place of head represented in terms of integer, L\+SB is 1, left of L\+SB is 2, 2 left of L\+SB is 3 and so on. head\+\_\+place is effectively the number of unread bits remaining in the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+unsigned int \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\+\_\+mask}}
+\begin{DoxyCompactList}\small\item\em the place of the head bit in buffer, represented in terms of mask. So if we are in the LSB, head\+\_\+mask is one, if we are in two bit left of LSB, this is 4 so on. When this is zero, it means the buffer is expired and we should probably read one more chunk from the input file \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\+\_\+place}}
+\begin{DoxyCompactList}\small\item\em the place of head represented in terms of integer, LSB is 1, left of LSB is 2, 2 left of LSB is 3 and so on. head\+\_\+place is effectively the number of unread bits remaining in the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 deals with reading bit streams from binary files, this is the reverse of obitstream 
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb}\label{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb}} 
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb}\label{classibitstream_af5f00b64072ed3ffe495b7712a71e3eb} 
 \index{ibitstream@{ibitstream}!ibitstream@{ibitstream}}
 \index{ibitstream@{ibitstream}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{ibitstream()}{ibitstream()}}
+\doxysubsubsection{\texorpdfstring{ibitstream()}{ibitstream()}}
 {\footnotesize\ttfamily ibitstream\+::ibitstream (\begin{DoxyParamCaption}\item[{string}]{file\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-\begin{DoxyCode}
-142                               \{
-143     \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f} = fopen(file\_name.c\_str(), \textcolor{stringliteral}{"rb+"});
-144     \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} =0;
-145     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 0;
-146     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = 0;
-147   \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}}\ =\ fopen(file\_name.c\_str(),\ \textcolor{stringliteral}{"{}rb+"{}});}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}}\ =0;}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ =\ 0;}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ =\ 0;}
+\DoxyCodeLine{00147\ \ \ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}\label{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}} 
-\index{ibitstream@{ibitstream}!bin\+\_\+inter\+\_\+decode@{bin\+\_\+inter\+\_\+decode}}
-\index{bin\+\_\+inter\+\_\+decode@{bin\+\_\+inter\+\_\+decode}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{bin\+\_\+inter\+\_\+decode()}{bin\_inter\_decode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}\label{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d} 
+\index{ibitstream@{ibitstream}!bin\_inter\_decode@{bin\_inter\_decode}}
+\index{bin\_inter\_decode@{bin\_inter\_decode}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{bin\_inter\_decode()}{bin\_inter\_decode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void ibitstream\+::bin\+\_\+inter\+\_\+decode (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
 
 
@@ -87,38 +88,39 @@ uses binary interpolative coding algorithm to decode for an array of increasing 
 \hline
 \end{DoxyParams}
 
-\begin{DoxyCode}
-549                                                       \{
-550   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_size;
-551   \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-552     cerr << \textcolor{stringliteral}{" 549 b = "} << b << endl;
-553   a\_size = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b); \textcolor{comment}{// size of the vector}
-554   \textcolor{comment}{//cout << "a\_size " << a\_size << endl;}
-555 
-556   \textcolor{keywordflow}{if} (a\_size == 0)
-557     \textcolor{keywordflow}{return};
-558   \textcolor{keywordflow}{if} (a\_size == 1)\{
-559     \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-560       cerr << \textcolor{stringliteral}{" 557 b = "} << b << endl;
-561     a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b));
-562     \textcolor{keywordflow}{return};
-563   \}
-564 
-565   \textcolor{comment}{// read low and high values}
-566   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} low, high;
-567   \textcolor{keywordflow}{if} (b > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-568     cerr << \textcolor{stringliteral}{" 565 b = "} << b << endl;
-569   low = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
-570   high = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(b);
-571   \textcolor{comment}{//cout << " low " << low << " high " << high << endl;}
-572   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, 0, a\_size - 1, low, high);
-573   \textcolor{keywordflow}{return};
-574 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00550\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ a\_size;}
+\DoxyCodeLine{00551\ \ \ \textcolor{keywordflow}{if}\ (b\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00552\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 549\ b\ =\ "{}}\ <<\ b\ <<\ endl;}
+\DoxyCodeLine{00553\ \ \ a\_size\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(b);\ \textcolor{comment}{//\ size\ of\ the\ vector}}
+\DoxyCodeLine{00554\ \ \ \textcolor{comment}{//cout\ <<\ "{}a\_size\ "{}\ <<\ a\_size\ <<\ endl;}}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \textcolor{keywordflow}{if}\ (a\_size\ ==\ 0)}
+\DoxyCodeLine{00557\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00558\ \ \ \textcolor{keywordflow}{if}\ (a\_size\ ==\ 1)\{}
+\DoxyCodeLine{00559\ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 557\ b\ =\ "{}}\ <<\ b\ <<\ endl;}
+\DoxyCodeLine{00561\ \ \ \ \ a.push\_back(\mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(b));}
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00563\ \ \ \}}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00565\ \ \ \textcolor{comment}{//\ read\ low\ and\ high\ values}}
+\DoxyCodeLine{00566\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ low,\ high;}
+\DoxyCodeLine{00567\ \ \ \textcolor{keywordflow}{if}\ (b\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00568\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 565\ b\ =\ "{}}\ <<\ b\ <<\ endl;}
+\DoxyCodeLine{00569\ \ \ low\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(b);}
+\DoxyCodeLine{00570\ \ \ high\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(b);}
+\DoxyCodeLine{00571\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ low\ "{}\ <<\ low\ <<\ "{}\ high\ "{}\ <<\ high\ <<\ endl;}}
+\DoxyCodeLine{00572\ \ \ \mbox{\hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}}(a,\ 0,\ a\_size\ -\/\ 1,\ low,\ high);}
+\DoxyCodeLine{00573\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00574\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_a97983c20903c908fafb26e250bf9e812}\label{classibitstream_a97983c20903c908fafb26e250bf9e812}} 
-\index{ibitstream@{ibitstream}!bin\+\_\+inter\+\_\+decode@{bin\+\_\+inter\+\_\+decode}}
-\index{bin\+\_\+inter\+\_\+decode@{bin\+\_\+inter\+\_\+decode}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{bin\+\_\+inter\+\_\+decode()}{bin\_inter\_decode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\Hypertarget{classibitstream_a97983c20903c908fafb26e250bf9e812}\label{classibitstream_a97983c20903c908fafb26e250bf9e812} 
+\index{ibitstream@{ibitstream}!bin\_inter\_decode@{bin\_inter\_decode}}
+\index{bin\_inter\_decode@{bin\_inter\_decode}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{bin\_inter\_decode()}{bin\_inter\_decode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void ibitstream\+::bin\+\_\+inter\+\_\+decode (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{a,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{low,  }\item[{int}]{high }\end{DoxyParamCaption})}
 
 
@@ -137,44 +139,45 @@ using bit interpolative coding algorithm to decode for a subinterval of an array
 \hline
 \end{DoxyParams}
 
-\begin{DoxyCode}
-584                                                                                 \{
-585   \textcolor{comment}{// cout << " i " << i << " j " << j << " low " << low << " high " << high << endl;}
-586   \textcolor{keywordflow}{if} (j < i)
-587     \textcolor{keywordflow}{return};
-588   \textcolor{keywordflow}{if} (i==j)\{
-589     \textcolor{keywordflow}{if}(low == high)\{
-590       a.push\_back(low); \textcolor{comment}{// the element must be low = high, no other change, nothing to read}
-591     \}\textcolor{keywordflow}{else}\{
-592       \textcolor{keywordflow}{if} (\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low) > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-593         cerr << \textcolor{stringliteral}{" 590 nu\_bits(high-low) = "} << \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low) << endl;
-594       a.push\_back(\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(high-low)) + low);
-595     \}
-596     \textcolor{keywordflow}{return};
-597   \}
-598 
-599   \textcolor{keywordtype}{int} m = (i+j)/2;
-600   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = low + m - i; \textcolor{comment}{// lower bound on a[m]}
-601   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} H = high - (j - m); \textcolor{comment}{// upper bound on a[m]}
-602   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a\_m; \textcolor{comment}{// the value of the intermediate point}
-603   \textcolor{keywordflow}{if} (L == H)\{
-604     a\_m = L; \textcolor{comment}{// there will be no bits to read}
-605   \}\textcolor{keywordflow}{else}\{
-606     \textcolor{keywordflow}{if} (\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L) > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-607       cerr << \textcolor{stringliteral}{" 604 nu\_bits(H-L) = "} << \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L) << endl;
-608     a\_m = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(\hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(H-L)) + L;
-609   \}
-610   
-611   a.push\_back(a\_m);
-612 
-613   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, i, m-1, low, a\_m - 1);
-614   \hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}(a, m+1, j, a\_m + 1, high);
-615 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00585\ \ \ \textcolor{comment}{//\ cout\ <<\ "{}\ i\ "{}\ <<\ i\ <<\ "{}\ j\ "{}\ <<\ j\ <<\ "{}\ low\ "{}\ <<\ low\ <<\ "{}\ high\ "{}\ <<\ high\ <<\ endl;}}
+\DoxyCodeLine{00586\ \ \ \textcolor{keywordflow}{if}\ (j\ <\ i)}
+\DoxyCodeLine{00587\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00588\ \ \ \textcolor{keywordflow}{if}\ (i==j)\{}
+\DoxyCodeLine{00589\ \ \ \ \ \textcolor{keywordflow}{if}(low\ ==\ high)\{}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ a.push\_back(low);\ \textcolor{comment}{//\ the\ element\ must\ be\ low\ =\ high,\ no\ other\ change,\ nothing\ to\ read}}
+\DoxyCodeLine{00591\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(high-\/low)\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 590\ nu\_bits(high-\/low)\ =\ "{}}\ <<\ \mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(high-\/low)\ <<\ endl;}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ a.push\_back(\mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(\mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(high-\/low))\ +\ low);}
+\DoxyCodeLine{00595\ \ \ \ \ \}}
+\DoxyCodeLine{00596\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00597\ \ \ \}}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \ \ \textcolor{keywordtype}{int}\ m\ =\ (i+j)/2;}
+\DoxyCodeLine{00600\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ L\ =\ low\ +\ m\ -\/\ i;\ \textcolor{comment}{//\ lower\ bound\ on\ a[m]}}
+\DoxyCodeLine{00601\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ H\ =\ high\ -\/\ (j\ -\/\ m);\ \textcolor{comment}{//\ upper\ bound\ on\ a[m]}}
+\DoxyCodeLine{00602\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ a\_m;\ \textcolor{comment}{//\ the\ value\ of\ the\ intermediate\ point}}
+\DoxyCodeLine{00603\ \ \ \textcolor{keywordflow}{if}\ (L\ ==\ H)\{}
+\DoxyCodeLine{00604\ \ \ \ \ a\_m\ =\ L;\ \textcolor{comment}{//\ there\ will\ be\ no\ bits\ to\ read}}
+\DoxyCodeLine{00605\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(H-\/L)\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 604\ nu\_bits(H-\/L)\ =\ "{}}\ <<\ \mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(H-\/L)\ <<\ endl;}
+\DoxyCodeLine{00608\ \ \ \ \ a\_m\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(\mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(H-\/L))\ +\ L;}
+\DoxyCodeLine{00609\ \ \ \}}
+\DoxyCodeLine{00610\ \ \ }
+\DoxyCodeLine{00611\ \ \ a.push\_back(a\_m);}
+\DoxyCodeLine{00612\ }
+\DoxyCodeLine{00613\ \ \ \mbox{\hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}}(a,\ i,\ m-\/1,\ low,\ a\_m\ -\/\ 1);}
+\DoxyCodeLine{00614\ \ \ \mbox{\hyperlink{classibitstream_a4d1bfd02f98f6af2ac4d80034b23e26d}{bin\_inter\_decode}}(a,\ m+1,\ j,\ a\_m\ +\ 1,\ high);}
+\DoxyCodeLine{00615\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}\label{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}} 
+\Hypertarget{classibitstream_aa7b59600e58571b802d6d0dadf92d37a}\label{classibitstream_aa7b59600e58571b802d6d0dadf92d37a} 
 \index{ibitstream@{ibitstream}!close@{close}}
 \index{close@{close}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{close()}{close()}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
 {\footnotesize\ttfamily void ibitstream\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -182,129 +185,130 @@ using bit interpolative coding algorithm to decode for a subinterval of an array
 closes the session by closing the input file 
 
 
-\begin{DoxyCode}
-165 \{fclose(\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00165\ \{fclose(\mbox{\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}});\}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}\label{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}} 
+\Hypertarget{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}\label{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc} 
 \index{ibitstream@{ibitstream}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \hyperlink{classibitstream}{ibitstream} \& ibitstream\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{unsigned int \&}]{n }\end{DoxyParamCaption})}
-
-
-
-reads an unsigned int from the input using Elias delta decoding and saves it in the reference given 
-
-
-\begin{DoxyCode}
-455                                                    \{
-456   \textcolor{comment}{// implement Elias delta decoding}
-457   \textcolor{comment}{//bitset<32> B(buffer);}
-458   \textcolor{comment}{//cerr << " buffer " << B << endl;}
-459   \textcolor{comment}{//cerr << " head " << bitset<32>(head\_mask) << endl;}
-460   \textcolor{comment}{//cerr << " head position " << head\_place << endl;}
-461   
-462   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
-463   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
-464     \textcolor{comment}{// read until reach one}
-465     L++;
-466   \}
-467   \textcolor{comment}{//cerr << " L " << L << endl;}
-468   
-469   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
-470   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
-471     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
-472     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-473   \}
-474   \textcolor{keywordflow}{if} (L > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-475     cerr << \textcolor{stringliteral}{" 472 L = "} << L << endl;
-476   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
-477   
-478   N += (1<<L); \textcolor{comment}{// we must add 2^L}
-479   N --; \textcolor{comment}{// this was N + 1}
-480 
-481   \textcolor{keywordflow}{if} (N > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-482     cerr << \textcolor{stringliteral}{" 479 N = "} << N << \textcolor{stringliteral}{" L = "} << L << endl;
-483   n = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N); \textcolor{comment}{// read N digits}
-484   n += (1 << N); \textcolor{comment}{// we must add 2^N}
-485   n --; \textcolor{comment}{// when we encoded, in order to get a positive integer, we added one, now we subtract one}
-486   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-487 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}\label{classibitstream_a0264d01fa1211c4bb73f5de2bc68adbc}} 
-\index{ibitstream@{ibitstream}!operator$>$$>$@{operator$>$$>$}}
-\index{operator$>$$>$@{operator$>$$>$}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \hyperlink{classibitstream}{ibitstream} \& ibitstream\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{mpz\+\_\+class \&}]{n }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classibitstream}{ibitstream}} \& ibitstream\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{mpz\+\_\+class \&}]{n }\end{DoxyParamCaption})}
 
 
 
 reads a nonnegative mpz\+\_\+class integer using Elias delta decoding and stores in the reference given 
 
 
-\begin{DoxyCode}
-489                                                 \{
-490   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} L = 0;
-491   \textcolor{comment}{//cout << "head\_place " << head\_place << endl;}
-492   \textcolor{comment}{//cout << "head\_mask  " << head\_mask << endl;}
-493   \textcolor{keywordflow}{while} (!\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}())\{
-494     \textcolor{comment}{// read until reach one}
-495     L++;
-496   \}
-497 
-498   \textcolor{comment}{//cout << " L = " << L << endl;}
-499   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} N;
-500   \textcolor{keywordflow}{if} (L == 0)\{\textcolor{comment}{// special case, avoid going over further calculations}
-501     n = 0; \textcolor{comment}{// we had subtracted one when encoding }
-502     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-503   \}
-504 
-505   \textcolor{keywordflow}{if} (L > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-506     cerr << \textcolor{stringliteral}{" 503 L = "} << L << endl;
-507   N = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(L); \textcolor{comment}{// read L digits}
-508   
-509   N += (1<<L); \textcolor{comment}{// we must add 2^L}
-510   N --; \textcolor{comment}{// this was N + 1}
-511 
-512   \textcolor{comment}{// we must read N bits and form n based on that}
-513 
-514   \hyperlink{classbit__pipe}{bit\_pipe} B;
-515   \textcolor{comment}{//cout << " N " << N << endl;}
-516   \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(N, B);
-517   \textcolor{comment}{//cout << " B first " << B << endl;}
-518   \textcolor{comment}{// we should add a leading 1 to B}
-519   \textcolor{comment}{// in order to do so, we should consider 2 cases:}
-520   \textcolor{keywordflow}{if} (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} == 0)\{
-521     \textcolor{comment}{// this is the tricky case, since B now contains full chunks and there is no room to add the leading 1}
-522     \textcolor{comment}{// so we need to insert a chunk at the beginning and place the leading bit there}
-523     \textcolor{comment}{// since the leading bit will be in the rightmost bit in this case, the value of the initial chunk is 1
-       in this case}
-524     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), 1);
-525   \}\textcolor{keywordflow}{else}\{
-526     \textcolor{comment}{// in this case, the lading bit will be placed in the first chunk of B}
-527     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= (1 << (N % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}));
-528   \}
-529   \textcolor{comment}{//cout << " B " << B << endl;}
-530   \textcolor{comment}{//cout << B.bits[0] << endl;}
-531 
-532   \textcolor{comment}{// construct the mpz\_clas}
-533   mpz\_import(n.get\_mpz\_t(),
-534              B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(), \textcolor{comment}{// the number of words}
-535              1, \textcolor{comment}{// order: 1 means first significant word first}
-536              \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), \textcolor{comment}{// each word is this many bytes}
-537              0, \textcolor{comment}{// endian can be 1 for most significant byte first, -1 for least significant first, or 0
-       for the native endianness of the host CPU.}
-538              0, \textcolor{comment}{// nails}
-539              &B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0]); \textcolor{comment}{//&B.bits[0]);}
-540 
-541   n --; \textcolor{comment}{// when encoding, we added 1 to make sure it is positive}
-542   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
-543 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00490\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ L\ =\ 0;}
+\DoxyCodeLine{00491\ \ \ \textcolor{comment}{//cout\ <<\ "{}head\_place\ "{}\ <<\ head\_place\ <<\ endl;}}
+\DoxyCodeLine{00492\ \ \ \textcolor{comment}{//cout\ <<\ "{}head\_mask\ \ "{}\ <<\ head\_mask\ <<\ endl;}}
+\DoxyCodeLine{00493\ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}}())\{}
+\DoxyCodeLine{00494\ \ \ \ \ \textcolor{comment}{//\ read\ until\ reach\ one}}
+\DoxyCodeLine{00495\ \ \ \ \ L++;}
+\DoxyCodeLine{00496\ \ \ \}}
+\DoxyCodeLine{00497\ }
+\DoxyCodeLine{00498\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ L\ =\ "{}\ <<\ L\ <<\ endl;}}
+\DoxyCodeLine{00499\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ N;}
+\DoxyCodeLine{00500\ \ \ \textcolor{keywordflow}{if}\ (L\ ==\ 0)\{\textcolor{comment}{//\ special\ case,\ avoid\ going\ over\ further\ calculations}}
+\DoxyCodeLine{00501\ \ \ \ \ n\ =\ 0;\ \textcolor{comment}{//\ we\ had\ subtracted\ one\ when\ encoding\ }}
+\DoxyCodeLine{00502\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00503\ \ \ \}}
+\DoxyCodeLine{00504\ }
+\DoxyCodeLine{00505\ \ \ \textcolor{keywordflow}{if}\ (L\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00506\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 503\ L\ =\ "{}}\ <<\ L\ <<\ endl;}
+\DoxyCodeLine{00507\ \ \ N\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(L);\ \textcolor{comment}{//\ read\ L\ digits}}
+\DoxyCodeLine{00508\ \ \ }
+\DoxyCodeLine{00509\ \ \ N\ +=\ (1<<L);\ \textcolor{comment}{//\ we\ must\ add\ 2\string^L}}
+\DoxyCodeLine{00510\ \ \ N\ -\/-\/;\ \textcolor{comment}{//\ this\ was\ N\ +\ 1}}
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \ \ \textcolor{comment}{//\ we\ must\ read\ N\ bits\ and\ form\ n\ based\ on\ that}}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \ \ \mbox{\hyperlink{classbit__pipe}{bit\_pipe}}\ B;}
+\DoxyCodeLine{00515\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ N\ "{}\ <<\ N\ <<\ endl;}}
+\DoxyCodeLine{00516\ \ \ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(N,\ B);}
+\DoxyCodeLine{00517\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ B\ first\ "{}\ <<\ B\ <<\ endl;}}
+\DoxyCodeLine{00518\ \ \ \textcolor{comment}{//\ we\ should\ add\ a\ leading\ 1\ to\ B}}
+\DoxyCodeLine{00519\ \ \ \textcolor{comment}{//\ in\ order\ to\ do\ so,\ we\ should\ consider\ 2\ cases:}}
+\DoxyCodeLine{00520\ \ \ \textcolor{keywordflow}{if}\ (N\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ ==\ 0)\{}
+\DoxyCodeLine{00521\ \ \ \ \ \textcolor{comment}{//\ this\ is\ the\ tricky\ case,\ since\ B\ now\ contains\ full\ chunks\ and\ there\ is\ no\ room\ to\ add\ the\ leading\ 1}}
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{comment}{//\ so\ we\ need\ to\ insert\ a\ chunk\ at\ the\ beginning\ and\ place\ the\ leading\ bit\ there}}
+\DoxyCodeLine{00523\ \ \ \ \ \textcolor{comment}{//\ since\ the\ leading\ bit\ will\ be\ in\ the\ rightmost\ bit\ in\ this\ case,\ the\ value\ of\ the\ initial\ chunk\ is\ 1\ in\ this\ case}}
+\DoxyCodeLine{00524\ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.insert(B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ 1);}
+\DoxyCodeLine{00525\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00526\ \ \ \ \ \textcolor{comment}{//\ in\ this\ case,\ the\ lading\ bit\ will\ be\ placed\ in\ the\ first\ chunk\ of\ B}}
+\DoxyCodeLine{00527\ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0]\ |=\ (1\ <<\ (N\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}));}
+\DoxyCodeLine{00528\ \ \ \}}
+\DoxyCodeLine{00529\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ B\ "{}\ <<\ B\ <<\ endl;}}
+\DoxyCodeLine{00530\ \ \ \textcolor{comment}{//cout\ <<\ B.bits[0]\ <<\ endl;}}
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \ \ \textcolor{comment}{//\ construct\ the\ mpz\_clas}}
+\DoxyCodeLine{00533\ \ \ mpz\_import(n.get\_mpz\_t(),}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size(),\ \textcolor{comment}{//\ the\ number\ of\ words}}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \textcolor{comment}{//\ order:\ 1\ means\ first\ significant\ word\ first}}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}),\ \textcolor{comment}{//\ each\ word\ is\ this\ many\ bytes}}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \textcolor{comment}{//\ endian\ can\ be\ 1\ for\ most\ significant\ byte\ first,\ -\/1\ for\ least\ significant\ first,\ or\ 0\ for\ the\ native\ endianness\ of\ the\ host\ CPU.}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \textcolor{comment}{//\ nails}}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \&B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0]);\ \textcolor{comment}{//\&B.bits[0]);}}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00541\ \ \ n\ -\/-\/;\ \textcolor{comment}{//\ when\ encoding,\ we\ added\ 1\ to\ make\ sure\ it\ is\ positive}}
+\DoxyCodeLine{00542\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00543\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_a895239acf7179f6778388c39c97643e4}\label{classibitstream_a895239acf7179f6778388c39c97643e4}} 
-\index{ibitstream@{ibitstream}!read\+\_\+bit@{read\+\_\+bit}}
-\index{read\+\_\+bit@{read\+\_\+bit}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{read\+\_\+bit()}{read\_bit()}}
+\Hypertarget{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca}\label{classibitstream_ae3e91ecc9ff17eef98d72d44aec02eca} 
+\index{ibitstream@{ibitstream}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classibitstream}{ibitstream}} \& ibitstream\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{unsigned int \&}]{n }\end{DoxyParamCaption})}
+
+
+
+reads an unsigned int from the input using Elias delta decoding and saves it in the reference given 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00456\ \ \ \textcolor{comment}{//\ implement\ Elias\ delta\ decoding}}
+\DoxyCodeLine{00457\ \ \ \textcolor{comment}{//bitset<32>\ B(buffer);}}
+\DoxyCodeLine{00458\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ buffer\ "{}\ <<\ B\ <<\ endl;}}
+\DoxyCodeLine{00459\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ head\ "{}\ <<\ bitset<32>(head\_mask)\ <<\ endl;}}
+\DoxyCodeLine{00460\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ head\ position\ "{}\ <<\ head\_place\ <<\ endl;}}
+\DoxyCodeLine{00461\ \ \ }
+\DoxyCodeLine{00462\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ L\ =\ 0;}
+\DoxyCodeLine{00463\ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{classibitstream_a895239acf7179f6778388c39c97643e4}{read\_bit}}())\{}
+\DoxyCodeLine{00464\ \ \ \ \ \textcolor{comment}{//\ read\ until\ reach\ one}}
+\DoxyCodeLine{00465\ \ \ \ \ L++;}
+\DoxyCodeLine{00466\ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ L\ "{}\ <<\ L\ <<\ endl;}}
+\DoxyCodeLine{00468\ \ \ }
+\DoxyCodeLine{00469\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ N;}
+\DoxyCodeLine{00470\ \ \ \textcolor{keywordflow}{if}\ (L\ ==\ 0)\{\textcolor{comment}{//\ special\ case,\ avoid\ going\ over\ further\ calculations}}
+\DoxyCodeLine{00471\ \ \ \ \ n\ =\ 0;\ \textcolor{comment}{//\ we\ had\ subtracted\ one\ when\ encoding\ }}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00473\ \ \ \}}
+\DoxyCodeLine{00474\ \ \ \textcolor{keywordflow}{if}\ (L\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00475\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 472\ L\ =\ "{}}\ <<\ L\ <<\ endl;}
+\DoxyCodeLine{00476\ \ \ N\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(L);\ \textcolor{comment}{//\ read\ L\ digits}}
+\DoxyCodeLine{00477\ \ \ }
+\DoxyCodeLine{00478\ \ \ N\ +=\ (1<<L);\ \textcolor{comment}{//\ we\ must\ add\ 2\string^L}}
+\DoxyCodeLine{00479\ \ \ N\ -\/-\/;\ \textcolor{comment}{//\ this\ was\ N\ +\ 1}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ \ \ \textcolor{keywordflow}{if}\ (N\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00482\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 479\ N\ =\ "{}}\ <<\ N\ <<\ \textcolor{stringliteral}{"{}\ L\ =\ "{}}\ <<\ L\ <<\ endl;}
+\DoxyCodeLine{00483\ \ \ n\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(N);\ \textcolor{comment}{//\ read\ N\ digits}}
+\DoxyCodeLine{00484\ \ \ n\ +=\ (1\ <<\ N);\ \textcolor{comment}{//\ we\ must\ add\ 2\string^N}}
+\DoxyCodeLine{00485\ \ \ n\ -\/-\/;\ \textcolor{comment}{//\ when\ we\ encoded,\ in\ order\ to\ get\ a\ positive\ integer,\ we\ added\ one,\ now\ we\ subtract\ one}}
+\DoxyCodeLine{00486\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00487\ \}}
+
+\end{DoxyCode}
+\Hypertarget{classibitstream_a895239acf7179f6778388c39c97643e4}\label{classibitstream_a895239acf7179f6778388c39c97643e4} 
+\index{ibitstream@{ibitstream}!read\_bit@{read\_bit}}
+\index{read\_bit@{read\_bit}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{read\_bit()}{read\_bit()}}
 {\footnotesize\ttfamily bool ibitstream\+::read\+\_\+bit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
@@ -312,187 +316,182 @@ reads a nonnegative mpz\+\_\+class integer using Elias delta decoding and stores
 read one bit from input and return true if its value is 1 and false otherwise. 
 
 
-\begin{DoxyCode}
-618                          \{
-619   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} == 0)\{ \textcolor{comment}{// nothing is in buffer}
-620     \textcolor{comment}{//cerr << " read a chunk " << endl;}
-621     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-622   \}
-623   \textcolor{keywordtype}{bool} ans = \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} & \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}; \textcolor{comment}{// look at the value of buffer at the bit where the
-       head\_mask is pointing to}
-624   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1; \textcolor{comment}{// go one bit to the right}
-625   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} --;
-626   \textcolor{comment}{//cerr << " read bit " << ans << endl;}
-627   \textcolor{keywordflow}{return} ans;
-628 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00619\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ ==\ 0)\{\ \textcolor{comment}{//\ nothing\ is\ in\ buffer}}
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ read\ a\ chunk\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00621\ \ \ \ \ \mbox{\hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}}();}
+\DoxyCodeLine{00622\ \ \ \}}
+\DoxyCodeLine{00623\ \ \ \textcolor{keywordtype}{bool}\ ans\ =\ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ \&\ \mbox{\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}};\ \textcolor{comment}{//\ look\ at\ the\ value\ of\ buffer\ at\ the\ bit\ where\ the\ head\_mask\ is\ pointing\ to}}
+\DoxyCodeLine{00624\ \ \ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ >>=\ 1;\ \textcolor{comment}{//\ go\ one\ bit\ to\ the\ right}}
+\DoxyCodeLine{00625\ \ \ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ -\/-\/;}
+\DoxyCodeLine{00626\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ read\ bit\ "{}\ <<\ ans\ <<\ endl;}}
+\DoxyCodeLine{00627\ \ \ \textcolor{keywordflow}{return}\ ans;}
+\DoxyCodeLine{00628\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}\label{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}} 
-\index{ibitstream@{ibitstream}!read\+\_\+bits@{read\+\_\+bits}}
-\index{read\+\_\+bits@{read\+\_\+bits}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{read\+\_\+bits()}{read\_bits()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\Hypertarget{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}\label{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c} 
+\index{ibitstream@{ibitstream}!read\_bits@{read\_bits}}
+\index{read\_bits@{read\_bits}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{read\_bits()}{read\_bits()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void ibitstream\+::read\+\_\+bits (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{\mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B }\end{DoxyParamCaption})}
+
+
+
+reads k bits from input and stores in the given \doxylink{classbit__pipe}{bit\+\_\+pipe}. $k \geq 1$ is arbitrary. The bits are stored in the \doxylink{classbit__pipe}{bit\+\_\+pipe} so that can be interpreted as integer (e.\+g. mpz\+\_\+class) so the LSB is located in the rightmost bit of the rightmost chunk (unlike the usual \doxylink{classbit__pipe}{bit\+\_\+pipe} situation). We assume that the B given here is an empty \doxylink{classbit__pipe}{bit\+\_\+pipe} 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00439\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ read\_bits\ "{}\ <<\ k\ <<\ endl;}}
+\DoxyCodeLine{00440\ \ \ \textcolor{comment}{//\ assumption:\ B\ is\ empty\ bit\_pipe}}
+\DoxyCodeLine{00441\ \ \ \textcolor{keywordflow}{if}\ (B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()\ !=\ 0\ or\ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ !=\ 0)\{}
+\DoxyCodeLine{00442\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ ERROR:\ ibitstream::read\_bits(int\ k,\ bit\_pipe\&\ B)\ must\ be\ called\ with\ an\ empty\ bit\_pipe,\ a\ nonempty\ bitpipe\ is\ given\ with\ B.bits.size()\ =\ "{}}\ <<\ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()\ <<\ endl;}
+\DoxyCodeLine{00443\ \ \ \}}
+\DoxyCodeLine{00444\ \ \ \mbox{\hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}}(k,\ B);}
+\DoxyCodeLine{00445\ \ \ \textcolor{comment}{//\ there\ might\ be\ a\ few\ zero\ chunks\ at\ the\ beginning\ of\ B\ which\ are\ redundant,\ we\ remove\ them\ here}}
+\DoxyCodeLine{00446\ \ \ \textcolor{comment}{//\ the\ number\ of\ nonzero\ chunks\ is\ exactly\ the\ floor\ of\ k\ /\ BIT\_INT}}
+\DoxyCodeLine{00447\ \ \ \textcolor{keywordtype}{int}\ nonzero\_chunks\ =\ k\ /\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00448\ \ \ \textcolor{keywordflow}{if}\ (k\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ !=\ 0)}
+\DoxyCodeLine{00449\ \ \ \ \ nonzero\_chunks\ ++;\ \textcolor{comment}{//\ take\ the\ floor}}
+\DoxyCodeLine{00450\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ nonzero\_chunks\ "{}\ <<\ nonzero\_chunks\ <<\ endl;}}
+\DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{if}\ (nonzero\_chunks\ <\ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size())}
+\DoxyCodeLine{00452\ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.erase(B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin()\ +\ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()\ -\/\ nonzero\_chunks);}
+\DoxyCodeLine{00453\ \}}
+
+\end{DoxyCode}
+\Hypertarget{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}\label{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0} 
+\index{ibitstream@{ibitstream}!read\_bits@{read\_bits}}
+\index{read\_bits@{read\_bits}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{read\_bits()}{read\_bits()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily unsigned int ibitstream\+::read\+\_\+bits (\begin{DoxyParamCaption}\item[{unsigned int}]{k }\end{DoxyParamCaption})}
 
 
 
-read k bits from the input, interpret it as integer (first bit read is M\+SB) and return its value. Here, k must be in the range 1 $<$= k $<$= B\+I\+T\+\_\+\+I\+NT 
+read k bits from the input, interpret it as integer (first bit read is MSB) and return its value. Here, k must be in the range 1 \texorpdfstring{$<$}{<}= k \texorpdfstring{$<$}{<}= BIT\+\_\+\+INT 
 
 
-\begin{DoxyCode}
-336                                                 \{
-337 
-338   \textcolor{comment}{//cerr << " read bits with k = " << k << endl;}
-339   \textcolor{keywordflow}{if} (k < 1 or k > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-340     cerr << \textcolor{stringliteral}{"ERROR: ibitstream::read\_bits called with k out of range, k = "} << k << endl;
-341   \}
-342   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\textcolor{comment}{// no bits left}
-343     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-344   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} >= k)\{ \textcolor{comment}{// head\_place is effectively the number of unread bits remaining in the
-       buffer}
-345     \textcolor{comment}{//cerr << " head\_place >= k head\_mask = " << head\_mask << " head\_place = " << head\_place << endl;}
-346     \textcolor{comment}{// there are enough number of bits in the current buffer to read}
-347     \textcolor{comment}{// mask the input}
-348     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = \hyperlink{bitstream_8cpp_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}(k); \textcolor{comment}{// k ones}
-349     \textcolor{comment}{// now we should shift mask to start at head\_place}
-350     mask <<= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k);
-351     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ans = \hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer} & mask; \textcolor{comment}{// mask out the corresponding bits}
-352     ans >>= (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} - k); \textcolor{comment}{// bring it back to LSB}
-353 
-354     \textcolor{comment}{// we need to shift head k bits to the right}
-355     \textcolor{comment}{// in some compilers, >>= 32 does strange things, in fact it does nothing. To avoid that, I shift k - 1
-       bits and then an extra 1 bit}
-356     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= k - 1;
-357     \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} >>= 1;
-358     \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} -= k;
-359     \textcolor{comment}{//cerr << " after head\_mask " << head\_mask << " head\_place = " << head\_place << endl;}
-360     \textcolor{keywordflow}{return} ans;
-361   \}\textcolor{keywordflow}{else}\{
-362     \textcolor{comment}{// there is not enough bits in the current buffer.}
-363     \textcolor{comment}{// So we should read head\_place many bits from the current buffer}
-364     \textcolor{comment}{// then read another chunk from input file}
-365     \textcolor{comment}{// and then read k - head\_place bits from the new buffer}
-366     \textcolor{comment}{// we do these two steps recursively}
-367     \textcolor{comment}{// but first need to store the number of bits we will have to read in the future, since these variables
-       will be modified later:}
-368     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_bits = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place};
-369     \textcolor{keywordflow}{if} (head\_place > BIT\_INT)
-370       cerr << \textcolor{stringliteral}{" 367 head\_place = "} << head\_place << endl;
-371     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place); \textcolor{comment}{// the bits from the current buffer}
-372     \hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}();
-373     \textcolor{keywordflow}{if} (future\_bits > BIT\_INT)
-374       cerr << \textcolor{stringliteral}{" 371 future\_bits = "} << future\_bits << endl;
-375     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} b = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(future\_bits); \textcolor{comment}{// bits from the next buffer}
-376     \textcolor{comment}{// now we need to combine these}
-377     \textcolor{comment}{// in order to do so, we need to shift a to the left and combine with b}
-378     \textcolor{comment}{// but the number of bits we need to shift a is exactly future bits}
-379     a <<= future\_bits;
-380     \textcolor{keywordflow}{return} a | b;
-381   \}
-382 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ read\ bits\ with\ k\ =\ "{}\ <<\ k\ <<\ endl;}}
+\DoxyCodeLine{00339\ \ \ \textcolor{keywordflow}{if}\ (k\ <\ 1\ or\ k\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})\{}
+\DoxyCodeLine{00340\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}ERROR:\ ibitstream::read\_bits\ called\ with\ k\ out\ of\ range,\ k\ =\ "{}}\ <<\ k\ <<\ endl;}
+\DoxyCodeLine{00341\ \ \ \}}
+\DoxyCodeLine{00342\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ ==\ 0)\textcolor{comment}{//\ no\ bits\ left}}
+\DoxyCodeLine{00343\ \ \ \ \ \mbox{\hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}}();}
+\DoxyCodeLine{00344\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ >=\ k)\{\ \textcolor{comment}{//\ head\_place\ is\ effectively\ the\ number\ of\ unread\ bits\ remaining\ in\ the\ buffer}}
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ head\_place\ >=\ k\ head\_mask\ =\ "{}\ <<\ head\_mask\ <<\ "{}\ head\_place\ =\ "{}\ <<\ head\_place\ <<\ endl;}}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{comment}{//\ there\ are\ enough\ number\ of\ bits\ in\ the\ current\ buffer\ to\ read}}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{comment}{//\ mask\ the\ input}}
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mask\ =\ \mbox{\hyperlink{bitstream_8h_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}}(k);\ \textcolor{comment}{//\ k\ ones}}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{comment}{//\ now\ we\ should\ shift\ mask\ to\ start\ at\ head\_place}}
+\DoxyCodeLine{00350\ \ \ \ \ mask\ <<=\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ -\/\ k);}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ans\ =\ \mbox{\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}}\ \&\ mask;\ \textcolor{comment}{//\ mask\ out\ the\ corresponding\ bits}}
+\DoxyCodeLine{00352\ \ \ \ \ ans\ >>=\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ -\/\ k);\ \textcolor{comment}{//\ bring\ it\ back\ to\ LSB}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{comment}{//\ we\ need\ to\ shift\ head\ k\ bits\ to\ the\ right}}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{comment}{//\ in\ some\ compilers,\ >>=\ 32\ does\ strange\ things,\ in\ fact\ it\ does\ nothing.\ To\ avoid\ that,\ I\ shift\ k\ -\/\ 1\ bits\ and\ then\ an\ extra\ 1\ bit}}
+\DoxyCodeLine{00356\ \ \ \ \ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ >>=\ k\ -\/\ 1;}
+\DoxyCodeLine{00357\ \ \ \ \ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ >>=\ 1;}
+\DoxyCodeLine{00358\ \ \ \ \ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ -\/=\ k;}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ after\ head\_mask\ "{}\ <<\ head\_mask\ <<\ "{}\ head\_place\ =\ "{}\ <<\ head\_place\ <<\ endl;}}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordflow}{return}\ ans;}
+\DoxyCodeLine{00361\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{comment}{//\ there\ is\ not\ enough\ bits\ in\ the\ current\ buffer.}}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{comment}{//\ So\ we\ should\ read\ head\_place\ many\ bits\ from\ the\ current\ buffer}}
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{comment}{//\ then\ read\ another\ chunk\ from\ input\ file}}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{comment}{//\ and\ then\ read\ k\ -\/\ head\_place\ bits\ from\ the\ new\ buffer}}
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{comment}{//\ we\ do\ these\ two\ steps\ recursively}}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{comment}{//\ but\ first\ need\ to\ store\ the\ number\ of\ bits\ we\ will\ have\ to\ read\ in\ the\ future,\ since\ these\ variables\ will\ be\ modified\ later:}}
+\DoxyCodeLine{00368\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ future\_bits\ =\ k\ -\/\ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}};}
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 367\ head\_place\ =\ "{}}\ <<\ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ <<\ endl;}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}});\ \textcolor{comment}{//\ the\ bits\ from\ the\ current\ buffer}}
+\DoxyCodeLine{00372\ \ \ \ \ \mbox{\hyperlink{classibitstream_ac62c26004436d83f337f4aeba0895e20}{read\_chunk}}();}
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordflow}{if}\ (future\_bits\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 371\ future\_bits\ =\ "{}}\ <<\ future\_bits\ <<\ endl;}
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ b\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(future\_bits);\ \textcolor{comment}{//\ bits\ from\ the\ next\ buffer}}
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{comment}{//\ now\ we\ need\ to\ combine\ these}}
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{comment}{//\ in\ order\ to\ do\ so,\ we\ need\ to\ shift\ a\ to\ the\ left\ and\ combine\ with\ b}}
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{comment}{//\ but\ the\ number\ of\ bits\ we\ need\ to\ shift\ a\ is\ exactly\ future\ bits}}
+\DoxyCodeLine{00379\ \ \ \ \ a\ <<=\ future\_bits;}
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keywordflow}{return}\ a\ |\ b;}
+\DoxyCodeLine{00381\ \ \ \}}
+\DoxyCodeLine{00382\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}\label{classibitstream_a4bb7a698ab44c1e2fe21b4daa880bd6c}} 
-\index{ibitstream@{ibitstream}!read\+\_\+bits@{read\+\_\+bits}}
-\index{read\+\_\+bits@{read\+\_\+bits}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{read\+\_\+bits()}{read\_bits()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void ibitstream\+::read\+\_\+bits (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{\hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B }\end{DoxyParamCaption})}
-
-
-
-reads k bits from input and stores in the given \hyperlink{classbit__pipe}{bit\+\_\+pipe}. $k \geq 1$ is arbitrary. The bits are stored in the \hyperlink{classbit__pipe}{bit\+\_\+pipe} so that can be interpreted as integer (e.\+g. mpz\+\_\+class) so the L\+SB is located in the rightmost bit of the rightmost chunk (unlike the usual \hyperlink{classbit__pipe}{bit\+\_\+pipe} situation). We assume that the B given here is an empty \hyperlink{classbit__pipe}{bit\+\_\+pipe} 
-
-
-\begin{DoxyCode}
-438                                             \{
-439   \textcolor{comment}{//cerr << " read\_bits " << k << endl;}
-440   \textcolor{comment}{// assumption: B is empty bit\_pipe}
-441   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() != 0 or B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} != 0)\{
-442     cerr << \textcolor{stringliteral}{" ERROR: ibitstream::read\_bits(int k, bit\_pipe& B) must be called with an empty bit\_pipe, a
-       nonempty bitpipe is given with B.bits.size() = "} << B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() << endl;
-443   \}
-444   \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(k, B);
-445   \textcolor{comment}{// there might be a few zero chunks at the beginning of B which are redundant, we remove them here}
-446   \textcolor{comment}{// the number of nonzero chunks is exactly the floor of k / BIT\_INT}
-447   \textcolor{keywordtype}{int} nonzero\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-448   \textcolor{keywordflow}{if} (k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} != 0)
-449     nonzero\_chunks ++; \textcolor{comment}{// take the floor}
-450   \textcolor{comment}{//cerr << " nonzero\_chunks " << nonzero\_chunks << endl;}
-451   \textcolor{keywordflow}{if} (nonzero\_chunks < B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size())
-452     B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - nonzero\_chunks);
-453 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}\label{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}} 
-\index{ibitstream@{ibitstream}!read\+\_\+bits\+\_\+append@{read\+\_\+bits\+\_\+append}}
-\index{read\+\_\+bits\+\_\+append@{read\+\_\+bits\+\_\+append}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{read\+\_\+bits\+\_\+append()}{read\_bits\_append()}}
-{\footnotesize\ttfamily void ibitstream\+::read\+\_\+bits\+\_\+append (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{\hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B }\end{DoxyParamCaption})}
+\Hypertarget{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}\label{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5} 
+\index{ibitstream@{ibitstream}!read\_bits\_append@{read\_bits\_append}}
+\index{read\_bits\_append@{read\_bits\_append}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{read\_bits\_append()}{read\_bits\_append()}}
+{\footnotesize\ttfamily void ibitstream\+::read\+\_\+bits\+\_\+append (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{\mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B }\end{DoxyParamCaption})}
 
 
 
 similar to read\+\_\+bits, but B does not have to be empty and the result will be appended to B (this is used in order to recursively implement read\+\_\+bits) 
 
 
-\begin{DoxyCode}
-384                                                    \{
-385   \textcolor{comment}{//cout << " read\_bits called k = " << k << " head\_place = " << head\_place << endl;}
-386   \textcolor{comment}{// by assumption, when calling this function, B has full chunks (last\_bits is either zero so BIT\_INT)}
-387   \textcolor{keywordflow}{if} (k == 0)
-388     \textcolor{keywordflow}{return}; \textcolor{comment}{// nothing remains to be done}
-389   \textcolor{keywordflow}{if} (\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} == 0)\{
-390     \textcolor{comment}{// we are over with the current bits in the buffer}
-391     \textcolor{comment}{// so we need to load a few chunks from the input}
-392     \textcolor{comment}{// we should append k / BIT\_INT full chunks to B and then k % BIT\_INT bits from the next chunk}
-393     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} full\_chunks = k / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-394     \textcolor{keywordflow}{if} (full\_chunks > 0)\{
-395       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() + full\_chunks);
-396       fread(&B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size() - full\_chunks], \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} int), full\_chunks, 
-      \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}); \textcolor{comment}{// read full\_chunks many chunks}
-397       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the last chunk contains full bits }
-398     \}
-399     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res\_bits = k % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the remaining bits to be read}
-400     \textcolor{keywordflow}{if} (res\_bits > 0)\{
-401       \textcolor{comment}{// we need to read an extra res bits}
-402       \textcolor{keywordflow}{if} (res\_bits > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-403         cerr << \textcolor{stringliteral}{" 400 res\_bits = "} << res\_bits << endl;
-404       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} res = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits} (res\_bits); \textcolor{comment}{// read res many bits}
-405       \textcolor{comment}{// we should shift res\_bits so that its MSB is the leftmost bits of the chunk}
-406       res <<= (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - res\_bits);
-407       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(res);
-408       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = res\_bits;
-409     \}
-410   \}\textcolor{keywordflow}{else}\{
-411     \textcolor{keywordflow}{if} (k <= \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place})\{
-412       \textcolor{comment}{// there are enough bits to read}
-413       \textcolor{keywordflow}{if} (k > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-414         cerr << \textcolor{stringliteral}{" 411 k = "} << k << endl;
-415       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(k);
-416       \textcolor{comment}{// no need to shift a since we need LSB of a to be in the rightmost bit}
-417       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
-418       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-419     \}\textcolor{keywordflow}{else}\{
-420       \textcolor{comment}{// read head\_place bits and call again}
-421       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} future\_read; \textcolor{comment}{// number of bits to read in future after calling the read\_bits function
-       below}
-422       future\_read = k - \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place};
-423       \textcolor{keywordflow}{if} (head\_place > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-424         cerr << \textcolor{stringliteral}{" 421 head\_place = "} << head\_place << endl;
-425       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} a = \hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}(head\_place);
-426       B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(a);
-427       B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-428       \hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}(future\_read, B); \textcolor{comment}{// read the remaining bits }
-429     \}
-430   \}
-431 
-432   B.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}); \textcolor{comment}{// so that LSB of B is the rightmost bit
-       of the lats chunk.}
-433 
-434   \textcolor{comment}{// this is important to make sure that B is correctly representing an integer and can be converted to
-       mpz\_class}
-435   \textcolor{comment}{// TODO issue of 2^k - 1 correct}
-436 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00385\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ read\_bits\ called\ k\ =\ "{}\ <<\ k\ <<\ "{}\ head\_place\ =\ "{}\ <<\ head\_place\ <<\ endl;}}
+\DoxyCodeLine{00386\ \ \ \textcolor{comment}{//\ by\ assumption,\ when\ calling\ this\ function,\ B\ has\ full\ chunks\ (last\_bits\ is\ either\ zero\ so\ BIT\_INT)}}
+\DoxyCodeLine{00387\ \ \ \textcolor{keywordflow}{if}\ (k\ ==\ 0)}
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ nothing\ remains\ to\ be\ done}}
+\DoxyCodeLine{00389\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ ==\ 0)\{}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{comment}{//\ we\ are\ over\ with\ the\ current\ bits\ in\ the\ buffer}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{comment}{//\ so\ we\ need\ to\ load\ a\ few\ chunks\ from\ the\ input}}
+\DoxyCodeLine{00392\ \ \ \ \ \textcolor{comment}{//\ we\ should\ append\ k\ /\ BIT\_INT\ full\ chunks\ to\ B\ and\ then\ k\ \%\ BIT\_INT\ bits\ from\ the\ next\ chunk}}
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ full\_chunks\ =\ k\ /\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keywordflow}{if}\ (full\_chunks\ >\ 0)\{}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.resize(B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()\ +\ full\_chunks);}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ fread(\&B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()\ -\/\ full\_chunks],\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}),\ full\_chunks,\ \mbox{\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}});\ \textcolor{comment}{//\ read\ full\_chunks\ many\ chunks}}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};\ \textcolor{comment}{//\ the\ last\ chunk\ contains\ full\ bits\ }}
+\DoxyCodeLine{00398\ \ \ \ \ \}}
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ res\_bits\ =\ k\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};\ \textcolor{comment}{//\ the\ remaining\ bits\ to\ be\ read}}
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keywordflow}{if}\ (res\_bits\ >\ 0)\{}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \textcolor{comment}{//\ we\ need\ to\ read\ an\ extra\ res\ bits}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\_bits\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 400\ res\_bits\ =\ "{}}\ <<\ res\_bits\ <<\ endl;}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ res\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}\ (res\_bits);\ \textcolor{comment}{//\ read\ res\ many\ bits}}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \textcolor{comment}{//\ we\ should\ shift\ res\_bits\ so\ that\ its\ MSB\ is\ the\ leftmost\ bits\ of\ the\ chunk}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ res\ <<=\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ res\_bits);}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.push\_back(res);}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ res\_bits;}
+\DoxyCodeLine{00409\ \ \ \ \ \}}
+\DoxyCodeLine{00410\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ <=\ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}})\{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \textcolor{comment}{//\ there\ are\ enough\ bits\ to\ read}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 411\ k\ =\ "{}}\ <<\ k\ <<\ endl;}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(k);}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \textcolor{comment}{//\ no\ need\ to\ shift\ a\ since\ we\ need\ LSB\ of\ a\ to\ be\ in\ the\ rightmost\ bit}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.push\_back(a);}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00419\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \textcolor{comment}{//\ read\ head\_place\ bits\ and\ call\ again}}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ future\_read;\ \textcolor{comment}{//\ number\ of\ bits\ to\ read\ in\ future\ after\ calling\ the\ read\_bits\ function\ below}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ future\_read\ =\ k\ -\/\ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ 421\ head\_place\ =\ "{}}\ <<\ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ <<\ endl;}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{classibitstream_a2fdcaecf10fefa6942dcd5286a2696e0}{read\_bits}}(\mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}});}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.push\_back(a);}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \mbox{\hyperlink{classibitstream_acec2e9efa21551ce8db784f5b0bbd1b5}{read\_bits\_append}}(future\_read,\ B);\ \textcolor{comment}{//\ read\ the\ remaining\ bits\ }}
+\DoxyCodeLine{00429\ \ \ \ \ \}}
+\DoxyCodeLine{00430\ \ \ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ B.\mbox{\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}}(\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}});\ \textcolor{comment}{//\ so\ that\ LSB\ of\ B\ is\ the\ rightmost\ bit\ of\ the\ lats\ chunk.}}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \textcolor{comment}{//\ this\ is\ important\ to\ make\ sure\ that\ B\ is\ correctly\ representing\ an\ integer\ and\ can\ be\ converted\ to\ mpz\_class}}
+\DoxyCodeLine{00435\ \ \ \textcolor{comment}{//\ TODO\ issue\ of\ 2\string^k\ -\/\ 1\ correct}}
+\DoxyCodeLine{00436\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classibitstream_ac62c26004436d83f337f4aeba0895e20}\label{classibitstream_ac62c26004436d83f337f4aeba0895e20}} 
-\index{ibitstream@{ibitstream}!read\+\_\+chunk@{read\+\_\+chunk}}
-\index{read\+\_\+chunk@{read\+\_\+chunk}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{read\+\_\+chunk()}{read\_chunk()}}
+\Hypertarget{classibitstream_ac62c26004436d83f337f4aeba0895e20}\label{classibitstream_ac62c26004436d83f337f4aeba0895e20} 
+\index{ibitstream@{ibitstream}!read\_chunk@{read\_chunk}}
+\index{read\_chunk@{read\_chunk}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{read\_chunk()}{read\_chunk()}}
 {\footnotesize\ttfamily void ibitstream\+::read\+\_\+chunk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
@@ -500,60 +499,61 @@ similar to read\+\_\+bits, but B does not have to be empty and the result will b
 reads one chunk (4 bytes) from the input file and stores it in buffer 
 
 
-\begin{DoxyCode}
-328                            \{
-329   fread(&\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}), 1, \hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f});
-330   \textcolor{comment}{//cout << " in read chunk  buffer = " << bitset<32>(buffer) << endl;}
-331   \hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask} = 1 << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - 1); \textcolor{comment}{// pointing to the MSB which is the first bit to consider}
-332   \hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-333 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00329\ \ \ fread(\&\mbox{\hyperlink{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}{buffer}},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}),\ 1,\ \mbox{\hyperlink{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}{f}});}
+\DoxyCodeLine{00330\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ in\ read\ chunk\ \ buffer\ =\ "{}\ <<\ bitset<32>(buffer)\ <<\ endl;}}
+\DoxyCodeLine{00331\ \ \ \mbox{\hyperlink{classibitstream_a48cd41991b6c29ea5120b53873a72a70}{head\_mask}}\ =\ 1\ <<\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ 1);\ \textcolor{comment}{//\ pointing\ to\ the\ MSB\ which\ is\ the\ first\ bit\ to\ consider}}
+\DoxyCodeLine{00332\ \ \ \mbox{\hyperlink{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}{head\_place}}\ =\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00333\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}\label{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}} 
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef}\label{classibitstream_a73f0b24d3d4402369f1abbb43f7f70ef} 
 \index{ibitstream@{ibitstream}!buffer@{buffer}}
 \index{buffer@{buffer}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{buffer}{buffer}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
 {\footnotesize\ttfamily unsigned int ibitstream\+::buffer\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the last chunk read from the input 
 
-\mbox{\Hypertarget{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}\label{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}} 
+\Hypertarget{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308}\label{classibitstream_a3ea2cdd0cf97820f0e1520c42e364308} 
 \index{ibitstream@{ibitstream}!f@{f}}
 \index{f@{f}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{f}{f}}
-{\footnotesize\ttfamily F\+I\+LE$\ast$ ibitstream\+::f\hspace{0.3cm}{\ttfamily [private]}}
+\doxysubsubsection{\texorpdfstring{f}{f}}
+{\footnotesize\ttfamily FILE\texorpdfstring{$\ast$}{*} ibitstream\+::f\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 pointer to input binary file 
 
-\mbox{\Hypertarget{classibitstream_a48cd41991b6c29ea5120b53873a72a70}\label{classibitstream_a48cd41991b6c29ea5120b53873a72a70}} 
-\index{ibitstream@{ibitstream}!head\+\_\+mask@{head\+\_\+mask}}
-\index{head\+\_\+mask@{head\+\_\+mask}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{head\+\_\+mask}{head\_mask}}
+\Hypertarget{classibitstream_a48cd41991b6c29ea5120b53873a72a70}\label{classibitstream_a48cd41991b6c29ea5120b53873a72a70} 
+\index{ibitstream@{ibitstream}!head\_mask@{head\_mask}}
+\index{head\_mask@{head\_mask}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{head\_mask}{head\_mask}}
 {\footnotesize\ttfamily unsigned int ibitstream\+::head\+\_\+mask\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-the place of the head bit in buffer, represented in terms of mask. So if we are in the L\+SB, head\+\_\+mask is one, if we are in two bit left of L\+SB, this is 4 so on. When this is zero, it means the buffer is expired and we should probably read one more chunk from the input file 
+the place of the head bit in buffer, represented in terms of mask. So if we are in the LSB, head\+\_\+mask is one, if we are in two bit left of LSB, this is 4 so on. When this is zero, it means the buffer is expired and we should probably read one more chunk from the input file 
 
-\mbox{\Hypertarget{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}\label{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}} 
-\index{ibitstream@{ibitstream}!head\+\_\+place@{head\+\_\+place}}
-\index{head\+\_\+place@{head\+\_\+place}!ibitstream@{ibitstream}}
-\subsubsection{\texorpdfstring{head\+\_\+place}{head\_place}}
+\Hypertarget{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3}\label{classibitstream_a7b96359ac1534a5565e6e9b0cc53a0b3} 
+\index{ibitstream@{ibitstream}!head\_place@{head\_place}}
+\index{head\_place@{head\_place}!ibitstream@{ibitstream}}
+\doxysubsubsection{\texorpdfstring{head\_place}{head\_place}}
 {\footnotesize\ttfamily unsigned int ibitstream\+::head\+\_\+place\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-the place of head represented in terms of integer, L\+SB is 1, left of L\+SB is 2, 2 left of L\+SB is 3 and so on. head\+\_\+place is effectively the number of unread bits remaining in the buffer. 
+the place of head represented in terms of integer, LSB is 1, left of LSB is 2, 2 left of LSB is 3 and so on. head\+\_\+place is effectively the number of unread bits remaining in the buffer. 
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{bitstream_8h}{bitstream.\+h}\item 
-\hyperlink{bitstream_8cpp}{bitstream.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{bitstream_8h}{bitstream.\+h}}\item 
+\mbox{\hyperlink{bitstream_8cpp}{bitstream.\+cpp}}\end{DoxyCompactItemize}

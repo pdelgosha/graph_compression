@@ -1,5 +1,5 @@
-\hypertarget{classbit__pipe}{}\section{bit\+\_\+pipe Class Reference}
-\label{classbit__pipe}\index{bit\+\_\+pipe@{bit\+\_\+pipe}}
+\doxysection{bit\+\_\+pipe Class Reference}
+\hypertarget{classbit__pipe}{}\label{classbit__pipe}\index{bit\_pipe@{bit\_pipe}}
 
 
 A sequence of arbitrary number of bits.  
@@ -9,94 +9,96 @@ A sequence of arbitrary number of bits.
 
 {\ttfamily \#include $<$bitstream.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1}{bit\+\_\+pipe} ()
+\mbox{\hyperlink{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1}{bit\+\_\+pipe}} ()
 \item 
-\hyperlink{classbit__pipe_a381c4371859988c65802767d31fc7458}{bit\+\_\+pipe} (const unsigned int \&n)
+\mbox{\hyperlink{classbit__pipe_a381c4371859988c65802767d31fc7458}{bit\+\_\+pipe}} (const unsigned int \&n)
 \begin{DoxyCompactList}\small\item\em constructor given an integer \end{DoxyCompactList}\item 
-\hyperlink{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e}{bit\+\_\+pipe} (const mpz\+\_\+class \&n)
+\mbox{\hyperlink{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e}{bit\+\_\+pipe}} (const mpz\+\_\+class \&n)
 \begin{DoxyCompactList}\small\item\em constructor given an mpz\+\_\+class object \end{DoxyCompactList}\item 
-void \hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\+\_\+right} (int n)
+void \mbox{\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\+\_\+right}} (int n)
 \begin{DoxyCompactList}\small\item\em shifts n bits to the right. \end{DoxyCompactList}\item 
-void \hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\+\_\+left} (int n)
+void \mbox{\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\+\_\+left}} (int n)
 \begin{DoxyCompactList}\small\item\em shift everything n bits to the left \end{DoxyCompactList}\item 
-int \hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size} () const
+int \mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}} () const
 \begin{DoxyCompactList}\small\item\em return the number of chunks \end{DoxyCompactList}\item 
-int \hyperlink{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}{residue} () const
+int \mbox{\hyperlink{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}{residue}} () const
 \begin{DoxyCompactList}\small\item\em returns the number of residual bits in the last chunk \end{DoxyCompactList}\item 
-const vector$<$ unsigned int $>$ \& \hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks} () const
+const vector$<$ unsigned int $>$ \& \mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}} () const
 \begin{DoxyCompactList}\small\item\em returns const reference to the bit sequence (object bits) \end{DoxyCompactList}\item 
-void \hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\+\_\+left} (const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B)
+void \mbox{\hyperlink{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}{append\+\_\+left}} (const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B)
 \begin{DoxyCompactList}\small\item\em append B to the left of me \end{DoxyCompactList}\item 
-unsigned int \& \hyperlink{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639}{operator\mbox{[}$\,$\mbox{]}} (int n)
+unsigned int \& \mbox{\hyperlink{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639}{operator\mbox{[}$\,$\mbox{]}}} (int n)
 \begin{DoxyCompactList}\small\item\em returns a reference to the nth chunk \end{DoxyCompactList}\item 
-const unsigned int \& \hyperlink{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d}{operator\mbox{[}$\,$\mbox{]}} (int n) const
+const unsigned int \& \mbox{\hyperlink{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d}{operator\mbox{[}$\,$\mbox{]}}} (int n) const
 \begin{DoxyCompactList}\small\item\em returns a (const) reference to the nth chunk (const) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ unsigned int $>$ \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}
+vector$<$ unsigned int $>$ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}
 \begin{DoxyCompactList}\small\item\em a vector of chunks, each of size 4 bytes. This represents an arbitrary sequence of bits \end{DoxyCompactList}\item 
-int \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\+\_\+bits}
-\begin{DoxyCompactList}\small\item\em the number of bits in the last chunk (the last chunk starts from M\+SB, so the B\+I\+T\+\_\+\+I\+NT -\/ last\+\_\+bits many bits to the right (L\+SB) are empty and should be zero) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Friends}
+int \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\+\_\+bits}}
+\begin{DoxyCompactList}\small\item\em the number of bits in the last chunk (the last chunk starts from MSB, so the BIT\+\_\+\+INT -\/ last\+\_\+bits many bits to the right (LSB) are empty and should be zero) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad}{obitstream}
+class \mbox{\hyperlink{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad}{obitstream}}
 \item 
-class \hyperlink{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41}{ibitstream}
+class \mbox{\hyperlink{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41}{ibitstream}}
 \item 
-ostream \& \hyperlink{classbit__pipe_a1fd08251d1f9f0ac5e24f3e90962f59a}{operator$<$$<$} (ostream \&o, const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B)
+ostream \& \mbox{\hyperlink{classbit__pipe_a9baed08cd68f51c68cb4dba4f52cc55e}{operator$<$$<$}} (ostream \&o, const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B)
 \begin{DoxyCompactList}\small\item\em write to the output \end{DoxyCompactList}\item 
-\hyperlink{classbit__pipe}{bit\+\_\+pipe} \hyperlink{classbit__pipe_a307267b689df83029a19dedf67cc4729}{operator$<$$<$} (const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B, int n)
+\mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \mbox{\hyperlink{classbit__pipe_a307267b689df83029a19dedf67cc4729}{operator$<$$<$}} (const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B, int n)
 \begin{DoxyCompactList}\small\item\em shifts bits in B n bits to the left \end{DoxyCompactList}\item 
-\hyperlink{classbit__pipe}{bit\+\_\+pipe} \hyperlink{classbit__pipe_a7de74a16947432771bc4001f8fd7079d}{operator$>$$>$} (const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&B, int n)
+\mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \mbox{\hyperlink{classbit__pipe_a7de74a16947432771bc4001f8fd7079d}{operator$>$$>$}} (const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&B, int n)
 \begin{DoxyCompactList}\small\item\em shifts bits in B n bits to the right \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 A sequence of arbitrary number of bits. 
 
-The \hyperlink{classbit__pipe}{bit\+\_\+pipe} class implements an arbitrary sequence of bits. This is useful for example when we want to use Elias delta code to write some integer to the output. This can lead to storage efficiencies, since in such cases we will need to work with incomplete bytes.
+The \doxylink{classbit__pipe}{bit\+\_\+pipe} class implements an arbitrary sequence of bits. This is useful for example when we want to use Elias delta code to write some integer to the output. This can lead to storage efficiencies, since in such cases we will need to work with incomplete bytes.
 
-The bits vector stores an array of chunks, each having 4 bytes (32 bits). For instance the sequence of bits $<$11001100110011$>$ is stored as a single chunk $<$11001100110011$\vert$000000000000000000$>$ of size 32 where the $\vert$ sign shows that the remaining zeros are residuals (not part of data). This is stored as the last\+\_\+bits variable. In this example, last\+\_\+bits is 14 because there are 14 bits of data in the last chunk. 
+The bits vector stores an array of chunks, each having 4 bytes (32 bits). For instance the sequence of bits \texorpdfstring{$<$}{<}11001100110011\texorpdfstring{$>$}{>} is stored as a single chunk \texorpdfstring{$<$}{<}11001100110011\texorpdfstring{$\vert$}{|}000000000000000000\texorpdfstring{$>$}{>} of size 32 where the \texorpdfstring{$\vert$}{|} sign shows that the remaining zeros are residuals (not part of data). This is stored as the last\+\_\+bits variable. In this example, last\+\_\+bits is 14 because there are 14 bits of data in the last chunk. 
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1}\label{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{bit\+\_\+pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1}\label{classbit__pipe_a6dab67e6a47c1d1f020fe769df27cef1} 
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{bit\_pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily bit\+\_\+pipe\+::bit\+\_\+pipe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-\begin{DoxyCode}
-28 \{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(0); \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = 0;\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \{\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.resize(0);\ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ 0;\}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a381c4371859988c65802767d31fc7458}\label{classbit__pipe_a381c4371859988c65802767d31fc7458}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{bit\+\_\+pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\Hypertarget{classbit__pipe_a381c4371859988c65802767d31fc7458}\label{classbit__pipe_a381c4371859988c65802767d31fc7458} 
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{bit\_pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily bit\+\_\+pipe\+::bit\+\_\+pipe (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{n }\end{DoxyParamCaption})}
 
 
 
 constructor given an integer 
 
-Some examples\+: n = 1, bits = 1$\vert$0000000 (followed by 3 zero bytes) n = 12, bits = 1100$\vert$0000 (followed by 3 zero bytes) n = 255633, bits = 11111001 10100100 01$\vert$000000 (followed by a zero byte) 
-\begin{DoxyCode}
-10                                        \{
-11   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(1);
-12   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] = n;
-13   \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8cpp_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}(n);
-14   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] <<= \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}; \textcolor{comment}{// so that n appears in the MSB place }
-15 \}
+Some examples\+: n = 1, bits = 1\texorpdfstring{$\vert$}{|}0000000 (followed by 3 zero bytes) n = 12, bits = 1100\texorpdfstring{$\vert$}{|}0000 (followed by 3 zero bytes) n = 255633, bits = 11111001 10100100 01\texorpdfstring{$\vert$}{|}000000 (followed by a zero byte) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.resize(1);}
+\DoxyCodeLine{00012\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0]\ =\ n;}
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ \mbox{\hyperlink{bitstream_8h_a9dfce6f51e3febb3973aa3b16c2fecb4}{nu\_bits}}(n);}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0]\ <<=\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}};\ \textcolor{comment}{//\ so\ that\ n\ appears\ in\ the\ MSB\ place\ }}
+\DoxyCodeLine{00015\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e}\label{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{bit\+\_\+pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\Hypertarget{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e}\label{classbit__pipe_adc311ad05b01a2ec6e979882aa8b703e} 
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\index{bit\_pipe@{bit\_pipe}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{bit\_pipe()}{bit\_pipe()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily bit\+\_\+pipe\+::bit\+\_\+pipe (\begin{DoxyParamCaption}\item[{const mpz\+\_\+class \&}]{n }\end{DoxyParamCaption})}
 
 
@@ -104,86 +106,87 @@ Some examples\+: n = 1, bits = 1$\vert$0000000 (followed by 3 zero bytes) n = 12
 constructor given an mpz\+\_\+class object 
 
 
-\begin{DoxyCode}
-17                                     \{
-18   \textcolor{keywordtype}{size\_t} n\_bits = mpz\_sizeinbase(n.get\_mpz\_t(), 2);
-19   \textcolor{keywordtype}{size\_t} \hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size} = n\_bits / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} + 1; \textcolor{comment}{// how many unsigned int chunks we need}
-20   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(size);
-21   mpz\_export(&\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0],
-22              &size,
-23              1, \textcolor{comment}{// order can be 1 for most significant word first or -1 for least significant first}
-24              \hyperlink{bitstream_8h_adcaf4dd854153bb193477f88f921eb36}{BYTE\_INT}, \textcolor{comment}{// size: each word will be size bytes and}
-25              0, \textcolor{comment}{// Within each word endian can be 1 for most significant byte first, -1 for least
-       significant first, or 0 for the native endianness of the host CPU.}
-26              0, \textcolor{comment}{// The most significant nails bits of each word are unused and set to zero, this can be 0
-       to produce full words.}
-27              n.get\_mpz\_t());
-28   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.resize(size);
-29   \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} = \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// at the moment LSB of n is the LSB bit of the rightmost chunk}
-30   \textcolor{comment}{// but we need the MSB of n to be the MSB of the leftmost chunk}
-31   \textcolor{comment}{// in order to do this, we must shift left}
-32   \textcolor{comment}{// but how much? it is related to the remainder of bit count in n with respect to BIT\_INT}
-33   \textcolor{keywordtype}{int} rem = n\_bits % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// the remainder }
-34   \textcolor{keywordflow}{if} (rem != 0)\{
-35     \textcolor{comment}{// if remainder is zero, nothing should be done}
-36     \textcolor{comment}{// otherwise, shift left BIT\_INT - rem bits}
-37     \hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - rem);
-38   \}
-39   
-40 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{size\_t}\ n\_bits\ =\ mpz\_sizeinbase(n.get\_mpz\_t(),\ 2);}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}}\ =\ n\_bits\ /\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ +\ 1;\ \textcolor{comment}{//\ how\ many\ unsigned\ int\ chunks\ we\ need}}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.resize(\mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}});}
+\DoxyCodeLine{00021\ \ \ mpz\_export(\&\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0],}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \textcolor{comment}{//\ order\ can\ be\ 1\ for\ most\ significant\ word\ first\ or\ -\/1\ for\ least\ significant\ first}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{bitstream_8h_adcaf4dd854153bb193477f88f921eb36}{BYTE\_INT}},\ \textcolor{comment}{//\ size:\ each\ word\ will\ be\ size\ bytes\ and}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \textcolor{comment}{//\ Within\ each\ word\ endian\ can\ be\ 1\ for\ most\ significant\ byte\ first,\ -\/1\ for\ least\ significant\ first,\ or\ 0\ for\ the\ native\ endianness\ of\ the\ host\ CPU.}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \textcolor{comment}{//\ The\ most\ significant\ nails\ bits\ of\ each\ word\ are\ unused\ and\ set\ to\ zero,\ this\ can\ be\ 0\ to\ produce\ full\ words.}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ n.get\_mpz\_t());}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.resize(\mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}});}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ =\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};\ \textcolor{comment}{//\ at\ the\ moment\ LSB\ of\ n\ is\ the\ LSB\ bit\ of\ the\ rightmost\ chunk}}
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{//\ but\ we\ need\ the\ MSB\ of\ n\ to\ be\ the\ MSB\ of\ the\ leftmost\ chunk}}
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{//\ in\ order\ to\ do\ this,\ we\ must\ shift\ left}}
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//\ but\ how\ much?\ it\ is\ related\ to\ the\ remainder\ of\ bit\ count\ in\ n\ with\ respect\ to\ BIT\_INT}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ rem\ =\ n\_bits\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};\ \textcolor{comment}{//\ the\ remainder\ }}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{if}\ (rem\ !=\ 0)\{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ if\ remainder\ is\ zero,\ nothing\ should\ be\ done}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ otherwise,\ shift\ left\ BIT\_INT\ -\/\ rem\ bits}}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}}(\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ rem);}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ \ \ }
+\DoxyCodeLine{00040\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}\label{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!append\+\_\+left@{append\+\_\+left}}
-\index{append\+\_\+left@{append\+\_\+left}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{append\+\_\+left()}{append\_left()}}
-{\footnotesize\ttfamily void bit\+\_\+pipe\+::append\+\_\+left (\begin{DoxyParamCaption}\item[{const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B }\end{DoxyParamCaption})}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8}\label{classbit__pipe_a0b14715c897cba1713a0ea19ea2996d8} 
+\index{bit\_pipe@{bit\_pipe}!append\_left@{append\_left}}
+\index{append\_left@{append\_left}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{append\_left()}{append\_left()}}
+{\footnotesize\ttfamily void bit\+\_\+pipe\+::append\+\_\+left (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B }\end{DoxyParamCaption})}
 
 
 
 append B to the left of me 
 
-Example\+: if this is $<$1100$\vert$0000$>$ and B is $<$11110000 1111$\vert$0000$>$ then this becomes $<$11110000 11111100$>$ (trailing zero bytes not shown in example) 
-\begin{DoxyCode}
-146                                            \{
-147   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}() == 0) \textcolor{comment}{// nothing should be done, B is empty}
-148     \textcolor{keywordflow}{return};
-149   \textcolor{keywordtype}{int} B\_res = B.\hyperlink{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}{residue}(); \textcolor{comment}{// number of incomplete bits in B}
-150   \textcolor{keywordflow}{if} (B\_res == \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-151     \textcolor{comment}{// B has complete chunks, so I just need to insert chunks of B at the beginning of my chunks}
-152     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), B.\hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks}().begin(), B.\hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks}().end());
-153     \textcolor{keywordflow}{return}; \textcolor{comment}{// all set!}
-154   \}
-155   \textcolor{comment}{// B has a residue}
-156   \textcolor{comment}{// so I need to shift myself to the right and then append}
-157   \hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(B\_res);
-158   \textcolor{comment}{// then, my leftmost chunk must be combined with the rightmost chunk of B:}
-159   \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[0] |= B[B.\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}()-1];
-160   \textcolor{comment}{// then insert all but the rightmost chunk of B at my left}
-161   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks}().size()>1)
-162     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), B.\hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks}().begin(), B.\hyperlink{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}{chunks}().end()-1);
-163 \}
+Example\+: if this is \texorpdfstring{$<$}{<}1100\texorpdfstring{$\vert$}{|}0000\texorpdfstring{$>$}{>} and B is \texorpdfstring{$<$}{<}11110000 1111\texorpdfstring{$\vert$}{|}0000\texorpdfstring{$>$}{>} then this becomes \texorpdfstring{$<$}{<}11110000 11111100\texorpdfstring{$>$}{>} (trailing zero bytes not shown in example) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{if}\ (B.\mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}}()\ ==\ 0)\ \textcolor{comment}{//\ nothing\ should\ be\ done,\ B\ is\ empty}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{int}\ B\_res\ =\ B.\mbox{\hyperlink{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}{residue}}();\ \textcolor{comment}{//\ number\ of\ incomplete\ bits\ in\ B}}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordflow}{if}\ (B\_res\ ==\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})\{}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ B\ has\ complete\ chunks,\ so\ I\ just\ need\ to\ insert\ chunks\ of\ B\ at\ the\ beginning\ of\ my\ chunks}}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.insert(\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ B.\mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}}().begin(),\ B.\mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}}().end());}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ all\ set!}}
+\DoxyCodeLine{00154\ \ \ \}}
+\DoxyCodeLine{00155\ \ \ \textcolor{comment}{//\ B\ has\ a\ residue}}
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{//\ so\ I\ need\ to\ shift\ myself\ to\ the\ right\ and\ then\ append}}
+\DoxyCodeLine{00157\ \ \ \mbox{\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}}(B\_res);}
+\DoxyCodeLine{00158\ \ \ \textcolor{comment}{//\ then,\ my\ leftmost\ chunk\ must\ be\ combined\ with\ the\ rightmost\ chunk\ of\ B:}}
+\DoxyCodeLine{00159\ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[0]\ |=\ B[B.\mbox{\hyperlink{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}{size}}()-\/1];}
+\DoxyCodeLine{00160\ \ \ \textcolor{comment}{//\ then\ insert\ all\ but\ the\ rightmost\ chunk\ of\ B\ at\ my\ left}}
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordflow}{if}\ (B.\mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}}().size()>1)}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.insert(\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ B.\mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}}().begin(),\ B.\mbox{\hyperlink{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}{chunks}}().end()-\/1);}
+\DoxyCodeLine{00163\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}\label{classbit__pipe_aebf19a4d9425e5ca10fc4fd3d78cada2}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!chunks@{chunks}}
-\index{chunks@{chunks}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{chunks()}{chunks()}}
-{\footnotesize\ttfamily const vector$<$unsigned int$>$\& bit\+\_\+pipe\+::chunks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\Hypertarget{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e}\label{classbit__pipe_a1b00c544ebb21a894961d658006b0b0e} 
+\index{bit\_pipe@{bit\_pipe}!chunks@{chunks}}
+\index{chunks@{chunks}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{chunks()}{chunks()}}
+{\footnotesize\ttfamily const vector$<$ unsigned int $>$ \& bit\+\_\+pipe\+::chunks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 returns const reference to the bit sequence (object bits) 
 
 
-\begin{DoxyCode}
-52 \{\textcolor{keywordflow}{return} \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits};\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}};\}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639}\label{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\Hypertarget{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639}\label{classbit__pipe_a4ea1ac9d3b026ebf3f71a68fccd1d639} 
+\index{bit\_pipe@{bit\_pipe}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily unsigned int \& bit\+\_\+pipe\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
 
 
@@ -191,19 +194,19 @@ returns const reference to the bit sequence (object bits)
 returns a reference to the nth chunk 
 
 
-\begin{DoxyCode}
-179                                         \{
-180   \textcolor{keywordflow}{if} (n < 0 or n >= \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size())\{
-181     cerr << \textcolor{stringliteral}{" ERROR: bit\_pipe::operator [] called for value out of range "} << n << \textcolor{stringliteral}{" the range is [0, "} << 
-      \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1 << \textcolor{stringliteral}{"]"} << endl;
-182   \}
-183   \textcolor{keywordflow}{return} \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[n];
-184 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 0\ or\ n\ >=\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size())\{}
+\DoxyCodeLine{00181\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ ERROR:\ bit\_pipe::operator\ []\ called\ for\ value\ out\ of\ range\ "{}}\ <<\ n\ <<\ \textcolor{stringliteral}{"{}\ the\ range\ is\ [0,\ "{}}\ <<\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()-\/1\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ endl;}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[n];}
+\DoxyCodeLine{00184\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d}\label{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\Hypertarget{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d}\label{classbit__pipe_a58c67130ac4b0fd511998f991c8ad58d} 
+\index{bit\_pipe@{bit\_pipe}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily const unsigned int \& bit\+\_\+pipe\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption}) const}
 
 
@@ -211,19 +214,19 @@ returns a reference to the nth chunk
 returns a (const) reference to the nth chunk (const) 
 
 
-\begin{DoxyCode}
-187                                                    \{
-188   \textcolor{keywordflow}{if} (n < 0 or n >= \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size())\{
-189     cerr << \textcolor{stringliteral}{" ERROR: bit\_pipe::operator [] called for value out of range "} << n << \textcolor{stringliteral}{" the range is [0, "} << 
-      \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1 << \textcolor{stringliteral}{"]"} << endl;
-190   \}
-191   \textcolor{keywordflow}{return} \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[n];
-192 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 0\ or\ n\ >=\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size())\{}
+\DoxyCodeLine{00189\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ ERROR:\ bit\_pipe::operator\ []\ called\ for\ value\ out\ of\ range\ "{}}\ <<\ n\ <<\ \textcolor{stringliteral}{"{}\ the\ range\ is\ [0,\ "{}}\ <<\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()-\/1\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ endl;}
+\DoxyCodeLine{00190\ \ \ \}}
+\DoxyCodeLine{00191\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[n];}
+\DoxyCodeLine{00192\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}\label{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!residue@{residue}}
-\index{residue@{residue}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{residue()}{residue()}}
+\Hypertarget{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252}\label{classbit__pipe_a283f47fa4422ac50b9b28e8f276f7252} 
+\index{bit\_pipe@{bit\_pipe}!residue@{residue}}
+\index{residue@{residue}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{residue()}{residue()}}
 {\footnotesize\ttfamily int bit\+\_\+pipe\+::residue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -231,13 +234,14 @@ returns a (const) reference to the nth chunk (const)
 returns the number of residual bits in the last chunk 
 
 
-\begin{DoxyCode}
-49 \{\textcolor{keywordflow}{return} \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits};\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00049\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}};\}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}\label{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!shift\+\_\+left@{shift\+\_\+left}}
-\index{shift\+\_\+left@{shift\+\_\+left}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{shift\+\_\+left()}{shift\_left()}}
+\Hypertarget{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}\label{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74} 
+\index{bit\_pipe@{bit\_pipe}!shift\_left@{shift\_left}}
+\index{shift\_left@{shift\_left}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{shift\_left()}{shift\_left()}}
 {\footnotesize\ttfamily void bit\+\_\+pipe\+::shift\+\_\+left (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
 
 
@@ -245,44 +249,45 @@ returns the number of residual bits in the last chunk
 shift everything n bits to the left 
 
 
-\begin{DoxyCode}
-76                               \{
-77   \textcolor{keywordflow}{if} (n < 0)\{
-78     cerr << \textcolor{stringliteral}{" ERROR: bit\_pipe::shift\_left called for negative value "} << n << endl;
-79     \textcolor{keywordflow}{return};
-80   \}
-81   \textcolor{keywordflow}{if} (n >= \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-82     \textcolor{comment}{// we need to remove a number of bytes}
-83     \textcolor{keywordtype}{int} bytes\_to\_remove = n / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}; \textcolor{comment}{// these many bytes must be remove}
-84     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.erase(\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin() + bytes\_to\_remove);
-85     n = n % \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-86   \}
-87   \textcolor{keywordflow}{if} (n == 0)
-88     \textcolor{keywordflow}{return};
-89 
-90   \textcolor{comment}{// when we reach at this line, we have 1 <= n <= 7}
-91   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = \hyperlink{bitstream_8cpp_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}(n) << (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-n); \textcolor{comment}{// n bits in MSB for carryover masking}
-92   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} carry; \textcolor{comment}{// carryover to the left byte}
-93   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size(); i++)\{
-94     carry = (mask & \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i]) >> (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-n); \textcolor{comment}{// bring it to the right}
-95     \textcolor{keywordflow}{if} ( i> 0)
-96       \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i-1] |= carry; \textcolor{comment}{// add carry to the left guy}
-97     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i] <<= n; 
-98   \}
-99 
-100   \textcolor{comment}{// now, deal with last\_bits}
-101   \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} -= n;
-102   \textcolor{keywordflow}{if} (\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} <= 0)\{
-103     \textcolor{comment}{// means that the rightmost byte must vanish}
-104     \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} += \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-105     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.pop\_back(); \textcolor{comment}{// remove the last byte}
-106   \}
-107 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 0)\{}
+\DoxyCodeLine{00078\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ ERROR:\ bit\_pipe::shift\_left\ called\ for\ negative\ value\ "{}}\ <<\ n\ <<\ endl;}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordflow}{if}\ (n\ >=\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})\{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ we\ need\ to\ remove\ a\ number\ of\ bytes}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ bytes\_to\_remove\ =\ n\ /\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};\ \textcolor{comment}{//\ these\ many\ bytes\ must\ be\ remove}}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.erase(\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin()\ +\ bytes\_to\_remove);}
+\DoxyCodeLine{00085\ \ \ \ \ n\ =\ n\ \%\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00086\ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{comment}{//\ when\ we\ reach\ at\ this\ line,\ we\ have\ 1\ <=\ n\ <=\ 7}}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mask\ =\ \mbox{\hyperlink{bitstream_8h_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}}(n)\ <<\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/n);\ \textcolor{comment}{//\ n\ bits\ in\ MSB\ for\ carryover\ masking}}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ carry;\ \textcolor{comment}{//\ carryover\ to\ the\ left\ byte}}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size();\ i++)\{}
+\DoxyCodeLine{00094\ \ \ \ \ carry\ =\ (mask\ \&\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i])\ >>\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/n);\ \textcolor{comment}{//\ bring\ it\ to\ the\ right}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ i>\ 0)}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i-\/1]\ |=\ carry;\ \textcolor{comment}{//\ add\ carry\ to\ the\ left\ guy}}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i]\ <<=\ n;\ }
+\DoxyCodeLine{00098\ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{comment}{//\ now,\ deal\ with\ last\_bits}}
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ -\/=\ n;}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ <=\ 0)\{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ means\ that\ the\ rightmost\ byte\ must\ vanish}}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ +=\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.pop\_back();\ \textcolor{comment}{//\ remove\ the\ last\ byte}}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a341a1f62d728a67f730503ca722a7770}\label{classbit__pipe_a341a1f62d728a67f730503ca722a7770}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!shift\+\_\+right@{shift\+\_\+right}}
-\index{shift\+\_\+right@{shift\+\_\+right}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{shift\+\_\+right()}{shift\_right()}}
+\Hypertarget{classbit__pipe_a341a1f62d728a67f730503ca722a7770}\label{classbit__pipe_a341a1f62d728a67f730503ca722a7770} 
+\index{bit\_pipe@{bit\_pipe}!shift\_right@{shift\_right}}
+\index{shift\_right@{shift\_right}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{shift\_right()}{shift\_right()}}
 {\footnotesize\ttfamily void bit\+\_\+pipe\+::shift\+\_\+right (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
 
 
@@ -290,47 +295,42 @@ shift everything n bits to the left
 shifts n bits to the right. 
 
 Example\+: if bits is 11111111 11111000 and n = 5, then bits becomes 00000111 11111111 11000000 (trailing zero bytes are not shown in this example) 
-\begin{DoxyCode}
-45                                \{
-46   \textcolor{keywordflow}{if} (n == 0)
-47     \textcolor{keywordflow}{return}; \textcolor{comment}{// nothing to do}
-48   \textcolor{keywordflow}{if} (n >= \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})\{
-49     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.insert(\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.begin(), n / \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}, 0); \textcolor{comment}{// n/BIT\_INT bytes each zero will be added}
-50     \hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(n%\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT});
-51     \textcolor{keywordflow}{return};
-52   \}
-53   \textcolor{comment}{// when we arrive at this line, n must be strictly less than BIT\_INT and strictly bigger than zero, i.e.
-       0 < n < BIT\_INT}
-54   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mask = \hyperlink{bitstream_8cpp_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}(n); \textcolor{comment}{// mask is going to be n many ones (in LSB), e.g. if n = 3, mask
-       is 00000111, this is useful in carrying over LSB of left bytes to the right bytes}
-55   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} carry\_current = 0; \textcolor{comment}{// carry over of left bytes to the right. For instance, if we want to
-       shift 11111111 3 bits to the right, it becomes 00011111 but a carry over 111 must be added to the byte to the
-       right. This is initially zero}
-56   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} carry\_prev = 0; \textcolor{comment}{// the same concept, but for the previous byte (to the left of me). }
-57   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size();i++)\{
-58     carry\_current = \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i] & mask; \textcolor{comment}{// find carryover bits for current byte}
-59     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i] >>= n; \textcolor{comment}{// shift the current byte}
-60     carry\_prev <<= (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-n); \textcolor{comment}{// put the previous carryover bits in place to be added to the
-       current byte}
-61     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i] |= carry\_prev; \textcolor{comment}{// add the carryover to the current byte}
-62     carry\_prev = carry\_current; \textcolor{comment}{// the current byte is the previous byte for the next byte}
-63   \}
-64     
-65   \textcolor{keywordflow}{if} (n > (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT} - \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}))\{
-66     \textcolor{comment}{// the LSB bits of the last chunk must fall into a new chunk, so I should push\_back a new chunk, which
-       is zero for now}
-67     carry\_prev <<= (\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-n);
-68     \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.push\_back(carry\_prev); \textcolor{comment}{// the last byte is the last carryover shifted to the left }
-69   \}
-70   \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} += n;
-71   \textcolor{keywordflow}{if} (\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} > \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT})
-72     \hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits} -= \hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};
-73 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ nothing\ to\ do}}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordflow}{if}\ (n\ >=\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})\{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.insert(\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.begin(),\ n\ /\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}},\ 0);\ \textcolor{comment}{//\ n/BIT\_INT\ bytes\ each\ zero\ will\ be\ added}}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}}(n\%\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//\ when\ we\ arrive\ at\ this\ line,\ n\ must\ be\ strictly\ less\ than\ BIT\_INT\ and\ strictly\ bigger\ than\ zero,\ i.e.\ 0\ <\ n\ <\ BIT\_INT}}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mask\ =\ \mbox{\hyperlink{bitstream_8h_a6364b017a9400a38f7a994376bb3ebee}{mask\_gen}}(n);\ \textcolor{comment}{//\ mask\ is\ going\ to\ be\ n\ many\ ones\ (in\ LSB),\ e.g.\ if\ n\ =\ 3,\ mask\ is\ 00000111,\ this\ is\ useful\ in\ carrying\ over\ LSB\ of\ left\ bytes\ to\ the\ right\ bytes}}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ carry\_current\ =\ 0;\ \textcolor{comment}{//\ carry\ over\ of\ left\ bytes\ to\ the\ right.\ For\ instance,\ if\ we\ want\ to\ shift\ 11111111\ 3\ bits\ to\ the\ right,\ it\ becomes\ 00011111\ but\ a\ carry\ over\ 111\ must\ be\ added\ to\ the\ byte\ to\ the\ right.\ This\ is\ initially\ zero}}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ carry\_prev\ =\ 0;\ \textcolor{comment}{//\ the\ same\ concept,\ but\ for\ the\ previous\ byte\ (to\ the\ left\ of\ me).\ }}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size();i++)\{}
+\DoxyCodeLine{00058\ \ \ \ \ carry\_current\ =\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i]\ \&\ mask;\ \textcolor{comment}{//\ find\ carryover\ bits\ for\ current\ byte}}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i]\ >>=\ n;\ \textcolor{comment}{//\ shift\ the\ current\ byte}}
+\DoxyCodeLine{00060\ \ \ \ \ carry\_prev\ <<=\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/n);\ \textcolor{comment}{//\ put\ the\ previous\ carryover\ bits\ in\ place\ to\ be\ added\ to\ the\ current\ byte}}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i]\ |=\ carry\_prev;\ \textcolor{comment}{//\ add\ the\ carryover\ to\ the\ current\ byte}}
+\DoxyCodeLine{00062\ \ \ \ \ carry\_prev\ =\ carry\_current;\ \textcolor{comment}{//\ the\ current\ byte\ is\ the\ previous\ byte\ for\ the\ next\ byte}}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}\ -\/\ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}))\{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ the\ LSB\ bits\ of\ the\ last\ chunk\ must\ fall\ into\ a\ new\ chunk,\ so\ I\ should\ push\_back\ a\ new\ chunk,\ which\ is\ zero\ for\ now}}
+\DoxyCodeLine{00067\ \ \ \ \ carry\_prev\ <<=\ (\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/n);}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.push\_back(carry\_prev);\ \textcolor{comment}{//\ the\ last\ byte\ is\ the\ last\ carryover\ shifted\ to\ the\ left\ }}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ +=\ n;}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ >\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}})}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}}\ -\/=\ \mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};}
+\DoxyCodeLine{00073\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}\label{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!size@{size}}
-\index{size@{size}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{size()}{size()}}
+\Hypertarget{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c}\label{classbit__pipe_a4bdc57f1f598bfad0eaa40860f17000c} 
+\index{bit\_pipe@{bit\_pipe}!size@{size}}
+\index{size@{size}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
 {\footnotesize\ttfamily int bit\+\_\+pipe\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -338,128 +338,131 @@ Example\+: if bits is 11111111 11111000 and n = 5, then bits becomes 00000111 11
 return the number of chunks 
 
 
-\begin{DoxyCode}
-46 \{\textcolor{keywordflow}{return} \hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size();\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size();\}}
+
 \end{DoxyCode}
 
 
-\subsection{Friends And Related Function Documentation}
-\mbox{\Hypertarget{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41}\label{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!ibitstream@{ibitstream}}
-\index{ibitstream@{ibitstream}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{ibitstream}{ibitstream}}
-{\footnotesize\ttfamily friend class \hyperlink{classibitstream}{ibitstream}\hspace{0.3cm}{\ttfamily [friend]}}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41}\label{classbit__pipe_ad424cca57ffb12b4cd748da4dcfe7b41} 
+\index{bit\_pipe@{bit\_pipe}!ibitstream@{ibitstream}}
+\index{ibitstream@{ibitstream}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{ibitstream}{ibitstream}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classibitstream}{ibitstream}}\hspace{0.3cm}{\ttfamily [friend]}}
 
-\mbox{\Hypertarget{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad}\label{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!obitstream@{obitstream}}
-\index{obitstream@{obitstream}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{obitstream}{obitstream}}
-{\footnotesize\ttfamily friend class \hyperlink{classobitstream}{obitstream}\hspace{0.3cm}{\ttfamily [friend]}}
+\Hypertarget{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad}\label{classbit__pipe_a8f65a774c3f7ab2392033a7cf4a170ad} 
+\index{bit\_pipe@{bit\_pipe}!obitstream@{obitstream}}
+\index{obitstream@{obitstream}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{obitstream}{obitstream}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classobitstream}{obitstream}}\hspace{0.3cm}{\ttfamily [friend]}}
 
-\mbox{\Hypertarget{classbit__pipe_a1fd08251d1f9f0ac5e24f3e90962f59a}\label{classbit__pipe_a1fd08251d1f9f0ac5e24f3e90962f59a}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
-
-
-
-write to the output 
-
-
-\begin{DoxyCode}
-112                                                     \{
-113   \textcolor{keywordflow}{if} (B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()==0)\{
-114     o << \textcolor{stringliteral}{"<>"};
-115     \textcolor{keywordflow}{return} o;
-116   \}
-117   o << \textcolor{stringliteral}{"<"};
-118   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1); i++)\{ \textcolor{comment}{// the last byte requires special handling}
-119     bitset<BIT\_INT> b(B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[i]);
-120     o << b << \textcolor{stringliteral}{" "};
-121   \}
-122   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} last\_byte = B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}[B.\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}.size()-1];
-123     
-124   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT};k>(\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits});k--)\{ \textcolor{comment}{// starting from MSB bit to LSB
-       for existing bits}
-125     \textcolor{keywordflow}{if} (last\_byte & (1<<(k-1)))
-126       o << \textcolor{stringliteral}{"1"};
-127     \textcolor{keywordflow}{else}
-128       o << \textcolor{stringliteral}{"0"};
-129   \}
-130   o << \textcolor{stringliteral}{"|"}; \textcolor{comment}{// to show the place of the last bit}
-131   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}-B.\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}; k>=1; k--)\{
-132     \textcolor{keywordflow}{if} (last\_byte &(1<<(k-1)))
-133       o << \textcolor{stringliteral}{"1"};
-134     \textcolor{keywordflow}{else}
-135       o << \textcolor{stringliteral}{"0"};
-136   \}
-137   o << \textcolor{stringliteral}{">"};
-138   \textcolor{keywordflow}{return} o;
-139 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a307267b689df83029a19dedf67cc4729}\label{classbit__pipe_a307267b689df83029a19dedf67cc4729}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \hyperlink{classbit__pipe}{bit\+\_\+pipe} operator$<$$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B,  }\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+\Hypertarget{classbit__pipe_a307267b689df83029a19dedf67cc4729}\label{classbit__pipe_a307267b689df83029a19dedf67cc4729} 
+\index{bit\_pipe@{bit\_pipe}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} operator$<$$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B,  }\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 shifts bits in B n bits to the left 
 
 
-\begin{DoxyCode}
-166                                                \{
-167   \hyperlink{classbit__pipe}{bit\_pipe} ans = B;
-168   ans.\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}(n);
-169   \textcolor{keywordflow}{return} ans;
-170 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \mbox{\hyperlink{classbit__pipe}{bit\_pipe}}\ ans\ =\ B;}
+\DoxyCodeLine{00168\ \ \ ans.\mbox{\hyperlink{classbit__pipe_a148fab2b6b3ee730fbaa52539d5a4d74}{shift\_left}}(n);}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordflow}{return}\ ans;}
+\DoxyCodeLine{00170\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classbit__pipe_a7de74a16947432771bc4001f8fd7079d}\label{classbit__pipe_a7de74a16947432771bc4001f8fd7079d}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!operator$>$$>$@{operator$>$$>$}}
-\index{operator$>$$>$@{operator$>$$>$}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{operator$>$$>$}{operator>>}}
-{\footnotesize\ttfamily \hyperlink{classbit__pipe}{bit\+\_\+pipe} operator$>$$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classbit__pipe}{bit\+\_\+pipe} \&}]{B,  }\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+\Hypertarget{classbit__pipe_a9baed08cd68f51c68cb4dba4f52cc55e}\label{classbit__pipe_a9baed08cd68f51c68cb4dba4f52cc55e} 
+\index{bit\_pipe@{bit\_pipe}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{o,  }\item[{const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+write to the output 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{if}\ (B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()==0)\{}
+\DoxyCodeLine{00114\ \ \ \ \ o\ <<\ \textcolor{stringliteral}{"{}<>"{}};}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return}\ o;}
+\DoxyCodeLine{00116\ \ \ \}}
+\DoxyCodeLine{00117\ \ \ o\ <<\ \textcolor{stringliteral}{"{}<"{}};}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<(B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()-\/1);\ i++)\{\ \textcolor{comment}{//\ the\ last\ byte\ requires\ special\ handling}}
+\DoxyCodeLine{00119\ \ \ \ \ bitset<BIT\_INT>\ b(B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[i]);}
+\DoxyCodeLine{00120\ \ \ \ \ o\ <<\ b\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00121\ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ last\_byte\ =\ B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}[B.\mbox{\hyperlink{classbit__pipe_a86f38af1e9736b053728033490476b50}{bits}}.size()-\/1];}
+\DoxyCodeLine{00123\ \ \ \ \ }
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k=\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}};k>(\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}});k-\/-\/)\{\ \textcolor{comment}{//\ starting\ from\ MSB\ bit\ to\ LSB\ for\ existing\ bits}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_byte\ \&\ (1<<(k-\/1)))}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ o\ <<\ \textcolor{stringliteral}{"{}1"{}};}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ o\ <<\ \textcolor{stringliteral}{"{}0"{}};}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ o\ <<\ \textcolor{stringliteral}{"{}|"{}};\ \textcolor{comment}{//\ to\ show\ the\ place\ of\ the\ last\ bit}}
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k=\mbox{\hyperlink{bitstream_8h_afcadf5aa65c5159bfb96c4d82ebc0a5d}{BIT\_INT}}-\/B.\mbox{\hyperlink{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}{last\_bits}};\ k>=1;\ k-\/-\/)\{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_byte\ \&(1<<(k-\/1)))}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ o\ <<\ \textcolor{stringliteral}{"{}1"{}};}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ o\ <<\ \textcolor{stringliteral}{"{}0"{}};}
+\DoxyCodeLine{00136\ \ \ \}}
+\DoxyCodeLine{00137\ \ \ o\ <<\ \textcolor{stringliteral}{"{}>"{}};}
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{return}\ o;}
+\DoxyCodeLine{00139\ \}}
+
+\end{DoxyCode}
+\Hypertarget{classbit__pipe_a7de74a16947432771bc4001f8fd7079d}\label{classbit__pipe_a7de74a16947432771bc4001f8fd7079d} 
+\index{bit\_pipe@{bit\_pipe}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$}{operator>>}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} operator$>$$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classbit__pipe}{bit\+\_\+pipe}} \&}]{B,  }\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 shifts bits in B n bits to the right 
 
 
-\begin{DoxyCode}
-172                                                \{
-173   \hyperlink{classbit__pipe}{bit\_pipe} ans = B;
-174   ans.\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}(n);
-175   \textcolor{keywordflow}{return} ans;
-176 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \mbox{\hyperlink{classbit__pipe}{bit\_pipe}}\ ans\ =\ B;}
+\DoxyCodeLine{00174\ \ \ ans.\mbox{\hyperlink{classbit__pipe_a341a1f62d728a67f730503ca722a7770}{shift\_right}}(n);}
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordflow}{return}\ ans;}
+\DoxyCodeLine{00176\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classbit__pipe_a86f38af1e9736b053728033490476b50}\label{classbit__pipe_a86f38af1e9736b053728033490476b50}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!bits@{bits}}
-\index{bits@{bits}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{bits}{bits}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classbit__pipe_a86f38af1e9736b053728033490476b50}\label{classbit__pipe_a86f38af1e9736b053728033490476b50} 
+\index{bit\_pipe@{bit\_pipe}!bits@{bits}}
+\index{bits@{bits}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{bits}{bits}}
 {\footnotesize\ttfamily vector$<$unsigned int$>$ bit\+\_\+pipe\+::bits\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 a vector of chunks, each of size 4 bytes. This represents an arbitrary sequence of bits 
 
-\mbox{\Hypertarget{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}\label{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}} 
-\index{bit\+\_\+pipe@{bit\+\_\+pipe}!last\+\_\+bits@{last\+\_\+bits}}
-\index{last\+\_\+bits@{last\+\_\+bits}!bit\+\_\+pipe@{bit\+\_\+pipe}}
-\subsubsection{\texorpdfstring{last\+\_\+bits}{last\_bits}}
+\Hypertarget{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe}\label{classbit__pipe_a0f3e84b02751803adaab499b5dad86fe} 
+\index{bit\_pipe@{bit\_pipe}!last\_bits@{last\_bits}}
+\index{last\_bits@{last\_bits}!bit\_pipe@{bit\_pipe}}
+\doxysubsubsection{\texorpdfstring{last\_bits}{last\_bits}}
 {\footnotesize\ttfamily int bit\+\_\+pipe\+::last\+\_\+bits\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-the number of bits in the last chunk (the last chunk starts from M\+SB, so the B\+I\+T\+\_\+\+I\+NT -\/ last\+\_\+bits many bits to the right (L\+SB) are empty and should be zero) 
+the number of bits in the last chunk (the last chunk starts from MSB, so the BIT\+\_\+\+INT -\/ last\+\_\+bits many bits to the right (LSB) are empty and should be zero) 
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{bitstream_8h}{bitstream.\+h}\item 
-\hyperlink{bitstream_8cpp}{bitstream.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{bitstream_8h}{bitstream.\+h}}\item 
+\mbox{\hyperlink{bitstream_8cpp}{bitstream.\+cpp}}\end{DoxyCompactItemize}

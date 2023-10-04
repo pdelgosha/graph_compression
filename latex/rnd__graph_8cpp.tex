@@ -1,128 +1,128 @@
-\hypertarget{rnd__graph_8cpp}{}\section{rnd\+\_\+graph.\+cpp File Reference}
-\label{rnd__graph_8cpp}\index{rnd\+\_\+graph.\+cpp@{rnd\+\_\+graph.\+cpp}}
+\doxysection{rnd\+\_\+graph.\+cpp File Reference}
+\hypertarget{rnd__graph_8cpp}{}\label{rnd__graph_8cpp}\index{rnd\_graph.cpp@{rnd\_graph.cpp}}
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$ctype.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}random\+\_\+graph.\+h\char`\"{}}\newline
-\subsection*{Functions}
+{\ttfamily \#include "{}random\+\_\+graph.\+h"{}}\newline
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\+\_\+usage} ()
+void \mbox{\hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\+\_\+usage}} ()
 \item 
-int \hyperlink{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+int \mbox{\hyperlink{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function Documentation}
-\mbox{\Hypertarget{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
-\index{rnd\+\_\+graph.\+cpp@{rnd\+\_\+graph.\+cpp}!main@{main}}
-\index{main@{main}!rnd\+\_\+graph.\+cpp@{rnd\+\_\+graph.\+cpp}}
-\subsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+\doxysubsection{Function Documentation}
+\Hypertarget{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{rnd__graph_8cpp_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{rnd\_graph.cpp@{rnd\_graph.cpp}!main@{main}}
+\index{main@{main}!rnd\_graph.cpp@{rnd\_graph.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
 
 
-\begin{DoxyCode}
-43                                 \{
-44   \textcolor{keywordtype}{int} n, edge\_mark, ver\_mark;
-45   \textcolor{keywordtype}{double} p, deg;
-46   \textcolor{keywordtype}{string} type, outfile;
-47   \textcolor{keywordtype}{char} opt;
-48 
-49   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"t:n:p:d:e:v:o:h"})) != EOF)\{
-50     \textcolor{keywordflow}{switch}(opt)\{
-51     \textcolor{keywordflow}{case} \textcolor{charliteral}{'t'}:
-52       type = string(optarg);
-53       \textcolor{keywordflow}{break};
-54     \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:
-55       n = atoi(optarg);
-56       \textcolor{keywordflow}{break};
-57     \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:
-58       p = atof(optarg);
-59       \textcolor{keywordflow}{break};
-60     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
-61       deg = atof(optarg);
-62       \textcolor{keywordflow}{break};
-63     \textcolor{keywordflow}{case} \textcolor{charliteral}{'e'}:
-64       edge\_mark = atoi(optarg);
-65       \textcolor{keywordflow}{break};
-66     \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
-67       ver\_mark = atoi(optarg);
-68       \textcolor{keywordflow}{break};
-69     \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
-70       outfile = string(optarg);
-71       \textcolor{keywordflow}{break};
-72     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
-73       \hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\_usage}();
-74       \textcolor{keywordflow}{break};
-75     \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
-76       cerr << \textcolor{stringliteral}{"Error: option -"} << char(optopt) << \textcolor{stringliteral}{" requires an argument"} << endl;
-77       \hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\_usage}();
-78       \textcolor{keywordflow}{return} 1;
-79     \}
-80   \}
-81   ofstream oup(outfile.c\_str());
-82   \textcolor{keywordflow}{if} (!oup.good())\{
-83     cerr << \textcolor{stringliteral}{"Error: invalid output file <"} << outfile << \textcolor{stringliteral}{"> given "} << endl;
-84     \textcolor{keywordflow}{return} 1;
-85   \}
-86 
-87   \hyperlink{classmarked__graph}{marked\_graph} G;
-88   \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"er"})\{
-89     G = \hyperlink{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\_ER}(n, p, ver\_mark, edge\_mark);
-90     oup << G;
-91   \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(type == \textcolor{stringliteral}{"reg"})\{
-92     G = \hyperlink{random__graph_8cpp_adccc8660f7f0d6afc43f4691de7d7518}{near\_regular\_graph}(n, deg, ver\_mark, edge\_mark);
-93     oup << G; 
-94   \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(type == \textcolor{stringliteral}{"poi"})\{
-95     G = \hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}(n, deg, ver\_mark, edge\_mark);
-96     oup << G;
-97   \}\textcolor{keywordflow}{else}\{
-98     cerr << \textcolor{stringliteral}{" ERROR: unknown type "} << type << \textcolor{stringliteral}{", type must be either <er> or <reg> or <poi> "} << endl;
-99     \textcolor{keywordflow}{return} 1;
-100   \}
-101   \textcolor{keywordflow}{return} 0;
-102 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{int}\ n,\ edge\_mark,\ ver\_mark;}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{double}\ p,\ deg;}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{string}\ type,\ outfile;}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{char}\ opt;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{while}\ ((opt\ =\ getopt(argc,\ argv,\ \textcolor{stringliteral}{"{}t:n:p:d:e:v:o:h"{}}))\ !=\ EOF)\{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{switch}(opt)\{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'t'}:}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ type\ =\ string(optarg);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'n'}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ n\ =\ atoi(optarg);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'p'}:}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ p\ =\ atof(optarg);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'d'}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ deg\ =\ atof(optarg);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'e'}:}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ edge\_mark\ =\ atoi(optarg);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'v'}:}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ ver\_mark\ =\ atoi(optarg);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'o'}:}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ outfile\ =\ string(optarg);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'h'}:}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \mbox{\hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\_usage}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'?'}:}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ option\ -\/"{}}\ <<\ char(optopt)\ <<\ \textcolor{stringliteral}{"{}\ requires\ an\ argument"{}}\ <<\ endl;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \mbox{\hyperlink{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}{print\_usage}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ \ \ ofstream\ oup(outfile.c\_str());}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordflow}{if}\ (!oup.good())\{}
+\DoxyCodeLine{00083\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ invalid\ output\ file\ <"{}}\ <<\ outfile\ <<\ \textcolor{stringliteral}{"{}>\ given\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{classmarked__graph}{marked\_graph}}\ G;}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}er"{}})\{}
+\DoxyCodeLine{00089\ \ \ \ \ G\ =\ \mbox{\hyperlink{random__graph_8cpp_a643ca20d84dd6981854da9b1a8c7a6c5}{marked\_ER}}(n,\ p,\ ver\_mark,\ edge\_mark);}
+\DoxyCodeLine{00090\ \ \ \ \ oup\ <<\ G;}
+\DoxyCodeLine{00091\ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(type\ ==\ \textcolor{stringliteral}{"{}reg"{}})\{}
+\DoxyCodeLine{00092\ \ \ \ \ G\ =\ \mbox{\hyperlink{random__graph_8cpp_adccc8660f7f0d6afc43f4691de7d7518}{near\_regular\_graph}}(n,\ deg,\ ver\_mark,\ edge\_mark);}
+\DoxyCodeLine{00093\ \ \ \ \ oup\ <<\ G;\ }
+\DoxyCodeLine{00094\ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(type\ ==\ \textcolor{stringliteral}{"{}poi"{}})\{}
+\DoxyCodeLine{00095\ \ \ \ \ G\ =\ \mbox{\hyperlink{random__graph_8cpp_a12c6d20574de900afa2186b61977b83d}{poisson\_graph}}(n,\ deg,\ ver\_mark,\ edge\_mark);}
+\DoxyCodeLine{00096\ \ \ \ \ oup\ <<\ G;}
+\DoxyCodeLine{00097\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00098\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ ERROR:\ unknown\ type\ "{}}\ <<\ type\ <<\ \textcolor{stringliteral}{"{},\ type\ must\ be\ either\ <er>\ or\ <reg>\ or\ <poi>\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00100\ \ \ \}}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00102\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}\label{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}} 
-\index{rnd\+\_\+graph.\+cpp@{rnd\+\_\+graph.\+cpp}!print\+\_\+usage@{print\+\_\+usage}}
-\index{print\+\_\+usage@{print\+\_\+usage}!rnd\+\_\+graph.\+cpp@{rnd\+\_\+graph.\+cpp}}
-\subsubsection{\texorpdfstring{print\+\_\+usage()}{print\_usage()}}
+\Hypertarget{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79}\label{rnd__graph_8cpp_ae5ad5cbeccaedc03a48d3c7eaa803e79} 
+\index{rnd\_graph.cpp@{rnd\_graph.cpp}!print\_usage@{print\_usage}}
+\index{print\_usage@{print\_usage}!rnd\_graph.cpp@{rnd\_graph.cpp}}
+\doxysubsubsection{\texorpdfstring{print\_usage()}{print\_usage()}}
 {\footnotesize\ttfamily void print\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
-\begin{DoxyCode}
-10                   \{
-11   cout << \textcolor{stringliteral}{" Usage: "} << endl;
-12   cout << \textcolor{stringliteral}{" rnd\_graph -t [random graph type] -n [number of vertices] [[options with -p / -d]] -e [number of
-       edge marks] -v [number of vertex marks] -o [output file]"} << endl;
-13   cout << endl;
-14   cout << \textcolor{stringliteral}{" OPTIONS "} << endl;
-15   cout << \textcolor{stringliteral}{" -n : number of vertices (positive integer) "} << endl;
-16   cout << \textcolor{stringliteral}{" -e : size of edge mark set "} << endl;
-17   cout << \textcolor{stringliteral}{" -v : size of vertex mark set "} << endl;
-18   cout << \textcolor{stringliteral}{" -o : output file to store graph "} << endl;
-19   cout << \textcolor{stringliteral}{" -t : type of random graph: "} << endl;
-20   cout << \textcolor{stringliteral}{"           \(\backslash\)"er\(\backslash\)" for Erdos Renyi "} << endl;
-21   cout << \textcolor{stringliteral}{"           \(\backslash\)"reg\(\backslash\)" for near regular graph "} << endl;
-22   cout << \textcolor{stringliteral}{"           \(\backslash\)"poi\(\backslash\)" for Poisson graph "} << endl;
-23   cout << endl;
-24   cout << \textcolor{stringliteral}{" TYPE SPECIFIC OPTIONS "} << endl;
-25   cout << endl;
-26   cout << \textcolor{stringliteral}{" Erdos Renyi Graph "} << endl;
-27   cout << \textcolor{stringliteral}{" ----------------- "} << endl;
-28   cout << \textcolor{stringliteral}{" -p : edge probability "} << endl;
-29   cout << endl;
-30   cout << \textcolor{stringliteral}{" Near Regular Graph "} << endl;
-31   cout << \textcolor{stringliteral}{" ------------------ "} << endl;
-32   cout << \textcolor{stringliteral}{" -d : half degree, generates a random graph which is nearly regular, and the degree of each
-       vertex is close to 2 * half\_deg. "} << endl;
-33   cout << endl;
-34   cout << \textcolor{stringliteral}{" Poisson Graph "} << endl;
-35   cout << \textcolor{stringliteral}{" ------------- "} << endl;
-36   cout << \textcolor{stringliteral}{" -d : mean degree, each vertex chooses Poisson neighbors with this mean "} << endl;
-37   cout << endl;
-38 
-39 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Usage:\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00012\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ rnd\_graph\ -\/t\ [random\ graph\ type]\ -\/n\ [number\ of\ vertices]\ [[options\ with\ -\/p\ /\ -\/d]]\ -\/e\ [number\ of\ edge\ marks]\ -\/v\ [number\ of\ vertex\ marks]\ -\/o\ [output\ file]"{}}\ <<\ endl;}
+\DoxyCodeLine{00013\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00014\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ OPTIONS\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00015\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/n\ :\ number\ of\ vertices\ (positive\ integer)\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00016\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/e\ :\ size\ of\ edge\ mark\ set\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00017\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/v\ :\ size\ of\ vertex\ mark\ set\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00018\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/o\ :\ output\ file\ to\ store\ graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00019\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/t\ :\ type\ of\ random\ graph:\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00020\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)"{}er\(\backslash\)"{}\ for\ Erdos\ Renyi\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00021\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)"{}reg\(\backslash\)"{}\ for\ near\ regular\ graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00022\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)"{}poi\(\backslash\)"{}\ for\ Poisson\ graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00023\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00024\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ TYPE\ SPECIFIC\ OPTIONS\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00025\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00026\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Erdos\ Renyi\ Graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00027\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00028\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/p\ :\ edge\ probability\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00029\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00030\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Near\ Regular\ Graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00031\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00032\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/d\ :\ half\ degree,\ generates\ a\ random\ graph\ which\ is\ nearly\ regular,\ and\ the\ degree\ of\ each\ vertex\ is\ close\ to\ 2\ *\ half\_deg.\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00033\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00034\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Poisson\ Graph\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00035\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00036\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/d\ :\ mean\ degree,\ each\ vertex\ chooses\ Poisson\ neighbors\ with\ this\ mean\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00037\ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \}}
+
 \end{DoxyCode}

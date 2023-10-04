@@ -1,5 +1,5 @@
-\hypertarget{classtime__series__encoder}{}\section{time\+\_\+series\+\_\+encoder Class Reference}
-\label{classtime__series__encoder}\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
+\doxysection{time\+\_\+series\+\_\+encoder Class Reference}
+\hypertarget{classtime__series__encoder}{}\label{classtime__series__encoder}\index{time\_series\_encoder@{time\_series\_encoder}}
 
 
 encodes a time series which is basically an array of arbitrary nonnegative integers  
@@ -9,80 +9,82 @@ encodes a time series which is basically an array of arbitrary nonnegative integ
 
 {\ttfamily \#include $<$time\+\_\+series\+\_\+compression.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec}{time\+\_\+series\+\_\+encoder} (int n\+\_\+)
+\mbox{\hyperlink{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec}{time\+\_\+series\+\_\+encoder}} (\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n\+\_\+}})
 \begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
-pair$<$ vector$<$ int $>$, mpz\+\_\+class $>$ \hyperlink{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465}{encode} (const vector$<$ int $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Encodes a {\ttfamily vector$<$int$>$} with size n. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Member Functions}
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{pair}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$, \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{mpz\+\_\+class}} $>$ \mbox{\hyperlink{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465}{encode}} (\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Encodes a {\ttfamily vector\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}} with size n. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\+\_\+alph\+\_\+size} (const vector$<$ int $>$ \&x)
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} \mbox{\hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\+\_\+alph\+\_\+size}} (\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em initializes the alphabet size, i.\+e. the variable init\+\_\+alph\+\_\+size \end{DoxyCompactList}\item 
-void \hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\+\_\+freq} (const vector$<$ int $>$ \&x)
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} \mbox{\hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\+\_\+freq}} (\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em initializes the freq vector \end{DoxyCompactList}\item 
-void \hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\+\_\+G} (const vector$<$ int $>$ \&x)
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} \mbox{\hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\+\_\+G}} (\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em initializes the auxiliary bipartite graph G \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}
+int \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}}
 \begin{DoxyCompactList}\small\item\em length of the series is assumed to be known \end{DoxyCompactList}\item 
-int \hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\+\_\+size}
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} \mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\+\_\+size}}
 \begin{DoxyCompactList}\small\item\em the number of distinct integers showing up in the sequence. Therefore, the sequence would consists of integers in the range \mbox{[}0,alph\+\_\+size-\/1\mbox{]}. \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}
+\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}}
 \begin{DoxyCompactList}\small\item\em the frequency of symbols, so has size alph\+\_\+size \end{DoxyCompactList}\item 
-\hyperlink{classb__graph}{b\+\_\+graph} \hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G}
+\mbox{\hyperlink{classb__graph}{b\+\_\+graph}} \mbox{\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G}}
 \begin{DoxyCompactList}\small\item\em the bipartite graph version of the sequence, which has n left vertices and alph\+\_\+size right sequence. Left vertex v is connected to right vertex w if the value of the time series in coordinate v is w. This way, each vertex on the left has degree 1, and the degree of a right vertex w is the frequency of w. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 encodes a time series which is basically an array of arbitrary nonnegative integers 
 
-This class is capable of compressing arrays of nonnegative integers with size n. Upon construction, n must be given. But later, the object is capable of compressing any sequence with this size, universally. The output of the compression is an object of type {\ttfamily pair$<$vector$<$int$>$, mpz\+\_\+class$>$}.
+This class is capable of compressing arrays of nonnegative integers with size n. Upon construction, n must be given. But later, the object is capable of compressing any sequence with this size, universally. The output of the compression is an object of type {\ttfamily pair\texorpdfstring{$<$}{<}vector\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}, mpz\+\_\+class\texorpdfstring{$>$}{>}}.
 
-{\bfseries Usage Example}
+{\bfseries{Usage Example}}
 
 
-\begin{DoxyCode}
-vector<int> a = \{0,2,3,1,2,1,0,1,0,2,1,0,0,2,1,3,4,5,0\};
-\textcolor{keywordtype}{int} n = a.size();
-\hyperlink{classtime__series__encoder}{time\_series\_encoder} E(n);
-pair<vector<int>, mpz\_class > ans = E.encode(a);
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector<int>}}\ a\ =\ \{0,2,3,1,2,1,0,1,0,2,1,0,0,2,1,3,4,5,0\};}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}}\ =\ a.size();}
+\DoxyCodeLine{\mbox{\hyperlink{classtime__series__encoder}{time\_series\_encoder}}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{E}}(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}});}
+\DoxyCodeLine{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{pair<vector<int>}},\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{mpz\_class}}\ >\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{ans}}\ =\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{E}}.encode(a);}
+
 \end{DoxyCode}
 
 
-See {\ttfamily \hyperlink{classtime__series__decoder}{time\+\_\+series\+\_\+decoder}} for decoding. 
+See {\ttfamily \doxylink{classtime__series__decoder}{time\+\_\+series\+\_\+decoder}} for decoding. 
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec}\label{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{time\+\_\+series\+\_\+encoder()}{time\_series\_encoder()}}
-{\footnotesize\ttfamily time\+\_\+series\+\_\+encoder\+::time\+\_\+series\+\_\+encoder (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec}\label{classtime__series__encoder_addf67a97a877de0abe070a5c7d9fa3ec} 
+\index{time\_series\_encoder@{time\_series\_encoder}!time\_series\_encoder@{time\_series\_encoder}}
+\index{time\_series\_encoder@{time\_series\_encoder}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{time\_series\_encoder()}{time\_series\_encoder()}}
+{\footnotesize\ttfamily time\+\_\+series\+\_\+encoder\+::time\+\_\+series\+\_\+encoder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}}}]{n\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 constructor 
 
 
-\begin{DoxyCode}
-44 : \hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}(n\_) \{\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ :\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}}(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n\_}})\ \{\}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465}\label{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!encode@{encode}}
-\index{encode@{encode}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{encode()}{encode()}}
-{\footnotesize\ttfamily pair$<$ vector$<$ int $>$, mpz\+\_\+class $>$ time\+\_\+series\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{x }\end{DoxyParamCaption})}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465}\label{classtime__series__encoder_a6d3fbf4d839978c6c82efc2160cdc465} 
+\index{time\_series\_encoder@{time\_series\_encoder}!encode@{encode}}
+\index{encode@{encode}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{pair}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$, \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{mpz\+\_\+class}} $>$ time\+\_\+series\+\_\+encoder\+::encode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&}]{x }\end{DoxyParamCaption})}
 
 
 
-Encodes a {\ttfamily vector$<$int$>$} with size n. 
+Encodes a {\ttfamily vector\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}} with size n. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -90,143 +92,144 @@ Encodes a {\ttfamily vector$<$int$>$} with size n.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-an object of type {\ttfamily pair$<$vector$<$int$>$, mpz\+\_\+class$>$}. The first part is the corresponding frequency array ({\ttfamily freq} member), and the second is the compressed form of the bipartite graph G 
+an object of type {\ttfamily pair\texorpdfstring{$<$}{<}vector\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}, mpz\+\_\+class\texorpdfstring{$>$}{>}}. The first part is the corresponding frequency array ({\ttfamily freq} member), and the second is the compressed form of the bipartite graph G 
 \end{DoxyReturn}
 
-\begin{DoxyCode}
-35 \{
-36   \textcolor{comment}{//check whether x is a compatible sequence}
-37   \textcolor{keywordflow}{if} (x.size()!= \hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n})
-38     cerr << \textcolor{stringliteral}{" WARNING: time\_series\_encoder::encode, called for a vector with size different from n,
-       x.size() = "} << x.size() << endl;
-39 
-40   \textcolor{comment}{// initialize alph\_size, freq and G}
-41   \textcolor{comment}{//logger::item\_start("time series init alph size");}
-42   \hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\_alph\_size}(x);
-43   \textcolor{comment}{//logger::item\_stop("time series init alph size");}
-44   \textcolor{comment}{//logger::item\_start("time series init freq");}
-45   \hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\_freq}(x);
-46   \textcolor{comment}{//logger::item\_stop("time series init freq");}
-47 
-48   \textcolor{comment}{//logger::item\_start("time series init G");}
-49   \hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\_G}(x);
-50   \textcolor{comment}{//logger::item\_stop("time series init G");}
-51   
-52   \textcolor{comment}{// initializing a b\_graph\_encoder}
-53   vector<int> left\_deg(\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}, 1); \textcolor{comment}{// the left degree sequence}
-54   \hyperlink{classb__graph__encoder}{b\_graph\_encoder} E(left\_deg, \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}); \textcolor{comment}{// the right degree sequence is freq}
-55   \textcolor{comment}{//logger::item\_start("time series encode");}
-56   mpz\_class f = E.encode(\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G});
-57   \textcolor{comment}{//logger::item\_stop("time series encode");}
-58   pair<vector<int>, mpz\_class> ans;
-59   ans.first = \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq};
-60   ans.second  = f;
-61   \textcolor{keywordflow}{return} ans;
-62 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{//check\ whether\ x\ is\ a\ compatible\ sequence}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordflow}{if}\ (x.size()!=\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}})}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{cerr}}\ <<\ \textcolor{stringliteral}{"{}\ WARNING:\ time\_series\_encoder::encode,\ called\ for\ a\ vector\ with\ size\ different\ from\ n,\ x.size()\ =\ "{}}\ <<\ x.size()\ <<\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{endl}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{//\ initialize\ alph\_size,\ freq\ and\ G}}
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{//logger::item\_start("{}time\ series\ init\ alph\ size"{});}}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}{init\_alph\_size}}(x);}
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{//logger::item\_stop("{}time\ series\ init\ alph\ size"{});}}
+\DoxyCodeLine{00044\ \ \ \textcolor{comment}{//logger::item\_start("{}time\ series\ init\ freq"{});}}
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}{init\_freq}}(x);}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{//logger::item\_stop("{}time\ series\ init\ freq"{});}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{comment}{//logger::item\_start("{}time\ series\ init\ G"{});}}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}{init\_G}}(x);}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{//logger::item\_stop("{}time\ series\ init\ G"{});}}
+\DoxyCodeLine{00051\ \ \ }
+\DoxyCodeLine{00052\ \ \ \textcolor{comment}{//\ initializing\ a\ b\_graph\_encoder}}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector<int>}}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{left\_deg}}(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}},\ 1);\ \textcolor{comment}{//\ the\ left\ degree\ sequence}}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{classb__graph__encoder}{b\_graph\_encoder}}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{E}}(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{left\_deg}},\ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}});\ \textcolor{comment}{//\ the\ right\ degree\ sequence\ is\ freq}}
+\DoxyCodeLine{00055\ \ \ \textcolor{comment}{//logger::item\_start("{}time\ series\ encode"{});}}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{mpz\_class}}\ f\ =\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{E}}.encode(\mbox{\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G}});}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{//logger::item\_stop("{}time\ series\ encode"{});}}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{pair<vector<int>}},\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{mpz\_class}}>\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{ans}};}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{ans}}.first\ =\ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}};}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{ans}}.second\ \ =\ f;}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{ans}};}
+\DoxyCodeLine{00062\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}\label{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!init\+\_\+alph\+\_\+size@{init\+\_\+alph\+\_\+size}}
-\index{init\+\_\+alph\+\_\+size@{init\+\_\+alph\+\_\+size}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{init\+\_\+alph\+\_\+size()}{init\_alph\_size()}}
-{\footnotesize\ttfamily void time\+\_\+series\+\_\+encoder\+::init\+\_\+alph\+\_\+size (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce}\label{classtime__series__encoder_a8607e6953e5115a3c8a198266d2db8ce} 
+\index{time\_series\_encoder@{time\_series\_encoder}!init\_alph\_size@{init\_alph\_size}}
+\index{init\_alph\_size@{init\_alph\_size}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{init\_alph\_size()}{init\_alph\_size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} time\+\_\+series\+\_\+encoder\+::init\+\_\+alph\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 initializes the alphabet size, i.\+e. the variable init\+\_\+alph\+\_\+size 
 
 
-\begin{DoxyCode}
-4 \{
-5   \hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size} = 0;
-6   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<x.size();i++)\{
-7     \textcolor{keywordflow}{if} (x[i] > \hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size})
-8       \hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size} = x[i];
-9     \textcolor{keywordflow}{if} (x[i] < 0)
-10       cerr << \textcolor{stringliteral}{" WARNING: time\_series\_encoder::encode called for a vector with negative entries "} << endl;
-11   \}
-12 
-13   \hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size} ++; \textcolor{comment}{// the array is zero based }
-14 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \ \ \mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}}\ =\ 0;}
+\DoxyCodeLine{00006\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}=0;\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}<x.size();\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}++)\{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordflow}{if}\ (x[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}]\ >\ \mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}})}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}}\ =\ x[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}];}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordflow}{if}\ (x[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}]\ <\ 0)}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{cerr}}\ <<\ \textcolor{stringliteral}{"{}\ WARNING:\ time\_series\_encoder::encode\ called\ for\ a\ vector\ with\ negative\ entries\ "{}}\ <<\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{endl}};}
+\DoxyCodeLine{00011\ \ \ \}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}}\ ++;\ \textcolor{comment}{//\ the\ array\ is\ zero\ based\ }}
+\DoxyCodeLine{00014\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}\label{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!init\+\_\+freq@{init\+\_\+freq}}
-\index{init\+\_\+freq@{init\+\_\+freq}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{init\+\_\+freq()}{init\_freq()}}
-{\footnotesize\ttfamily void time\+\_\+series\+\_\+encoder\+::init\+\_\+freq (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classtime__series__encoder_af4b8988acb10fe076be59302e47084be}\label{classtime__series__encoder_af4b8988acb10fe076be59302e47084be} 
+\index{time\_series\_encoder@{time\_series\_encoder}!init\_freq@{init\_freq}}
+\index{init\_freq@{init\_freq}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{init\_freq()}{init\_freq()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} time\+\_\+series\+\_\+encoder\+::init\+\_\+freq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 initializes the freq vector 
 
 
-\begin{DoxyCode}
-17 \{
-18   \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}.clear();
-19   \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}.resize(\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}); \textcolor{comment}{//assuming that alph\_size is already set}
-20   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<x.size();i++)
-21     \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}[x[i]] ++;
-22 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}}.clear();}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}}.resize(\mbox{\hyperlink{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}{alph\_size}});\ \textcolor{comment}{//assuming\ that\ alph\_size\ is\ already\ set}}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}=0;\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}<x.size();\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}++)}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}}[x[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}]]\ ++;}
+\DoxyCodeLine{00022\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}\label{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!init\+\_\+G@{init\+\_\+G}}
-\index{init\+\_\+G@{init\+\_\+G}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{init\+\_\+\+G()}{init\_G()}}
-{\footnotesize\ttfamily void time\+\_\+series\+\_\+encoder\+::init\+\_\+G (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470}\label{classtime__series__encoder_a90eb54134d6af2ab2cca36ee13956470} 
+\index{time\_series\_encoder@{time\_series\_encoder}!init\_G@{init\_G}}
+\index{init\_G@{init\_G}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{init\_G()}{init\_G()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{void}} time\+\_\+series\+\_\+encoder\+::init\+\_\+G (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{const}} \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 initializes the auxiliary bipartite graph G 
 
 
-\begin{DoxyCode}
-25 \{
-26   \textcolor{comment}{//initializing the adjacency list}
-27   vector<vector<int> > list;
-28   list.resize(\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n});
-29   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<x.size();i++)
-30     list[i] = vector<int>(\{x[i]\}); \textcolor{comment}{// list[i] has a single member, which is x[i]. In other words, the left
-       vertex i has only one right neighbor, which is precisely x[i]}
-31   \hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G} = \hyperlink{classb__graph}{b\_graph}(list, \hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}); \textcolor{comment}{// construct G based on its adjacency list, and the right degree
-       sequence which is freq}
-32 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{//initializing\ the\ adjacency\ list}}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector<vector<int>}}\ >\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{list}};}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{list}}.resize(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{n}});}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}=0;\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}<x.size();\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}++)}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{list}}[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}]\ =\ \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector<int>}}(\{x[\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{i}}]\});\ \textcolor{comment}{//\ list[i]\ has\ a\ single\ member,\ which\ is\ x[i].\ In\ other\ words,\ the\ left\ vertex\ i\ has\ only\ one\ right\ neighbor,\ which\ is\ precisely\ x[i]}}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}{G}}\ =\ \mbox{\hyperlink{classb__graph}{b\_graph}}(\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{list}},\ \mbox{\hyperlink{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}{freq}});\ \textcolor{comment}{//\ construct\ G\ based\ on\ its\ adjacency\ list,\ and\ the\ right\ degree\ sequence\ which\ is\ freq}}
+\DoxyCodeLine{00032\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}\label{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!alph\+\_\+size@{alph\+\_\+size}}
-\index{alph\+\_\+size@{alph\+\_\+size}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{alph\+\_\+size}{alph\_size}}
-{\footnotesize\ttfamily int time\+\_\+series\+\_\+encoder\+::alph\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac}\label{classtime__series__encoder_a7e73867e25ea5ae643bf05eaf33ea9ac} 
+\index{time\_series\_encoder@{time\_series\_encoder}!alph\_size@{alph\_size}}
+\index{alph\_size@{alph\_size}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{alph\_size}{alph\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}} time\+\_\+series\+\_\+encoder\+::alph\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the number of distinct integers showing up in the sequence. Therefore, the sequence would consists of integers in the range \mbox{[}0,alph\+\_\+size-\/1\mbox{]}. 
 
-\mbox{\Hypertarget{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}\label{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!freq@{freq}}
-\index{freq@{freq}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{freq}{freq}}
-{\footnotesize\ttfamily vector$<$int$>$ time\+\_\+series\+\_\+encoder\+::freq\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057}\label{classtime__series__encoder_ac6496aa39f28da4d8fe964c495e76057} 
+\index{time\_series\_encoder@{time\_series\_encoder}!freq@{freq}}
+\index{freq@{freq}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{vector}}$<$\mbox{\hyperlink{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}{int}}$>$ time\+\_\+series\+\_\+encoder\+::freq\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the frequency of symbols, so has size alph\+\_\+size 
 
-\mbox{\Hypertarget{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}\label{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!G@{G}}
-\index{G@{G}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{G}{G}}
-{\footnotesize\ttfamily \hyperlink{classb__graph}{b\+\_\+graph} time\+\_\+series\+\_\+encoder\+::G\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9}\label{classtime__series__encoder_aa40f761a56f696e78e8888e50e8f45b9} 
+\index{time\_series\_encoder@{time\_series\_encoder}!G@{G}}
+\index{G@{G}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classb__graph}{b\+\_\+graph}} time\+\_\+series\+\_\+encoder\+::G\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the bipartite graph version of the sequence, which has n left vertices and alph\+\_\+size right sequence. Left vertex v is connected to right vertex w if the value of the time series in coordinate v is w. This way, each vertex on the left has degree 1, and the degree of a right vertex w is the frequency of w. 
 
-\mbox{\Hypertarget{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}\label{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}} 
-\index{time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}!n@{n}}
-\index{n@{n}!time\+\_\+series\+\_\+encoder@{time\+\_\+series\+\_\+encoder}}
-\subsubsection{\texorpdfstring{n}{n}}
+\Hypertarget{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539}\label{classtime__series__encoder_ab84b7528d50c495fc140f1eb50d9b539} 
+\index{time\_series\_encoder@{time\_series\_encoder}!n@{n}}
+\index{n@{n}!time\_series\_encoder@{time\_series\_encoder}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
 {\footnotesize\ttfamily int time\+\_\+series\+\_\+encoder\+::n\hspace{0.3cm}{\ttfamily [private]}}
 
 
@@ -237,5 +240,5 @@ length of the series is assumed to be known
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{time__series__compression_8h}{time\+\_\+series\+\_\+compression.\+h}\item 
-\hyperlink{time__series__compression_8cpp}{time\+\_\+series\+\_\+compression.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{time__series__compression_8h}{time\+\_\+series\+\_\+compression.\+h}}\item 
+\mbox{\hyperlink{time__series__compression_8cpp}{time\+\_\+series\+\_\+compression.\+cpp}}\end{DoxyCompactItemize}

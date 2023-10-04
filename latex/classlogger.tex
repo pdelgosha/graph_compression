@@ -1,299 +1,298 @@
-\hypertarget{classlogger}{}\section{logger Class Reference}
-\label{classlogger}\index{logger@{logger}}
+\doxysection{logger Class Reference}
+\hypertarget{classlogger}{}\label{classlogger}\index{logger@{logger}}
 
 
 {\ttfamily \#include $<$logger.\+h$>$}
 
-\subsection*{Static Public Member Functions}
+\doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{add\+\_\+entry} (string name, string description)
+static void \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{add\+\_\+entry}} (string name, string description)
 \item 
-static void \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{start} ()
+static void \mbox{\hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{start}} ()
 \item 
-static void \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{stop} ()
+static void \mbox{\hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{stop}} ()
 \item 
-static void \hyperlink{classlogger_ab518e6d927694bb7329e933fa75c27bf}{log} ()
+static void \mbox{\hyperlink{classlogger_ab518e6d927694bb7329e933fa75c27bf}{log}} ()
 \item 
-static void \hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{item\+\_\+start} (string name)
+static void \mbox{\hyperlink{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}{item\+\_\+start}} (string name)
 \item 
-static void \hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{item\+\_\+stop} (string name)
+static void \mbox{\hyperlink{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}{item\+\_\+stop}} (string name)
 \end{DoxyCompactItemize}
-\subsection*{Static Public Attributes}
+\doxysubsubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{verbose} = true
+static bool \mbox{\hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{verbose}} = true
 \begin{DoxyCompactList}\small\item\em if true, every entry is printed at the time of its report, default is false \end{DoxyCompactList}\item 
-static bool \hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{stat} = false
+static bool \mbox{\hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{stat}} = false
 \begin{DoxyCompactList}\small\item\em if true, statistics will be displayed, e.\+g. number of star vertices / edges or the number of partition graphs etc \end{DoxyCompactList}\item 
-static ostream $\ast$ \hyperlink{classlogger_ae8d04646d8d5244120781025a4d8540b}{verbose\+\_\+stream} = \&cout
+static ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classlogger_ae8d04646d8d5244120781025a4d8540b}{verbose\+\_\+stream}} = \&cout
 \begin{DoxyCompactList}\small\item\em the stream for printing entries at the time of arrival, default is cout \end{DoxyCompactList}\item 
-static bool \hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{report} = true
+static bool \mbox{\hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{report}} = true
 \begin{DoxyCompactList}\small\item\em if true, at the end of the program, a hierarchical report is printed \end{DoxyCompactList}\item 
-static ostream $\ast$ \hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\+\_\+stream} = \&cout
+static ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\+\_\+stream}} = \&cout
 \begin{DoxyCompactList}\small\item\em the stream to report the final report. Default is cout \end{DoxyCompactList}\item 
-static ostream $\ast$ \hyperlink{classlogger_a7db37821f875f2ba3540980b355779f5}{stat\+\_\+stream} = \&cout
+static ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classlogger_a7db37821f875f2ba3540980b355779f5}{stat\+\_\+stream}} = \&cout
 \begin{DoxyCompactList}\small\item\em the stream to report the statistics. Default is cout \end{DoxyCompactList}\item 
-static vector$<$ \hyperlink{classlog__entry}{log\+\_\+entry} $>$ \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}
+static vector$<$ \mbox{\hyperlink{classlog__entry}{log\+\_\+entry}} $>$ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}
 \item 
-static int \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\+\_\+depth} = 1
+static int \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\+\_\+depth}} = 1
 \item 
-static map$<$ string, float $>$ \hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\+\_\+duration}
+static map$<$ string, float $>$ \mbox{\hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\+\_\+duration}}
 \item 
-static map$<$ string, high\+\_\+resolution\+\_\+clock\+::time\+\_\+point $>$ \hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\+\_\+last\+\_\+start}
+static map$<$ string, high\+\_\+resolution\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\+\_\+last\+\_\+start}}
 \begin{DoxyCompactList}\small\item\em the last time each item was started \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classlogger_a710163deb17bc81f70d53d285b8ac9ac}\label{classlogger_a710163deb17bc81f70d53d285b8ac9ac}} 
-\index{logger@{logger}!add\+\_\+entry@{add\+\_\+entry}}
-\index{add\+\_\+entry@{add\+\_\+entry}!logger@{logger}}
-\subsubsection{\texorpdfstring{add\+\_\+entry()}{add\_entry()}}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classlogger_a710163deb17bc81f70d53d285b8ac9ac}\label{classlogger_a710163deb17bc81f70d53d285b8ac9ac} 
+\index{logger@{logger}!add\_entry@{add\_entry}}
+\index{add\_entry@{add\_entry}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{add\_entry()}{add\_entry()}}
 {\footnotesize\ttfamily void logger\+::add\+\_\+entry (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{string}]{description }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-26 \{
-27   \textcolor{comment}{//cerr << " adding entry current\_depth " << current\_depth << endl;}
-28   \hyperlink{classlog__entry}{log\_entry} new\_entry(name, description, \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\_depth});
-29   \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logger::logs}.push\_back(new\_entry);
-30   \textcolor{keywordflow}{if} (\hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose})\{
-31     \textcolor{keywordtype}{string} s = \textcolor{stringliteral}{""};
-32     time\_t tt = system\_clock::to\_time\_t(new\_entry.sys\_t);
-33     \textcolor{keywordtype}{char} buffer[80];
-34     strftime(buffer, 80, \textcolor{stringliteral}{"%F %r"}, localtime(&tt));
-35     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<(\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\_depth}-1);i++)
-36       s += \textcolor{stringliteral}{"|---"};
-37     \textcolor{keywordtype}{string} buffer\_str(buffer);
-38     s +=  name + \textcolor{stringliteral}{" ("} + description + \textcolor{stringliteral}{") "};
-39     s += buffer\_str;
-40     *\hyperlink{classlogger_ae8d04646d8d5244120781025a4d8540b}{verbose\_stream} << s << endl;
-41   \}
-42 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ adding\ entry\ current\_depth\ "{}\ <<\ current\_depth\ <<\ endl;}}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classlog__entry}{log\_entry}}\ new\_entry(name,\ description,\ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\_depth}});}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logger::logs}}.push\_back(new\_entry);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose}})\{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{string}\ s\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00032\ \ \ \ \ time\_t\ tt\ =\ system\_clock::to\_time\_t(new\_entry.sys\_t);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[80];}
+\DoxyCodeLine{00034\ \ \ \ \ strftime(buffer,\ 80,\ \textcolor{stringliteral}{"{}\%F\ \%r"{}},\ localtime(\&tt));}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=1;i<(\mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{current\_depth}}-\/1);i++)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ s\ +=\ \textcolor{stringliteral}{"{}|-\/-\/-\/"{}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{string}\ buffer\_str(buffer);}
+\DoxyCodeLine{00038\ \ \ \ \ s\ +=\ \ name\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ description\ +\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00039\ \ \ \ \ s\ +=\ buffer\_str;}
+\DoxyCodeLine{00040\ \ \ \ \ *\mbox{\hyperlink{classlogger_ae8d04646d8d5244120781025a4d8540b}{verbose\_stream}}\ <<\ s\ <<\ endl;}
+\DoxyCodeLine{00041\ \ \ \}}
+\DoxyCodeLine{00042\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}\label{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}} 
-\index{logger@{logger}!item\+\_\+start@{item\+\_\+start}}
-\index{item\+\_\+start@{item\+\_\+start}!logger@{logger}}
-\subsubsection{\texorpdfstring{item\+\_\+start()}{item\_start()}}
+\Hypertarget{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a}\label{classlogger_a7e21ec6ad2d40cfc2c6a383521b5641a} 
+\index{logger@{logger}!item\_start@{item\_start}}
+\index{item\_start@{item\_start}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{item\_start()}{item\_start()}}
 {\footnotesize\ttfamily void logger\+::item\+\_\+start (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-128                                   \{
-129   \hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\_last\_start}[name] = high\_resolution\_clock::now();
-130 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \mbox{\hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\_last\_start}}[name]\ =\ high\_resolution\_clock::now();}
+\DoxyCodeLine{00130\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}\label{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}} 
-\index{logger@{logger}!item\+\_\+stop@{item\+\_\+stop}}
-\index{item\+\_\+stop@{item\+\_\+stop}!logger@{logger}}
-\subsubsection{\texorpdfstring{item\+\_\+stop()}{item\_stop()}}
+\Hypertarget{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2}\label{classlogger_a6775fee9681c437fc9c05d71cfbbe4a2} 
+\index{logger@{logger}!item\_stop@{item\_stop}}
+\index{item\_stop@{item\_stop}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{item\_stop()}{item\_stop()}}
 {\footnotesize\ttfamily void logger\+::item\+\_\+stop (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-132                                  \{
-133   high\_resolution\_clock::time\_point t = high\_resolution\_clock::now();
-134   duration<float> diff = t - \hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\_last\_start}[name];
-135   \hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}[name] += diff.count();
-136 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ high\_resolution\_clock::time\_point\ t\ =\ high\_resolution\_clock::now();}
+\DoxyCodeLine{00134\ \ \ duration<float>\ diff\ =\ t\ -\/\ \mbox{\hyperlink{classlogger_af21bf7ca37e55cf225b282ab2f312c95}{item\_last\_start}}[name];}
+\DoxyCodeLine{00135\ \ \ \mbox{\hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}}[name]\ +=\ diff.count();}
+\DoxyCodeLine{00136\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classlogger_ab518e6d927694bb7329e933fa75c27bf}\label{classlogger_ab518e6d927694bb7329e933fa75c27bf}} 
+\Hypertarget{classlogger_ab518e6d927694bb7329e933fa75c27bf}\label{classlogger_ab518e6d927694bb7329e933fa75c27bf} 
 \index{logger@{logger}!log@{log}}
 \index{log@{log}!logger@{logger}}
-\subsubsection{\texorpdfstring{log()}{log()}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
 {\footnotesize\ttfamily void logger\+::log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-45                 \{
-46   \textcolor{comment}{//cerr << " log started " << endl;}
-47   \textcolor{keywordtype}{int} max\_depth = 0;
-48   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size(); i++)\{
-49     \textcolor{keywordflow}{if} (\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].depth > max\_depth)
-50       max\_depth = \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].depth;
-51   \}
-52 
-53   vector<int> parent(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()); \textcolor{comment}{// for a log L, parent[L] is the max index i < L such that depth[i]
-       < depth[L], this shows in what block we are in}
-54   vector<int> next(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()); \textcolor{comment}{// for a log L, next[L] is the min index i > L such that depth[i] >=
-       depth[L], this is the index right after L in its block, or if L is the last entry in its block, it is the
-       start of the next block. The diff between L and next[L] shows the duration of running L}
-55   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()-1);i++)\{
-56     \textcolor{comment}{// finding parent[i]}
-57     \textcolor{comment}{//cerr << " finding parent " << i << endl;}
-58     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=(i-1); j>=0 ;j--)\{
-59       \textcolor{keywordflow}{if} (\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[j].depth < \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].depth)\{
-60         parent[i] = j;
-61         \textcolor{keywordflow}{break};
-62       \}
-63     \}
-64     \textcolor{comment}{//cerr << " parent[" << i << "] = " << parent[i] << endl;}
-65     \textcolor{comment}{//cerr << " finding next " << i << endl;}
-66     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=(i+1); j<\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size();j++)\{
-67       \textcolor{keywordflow}{if} (\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[j].depth <= \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].depth)\{
-68         next[i] = j;
-69         \textcolor{keywordflow}{break};
-70       \}
-71     \}
-72     \textcolor{comment}{//cerr << " next[" << i << "] = " << next[i] << endl;}
-73   \}
-74   next[0] = \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()-1; \textcolor{comment}{// next of start entry is the finish entry}
-75 
-76   vector<float> dur(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()); \textcolor{comment}{// dur[L] is the duration that entry L takes, meaning the difference
-       between L and next[L]}
-77   vector<float> block\_dur(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()); \textcolor{comment}{// the duration of the whole block for each entry, which is the
-       difference between}
-78   vector<float> block\_percent(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()); \textcolor{comment}{// the percentage of time each entry takes inside a block}
-79   duration<float> diff;
-80   \textcolor{keywordtype}{string} s;
-81   \textcolor{comment}{//cerr << " logs.size() " << logs.size() << endl;}
-82   *\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream} << endl;
-83   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=1;i<(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.size()-1); i++)\{
-84     \textcolor{comment}{//cerr << " i " << i << endl;}
-85     \textcolor{comment}{// finding duration[i]}
-86     diff = \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[next[i]].t - \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].t;
-87     dur[i] = diff.count();
-88     \textcolor{comment}{//cerr << " dur[i] " << dur[i] << endl;}
-89     \textcolor{comment}{// finding block\_duration }
-90     diff = \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[next[parent[i]]].t - \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[parent[i]].t;
-91     block\_dur[i] = diff.count();
-92     \textcolor{comment}{//cerr << " block\_dur[i] " << block\_dur[i] << endl;}
-93     block\_percent[i] = dur[i] / block\_dur[i] * 100;
-94     \textcolor{comment}{//cerr << " block\_percent[i] " << block\_percent[i] << endl;}
-95     s = \textcolor{stringliteral}{""};
-96     \textcolor{comment}{//cerr << " logs[i].depth " << logs[i].depth << endl;}
-97     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=1;j<(\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].depth-1); j++)
-98       s += \textcolor{stringliteral}{"|---"};
-99     s +=  \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].name + \textcolor{stringliteral}{" ("} + \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}[i].description + \textcolor{stringliteral}{"): "} + to\_string(dur[i]) + \textcolor{stringliteral}{"s "} + \textcolor{stringliteral}{"["} + 
-      to\_string(block\_percent[i]) + \textcolor{stringliteral}{"\(\backslash\)%]"} + \textcolor{stringliteral}{" "};
-100     *\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream} << s << endl;
-101   \}
-102 
-103   *\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream} << endl << \textcolor{stringliteral}{" itemized log "} << endl;
-104   \textcolor{keywordflow}{for} (map<string, float>::iterator it = \hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}.begin(); it!= 
-      \hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}.end(); it++)
-105     *\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream} << it->first << \textcolor{stringliteral}{" : "} << it->second << endl;
-106 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ log\ started\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{int}\ max\_depth\ =\ 0;}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size();\ i++)\{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].depth\ >\ max\_depth)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ max\_depth\ =\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].depth;}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ vector<int>\ parent(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size());\ \textcolor{comment}{//\ for\ a\ log\ L,\ parent[L]\ is\ the\ max\ index\ i\ <\ L\ such\ that\ depth[i]\ <\ depth[L],\ this\ shows\ in\ what\ block\ we\ are\ in}}
+\DoxyCodeLine{00054\ \ \ vector<int>\ next(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size());\ \textcolor{comment}{//\ for\ a\ log\ L,\ next[L]\ is\ the\ min\ index\ i\ >\ L\ such\ that\ depth[i]\ >=\ depth[L],\ this\ is\ the\ index\ right\ after\ L\ in\ its\ block,\ or\ if\ L\ is\ the\ last\ entry\ in\ its\ block,\ it\ is\ the\ start\ of\ the\ next\ block.\ The\ diff\ between\ L\ and\ next[L]\ shows\ the\ duration\ of\ running\ L}}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=1;i<(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size()-\/1);i++)\{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ finding\ parent[i]}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ finding\ parent\ "{}\ <<\ i\ <<\ endl;}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j=(i-\/1);\ j>=0\ ;j-\/-\/)\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[j].depth\ <\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].depth)\{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ parent[i]\ =\ j;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ parent["{}\ <<\ i\ <<\ "{}]\ =\ "{}\ <<\ parent[i]\ <<\ endl;}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ finding\ next\ "{}\ <<\ i\ <<\ endl;}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j=(i+1);\ j<\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size();j++)\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[j].depth\ <=\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].depth)\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ next[i]\ =\ j;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ next["{}\ <<\ i\ <<\ "{}]\ =\ "{}\ <<\ next[i]\ <<\ endl;}}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ \ \ next[0]\ =\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size()-\/1;\ \textcolor{comment}{//\ next\ of\ start\ entry\ is\ the\ finish\ entry}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ vector<float>\ dur(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size());\ \textcolor{comment}{//\ dur[L]\ is\ the\ duration\ that\ entry\ L\ takes,\ meaning\ the\ difference\ between\ L\ and\ next[L]}}
+\DoxyCodeLine{00077\ \ \ vector<float>\ block\_dur(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size());\ \textcolor{comment}{//\ the\ duration\ of\ the\ whole\ block\ for\ each\ entry,\ which\ is\ the\ difference\ between}}
+\DoxyCodeLine{00078\ \ \ vector<float>\ block\_percent(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size());\ \textcolor{comment}{//\ the\ percentage\ of\ time\ each\ entry\ takes\ inside\ a\ block}}
+\DoxyCodeLine{00079\ \ \ duration<float>\ diff;}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{string}\ s;}
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ logs.size()\ "{}\ <<\ logs.size()\ <<\ endl;}}
+\DoxyCodeLine{00082\ \ \ *\mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream}}\ <<\ endl;}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=1;i<(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.size()-\/1);\ i++)\{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ i\ "{}\ <<\ i\ <<\ endl;}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//\ finding\ duration[i]}}
+\DoxyCodeLine{00086\ \ \ \ \ diff\ =\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[next[i]].t\ -\/\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].t;}
+\DoxyCodeLine{00087\ \ \ \ \ dur[i]\ =\ diff.count();}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ dur[i]\ "{}\ <<\ dur[i]\ <<\ endl;}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ finding\ block\_duration\ }}
+\DoxyCodeLine{00090\ \ \ \ \ diff\ =\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[next[parent[i]]].t\ -\/\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[parent[i]].t;}
+\DoxyCodeLine{00091\ \ \ \ \ block\_dur[i]\ =\ diff.count();}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ block\_dur[i]\ "{}\ <<\ block\_dur[i]\ <<\ endl;}}
+\DoxyCodeLine{00093\ \ \ \ \ block\_percent[i]\ =\ dur[i]\ /\ block\_dur[i]\ *\ 100;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ block\_percent[i]\ "{}\ <<\ block\_percent[i]\ <<\ endl;}}
+\DoxyCodeLine{00095\ \ \ \ \ s\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ logs[i].depth\ "{}\ <<\ logs[i].depth\ <<\ endl;}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j=1;j<(\mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].depth-\/1);\ j++)}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ s\ +=\ \textcolor{stringliteral}{"{}|-\/-\/-\/"{}};}
+\DoxyCodeLine{00099\ \ \ \ \ s\ +=\ \ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].name\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}[i].description\ +\ \textcolor{stringliteral}{"{}):\ "{}}\ +\ to\_string(dur[i])\ +\ \textcolor{stringliteral}{"{}s\ "{}}\ +\ \textcolor{stringliteral}{"{}["{}}\ +\ to\_string(block\_percent[i])\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\%]"{}}\ +\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00100\ \ \ \ \ *\mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream}}\ <<\ s\ <<\ endl;}
+\DoxyCodeLine{00101\ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ *\mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream}}\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}\ itemized\ log\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordflow}{for}\ (map<string,\ float>::iterator\ it\ =\ \mbox{\hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}}.begin();\ it!=\ \mbox{\hyperlink{classlogger_a8097637b66086185096030c96a1189ba}{item\_duration}}.end();\ it++)}
+\DoxyCodeLine{00105\ \ \ \ \ *\mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{report\_stream}}\ <<\ it-\/>first\ <<\ \textcolor{stringliteral}{"{}\ :\ "{}}\ <<\ it-\/>second\ <<\ endl;}
+\DoxyCodeLine{00106\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classlogger_afba86118a3bb044060be8309b3fa755a}\label{classlogger_afba86118a3bb044060be8309b3fa755a}} 
+\Hypertarget{classlogger_afba86118a3bb044060be8309b3fa755a}\label{classlogger_afba86118a3bb044060be8309b3fa755a} 
 \index{logger@{logger}!start@{start}}
 \index{start@{start}!logger@{logger}}
-\subsubsection{\texorpdfstring{start()}{start()}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
 {\footnotesize\ttfamily void logger\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-109                   \{
-110   \hyperlink{classlog__entry}{log\_entry} new\_log(\textcolor{stringliteral}{"Start"}, \textcolor{stringliteral}{""}, 0);
-111   \textcolor{comment}{//cerr << " started " << endl;}
-112   \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.push\_back(new\_log);
-113   \textcolor{comment}{//cerr << logger::logs.size() << endl;}
-114 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \mbox{\hyperlink{classlog__entry}{log\_entry}}\ new\_log(\textcolor{stringliteral}{"{}Start"{}},\ \textcolor{stringliteral}{"{}"{}},\ 0);}
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ started\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00112\ \ \ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.push\_back(new\_log);}
+\DoxyCodeLine{00113\ \ \ \textcolor{comment}{//cerr\ <<\ logger::logs.size()\ <<\ endl;}}
+\DoxyCodeLine{00114\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classlogger_abb856642f4e62c7a4a11cc4a2d963010}\label{classlogger_abb856642f4e62c7a4a11cc4a2d963010}} 
+\Hypertarget{classlogger_abb856642f4e62c7a4a11cc4a2d963010}\label{classlogger_abb856642f4e62c7a4a11cc4a2d963010} 
 \index{logger@{logger}!stop@{stop}}
 \index{stop@{stop}!logger@{logger}}
-\subsubsection{\texorpdfstring{stop()}{stop()}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
 {\footnotesize\ttfamily void logger\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
-\begin{DoxyCode}
-117                  \{
-118   \hyperlink{classlog__entry}{log\_entry} new\_log(\textcolor{stringliteral}{"Finish"}, \textcolor{stringliteral}{""}, 0);
-119   \textcolor{comment}{//cerr << " finished " << endl;}
-120   \hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}.push\_back(new\_log);
-121   \textcolor{comment}{//cerr << logs.size() << endl;}
-122   \textcolor{keywordflow}{if} (\hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{report})
-123     \hyperlink{classlogger_ab518e6d927694bb7329e933fa75c27bf}{log}();
-124 
-125 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \mbox{\hyperlink{classlog__entry}{log\_entry}}\ new\_log(\textcolor{stringliteral}{"{}Finish"{}},\ \textcolor{stringliteral}{"{}"{}},\ 0);}
+\DoxyCodeLine{00119\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ finished\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00120\ \ \ \mbox{\hyperlink{classlogger_a46e89697a97bc41a90ec78763bfe4d39}{logs}}.push\_back(new\_log);}
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{//cerr\ <<\ logs.size()\ <<\ endl;}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{report}})}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classlogger_ab518e6d927694bb7329e933fa75c27bf}{log}}();}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}\label{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}} 
-\index{logger@{logger}!current\+\_\+depth@{current\+\_\+depth}}
-\index{current\+\_\+depth@{current\+\_\+depth}!logger@{logger}}
-\subsubsection{\texorpdfstring{current\+\_\+depth}{current\_depth}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}\label{classlogger_a9d29b49bd318a719a8e85b59eac54fe0} 
+\index{logger@{logger}!current\_depth@{current\_depth}}
+\index{current\_depth@{current\_depth}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{current\_depth}{current\_depth}}
 {\footnotesize\ttfamily int logger\+::current\+\_\+depth = 1\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classlogger_a8097637b66086185096030c96a1189ba}\label{classlogger_a8097637b66086185096030c96a1189ba}} 
-\index{logger@{logger}!item\+\_\+duration@{item\+\_\+duration}}
-\index{item\+\_\+duration@{item\+\_\+duration}!logger@{logger}}
-\subsubsection{\texorpdfstring{item\+\_\+duration}{item\_duration}}
+\Hypertarget{classlogger_a8097637b66086185096030c96a1189ba}\label{classlogger_a8097637b66086185096030c96a1189ba} 
+\index{logger@{logger}!item\_duration@{item\_duration}}
+\index{item\_duration@{item\_duration}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{item\_duration}{item\_duration}}
 {\footnotesize\ttfamily map$<$ string, float $>$ logger\+::item\+\_\+duration\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classlogger_af21bf7ca37e55cf225b282ab2f312c95}\label{classlogger_af21bf7ca37e55cf225b282ab2f312c95}} 
-\index{logger@{logger}!item\+\_\+last\+\_\+start@{item\+\_\+last\+\_\+start}}
-\index{item\+\_\+last\+\_\+start@{item\+\_\+last\+\_\+start}!logger@{logger}}
-\subsubsection{\texorpdfstring{item\+\_\+last\+\_\+start}{item\_last\_start}}
+\Hypertarget{classlogger_af21bf7ca37e55cf225b282ab2f312c95}\label{classlogger_af21bf7ca37e55cf225b282ab2f312c95} 
+\index{logger@{logger}!item\_last\_start@{item\_last\_start}}
+\index{item\_last\_start@{item\_last\_start}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{item\_last\_start}{item\_last\_start}}
 {\footnotesize\ttfamily map$<$ string, high\+\_\+resolution\+\_\+clock\+::time\+\_\+point $>$ logger\+::item\+\_\+last\+\_\+start\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 the last time each item was started 
 
-\mbox{\Hypertarget{classlogger_a46e89697a97bc41a90ec78763bfe4d39}\label{classlogger_a46e89697a97bc41a90ec78763bfe4d39}} 
+\Hypertarget{classlogger_a46e89697a97bc41a90ec78763bfe4d39}\label{classlogger_a46e89697a97bc41a90ec78763bfe4d39} 
 \index{logger@{logger}!logs@{logs}}
 \index{logs@{logs}!logger@{logger}}
-\subsubsection{\texorpdfstring{logs}{logs}}
-{\footnotesize\ttfamily vector$<$ \hyperlink{classlog__entry}{log\+\_\+entry} $>$ logger\+::logs\hspace{0.3cm}{\ttfamily [static]}}
+\doxysubsubsection{\texorpdfstring{logs}{logs}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classlog__entry}{log\+\_\+entry}} $>$ logger\+::logs\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}\label{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}} 
+\Hypertarget{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}\label{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e} 
 \index{logger@{logger}!report@{report}}
 \index{report@{report}!logger@{logger}}
-\subsubsection{\texorpdfstring{report}{report}}
+\doxysubsubsection{\texorpdfstring{report}{report}}
 {\footnotesize\ttfamily bool logger\+::report = true\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 if true, at the end of the program, a hierarchical report is printed 
 
-\mbox{\Hypertarget{classlogger_a8e3da449edb99f9ecc59858c0e75beca}\label{classlogger_a8e3da449edb99f9ecc59858c0e75beca}} 
-\index{logger@{logger}!report\+\_\+stream@{report\+\_\+stream}}
-\index{report\+\_\+stream@{report\+\_\+stream}!logger@{logger}}
-\subsubsection{\texorpdfstring{report\+\_\+stream}{report\_stream}}
-{\footnotesize\ttfamily ostream $\ast$ logger\+::report\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
+\Hypertarget{classlogger_a8e3da449edb99f9ecc59858c0e75beca}\label{classlogger_a8e3da449edb99f9ecc59858c0e75beca} 
+\index{logger@{logger}!report\_stream@{report\_stream}}
+\index{report\_stream@{report\_stream}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{report\_stream}{report\_stream}}
+{\footnotesize\ttfamily ostream \texorpdfstring{$\ast$}{*} logger\+::report\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 the stream to report the final report. Default is cout 
 
-\mbox{\Hypertarget{classlogger_a26812b5ba03f130e8dae3446d5fc032f}\label{classlogger_a26812b5ba03f130e8dae3446d5fc032f}} 
+\Hypertarget{classlogger_a26812b5ba03f130e8dae3446d5fc032f}\label{classlogger_a26812b5ba03f130e8dae3446d5fc032f} 
 \index{logger@{logger}!stat@{stat}}
 \index{stat@{stat}!logger@{logger}}
-\subsubsection{\texorpdfstring{stat}{stat}}
+\doxysubsubsection{\texorpdfstring{stat}{stat}}
 {\footnotesize\ttfamily bool logger\+::stat = false\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 if true, statistics will be displayed, e.\+g. number of star vertices / edges or the number of partition graphs etc 
 
-\mbox{\Hypertarget{classlogger_a7db37821f875f2ba3540980b355779f5}\label{classlogger_a7db37821f875f2ba3540980b355779f5}} 
-\index{logger@{logger}!stat\+\_\+stream@{stat\+\_\+stream}}
-\index{stat\+\_\+stream@{stat\+\_\+stream}!logger@{logger}}
-\subsubsection{\texorpdfstring{stat\+\_\+stream}{stat\_stream}}
-{\footnotesize\ttfamily ostream $\ast$ logger\+::stat\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
+\Hypertarget{classlogger_a7db37821f875f2ba3540980b355779f5}\label{classlogger_a7db37821f875f2ba3540980b355779f5} 
+\index{logger@{logger}!stat\_stream@{stat\_stream}}
+\index{stat\_stream@{stat\_stream}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{stat\_stream}{stat\_stream}}
+{\footnotesize\ttfamily ostream \texorpdfstring{$\ast$}{*} logger\+::stat\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 the stream to report the statistics. Default is cout 
 
-\mbox{\Hypertarget{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}\label{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}} 
+\Hypertarget{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}\label{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9} 
 \index{logger@{logger}!verbose@{verbose}}
 \index{verbose@{verbose}!logger@{logger}}
-\subsubsection{\texorpdfstring{verbose}{verbose}}
+\doxysubsubsection{\texorpdfstring{verbose}{verbose}}
 {\footnotesize\ttfamily bool logger\+::verbose = true\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 if true, every entry is printed at the time of its report, default is false 
 
-\mbox{\Hypertarget{classlogger_ae8d04646d8d5244120781025a4d8540b}\label{classlogger_ae8d04646d8d5244120781025a4d8540b}} 
-\index{logger@{logger}!verbose\+\_\+stream@{verbose\+\_\+stream}}
-\index{verbose\+\_\+stream@{verbose\+\_\+stream}!logger@{logger}}
-\subsubsection{\texorpdfstring{verbose\+\_\+stream}{verbose\_stream}}
-{\footnotesize\ttfamily ostream $\ast$ logger\+::verbose\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
+\Hypertarget{classlogger_ae8d04646d8d5244120781025a4d8540b}\label{classlogger_ae8d04646d8d5244120781025a4d8540b} 
+\index{logger@{logger}!verbose\_stream@{verbose\_stream}}
+\index{verbose\_stream@{verbose\_stream}!logger@{logger}}
+\doxysubsubsection{\texorpdfstring{verbose\_stream}{verbose\_stream}}
+{\footnotesize\ttfamily ostream \texorpdfstring{$\ast$}{*} logger\+::verbose\+\_\+stream = \&cout\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -303,5 +302,5 @@ the stream for printing entries at the time of arrival, default is cout
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{logger_8h}{logger.\+h}\item 
-\hyperlink{logger_8cpp}{logger.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{logger_8h}{logger.\+h}}\item 
+\mbox{\hyperlink{logger_8cpp}{logger.\+cpp}}\end{DoxyCompactItemize}

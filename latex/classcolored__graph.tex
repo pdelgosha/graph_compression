@@ -1,5 +1,5 @@
-\hypertarget{classcolored__graph}{}\section{colored\+\_\+graph Class Reference}
-\label{classcolored__graph}\index{colored\+\_\+graph@{colored\+\_\+graph}}
+\doxysection{colored\+\_\+graph Class Reference}
+\hypertarget{classcolored__graph}{}\label{classcolored__graph}\index{colored\_graph@{colored\_graph}}
 
 
 this class defines a colored graph, which is obtained from a simple marked graph and the color of edges come from the type of edges  
@@ -9,47 +9,47 @@ this class defines a colored graph, which is obtained from a simple marked graph
 
 {\ttfamily \#include $<$graph\+\_\+message.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}{colored\+\_\+graph} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&\hyperlink{classgraph}{graph}, int depth, int max\+\_\+degree)
+\mbox{\hyperlink{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}{colored\+\_\+graph}} (const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&\mbox{\hyperlink{classgraph}{graph}}, int depth, int max\+\_\+degree)
 \begin{DoxyCompactList}\small\item\em constructor from a graph, depth and maximum degree parameters \end{DoxyCompactList}\item 
-\hyperlink{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}{colored\+\_\+graph} ()
+\mbox{\hyperlink{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}{colored\+\_\+graph}} ()
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
-void \hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&G)
+void \mbox{\hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init}} (const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&G)
 \begin{DoxyCompactList}\small\item\em initializes other variables. Here, G is the reference to the marked graph based on which this object is being created \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}
+int \mbox{\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}}
 \begin{DoxyCompactList}\small\item\em the depth up to which look at edge types \end{DoxyCompactList}\item 
-int \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}
+int \mbox{\hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}}
 \begin{DoxyCompactList}\small\item\em the maximum degree threshold \end{DoxyCompactList}\item 
-\hyperlink{classgraph__message}{graph\+\_\+message} \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}
-\begin{DoxyCompactList}\small\item\em we use the message passing algorithm of class \hyperlink{classgraph__message}{graph\+\_\+message} to find out edge types \end{DoxyCompactList}\item 
-int \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\+\_\+vertices}
+\mbox{\hyperlink{classgraph__message}{graph\+\_\+message}} \mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}
+\begin{DoxyCompactList}\small\item\em we use the message passing algorithm of class \doxylink{classgraph__message}{graph\+\_\+message} to find out edge types \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\+\_\+vertices}}
 \begin{DoxyCompactList}\small\item\em the number of vertices in the graph. \end{DoxyCompactList}\item 
-vector$<$ vector$<$ pair$<$ int, pair$<$ int, int $>$ $>$ $>$ $>$ \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\+\_\+list}
+vector$<$ vector$<$ pair$<$ int, pair$<$ int, int $>$ $>$ $>$ $>$ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\+\_\+list}}
 \begin{DoxyCompactList}\small\item\em adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, color component towards i, color component towards other endpoint). Therefore, the color of an edge between v and its ith neighbor is of the form (adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+first, adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+second) \end{DoxyCompactList}\item 
-vector$<$ vector$<$ int $>$ $>$ \hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\+\_\+in\+\_\+neighbor}
+vector$<$ vector$<$ int $>$ $>$ \mbox{\hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\+\_\+in\+\_\+neighbor}}
 \begin{DoxyCompactList}\small\item\em index\+\_\+in\+\_\+neighbor\mbox{[}v\mbox{]}\mbox{[}i\mbox{]} is the index of vertex v in the adjacency list of the ith neighbor of v \end{DoxyCompactList}\item 
-vector$<$ map$<$ pair$<$ int, int $>$, int $>$ $>$ \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}
+vector$<$ map$<$ pair$<$ int, int $>$, int $>$ $>$ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}
 \begin{DoxyCompactList}\small\item\em deg\mbox{[}v\mbox{]} for a vertex v is a map, where deg\mbox{[}v\mbox{]}\mbox{[}(m, m\textquotesingle{})\mbox{]} for a pair of non star types m, m\textquotesingle{} is the number of edges connected to v with type m towards v and type m\textquotesingle{} towards the other endpoint. Note that only non star types appear in this map. \end{DoxyCompactList}\item 
-vector$<$ vector$<$ int $>$ $>$ \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\+\_\+type}
-\begin{DoxyCompactList}\small\item\em for a vertex v, ver\+\_\+type\mbox{[}v\mbox{]} is a vector$<$int$>$ and encodes the mark of v and its colored degree in the following way\+: ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}0\mbox{]} is the ver\+\_\+mark of v, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+1\mbox{]}, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+2\mbox{]} and ver\+\_\+type\mbox{[}3k+3\mbox{]} are $m, m'$ and $n_{m, m'}$, where $m$ and $m'$ are edge types, and $n_{m, m'}$ denotes the number of edges connected to v with type $(m, m')$. The list of $m, m'$ is sorted (lexicographically) to ensure unique representation. Since we only represent types with nonzero $n_{m, m'}$, we are effectively giving the nonzero entries of the colored degree matrix, resulting in an improvement over storing the whole degree matrix. \end{DoxyCompactList}\item 
-map$<$ vector$<$ int $>$, int $>$ \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\+\_\+type\+\_\+dict}
+vector$<$ vector$<$ int $>$ $>$ \mbox{\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em for a vertex v, ver\+\_\+type\mbox{[}v\mbox{]} is a vector$<$int$>$ and encodes the mark of v and its colored degree in the following way\+: ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}0\mbox{]} is the ver\+\_\+mark of v, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+1\mbox{]}, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+2\mbox{]} and ver\+\_\+type\mbox{[}3k+3\mbox{]} are $m, m\textnormal{\textquotesingle}$ and $n_{m, m\textnormal{\textquotesingle}}$, where $m$ and $m\textnormal{\textquotesingle}$ are edge types, and $n_{m, m\textnormal{\textquotesingle}}$ denotes the number of edges connected to v with type $(m, m\textnormal{\textquotesingle})$. The list of $m, m\textnormal{\textquotesingle}$ is sorted (lexicographically) to ensure unique representation. Since we only represent types with nonzero $n_{m, m\textnormal{\textquotesingle}}$, we are effectively giving the nonzero entries of the colored degree matrix, resulting in an improvement over storing the whole degree matrix. \end{DoxyCompactList}\item 
+map$<$ vector$<$ int $>$, int $>$ \mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\+\_\+type\+\_\+dict}}
 \begin{DoxyCompactList}\small\item\em the dictionary mapping vertex types to integers, obtained from the ver\+\_\+type array defined above \end{DoxyCompactList}\item 
-vector$<$ vector$<$ int $>$ $>$ \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\+\_\+type\+\_\+list}
+vector$<$ vector$<$ int $>$ $>$ \mbox{\hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\+\_\+type\+\_\+list}}
 \begin{DoxyCompactList}\small\item\em the list of all distinct vertex types, obtained from the ver\+\_\+type array. \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\+\_\+type\+\_\+int}
+vector$<$ int $>$ \mbox{\hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\+\_\+type\+\_\+int}}
 \begin{DoxyCompactList}\small\item\em vertex type converted to integers, using the ver\+\_\+type\+\_\+dict map, i.\+e. ver\+\_\+type\+\_\+int\mbox{[}v\mbox{]} = ver\+\_\+type\+\_\+dict\mbox{[}ver\+\_\+type\mbox{[}v\mbox{]}\mbox{]} \end{DoxyCompactList}\item 
-vector$<$ bool $>$ \hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\+\_\+star\+\_\+vertex}
+vector$<$ bool $>$ \mbox{\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\+\_\+star\+\_\+vertex}}
 \begin{DoxyCompactList}\small\item\em for $0 \leq v < n$, is\+\_\+star\+\_\+vertex\mbox{[}v\mbox{]} is true if vertex v has at least one star typed edge connected to it \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\+\_\+vertices}
+vector$<$ int $>$ \mbox{\hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\+\_\+vertices}}
 \begin{DoxyCompactList}\small\item\em the (sorted) list of star\+\_\+vertices, where a star vertex is the one which has at least one star type vertex connected to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 this class defines a colored graph, which is obtained from a simple marked graph and the color of edges come from the type of edges 
 
 quick member overview\+:
@@ -57,51 +57,52 @@ quick member overview\+:
 
 \begin{DoxyItemize}
 \item h and Delta are parameters that determine depth and maximum degree to form edge types,
-\item M is a member with type \hyperlink{classgraph__message}{graph\+\_\+message} that is used to form edge types,
+\item M is a member with type \doxylink{classgraph__message}{graph\+\_\+message} that is used to form edge types,
 \item nu\+\_\+vertices\+: number of vertices in the graph
 \item adj\+\_\+list\+: the adjacency list of vertices, which also includes edge colors
 \item adj\+\_\+location\+: map for finding where neighbors of vertices are in the adjacency list
 \item ver\+\_\+type\+: a vector for each vertex, containing mark + vectorized degree matrix
 \item ver\+\_\+type\+\_\+dict\+: dictionary mapping vertex mark + degree matrix to integer
-\item ver\+\_\+type\+\_\+list\+: list of \char`\"{}distinct\char`\"{} vertex types
+\item ver\+\_\+type\+\_\+list\+: list of "{}distinct"{} vertex types
 \item ver\+\_\+type\+\_\+int\+: vertex types converted to integers
 \end{DoxyItemize}
 
-{\bfseries Sample Usage}
+{\bfseries{Sample Usage}}
 
 
-\begin{DoxyCode}
-\hyperlink{classmarked__graph}{marked\_graph} G;
-... \textcolor{comment}{//define G}
-\textcolor{keywordtype}{int} h = 10;
-\textcolor{keywordtype}{int} Delta = 5;
-\hyperlink{classcolored__graph}{colored\_graph} C(G, h, Delta);
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmarked__graph}{marked\_graph}}\ G;}
+\DoxyCodeLine{...\ \textcolor{comment}{//define\ G}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}}\ =\ 10;}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}}\ =\ 5;}
+\DoxyCodeLine{\mbox{\hyperlink{classcolored__graph}{colored\_graph}}\ C(G,\ \mbox{\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}},\ \mbox{\hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}});}
+
 \end{DoxyCode}
  
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}\label{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
-\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b}\label{classcolored__graph_a0374481a0474ac8e9b77689f74b5ed9b} 
+\index{colored\_graph@{colored\_graph}!colored\_graph@{colored\_graph}}
+\index{colored\_graph@{colored\_graph}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{colored\_graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 constructor from a graph, depth and maximum degree parameters 
 
 
-\begin{DoxyCode}
-148                                                                     : \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}(graph, depth, max\_degree), 
-      \hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}(depth), \hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}(max\_degree)
-149   \{
-150     \hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init}(graph); \textcolor{comment}{// initialize other variables }
-151   \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}(\mbox{\hyperlink{classgraph}{graph}},\ depth,\ max\_degree),\ \mbox{\hyperlink{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}{h}}(depth),\ \mbox{\hyperlink{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}{Delta}}(max\_degree)}
+\DoxyCodeLine{00149\ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}{init}}(\mbox{\hyperlink{classgraph}{graph}});\ \textcolor{comment}{//\ initialize\ other\ variables\ }}
+\DoxyCodeLine{00151\ \ \ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}\label{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
-\index{colored\+\_\+graph@{colored\+\_\+graph}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{colored\+\_\+graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\Hypertarget{classcolored__graph_a104bcd930e68c04e4786678923bfdca1}\label{classcolored__graph_a104bcd930e68c04e4786678923bfdca1} 
+\index{colored\_graph@{colored\_graph}!colored\_graph@{colored\_graph}}
+\index{colored\_graph@{colored\_graph}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{colored\_graph()}{colored\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily colored\+\_\+graph\+::colored\+\_\+graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -109,17 +110,18 @@ constructor from a graph, depth and maximum degree parameters
 default constructor 
 
 
-\begin{DoxyCode}
-154 \{\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00154\ \{\}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}\label{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!init@{init}}
-\index{init@{init}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily void colored\+\_\+graph\+::init (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G }\end{DoxyParamCaption})}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709}\label{classcolored__graph_a0e867afa9f5491dfc05bed10680f0709} 
+\index{colored\_graph@{colored\_graph}!init@{init}}
+\index{init@{init}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void colored\+\_\+graph\+::init (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&}]{G }\end{DoxyParamCaption})}
 
 
 
@@ -132,264 +134,257 @@ initializes other variables. Here, G is the reference to the marked graph based 
 \item updates ver\+\_\+type, ver\+\_\+type\+\_\+dict, ver\+\_\+type\+\_\+list, ver\+\_\+type\+\_\+int
 \item to make sure, checks whether the sum of degree matrices is symmetric 
 \end{DoxyItemize}
-\begin{DoxyCode}
-531 \{
-532   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"colored\_graph::init init"}, \textcolor{stringliteral}{""});
-533   \hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices} = G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
-534   \textcolor{comment}{//adj\_location = G.adj\_location; // neighborhood structure is the same as the given graph}
-535   \hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\_in\_neighbor} = G.\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor};
-536 
-537   \textcolor{comment}{// assigning edge colors based on the messages given by M}
-538   \textcolor{comment}{//M.update\_messages();}
-539   \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}.resize(\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices});
-540 
-541   \textcolor{comment}{// updating adj\_list}
-542   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"updating adj\_list"}, \textcolor{stringliteral}{""});
-543   \textcolor{keywordtype}{int} w, my\_location, color\_v, color\_w;
-544   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
-545     \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].resize(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()); \textcolor{comment}{// the same number of neighbors here}
-546     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-547       w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// the ith neighbor, the same as in G}
-548       \textcolor{comment}{//my\_location = G.adj\_location[w].at(v); // where v stands among the neighbors of w}
-549       my\_location = \hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\_in\_neighbor}[v][i]; 
-550       color\_v = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i]; \textcolor{comment}{// the color towards v corresponds to the message v sends to w}
-551       color\_w = \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[w][my\_location]; \textcolor{comment}{// the color towards w is the message w sends towards
-       v}
-552       \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i] = pair<int, pair<int, int> >(w, pair<int, int>(color\_v, color\_w)); \textcolor{comment}{// add w as
-       a neighbor, in the same order as in G, and add the colors towards v and w }
-553     \}
-554   \}
-555 
-556   \textcolor{comment}{// updating the vertex type sequence, dictionary and list, i.e. variables ver\_type, ver\_type\_dict and
-       ver\_type\_list}
-557   \textcolor{comment}{// we also update ver\_type\_int}
-558 
-559   \textcolor{comment}{// implement and update deg and type\_vertex\_list}
-560   
-561   \textcolor{keywordtype}{int} m, mp; \textcolor{comment}{// pair of types}
-562 
-563   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Find deg and ver\_types"}, \textcolor{stringliteral}{""});
-564   \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}.resize(nu\_vertices);
-565   \hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}.resize(nu\_vertices);
-566   \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}.resize(nu\_vertices);
-567   \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}.resize(nu\_vertices);
-568 
-569   vector<int> vt; \textcolor{comment}{// type of v}
-570 
-571   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)\{
-572     \hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}[v] = \textcolor{keyword}{false}; \textcolor{comment}{// it is false unless we figure out otherwise, see below}
-573     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v].size(); i++)\{
-574       m = \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.first;
-575       mp = \hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}[v][i].second.second;
-576       \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[m] == \textcolor{keyword}{false} and \hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}.\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[mp] == \textcolor{keyword}{false})
-      \{
-577         \textcolor{comment}{// this edge is not star type}
-578         \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].find(pair<int, int>(m, mp)) == \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].end())\{
-579           \textcolor{comment}{// this does not exist, so create it, since this is the first edge, its value must be 1}
-580           \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v][pair<int, int>(m, mp)] = 1;
-581           \textcolor{comment}{//type\_vertex\_list[pair<int, int>(m, mp)].push\_back(v); // this must be done when we see the type
-       (m, mp) for the first time here, so as to avoid multiple placing of v in the list }
-582         \}\textcolor{keywordflow}{else}\{
-583           \textcolor{comment}{// the edge exists, we only need to increase it by one}
-584           \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v][pair<int, int>(m, mp)] ++;
-585         \}
-586       \}\textcolor{keywordflow}{else}\{
-587         \textcolor{comment}{// this is a star type vertex}
-588         \hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}[v] = \textcolor{keyword}{true};
-589       \}
-590     \}
-591 
-592     \textcolor{comment}{// check if it was star vertex}
-593     \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}[v] == \textcolor{keyword}{true})
-594       \hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\_vertices}.push\_back(v);
-595 
-596 
-597     \textcolor{comment}{// now, we form the type of this vertex}
-598     \textcolor{comment}{// the type of a vertex is a vector x as follows:}
-599     \textcolor{comment}{// x[0] is the vertex mark of v}
-600     \textcolor{comment}{// x[3k+1], x[3k+2], x[3k+3] = (m\_k, mp\_k, deg[v][(m\_k, mp\_k)]) where (m\_k, mp\_k) is the kt key present
-       in the map deg[v]. Since deg[v] is a map, we read its elements in increasing order (lexicographic order for
-       pairs (m, mp)), hence this list is on a 1-1 correspondence with the pair (\(\backslash\)theta(v), D(v)) in the paper.}
-601     
-602     vt.resize(1+3 * \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].size()); \textcolor{comment}{// motivated by the above explanation}
-603     vt[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]; \textcolor{comment}{// mark of v}
-604     \textcolor{keywordtype}{int} k = 0; \textcolor{comment}{// current index of vt}
-605     \textcolor{keywordflow}{for} (map<pair<int, int>, \textcolor{keywordtype}{int}>::iterator it = \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].begin(); it != \hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}[v].end(); it++)\{
-606       vt[++k] = it->first.first; \textcolor{comment}{// m}
-607       vt[++k] = it->first.second; \textcolor{comment}{// mp}
-608       vt[++k] = it->second;
-609       
-610     \}
-611 
-612     \textcolor{comment}{// cerr << " vt ";}
-613     \textcolor{comment}{// for (int AA=0; AA<vt.size(); AA++)}
-614     \textcolor{comment}{//   cerr << vt[AA] << " ";}
-615     \textcolor{comment}{// cerr << endl;}
-616     \hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v] = vt;
-617     \textcolor{comment}{// find ver\_type\_int[v]}
-618     \textcolor{keywordflow}{if} (\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.find(vt) == \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.end())\{
-619       \textcolor{comment}{// this is a new type, so add it to the dictionary and the list }
-620       \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[vt] = \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}.size();
-621       \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}.push\_back(vt);
-622     \}
-623     \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}[v] = \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[vt];
-624   \}
-625 
-626   \textcolor{comment}{// editing vertex types so that the vertex type list is sorted lexicographically}
-627 
-628   \textcolor{comment}{// cerr << " ver\_type\_list before sorting " << endl;}
-629   \textcolor{comment}{// for (int K=0; K<ver\_type\_list.size(); K++)\{}
-630   \textcolor{comment}{//   //for (int J=0; J<ver\_type\_list[K].size(); J++)}
-631   \textcolor{comment}{//   //  cerr << ver\_type\_list[K][J] << " ";}
-632   \textcolor{comment}{//   cerr << ver\_type\_list[K][0]<< ": ";}
-633   \textcolor{comment}{//   for (int j=0; j< (ver\_type\_list[K].size()-1)/3; j++)}
-634   \textcolor{comment}{//     cerr << "| " << ver\_type\_list[K][1+3*j] << " " << ver\_type\_list[K][2+3*j] << " " <<
-       ver\_type\_list[K][3+3*j] << " ";}
-635   \textcolor{comment}{//   cerr << endl;}
-636   \textcolor{comment}{// \}}
-637   \textcolor{comment}{// cerr << endl << endl;}
-638 
-639   map<vector<int>, \textcolor{keywordtype}{int} >::iterator it;
-640   \textcolor{keywordtype}{int} counter = 0;
-641   \textcolor{keywordflow}{for} (it=\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.begin(); it!=\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}.end(); it++)\{
-642     \textcolor{comment}{// sweeping over elements in the dictionary increasingly }
-643     it->second = counter; 
-644     \hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}[counter] = it->first; \textcolor{comment}{// edit the ver\_type\_list as well}
-645     counter ++;
-646   \}
-647 
-648   \textcolor{comment}{// edit vertex types given the updated ver\_type\_dict}
-649   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0; v<\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices};v++)
-650     \hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}[v] = \hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}[\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}[v]]; 
-651 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00531\ \{}
+\DoxyCodeLine{00532\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}colored\_graph::init\ init"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00533\ \ \ \mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}}\ =\ G.\mbox{\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}};}
+\DoxyCodeLine{00534\ \ \ \textcolor{comment}{//adj\_location\ =\ G.adj\_location;\ //\ neighborhood\ structure\ is\ the\ same\ as\ the\ given\ graph}}
+\DoxyCodeLine{00535\ \ \ \mbox{\hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\_in\_neighbor}}\ =\ G.\mbox{\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}};}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \ \ \textcolor{comment}{//\ assigning\ edge\ colors\ based\ on\ the\ messages\ given\ by\ M}}
+\DoxyCodeLine{00538\ \ \ \textcolor{comment}{//M.update\_messages();}}
+\DoxyCodeLine{00539\ \ \ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}.resize(\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}});}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00541\ \ \ \textcolor{comment}{//\ updating\ adj\_list}}
+\DoxyCodeLine{00542\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}updating\ adj\_list"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordtype}{int}\ w,\ my\_location,\ color\_v,\ color\_w;}
+\DoxyCodeLine{00544\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}};v++)\{}
+\DoxyCodeLine{00545\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}[v].resize(G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size());\ \textcolor{comment}{//\ the\ same\ number\ of\ neighbors\ here}}
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size();i++)\{}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ w\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].first;\ \textcolor{comment}{//\ the\ ith\ neighbor,\ the\ same\ as\ in\ G}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \textcolor{comment}{//my\_location\ =\ G.adj\_location[w].at(v);\ //\ where\ v\ stands\ among\ the\ neighbors\ of\ w}}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ my\_location\ =\ \mbox{\hyperlink{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}{index\_in\_neighbor}}[v][i];\ }
+\DoxyCodeLine{00550\ \ \ \ \ \ \ color\_v\ =\ \mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}.\mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[v][i];\ \textcolor{comment}{//\ the\ color\ towards\ v\ corresponds\ to\ the\ message\ v\ sends\ to\ w}}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ color\_w\ =\ \mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}.\mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[w][my\_location];\ \textcolor{comment}{//\ the\ color\ towards\ w\ is\ the\ message\ w\ sends\ towards\ v}}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}[v][i]\ =\ pair<int,\ pair<int,\ int>\ >(w,\ pair<int,\ int>(color\_v,\ color\_w));\ \textcolor{comment}{//\ add\ w\ as\ a\ neighbor,\ in\ the\ same\ order\ as\ in\ G,\ and\ add\ the\ colors\ towards\ v\ and\ w\ }}
+\DoxyCodeLine{00553\ \ \ \ \ \}}
+\DoxyCodeLine{00554\ \ \ \}}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \textcolor{comment}{//\ updating\ the\ vertex\ type\ sequence,\ dictionary\ and\ list,\ i.e.\ variables\ ver\_type,\ ver\_type\_dict\ and\ ver\_type\_list}}
+\DoxyCodeLine{00557\ \ \ \textcolor{comment}{//\ we\ also\ update\ ver\_type\_int}}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00559\ \ \ \textcolor{comment}{//\ implement\ and\ update\ deg\ and\ type\_vertex\_list}}
+\DoxyCodeLine{00560\ \ \ }
+\DoxyCodeLine{00561\ \ \ \textcolor{keywordtype}{int}\ m,\ mp;\ \textcolor{comment}{//\ pair\ of\ types}}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Find\ deg\ and\ ver\_types"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00564\ \ \ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}.resize(\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}});}
+\DoxyCodeLine{00565\ \ \ \mbox{\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}}.resize(\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}});}
+\DoxyCodeLine{00566\ \ \ \mbox{\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}}.resize(\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}});}
+\DoxyCodeLine{00567\ \ \ \mbox{\hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}}.resize(\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}});}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00569\ \ \ vector<int>\ vt;\ \textcolor{comment}{//\ type\ of\ v}}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}};v++)\{}
+\DoxyCodeLine{00572\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}}[v]\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ it\ is\ false\ unless\ we\ figure\ out\ otherwise,\ see\ below}}
+\DoxyCodeLine{00573\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<\mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}[v].size();\ i++)\{}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ m\ =\ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ mp\ =\ \mbox{\hyperlink{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}{adj\_list}}[v][i].second.second;}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}.\mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}[m]\ ==\ \textcolor{keyword}{false}\ and\ \mbox{\hyperlink{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}{M}}.\mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}[mp]\ ==\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this\ edge\ is\ not\ star\ type}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v].find(pair<int,\ int>(m,\ mp))\ ==\ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v].end())\{}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this\ does\ not\ exist,\ so\ create\ it,\ since\ this\ is\ the\ first\ edge,\ its\ value\ must\ be\ 1}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v][pair<int,\ int>(m,\ mp)]\ =\ 1;}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//type\_vertex\_list[pair<int,\ int>(m,\ mp)].push\_back(v);\ //\ this\ must\ be\ done\ when\ we\ see\ the\ type\ (m,\ mp)\ for\ the\ first\ time\ here,\ so\ as\ to\ avoid\ multiple\ placing\ of\ v\ in\ the\ list\ }}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ edge\ exists,\ we\ only\ need\ to\ increase\ it\ by\ one}}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v][pair<int,\ int>(m,\ mp)]\ ++;}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ this\ is\ a\ star\ type\ vertex}}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}}[v]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \}}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00592\ \ \ \ \ \textcolor{comment}{//\ check\ if\ it\ was\ star\ vertex}}
+\DoxyCodeLine{00593\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcolored__graph_ad41163e970530c7e45878d299f0dc961}{is\_star\_vertex}}[v]\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}{star\_vertices}}.push\_back(v);}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00597\ \ \ \ \ \textcolor{comment}{//\ now,\ we\ form\ the\ type\ of\ this\ vertex}}
+\DoxyCodeLine{00598\ \ \ \ \ \textcolor{comment}{//\ the\ type\ of\ a\ vertex\ is\ a\ vector\ x\ as\ follows:}}
+\DoxyCodeLine{00599\ \ \ \ \ \textcolor{comment}{//\ x[0]\ is\ the\ vertex\ mark\ of\ v}}
+\DoxyCodeLine{00600\ \ \ \ \ \textcolor{comment}{//\ x[3k+1],\ x[3k+2],\ x[3k+3]\ =\ (m\_k,\ mp\_k,\ deg[v][(m\_k,\ mp\_k)])\ where\ (m\_k,\ mp\_k)\ is\ the\ kt\ key\ present\ in\ the\ map\ deg[v].\ Since\ deg[v]\ is\ a\ map,\ we\ read\ its\ elements\ in\ increasing\ order\ (lexicographic\ order\ for\ pairs\ (m,\ mp)),\ hence\ this\ list\ is\ on\ a\ 1-\/1\ correspondence\ with\ the\ pair\ (\(\backslash\)theta(v),\ D(v))\ in\ the\ paper.}}
+\DoxyCodeLine{00601\ \ \ \ \ }
+\DoxyCodeLine{00602\ \ \ \ \ vt.resize(1+3\ *\ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v].size());\ \textcolor{comment}{//\ motivated\ by\ the\ above\ explanation}}
+\DoxyCodeLine{00603\ \ \ \ \ vt[0]\ =\ G.\mbox{\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}}[v];\ \textcolor{comment}{//\ mark\ of\ v}}
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 0;\ \textcolor{comment}{//\ current\ index\ of\ vt}}
+\DoxyCodeLine{00605\ \ \ \ \ \textcolor{keywordflow}{for}\ (map<pair<int,\ int>,\ \textcolor{keywordtype}{int}>::iterator\ it\ =\ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v].begin();\ it\ !=\ \mbox{\hyperlink{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}{deg}}[v].end();\ it++)\{}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ vt[++k]\ =\ it-\/>first.first;\ \textcolor{comment}{//\ m}}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ vt[++k]\ =\ it-\/>first.second;\ \textcolor{comment}{//\ mp}}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ vt[++k]\ =\ it-\/>second;}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ }
+\DoxyCodeLine{00610\ \ \ \ \ \}}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \ \ \ \ \textcolor{comment}{//\ cerr\ <<\ "{}\ vt\ "{};}}
+\DoxyCodeLine{00613\ \ \ \ \ \textcolor{comment}{//\ for\ (int\ AA=0;\ AA<vt.size();\ AA++)}}
+\DoxyCodeLine{00614\ \ \ \ \ \textcolor{comment}{//\ \ \ cerr\ <<\ vt[AA]\ <<\ "{}\ "{};}}
+\DoxyCodeLine{00615\ \ \ \ \ \textcolor{comment}{//\ cerr\ <<\ endl;}}
+\DoxyCodeLine{00616\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}}[v]\ =\ vt;}
+\DoxyCodeLine{00617\ \ \ \ \ \textcolor{comment}{//\ find\ ver\_type\_int[v]}}
+\DoxyCodeLine{00618\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}.find(vt)\ ==\ \mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}.end())\{}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \textcolor{comment}{//\ this\ is\ a\ new\ type,\ so\ add\ it\ to\ the\ dictionary\ and\ the\ list\ }}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}[vt]\ =\ \mbox{\hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}}.size();}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}}.push\_back(vt);}
+\DoxyCodeLine{00622\ \ \ \ \ \}}
+\DoxyCodeLine{00623\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}}[v]\ =\ \mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}[vt];}
+\DoxyCodeLine{00624\ \ \ \}}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \ \ \textcolor{comment}{//\ editing\ vertex\ types\ so\ that\ the\ vertex\ type\ list\ is\ sorted\ lexicographically}}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ \ \ \textcolor{comment}{//\ cerr\ <<\ "{}\ ver\_type\_list\ before\ sorting\ "{}\ <<\ endl;}}
+\DoxyCodeLine{00629\ \ \ \textcolor{comment}{//\ for\ (int\ K=0;\ K<ver\_type\_list.size();\ K++)\{}}
+\DoxyCodeLine{00630\ \ \ \textcolor{comment}{//\ \ \ //for\ (int\ J=0;\ J<ver\_type\_list[K].size();\ J++)}}
+\DoxyCodeLine{00631\ \ \ \textcolor{comment}{//\ \ \ //\ \ cerr\ <<\ ver\_type\_list[K][J]\ <<\ "{}\ "{};}}
+\DoxyCodeLine{00632\ \ \ \textcolor{comment}{//\ \ \ cerr\ <<\ ver\_type\_list[K][0]<<\ "{}:\ "{};}}
+\DoxyCodeLine{00633\ \ \ \textcolor{comment}{//\ \ \ for\ (int\ j=0;\ j<\ (ver\_type\_list[K].size()-\/1)/3;\ j++)}}
+\DoxyCodeLine{00634\ \ \ \textcolor{comment}{//\ \ \ \ \ cerr\ <<\ "{}|\ "{}\ <<\ ver\_type\_list[K][1+3*j]\ <<\ "{}\ "{}\ <<\ ver\_type\_list[K][2+3*j]\ <<\ "{}\ "{}\ <<\ ver\_type\_list[K][3+3*j]\ <<\ "{}\ "{};}}
+\DoxyCodeLine{00635\ \ \ \textcolor{comment}{//\ \ \ cerr\ <<\ endl;}}
+\DoxyCodeLine{00636\ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00637\ \ \ \textcolor{comment}{//\ cerr\ <<\ endl\ <<\ endl;}}
+\DoxyCodeLine{00638\ }
+\DoxyCodeLine{00639\ \ \ map<vector<int>,\ \textcolor{keywordtype}{int}\ >::iterator\ it;}
+\DoxyCodeLine{00640\ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{00641\ \ \ \textcolor{keywordflow}{for}\ (it=\mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}.begin();\ it!=\mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}.end();\ it++)\{}
+\DoxyCodeLine{00642\ \ \ \ \ \textcolor{comment}{//\ sweeping\ over\ elements\ in\ the\ dictionary\ increasingly\ }}
+\DoxyCodeLine{00643\ \ \ \ \ it-\/>second\ =\ counter;\ }
+\DoxyCodeLine{00644\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}{ver\_type\_list}}[counter]\ =\ it-\/>first;\ \textcolor{comment}{//\ edit\ the\ ver\_type\_list\ as\ well}}
+\DoxyCodeLine{00645\ \ \ \ \ counter\ ++;}
+\DoxyCodeLine{00646\ \ \ \}}
+\DoxyCodeLine{00647\ }
+\DoxyCodeLine{00648\ \ \ \textcolor{comment}{//\ edit\ vertex\ types\ given\ the\ updated\ ver\_type\_dict}}
+\DoxyCodeLine{00649\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;\ v<\mbox{\hyperlink{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}{nu\_vertices}};v++)}
+\DoxyCodeLine{00650\ \ \ \ \ \mbox{\hyperlink{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}{ver\_type\_int}}[v]\ =\ \mbox{\hyperlink{classcolored__graph_aeb780762429ddac375799f4a45405712}{ver\_type\_dict}}[\mbox{\hyperlink{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}{ver\_type}}[v]];\ }
+\DoxyCodeLine{00651\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}\label{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!adj\+\_\+list@{adj\+\_\+list}}
-\index{adj\+\_\+list@{adj\+\_\+list}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{adj\+\_\+list}{adj\_list}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4}\label{classcolored__graph_a45dce16965079286cf3f41a54a1b2ea4} 
+\index{colored\_graph@{colored\_graph}!adj\_list@{adj\_list}}
+\index{adj\_list@{adj\_list}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{adj\_list}{adj\_list}}
 {\footnotesize\ttfamily vector$<$vector$<$pair$<$int, pair$<$int, int$>$ $>$ $>$ $>$ colored\+\_\+graph\+::adj\+\_\+list}
 
 
 
 adj\+\_\+list\mbox{[}i\mbox{]} is the list of edges connected to vertex i, each of the format (other endpoint, color component towards i, color component towards other endpoint). Therefore, the color of an edge between v and its ith neighbor is of the form (adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+first, adj\+\_\+list\mbox{[}v\mbox{]}\mbox{[}i\mbox{]}.second.\+second) 
 
-\mbox{\Hypertarget{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}\label{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!deg@{deg}}
-\index{deg@{deg}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{deg}{deg}}
+\Hypertarget{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a}\label{classcolored__graph_ae3269d35c1b022bc70d195bebd4e1b8a} 
+\index{colored\_graph@{colored\_graph}!deg@{deg}}
+\index{deg@{deg}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{deg}{deg}}
 {\footnotesize\ttfamily vector$<$map$<$pair$<$int, int$>$ , int$>$ $>$ colored\+\_\+graph\+::deg}
 
 
 
 deg\mbox{[}v\mbox{]} for a vertex v is a map, where deg\mbox{[}v\mbox{]}\mbox{[}(m, m\textquotesingle{})\mbox{]} for a pair of non star types m, m\textquotesingle{} is the number of edges connected to v with type m towards v and type m\textquotesingle{} towards the other endpoint. Note that only non star types appear in this map. 
 
-\mbox{\Hypertarget{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}\label{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!Delta@{Delta}}
-\index{Delta@{Delta}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{Delta}{Delta}}
+\Hypertarget{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12}\label{classcolored__graph_a5b0e93eb40a20dc815c809dee11edc12} 
+\index{colored\_graph@{colored\_graph}!Delta@{Delta}}
+\index{Delta@{Delta}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{Delta}{Delta}}
 {\footnotesize\ttfamily int colored\+\_\+graph\+::\+Delta}
 
 
 
 the maximum degree threshold 
 
-\mbox{\Hypertarget{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}\label{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!h@{h}}
-\index{h@{h}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{h}{h}}
+\Hypertarget{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa}\label{classcolored__graph_ae27062a4ee59df2670d3a0c81e85a3fa} 
+\index{colored\_graph@{colored\_graph}!h@{h}}
+\index{h@{h}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{h}{h}}
 {\footnotesize\ttfamily int colored\+\_\+graph\+::h}
 
 
 
 the depth up to which look at edge types 
 
-\mbox{\Hypertarget{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}\label{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!index\+\_\+in\+\_\+neighbor@{index\+\_\+in\+\_\+neighbor}}
-\index{index\+\_\+in\+\_\+neighbor@{index\+\_\+in\+\_\+neighbor}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{index\+\_\+in\+\_\+neighbor}{index\_in\_neighbor}}
+\Hypertarget{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f}\label{classcolored__graph_ae28fcd089f9785204d76b6a608bed54f} 
+\index{colored\_graph@{colored\_graph}!index\_in\_neighbor@{index\_in\_neighbor}}
+\index{index\_in\_neighbor@{index\_in\_neighbor}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{index\_in\_neighbor}{index\_in\_neighbor}}
 {\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ colored\+\_\+graph\+::index\+\_\+in\+\_\+neighbor}
 
 
 
 index\+\_\+in\+\_\+neighbor\mbox{[}v\mbox{]}\mbox{[}i\mbox{]} is the index of vertex v in the adjacency list of the ith neighbor of v 
 
-\mbox{\Hypertarget{classcolored__graph_ad41163e970530c7e45878d299f0dc961}\label{classcolored__graph_ad41163e970530c7e45878d299f0dc961}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!is\+\_\+star\+\_\+vertex@{is\+\_\+star\+\_\+vertex}}
-\index{is\+\_\+star\+\_\+vertex@{is\+\_\+star\+\_\+vertex}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{is\+\_\+star\+\_\+vertex}{is\_star\_vertex}}
+\Hypertarget{classcolored__graph_ad41163e970530c7e45878d299f0dc961}\label{classcolored__graph_ad41163e970530c7e45878d299f0dc961} 
+\index{colored\_graph@{colored\_graph}!is\_star\_vertex@{is\_star\_vertex}}
+\index{is\_star\_vertex@{is\_star\_vertex}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{is\_star\_vertex}{is\_star\_vertex}}
 {\footnotesize\ttfamily vector$<$bool$>$ colored\+\_\+graph\+::is\+\_\+star\+\_\+vertex}
 
 
 
 for $0 \leq v < n$, is\+\_\+star\+\_\+vertex\mbox{[}v\mbox{]} is true if vertex v has at least one star typed edge connected to it 
 
-\mbox{\Hypertarget{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}\label{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!M@{M}}
-\index{M@{M}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{M}{M}}
-{\footnotesize\ttfamily \hyperlink{classgraph__message}{graph\+\_\+message} colored\+\_\+graph\+::M}
+\Hypertarget{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47}\label{classcolored__graph_ab72c568fe12f7c849ca6bffb145aec47} 
+\index{colored\_graph@{colored\_graph}!M@{M}}
+\index{M@{M}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgraph__message}{graph\+\_\+message}} colored\+\_\+graph\+::M}
 
 
 
-we use the message passing algorithm of class \hyperlink{classgraph__message}{graph\+\_\+message} to find out edge types 
+we use the message passing algorithm of class \doxylink{classgraph__message}{graph\+\_\+message} to find out edge types 
 
-\mbox{\Hypertarget{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}\label{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!nu\+\_\+vertices@{nu\+\_\+vertices}}
-\index{nu\+\_\+vertices@{nu\+\_\+vertices}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{nu\+\_\+vertices}{nu\_vertices}}
+\Hypertarget{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b}\label{classcolored__graph_a90ece8eb1fec52f3f41549ab527c1d5b} 
+\index{colored\_graph@{colored\_graph}!nu\_vertices@{nu\_vertices}}
+\index{nu\_vertices@{nu\_vertices}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{nu\_vertices}{nu\_vertices}}
 {\footnotesize\ttfamily int colored\+\_\+graph\+::nu\+\_\+vertices}
 
 
 
 the number of vertices in the graph. 
 
-\mbox{\Hypertarget{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}\label{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!star\+\_\+vertices@{star\+\_\+vertices}}
-\index{star\+\_\+vertices@{star\+\_\+vertices}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{star\+\_\+vertices}{star\_vertices}}
+\Hypertarget{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574}\label{classcolored__graph_ab7ee8d717abde7ad7467ef695038f574} 
+\index{colored\_graph@{colored\_graph}!star\_vertices@{star\_vertices}}
+\index{star\_vertices@{star\_vertices}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{star\_vertices}{star\_vertices}}
 {\footnotesize\ttfamily vector$<$int$>$ colored\+\_\+graph\+::star\+\_\+vertices}
 
 
 
 the (sorted) list of star\+\_\+vertices, where a star vertex is the one which has at least one star type vertex connected to it. 
 
-\mbox{\Hypertarget{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}\label{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type@{ver\+\_\+type}}
-\index{ver\+\_\+type@{ver\+\_\+type}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{ver\+\_\+type}{ver\_type}}
+\Hypertarget{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4}\label{classcolored__graph_a2cc32e7146fa3319f83cfa940f5e1be4} 
+\index{colored\_graph@{colored\_graph}!ver\_type@{ver\_type}}
+\index{ver\_type@{ver\_type}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{ver\_type}{ver\_type}}
 {\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ colored\+\_\+graph\+::ver\+\_\+type}
 
 
 
-for a vertex v, ver\+\_\+type\mbox{[}v\mbox{]} is a vector$<$int$>$ and encodes the mark of v and its colored degree in the following way\+: ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}0\mbox{]} is the ver\+\_\+mark of v, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+1\mbox{]}, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+2\mbox{]} and ver\+\_\+type\mbox{[}3k+3\mbox{]} are $m, m'$ and $n_{m, m'}$, where $m$ and $m'$ are edge types, and $n_{m, m'}$ denotes the number of edges connected to v with type $(m, m')$. The list of $m, m'$ is sorted (lexicographically) to ensure unique representation. Since we only represent types with nonzero $n_{m, m'}$, we are effectively giving the nonzero entries of the colored degree matrix, resulting in an improvement over storing the whole degree matrix. 
+for a vertex v, ver\+\_\+type\mbox{[}v\mbox{]} is a vector$<$int$>$ and encodes the mark of v and its colored degree in the following way\+: ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}0\mbox{]} is the ver\+\_\+mark of v, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+1\mbox{]}, ver\+\_\+type\mbox{[}v\mbox{]}\mbox{[}3k+2\mbox{]} and ver\+\_\+type\mbox{[}3k+3\mbox{]} are $m, m\textnormal{\textquotesingle}$ and $n_{m, m\textnormal{\textquotesingle}}$, where $m$ and $m\textnormal{\textquotesingle}$ are edge types, and $n_{m, m\textnormal{\textquotesingle}}$ denotes the number of edges connected to v with type $(m, m\textnormal{\textquotesingle})$. The list of $m, m\textnormal{\textquotesingle}$ is sorted (lexicographically) to ensure unique representation. Since we only represent types with nonzero $n_{m, m\textnormal{\textquotesingle}}$, we are effectively giving the nonzero entries of the colored degree matrix, resulting in an improvement over storing the whole degree matrix. 
 
-\mbox{\Hypertarget{classcolored__graph_aeb780762429ddac375799f4a45405712}\label{classcolored__graph_aeb780762429ddac375799f4a45405712}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+dict@{ver\+\_\+type\+\_\+dict}}
-\index{ver\+\_\+type\+\_\+dict@{ver\+\_\+type\+\_\+dict}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+dict}{ver\_type\_dict}}
+\Hypertarget{classcolored__graph_aeb780762429ddac375799f4a45405712}\label{classcolored__graph_aeb780762429ddac375799f4a45405712} 
+\index{colored\_graph@{colored\_graph}!ver\_type\_dict@{ver\_type\_dict}}
+\index{ver\_type\_dict@{ver\_type\_dict}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{ver\_type\_dict}{ver\_type\_dict}}
 {\footnotesize\ttfamily map$<$vector$<$int$>$, int $>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+dict}
 
 
 
 the dictionary mapping vertex types to integers, obtained from the ver\+\_\+type array defined above 
 
-\mbox{\Hypertarget{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}\label{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+int@{ver\+\_\+type\+\_\+int}}
-\index{ver\+\_\+type\+\_\+int@{ver\+\_\+type\+\_\+int}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+int}{ver\_type\_int}}
+\Hypertarget{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a}\label{classcolored__graph_a491ed2ea1a65118af02ec606c8d44c0a} 
+\index{colored\_graph@{colored\_graph}!ver\_type\_int@{ver\_type\_int}}
+\index{ver\_type\_int@{ver\_type\_int}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{ver\_type\_int}{ver\_type\_int}}
 {\footnotesize\ttfamily vector$<$int$>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+int}
 
 
 
 vertex type converted to integers, using the ver\+\_\+type\+\_\+dict map, i.\+e. ver\+\_\+type\+\_\+int\mbox{[}v\mbox{]} = ver\+\_\+type\+\_\+dict\mbox{[}ver\+\_\+type\mbox{[}v\mbox{]}\mbox{]} 
 
-\mbox{\Hypertarget{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}\label{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}} 
-\index{colored\+\_\+graph@{colored\+\_\+graph}!ver\+\_\+type\+\_\+list@{ver\+\_\+type\+\_\+list}}
-\index{ver\+\_\+type\+\_\+list@{ver\+\_\+type\+\_\+list}!colored\+\_\+graph@{colored\+\_\+graph}}
-\subsubsection{\texorpdfstring{ver\+\_\+type\+\_\+list}{ver\_type\_list}}
+\Hypertarget{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956}\label{classcolored__graph_a3a1ae8abac458d20a2afb4aa48bbc956} 
+\index{colored\_graph@{colored\_graph}!ver\_type\_list@{ver\_type\_list}}
+\index{ver\_type\_list@{ver\_type\_list}!colored\_graph@{colored\_graph}}
+\doxysubsubsection{\texorpdfstring{ver\_type\_list}{ver\_type\_list}}
 {\footnotesize\ttfamily vector$<$vector$<$int$>$ $>$ colored\+\_\+graph\+::ver\+\_\+type\+\_\+list}
 
 
@@ -400,5 +395,5 @@ the list of all distinct vertex types, obtained from the ver\+\_\+type array.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}\item 
-\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}}\item 
+\mbox{\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}}\end{DoxyCompactItemize}

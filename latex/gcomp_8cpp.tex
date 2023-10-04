@@ -1,5 +1,5 @@
-\hypertarget{gcomp_8cpp}{}\section{gcomp.\+cpp File Reference}
-\label{gcomp_8cpp}\index{gcomp.\+cpp@{gcomp.\+cpp}}
+\doxysection{gcomp.\+cpp File Reference}
+\hypertarget{gcomp_8cpp}{}\label{gcomp_8cpp}\index{gcomp.cpp@{gcomp.cpp}}
 
 
 To compress / decompress simple marked graphs.  
@@ -10,15 +10,15 @@ To compress / decompress simple marked graphs.
 {\ttfamily \#include $<$ctype.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}marked\+\_\+graph\+\_\+compression.\+h\char`\"{}}\newline
-\subsection*{Functions}
+{\ttfamily \#include "{}marked\+\_\+graph\+\_\+compression.\+h"{}}\newline
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+int \mbox{\hyperlink{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 To compress / decompress simple marked graphs. 
 
 This code has two functionalities\+: 1) gets a simple marked graph and compresses it, 2) gets a simple marked graph in its compressed form and decompresses it.
@@ -27,152 +27,149 @@ In order to compress a graph, the hyperparameters h and delta should be given us
 
 In order to decompress, the compressed file should be given after -\/i, the file to store the decompressed graph should be given using -\/o, and an argument -\/u for uncompress should be given. 
 
-\subsection{Function Documentation}
-\mbox{\Hypertarget{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
-\index{gcomp.\+cpp@{gcomp.\+cpp}!main@{main}}
-\index{main@{main}!gcomp.\+cpp@{gcomp.\+cpp}}
-\subsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+\doxysubsection{Function Documentation}
+\Hypertarget{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{gcomp_8cpp_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{gcomp.cpp@{gcomp.cpp}!main@{main}}
+\index{main@{main}!gcomp.cpp@{gcomp.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
 
 
-\begin{DoxyCode}
-22                                 \{
-23   \textcolor{keywordtype}{int} h, delta;
-24   \textcolor{keywordtype}{string} infile, outfile;
-25   \textcolor{keywordtype}{bool} uncompress = \textcolor{keyword}{false}; \textcolor{comment}{// becomes true if -u option is given (to decompress)}
-26   \textcolor{keywordtype}{bool} quiet = \textcolor{keyword}{true}; \textcolor{comment}{// becomes false if -v option is given (verbose)}
-27   \textcolor{keywordtype}{bool} stat = \textcolor{keyword}{false}; \textcolor{comment}{// if true, statistics on the properties of the compressed graph, e.g. number of star
-       vertices / edges or the number of partition graphs will be given}
-28   \textcolor{keywordtype}{char} opt;
-29 
-30   \textcolor{keywordtype}{string} report\_file, stat\_file;
-31   ofstream report\_stream, stat\_stream; 
-32 
-33   \textcolor{keywordflow}{while} ((opt = getopt(argc, argv, \textcolor{stringliteral}{"h:d:i:o:uvsV:S:"})) != EOF)\{
-34     \textcolor{keywordflow}{switch}(opt)\{
-35     \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
-36       h = atoi(optarg);
-37       \textcolor{keywordflow}{break};
-38     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
-39       delta = atoi(optarg);
-40       \textcolor{keywordflow}{break};
-41     \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
-42       infile = string(optarg);
-43       \textcolor{keywordflow}{break};
-44     \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
-45       outfile = string(optarg);
-46       \textcolor{keywordflow}{break};
-47     \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
-48       uncompress = \textcolor{keyword}{true}; \textcolor{comment}{// in the decompression phase }
-49       \textcolor{keywordflow}{break};
-50     \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
-51       quiet = \textcolor{keyword}{false};
-52       \textcolor{keywordflow}{break};
-53     \textcolor{keywordflow}{case} \textcolor{charliteral}{'V'}:
-54       report\_file = string(optarg);
-55       \textcolor{keywordflow}{if} (report\_file != \textcolor{stringliteral}{""})\{
-56         report\_stream.open(report\_file);
-57         \hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{logger::report\_stream} = &report\_stream;
-58       \}
-59       \textcolor{keywordflow}{break};
-60     \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
-61       stat = \textcolor{keyword}{true};
-62       \textcolor{keywordflow}{break};
-63     \textcolor{keywordflow}{case} \textcolor{charliteral}{'S'}:
-64       stat\_file = string(optarg);
-65       \textcolor{keywordflow}{if} (stat\_file != \textcolor{stringliteral}{""})\{
-66         stat\_stream.open(stat\_file);
-67         \hyperlink{classlogger_a7db37821f875f2ba3540980b355779f5}{logger::stat\_stream} = &stat\_stream;
-68       \}
-69       \textcolor{keywordflow}{break};
-70     \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
-71       cerr << \textcolor{stringliteral}{"Error: option -"} << char(optopt) << \textcolor{stringliteral}{" requires an argument"} << endl;
-72       \textcolor{keywordflow}{return} 1;
-73     \}
-74   \}
-75   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and h <= 0)\{
-76     cerr << \textcolor{stringliteral}{"Error: parameter h must be a positive integer. Instead, the value "} << h << \textcolor{stringliteral}{" was given."} << 
-      endl;
-77     \textcolor{keywordflow}{return} 1;
-78   \}
-79   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false} and delta <= 0)\{
-80     cerr << \textcolor{stringliteral}{"Error: parameter d (delta) must be a positive integer. Instead, the value "} << delta << \textcolor{stringliteral}{" was
-       given."} << endl;
-81     \textcolor{keywordflow}{return} 1;
-82   \}
-83 
-84   ifstream inp(infile.c\_str());
-85   ofstream oup(outfile.c\_str());
-86 
-87   \textcolor{keywordflow}{if} (!inp.good())\{
-88     cerr << \textcolor{stringliteral}{"Error: invalid input file <"} << infile << \textcolor{stringliteral}{"> given "} << endl;
-89     \textcolor{keywordflow}{return} 1;
-90   \}
-91 
-92   \textcolor{keywordflow}{if} (!oup.good())\{
-93     cerr << \textcolor{stringliteral}{"Error: invalid output file <"} << outfile << \textcolor{stringliteral}{"> given "} << endl;
-94     \textcolor{keywordflow}{return} 1;
-95   \}
-96 
-97 
-98   \textcolor{keywordflow}{if} (quiet == \textcolor{keyword}{true})\{
-99     \textcolor{comment}{// do not log }
-100     \hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose} = \textcolor{keyword}{false}; \textcolor{comment}{// no run time log }
-101     \hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{logger::report} = \textcolor{keyword}{false}; \textcolor{comment}{// no final report}
-102   \}
-103 
-104   \textcolor{keywordflow}{if} (stat == \textcolor{keyword}{true})\{
-105     \hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{logger::stat} = \textcolor{keyword}{true};
-106   \} 
-107 
-108   \textcolor{comment}{//cout << " h = " << h << " delta = " << delta << " infile = " << infile << " outfile = " << outfile <<
-       endl;}
-109 
-110   \hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}();
-111   \textcolor{keywordflow}{if} (uncompress == \textcolor{keyword}{false})\{
-112     \textcolor{comment}{// goal is compression}
-113     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-114     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read Graph"}, \textcolor{stringliteral}{""});
-115     \hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder} E(h, delta);
-116     \hyperlink{classmarked__graph}{marked\_graph} G; \textcolor{comment}{// the input graph to be compressed}
-117     inp >> G;
-118     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-119     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-120     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Encode"}, \textcolor{stringliteral}{""});
-121     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C = E.encode(G);
-122     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-123     \textcolor{comment}{//FILE* f;}
-124     \textcolor{comment}{//f = fopen(outfile.c\_str(), "wb+");}
-125     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-126     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write to binary"}, \textcolor{stringliteral}{""});
-127     \textcolor{comment}{//C.binary\_write(f);}
-128     C.\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}(outfile);
-129     \textcolor{comment}{//fclose(f);}
-130     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-131   \}\textcolor{keywordflow}{else}\{
-132     \textcolor{comment}{// goal is to decompess}
-133     \textcolor{comment}{//FILE* f;}
-134     \textcolor{comment}{//f = fopen(infile.c\_str(), "rb+");}
-135     \hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed} C;
-136     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-137     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Read from binary"}, \textcolor{stringliteral}{""});
-138     \textcolor{comment}{//C.binary\_read(f);}
-139     C.\hyperlink{classmarked__graph__compressed_a9db2d11bd63ad3d5a75e47b4023a89dd}{binary\_read}(infile);
-140     \textcolor{comment}{//fclose(f);}
-141     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-142 
-143     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-144     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Decode"}, \textcolor{stringliteral}{""});
-145     \hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder} D;
-146     \hyperlink{classmarked__graph}{marked\_graph} G = D.\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}(C);
-147     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-148 
-149     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-150     \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"Write decoded graph to output file"},\textcolor{stringliteral}{""});
-151     oup << G;
-152     \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-153   \}
-154   \hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}();
-155   \textcolor{keywordflow}{return} 0;
-156 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{int}\ h,\ delta;}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{string}\ infile,\ outfile;}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{bool}\ uncompress\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ becomes\ true\ if\ -\/u\ option\ is\ given\ (to\ decompress)}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{bool}\ quiet\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ becomes\ false\ if\ -\/v\ option\ is\ given\ (verbose)}}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{bool}\ stat\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ if\ true,\ statistics\ on\ the\ properties\ of\ the\ compressed\ graph,\ e.g.\ number\ of\ star\ vertices\ /\ edges\ or\ the\ number\ of\ partition\ graphs\ will\ be\ given}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{char}\ opt;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{string}\ report\_file,\ stat\_file;}
+\DoxyCodeLine{00031\ \ \ ofstream\ report\_stream,\ stat\_stream;\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{while}\ ((opt\ =\ getopt(argc,\ argv,\ \textcolor{stringliteral}{"{}h:d:i:o:uvsV:S:"{}}))\ !=\ EOF)\{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{switch}(opt)\{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'h'}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ h\ =\ atoi(optarg);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'d'}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ delta\ =\ atoi(optarg);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'i'}:}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ infile\ =\ string(optarg);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'o'}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ outfile\ =\ string(optarg);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'u'}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ uncompress\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ in\ the\ decompression\ phase\ }}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'v'}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ quiet\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'V'}:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ report\_file\ =\ string(optarg);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (report\_file\ !=\ \textcolor{stringliteral}{"{}"{}})\{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ report\_stream.open(report\_file);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlogger_a8e3da449edb99f9ecc59858c0e75beca}{logger::report\_stream}}\ =\ \&report\_stream;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'s'}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ stat\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'S'}:}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ stat\_file\ =\ string(optarg);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stat\_file\ !=\ \textcolor{stringliteral}{"{}"{}})\{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ stat\_stream.open(stat\_file);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlogger_a7db37821f875f2ba3540980b355779f5}{logger::stat\_stream}}\ =\ \&stat\_stream;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'?'}:}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ option\ -\/"{}}\ <<\ char(optopt)\ <<\ \textcolor{stringliteral}{"{}\ requires\ an\ argument"{}}\ <<\ endl;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{if}\ (uncompress\ ==\ \textcolor{keyword}{false}\ and\ h\ <=\ 0)\{}
+\DoxyCodeLine{00076\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ parameter\ h\ must\ be\ a\ positive\ integer.\ Instead,\ the\ value\ "{}}\ <<\ h\ <<\ \textcolor{stringliteral}{"{}\ was\ given."{}}\ <<\ endl;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordflow}{if}\ (uncompress\ ==\ \textcolor{keyword}{false}\ and\ delta\ <=\ 0)\{}
+\DoxyCodeLine{00080\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ parameter\ d\ (delta)\ must\ be\ a\ positive\ integer.\ Instead,\ the\ value\ "{}}\ <<\ delta\ <<\ \textcolor{stringliteral}{"{}\ was\ given."{}}\ <<\ endl;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ ifstream\ inp(infile.c\_str());}
+\DoxyCodeLine{00085\ \ \ ofstream\ oup(outfile.c\_str());}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{if}\ (!inp.good())\{}
+\DoxyCodeLine{00088\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ invalid\ input\ file\ <"{}}\ <<\ infile\ <<\ \textcolor{stringliteral}{"{}>\ given\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{if}\ (!oup.good())\{}
+\DoxyCodeLine{00093\ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ invalid\ output\ file\ <"{}}\ <<\ outfile\ <<\ \textcolor{stringliteral}{"{}>\ given\ "{}}\ <<\ endl;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00095\ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordflow}{if}\ (quiet\ ==\ \textcolor{keyword}{true})\{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ do\ not\ log\ }}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classlogger_aab3c778c044ddf4b1b5fad8f4c230ff9}{logger::verbose}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ no\ run\ time\ log\ }}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classlogger_adbcc380b0ef53e23125f91e1c8f13f4e}{logger::report}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ no\ final\ report}}
+\DoxyCodeLine{00102\ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordflow}{if}\ (stat\ ==\ \textcolor{keyword}{true})\{}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classlogger_a26812b5ba03f130e8dae3446d5fc032f}{logger::stat}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00106\ \ \ \}\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{comment}{//cout\ <<\ "{}\ h\ =\ "{}\ <<\ h\ <<\ "{}\ delta\ =\ "{}\ <<\ delta\ <<\ "{}\ infile\ =\ "{}\ <<\ infile\ <<\ "{}\ outfile\ =\ "{}\ <<\ outfile\ <<\ endl;}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \mbox{\hyperlink{classlogger_afba86118a3bb044060be8309b3fa755a}{logger::start}}();}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{if}\ (uncompress\ ==\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//\ goal\ is\ compression}}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Read\ Graph"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classmarked__graph__encoder}{marked\_graph\_encoder}}\ E(h,\ delta);}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classmarked__graph}{marked\_graph}}\ G;\ \textcolor{comment}{//\ the\ input\ graph\ to\ be\ compressed}}
+\DoxyCodeLine{00117\ \ \ \ \ inp\ >>\ G;}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Encode"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed}}\ C\ =\ E.encode(G);}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{//FILE*\ f;}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//f\ =\ fopen(outfile.c\_str(),\ "{}wb+"{});}}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Write\ to\ binary"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//C.binary\_write(f);}}
+\DoxyCodeLine{00128\ \ \ \ \ C.\mbox{\hyperlink{classmarked__graph__compressed_ab9cdb7fc43badd58fb5202f74ffac723}{binary\_write}}(outfile);}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//fclose(f);}}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00131\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ goal\ is\ to\ decompess}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//FILE*\ f;}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//f\ =\ fopen(infile.c\_str(),\ "{}rb+"{});}}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{classmarked__graph__compressed}{marked\_graph\_compressed}}\ C;}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Read\ from\ binary"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//C.binary\_read(f);}}
+\DoxyCodeLine{00139\ \ \ \ \ C.\mbox{\hyperlink{classmarked__graph__compressed_a9db2d11bd63ad3d5a75e47b4023a89dd}{binary\_read}}(infile);}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//fclose(f);}}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Decode"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classmarked__graph__decoder}{marked\_graph\_decoder}}\ D;}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classmarked__graph}{marked\_graph}}\ G\ =\ D.\mbox{\hyperlink{classmarked__graph__decoder_a31bbd76091acf5b058fd0a7b7948f74c}{decode}}(C);}
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}Write\ decoded\ graph\ to\ output\ file"{}},\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00151\ \ \ \ \ oup\ <<\ G;}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00153\ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \mbox{\hyperlink{classlogger_abb856642f4e62c7a4a11cc4a2d963010}{logger::stop}}();}
+\DoxyCodeLine{00155\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00156\ \}}
+
 \end{DoxyCode}

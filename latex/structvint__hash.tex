@@ -1,32 +1,33 @@
-\hypertarget{structvint__hash}{}\section{vint\+\_\+hash Struct Reference}
-\label{structvint__hash}\index{vint\+\_\+hash@{vint\+\_\+hash}}
+\doxysection{vint\+\_\+hash Struct Reference}
+\hypertarget{structvint__hash}{}\label{structvint__hash}\index{vint\_hash@{vint\_hash}}
 
 
 {\ttfamily \#include $<$graph\+\_\+message.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-size\+\_\+t \hyperlink{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78}{operator()} (vector$<$ int $>$ const \&v) const
+size\+\_\+t \mbox{\hyperlink{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78}{operator()}} (vector$<$ int $>$ const \&v) const
 \end{DoxyCompactItemize}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78}\label{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78}} 
-\index{vint\+\_\+hash@{vint\+\_\+hash}!operator()@{operator()}}
-\index{operator()@{operator()}!vint\+\_\+hash@{vint\+\_\+hash}}
-\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78}\label{structvint__hash_a4cbe939bbbf51cf2e77c688ce6f1bf78} 
+\index{vint\_hash@{vint\_hash}!operator()@{operator()}}
+\index{operator()@{operator()}!vint\_hash@{vint\_hash}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
 {\footnotesize\ttfamily size\+\_\+t vint\+\_\+hash\+::operator() (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ const \&}]{v }\end{DoxyParamCaption}) const}
 
 
-\begin{DoxyCode}
-3                                                       \{
-4   \textcolor{keywordflow}{return} boost::hash\_range(v.begin(),v.end());
-5 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00004\ \ \ \textcolor{keywordflow}{return}\ boost::hash\_range(v.begin(),v.end());}
+\DoxyCodeLine{00005\ \}}
+
 \end{DoxyCode}
 
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}\item 
-\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}}\item 
+\mbox{\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}}\end{DoxyCompactItemize}

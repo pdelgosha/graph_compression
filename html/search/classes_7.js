@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['obitstream',['obitstream',['../classobitstream.html',1,'']]]
+  ['obitstream_0',['obitstream',['../classobitstream.html',1,'']]]
 ];

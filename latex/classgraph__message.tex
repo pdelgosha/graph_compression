@@ -1,5 +1,5 @@
-\hypertarget{classgraph__message}{}\section{graph\+\_\+message Class Reference}
-\label{classgraph__message}\index{graph\+\_\+message@{graph\+\_\+message}}
+\doxysection{graph\+\_\+message Class Reference}
+\hypertarget{classgraph__message}{}\label{classgraph__message}\index{graph\_message@{graph\_message}}
 
 
 this class takes care of message passing on marked graphs.  
@@ -9,80 +9,82 @@ this class takes care of message passing on marked graphs.
 
 {\ttfamily \#include $<$graph\+\_\+message.\+h$>$}
 
-\subsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classgraph__message_a792e738b94a19f914e5495c416defe4d}{graph\+\_\+message} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&\hyperlink{classgraph}{graph}, int depth, int max\+\_\+degree)
+\mbox{\hyperlink{classgraph__message_a792e738b94a19f914e5495c416defe4d}{graph\+\_\+message}} (const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&\mbox{\hyperlink{classgraph}{graph}}, int depth, int max\+\_\+degree)
 \begin{DoxyCompactList}\small\item\em constructor, given reference to a graph \end{DoxyCompactList}\item 
-\hyperlink{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}{graph\+\_\+message} ()
+\mbox{\hyperlink{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}{graph\+\_\+message}} ()
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ vector$<$ int $>$ $>$ \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}
+vector$<$ vector$<$ int $>$ $>$ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}
 \begin{DoxyCompactList}\small\item\em messages\mbox{[}v\mbox{]}\mbox{[}i\mbox{]} is the integer version of the message from vertex v towards its ith neighbor (in the order given by adj\+\_\+list of vertex i in graph G). The message is at any given step that update\+\_\+messages is running, so after finishing update\+\_\+message, the messages are at step (depth) h-\/1. \end{DoxyCompactList}\item 
-unordered\+\_\+map$<$ vector$<$ int $>$, int, \hyperlink{structvint__hash}{vint\+\_\+hash} $>$ \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\+\_\+dict}
+unordered\+\_\+map$<$ vector$<$ int $>$, int, \mbox{\hyperlink{structvint__hash}{vint\+\_\+hash}} $>$ \mbox{\hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\+\_\+dict}}
 \begin{DoxyCompactList}\small\item\em message\+\_\+dict is the message dictionary at any step that update\+\_\+messages is running, which maps each message to its corresponding index in the dictionary. When update\+\_\+messages is over, this corresponds to step (depth) h-\/1 \end{DoxyCompactList}\item 
-vector$<$ int $>$ \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\+\_\+mark}
+vector$<$ int $>$ \mbox{\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\+\_\+mark}}
 \begin{DoxyCompactList}\small\item\em for an integer message $m$, message\+\_\+mark\mbox{[}m\mbox{]} is the mark component associated to the message m at any step that update\+\_\+messages is working. This is basically the last index in the vector message associate to m. When update\+\_\+messages is over, this corresponds to step (depth) h-\/1. \end{DoxyCompactList}\item 
-vector$<$ bool $>$ \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\+\_\+star\+\_\+message}
+vector$<$ bool $>$ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\+\_\+star\+\_\+message}}
 \begin{DoxyCompactList}\small\item\em for an integer message $m$, is\+\_\+star\+\_\+message\mbox{[}m\mbox{]} is true if m is a star message and false otherwise. Note that m is star type iff the first index in the vector message corresponding to m is -\/1. This is updated at step of update\+\_\+messages, so when it is over, it corresponds to step (depth) h-\/1. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Member Functions}
+\doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\+\_\+messages} (const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&)
+void \mbox{\hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\+\_\+messages}} (const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&)
 \begin{DoxyCompactList}\small\item\em performs the message passing algorithm and updates the messages array accordingly \end{DoxyCompactList}\item 
-void \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\+\_\+message} (const vector$<$ int $>$ \&m, int v, int i)
+void \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\+\_\+message}} (const vector$<$ int $>$ \&m, int v, int i)
 \begin{DoxyCompactList}\small\item\em update message\+\_\+dict and message\+\_\+list \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}
+int \mbox{\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}}
 \begin{DoxyCompactList}\small\item\em the depth up to which we do message passing (the type of edges go through depth h-\/1) \end{DoxyCompactList}\item 
-int \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}
+int \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}
 \begin{DoxyCompactList}\small\item\em the maximum degree threshold \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 this class takes care of message passing on marked graphs. 
 
-This graph has a reference to a \hyperlink{classmarked__graph}{marked\+\_\+graph} object for which we perform message passing to find edge types. The edge types are discovered up to depth h-\/1, and with degree parameter Delta, where h and Delta are member objects. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -\/1, and the second being the edge mark component (towards the \textquotesingle{}me\textquotesingle{} vertex).
+This graph has a reference to a \doxylink{classmarked__graph}{marked\+\_\+graph} object for which we perform message passing to find edge types. The edge types are discovered up to depth h-\/1, and with degree parameter Delta, where h and Delta are member objects. Star type messages (which roughly speaking corresponds to places where there is a vertex in the h neighborhood has degree more than delta) are vectors of size 2, first coordinate being -\/1, and the second being the edge mark component (towards the \textquotesingle{}me\textquotesingle{} vertex).
 
 {\itshape Sample Usage}
 
 
-\begin{DoxyCode}
-\hyperlink{classmarked__graph}{marked\_graph} G;
-... \textcolor{comment}{//define G}
-\textcolor{keywordtype}{int} h = 10;
-\textcolor{keywordtype}{int} Delta = 5; 
-\hyperlink{classgraph__message}{graph\_message} M(G, h, Delta);
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmarked__graph}{marked\_graph}}\ G;}
+\DoxyCodeLine{...\ \textcolor{comment}{//define\ G}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}}\ =\ 10;}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}\ =\ 5;\ }
+\DoxyCodeLine{\mbox{\hyperlink{classgraph__message}{graph\_message}}\ M(G,\ \mbox{\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}},\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}});}
+
 \end{DoxyCode}
  
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classgraph__message_a792e738b94a19f914e5495c416defe4d}\label{classgraph__message_a792e738b94a19f914e5495c416defe4d}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\index{graph\+\_\+message@{graph\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{graph\+\_\+message()}{graph\_message()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily graph\+\_\+message\+::graph\+\_\+message (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgraph__message_a792e738b94a19f914e5495c416defe4d}\label{classgraph__message_a792e738b94a19f914e5495c416defe4d} 
+\index{graph\_message@{graph\_message}!graph\_message@{graph\_message}}
+\index{graph\_message@{graph\_message}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{graph\_message()}{graph\_message()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily graph\+\_\+message\+::graph\+\_\+message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&}]{graph,  }\item[{int}]{depth,  }\item[{int}]{max\+\_\+degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 constructor, given reference to a graph 
 
 
-\begin{DoxyCode}
-69                                                                      \{
-70     \hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h} = depth;
-71     \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} = max\_degree;
-72     \hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\_messages}(graph); \textcolor{comment}{// do message passing}
-73   \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}}\ =\ depth;}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}\ =\ max\_degree;}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}{update\_messages}}(\mbox{\hyperlink{classgraph}{graph}});\ \textcolor{comment}{//\ do\ message\ passing}}
+\DoxyCodeLine{00073\ \ \ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}\label{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\index{graph\+\_\+message@{graph\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{graph\+\_\+message()}{graph\_message()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\Hypertarget{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb}\label{classgraph__message_aa21140453eb0e1de98a2ddfcf2832aeb} 
+\index{graph\_message@{graph\_message}!graph\_message@{graph\_message}}
+\index{graph\_message@{graph\_message}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{graph\_message()}{graph\_message()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily graph\+\_\+message\+::graph\+\_\+message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -90,16 +92,17 @@ constructor, given reference to a graph
 default constructor 
 
 
-\begin{DoxyCode}
-76 \{\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \{\}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Function Documentation}
-\mbox{\Hypertarget{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}\label{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!send\+\_\+message@{send\+\_\+message}}
-\index{send\+\_\+message@{send\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{send\+\_\+message()}{send\_message()}}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}\label{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f} 
+\index{graph\_message@{graph\_message}!send\_message@{send\_message}}
+\index{send\_message@{send\_message}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{send\_message()}{send\_message()}}
 {\footnotesize\ttfamily void graph\+\_\+message\+::send\+\_\+message (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{m,  }\item[{int}]{v,  }\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
@@ -120,42 +123,39 @@ sends a message by setting messages, and puts it in the message hash table messa
 \hline
 \end{DoxyParams}
 
-\begin{DoxyCode}
-487                                                                          \{
-488   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
-489   \textcolor{comment}{/*}
-490 \textcolor{comment}{  cerr << " send message (";}
-491 \textcolor{comment}{  for (int k=0;k<m.size();k++)\{}
-492 \textcolor{comment}{    cerr << m[k];}
-493 \textcolor{comment}{    if (k<m.size()-1)}
-494 \textcolor{comment}{      cerr << ", ";}
-495 \textcolor{comment}{   \}}
-496 \textcolor{comment}{  cerr << "): " << v << " -> " << i;}
-497 \textcolor{comment}{  */}
-498 
-499   it = \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.find(m);
-500   \textcolor{keywordflow}{if} (it == \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.end())\{
-501     \textcolor{comment}{// this is a new message}
-502     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.insert(pair<vector<int>, \textcolor{keywordtype}{int}> (m, \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size())); \textcolor{comment}{// insert
-       the message into the hash table, message\_mark[s].size() is in fact the number of registered marks at step s}
-503     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.size(); \textcolor{comment}{// set the message}
-504     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.push\_back(m.back()); \textcolor{comment}{// register m by adding its mark component (which is
-       m.back() the last element in m) to the list of marks at step s}
-505     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.push\_back(m[0]==-1); \textcolor{comment}{// check if m is star type, and add this
-       information to the list}
-506   \}\textcolor{keywordflow}{else}\{
-507     \textcolor{comment}{// the message already exists, just use the registered integer value corresponding to m and send the
-       message}
-508     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i] = it->second;
-509   \}
-510   \textcolor{comment}{//cerr << " message = " << messages[v][i] << endl;}
-511 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00488\ \ \ unordered\_map<vector<int>,\ int,\ \mbox{\hyperlink{structvint__hash}{vint\_hash}}>::iterator\ it;}
+\DoxyCodeLine{00489\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00490\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ send\ message\ ("{};}}
+\DoxyCodeLine{00491\ \textcolor{comment}{\ \ for\ (int\ k=0;k<m.size();k++)\{}}
+\DoxyCodeLine{00492\ \textcolor{comment}{\ \ \ \ cerr\ <<\ m[k];}}
+\DoxyCodeLine{00493\ \textcolor{comment}{\ \ \ \ if\ (k<m.size()-\/1)}}
+\DoxyCodeLine{00494\ \textcolor{comment}{\ \ \ \ \ \ cerr\ <<\ "{},\ "{};}}
+\DoxyCodeLine{00495\ \textcolor{comment}{\ \ \ \}}}
+\DoxyCodeLine{00496\ \textcolor{comment}{\ \ cerr\ <<\ "{}):\ "{}\ <<\ v\ <<\ "{}\ -\/>\ "{}\ <<\ i;}}
+\DoxyCodeLine{00497\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00499\ \ \ it\ =\ \mbox{\hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}}.find(m);}
+\DoxyCodeLine{00500\ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}}.end())\{}
+\DoxyCodeLine{00501\ \ \ \ \ \textcolor{comment}{//\ this\ is\ a\ new\ message}}
+\DoxyCodeLine{00502\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}}.insert(pair<vector<int>,\ \textcolor{keywordtype}{int}>\ (m,\ \mbox{\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}}.size()));\ \textcolor{comment}{//\ insert\ the\ message\ into\ the\ hash\ table,\ message\_mark[s].size()\ is\ in\ fact\ the\ number\ of\ registered\ marks\ at\ step\ s}}
+\DoxyCodeLine{00503\ \ \ \ \ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[v][i]\ =\ \mbox{\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}}.size();\ \textcolor{comment}{//\ set\ the\ message}}
+\DoxyCodeLine{00504\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}}.push\_back(m.back());\ \textcolor{comment}{//\ register\ m\ by\ adding\ its\ mark\ component\ (which\ is\ m.back()\ the\ last\ element\ in\ m)\ to\ the\ list\ of\ marks\ at\ step\ s}}
+\DoxyCodeLine{00505\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}.push\_back(m[0]==-\/1);\ \textcolor{comment}{//\ check\ if\ m\ is\ star\ type,\ and\ add\ this\ information\ to\ the\ list}}
+\DoxyCodeLine{00506\ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00507\ \ \ \ \ \textcolor{comment}{//\ the\ message\ already\ exists,\ just\ use\ the\ registered\ integer\ value\ corresponding\ to\ m\ and\ send\ the\ message}}
+\DoxyCodeLine{00508\ \ \ \ \ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[v][i]\ =\ it-\/>second;}
+\DoxyCodeLine{00509\ \ \ \}}
+\DoxyCodeLine{00510\ \ \ \textcolor{comment}{//cerr\ <<\ "{}\ message\ =\ "{}\ <<\ messages[v][i]\ <<\ endl;}}
+\DoxyCodeLine{00511\ \}}
+
 \end{DoxyCode}
-\mbox{\Hypertarget{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}\label{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!update\+\_\+messages@{update\+\_\+messages}}
-\index{update\+\_\+messages@{update\+\_\+messages}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{update\+\_\+messages()}{update\_messages()}}
-{\footnotesize\ttfamily void graph\+\_\+message\+::update\+\_\+messages (\begin{DoxyParamCaption}\item[{const \hyperlink{classmarked__graph}{marked\+\_\+graph} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classgraph__message_a40dadc59d582b290202e79bc4a9e896c}\label{classgraph__message_a40dadc59d582b290202e79bc4a9e896c} 
+\index{graph\_message@{graph\_message}!update\_messages@{update\_messages}}
+\index{update\_messages@{update\_messages}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{update\_messages()}{update\_messages()}}
+{\footnotesize\ttfamily void graph\+\_\+message\+::update\+\_\+messages (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmarked__graph}{marked\+\_\+graph}} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -169,559 +169,523 @@ The structure of messages is as follows. To simplify the notation, we use $M_k(v
 \item For $k > 0$, if the degree of $v$ is bigger than Delta, we have $M_k(v,w) = (-1,\xi_G(w,v))$.
 \item Otherwise, we form the list $(s_u: u \sim_G v, u \neq w)$, where for $u \sim_G v, u \neq w$, we set $s_u = (M_{k-1}(u,v), \xi_G(u,v))$.
 \item If for some $u \sim_G v, u \neq w$, the sequence $s_u$ starts with a -\/1, we set $M_k(v,w) = (-1,\xi_G(w,v))$.
-\item Otherwise, we sort the sequences $s_u$ nondecreasingly with respect to the lexicographic order and set $s$ to be the concatenation of the sorted list. Finally, we set $M_k(v,w) = (\tau_G(v), \deg_G(v) -1, s, \xi_G(w,v))$. 
+\item Otherwise, we sort the sequences $s_u$ nondecreasingly with respect to the lexicographic order and set $s$ to be the concatenation of the sorted list. Finally, we set $M_k(v,w) =
+(\tau_G(v), \deg_G(v) -1, s, \xi_G(w,v))$. 
 \end{DoxyItemize}
-\begin{DoxyCode}
-24 \{
-25   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}++;
-26   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"graph\_message::update\_message init"}, \textcolor{stringliteral}{""});
-27   \textcolor{keywordtype}{int} nu\_vertices = G.\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices};
-28   \textcolor{keywordtype}{int} w;
-29   \textcolor{keywordtype}{int} my\_location;
-30   \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}.resize(nu\_vertices);
-31   \textcolor{comment}{//inward\_message.resize(nu\_vertices);}
-32   \textcolor{comment}{//message\_dict.resize(h);}
-33   \textcolor{comment}{//message\_list.resize(h);}
-34   \textcolor{comment}{//message\_mark.resize(h);}
-35   \textcolor{comment}{//is\_star\_message.resize(h);}
-36 
-37   
-38   \textcolor{comment}{// initialize the messages}
-39 
-40   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"resizing messages"}, \textcolor{stringliteral}{""});
-41   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-42     \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v].resize(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size());
-43     \textcolor{comment}{//inward\_messages[v].resize(G.adj\_list[v].size());}
-44     \textcolor{comment}{//for (int i=0;i<G.adj\_list[v].size();i++)\{}
-45     \textcolor{comment}{//messages[v][i].resize(h);}
-46       \textcolor{comment}{//inward\_messages[v][i].resize(h);}
-47     \textcolor{comment}{//\}}
-48   \}
-49 
-50   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"initializing messages"},\textcolor{stringliteral}{""});
-51   vector<int> m(3);
-52   unordered\_map<vector<int>, int, \hyperlink{structvint__hash}{vint\_hash}>::iterator it;
-53   \textcolor{comment}{//map<vector<int>, int>::iterator it;}
-54 
-55   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-56 
-57     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-58       \textcolor{comment}{// the message from v towards the ith neighbor (lets call is w) at time 0 has a mark component which
-       is \(\backslash\)xi(v,w) and a subtree component which is a single root with mark \(\backslash\)tau(v). This is encoded as a message
-       vector with size 3 of the form (\(\backslash\)tau(v), 0,\(\backslash\)xi(v,w)) where the last 0 indicates that there is no offspring.}
-59 
-60 
-61       \textcolor{comment}{//vector<int> m;}
-62       \textcolor{comment}{//m.clear();}
-63       \textcolor{comment}{//m.push\_back(G.ver\_mark[v]);}
-64       \textcolor{comment}{//m.push\_back(0);}
-65       \textcolor{comment}{//m.push\_back(G.adj\_list[v][i].second.first);}
-66 
-67       m[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
-68       m[1] = 0;
-69       m[2] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-70       \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m, v, i);
-71 
-72       \textcolor{comment}{// adding this message to the message dictionary}
-73       \textcolor{comment}{//it = message\_dict[0].find(m);}
-74       \textcolor{comment}{//w = G.adj\_list[v][i].first;}
-75 
-76       \textcolor{comment}{/*}
-77 \textcolor{comment}{      if (it == message\_dict[0].end())\{}
-78 \textcolor{comment}{        message\_dict[0][m] = message\_list[0].size();}
-79 \textcolor{comment}{        messages[v][i][0] = message\_list[0].size();}
-80 \textcolor{comment}{        message\_list[0].push\_back(m);}
-81 \textcolor{comment}{}
-82 \textcolor{comment}{      \}else\{}
-83 \textcolor{comment}{        messages[v][i][0] = it->second;}
-84 \textcolor{comment}{      \}}
-85 \textcolor{comment}{      */}
-86       \textcolor{comment}{//messages[v][i][0] = message\_dict[0][m]; // the message at time 0}
-87     \}
-88   \}
-89 
-90   \textcolor{comment}{// these are copies of message\_dict, message\_mark and is\_star\_message at the previous step, which are
-       used to update messages at the current step.}
-91 
-92   \textcolor{comment}{//unordered\_map<vector<int>, int, vint\_hash> message\_dict\_old;}
-93   \textcolor{comment}{//vector<int> message\_mark\_old;}
-94   vector<bool> is\_star\_message\_old;
-95   vector<vector<int> > messages\_old;
-96 
-97   \textcolor{comment}{// updating messages}
-98   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"updating messages"}, \textcolor{stringliteral}{""});
-99   m.reserve(5+ 2 * \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
-100   vector<int> m2;
-101   m2.reserve(5 + 2*\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}); \textcolor{comment}{// an auxiliary message when we need to work with two types of messages
-       simultaneously }
-102   duration<float> diff;
-103   high\_resolution\_clock::time\_point t1, t2; 
-104   \textcolor{keywordtype}{float} agg\_search = 0;
-105   \textcolor{keywordtype}{float} agg\_insert = 0;
-106   \textcolor{keywordtype}{float} agg\_m = 0;
-107   \textcolor{keywordtype}{float} agg\_sort = 0;
-108   \textcolor{keywordtype}{float} agg\_neigh\_message = 0;
-109 
-110   vector<pair<pair<int, int>, \textcolor{keywordtype}{int}> > neighbor\_messages; \textcolor{comment}{// the first component is the message and the
-       second is the name of the neighbor}
-111   \textcolor{comment}{// the second component is stored so that after sorting, we know the owner of the message}
-112   neighbor\_messages.reserve(5+2*\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta});
-113 
-114   \textcolor{keywordtype}{int} nu\_star\_neigh; \textcolor{comment}{// number of star neighbors, i.e. neighbors of a vertex v whose message towards v are
-       star type}
-115   \textcolor{keywordtype}{int} star\_neigh\_index; \textcolor{comment}{// the index of the star neighbor of v, this is only useful when there is one star
-       neighbor, if there are more than one star neighbor, then the message sent from v towards all other neighbors
-       are star typed}
-116   \textcolor{keywordtype}{int} star\_neigh; \textcolor{comment}{// the label of the star neighbor, i.e. star\_neigh =
-       G.adj\_list[v][star\_neigh\_index].first;}
-117   \textcolor{keywordtype}{int} previous\_message; \textcolor{comment}{// the message from the previous step}
-118   \textcolor{keywordtype}{int} mark\_to\_v; \textcolor{comment}{// mark towards the current vertex directed from its neighbor}
-119   vector<int> neighbors\_list; \textcolor{comment}{// the list of neighbors of a vertex in the order after sorting with respect
-       to their corresponding messages}
-120   neighbors\_list.reserve(\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} + 3);
-121   \textcolor{keywordtype}{int} deg\_v; \textcolor{comment}{// the degree of vertex v }
-122 
-123 
-124 
-125   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} s=1; s<\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h};s++)\{ \textcolor{comment}{// s stands for step}
-126     \textcolor{comment}{//cerr << endl << endl<< " depth " << s << endl;}
-127     \textcolor{comment}{// store variables corresponding to the previous step in their old version, and clearing the variables
-       for this step:}
-128     \textcolor{comment}{//message\_dict\_old = message\_dict;}
-129     messages\_old = \hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages};
-130     \textcolor{comment}{//message\_mark\_old = message\_mark;}
-131     is\_star\_message\_old = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message};
-132     \hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}.clear();
-133     \hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}.clear();
-134     \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}.clear();
-135     \textcolor{comment}{// we do not clear messages since we need its size to be the same, and we only modify its content}
-136     
-137 
-138     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-139       deg\_v = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();
-140       \textcolor{keywordflow}{if} (deg\_v==1)\{
-141         \textcolor{comment}{// no need to collect messages, there is only one message towards the one neighbor, which is known }
-142         m.resize(3); \textcolor{comment}{// there is only one message which is of the form \(\backslash\)f$(\(\backslash\)theta, 0, x)\(\backslash\)f$, where
-       \(\backslash\)f$\(\backslash\)theta\(\backslash\)f$ is the mark of v, and \(\backslash\)f$x = \(\backslash\)xi\_G(w,v)\(\backslash\)f$  where \(\backslash\)f$w\(\backslash\)f$ is the only neighbor of v}
-143         m[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
-144         m[1] = 0;
-145         m[2] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][0].second.first;
-146         \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m, v, 0);
-147       \}\textcolor{keywordflow}{else}\{
-148         \textcolor{keywordflow}{if} (deg\_v <= \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta})\{
-149           neighbor\_messages.clear();
-150           nu\_star\_neigh = 0;
-151           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<deg\_v;i++)\{
-152             w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first; \textcolor{comment}{// neighbor label}
-153             my\_location = G.\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}[v][i];
-154             previous\_message = messages\_old[w][my\_location]; \textcolor{comment}{// the message sent from this neighbor towards
-       v at time t-1}
-155             \textcolor{comment}{// check if previous message is star}
-156             \textcolor{keywordflow}{if} (is\_star\_message\_old[previous\_message])\{
-157               nu\_star\_neigh ++;
-158               star\_neigh\_index = i;
-159               star\_neigh = w;
-160             \}
-161             \textcolor{keywordflow}{if} (nu\_star\_neigh >= 2)
-162               \textcolor{keywordflow}{break}; \textcolor{comment}{// then message towards all neighbors will be star, no need to collect messages}
-163             mark\_to\_v = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-164             neighbor\_messages.push\_back(pair<pair<int, int> , \textcolor{keywordtype}{int}> (pair<int,int>(previous\_message, 
-      mark\_to\_v), i));
-165           \}
-166           \textcolor{keywordflow}{if} (nu\_star\_neigh == 2)\{
-167             \textcolor{comment}{// message towards all the neighbors will be star}
-168             m.resize(2);
-169             m[0] = -1;
-170             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-171               m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first; 
-172               \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m, v, i); \textcolor{comment}{// send message m from v towards its ith neighbor at step
-       s}
-173             \}
-174           \}
-175           \textcolor{keywordflow}{if} (nu\_star\_neigh == 1)\{
-176             \textcolor{comment}{// the message towards all the neighbors except for that star neighbor is star}
-177             \textcolor{comment}{// let m be the message towards that neighbor and m2 be the star messages}
-178 
-179             \textcolor{comment}{// sorting neighbor messages}
-180             sort(neighbor\_messages.begin(), neighbor\_messages.end());
-181 
-182             \textcolor{comment}{// preparing m }
-183             m.resize(0);
-184             m.push\_back(G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v]);
-185             m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1);
-186 
-187             
-188 
-189             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<neighbor\_messages.size();i++)\{
-190               \textcolor{keywordflow}{if} (neighbor\_messages[i].second != star\_neigh\_index)\{
-191                 \textcolor{comment}{// collect the messages of non star neighbors}
-192                 m.push\_back(neighbor\_messages[i].first.first);
-193                 m.push\_back(neighbor\_messages[i].first.second);
-194               \}
-195             \}
-196             \textcolor{comment}{// finalize m by inserting its mark component}
-197             m.push\_back(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][star\_neigh\_index].second.first);
-198 
-199             \textcolor{comment}{// prepare star messages}
-200             m2.resize(2);
-201             m2[0] = -1;
-202             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<deg\_v;i++)\{
-203               \textcolor{keywordflow}{if} (i==star\_neigh\_index)\{
-204                 \textcolor{comment}{// send the prepared message m}
-205                 \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m, v, i);
-206               \}\textcolor{keywordflow}{else}\{
-207                 \textcolor{comment}{// prepare a star message and send it}
-208                 m2[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-209                 \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m2, v, i);
-210               \}
-211             \}
-212           \}
-213 
-214           \textcolor{keywordflow}{if} (nu\_star\_neigh == 0)\{
-215             \textcolor{comment}{// no star neighbor, so we can prepare messages to all neighbors comfortably as none of them
-       are star type}
-216             \textcolor{comment}{// we do this by a masking technique}
-217             \textcolor{comment}{// sorting neighbor messages}
-218             sort(neighbor\_messages.begin(), neighbor\_messages.end());
-219             \textcolor{keywordflow}{if} (neighbor\_messages.size() != deg\_v)\{
-220               cerr << \textcolor{stringliteral}{" Error: no star messages and yet neighbor\_messages does not have a size equal to the
-       deg of v, step "} << s << \textcolor{stringliteral}{" v= "} << v <<  \textcolor{stringliteral}{" deg\_v= "} << deg\_v << \textcolor{stringliteral}{" neighbor\_messages.size() "} << 
-      neighbor\_messages.size() << endl;
-221             \}
-222             m.resize(1 + 1 + 2*(G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1) +1); \textcolor{comment}{// 1 for vertex mark, 1 for deg -1,
-       for (deg-1) many neighbors, each we have 2 values, and finally 1 for the mark component}
-223             m[0] = G.\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}[v];
-224             m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size()-1;
-225             neighbors\_list.resize(deg\_v);
-226             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<neighbor\_messages.size();i++)\{
-227               m[2*(i+1)]   = neighbor\_messages[i].first.first;
-228               m[2*(i+1)+1] = neighbor\_messages[i].first.second;
-229               neighbors\_list[i] = neighbor\_messages[i].second;
-230             \}
-231             \textcolor{comment}{// swapping the last message so that its mark component comes first, so that we can treat m as
-       a valid message in our standard}
-232             swap(m[2*deg\_v], m[2*deg\_v+1]);
-233 
-234             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=neighbor\_messages.size()-1;i>=0;i--)\{
-235               \textcolor{keywordflow}{if} (i < neighbor\_messages.size()-1)\{
-236                 swap(m[2*deg\_v], m[2*(i+1)+1]);
-237                 swap(m[2*deg\_v+1], m[2*(i+1)]);
-238                 swap(neighbors\_list[deg\_v-1], neighbors\_list[i]);
-239               \}
-240               \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,neighbors\_list[deg\_v-1]);
-241             \}
-242           \}
-243         \}
-244         \textcolor{keywordflow}{if} (deg\_v > \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta})\{ \textcolor{comment}{// the message towards all neighbors is star}
-245           m.resize(2);
-246           m[0] = -1;
-247           \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<deg\_v;i++)\{
-248             m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-249             \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
-250           \}
-251         \}
-252       \}
-253     \}
-254   \}
-255 
-256 
-257   \hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}(\textcolor{stringliteral}{"* symmetrizing"}, \textcolor{stringliteral}{""});
-258   \textcolor{keywordtype}{bool} star1, star2;
-259   m.resize(2); \textcolor{comment}{// prepare for star message}
-260   m[0] = -1;
-261   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} v=0;v<nu\_vertices;v++)\{
-262     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size();i++)\{
-263       w = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].first;
-264       my\_location = G.\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}[v][i];
-265       \textcolor{keywordflow}{if} (w > v)\{ \textcolor{comment}{// to avoid going over edges twice }
-266         star1 = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}[v][i]];
-267         star2 = \hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}[messages[w][my\_location]];
-268         \textcolor{keywordflow}{if} (star1 and !star2)\{
-269           \textcolor{comment}{// message[w][my\_location] should be star}
-270           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second;
-271           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,w,my\_location);
-272         \}
-273         \textcolor{keywordflow}{if} (!star1 and star2)\{
-274           \textcolor{comment}{// messages[v][i] should also become star}
-275           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-276           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
-277         \}
-278         \textcolor{keywordflow}{if} ((!star1 and !star2) and (G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v].size() > \hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta} or G.
-      \hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[w].size()>\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}))\{ \textcolor{comment}{// this activates only when h = 1, ensures truncation of degrees
-       bigger than delta}
-279           \textcolor{comment}{// message[w][my\_location] should be star}
-280           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.second;
-281           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,w,my\_location);
-282           \textcolor{comment}{// messages[v][i] should also become star}
-283           m[1] = G.\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}[v][i].second.first;
-284           \hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}(m,v,i);
-285         \}
-286       \}
-287     \}
-288   \}
-289   \hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}--;
-290 
-291 
-292 
-293 
-294   \textcolor{comment}{// ==================================================}
-295   \textcolor{comment}{// ==================================================}
-296   \textcolor{comment}{// ==================================================}
-297   \textcolor{comment}{// ==================================================}
-298   \textcolor{comment}{// ==================================================}
-299   \textcolor{comment}{// ==================================================}
-300   \textcolor{comment}{// ==================================================}
-301   \textcolor{comment}{// ==================================================}
-302 
-303   \textcolor{comment}{/*}
-304 \textcolor{comment}{  for (int t=1;t<h;t++)\{}
-305 \textcolor{comment}{    for (int v=0;v<nu\_vertices;v++)\{}
-306 \textcolor{comment}{      //cerr << " vertex " << v << endl;}
-307 \textcolor{comment}{      if (G.adj\_list[v].size() <= Delta)\{}
-308 \textcolor{comment}{        // the degree of v is no more than Delta}
-309 \textcolor{comment}{        // do the standard message passing by aggregating messages from neighbors}
-310 \textcolor{comment}{        // stacking all the messages from neighbors of v towards v}
-311 \textcolor{comment}{        neighbor\_messages.clear();}
-312 \textcolor{comment}{}
-313 \textcolor{comment}{        // the message from each neighbor of v, say w,  towards v is considered, the mark of the edge
-       between w and v towards v is added to it, and then all these objects are stacked in neighbor\_messages to be
-       sorted and used afterwards}
-314 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
-315 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-316 \textcolor{comment}{          w = G.adj\_list[v][i].first; // what is the name of the neighbor I am looking at now, which is the
-       ith neighbor of vertex v }
-317 \textcolor{comment}{          //my\_location = G.adj\_location[w].at(v); <--- the inefficient way}
-318 \textcolor{comment}{          my\_location = G.index\_in\_neighbor[v][i];}
-319 \textcolor{comment}{          // where is the place of node v among the list of neighbors of the ith neighbor of v}
-320 \textcolor{comment}{          int previous\_message = messages[w][my\_location][t-1]; // the message sent from this neighbor
-       towards v at time t-1}
-321 \textcolor{comment}{          int mark\_to\_v = G.adj\_list[v][i].second.first;}
-322 \textcolor{comment}{          neighbor\_messages.push\_back(pair<pair<int, int> , int> (pair<int,int>(previous\_message,
-       mark\_to\_v), w));}
-323 \textcolor{comment}{        \}}
-324 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
-325 \textcolor{comment}{        //diff = t2 - t1;}
-326 \textcolor{comment}{        //agg\_neigh\_message += diff.count();}
-327 \textcolor{comment}{}
-328 \textcolor{comment}{        //t1 = high\_resolution\_clock::now();}
-329 \textcolor{comment}{        sort(neighbor\_messages.begin(), neighbor\_messages.end()); // sorts lexicographically}
-330 \textcolor{comment}{        //t2 = high\_resolution\_clock::now();}
-331 \textcolor{comment}{        //diff = t2 - t1;}
-332 \textcolor{comment}{        //agg\_sort += diff.count();}
-333 \textcolor{comment}{}
-334 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-335 \textcolor{comment}{          // let w be the current ith neighbor of v}
-336 \textcolor{comment}{          int w = G.adj\_list[v][i].first;}
-337 \textcolor{comment}{          // first, start with the mark of v and the number of offsprings in the subgraph component of the
-       message}
-338 \textcolor{comment}{          //vector<int> m; // the message that v is going to send to w}
-339 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-340 \textcolor{comment}{          m.clear();}
-341 \textcolor{comment}{          m.push\_back(G.ver\_mark[v]); // mark of v}
-342 \textcolor{comment}{          m.push\_back(G.adj\_list[v].size()-1); // the number of offsprings in the subgraph component of the
-       message}
-343 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-344 \textcolor{comment}{          //diff = t2 - t1;}
-345 \textcolor{comment}{          //agg\_m += diff.count();}
-346 \textcolor{comment}{}
-347 \textcolor{comment}{          // stacking messages from all neighbors of v expect for w towards v at time t-1}
-348 \textcolor{comment}{          for (int j=0;j<G.adj\_list[v].size();j++)\{}
-349 \textcolor{comment}{            if (neighbor\_messages[j].second != w)\{}
-350 \textcolor{comment}{              if (message\_list[t-1][neighbor\_messages[j].first.first][0] == -1)\{}
-351 \textcolor{comment}{                // this means that one of the messages that should be aggregated is * typed, therefore the
-       outgoing messages should also be * typed}
-352 \textcolor{comment}{                // i.e. the message has only two entries: (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark of the
-       edge between v and w towards v}
-353 \textcolor{comment}{                // since after this loop, the mark \(\backslash\)xi(w,v) is added to the message (after the comment
-       starting with 'finally'), we only add the initial -1 part}
-354 \textcolor{comment}{                //t1 = high\_resolution\_clock::now();}
-355 \textcolor{comment}{                m.resize(0);}
-356 \textcolor{comment}{                m.push\_back(-1);}
-357 \textcolor{comment}{                //t2 = high\_resolution\_clock::now();}
-358 \textcolor{comment}{                //diff = t2 - t1;}
-359 \textcolor{comment}{                //agg\_m += diff.count();}
-360 \textcolor{comment}{                break; // the message is decided, we do not need to go over any of the other neighbor
-       messages, hence break}
-361 \textcolor{comment}{              \}}
-362 \textcolor{comment}{              // this message should be added to the list of messages}
-363 \textcolor{comment}{              //t1 = high\_resolution\_clock::now();}
-364 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.first); // message part}
-365 \textcolor{comment}{              m.push\_back(neighbor\_messages[j].first.second); // mark part towards v}
-366 \textcolor{comment}{              //t2 = high\_resolution\_clock::now();}
-367 \textcolor{comment}{              //diff = t2 - t1;}
-368 \textcolor{comment}{              //agg\_m += diff.count();}
-369 \textcolor{comment}{}
-370 \textcolor{comment}{            \}}
-371 \textcolor{comment}{          \}}
-372 \textcolor{comment}{          // if we break, we reach at this point and message is (-1), otherwise the message is of the form
-       (\(\backslash\)tau(v), \(\backslash\)deg(v) - 1, ...) where ... is the list of all neighbor messages towards v except for w. }
-373 \textcolor{comment}{          // finally, the mark of the edge between v and w towards v, \(\backslash\)xi(w,v), should be added to this
-       list}
-374 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-375 \textcolor{comment}{          m.push\_back(G.adj\_list[v][i].second.first);}
-376 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-377 \textcolor{comment}{          //diff = t2 - t1;}
-378 \textcolor{comment}{          //agg\_m += diff.count();}
-379 \textcolor{comment}{}
-380 \textcolor{comment}{          // set the current message}
-381 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-382 \textcolor{comment}{          it = message\_dict[t].find(m);}
-383 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-384 \textcolor{comment}{          //diff = t2 - t1;}
-385 \textcolor{comment}{          //agg\_search += diff.count();}
-386 \textcolor{comment}{}
-387 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
-388 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
-389 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
-390 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
-391 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
-392 \textcolor{comment}{            //diff = t2 - t1;}
-393 \textcolor{comment}{            //agg\_insert += diff.count();}
-394 \textcolor{comment}{}
-395 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
-396 \textcolor{comment}{            message\_list[t].push\_back(m);}
-397 \textcolor{comment}{          \}else\{}
-398 \textcolor{comment}{            messages[v][i][t] = it->second;}
-399 \textcolor{comment}{          \}}
-400 \textcolor{comment}{        \}}
-401 \textcolor{comment}{      \}else\{}
-402 \textcolor{comment}{        // if the degree of v is bigger than Delta, the message towards all neighbors is of the form *}
-403 \textcolor{comment}{        // i.e. message of v towards a neighbor w is of the form (-1, \(\backslash\)xi(w,v)) where \(\backslash\)xi(w,v) is the mark
-       of the edge between v and w towards v}
-404 \textcolor{comment}{        for (int i=0;i<G.adj\_list[v].size();i++)\{}
-405 \textcolor{comment}{          //vector<int> m; // the current message from v to ith neighbor}
-406 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-407 \textcolor{comment}{          m.clear();}
-408 \textcolor{comment}{          m.resize(2);}
-409 \textcolor{comment}{          m[0] = -1;}
-410 \textcolor{comment}{          m[1] = G.adj\_list[v][i].second.first;}
-411 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-412 \textcolor{comment}{          //diff = t2 - t1;}
-413 \textcolor{comment}{          //agg\_m += diff.count();}
-414 \textcolor{comment}{}
-415 \textcolor{comment}{          // set the current message}
-416 \textcolor{comment}{          //t1 = high\_resolution\_clock::now();}
-417 \textcolor{comment}{          it = message\_dict[t].find(m);}
-418 \textcolor{comment}{          //t2 = high\_resolution\_clock::now();}
-419 \textcolor{comment}{          //diff = t2 - t1;}
-420 \textcolor{comment}{          //agg\_search += diff.count();}
-421 \textcolor{comment}{}
-422 \textcolor{comment}{          if (it == message\_dict[t].end())\{}
-423 \textcolor{comment}{            //t1 = high\_resolution\_clock::now();}
-424 \textcolor{comment}{            //message\_dict[t][m] = message\_list[t].size();}
-425 \textcolor{comment}{            message\_dict[t].insert(pair<vector<int>, int> (m, message\_list[t].size()));}
-426 \textcolor{comment}{            //t2 = high\_resolution\_clock::now();}
-427 \textcolor{comment}{            //diff = t2 - t1;}
-428 \textcolor{comment}{            //agg\_insert += diff.count();}
-429 \textcolor{comment}{            messages[v][i][t] = message\_list[t].size();}
-430 \textcolor{comment}{            message\_list[t].push\_back(m);}
-431 \textcolor{comment}{          \}else\{}
-432 \textcolor{comment}{            messages[v][i][t] = it->second;}
-433 \textcolor{comment}{          \}}
-434 \textcolor{comment}{        \}}
-435 \textcolor{comment}{      \}}
-436 \textcolor{comment}{    \}}
-437 \textcolor{comment}{  \}}
-438 \textcolor{comment}{  cerr << " total time to search in hash table: " << agg\_search << endl;}
-439 \textcolor{comment}{  cerr << " total time to insert in hash table: " << agg\_insert << endl;}
-440 \textcolor{comment}{  cerr << " total time to modify vector m  " << agg\_m << endl;}
-441 \textcolor{comment}{  cerr << " total time to sort  " << agg\_sort << endl;}
-442 \textcolor{comment}{  cerr << " total time to collect neighbor messages " <<  agg\_neigh\_message << endl;}
-443 \textcolor{comment}{  // now, we should update messages at time h-1 so that if the message from v to w is *, i.e. is of the
-       form (-1,x), then the message from w to v is also of the similar form, i.e. it is (-1,x') where x' = \(\backslash\)xi(v,w)}
-444 \textcolor{comment}{  logger::add\_entry("* symmetrizing", "");}
-445 \textcolor{comment}{  for (int v=0;v<nu\_vertices;v++)\{}
-446 \textcolor{comment}{    for (int i=0;i<G.adj\_list[v].size();i++)\{}
-447 \textcolor{comment}{      if (message\_list[h-1][messages[v][i][h-1]][0] == -1)\{}
-448 \textcolor{comment}{        // it is of the form *}
-449 \textcolor{comment}{        w = G.adj\_list[v][i].first; // the other endpoint of the edge}
-450 \textcolor{comment}{        //my\_location = G.adj\_location[w].at(v); // so that adj\_list[w][my\_location].first = v}
-451 \textcolor{comment}{        my\_location = G.index\_in\_neighbor[v][i];}
-452 \textcolor{comment}{}
-453 \textcolor{comment}{        //vector<int> m;}
-454 \textcolor{comment}{        m.clear();}
-455 \textcolor{comment}{        m.resize(2);}
-456 \textcolor{comment}{        m[0] = -1;}
-457 \textcolor{comment}{        m[1] = G.adj\_list[v][i].second.second; // the mark towards w}
-458 \textcolor{comment}{        if (message\_dict[h-1].find(m) == message\_dict[h-1].end())\{}
-459 \textcolor{comment}{          message\_dict[h-1][m] = message\_list[h-1].size();}
-460 \textcolor{comment}{          message\_list[h-1].push\_back(m);}
-461 \textcolor{comment}{        \}}
-462 \textcolor{comment}{        messages[w][my\_location][h-1] = message\_dict[h-1][m];}
-463 \textcolor{comment}{      \}}
-464 \textcolor{comment}{    \}}
-465 \textcolor{comment}{  \}}
-466 \textcolor{comment}{}
-467 \textcolor{comment}{  // setting message\_mark and is\_star\_message}
-468 \textcolor{comment}{  logger::add\_entry("setting message\_mark and is\_star\_message", "");}
-469 \textcolor{comment}{  message\_mark.resize(message\_list[h-1].size());}
-470 \textcolor{comment}{  is\_star\_message.resize(message\_list[h-1].size());}
-471 \textcolor{comment}{  for (int i=0;i<message\_list[h-1].size();i++)\{}
-472 \textcolor{comment}{    message\_mark[i] = message\_list[h-1][i].back(); // the last element is the mark component}
-473 \textcolor{comment}{    is\_star\_message[i] = (message\_list[h-1][i][0] == -1); // message is star type when the first element is
-       -1}
-474 \textcolor{comment}{  \}}
-475 \textcolor{comment}{  logger::current\_depth--;}
-476 \textcolor{comment}{  */}
-477 \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}++;}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}graph\_message::update\_message\ init"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{int}\ nu\_vertices\ =\ G.\mbox{\hyperlink{classmarked__graph_acf79c6aeb8f32614cb14a5baaa6c9f9b}{nu\_vertices}};}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{int}\ w;}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{int}\ my\_location;}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}.resize(nu\_vertices);}
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{//inward\_message.resize(nu\_vertices);}}
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//message\_dict.resize(h);}}
+\DoxyCodeLine{00033\ \ \ \textcolor{comment}{//message\_list.resize(h);}}
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{//message\_mark.resize(h);}}
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{//is\_star\_message.resize(h);}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ }
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{//\ initialize\ the\ messages}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}resizing\ messages"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<nu\_vertices;v++)\{}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[v].resize(G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size());}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//inward\_messages[v].resize(G.adj\_list[v].size());}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//for\ (int\ i=0;i<G.adj\_list[v].size();i++)\{}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//messages[v][i].resize(h);}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{comment}{//inward\_messages[v][i].resize(h);}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}initializing\ messages"{}},\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00051\ \ \ vector<int>\ m(3);}
+\DoxyCodeLine{00052\ \ \ unordered\_map<vector<int>,\ int,\ \mbox{\hyperlink{structvint__hash}{vint\_hash}}>::iterator\ it;}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//map<vector<int>,\ int>::iterator\ it;}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<nu\_vertices;v++)\{}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size();i++)\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \textcolor{comment}{//\ the\ message\ from\ v\ towards\ the\ ith\ neighbor\ (lets\ call\ is\ w)\ at\ time\ 0\ has\ a\ mark\ component\ which\ is\ \(\backslash\)xi(v,w)\ and\ a\ subtree\ component\ which\ is\ a\ single\ root\ with\ mark\ \(\backslash\)tau(v).\ This\ is\ encoded\ as\ a\ message\ vector\ with\ size\ 3\ of\ the\ form\ (\(\backslash\)tau(v),\ 0,\(\backslash\)xi(v,w))\ where\ the\ last\ 0\ indicates\ that\ there\ is\ no\ offspring.}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{comment}{//vector<int>\ m;}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{comment}{//m.clear();}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{comment}{//m.push\_back(G.ver\_mark[v]);}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{comment}{//m.push\_back(0);}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \textcolor{comment}{//m.push\_back(G.adj\_list[v][i].second.first);}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ m[0]\ =\ G.\mbox{\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}}[v];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ m[1]\ =\ 0;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ m[2]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,\ v,\ i);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{comment}{//\ adding\ this\ message\ to\ the\ message\ dictionary}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{comment}{//it\ =\ message\_dict[0].find(m);}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{comment}{//w\ =\ G.adj\_list[v][i].first;}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ \ \ if\ (it\ ==\ message\_dict[0].end())\{}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ \ \ \ \ message\_dict[0][m]\ =\ message\_list[0].size();}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ \ \ \ \ messages[v][i][0]\ =\ message\_list[0].size();}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ message\_list[0].push\_back(m);}}
+\DoxyCodeLine{00081\ \textcolor{comment}{}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ \ \}else\{}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ messages[v][i][0]\ =\ it-\/>second;}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ \ */}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{comment}{//messages[v][i][0]\ =\ message\_dict[0][m];\ //\ the\ message\ at\ time\ 0}}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{comment}{//\ these\ are\ copies\ of\ message\_dict,\ message\_mark\ and\ is\_star\_message\ at\ the\ previous\ step,\ which\ are\ used\ to\ update\ messages\ at\ the\ current\ step.}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{//unordered\_map<vector<int>,\ int,\ vint\_hash>\ message\_dict\_old;}}
+\DoxyCodeLine{00093\ \ \ \textcolor{comment}{//vector<int>\ message\_mark\_old;}}
+\DoxyCodeLine{00094\ \ \ vector<bool>\ is\_star\_message\_old;}
+\DoxyCodeLine{00095\ \ \ vector<vector<int>\ >\ messages\_old;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{comment}{//\ updating\ messages}}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}updating\ messages"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00099\ \ \ m.reserve(5+\ 2\ *\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}});}
+\DoxyCodeLine{00100\ \ \ vector<int>\ m2;}
+\DoxyCodeLine{00101\ \ \ m2.reserve(5\ +\ 2*\mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}});\ \textcolor{comment}{//\ an\ auxiliary\ message\ when\ we\ need\ to\ work\ with\ two\ types\ of\ messages\ simultaneously\ }}
+\DoxyCodeLine{00102\ \ \ duration<float>\ diff;}
+\DoxyCodeLine{00103\ \ \ high\_resolution\_clock::time\_point\ t1,\ t2;\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{float}\ agg\_search\ =\ 0;}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{float}\ agg\_insert\ =\ 0;}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{float}\ agg\_m\ =\ 0;}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{float}\ agg\_sort\ =\ 0;}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{float}\ agg\_neigh\_message\ =\ 0;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ vector<pair<pair<int,\ int>,\ \textcolor{keywordtype}{int}>\ >\ neighbor\_messages;\ \textcolor{comment}{//\ the\ first\ component\ is\ the\ message\ and\ the\ second\ is\ the\ name\ of\ the\ neighbor}}
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{//\ the\ second\ component\ is\ stored\ so\ that\ after\ sorting,\ we\ know\ the\ owner\ of\ the\ message}}
+\DoxyCodeLine{00112\ \ \ neighbor\_messages.reserve(5+2*\mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{int}\ nu\_star\_neigh;\ \textcolor{comment}{//\ number\ of\ star\ neighbors,\ i.e.\ neighbors\ of\ a\ vertex\ v\ whose\ message\ towards\ v\ are\ star\ type}}
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordtype}{int}\ star\_neigh\_index;\ \textcolor{comment}{//\ the\ index\ of\ the\ star\ neighbor\ of\ v,\ this\ is\ only\ useful\ when\ there\ is\ one\ star\ neighbor,\ if\ there\ are\ more\ than\ one\ star\ neighbor,\ then\ the\ message\ sent\ from\ v\ towards\ all\ other\ neighbors\ are\ star\ typed}}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordtype}{int}\ star\_neigh;\ \textcolor{comment}{//\ the\ label\ of\ the\ star\ neighbor,\ i.e.\ star\_neigh\ =\ G.adj\_list[v][star\_neigh\_index].first;}}
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordtype}{int}\ previous\_message;\ \textcolor{comment}{//\ the\ message\ from\ the\ previous\ step}}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordtype}{int}\ mark\_to\_v;\ \textcolor{comment}{//\ mark\ towards\ the\ current\ vertex\ directed\ from\ its\ neighbor}}
+\DoxyCodeLine{00119\ \ \ vector<int>\ neighbors\_list;\ \textcolor{comment}{//\ the\ list\ of\ neighbors\ of\ a\ vertex\ in\ the\ order\ after\ sorting\ with\ respect\ to\ their\ corresponding\ messages}}
+\DoxyCodeLine{00120\ \ \ neighbors\_list.reserve(\mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}\ +\ 3);}
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordtype}{int}\ deg\_v;\ \textcolor{comment}{//\ the\ degree\ of\ vertex\ v\ }}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ s=1;\ s<\mbox{\hyperlink{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}{h}};s++)\{\ \textcolor{comment}{//\ s\ stands\ for\ step}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//cerr\ <<\ endl\ <<\ endl<<\ "{}\ depth\ "{}\ <<\ s\ <<\ endl;}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//\ store\ variables\ corresponding\ to\ the\ previous\ step\ in\ their\ old\ version,\ and\ clearing\ the\ variables\ for\ this\ step:}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//message\_dict\_old\ =\ message\_dict;}}
+\DoxyCodeLine{00129\ \ \ \ \ messages\_old\ =\ \mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}};}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//message\_mark\_old\ =\ message\_mark;}}
+\DoxyCodeLine{00131\ \ \ \ \ is\_star\_message\_old\ =\ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}};}
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a557473b726dc5d80618055a6b843670f}{message\_dict}}.clear();}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}{message\_mark}}.clear();}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}.clear();}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ we\ do\ not\ clear\ messages\ since\ we\ need\ its\ size\ to\ be\ the\ same,\ and\ we\ only\ modify\ its\ content}}
+\DoxyCodeLine{00136\ \ \ \ \ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<nu\_vertices;v++)\{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ deg\_v\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size();}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deg\_v==1)\{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ no\ need\ to\ collect\ messages,\ there\ is\ only\ one\ message\ towards\ the\ one\ neighbor,\ which\ is\ known\ }}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ m.resize(3);\ \textcolor{comment}{//\ there\ is\ only\ one\ message\ which\ is\ of\ the\ form\ \(\backslash\)f\$(\(\backslash\)theta,\ 0,\ x)\(\backslash\)f\$,\ where\ \(\backslash\)f\$\(\backslash\)theta\(\backslash\)f\$\ is\ the\ mark\ of\ v,\ and\ \(\backslash\)f\$x\ =\ \(\backslash\)xi\_G(w,v)\(\backslash\)f\$\ \ where\ \(\backslash\)f\$w\(\backslash\)f\$\ is\ the\ only\ neighbor\ of\ v}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ m[0]\ =\ G.\mbox{\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}}[v];}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ m[1]\ =\ 0;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ m[2]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][0].second.first;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,\ v,\ 0);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deg\_v\ <=\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}})\{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ neighbor\_messages.clear();}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ nu\_star\_neigh\ =\ 0;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<deg\_v;i++)\{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ w\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].first;\ \textcolor{comment}{//\ neighbor\ label}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ my\_location\ =\ G.\mbox{\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}}[v][i];}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ previous\_message\ =\ messages\_old[w][my\_location];\ \textcolor{comment}{//\ the\ message\ sent\ from\ this\ neighbor\ towards\ v\ at\ time\ t-\/1}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ if\ previous\ message\ is\ star}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_star\_message\_old[previous\_message])\{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu\_star\_neigh\ ++;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ star\_neigh\_index\ =\ i;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ star\_neigh\ =\ w;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nu\_star\_neigh\ >=\ 2)}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ then\ message\ towards\ all\ neighbors\ will\ be\ star,\ no\ need\ to\ collect\ messages}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ mark\_to\_v\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ neighbor\_messages.push\_back(pair<pair<int,\ int>\ ,\ \textcolor{keywordtype}{int}>\ (pair<int,int>(previous\_message,\ mark\_to\_v),\ i));}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nu\_star\_neigh\ ==\ 2)\{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ message\ towards\ all\ the\ neighbors\ will\ be\ star}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ m.resize(2);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ =\ -\/1;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size();i++)\{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,\ v,\ i);\ \textcolor{comment}{//\ send\ message\ m\ from\ v\ towards\ its\ ith\ neighbor\ at\ step\ s}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nu\_star\_neigh\ ==\ 1)\{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ message\ towards\ all\ the\ neighbors\ except\ for\ that\ star\ neighbor\ is\ star}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ let\ m\ be\ the\ message\ towards\ that\ neighbor\ and\ m2\ be\ the\ star\ messages}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sorting\ neighbor\ messages}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ sort(neighbor\_messages.begin(),\ neighbor\_messages.end());}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ preparing\ m\ }}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ m.resize(0);}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(G.\mbox{\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}}[v]);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size()-\/1);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<neighbor\_messages.size();i++)\{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (neighbor\_messages[i].second\ !=\ star\_neigh\_index)\{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ collect\ the\ messages\ of\ non\ star\ neighbors}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(neighbor\_messages[i].first.first);}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(neighbor\_messages[i].first.second);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ finalize\ m\ by\ inserting\ its\ mark\ component}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][star\_neigh\_index].second.first);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ prepare\ star\ messages}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ m2.resize(2);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ m2[0]\ =\ -\/1;}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<deg\_v;i++)\{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i==star\_neigh\_index)\{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ send\ the\ prepared\ message\ m}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,\ v,\ i);}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ prepare\ a\ star\ message\ and\ send\ it}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m2[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m2,\ v,\ i);}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nu\_star\_neigh\ ==\ 0)\{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ no\ star\ neighbor,\ so\ we\ can\ prepare\ messages\ to\ all\ neighbors\ comfortably\ as\ none\ of\ them\ are\ star\ type}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ we\ do\ this\ by\ a\ masking\ technique}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sorting\ neighbor\ messages}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ sort(neighbor\_messages.begin(),\ neighbor\_messages.end());}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (neighbor\_messages.size()\ !=\ deg\_v)\{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}\ Error:\ no\ star\ messages\ and\ yet\ neighbor\_messages\ does\ not\ have\ a\ size\ equal\ to\ the\ deg\ of\ v,\ step\ "{}}\ <<\ s\ <<\ \textcolor{stringliteral}{"{}\ v=\ "{}}\ <<\ v\ <<\ \ \textcolor{stringliteral}{"{}\ deg\_v=\ "{}}\ <<\ deg\_v\ <<\ \textcolor{stringliteral}{"{}\ neighbor\_messages.size()\ "{}}\ <<\ neighbor\_messages.size()\ <<\ endl;}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ m.resize(1\ +\ 1\ +\ 2*(G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size()-\/1)\ +1);\ \textcolor{comment}{//\ 1\ for\ vertex\ mark,\ 1\ for\ deg\ -\/1,\ for\ (deg-\/1)\ many\ neighbors,\ each\ we\ have\ 2\ values,\ and\ finally\ 1\ for\ the\ mark\ component}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ =\ G.\mbox{\hyperlink{classmarked__graph_ac83e9377dd4d8bb95be1ac949b127296}{ver\_mark}}[v];}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size()-\/1;}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_list.resize(deg\_v);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<neighbor\_messages.size();i++)\{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[2*(i+1)]\ \ \ =\ neighbor\_messages[i].first.first;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[2*(i+1)+1]\ =\ neighbor\_messages[i].first.second;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_list[i]\ =\ neighbor\_messages[i].second;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ swapping\ the\ last\ message\ so\ that\ its\ mark\ component\ comes\ first,\ so\ that\ we\ can\ treat\ m\ as\ a\ valid\ message\ in\ our\ standard}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ swap(m[2*deg\_v],\ m[2*deg\_v+1]);}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=neighbor\_messages.size()-\/1;i>=0;i-\/-\/)\{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ neighbor\_messages.size()-\/1)\{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ swap(m[2*deg\_v],\ m[2*(i+1)+1]);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ swap(m[2*deg\_v+1],\ m[2*(i+1)]);}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ swap(neighbors\_list[deg\_v-\/1],\ neighbors\_list[i]);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,v,neighbors\_list[deg\_v-\/1]);}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deg\_v\ >\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}})\{\ \textcolor{comment}{//\ the\ message\ towards\ all\ neighbors\ is\ star}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ m.resize(2);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ m[0]\ =\ -\/1;}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;i<deg\_v;i++)\{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,v,i);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00253\ \ \ \ \ \}}
+\DoxyCodeLine{00254\ \ \ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \mbox{\hyperlink{classlogger_a710163deb17bc81f70d53d285b8ac9ac}{logger::add\_entry}}(\textcolor{stringliteral}{"{}*\ symmetrizing"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00258\ \ \ \textcolor{keywordtype}{bool}\ star1,\ star2;}
+\DoxyCodeLine{00259\ \ \ m.resize(2);\ \textcolor{comment}{//\ prepare\ for\ star\ message}}
+\DoxyCodeLine{00260\ \ \ m[0]\ =\ -\/1;}
+\DoxyCodeLine{00261\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ v=0;v<nu\_vertices;v++)\{}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;i<G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size();i++)\{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ w\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].first;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ my\_location\ =\ G.\mbox{\hyperlink{classmarked__graph_aee10b537408de42476609c1e45c075d0}{index\_in\_neighbor}}[v][i];}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (w\ >\ v)\{\ \textcolor{comment}{//\ to\ avoid\ going\ over\ edges\ twice\ }}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ star1\ =\ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}[\mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[v][i]];}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ star2\ =\ \mbox{\hyperlink{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}{is\_star\_message}}[\mbox{\hyperlink{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}{messages}}[w][my\_location]];}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (star1\ and\ !star2)\{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ message[w][my\_location]\ should\ be\ star}}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.second;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,w,my\_location);}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!star1\ and\ star2)\{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ messages[v][i]\ should\ also\ become\ star}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,v,i);}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((!star1\ and\ !star2)\ and\ (G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v].size()\ >\ \mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}\ or\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[w].size()>\mbox{\hyperlink{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}{Delta}}))\{\ \textcolor{comment}{//\ this\ activates\ only\ when\ h\ =\ 1,\ ensures\ truncation\ of\ degrees\ bigger\ than\ delta}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ message[w][my\_location]\ should\ be\ star}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.second;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,w,my\_location);}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ messages[v][i]\ should\ also\ become\ star}}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.\mbox{\hyperlink{classmarked__graph_a1a0bf7ca413a278763f7c878b3b6fd6f}{adj\_list}}[v][i].second.first;}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgraph__message_aa76d1d5420a12477fa1dddd878d78c8f}{send\_message}}(m,v,i);}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \ \ \}}
+\DoxyCodeLine{00289\ \ \ \mbox{\hyperlink{classlogger_a9d29b49bd318a719a8e85b59eac54fe0}{logger::current\_depth}}-\/-\/;}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00295\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00296\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00297\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00298\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00299\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00300\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00301\ \ \ \textcolor{comment}{//\ ==================================================}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00304\ \textcolor{comment}{\ \ for\ (int\ t=1;t<h;t++)\{}}
+\DoxyCodeLine{00305\ \textcolor{comment}{\ \ \ \ for\ (int\ v=0;v<nu\_vertices;v++)\{}}
+\DoxyCodeLine{00306\ \textcolor{comment}{\ \ \ \ \ \ //cerr\ <<\ "{}\ vertex\ "{}\ <<\ v\ <<\ endl;}}
+\DoxyCodeLine{00307\ \textcolor{comment}{\ \ \ \ \ \ if\ (G.adj\_list[v].size()\ <=\ Delta)\{}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ the\ degree\ of\ v\ is\ no\ more\ than\ Delta}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ do\ the\ standard\ message\ passing\ by\ aggregating\ messages\ from\ neighbors}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ stacking\ all\ the\ messages\ from\ neighbors\ of\ v\ towards\ v}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ \ \ \ \ \ neighbor\_messages.clear();}}
+\DoxyCodeLine{00312\ \textcolor{comment}{}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ the\ message\ from\ each\ neighbor\ of\ v,\ say\ w,\ \ towards\ v\ is\ considered,\ the\ mark\ of\ the\ edge\ between\ w\ and\ v\ towards\ v\ is\ added\ to\ it,\ and\ then\ all\ these\ objects\ are\ stacked\ in\ neighbor\_messages\ to\ be\ sorted\ and\ used\ afterwards}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;i<G.adj\_list[v].size();i++)\{}}
+\DoxyCodeLine{00316\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ w\ =\ G.adj\_list[v][i].first;\ //\ what\ is\ the\ name\ of\ the\ neighbor\ I\ am\ looking\ at\ now,\ which\ is\ the\ ith\ neighbor\ of\ vertex\ v\ }}
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //my\_location\ =\ G.adj\_location[w].at(v);\ <-\/-\/-\/\ the\ inefficient\ way}}
+\DoxyCodeLine{00318\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ my\_location\ =\ G.index\_in\_neighbor[v][i];}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ where\ is\ the\ place\ of\ node\ v\ among\ the\ list\ of\ neighbors\ of\ the\ ith\ neighbor\ of\ v}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ int\ previous\_message\ =\ messages[w][my\_location][t-\/1];\ //\ the\ message\ sent\ from\ this\ neighbor\ towards\ v\ at\ time\ t-\/1}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ int\ mark\_to\_v\ =\ G.adj\_list[v][i].second.first;}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ neighbor\_messages.push\_back(pair<pair<int,\ int>\ ,\ int>\ (pair<int,int>(previous\_message,\ mark\_to\_v),\ w));}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ \ \ \ \ //agg\_neigh\_message\ +=\ diff.count();}}
+\DoxyCodeLine{00327\ \textcolor{comment}{}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \ \ \ \ sort(neighbor\_messages.begin(),\ neighbor\_messages.end());\ //\ sorts\ lexicographically}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ \ \ \ \ \ //agg\_sort\ +=\ diff.count();}}
+\DoxyCodeLine{00333\ \textcolor{comment}{}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;i<G.adj\_list[v].size();i++)\{}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ let\ w\ be\ the\ current\ ith\ neighbor\ of\ v}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ int\ w\ =\ G.adj\_list[v][i].first;}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ first,\ start\ with\ the\ mark\ of\ v\ and\ the\ number\ of\ offsprings\ in\ the\ subgraph\ component\ of\ the\ message}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //vector<int>\ m;\ //\ the\ message\ that\ v\ is\ going\ to\ send\ to\ w}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.clear();}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.push\_back(G.ver\_mark[v]);\ //\ mark\ of\ v}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.push\_back(G.adj\_list[v].size()-\/1);\ //\ the\ number\ of\ offsprings\ in\ the\ subgraph\ component\ of\ the\ message}}
+\DoxyCodeLine{00343\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //agg\_m\ +=\ diff.count();}}
+\DoxyCodeLine{00346\ \textcolor{comment}{}}
+\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ stacking\ messages\ from\ all\ neighbors\ of\ v\ expect\ for\ w\ towards\ v\ at\ time\ t-\/1}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ for\ (int\ j=0;j<G.adj\_list[v].size();j++)\{}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (neighbor\_messages[j].second\ !=\ w)\{}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (message\_list[t-\/1][neighbor\_messages[j].first.first][0]\ ==\ -\/1)\{}}
+\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ this\ means\ that\ one\ of\ the\ messages\ that\ should\ be\ aggregated\ is\ *\ typed,\ therefore\ the\ outgoing\ messages\ should\ also\ be\ *\ typed}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ i.e.\ the\ message\ has\ only\ two\ entries:\ (-\/1,\ \(\backslash\)xi(w,v))\ where\ \(\backslash\)xi(w,v)\ is\ the\ mark\ of\ the\ edge\ between\ v\ and\ w\ towards\ v}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ since\ after\ this\ loop,\ the\ mark\ \(\backslash\)xi(w,v)\ is\ added\ to\ the\ message\ (after\ the\ comment\ starting\ with\ 'finally'),\ we\ only\ add\ the\ initial\ -\/1\ part}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m.resize(0);}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(-\/1);}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //agg\_m\ +=\ diff.count();}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ break;\ //\ the\ message\ is\ decided,\ we\ do\ not\ need\ to\ go\ over\ any\ of\ the\ other\ neighbor\ messages,\ hence\ break}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ this\ message\ should\ be\ added\ to\ the\ list\ of\ messages}}
+\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(neighbor\_messages[j].first.first);\ //\ message\ part}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ m.push\_back(neighbor\_messages[j].first.second);\ //\ mark\ part\ towards\ v}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //agg\_m\ +=\ diff.count();}}
+\DoxyCodeLine{00369\ \textcolor{comment}{}}
+\DoxyCodeLine{00370\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ if\ we\ break,\ we\ reach\ at\ this\ point\ and\ message\ is\ (-\/1),\ otherwise\ the\ message\ is\ of\ the\ form\ (\(\backslash\)tau(v),\ \(\backslash\)deg(v)\ -\/\ 1,\ ...)\ where\ ...\ is\ the\ list\ of\ all\ neighbor\ messages\ towards\ v\ except\ for\ w.\ }}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ finally,\ the\ mark\ of\ the\ edge\ between\ v\ and\ w\ towards\ v,\ \(\backslash\)xi(w,v),\ should\ be\ added\ to\ this\ list}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.push\_back(G.adj\_list[v][i].second.first);}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //agg\_m\ +=\ diff.count();}}
+\DoxyCodeLine{00379\ \textcolor{comment}{}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ set\ the\ current\ message}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ it\ =\ message\_dict[t].find(m);}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //agg\_search\ +=\ diff.count();}}
+\DoxyCodeLine{00386\ \textcolor{comment}{}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ if\ (it\ ==\ message\_dict[t].end())\{}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //message\_dict[t][m]\ =\ message\_list[t].size();}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ message\_dict[t].insert(pair<vector<int>,\ int>\ (m,\ message\_list[t].size()));}}
+\DoxyCodeLine{00391\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //agg\_insert\ +=\ diff.count();}}
+\DoxyCodeLine{00394\ \textcolor{comment}{}}
+\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ messages[v][i][t]\ =\ message\_list[t].size();}}
+\DoxyCodeLine{00396\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ message\_list[t].push\_back(m);}}
+\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}else\{}}
+\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ messages[v][i][t]\ =\ it-\/>second;}}
+\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ \ \ \}else\{}}
+\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ if\ the\ degree\ of\ v\ is\ bigger\ than\ Delta,\ the\ message\ towards\ all\ neighbors\ is\ of\ the\ form\ *}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ i.e.\ message\ of\ v\ towards\ a\ neighbor\ w\ is\ of\ the\ form\ (-\/1,\ \(\backslash\)xi(w,v))\ where\ \(\backslash\)xi(w,v)\ is\ the\ mark\ of\ the\ edge\ between\ v\ and\ w\ towards\ v}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;i<G.adj\_list[v].size();i++)\{}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //vector<int>\ m;\ //\ the\ current\ message\ from\ v\ to\ ith\ neighbor}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.clear();}}
+\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m.resize(2);}}
+\DoxyCodeLine{00409\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m[0]\ =\ -\/1;}}
+\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ m[1]\ =\ G.adj\_list[v][i].second.first;}}
+\DoxyCodeLine{00411\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //agg\_m\ +=\ diff.count();}}
+\DoxyCodeLine{00414\ \textcolor{comment}{}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ set\ the\ current\ message}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ it\ =\ message\_dict[t].find(m);}}
+\DoxyCodeLine{00418\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //agg\_search\ +=\ diff.count();}}
+\DoxyCodeLine{00421\ \textcolor{comment}{}}
+\DoxyCodeLine{00422\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ if\ (it\ ==\ message\_dict[t].end())\{}}
+\DoxyCodeLine{00423\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //t1\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //message\_dict[t][m]\ =\ message\_list[t].size();}}
+\DoxyCodeLine{00425\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ message\_dict[t].insert(pair<vector<int>,\ int>\ (m,\ message\_list[t].size()));}}
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //t2\ =\ high\_resolution\_clock::now();}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //diff\ =\ t2\ -\/\ t1;}}
+\DoxyCodeLine{00428\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //agg\_insert\ +=\ diff.count();}}
+\DoxyCodeLine{00429\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ messages[v][i][t]\ =\ message\_list[t].size();}}
+\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ message\_list[t].push\_back(m);}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}else\{}}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ messages[v][i][t]\ =\ it-\/>second;}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00437\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00438\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ total\ time\ to\ search\ in\ hash\ table:\ "{}\ <<\ agg\_search\ <<\ endl;}}
+\DoxyCodeLine{00439\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ total\ time\ to\ insert\ in\ hash\ table:\ "{}\ <<\ agg\_insert\ <<\ endl;}}
+\DoxyCodeLine{00440\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ total\ time\ to\ modify\ vector\ m\ \ "{}\ <<\ agg\_m\ <<\ endl;}}
+\DoxyCodeLine{00441\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ total\ time\ to\ sort\ \ "{}\ <<\ agg\_sort\ <<\ endl;}}
+\DoxyCodeLine{00442\ \textcolor{comment}{\ \ cerr\ <<\ "{}\ total\ time\ to\ collect\ neighbor\ messages\ "{}\ <<\ \ agg\_neigh\_message\ <<\ endl;}}
+\DoxyCodeLine{00443\ \textcolor{comment}{\ \ //\ now,\ we\ should\ update\ messages\ at\ time\ h-\/1\ so\ that\ if\ the\ message\ from\ v\ to\ w\ is\ *,\ i.e.\ is\ of\ the\ form\ (-\/1,x),\ then\ the\ message\ from\ w\ to\ v\ is\ also\ of\ the\ similar\ form,\ i.e.\ it\ is\ (-\/1,x')\ where\ x'\ =\ \(\backslash\)xi(v,w)}}
+\DoxyCodeLine{00444\ \textcolor{comment}{\ \ logger::add\_entry("{}*\ symmetrizing"{},\ "{}"{});}}
+\DoxyCodeLine{00445\ \textcolor{comment}{\ \ for\ (int\ v=0;v<nu\_vertices;v++)\{}}
+\DoxyCodeLine{00446\ \textcolor{comment}{\ \ \ \ for\ (int\ i=0;i<G.adj\_list[v].size();i++)\{}}
+\DoxyCodeLine{00447\ \textcolor{comment}{\ \ \ \ \ \ if\ (message\_list[h-\/1][messages[v][i][h-\/1]][0]\ ==\ -\/1)\{}}
+\DoxyCodeLine{00448\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ it\ is\ of\ the\ form\ *}}
+\DoxyCodeLine{00449\ \textcolor{comment}{\ \ \ \ \ \ \ \ w\ =\ G.adj\_list[v][i].first;\ //\ the\ other\ endpoint\ of\ the\ edge}}
+\DoxyCodeLine{00450\ \textcolor{comment}{\ \ \ \ \ \ \ \ //my\_location\ =\ G.adj\_location[w].at(v);\ //\ so\ that\ adj\_list[w][my\_location].first\ =\ v}}
+\DoxyCodeLine{00451\ \textcolor{comment}{\ \ \ \ \ \ \ \ my\_location\ =\ G.index\_in\_neighbor[v][i];}}
+\DoxyCodeLine{00452\ \textcolor{comment}{}}
+\DoxyCodeLine{00453\ \textcolor{comment}{\ \ \ \ \ \ \ \ //vector<int>\ m;}}
+\DoxyCodeLine{00454\ \textcolor{comment}{\ \ \ \ \ \ \ \ m.clear();}}
+\DoxyCodeLine{00455\ \textcolor{comment}{\ \ \ \ \ \ \ \ m.resize(2);}}
+\DoxyCodeLine{00456\ \textcolor{comment}{\ \ \ \ \ \ \ \ m[0]\ =\ -\/1;}}
+\DoxyCodeLine{00457\ \textcolor{comment}{\ \ \ \ \ \ \ \ m[1]\ =\ G.adj\_list[v][i].second.second;\ //\ the\ mark\ towards\ w}}
+\DoxyCodeLine{00458\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (message\_dict[h-\/1].find(m)\ ==\ message\_dict[h-\/1].end())\{}}
+\DoxyCodeLine{00459\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ message\_dict[h-\/1][m]\ =\ message\_list[h-\/1].size();}}
+\DoxyCodeLine{00460\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ message\_list[h-\/1].push\_back(m);}}
+\DoxyCodeLine{00461\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00462\ \textcolor{comment}{\ \ \ \ \ \ \ \ messages[w][my\_location][h-\/1]\ =\ message\_dict[h-\/1][m];}}
+\DoxyCodeLine{00463\ \textcolor{comment}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00464\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00465\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00466\ \textcolor{comment}{}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ //\ setting\ message\_mark\ and\ is\_star\_message}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ logger::add\_entry("{}setting\ message\_mark\ and\ is\_star\_message"{},\ "{}"{});}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ message\_mark.resize(message\_list[h-\/1].size());}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ is\_star\_message.resize(message\_list[h-\/1].size());}}
+\DoxyCodeLine{00471\ \textcolor{comment}{\ \ for\ (int\ i=0;i<message\_list[h-\/1].size();i++)\{}}
+\DoxyCodeLine{00472\ \textcolor{comment}{\ \ \ \ message\_mark[i]\ =\ message\_list[h-\/1][i].back();\ //\ the\ last\ element\ is\ the\ mark\ component}}
+\DoxyCodeLine{00473\ \textcolor{comment}{\ \ \ \ is\_star\_message[i]\ =\ (message\_list[h-\/1][i][0]\ ==\ -\/1);\ //\ message\ is\ star\ type\ when\ the\ first\ element\ is\ -\/1}}
+\DoxyCodeLine{00474\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00475\ \textcolor{comment}{\ \ logger::current\_depth-\/-\/;}}
+\DoxyCodeLine{00476\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00477\ \}}
+
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}\label{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!Delta@{Delta}}
-\index{Delta@{Delta}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{Delta}{Delta}}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55}\label{classgraph__message_a45dfd061b7bc73572e5132fbf66efd55} 
+\index{graph\_message@{graph\_message}!Delta@{Delta}}
+\index{Delta@{Delta}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{Delta}{Delta}}
 {\footnotesize\ttfamily int graph\+\_\+message\+::\+Delta\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the maximum degree threshold 
 
-\mbox{\Hypertarget{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}\label{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!h@{h}}
-\index{h@{h}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{h}{h}}
+\Hypertarget{classgraph__message_a934d63ed7275c211e13c6fb68824ed46}\label{classgraph__message_a934d63ed7275c211e13c6fb68824ed46} 
+\index{graph\_message@{graph\_message}!h@{h}}
+\index{h@{h}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{h}{h}}
 {\footnotesize\ttfamily int graph\+\_\+message\+::h\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 the depth up to which we do message passing (the type of edges go through depth h-\/1) 
 
-\mbox{\Hypertarget{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}\label{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!is\+\_\+star\+\_\+message@{is\+\_\+star\+\_\+message}}
-\index{is\+\_\+star\+\_\+message@{is\+\_\+star\+\_\+message}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{is\+\_\+star\+\_\+message}{is\_star\_message}}
+\Hypertarget{classgraph__message_a55ff5531a0043106369e84a7bc45e22d}\label{classgraph__message_a55ff5531a0043106369e84a7bc45e22d} 
+\index{graph\_message@{graph\_message}!is\_star\_message@{is\_star\_message}}
+\index{is\_star\_message@{is\_star\_message}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{is\_star\_message}{is\_star\_message}}
 {\footnotesize\ttfamily vector$<$bool$>$ graph\+\_\+message\+::is\+\_\+star\+\_\+message}
 
 
 
 for an integer message $m$, is\+\_\+star\+\_\+message\mbox{[}m\mbox{]} is true if m is a star message and false otherwise. Note that m is star type iff the first index in the vector message corresponding to m is -\/1. This is updated at step of update\+\_\+messages, so when it is over, it corresponds to step (depth) h-\/1. 
 
-\mbox{\Hypertarget{classgraph__message_a557473b726dc5d80618055a6b843670f}\label{classgraph__message_a557473b726dc5d80618055a6b843670f}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!message\+\_\+dict@{message\+\_\+dict}}
-\index{message\+\_\+dict@{message\+\_\+dict}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{message\+\_\+dict}{message\_dict}}
-{\footnotesize\ttfamily unordered\+\_\+map$<$vector$<$int$>$, int, \hyperlink{structvint__hash}{vint\+\_\+hash}$>$ graph\+\_\+message\+::message\+\_\+dict}
+\Hypertarget{classgraph__message_a557473b726dc5d80618055a6b843670f}\label{classgraph__message_a557473b726dc5d80618055a6b843670f} 
+\index{graph\_message@{graph\_message}!message\_dict@{message\_dict}}
+\index{message\_dict@{message\_dict}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{message\_dict}{message\_dict}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$vector$<$int$>$, int, \mbox{\hyperlink{structvint__hash}{vint\+\_\+hash}}$>$ graph\+\_\+message\+::message\+\_\+dict}
 
 
 
 message\+\_\+dict is the message dictionary at any step that update\+\_\+messages is running, which maps each message to its corresponding index in the dictionary. When update\+\_\+messages is over, this corresponds to step (depth) h-\/1 
 
-\mbox{\Hypertarget{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}\label{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!message\+\_\+mark@{message\+\_\+mark}}
-\index{message\+\_\+mark@{message\+\_\+mark}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{message\+\_\+mark}{message\_mark}}
+\Hypertarget{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5}\label{classgraph__message_a49d9af5150daf0599c29fe18cb032fa5} 
+\index{graph\_message@{graph\_message}!message\_mark@{message\_mark}}
+\index{message\_mark@{message\_mark}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{message\_mark}{message\_mark}}
 {\footnotesize\ttfamily vector$<$int$>$ graph\+\_\+message\+::message\+\_\+mark}
 
 
 
 for an integer message $m$, message\+\_\+mark\mbox{[}m\mbox{]} is the mark component associated to the message m at any step that update\+\_\+messages is working. This is basically the last index in the vector message associate to m. When update\+\_\+messages is over, this corresponds to step (depth) h-\/1. 
 
-\mbox{\Hypertarget{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}\label{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}} 
-\index{graph\+\_\+message@{graph\+\_\+message}!messages@{messages}}
-\index{messages@{messages}!graph\+\_\+message@{graph\+\_\+message}}
-\subsubsection{\texorpdfstring{messages}{messages}}
+\Hypertarget{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e}\label{classgraph__message_af680c8a1755cf8d4aba389c1a3d6634e} 
+\index{graph\_message@{graph\_message}!messages@{messages}}
+\index{messages@{messages}!graph\_message@{graph\_message}}
+\doxysubsubsection{\texorpdfstring{messages}{messages}}
 {\footnotesize\ttfamily vector$<$vector$<$int $>$ $>$ graph\+\_\+message\+::messages}
 
 
@@ -732,5 +696,5 @@ messages\mbox{[}v\mbox{]}\mbox{[}i\mbox{]} is the integer version of the message
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}\item 
-\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{graph__message_8h}{graph\+\_\+message.\+h}}\item 
+\mbox{\hyperlink{graph__message_8cpp}{graph\+\_\+message.\+cpp}}\end{DoxyCompactItemize}
